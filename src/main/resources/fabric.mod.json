@@ -3,23 +3,24 @@
   "id": "explorationv2",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Exploration update v2",
+  "description": "This mod will update exploration",
   "authors": [
-    "Me!"
+    "Matteo_fey",
+    "gems_bond"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/warior456/explorationv2"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/explorationv2/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "net.ugi.explorationv2.ExplorationV2"
     ]
   },
   "mixins": [
