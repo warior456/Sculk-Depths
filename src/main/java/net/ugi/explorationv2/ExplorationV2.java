@@ -1,6 +1,8 @@
 package net.ugi.explorationv2;
 
 import net.fabricmc.api.ModInitializer;
+import net.ugi.explorationv2.item.ModItemGroup;
+import net.ugi.explorationv2.item.ModItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,6 +12,8 @@ public class ExplorationV2 implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		ModItemGroup.registerItemgroups();
+		ModItems.registerModItems();
 		LOGGER.info("explorationv2 has loaded");
 	}
 }
