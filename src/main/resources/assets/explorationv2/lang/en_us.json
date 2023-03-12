@@ -1,5 +1,8 @@
 {
   "item.explorationv2.citrine" : "Citrine",
   "item.explorationv2.raw_citrine" : "Raw Citrine",
+  "block.explorationv2.citrine_block": "Block of Citrine",
+  "block.explorationv2.citrine_ore": "Citrine Ore",
+  "block.explorationv2.deepslate_citrine_ore": "Deepslate Citrine Ore",
   "itemgroup.explorationv2" : "Exploration V2"
 }

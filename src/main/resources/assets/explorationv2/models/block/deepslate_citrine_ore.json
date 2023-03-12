@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "explorationv2:block/deepslate_citrine_ore"
+  }
+}

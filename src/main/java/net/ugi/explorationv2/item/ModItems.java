@@ -11,7 +11,6 @@ import net.minecraft.util.Identifier;
 import net.ugi.explorationv2.ExplorationV2;
 
 public class ModItems {
-
     public static final Item CITRINE = registerItem("citrine",
             new Item(new FabricItemSettings()));
 
@@ -20,7 +19,6 @@ public class ModItems {
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(ExplorationV2.MOD_ID, name), item);
-
     }
 
     public static void addItemsToItemGroup(){
