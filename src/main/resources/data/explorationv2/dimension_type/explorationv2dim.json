@@ -1,0 +1,25 @@
+{
+    "name": "explorationv2dim",
+    "has_raids": false,
+    "logical_height": 128,
+    "infiniburn": "#minecraft:infiniburn_overworld",
+    "ambient_light": 0.02,
+    "piglin_safe": false,
+    "bed_works": true,
+    "respawn_anchor_works": true,
+    "ultrawarm": false,
+    "natural": false,
+    "has_skylight": true,
+    "has_ceiling": true,
+    "height": 128,
+    "min_y": 0,
+    "monster_spawn_block_light_limit": 0,
+    "monster_spawn_light_level": {
+        "type": "minecraft:uniform",
+        "value": {
+          "max_inclusive": 7,
+          "min_inclusive": 0
+        }
+      },
+    "coordinate_scale": 1
+}

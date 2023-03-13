@@ -1,0 +1,12 @@
+
+{
+  "type": "explorationv2:explorationv2dim",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "minecraft:overworld",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "explorationv2:basic"
+    }
+  }
+}

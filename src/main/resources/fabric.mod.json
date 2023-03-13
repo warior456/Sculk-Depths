@@ -24,7 +24,7 @@
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "explorationv2.mixins.json"
   ],
 
   "depends": {

@@ -4,6 +4,7 @@
   "package": "net.ugi.explorationv2.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+
   ],
   "client": [
     "ExampleMixin"
