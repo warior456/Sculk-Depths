@@ -1,16 +1,67 @@
 {
-  "temperature": 1,
-  "downfall": 0,
-  "has_precipitation": 0,
-  "effects": {
-    "sky_color": 16612095,
-    "fog_color": 7471226,
-    "water_color": 2832725,
-    "water_fog_color": 329011,
-    "grass_color": 7340032
-  },
-  "spawners": {},
   "spawn_costs": {},
-  "carvers": {},
-  "features": []
+  "precipitation": "none",
+  "temperature": 0.8,
+  "downfall": 0.4,
+  "category": "plains",
+  "has_precipitation": false,
+  "effects": {
+    "sky_color": 352351,
+    "fog_color": 213071,
+    "water_color": 4159204,
+    "water_fog_color": 329011,
+    "foliage_color": 6029312,
+    "grass_color": 213071
+  },
+  "carvers": {
+    "air": [
+      "minecraft:cave"
+
+    ]
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ],
+  "spawners": {
+    "monster": [
+      {
+        "type": "minecraft:warden",
+        "weight": 1,
+        "minCount": 0,
+        "maxCount": 1
+      }
+    ],
+    "creature": [],
+    "ambient": [
+      {
+        "type": "minecraft:bat",
+        "weight": 10,
+        "minCount": 8,
+        "maxCount": 8
+      }
+    ],
+    "axolotls": [],
+    "underground_water_creature": [
+      {
+        "type": "minecraft:glow_squid",
+        "weight": 10,
+        "minCount": 4,
+        "maxCount": 6
+      }
+    ],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  }
+
 }
