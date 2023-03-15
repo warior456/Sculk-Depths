@@ -1,67 +1,48 @@
 {
-  "spawn_costs": {},
-  "precipitation": "none",
   "temperature": 0.8,
   "downfall": 0.4,
-  "category": "plains",
   "has_precipitation": false,
   "effects": {
-    "sky_color": 352351,
-    "fog_color": 213071,
+    "sky_color": 7907327,
+    "fog_color": 12638463,
     "water_color": 4159204,
     "water_fog_color": 329011,
-    "foliage_color": 6029312,
-    "grass_color": 213071
+    "mood_sound": {
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2
+    },
+    "music": {
+      "sound": "minecraft:music.overworld.deep_dark",
+      "min_delay": 12000,
+      "max_delay": 24000,
+      "replace_current_music": false
+    }
   },
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "spawn_costs": {},
   "carvers": {
     "air": [
-      "minecraft:cave"
-
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
     ]
   },
   "features": [
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    []
-  ],
-  "spawners": {
-    "monster": [
-      {
-        "type": "minecraft:warden",
-        "weight": 1,
-        "minCount": 0,
-        "maxCount": 1
-      }
-    ],
-    "creature": [],
-    "ambient": [
-      {
-        "type": "minecraft:bat",
-        "weight": 10,
-        "minCount": 8,
-        "maxCount": 8
-      }
-    ],
-    "axolotls": [],
-    "underground_water_creature": [
-      {
-        "type": "minecraft:glow_squid",
-        "weight": 10,
-        "minCount": 4,
-        "maxCount": 6
-      }
-    ],
-    "water_creature": [],
-    "water_ambient": [],
-    "misc": []
-  }
+    [
+      "minecraft:sculk_vein",
+      "explorationv2:sculk_patch"
 
+    ]
+  ]
 }
