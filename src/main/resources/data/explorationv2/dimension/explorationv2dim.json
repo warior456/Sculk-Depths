@@ -9,7 +9,7 @@
       "ore_veins_enabled": true,
       "legacy_random_source": false,
       "default_block": {
-        "Name": "minecraft:stone"
+        "Name": "minecraft:deepslate"
       },
       "default_fluid": {
         "Name": "minecraft:water",
@@ -2628,7 +2628,7 @@
             "then_run": {
               "type": "minecraft:block",
               "result_state": {
-                "Name": "minecraft:deepslate",
+                "Name": "explorationv2:umbrusk",
                 "Properties": {
                   "axis": "y"
                 }

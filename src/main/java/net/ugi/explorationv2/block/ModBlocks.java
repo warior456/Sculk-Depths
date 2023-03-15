@@ -26,6 +26,8 @@ public class ModBlocks {
     public static final Block DEEPSLATE_CITRINE_ORE = registerBlock("deepslate_citrine_ore",
             new ExperienceDroppingBlock(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool(),
                     UniformIntProvider.create(2, 6)), ModItemGroup.EXPLORATIONV2);
+    public static final Block UMBRUSK = registerBlock("umbrusk",
+            new Block(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.EXPLORATIONV2);
 
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {
