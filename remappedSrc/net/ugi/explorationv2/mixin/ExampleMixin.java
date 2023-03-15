@@ -14,3 +14,4 @@ public class ExampleMixin {
 		ExplorationV2.LOGGER.info("This line is printed by an example mod mixin!");
 	}
 }
+
