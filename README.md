@@ -1,4 +1,4 @@
-# explorationv2 (working title)
+# sculk_depths (working title)
 
 ## Setup
 

@@ -1,30 +1,30 @@
 {
   "schemaVersion": 1,
-  "id": "explorationv2",
+  "id": "sculk_depths",
   "version": "${version}",
 
-  "name": "Exploration update v2",
-  "description": "This mod will update exploration",
+  "name": "Sculk Depths",
+  "description": "This mod adds a new dimension accessed from the ancient cities",
   "authors": [
     "Matteo_fey",
     "gems_bond"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/warior456/explorationv2"
+    "sources": "https://github.com/warior456/sculk_depths"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/explorationv2/icon.png",
+  "icon": "assets/sculk_depths/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.ugi.explorationv2.ExplorationV2"
+      "net.ugi.sculk_depths.SculkDepths"
     ]
   },
   "mixins": [
-    "explorationv2.mixins.json"
+    "sculk_depths.mixins.json"
   ],
 
   "depends": {
