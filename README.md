@@ -1,4 +1,4 @@
-# sculk_depths (working title)
+# Sculk Depths
 
 ## Setup
 
