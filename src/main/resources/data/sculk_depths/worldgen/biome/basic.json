@@ -42,6 +42,9 @@
   },
   "features": [
     [
+      "sculk_depths:ore_citrine"
+    ],
+    [
       "minecraft:sculk_vein",
       "sculk_depths:sculk_patch"
 

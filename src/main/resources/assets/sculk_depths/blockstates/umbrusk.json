@@ -1,5 +1,20 @@
 {
   "variants": {
-    "": { "model": "sculk_depths:block/umbrusk" }
+    "": [
+      {
+        "model": "sculk_depths:block/umbrusk"
+      },
+      {
+        "model": "sculk_depths:block/umbrusk_mirrored"
+      },
+      {
+        "model": "sculk_depths:block/umbrusk",
+        "y": 180
+      },
+      {
+        "model": "sculk_depths:block/umbrusk_mirrored",
+        "y": 180
+      }
+    ]
   }
 }
