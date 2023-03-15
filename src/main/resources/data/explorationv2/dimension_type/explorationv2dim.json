@@ -2,6 +2,7 @@
     "name": "explorationv2dim",
     "has_raids": false,
     "logical_height": 256,
+    "effects": "minecraft:the_nether",
     "infiniburn": "#minecraft:infiniburn_overworld",
     "ambient_light": 0.01,
     "piglin_safe": false,
