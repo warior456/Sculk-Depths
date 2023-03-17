@@ -45,10 +45,16 @@
       "sculk_depths:ore_citrine"
     ],
     [
-      "minecraft:sculk_vein",
       /*"sculk_depths:sculk_patch",*/
-      "sculk_depths:sculk_fast_patch"
+      /*"sculk_depths:sculk_fast_patch",*/
       /*"sculk_depths:sculksensor_fast_patch"*/
+      "sculk_depths:sculk_veins_roof",
+      "sculk_depths:sculk_veins_floor"
+    ],
+    [
+      "sculk_depths:sculk_sensor",
+      "sculk_depths:sculk_shrieker",
+      "sculk_depths:sculk_catalist"
     ]
   ]
 }
