@@ -1,5 +1,5 @@
-/*
 {
+  /*doesn't work*/
   "feature": {
     "type": "minecraft:nether_forest_vegetation",
     "config": {
@@ -43,4 +43,4 @@
       "type": "minecraft:biome"
     }
   ]
-}*/
+}
