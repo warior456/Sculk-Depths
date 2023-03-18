@@ -2,15 +2,10 @@ package net.ugi.sculk_depths.fluid;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.fluid.FlowableFluid;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
+import net.minecraft.fluid.*;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.FluidTags;
@@ -29,16 +24,16 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public abstract class SculkFluidFluid extends FlowableFluid {
-    public SculkFluidFluid() {
+public class SculkFluid extends FlowableFluid {
+    public SculkFluid() {
     }
 
     public Fluid getFlowing() {
-        return ModFluids.FLOWING_SCULK_FLUID;
+        return ModFluids.SCULK_FLUID_FLOWING;
     }
 
     public Fluid getStill() {
-        return ModFluids.SCULK_FLUID;
+        return ModFluids.SCULK_FLUID_STILL;
     }
 
     public Item getBucketItem() {
@@ -48,21 +43,20 @@ public abstract class SculkFluidFluid extends FlowableFluid {
     public void randomDisplayTick(World world, BlockPos pos, FluidState state, Random random) {
         if (!state.isStill() && !(Boolean)state.get(FALLING)) {
             if (random.nextInt(64) == 0) {
-                world.playSound((double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, SoundEvents.BLOCK_WATER_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.25F + 0.75F, random.nextFloat() + 0.5F, false);
+                world.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_WATER_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.25F + 0.75F, random.nextFloat() + 0.5F, false);
             }
         } else if (random.nextInt(10) == 0) {
-            world.addParticle(ParticleTypes.UNDERWATER, (double)pos.getX() + random.nextDouble(), (double)pos.getY() + random.nextDouble(), (double)pos.getZ() + random.nextDouble(), 0.0, 0.0, 0.0);
+            world.addParticle(ParticleTypes.UNDERWATER, (double)pos.getX() + random.nextDouble(), (double)pos.getY() + random.nextDouble(), (double)pos.getZ() + random.nextDouble(), 0.0D, 0.0D, 0.0D);
         }
-
     }
 
     @Nullable
     public ParticleEffect getParticle() {
-        return ParticleTypes.SCULK_SOUL;
+        return ParticleTypes.DRIPPING_WATER;
     }
 
     protected boolean isInfinite(World world) {
-        return world.getGameRules().getBoolean(GameRules.LAVA_SOURCE_CONVERSION);
+        return false;
     }
 
     protected void beforeBreakingBlock(WorldAccess world, BlockPos pos, BlockState state) {
@@ -75,23 +69,33 @@ public abstract class SculkFluidFluid extends FlowableFluid {
     }
 
     public BlockState toBlockState(FluidState state) {
-        return ModBlocks.SCULK_FLUID.getDefaultState().with(FluidBlock.LEVEL, getBlockStateLevel(state));
+        return (BlockState) ModBlocks.SCULK_FLUID.getDefaultState().with(FluidBlock.LEVEL, getBlockStateLevel(state));
+    }
+
+    @Override
+    public boolean isStill(FluidState state) {
+        return false;
     }
 
     public boolean matchesType(Fluid fluid) {
-        return fluid == ModFluids.SCULK_FLUID || fluid == ModFluids.FLOWING_SCULK_FLUID;
+        return fluid == ModFluids.SCULK_FLUID_STILL || fluid == ModFluids.SCULK_FLUID_FLOWING;
     }
 
     public int getLevelDecreasePerBlock(WorldView world) {
         return 1;
     }
 
+    @Override
+    public int getLevel(FluidState state) {
+        return 0;
+    }
+
     public int getTickRate(WorldView world) {
-        return 4;
+        return 5;
     }
 
     public boolean canBeReplacedWith(FluidState state, BlockView world, BlockPos pos, Fluid fluid, Direction direction) {
-        return direction == Direction.DOWN;
+        return direction == Direction.DOWN && !fluid.isIn(FluidTags.WATER);
     }
 
     protected float getBlastResistance() {
@@ -102,7 +106,7 @@ public abstract class SculkFluidFluid extends FlowableFluid {
         return Optional.of(SoundEvents.ITEM_BUCKET_FILL);
     }
 
-    public static class Flowing extends net.ugi.sculk_depths.fluid.SculkFluidFluid {
+    public static class Flowing extends SculkFluid {
         public Flowing() {
         }
 
@@ -112,7 +116,7 @@ public abstract class SculkFluidFluid extends FlowableFluid {
         }
 
         public int getLevel(FluidState state) {
-            return state.get(LEVEL);
+            return (Integer)state.get(LEVEL);
         }
 
         public boolean isStill(FluidState state) {
@@ -120,7 +124,7 @@ public abstract class SculkFluidFluid extends FlowableFluid {
         }
     }
 
-    public static class Still extends net.ugi.sculk_depths.fluid.SculkFluidFluid {
+    public static class Still extends SculkFluid {
         public Still() {
         }
 
@@ -133,3 +137,4 @@ public abstract class SculkFluidFluid extends FlowableFluid {
         }
     }
 }
+

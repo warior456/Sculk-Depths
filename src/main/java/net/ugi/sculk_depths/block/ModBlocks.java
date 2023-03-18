@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
-import net.minecraft.fluid.Fluids;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
@@ -29,7 +28,7 @@ public class ModBlocks {
     public static final Block UMBRUSK = registerBlock("umbrusk",
             new Block(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
     public static final Block SCULK_FLUID = registerFluids("sculk_fluid",
-            new FluidBlock(ModFluids.SCULK_FLUID, AbstractBlock.Settings.of(Material.LAVA).strength(100.0F).dropsNothing()), ModItemGroup.SCULK_DEPTHS);
+            new FluidBlock(ModFluids.SCULK_FLUID_STILL, AbstractBlock.Settings.of(Material.LAVA).strength(100.0F).dropsNothing()), ModItemGroup.SCULK_DEPTHS);
 
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {
