@@ -1,6 +1,9 @@
 package net.ugi.sculk_depths;
 
 import net.fabricmc.api.ModInitializer;
+import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
+import net.minecraft.block.Blocks;
+import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItemGroup;
 import net.ugi.sculk_depths.item.ModItems;
@@ -16,6 +19,12 @@ public class SculkDepths implements ModInitializer {
 		ModItemGroup.registerItemgroups();
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
+		CustomPortalBuilder.beginPortal()
+				.frameBlock(Blocks.REINFORCED_DEEPSLATE)
+				//.customPortalBlock(Blocks.SCULK)
+				.destDimID(new Identifier("sculk_depths:sculk_depthsdim"))
+				.tintColor(0, 115, 150)
+				.registerPortal();
 		LOGGER.info("sculk_depths has loaded");
 	}
 }
