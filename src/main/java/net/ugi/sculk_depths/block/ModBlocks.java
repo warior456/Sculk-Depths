@@ -27,12 +27,14 @@ public class ModBlocks {
                     UniformIntProvider.create(2, 6)), ModItemGroup.SCULK_DEPTHS);
     public static final Block UMBRUSK = registerBlock("umbrusk",
             new Block(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
-    public static final Block SCULK_FLUID = registerFluids("sculk_fluid",
-            new FluidBlock(ModFluids.SCULK_FLUID_STILL, AbstractBlock.Settings.of(Material.LAVA).strength(100.0F).dropsNothing()), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block SCULK_FLUID = registerBlockWithoutBlockItem("sculk_fluid_block", new ModFluidBlock(ModFluids.SCULK_FLUID_STILL, FabricBlockSettings.of(Material.WATER).noCollision().nonOpaque().dropsNothing()), ModItemGroup.SCULK_DEPTHS);
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         registerBlockItem(name, block, group);
+        return Registry.register(Registries.BLOCK, new Identifier(SculkDepths.MOD_ID, name), block);
+    }
+    private static Block registerBlockWithoutBlockItem(String name, Block block, ItemGroup group){
         return Registry.register(Registries.BLOCK, new Identifier(SculkDepths.MOD_ID, name), block);
     }
     private static Block registerFluids(String name, Block block, ItemGroup group) {

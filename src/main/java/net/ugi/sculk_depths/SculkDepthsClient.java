@@ -1,24 +1,21 @@
 package net.ugi.sculk_depths;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.fluid.ModFluids;
 
 public class SculkDepthsClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.SCULK_FLUID_STILL, ModFluids.SCULK_FLUID_FLOWING, new SimpleFluidRenderHandler(
-                new Identifier("minecraft:block/water_still"),
-                new Identifier("minecraft:block/water_flow"),
-                0x4CC248
-        ));
 
-        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.SCULK_FLUID_STILL, ModFluids.SCULK_FLUID_FLOWING);
+
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.SCULK_FLUID_STILL, new SimpleFluidRenderHandler(
+                SimpleFluidRenderHandler.WATER_STILL, SimpleFluidRenderHandler.WATER_FLOWING, SimpleFluidRenderHandler.WATER_OVERLAY, 0x80050d));
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.SCULK_FLUID_FLOWING, new SimpleFluidRenderHandler(
+                SimpleFluidRenderHandler.WATER_STILL, SimpleFluidRenderHandler.WATER_FLOWING, SimpleFluidRenderHandler.WATER_OVERLAY, 0x80050d));
+
 
         //if you want to use custom textures they needs to be registered.
         //In this example this is unnecessary because the vanilla water textures are already registered.
