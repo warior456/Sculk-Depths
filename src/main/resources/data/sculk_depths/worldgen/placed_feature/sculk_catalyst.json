@@ -1,8 +1,8 @@
 {
   "feature": {
-    "type": "minecraft:block_pile",
+    "type": "minecraft:simple_block",
     "config": {
-      "state_provider": {
+      "to_place": {
         "type": "minecraft:simple_state_provider",
         "state": {
           "Name": "minecraft:sculk_catalyst"
@@ -10,10 +10,12 @@
       }
     }
   },
+
+
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 70
+      "count": 250
     },
     {
       "type": "minecraft:in_square"
@@ -30,6 +32,15 @@
         }
       }
     },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": 0,
+      "y_spread": {
+        "type": "minecraft:constant",
+        "value": 1
+      }
+    },
+
     {
       "type": "minecraft:environment_scan",
       "direction_of_search": "down",
