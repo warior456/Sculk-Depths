@@ -12,6 +12,8 @@ import java.util.Iterator;
 
 public class ModFluids {
     public static final FlowableFluid FLOWING_SCULK_FLUID = register("flowing_sculk_fluid", new SculkFluidFluid.Flowing());
+
+    public static final FlowableFluid STILL_SCULK_FLUID = register("still_sculk_fluid", new SculkFluidFluid.Still());
     public static final FlowableFluid SCULK_FLUID = register("sculk_fluid", new SculkFluidFluid.Still());
 
 

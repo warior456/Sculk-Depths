@@ -30,6 +30,7 @@ public class ModItems {
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, CITRINE);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, RAW_CITRINE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, SCULK_FLUID_BUCKET);
     }
 
     private static void addToItemGroup(ItemGroup group, Item item) {

@@ -58,11 +58,11 @@ public abstract class SculkFluidFluid extends FlowableFluid {
 
     @Nullable
     public ParticleEffect getParticle() {
-        return ParticleTypes.DRIPPING_WATER;
+        return ParticleTypes.SCULK_SOUL;
     }
 
     protected boolean isInfinite(World world) {
-        return world.getGameRules().getBoolean(GameRules.WATER_SOURCE_CONVERSION);
+        return world.getGameRules().getBoolean(GameRules.LAVA_SOURCE_CONVERSION);
     }
 
     protected void beforeBreakingBlock(WorldAccess world, BlockPos pos, BlockState state) {
@@ -87,7 +87,7 @@ public abstract class SculkFluidFluid extends FlowableFluid {
     }
 
     public int getTickRate(WorldView world) {
-        return 5;
+        return 4;
     }
 
     public boolean canBeReplacedWith(FluidState state, BlockView world, BlockPos pos, Fluid fluid, Direction direction) {
