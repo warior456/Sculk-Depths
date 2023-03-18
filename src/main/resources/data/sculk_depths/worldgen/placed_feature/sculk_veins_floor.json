@@ -24,7 +24,7 @@
       "replaceable": "#sculk_depths:umbrusk_ore_replaceables",
       "ground_state": {
         "type": "minecraft:noise_provider",
-        "seed": 152,
+        "seed": 0,
         "noise": {
           "firstOctave": -7,
           "amplitudes": [
@@ -192,8 +192,8 @@
           "type": "minecraft:multiface_growth",
           "config": {
             "block": "minecraft:sculk_vein",
-            "search_range": 3,
-            "chance_of_spreading": 50,
+            "search_range": 1,
+            "chance_of_spreading": 1,
             "can_place_on_floor": true,
             "can_place_on_ceiling": true,
             "can_place_on_wall": true,

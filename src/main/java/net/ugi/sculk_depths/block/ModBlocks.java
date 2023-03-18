@@ -3,11 +3,11 @@ package net.ugi.sculk_depths.block;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.*;
+import net.minecraft.fluid.Fluids;
 import net.ugi.sculk_depths.SculkDepths;
+import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
-import net.minecraft.block.Block;
-import net.minecraft.block.ExperienceDroppingBlock;
-import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -28,13 +28,17 @@ public class ModBlocks {
                     UniformIntProvider.create(2, 6)), ModItemGroup.SCULK_DEPTHS);
     public static final Block UMBRUSK = registerBlock("umbrusk",
             new Block(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+    public static final Block SCULK_FLUID = registerFluids("sculk_fluid",
+            new FluidBlock(ModFluids.SCULK_FLUID, AbstractBlock.Settings.of(Material.WATER).noCollision().strength(100.0F).dropsNothing()), ModItemGroup.SCULK_DEPTHS);
 
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         registerBlockItem(name, block, group);
         return Registry.register(Registries.BLOCK, new Identifier(SculkDepths.MOD_ID, name), block);
     }
-
+    private static Block registerFluids(String name, Block block, ItemGroup group) {
+        return (Block)Registry.register(Registries.BLOCK, new Identifier(SculkDepths.MOD_ID, name), block);
+    }
     private static Item registerBlockItem(String name, Block block, ItemGroup group) {
         Item item = Registry.register(Registries.ITEM, new Identifier(SculkDepths.MOD_ID, name),
                 new BlockItem(block, new FabricItemSettings()));

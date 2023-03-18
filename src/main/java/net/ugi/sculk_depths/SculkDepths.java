@@ -1,7 +1,10 @@
 package net.ugi.sculk_depths;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.registry.DefaultedRegistry;
 import net.ugi.sculk_depths.block.ModBlocks;
+import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
 import net.ugi.sculk_depths.item.ModItems;
 import org.slf4j.Logger;
@@ -16,6 +19,7 @@ public class SculkDepths implements ModInitializer {
 		ModItemGroup.registerItemgroups();
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
+		ModFluids.registerModFluids();
 		LOGGER.info("sculk_depths has loaded");
 	}
 }
