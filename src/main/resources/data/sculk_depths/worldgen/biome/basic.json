@@ -52,9 +52,7 @@
       "sculk_depths:sculk_veins_floor"
     ],
     [
-      "sculk_depths:sculk_sensor",
-      "sculk_depths:sculk_shrieker",
-      "sculk_depths:sculk_catalyst"
+      "sculk_depths:sculk_vegetation"
     ]
   ]
 }
