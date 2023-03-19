@@ -16,8 +16,6 @@ public class ModItems {
     public static final Item RAW_CITRINE = registerItem("raw_citrine",
             new Item(new FabricItemSettings()));
 
-    //public static final Item SCULK_FLUID_BUCKET = registerItem("sculk_fluid_bucket",
-    //       new Item(new FabricItemSettings()));
 
     public static final Item SCULK_FLUID_BUCKET = registerItem("sculk_fluid_bucket", new BucketItem(ModFluids.SCULK_FLUID_STILL,
             new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
