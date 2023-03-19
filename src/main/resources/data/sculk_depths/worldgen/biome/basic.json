@@ -35,9 +35,6 @@
   "spawn_costs": {},
   "carvers": {
     "air": [
-      "minecraft:cave",
-      "minecraft:cave_extra_underground",
-      "minecraft:canyon"
     ]
   },
   "features": [
@@ -48,8 +45,11 @@
       /*"sculk_depths:sculk_patch",*/
       /*"sculk_depths:sculk_fast_patch",*/
       /*"sculk_depths:sculksensor_fast_patch"*/
-      "sculk_depths:sculk_veins_roof",
-      "sculk_depths:sculk_veins_floor"
+      "sculk_depths:sculk_veins_roof_umbrusk",
+      "sculk_depths:sculk_veins_floor_umbrusk",
+      "sculk_depths:sculk_veins_roof_deepslate",
+      "sculk_depths:sculk_veins_floor_deepslate"
+
     ],
     [
       "sculk_depths:sculk_vegetation"

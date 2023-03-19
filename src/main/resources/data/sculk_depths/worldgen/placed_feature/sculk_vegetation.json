@@ -41,7 +41,7 @@
                     "Name": "minecraft:sculk_shrieker",
                     "Properties": {
                       "can_summon": "true",
-                      "shrieking": "true",
+                      "shrieking": "false",
                       "waterlogged": "false"
                     }
                   }
@@ -94,7 +94,7 @@
           "absolute": -256
         },
         "max_inclusive": {
-          "absolute": 0
+          "absolute": 16
         }
       }
     },

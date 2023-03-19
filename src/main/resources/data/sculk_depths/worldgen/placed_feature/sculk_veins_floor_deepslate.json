@@ -2,7 +2,7 @@
   "feature": {
     "type": "minecraft:vegetation_patch",
     "config": {
-      "surface": "ceiling",
+      "surface": "floor",
       "depth": {
         "type": "minecraft:uniform",
         "value": {
@@ -21,12 +21,12 @@
           "max_inclusive": 3
         }
       },
-      "replaceable": "#sculk_depths:umbrusk_ore_replaceables",
+      "replaceable": "#minecraft:deepslate_ore_replaceables",
       "ground_state": {
         "type": "minecraft:noise_provider",
         "seed": 0,
         "noise": {
-          "firstOctave": -8,
+          "firstOctave": -7,
           "amplitudes": [
             1.0,
             0.5,
@@ -48,16 +48,13 @@
             "Name": "minecraft:sculk"
           },
           {
-            "Name": "minecraft:sculk"
+            "Name": "minecraft:deepslate"
           },
           {
-            "Name": "sculk_depths:umbrusk"
+            "Name": "minecraft:deepslate"
           },
           {
-            "Name": "sculk_depths:umbrusk"
-          },
-          {
-            "Name": "minecraft:sculk"
+            "Name": "minecraft:deepslate"
           },
           {
             "Name": "minecraft:sculk"
@@ -66,22 +63,49 @@
             "Name": "minecraft:sculk"
           },
           {
-            "Name": "sculk_depths:umbrusk"
+            "Name": "minecraft:deepslate"
           },
           {
-            "Name": "sculk_depths:umbrusk"
+            "Name": "minecraft:deepslate"
           },
           {
-            "Name": "sculk_depths:umbrusk"
+            "Name": "minecraft:deepslate"
           },
           {
-            "Name": "sculk_depths:umbrusk"
+            "Name": "minecraft:deepslate"
           },
           {
-            "Name": "sculk_depths:umbrusk"
+            "Name": "minecraft:deepslate"
           },
           {
-            "Name": "sculk_depths:umbrusk"
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:deepslate"
           },
           {
             "Name": "minecraft:sculk"
@@ -90,88 +114,22 @@
             "Name": "minecraft:sculk"
           },
           {
-            "Name": "sculk_depths:umbrusk"
+            "Name": "minecraft:deepslate"
           },
           {
-            "Name": "sculk_depths:umbrusk"
+            "Name": "minecraft:deepslate"
           },
           {
-            "Name": "sculk_depths:umbrusk"
+            "Name": "minecraft:deepslate"
           },
           {
-            "Name": "sculk_depths:umbrusk"
+            "Name": "minecraft:deepslate"
           },
           {
-            "Name": "sculk_depths:umbrusk"
+            "Name": "minecraft:deepslate"
           },
           {
-            "Name": "sculk_depths:umbrusk"
-          },
-          {
-            "Name": "minecraft:sculk"
-          },
-          {
-            "Name": "minecraft:sculk"
-          },
-          {
-            "Name": "sculk_depths:umbrusk"
-          },
-          {
-            "Name": "sculk_depths:umbrusk"
-          },
-          {
-            "Name": "sculk_depths:umbrusk"
-          },
-          {
-            "Name": "sculk_depths:umbrusk"
-          },
-          {
-            "Name": "sculk_depths:umbrusk"
-          },
-          {
-            "Name": "sculk_depths:umbrusk"
-          },
-          {
-            "Name": "minecraft:sculk"
-          },
-          {
-            "Name": "minecraft:sculk"
-          },
-          {
-            "Name": "minecraft:sculk"
-          },
-          {
-            "Name": "sculk_depths:umbrusk"
-          },
-          {
-            "Name": "sculk_depths:umbrusk"
-          },
-          {
-            "Name": "sculk_depths:umbrusk"
-          },
-          {
-            "Name": "sculk_depths:umbrusk"
-          },
-          {
-            "Name": "sculk_depths:umbrusk"
-          },
-          {
-            "Name": "sculk_depths:umbrusk"
-          },
-          {
-            "Name": "sculk_depths:umbrusk"
-          },
-          {
-            "Name": "minecraft:sculk"
-          },
-          {
-            "Name": "sculk_depths:umbrusk"
-          },
-          {
-            "Name": "sculk_depths:umbrusk"
-          },
-          {
-            "Name": "sculk_depths:umbrusk"
+            "Name": "minecraft:deepslate"
           },
           {
             "Name": "minecraft:sculk"
@@ -183,7 +141,49 @@
             "Name": "minecraft:sculk"
           },
           {
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:deepslate"
+          },
+          {
             "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:deepslate"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "minecraft:deepslate"
           }
         ]
       },
@@ -198,14 +198,14 @@
             "can_place_on_ceiling": true,
             "can_place_on_wall": true,
             "can_be_placed_on": [
-              "sculk_depths:umbrusk"
+              "minecraft:deepslate"
             ]
           }
         },
         "placement": [
           {
             "type": "minecraft:environment_scan",
-            "direction_of_search": "up",
+            "direction_of_search": "down",
             "max_steps": 1,
             "target_condition": {
               "type": "minecraft:true"
@@ -214,7 +214,7 @@
               "type": "minecraft:matching_blocks",
               "offset": [
                 0,
-                1,
+                -1,
                 0
               ],
               "blocks": "minecraft:sculk"
@@ -241,16 +241,16 @@
       "height": {
         "type": "minecraft:uniform",
         "min_inclusive": {
-          "absolute": -256
+          "absolute": 0
         },
         "max_inclusive": {
-          "absolute": 32
+          "absolute": 64
         }
       }
     },
     {
       "type": "minecraft:environment_scan",
-      "direction_of_search": "up",
+      "direction_of_search": "down",
       "max_steps": 32,
       "target_condition": {
         "type": "minecraft:has_sturdy_face",
@@ -259,7 +259,7 @@
           1,
           0
         ],
-        "direction": "down"
+        "direction": "up"
       }
     },
     {

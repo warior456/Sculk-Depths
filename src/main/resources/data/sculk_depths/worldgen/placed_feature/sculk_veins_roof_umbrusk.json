@@ -2,7 +2,7 @@
   "feature": {
     "type": "minecraft:vegetation_patch",
     "config": {
-      "surface": "floor",
+      "surface": "ceiling",
       "depth": {
         "type": "minecraft:uniform",
         "value": {
@@ -26,7 +26,7 @@
         "type": "minecraft:noise_provider",
         "seed": 0,
         "noise": {
-          "firstOctave": -7,
+          "firstOctave": -8,
           "amplitudes": [
             1.0,
             0.5,
@@ -205,7 +205,7 @@
         "placement": [
           {
             "type": "minecraft:environment_scan",
-            "direction_of_search": "down",
+            "direction_of_search": "up",
             "max_steps": 1,
             "target_condition": {
               "type": "minecraft:true"
@@ -214,7 +214,7 @@
               "type": "minecraft:matching_blocks",
               "offset": [
                 0,
-                -1,
+                1,
                 0
               ],
               "blocks": "minecraft:sculk"
@@ -244,13 +244,13 @@
           "absolute": -256
         },
         "max_inclusive": {
-          "absolute": 32
+          "absolute": 8
         }
       }
     },
     {
       "type": "minecraft:environment_scan",
-      "direction_of_search": "down",
+      "direction_of_search": "up",
       "max_steps": 32,
       "target_condition": {
         "type": "minecraft:has_sturdy_face",
@@ -259,7 +259,7 @@
           1,
           0
         ],
-        "direction": "up"
+        "direction": "down"
       }
     },
     {
