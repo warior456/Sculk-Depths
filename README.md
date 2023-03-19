@@ -7,8 +7,6 @@ You acces this dimension by lighting the portal structure in the ancient cities 
 
 
 ## FEATURES
-<details>
-  <summary> Expand </summary>
   
   - custom world gen
   - portal to the dimension
@@ -21,8 +19,8 @@ You acces this dimension by lighting the portal structure in the ancient cities 
 
 
 
-  </details>
 </details>
+
 
 
 
