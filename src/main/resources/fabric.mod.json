@@ -24,6 +24,9 @@
     ],
     "client": [
       "net.ugi.sculk_depths.SculkDepthsClient"
+    ],
+    "fabric-datagen": [
+      "net.ugi.sculk_depths.SculkDepthsDataGenerator"
     ]
   },
   "mixins": [
