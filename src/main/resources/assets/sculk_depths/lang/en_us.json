@@ -1,11 +1,11 @@
 {
   "item.sculk_depths.citrine" : "Citrine",
   "item.sculk_depths.raw_citrine" : "Raw Citrine",
+  "item.sculk_depths.kryslum_bucket": "Kryslum Bucket",
   "block.sculk_depths.citrine_block": "Block of Citrine",
   "block.sculk_depths.citrine_ore": "Citrine Ore",
   "block.sculk_depths.deepslate_citrine_ore": "Deepslate Citrine Ore",
   "block.sculk_depths.umbrusk": "Umbrusk",
   "block.sculk_depths.flumrock": "Flumrock",
-  "block.sculk_depths.kryslum_bucket": "Kryslum Bucket",
   "itemgroup.sculk_depths" : "Sculk Depths"
 }
