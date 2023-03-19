@@ -3,7 +3,7 @@
 
 
 This mod adds a new dimension the "Sculk Depths" <br>
-You acces this dimension by lighting the portal structure in the ancient cities with a flint and steel, when doing so make sure the inside of the portal is clear of any blocks and sculk vains.
+You acces this dimension by lighting the portal structure in the ancient cities with citrine, when doing so make sure the inside of the portal is clear of any blocks and sculk vains.
 
 
 ## FEATURES
