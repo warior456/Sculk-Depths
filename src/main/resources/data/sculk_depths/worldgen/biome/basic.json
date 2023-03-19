@@ -53,6 +53,9 @@
     ],
     [
       "sculk_depths:sculk_vegetation"
+    ],
+    [
+      "sculk_depths:test"
     ]
   ]
 }

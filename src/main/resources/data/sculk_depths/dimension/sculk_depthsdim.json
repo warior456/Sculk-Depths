@@ -12,7 +12,7 @@
         "Name": "minecraft:deepslate"
       },
       "default_fluid": {
-        "Name": "sculk_depths:kryslum"
+        "Name": "sculk_depths:kryslum_block"
       },
       "noise": {
         "min_y": -256,
@@ -440,7 +440,7 @@
             "type": "minecraft:condition",
             "if_true": {
               "type": "minecraft:vertical_gradient",
-              "random_name": "minecraft:deepslate",
+              "random_name": "sculk_depths:umbrusk",
               "true_at_and_below": {
                 "absolute": 0
               },
