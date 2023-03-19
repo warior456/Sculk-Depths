@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "sculk_depths:item/sculk_fluid_bucket"
+    "layer0": "sculk_depths:item/kryslum_bucket"
   }
 }

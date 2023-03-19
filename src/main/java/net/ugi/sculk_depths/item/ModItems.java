@@ -17,7 +17,7 @@ public class ModItems {
             new Item(new FabricItemSettings()));
 
 
-    public static final Item SCULK_FLUID_BUCKET = registerItem("sculk_fluid_bucket", new BucketItem(ModFluids.SCULK_FLUID_STILL,
+    public static final Item KRYSLUM_BUCKET = registerItem("kryslum_bucket", new BucketItem(ModFluids.KRYSLUM_STILL,
             new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
     private static Item registerItem(String name, Item item) {
@@ -30,7 +30,7 @@ public class ModItems {
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, CITRINE);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, RAW_CITRINE);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, SCULK_FLUID_BUCKET);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, KRYSLUM_BUCKET);
     }
 
     private static void addToItemGroup(ItemGroup group, Item item) {

@@ -30,7 +30,7 @@ public class ModBlocks {
     public static final Block FLUMROCK = registerBlock("flumrock",
             new Block(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block SCULK_FLUID = registerBlockWithoutBlockItem("sculk_fluid_block", new ModFluidBlock(ModFluids.SCULK_FLUID_STILL, FabricBlockSettings.of(Material.WATER).noCollision().nonOpaque().dropsNothing()), ModItemGroup.SCULK_DEPTHS);
+    public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum_block", new ModFluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.of(Material.WATER).noCollision().nonOpaque().dropsNothing()), ModItemGroup.SCULK_DEPTHS);
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         registerBlockItem(name, block, group);

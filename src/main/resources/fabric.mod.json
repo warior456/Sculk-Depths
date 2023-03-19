@@ -21,6 +21,9 @@
   "entrypoints": {
     "main": [
       "net.ugi.sculk_depths.SculkDepths"
+    ],
+    "client": [
+      "net.ugi.sculk_depths.SculkDepthsClient"
     ]
   },
   "mixins": [
