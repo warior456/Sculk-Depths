@@ -69,7 +69,7 @@ public class KryslumFluid extends FlowableFluid {
     }
 
     public BlockState toBlockState(FluidState state) {
-        return (BlockState) ModBlocks.KRYSLUM.getDefaultState().with(FluidBlock.LEVEL, getBlockStateLevel(state));
+        return ModBlocks.KRYSLUM.getDefaultState().with(FluidBlock.LEVEL, getBlockStateLevel(state));
     }
 
     @Override
@@ -112,11 +112,11 @@ public class KryslumFluid extends FlowableFluid {
 
         protected void appendProperties(StateManager.Builder<Fluid, FluidState> builder) {
             super.appendProperties(builder);
-            builder.add(new Property[]{LEVEL});
+            builder.add(LEVEL);
         }
 
         public int getLevel(FluidState state) {
-            return (Integer)state.get(LEVEL);
+            return state.get(LEVEL);
         }
 
         public boolean isStill(FluidState state) {

@@ -22,9 +22,7 @@ public class ModBlocks {
     public static final Block CITRINE_ORE = registerBlock("citrine_ore",
             new ExperienceDroppingBlock(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool(),
                     UniformIntProvider.create(2, 6)), ModItemGroup.SCULK_DEPTHS);
-    public static final Block DEEPSLATE_CITRINE_ORE = registerBlock("deepslate_citrine_ore",
-            new ExperienceDroppingBlock(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool(),
-                    UniformIntProvider.create(2, 6)), ModItemGroup.SCULK_DEPTHS);
+
     public static final Block UMBRUSK = registerBlock("umbrusk",
             new Block(FabricBlockSettings.of(Material.STONE).hardness(5.0f).resistance(8f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
     public static final Block FLUMROCK = registerBlock("flumrock",
