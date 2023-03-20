@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "sculk_depths:block/crumbling_dirt"
+      },
+      {
+        "model": "sculk_depths:block/crumbling_dirt_mirrored"
+      },
+      {
+        "model": "sculk_depths:block/crumbling_dirt",
+        "y": 180
+      },
+      {
+        "model": "sculk_depths:block/crumbling_dirt_mirrored",
+        "y": 180
+      }
+    ]
+  }
+}

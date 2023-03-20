@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "sculk_depths:block/umbrusk_bricks",
+    "side": "sculk_depths:block/umbrusk_bricks",
+    "top": "sculk_depths:block/umbrusk_bricks"
+  }
+}

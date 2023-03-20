@@ -27,6 +27,30 @@ public class ModBlocks {
             new Block(FabricBlockSettings.of(Material.STONE).hardness(5.0f).resistance(8f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
     public static final Block FLUMROCK = registerBlock("flumrock",
             new Block(FabricBlockSettings.of(Material.STONE).strength(4.5f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+    public static final Block CRUMBLING_DIRT = registerBlock("crumbling_dirt",
+            new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC).strength(1.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block UMBRUSK_BRICKS = registerBlock("umbrusk_bricks",
+            new Block(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block UMBRUSK_BRICK_STAIRS = registerBlock("umbrusk_brick_stairs",
+            new StairsBlock(UMBRUSK.getDefaultState(), FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block UMBRUSK_BRICK_SLAB = registerBlock("umbrusk_brick_slab",
+            new SlabBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block UMBRUSK_BRICK_WALL = registerBlock("umbrusk_brick_wall",
+            new WallBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block UMBRUSK_STAIRS = registerBlock("umbrusk_stairs",
+            new StairsBlock(UMBRUSK.getDefaultState(), FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block UMBRUSK_SLAB = registerBlock("umbrusk_slab",
+            new SlabBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block UMBRUSK_WALL = registerBlock("umbrusk_wall",
+            new WallBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
 
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum_block", new ModFluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.of(Material.WATER).noCollision().nonOpaque().dropsNothing()), ModItemGroup.SCULK_DEPTHS);
 
@@ -34,6 +58,8 @@ public class ModBlocks {
         registerBlockItem(name, block, group);
         return Registry.register(Registries.BLOCK, new Identifier(SculkDepths.MOD_ID, name), block);
     }
+
+
     private static Block registerBlockWithoutBlockItem(String name, Block block, ItemGroup group){
         return Registry.register(Registries.BLOCK, new Identifier(SculkDepths.MOD_ID, name), block);
     }

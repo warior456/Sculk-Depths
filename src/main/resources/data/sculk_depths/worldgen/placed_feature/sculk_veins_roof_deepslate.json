@@ -21,7 +21,7 @@
           "max_inclusive": 3
         }
       },
-      "replaceable": "#minecraft:deepslate_ore_replaceables",
+      "replaceable": "#sculk_depths:sculk_veins",
       "ground_state": {
         "type": "minecraft:noise_provider",
         "seed": 0,
@@ -198,7 +198,8 @@
             "can_place_on_ceiling": true,
             "can_place_on_wall": true,
             "can_be_placed_on": [
-              "minecraft:deepslate"
+              "minecraft:deepslate",
+              "sculk_depths:crumbling_dirt"
             ]
           }
         },

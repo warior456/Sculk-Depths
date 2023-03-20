@@ -39,9 +39,6 @@
   },
   "features": [
     [
-      "sculk_depths:ore_citrine"
-    ],
-    [
       /*"sculk_depths:sculk_patch",*/
       /*"sculk_depths:sculk_fast_patch",*/
       /*"sculk_depths:sculksensor_fast_patch"*/
@@ -52,7 +49,14 @@
 
     ],
     [
+      "sculk_depths:ore_citrine",
+      "sculk_depths:ore_flumrock"
+    ],
+    [
       "sculk_depths:sculk_vegetation"
+    ],
+    [
+      "sculk_depths:test"
     ]
   ]
 }
