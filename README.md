@@ -7,7 +7,7 @@ To get to this dimension:
 1) Search a deep dark biome with an ancient city
 2) Summon and kill a warden for its new drop the Soul Heart
 3) Go to the center of the city and clear all the sculk veins from the middle of the reinforced deepslate
-4) Light the portal with the soul heart you just got from the Warden
+4) Light the portal with the soul heart you just got from the Warden <br>
 When going to this dimension take at least a diamond pickaxe because the world is mostly made up of a very hard block Umbrusk
 
 
