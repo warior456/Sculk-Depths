@@ -1,9 +1,9 @@
-## THIS MOD IS IN ALFA, USE AT YOUR OWN RISK!
+## THIS MOD IS IN ALPHA, USE AT YOUR OWN RISK!
 # ABOUT
 
 
 This mod adds a new dimension the "Sculk Depths" <br>
-You acces this dimension by lighting the portal structure in the ancient cities with citrine, when doing so make sure the inside of the portal is clear of any blocks and sculk vains.
+You access this dimension by lighting the portal structure in the ancient cities with citrine, when doing so make sure the inside of the portal is clear of any blocks and sculk veins.
 
 
 ## FEATURES
