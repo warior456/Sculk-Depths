@@ -3,7 +3,12 @@
 
 
 This mod adds a new dimension the "Sculk Depths" <br>
-You access this dimension by lighting the portal structure in the ancient cities with citrine, when doing so make sure the inside of the portal is clear of any blocks and sculk veins.
+To get to this dimension:
+1) Search a deep dark biome with an ancient city
+2) Summon and kill a warden for its new drop the Soul Heart
+3) Go to the center of the city and clear all the sculk veins from the middle of the reinforced deepslate
+4) Light the portal with the soul heart you just got from the Warden
+When going to this dimension take at least a diamond pickaxe because the world is mostly made up of a very hard block Umbrusk
 
 
 ## FEATURES
