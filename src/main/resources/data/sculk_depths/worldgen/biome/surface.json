@@ -39,24 +39,8 @@
   },
   "features": [
     [
-      /*"sculk_depths:sculk_patch",*/
-      /*"sculk_depths:sculk_fast_patch",*/
-      /*"sculk_depths:sculksensor_fast_patch"*/
-      "sculk_depths:sculk_veins_roof_umbrusk",
-      "sculk_depths:sculk_veins_floor_umbrusk",
-      "sculk_depths:sculk_veins_roof_deepslate",
-      "sculk_depths:sculk_veins_floor_deepslate"
-
-    ],
-    [
-      "sculk_depths:ore_citrine",
-      "sculk_depths:ore_flumrock"
-    ],
-    [
-      "sculk_depths:sculk_vegetation"
-    ],
-    [
-      "sculk_depths:test"
+      "sculk_depths:petrified_wood",
+      "sculk_depths:dried_wood"
     ]
   ]
 }

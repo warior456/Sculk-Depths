@@ -15,7 +15,7 @@
           "max_inclusive": 8
         }
       },
-      "replaceable": "#minecraft:moss_replaceable",
+      "replaceable": "#sculk_depths:sculk",
       "ground_state": {
         "type": "minecraft:simple_state_provider",
         "state": {

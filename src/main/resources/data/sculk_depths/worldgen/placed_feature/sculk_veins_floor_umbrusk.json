@@ -21,7 +21,7 @@
           "max_inclusive": 3
         }
       },
-      "replaceable": "#sculk_depths:sculk_veins",
+      "replaceable": "#sculk_depths:sculk_veins_umbrusk",
       "ground_state": {
         "type": "minecraft:noise_provider",
         "seed": 0,

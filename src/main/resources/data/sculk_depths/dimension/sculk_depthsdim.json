@@ -388,44 +388,19 @@
           ],
           "depth": 0,
           "offset": 0
-        },
-        {
-          "temperature": [
-            -1,
-            1
-          ],
-          "humidity": [
-            -1,
-            1
-          ],
-          "continentalness": [
-            -0.11,
-            1
-          ],
-          "erosion": [
-            -1,
-            1
-          ],
-          "weirdness": [
-            0.16,
-            1
-          ],
-          "depth": 0,
-          "offset": 0
         }
       ],
       "surface_rule": {
         "type": "minecraft:sequence",
         "sequence": [
+
           {
             "type": "minecraft:condition",
             "if_true": {
-              "type": "minecraft:y_above",
-              "anchor": {
-                "absolute": 32
-              },
-              "surface_depth_multiplier": 0,
-              "add_stone_depth": false
+              "type": "minecraft:biome",
+              "biome_is": [
+                "sculk_depths:surface"
+              ]
             },
             "then_run": {
               "type": "minecraft:condition",
@@ -517,7 +492,23 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "sculk_depths:basic",
+          "biome": "sculk_depths:sculk_caves",
+          "parameters": {
+            "temperature": 0,
+            "humidity": 0,
+            "continentalness": 0,
+            "erosion": 0,
+            "weirdness": 0,
+            "depth": [
+              0.2,
+              1
+            ],
+            "offset": 0
+          }
+
+        },
+        {
+          "biome": "sculk_depths:surface",
           "parameters": {
             "temperature": 0,
             "humidity": 0,
