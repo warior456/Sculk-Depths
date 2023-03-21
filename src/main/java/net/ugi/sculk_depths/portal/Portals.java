@@ -1,5 +1,6 @@
 package net.ugi.sculk_depths.portal;
 
+
 import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
@@ -13,6 +14,7 @@ public class Portals {
                 .destDimID(new Identifier("sculk_depths:sculk_depthsdim"))
                 .tintColor(0, 115, 150)
                 .lightWithItem(ModItems.CITRINE)
+                .setPortalSearchYRange(0,120)
                 .registerPortal();
     }
 }
