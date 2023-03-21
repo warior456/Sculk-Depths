@@ -32,7 +32,7 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modImplementation include ('net.kyrptonaught:customportalapi:0.0.1-beta60-1.19'){
+	modImplementation include ('net.kyrptonaught:customportalapi:0.0.1-beta62-1.19'){
 		exclude group: "net.fabricmc.fabric-api", module: "fabric-gametest-api-v1"}
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
