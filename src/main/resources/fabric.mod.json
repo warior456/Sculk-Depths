@@ -10,11 +10,11 @@
     "gems_bond"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
+    "homepage": "https://github.com/warior456/Sculk-Depths/blob/main/README.md",
     "sources": "https://github.com/warior456/sculk_depths"
   },
 
-  "license": "CC0-1.0",
+  "license": "Custom License",
   "icon": "assets/sculk_depths/icon.png",
 
   "environment": "*",
