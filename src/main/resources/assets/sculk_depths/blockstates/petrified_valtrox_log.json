@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "sculk_depths:block/petrified_valtrox_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "sculk_depths:block/petrified_valtrox_log"
+    },
+    "axis=z": {
+      "model": "sculk_depths:block/petrified_valtrox_log",
+      "x": 90
+    }
+  }
+}

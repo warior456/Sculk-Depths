@@ -18,7 +18,7 @@ public class ModItems {
 
 
     public static final Item SOUL_HEART = registerItem("soul_heart",
-            new Item(new FabricItemSettings()));
+            new Item(new FabricItemSettings().maxCount(16)));
 
 
     public static final Item KRYSLUM_BUCKET = registerItem("kryslum_bucket", new BucketItem(ModFluids.KRYSLUM_STILL,
