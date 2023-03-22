@@ -48,6 +48,12 @@ public class ModBlocks {
     public static final Block UMBRUSK_WALL = registerBlock("umbrusk_wall",
             new WallBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block VALTROX_LOG = registerBlock("valtrox_log",
+            new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block DRIED_VALTROX_LOG = registerBlock("dried_valtrox_log",
+            new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
     public static final Block PETRIFIED_VALTROX_LOG = registerBlock("petrified_valtrox_log",
             new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
