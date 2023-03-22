@@ -25,13 +25,13 @@
           {
             "weight": 1,
             "data": {
-              "Name": "minecraft:basalt"
+              "Name": "sculk_depths:petrified_valtrox_log"
             }
           },
           {
             "weight": 2,
             "data": {
-              "Name": "minecraft:polished_basalt"
+              "Name": "sculk_depths:petrified_valtrox_log"
             }
           }
 
@@ -51,13 +51,13 @@
             {
               "weight": 1,
               "data": {
-                "Name": "minecraft:basalt"
+                "Name": "sculk_depths:petrified_valtrox_log"
               }
             },
             {
               "weight": 2,
               "data": {
-                "Name": "minecraft:polished_basalt"
+                "Name": "sculk_depths:petrified_valtrox_log"
               }
             },
             {
@@ -81,13 +81,13 @@
               {
                 "weight": 3,
                 "data": {
-                  "Name": "minecraft:basalt"
+                  "Name": "sculk_depths:petrified_valtrox_log"
                 }
               },
               {
                 "weight": 2,
                 "data": {
-                  "Name": "minecraft:polished_basalt"
+                  "Name": "sculk_depths:petrified_valtrox_log"
                 }
               },
               {

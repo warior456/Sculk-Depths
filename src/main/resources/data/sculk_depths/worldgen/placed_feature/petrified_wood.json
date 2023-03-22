@@ -16,7 +16,7 @@
       "dirt_provider": {
         "type": "minecraft:simple_state_provider",
         "state": {
-          "Name": "minecraft:dirt"
+          "Name": "sculk_depths:crumbling_dirt"
         }
       },
       "trunk_provider": {
@@ -25,13 +25,13 @@
           {
             "weight": 1,
             "data": {
-              "Name": "minecraft:basalt"
+              "Name": "sculk_depths:petrified_valtrox_log"
             }
           },
           {
             "weight": 2,
             "data": {
-              "Name": "minecraft:polished_basalt"
+              "Name": "sculk_depths:petrified_valtrox_log"
             }
           }
         ]
@@ -50,19 +50,19 @@
             {
               "weight": 2,
               "data": {
-                "Name": "minecraft:basalt"
+                "Name": "sculk_depths:petrified_valtrox_log"
               }
             },
             {
               "weight": 1,
               "data": {
-                "Name": "minecraft:smooth_basalt"
+                "Name": "sculk_depths:petrified_valtrox_log"
               }
             },
             {
               "weight": 2,
               "data": {
-                "Name": "minecraft:polished_basalt"
+                "Name": "sculk_depths:petrified_valtrox_log"
               }
             },
             {
@@ -86,19 +86,19 @@
               {
                 "weight": 2,
                 "data": {
-                  "Name": "minecraft:basalt"
+                  "Name": "sculk_depths:petrified_valtrox_log"
                 }
               },
               {
                 "weight": 1,
                 "data": {
-                  "Name": "minecraft:smooth_basalt"
+                  "Name": "sculk_depths:petrified_valtrox_log"
                 }
               },
               {
                 "weight": 2,
                 "data": {
-                  "Name": "minecraft:polished_basalt"
+                  "Name": "sculk_depths:petrified_valtrox_log"
                 }
               },
               {
