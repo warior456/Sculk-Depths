@@ -55,7 +55,7 @@ public class ModBlocks {
             new WallBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_LOG = registerBlock("petrified_valtrox_log",
-            new Block(FabricBlockSettings.of(Material.WOOD).strength(2.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum_block", new ModFluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.of(Material.WATER).noCollision().nonOpaque().dropsNothing()), ModItemGroup.SCULK_DEPTHS);
 
