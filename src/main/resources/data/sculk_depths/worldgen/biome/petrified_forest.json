@@ -39,8 +39,8 @@
   },
   "features": [
     [
-      "sculk_depths:petrified_wood",
-      "sculk_depths:dried_wood"
+      "sculk_depths:petrified_valtrox",
+      "sculk_depths:dried_valtrox"
     ]
   ]
 }

@@ -399,7 +399,7 @@
             "if_true": {
               "type": "minecraft:biome",
               "biome_is": [
-                "sculk_depths:surface"
+                "sculk_depths:petrified_forest"
               ]
             },
             "then_run": {
@@ -508,7 +508,7 @@
 
         },
         {
-          "biome": "sculk_depths:surface",
+          "biome": "sculk_depths:petrified_forest",
           "parameters": {
             "temperature": 0,
             "humidity": 0,
