@@ -11,7 +11,9 @@
     "sculk_depths:umbrusk_brick_slab",
     "sculk_depths:umbrusk_brick_wall",
 
-    "sculk_depths:flumrock"
+    "sculk_depths:flumrock",
+    "sculk_depths:petrified_valtrox_log"
+
 
   ]
 }

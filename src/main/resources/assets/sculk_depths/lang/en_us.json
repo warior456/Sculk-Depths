@@ -1,6 +1,6 @@
 {
   "item.sculk_depths.kryslum_bucket": "Kryslum Bucket",
-
+  "item.sculk_depths.soul_heart": "Soul Heart",
   "block.sculk_depths.crumbling_dirt" : "Crumbling Dirt",
 
   "block.sculk_depths.umbrusk": "Umbrusk",
@@ -14,6 +14,9 @@
   "block.sculk_depths.umbrusk_brick_wall": "Umbrusk Brick Wall",
 
   "block.sculk_depths.petrified_valtrox_log": "Petrified Valtrox Log",
+  "block.sculk_depths.dried_valtrox_log": "Dried Valtrox Log",
+  "block.sculk_depths.valtrox_log": "Valtrox Log",
+
   "block.sculk_depths.flumrock": "Flumrock",
   "itemgroup.sculk_depths" : "Sculk Depths"
 }
