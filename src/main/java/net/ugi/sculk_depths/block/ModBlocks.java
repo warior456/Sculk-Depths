@@ -4,6 +4,8 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.sound.SoundEvents;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
@@ -27,8 +29,9 @@ public class ModBlocks {
             new Block(FabricBlockSettings.of(Material.STONE).hardness(5.0f).resistance(8f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
     public static final Block FLUMROCK = registerBlock("flumrock",
             new Block(FabricBlockSettings.of(Material.STONE).strength(4.5f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
     public static final Block CRUMBLING_DIRT = registerBlock("crumbling_dirt",
-            new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC).strength(1.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC).strength(1.0f).requiresTool().sounds(BlockSoundGroup.ROOTED_DIRT)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block UMBRUSK_BRICKS = registerBlock("umbrusk_bricks",
             new Block(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);

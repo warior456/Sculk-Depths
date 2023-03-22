@@ -2,9 +2,9 @@ package net.ugi.sculk_depths;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.ugi.sculk_depths.data.ModLootTableGenerator;
-import net.ugi.sculk_depths.data.ModModelProvider;
-import net.ugi.sculk_depths.data.ModRecipeGenerator;
+import net.ugi.sculk_depths.datagen.ModLootTableGenerator;
+import net.ugi.sculk_depths.datagen.ModModelProvider;
+import net.ugi.sculk_depths.datagen.ModRecipeGenerator;
 
 public class SculkDepthsDataGenerator implements DataGeneratorEntrypoint {
 	@Override

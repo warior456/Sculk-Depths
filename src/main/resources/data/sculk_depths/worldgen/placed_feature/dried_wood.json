@@ -16,7 +16,7 @@
       "dirt_provider": {
         "type": "minecraft:simple_state_provider",
         "state": {
-          "Name": "minecraft:dirt"
+          "Name": "sculk_depths:crumbling_dirt"
         }
       },
       "trunk_provider": {
@@ -25,15 +25,16 @@
           {
             "weight": 1,
             "data": {
-              "Name": "minecraft:oak_log"
+              "Name": "minecraft:basalt"
             }
           },
           {
             "weight": 2,
             "data": {
-              "Name": "minecraft:dark_oak_log"
+              "Name": "minecraft:polished_basalt"
             }
           }
+
         ]
       },
       "foliage_provider": {
@@ -48,21 +49,15 @@
           "type": "minecraft:weighted_state_provider",
           "entries": [
             {
-              "weight": 2,
-              "data": {
-                "Name": "minecraft:oak_log"
-              }
-            },
-            {
               "weight": 1,
               "data": {
-                "Name": "minecraft:acacia_log"
+                "Name": "minecraft:basalt"
               }
             },
             {
               "weight": 2,
               "data": {
-                "Name": "minecraft:dark_oak_log"
+                "Name": "minecraft:polished_basalt"
               }
             },
             {
@@ -84,21 +79,15 @@
             "type": "minecraft:weighted_state_provider",
             "entries": [
               {
-                "weight": 2,
+                "weight": 3,
                 "data": {
-                  "Name": "minecraft:boak_log"
-                }
-              },
-              {
-                "weight": 1,
-                "data": {
-                  "Name": "minecraft:acacia_log"
+                  "Name": "minecraft:basalt"
                 }
               },
               {
                 "weight": 2,
                 "data": {
-                  "Name": "minecraft:dark_oak_log"
+                  "Name": "minecraft:polished_basalt"
                 }
               },
               {
