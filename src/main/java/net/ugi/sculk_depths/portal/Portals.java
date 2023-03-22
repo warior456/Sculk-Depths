@@ -13,7 +13,7 @@ public class Portals {
                 //.customPortalBlock(Blocks.SCULK)
                 .destDimID(new Identifier("sculk_depths:sculk_depthsdim"))
                 .tintColor(0, 115, 150)
-                .lightWithItem(ModItems.CITRINE)
+                .lightWithItem(ModItems.SOUL_HEART)
                 .setPortalSearchYRange(0,120)
                 .registerPortal();
     }

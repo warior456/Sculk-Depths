@@ -17,6 +17,10 @@ public class ModItems {
             new Item(new FabricItemSettings()));
 
 
+    public static final Item SOUL_HEART = registerItem("soul_heart",
+            new Item(new FabricItemSettings()));
+
+
     public static final Item KRYSLUM_BUCKET = registerItem("kryslum_bucket", new BucketItem(ModFluids.KRYSLUM_STILL,
             new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
@@ -31,6 +35,7 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, CITRINE);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, RAW_CITRINE);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, KRYSLUM_BUCKET);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, SOUL_HEART);
     }
 
     private static void addToItemGroup(ItemGroup group, Item item) {
