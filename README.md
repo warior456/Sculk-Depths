@@ -13,8 +13,10 @@ When going to this dimension take at least a diamond pickaxe because the world i
 
 ## FEATURES
   
-  - custom world gen
-  - portal to the dimension
+  - new dimension with custom world gen
+  - 2 new biomes
+  - Soul Heart drops from the warden
+  - 2 new blocksets: Umbrusk and Umbrusk Bricks
   
   <details>
     <summary> Screenshots </summary>
