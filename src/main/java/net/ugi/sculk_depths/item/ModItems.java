@@ -10,16 +10,9 @@ import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.fluid.ModFluids;
 
 public class ModItems {
-    public static final Item CITRINE = registerItem("citrine",
-            new Item(new FabricItemSettings()));
-
-    public static final Item RAW_CITRINE = registerItem("raw_citrine",
-            new Item(new FabricItemSettings()));
-
 
     public static final Item SOUL_HEART = registerItem("soul_heart",
             new Item(new FabricItemSettings().maxCount(16)));
-
 
     public static final Item KRYSLUM_BUCKET = registerItem("kryslum_bucket", new BucketItem(ModFluids.KRYSLUM_STILL,
             new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
@@ -29,11 +22,7 @@ public class ModItems {
     }
 
     public static void addItemsToItemGroup(){
-        addToItemGroup(ItemGroups.INGREDIENTS, CITRINE);
-        addToItemGroup(ItemGroups.INGREDIENTS, RAW_CITRINE);
 
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, CITRINE);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, RAW_CITRINE);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, KRYSLUM_BUCKET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, SOUL_HEART);
     }

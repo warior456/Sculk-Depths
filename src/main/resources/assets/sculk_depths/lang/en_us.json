@@ -1,9 +1,5 @@
 {
-  "item.sculk_depths.citrine" : "Citrine",
-  "item.sculk_depths.raw_citrine" : "Raw Citrine",
   "item.sculk_depths.kryslum_bucket": "Kryslum Bucket",
-  "block.sculk_depths.citrine_block": "Block of Citrine",
-  "block.sculk_depths.citrine_ore": "Citrine Ore",
 
   "block.sculk_depths.crumbling_dirt" : "Crumbling Dirt",
 
@@ -17,7 +13,7 @@
   "block.sculk_depths.umbrusk_brick_slab": "Umbrusk Brick Slab",
   "block.sculk_depths.umbrusk_brick_wall": "Umbrusk Brick Wall",
 
-
+  "block.sculk_depths.petrified_valtrox_log": "Petrified Valtrox Log",
   "block.sculk_depths.flumrock": "Flumrock",
   "itemgroup.sculk_depths" : "Sculk Depths"
 }
