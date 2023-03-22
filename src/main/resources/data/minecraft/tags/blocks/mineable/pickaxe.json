@@ -9,8 +9,9 @@
     "sculk_depths:umbrusk_bricks",
     "sculk_depths:umbrusk_brick_stairs",
     "sculk_depths:umbrusk_brick_slab",
-    "sculk_depths:umbrusk_brick_wall"
+    "sculk_depths:umbrusk_brick_wall",
 
+    "sculk_depths:flumrock"
 
   ]
 }

@@ -28,7 +28,7 @@ public class ModBlocks {
     public static final Block UMBRUSK = registerBlock("umbrusk",
             new Block(FabricBlockSettings.of(Material.STONE).hardness(5.0f).resistance(8f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
     public static final Block FLUMROCK = registerBlock("flumrock",
-            new Block(FabricBlockSettings.of(Material.STONE).strength(4.5f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new Block(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block CRUMBLING_DIRT = registerBlock("crumbling_dirt",
             new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC).strength(1.0f).requiresTool().sounds(BlockSoundGroup.ROOTED_DIRT)), ModItemGroup.SCULK_DEPTHS);

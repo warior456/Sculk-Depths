@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "sculk_depths:umbrusk_bricks"
+    }
+  },
+  "result": {
+    "item": "sculk_depths:umbrusk_brick_slab",
+    "count": 6
+  }
+}
