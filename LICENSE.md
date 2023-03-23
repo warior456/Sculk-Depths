@@ -28,3 +28,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ### 2. Non-Code
 
  Per the definitions above, Everything that is not defined as Code is "All Rights Reserved"
+
+### 3. ModPacks
+
+This mod is allowed to be included in any modpack hosted on curseforge or modrinth
