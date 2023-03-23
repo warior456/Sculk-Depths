@@ -15,7 +15,7 @@ public class Portals {
                 .destDimID(new Identifier("sculk_depths:sculk_depthsdim"))
                 .tintColor(0, 115, 150)
                 .lightWithItem(ModItems.SOUL_HEART)
-                // .setPortalSearchYRange(0,120)
+                .setPortalSearchYRange(0,120)
                 .registerIgniteEvent((player, world, portalPos, framePos, portalIgnitionSource) -> {
                     if (portalIgnitionSource.sourceType == PortalIgnitionSource.SourceType.USEITEM && player != null) {
                         if (player.isCreative())
