@@ -44,6 +44,8 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, KRYSLUM_BUCKET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, SOUL_HEART);
 
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH);
+
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_HELMET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_CHESTPLATE);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_LEGGINGS);
