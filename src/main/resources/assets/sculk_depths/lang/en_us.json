@@ -20,8 +20,8 @@
   "block.sculk_depths.flumrock": "Flumrock",
   "itemgroup.sculk_depths" : "Sculk Depths",
 
-  "item.sculk_dephts.quazarith_helmet": "Quazarith Helmet",
-  "item.sculk_dephts.quazarith_chestplate": "Quazarith Chestplate",
-  "item.sculk_dephts.quazarith_leggings": "Quazarith Leggings",
-  "item.sculk_dephts.quazarith_boots": "Quazarith Boots"
+  "item.sculk_depths.quazarith_helmet": "Quazarith Helmet",
+  "item.sculk_depths.quazarith_chestplate": "Quazarith Chestplate",
+  "item.sculk_depths.quazarith_leggings": "Quazarith Leggings",
+  "item.sculk_depths.quazarith_boots": "Quazarith Boots"
 }
