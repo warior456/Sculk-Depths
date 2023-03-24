@@ -16,21 +16,22 @@ public class ModItems {
             new Item(new FabricItemSettings().maxCount(16)));
     public static final Item KRYSLUM_BUCKET = registerItem("kryslum_bucket", new BucketItem(ModFluids.KRYSLUM_STILL,
             new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
-
+    public static final Item QUAZARITH = registerItem("quazarith",
+            new Item(new FabricItemSettings()));
 
 
     //custom armor seet
-    public static final Item CUSTOM_ARMOR_HELMET = registerItem("custom_armor_helmet",
-            new ArmorItem(ModArmorMaterials.CUSTOMARMORMATERIAL, ArmorItem.Type.HELMET,
+    public static final Item QUAZARITH_HELMET = registerItem("quazarith_helmet",
+            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.HELMET,
                     new FabricItemSettings()));
-    public static final Item CUSTOM_ARMOR_CHESTPLATE = registerItem("custom_armor_chestplate",
-            new ArmorItem(ModArmorMaterials.CUSTOMARMORMATERIAL, ArmorItem.Type.CHESTPLATE,
+    public static final Item QUAZARITH_CHESTPLATE = registerItem("quazarith_chestplate",
+            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.CHESTPLATE,
                     new FabricItemSettings()));
-    public static final Item CUSTOM_ARMOR_LEGGINGS = registerItem("custom_armor_leggings",
-            new ArmorItem(ModArmorMaterials.CUSTOMARMORMATERIAL, ArmorItem.Type.LEGGINGS,
+    public static final Item QUAZARITH_LEGGINGS = registerItem("quazarith_leggings",
+            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.LEGGINGS,
                     new FabricItemSettings()));
-    public static final Item CUSTOM_ARMOR_BOOTS = registerItem("custom_armor_boots",
-            new ArmorItem(ModArmorMaterials.CUSTOMARMORMATERIAL, ArmorItem.Type.BOOTS,
+    public static final Item QUAZARITH_BOOTS = registerItem("quazarith_boots",
+            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.BOOTS,
                     new FabricItemSettings()));
 
 
@@ -43,10 +44,10 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, KRYSLUM_BUCKET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, SOUL_HEART);
 
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, CUSTOM_ARMOR_HELMET);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, CUSTOM_ARMOR_CHESTPLATE);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, CUSTOM_ARMOR_LEGGINGS);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, CUSTOM_ARMOR_BOOTS);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_HELMET);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_CHESTPLATE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_LEGGINGS);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_BOOTS);
     }
 
     private static void addToItemGroup(ItemGroup group, Item item) {

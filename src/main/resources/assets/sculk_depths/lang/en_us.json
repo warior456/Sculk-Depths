@@ -18,5 +18,10 @@
   "block.sculk_depths.valtrox_log": "Valtrox Log",
 
   "block.sculk_depths.flumrock": "Flumrock",
-  "itemgroup.sculk_depths" : "Sculk Depths"
+  "itemgroup.sculk_depths" : "Sculk Depths",
+
+  "item.sculk_dephts.quazarith_helmet": "Quazarith Helmet",
+  "item.sculk_dephts.quazarith_chestplate": "Quazarith Chestplate",
+  "item.sculk_dephts.quazarith_leggings": "Quazarith Leggings",
+  "item.sculk_dephts.quazarith_boots": "Quazarith Boots"
 }
