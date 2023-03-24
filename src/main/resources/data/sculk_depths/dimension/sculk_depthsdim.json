@@ -399,7 +399,8 @@
             "if_true": {
               "type": "minecraft:biome",
               "biome_is": [
-                "sculk_depths:petrified_forest"
+                "sculk_depths:petrified_forest",
+                "sculk_depths:biome2"
               ]
             },
             "then_run": {
@@ -494,11 +495,57 @@
         {
           "biome": "sculk_depths:sculk_caves",
           "parameters": {
-            "temperature": 0,
-            "humidity": 0,
-            "continentalness": 0,
-            "erosion": 0,
-            "weirdness": 0,
+            "temperature": [
+              0,
+              0
+            ],
+            "humidity": [
+              0,
+              0
+            ],
+            "continentalness": [
+              0,
+              0
+            ],
+            "erosion": [
+              0,
+              0
+            ],
+            "weirdness": [
+              0,
+              0
+            ],
+            "depth": [
+              0.2,
+              1
+            ],
+            "offset": 0
+          }
+
+        },
+        {
+          "biome": "sculk_depths:biome3",
+          "parameters": {
+            "temperature": [
+              0.2,
+              1
+            ],
+            "humidity": [
+              0,
+              0
+            ],
+            "continentalness": [
+              0,
+              0
+            ],
+            "erosion": [
+              0,
+              0
+            ],
+            "weirdness": [
+              0,
+              0
+            ],
             "depth": [
               0.2,
               1
@@ -510,12 +557,61 @@
         {
           "biome": "sculk_depths:petrified_forest",
           "parameters": {
-            "temperature": 0,
-            "humidity": 0,
-            "continentalness": 0,
-            "erosion": 0,
-            "weirdness": 0,
-            "depth": 0,
+            "temperature": [
+              0,
+              1
+            ],
+            "humidity": [
+              0,
+              0
+            ],
+            "continentalness": [
+              0,
+              0
+            ],
+            "erosion": [
+              0,
+              0
+            ],
+            "weirdness": [
+              0,
+              0
+            ],
+            "depth": [
+              -1,
+              0.2
+            ],
+            "offset": 0
+          }
+
+        },
+        {
+          "biome": "sculk_depths:biome2",
+          "parameters": {
+            "temperature": [
+              -1,
+              0
+            ],
+            "humidity": [
+              0,
+              0
+            ],
+            "continentalness": [
+              0,
+              0
+            ],
+            "erosion": [
+              0,
+              0
+            ],
+            "weirdness": [
+              0,
+              0
+            ],
+            "depth": [
+              -1,
+              0.2
+            ],
             "offset": 0
           }
 

@@ -4,7 +4,7 @@
   "has_precipitation": false,
   "effects": {
     "sky_color": 7254527,
-    "fog_color": 853299,
+    "fog_color": 33299,
     "water_color": 928354,
     "water_fog_color": 328995,
     "grass_color": 596558,
@@ -39,7 +39,6 @@
   },
   "features": [
     [
-      "sculk_depths:petrified_valtrox"
     ]
   ]
 }
