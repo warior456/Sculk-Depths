@@ -1,15 +1,15 @@
 {
   "variants": {
     "axis=x": {
-      "model": "minecraft:block/valtrox_wood",
+      "model": "sculk_depths:block/valtrox_wood",
       "x": 90,
       "y": 90
     },
     "axis=y": {
-      "model": "minecraft:block/valtrox_wood"
+      "model": "sculk_depths:block/valtrox_wood"
     },
     "axis=z": {
-      "model": "minecraft:block/valtrox_wood",
+      "model": "sculk_depths:block/valtrox_wood",
       "x": 90
     }
   }

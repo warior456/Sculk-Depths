@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "minecraft:block/valtrox_planks"
+      "model": "sculk_depths:block/valtrox_planks"
     }
   }
 }
