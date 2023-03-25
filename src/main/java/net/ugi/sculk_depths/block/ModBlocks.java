@@ -54,6 +54,51 @@ public class ModBlocks {
     public static final Block UMBRUSK_BRICK_WALL = registerBlock("umbrusk_brick_wall",
             new WallBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block VALTROX_PLANKS = registerBlock("valtrox_planks",
+            new Block(FabricBlockSettings.of(Material.WOOD).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block VALTROX_WOOD = registerBlock("valtrox_wood",
+            new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block VALTROX_SLAB = registerBlock("valtrox_slab",
+            new SlabBlock(FabricBlockSettings.of(Material.WOOD).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block VALTROX_STAIRS = registerBlock("valtrox_stairs",
+            new StairsBlock(VALTROX_PLANKS.getDefaultState(), FabricBlockSettings.of(Material.WOOD).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block VALTROX_FENCE = registerBlock("valtrox_fence",
+            new FenceBlock(FabricBlockSettings.of(Material.WOOD).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block DRIED_VALTROX_PLANKS = registerBlock("dried_valtrox_planks",
+            new Block(FabricBlockSettings.of(Material.WOOD).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block DRIED_VALTROX_WOOD = registerBlock("dried_valtrox_wood",
+            new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block DRIED_VALTROX_SLAB = registerBlock("dried_valtrox_slab",
+            new SlabBlock(FabricBlockSettings.of(Material.WOOD).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block DRIED_VALTROX_STAIRS = registerBlock("dried_valtrox_stairs",
+            new StairsBlock(DRIED_VALTROX_PLANKS.getDefaultState(), FabricBlockSettings.of(Material.WOOD).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block DRIED_VALTROX_FENCE = registerBlock("dried_valtrox_fence",
+            new FenceBlock(FabricBlockSettings.of(Material.WOOD).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PETRIFIED_VALTROX_SLATES = registerBlock("petrified_valtrox_slates",
+            new Block(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PETRIFIED_VALTROX_WOOD = registerBlock("petrified_valtrox_wood",
+            new PillarBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PETRIFIED_VALTROX_SLAB = registerBlock("petrified_valtrox_slab",
+            new SlabBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PETRIFIED_VALTROX_STAIRS = registerBlock("petrified_valtrox_stairs",
+            new StairsBlock(PETRIFIED_VALTROX_SLATES.getDefaultState(), FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PETRIFIED_VALTROX_FENCE = registerBlock("petrified_valtrox_fence",
+            new FenceBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
 
     //valtrox blockset
     public static final Block VALTROX_LOG = registerBlock("valtrox_log",
