@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "sculk_depths:block/petrified_valtrox_slab"
+    },
+    "type=double": {
+      "model": "sculk_depths:block/petrified_valtrox_slates"
+    },
+    "type=top": {
+      "model": "sculk_depths:block/petrified_valtrox_slab_top"
+    }
+  }
+}

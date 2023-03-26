@@ -25,13 +25,13 @@
           {
             "weight": 1,
             "data": {
-              "Name": "sculk_depths:petrified_valtrox_log"
+              "Name": "sculk_depths:valtrox_log"
             }
           },
           {
-            "weight": 2,
+            "weight": 4,
             "data": {
-              "Name": "sculk_depths:petrified_valtrox_log"
+              "Name": "sculk_depths:dried_valtrox_log"
             }
           }
 
@@ -51,17 +51,17 @@
             {
               "weight": 1,
               "data": {
-                "Name": "sculk_depths:petrified_valtrox_log"
-              }
-            },
-            {
-              "weight": 2,
-              "data": {
-                "Name": "sculk_depths:petrified_valtrox_log"
+                "Name": "sculk_depths:valtrox_log"
               }
             },
             {
               "weight": 4,
+              "data": {
+                "Name": "sculk_depths:dried_valtrox_log"
+              }
+            },
+            {
+              "weight": 8,
               "data": {
                 "Name": "minecraft:air"
               }
@@ -79,19 +79,19 @@
             "type": "minecraft:weighted_state_provider",
             "entries": [
               {
-                "weight": 3,
+                "weight": 1,
                 "data": {
-                  "Name": "sculk_depths:petrified_valtrox_log"
-                }
-              },
-              {
-                "weight": 2,
-                "data": {
-                  "Name": "sculk_depths:petrified_valtrox_log"
+                  "Name": "sculk_depths:valtrox_log"
                 }
               },
               {
                 "weight": 4,
+                "data": {
+                  "Name": "sculk_depths:dried_valtrox_log"
+                }
+              },
+              {
+                "weight": 8,
                 "data": {
                   "Name": "minecraft:air"
                 }
@@ -103,8 +103,8 @@
       "trunk_placer": {
         "type": "minecraft:fancy_trunk_placer",
         "base_height":2,
-        "height_rand_a": 7,
-        "height_rand_b": 0
+        "height_rand_a": 8,
+        "height_rand_b": 3
       },
       "foliage_placer": {
         "type": "minecraft:fancy_foliage_placer",

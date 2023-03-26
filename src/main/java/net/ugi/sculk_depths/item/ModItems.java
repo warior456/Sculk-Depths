@@ -9,13 +9,31 @@ import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.fluid.ModFluids;
 
+
 public class ModItems {
 
     public static final Item SOUL_HEART = registerItem("soul_heart",
             new Item(new FabricItemSettings().maxCount(16)));
-
     public static final Item KRYSLUM_BUCKET = registerItem("kryslum_bucket", new BucketItem(ModFluids.KRYSLUM_STILL,
             new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+    public static final Item QUAZARITH = registerItem("quazarith",
+            new Item(new FabricItemSettings()));
+
+
+    //custom armor seet
+    public static final Item QUAZARITH_HELMET = registerItem("quazarith_helmet",
+            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.HELMET,
+                    new FabricItemSettings()));
+    public static final Item QUAZARITH_CHESTPLATE = registerItem("quazarith_chestplate",
+            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.CHESTPLATE,
+                    new FabricItemSettings()));
+    public static final Item QUAZARITH_LEGGINGS = registerItem("quazarith_leggings",
+            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.LEGGINGS,
+                    new FabricItemSettings()));
+    public static final Item QUAZARITH_BOOTS = registerItem("quazarith_boots",
+            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.BOOTS,
+                    new FabricItemSettings()));
+
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(SculkDepths.MOD_ID, name), item);
@@ -25,6 +43,13 @@ public class ModItems {
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, KRYSLUM_BUCKET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, SOUL_HEART);
+
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH);
+
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_HELMET);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_CHESTPLATE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_LEGGINGS);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_BOOTS);
     }
 
     private static void addToItemGroup(ItemGroup group, Item item) {

@@ -2,9 +2,9 @@
     "name": "sculk_depthsdim",
     "has_raids": false,
     "logical_height": 256,
-    "effects": "minecraft:the_nether",
+    /*"effects": "minecraft:the_nether",*/
     "infiniburn": "#minecraft:infiniburn_overworld",
-    "ambient_light": 0.002,
+    "ambient_light": 0.003,
     "ultrawarm": false,
     "natural": false,
     "piglin_safe": false,

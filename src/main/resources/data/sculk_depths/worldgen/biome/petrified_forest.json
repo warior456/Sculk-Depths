@@ -39,8 +39,7 @@
   },
   "features": [
     [
-      "sculk_depths:petrified_valtrox",
-      "sculk_depths:dried_valtrox"
+      "sculk_depths:petrified_valtrox"
     ]
   ]
 }
