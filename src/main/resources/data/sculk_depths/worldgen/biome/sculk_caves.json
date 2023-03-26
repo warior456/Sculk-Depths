@@ -53,6 +53,15 @@
     ],
     [
       "sculk_depths:sculk_vegetation"
+    ],
+    [
+      "sculk_depths:ore_quazarith_north",
+      "sculk_depths:ore_quazarith_east",
+      "sculk_depths:ore_quazarith_south",
+      "sculk_depths:ore_quazarith_west",
+      "sculk_depths:ore_quazarith_up",
+      "sculk_depths:ore_quazarith_down"
+
     ]
   ]
 }

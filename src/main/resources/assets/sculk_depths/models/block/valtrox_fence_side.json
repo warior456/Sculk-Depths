@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_side",
+  "textures": {
+    "texture": "sculk_depths:block/valtrox_planks"
+  }
+}
