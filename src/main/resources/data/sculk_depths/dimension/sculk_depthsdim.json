@@ -496,8 +496,8 @@
           "biome": "sculk_depths:sculk_caves",
           "parameters": {
             "temperature": [
-              0,
-              0
+              -1,
+              0.5
             ],
             "humidity": [
               0,
@@ -516,7 +516,7 @@
               0
             ],
             "depth": [
-              0.2,
+              0.18,
               1
             ],
             "offset": 0
@@ -527,7 +527,7 @@
           "biome": "sculk_depths:biome3",
           "parameters": {
             "temperature": [
-              0.2,
+              0.3,
               1
             ],
             "humidity": [
@@ -547,7 +547,7 @@
               0
             ],
             "depth": [
-              0.2,
+              0.18,
               1
             ],
             "offset": 0
@@ -558,7 +558,7 @@
           "biome": "sculk_depths:petrified_forest",
           "parameters": {
             "temperature": [
-              0,
+              -0.1,
               1
             ],
             "humidity": [
@@ -579,7 +579,7 @@
             ],
             "depth": [
               -1,
-              0.2
+              0.18
             ],
             "offset": 0
           }
@@ -590,7 +590,7 @@
           "parameters": {
             "temperature": [
               -1,
-              0
+              0.1
             ],
             "humidity": [
               0,
@@ -610,7 +610,7 @@
             ],
             "depth": [
               -1,
-              0.2
+              0.18
             ],
             "offset": 0
           }
