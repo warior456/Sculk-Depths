@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.world.event.GameEvent;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModArmorMaterials;
@@ -20,13 +21,12 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 
 public class ModBlocks {
 
-
-
     public static final Block FLUMROCK = registerBlock("flumrock",
             new Block(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block CRUMBLING_DIRT = registerBlock("crumbling_dirt",
             new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC).strength(1.0f).requiresTool().sounds(BlockSoundGroup.ROOTED_DIRT)), ModItemGroup.SCULK_DEPTHS);
+
 
     //umbrusk blockset
     public static final Block UMBRUSK = registerBlock("umbrusk",
@@ -41,6 +41,7 @@ public class ModBlocks {
     public static final Block UMBRUSK_WALL = registerBlock("umbrusk_wall",
             new WallBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
+
     //umbrusk brick blockset
     public static final Block UMBRUSK_BRICKS = registerBlock("umbrusk_bricks",
             new Block(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
@@ -53,6 +54,11 @@ public class ModBlocks {
 
     public static final Block UMBRUSK_BRICK_WALL = registerBlock("umbrusk_brick_wall",
             new WallBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+
+    //valtrox blockset
+    public static final Block VALTROX_LOG = registerBlock("valtrox_log",
+            new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block VALTROX_PLANKS = registerBlock("valtrox_planks",
             new Block(FabricBlockSettings.of(Material.WOOD).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
@@ -69,6 +75,10 @@ public class ModBlocks {
     public static final Block VALTROX_FENCE = registerBlock("valtrox_fence",
             new FenceBlock(FabricBlockSettings.of(Material.WOOD).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
+    //dried valtrox blockset
+    public static final Block DRIED_VALTROX_LOG = registerBlock("dried_valtrox_log",
+            new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
     public static final Block DRIED_VALTROX_PLANKS = registerBlock("dried_valtrox_planks",
             new Block(FabricBlockSettings.of(Material.WOOD).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
@@ -83,6 +93,11 @@ public class ModBlocks {
 
     public static final Block DRIED_VALTROX_FENCE = registerBlock("dried_valtrox_fence",
             new FenceBlock(FabricBlockSettings.of(Material.WOOD).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+
+    //petrified valtrox blockset
+    public static final Block PETRIFIED_VALTROX_LOG = registerBlock("petrified_valtrox_log",
+            new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_SLATES = registerBlock("petrified_valtrox_slates",
             new Block(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
@@ -99,17 +114,6 @@ public class ModBlocks {
     public static final Block PETRIFIED_VALTROX_FENCE = registerBlock("petrified_valtrox_fence",
             new FenceBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
-
-    //valtrox blockset
-    public static final Block VALTROX_LOG = registerBlock("valtrox_log",
-            new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
-
-    public static final Block DRIED_VALTROX_LOG = registerBlock("dried_valtrox_log",
-            new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
-
-    public static final Block PETRIFIED_VALTROX_LOG = registerBlock("petrified_valtrox_log",
-            new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
-
     //ores
     public static final Block QUAZARITH_ORE = registerBlock("quazarith_ore",
             new Block(FabricBlockSettings.of(Material.STONE).hardness(6.0f).resistance(10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
@@ -123,7 +127,7 @@ public class ModBlocks {
     }
 
 
-    private static Block registerBlockWithoutBlockItem(String name, Block block, ItemGroup group){
+    private static Block registerBlockWithoutBlockItem(String name, Block block, ItemGroup group) {
         return Registry.register(Registries.BLOCK, new Identifier(SculkDepths.MOD_ID, name), block);
     }
 
