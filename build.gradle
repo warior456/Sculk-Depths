@@ -15,6 +15,7 @@ group = project.maven_group
 
 repositories {
 	maven {url = "https://maven.kyrptonaught.dev"}
+	maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
 
 	// Add repositories to retrieve artifacts from in here.
 	// You should only use this when depending on other mods because
@@ -34,6 +35,10 @@ dependencies {
 
 	modImplementation include ("net.kyrptonaught:customportalapi:${project.customportalapi_version}"){
 		exclude group: "net.fabricmc.fabric-api", module: "fabric-gametest-api-v1"}
+
+
+	//modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19.4:4.1.2'
+	//modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19.3:4.0.6'
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
