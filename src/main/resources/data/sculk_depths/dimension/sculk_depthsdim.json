@@ -12,7 +12,7 @@
         "Name": "minecraft:deepslate"
       },
       "default_fluid": {
-        "Name": "sculk_depths:kryslum_block"
+        "Name": "sculk_depths:kryslum"
       },
       "noise": {
         "min_y": -256,
