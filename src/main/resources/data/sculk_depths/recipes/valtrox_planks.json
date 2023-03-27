@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "sculk_depths:valtrox_logs"
+    }
+  ],
+  "result": {
+    "item": "sculk_depths:valtrox_planks",
+    "count": 4
+  }
+}
