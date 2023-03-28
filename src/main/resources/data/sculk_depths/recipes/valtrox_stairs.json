@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_stairs",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "sculk_depths:valtrox_planks"
+    }
+  },
+  "result": {
+    "item": "sculk_depths:valtrox_stairs",
+    "count": 4
+  }
+}

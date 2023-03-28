@@ -20,7 +20,13 @@ public class ModItems {
     public static final Item QUAZARITH = registerItem("quazarith",
             new Item(new FabricItemSettings()));
 
+    //quazarith tools
+    public static final Item QUAZARITH_PICKAXE = registerItem("quazarith_pickaxe",
+            new PickaxeItem(ModToolMaterials.QUAZARITH, 2, -2.0F,
+                    new FabricItemSettings()));
 
+
+    //quazarith armor
     public static final Item QUAZARITH_HELMET = registerItem("quazarith_helmet",
             new ArmorItem(ModArmorMaterials.QUAZARITH, EquipmentSlot.HEAD, new Item.Settings()));
     public static final Item QUAZARITH_CHESTPLATE = registerItem("quazarith_chestplate",
@@ -41,6 +47,7 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, SOUL_HEART);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_PICKAXE);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_HELMET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_CHESTPLATE);
