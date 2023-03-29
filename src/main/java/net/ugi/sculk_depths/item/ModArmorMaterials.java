@@ -17,7 +17,7 @@ public enum ModArmorMaterials implements ArmorMaterial {
 
     // mod armor
     QUAZARITH("quazarith", 60, new int[]{5, 8, 11, 5}, 30, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 5.0F, 0.2F, () -> {
-        return Ingredient.ofItems(ModItems.QUAZARITH);
+        return Ingredient.ofItems(ModItems.QUAZARITH_INGOT);
     });
 
 
