@@ -155,7 +155,8 @@ public class ModBlocks {
             new WallBlock(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     //leaves
-
+    public static final Block VALTROX_LEAVES = registerBlock("valtrox_leaves",
+            new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).sounds(BlockSoundGroup.GRASS)), ModItemGroup.SCULK_DEPTHS);
 
     //ores
     public static final Block QUAZARITH_ORE = registerBlock("quazarith_ore",
