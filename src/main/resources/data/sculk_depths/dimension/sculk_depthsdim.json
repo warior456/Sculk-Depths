@@ -400,7 +400,7 @@
               "type": "minecraft:biome",
               "biome_is": [
                 "sculk_depths:petrified_valtrox_forest",
-                "sculk_depths:bdried_valtrox_forest"
+                "sculk_depths:dried_valtrox_forest"
               ]
             },
             "then_run": {
