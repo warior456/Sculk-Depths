@@ -3,7 +3,7 @@
   "ingredient": {
     "item": "sculk_depths:quazarith_ore"
   },
-  "result": "sculk_depths:quazarith_scrap",
+  "result": "sculk_depths:quazarith_pieces",
   "experience": 4,
   "cookingtime": 150
 }

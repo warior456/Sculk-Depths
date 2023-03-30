@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "sculk_depths:item/quazarith_ingot"
+    "layer0": "sculk_depths:item/quazarith_pieces"
   }
 }

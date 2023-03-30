@@ -19,7 +19,7 @@ public class ModItems {
     public static final Item QUAZARITH_INGOT = registerItem("quazarith_ingot",
             new Item(new FabricItemSettings()));
 
-    public static final Item QUAZARITH_SCRAP = registerItem("quazarith_scrap",
+    public static final Item QUAZARITH_PIECES = registerItem("quazarith_pieces",
             new Item(new FabricItemSettings()));
 
     //quazarith tools
@@ -52,7 +52,7 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, SOUL_HEART);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_INGOT);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_SCRAP);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_PIECES);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_PICKAXE);
 
