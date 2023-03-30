@@ -399,8 +399,8 @@
             "if_true": {
               "type": "minecraft:biome",
               "biome_is": [
-                "sculk_depths:petrified_forest",
-                "sculk_depths:biome2"
+                "sculk_depths:petrified_valtrox_forest",
+                "sculk_depths:bdried_valtrox_forest"
               ]
             },
             "then_run": {
@@ -555,7 +555,7 @@
 
         },
         {
-          "biome": "sculk_depths:petrified_forest",
+          "biome": "sculk_depths:petrified_valtrox_forest",
           "parameters": {
             "temperature": [
               -0.1,
@@ -586,7 +586,7 @@
 
         },
         {
-          "biome": "sculk_depths:biome2",
+          "biome": "sculk_depths:dried_valtrox_forest",
           "parameters": {
             "temperature": [
               -1,
