@@ -14,15 +14,9 @@ group = project.maven_group
 
 
 repositories {
-
-	flatDir {
-		dirs 'libs'
-	}
-
-	maven {
-		url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
-	}
-
+	maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+	maven { url 'https://maven.kyrptonaught.dev/' }
+	maven { url "https://api.modrinth.com/maven" }
 }
 
 dependencies {
