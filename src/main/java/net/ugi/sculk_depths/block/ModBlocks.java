@@ -5,11 +5,8 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.world.event.GameEvent;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.fluid.ModFluids;
-import net.ugi.sculk_depths.item.ModArmorMaterials;
 import net.ugi.sculk_depths.item.ModItemGroup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -17,7 +14,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
 
 public class ModBlocks {
 
@@ -116,45 +112,46 @@ public class ModBlocks {
 
     //zygrin set
     public static final Block ZYGRIN = registerBlock("zygrin",
-            new Block(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new Block(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_STAIRS = registerBlock("zygrin_stairs",
-            new StairsBlock(ZYGRIN.getDefaultState(), FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new StairsBlock(ZYGRIN.getDefaultState(), FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_SLAB = registerBlock("zygrin_slab",
-            new SlabBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new SlabBlock(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_WALL = registerBlock("zygrin_wall",
-            new WallBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
-
-    public static final Block POLISHED_ZYGRIN = registerBlock("polished_zygrin",
-            new Block(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
-
-    public static final Block POLISHED_ZYGRIN_STAIRS = registerBlock("polished_zygrin_stairs",
-            new StairsBlock(POLISHED_ZYGRIN.getDefaultState(), FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
-
-    public static final Block POLISHED_ZYGRIN_SLAB = registerBlock("polished_zygrin_slab",
-            new SlabBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
-
-    public static final Block POLISHED_ZYGRIN_WALL = registerBlock("polished_zygrin_wall",
-            new WallBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new WallBlock(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_PILLAR = registerBlock("zygrin_pillar",
-            new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
+            new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(4.0f)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block CHISELED_ZYGRIN = registerBlock("chiseled_zygrin",
-            new Block(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new Block(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block POLISHED_ZYGRIN = registerBlock("polished_zygrin",
+            new Block(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block POLISHED_ZYGRIN_STAIRS = registerBlock("polished_zygrin_stairs",
+            new StairsBlock(POLISHED_ZYGRIN.getDefaultState(), FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block POLISHED_ZYGRIN_SLAB = registerBlock("polished_zygrin_slab",
+            new SlabBlock(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block POLISHED_ZYGRIN_WALL = registerBlock("polished_zygrin_wall",
+            new WallBlock(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
     public static final Block ZYGRIN_BRICKS = registerBlock("zygrin_bricks",
-            new Block(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new Block(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_BRICK_STAIRS = registerBlock("zygrin_brick_stairs",
-            new StairsBlock(ZYGRIN_BRICKS.getDefaultState(), FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new StairsBlock(ZYGRIN_BRICKS.getDefaultState(), FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_BRICK_SLAB = registerBlock("zygrin_brick_slab",
-            new SlabBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new SlabBlock(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_BRICK_WALL = registerBlock("zygrin_brick_wall",
-            new WallBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new WallBlock(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
     //ores
     public static final Block QUAZARITH_ORE = registerBlock("quazarith_ore",
             new Block(FabricBlockSettings.of(Material.STONE).hardness(6.0f).resistance(10f).requiresTool().emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).luminance(1)), ModItemGroup.SCULK_DEPTHS);

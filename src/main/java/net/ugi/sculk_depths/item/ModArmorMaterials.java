@@ -17,7 +17,7 @@ public enum ModArmorMaterials implements ArmorMaterial {
 
     // mod armor
     QUAZARITH("quazarith", 60, new int[]{5, 8, 11, 5}, 30, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 5.0F, 0.2F, () -> {
-        return Ingredient.ofItems(ModItems.QUAZARITH);
+        return Ingredient.ofItems(ModItems.QUAZARITH_INGOT);
     });
 
 
@@ -29,7 +29,7 @@ public enum ModArmorMaterials implements ArmorMaterial {
     private final SoundEvent equipSound;
     private final float toughness;
     private final float knockbackResistance;
-    private final Lazy<Ingredient> repairIngredientSupplier;
+    private final Supplier<Ingredient> repairIngredientSupplier;
 
     ModArmorMaterials(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantability, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredientSupplier) {
         this.name = name;
@@ -39,7 +39,7 @@ public enum ModArmorMaterials implements ArmorMaterial {
         this.equipSound = equipSound;
         this.toughness = toughness;
         this.knockbackResistance = knockbackResistance;
-        this.repairIngredientSupplier = new Lazy(repairIngredientSupplier);
+        this.repairIngredientSupplier = repairIngredientSupplier;
     }
 
     @Override

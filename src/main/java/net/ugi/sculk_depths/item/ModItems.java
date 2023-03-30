@@ -17,7 +17,10 @@ public class ModItems {
             new Item(new FabricItemSettings().maxCount(16)));
     public static final Item KRYSLUM_BUCKET = registerItem("kryslum_bucket", new BucketItem(ModFluids.KRYSLUM_STILL,
             new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
-    public static final Item QUAZARITH = registerItem("quazarith",
+    public static final Item QUAZARITH_INGOT = registerItem("quazarith_ingot",
+            new Item(new FabricItemSettings()));
+
+    public static final Item QUAZARITH_SCRAP = registerItem("quazarith_scrap",
             new Item(new FabricItemSettings()));
 
     //quazarith tools
@@ -46,7 +49,9 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, KRYSLUM_BUCKET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, SOUL_HEART);
 
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_INGOT);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_SCRAP);
+
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_PICKAXE);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_HELMET);
