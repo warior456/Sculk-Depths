@@ -14,14 +14,9 @@ group = project.maven_group
 
 
 repositories {
-	maven {url = "https://maven.kyrptonaught.dev"}
 	maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
-
-	// Add repositories to retrieve artifacts from in here.
-	// You should only use this when depending on other mods because
-	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
-	// for more information about repositories.
+	maven { url 'https://maven.kyrptonaught.dev/' }
+	maven { url "https://api.modrinth.com/maven" }
 }
 
 dependencies {
