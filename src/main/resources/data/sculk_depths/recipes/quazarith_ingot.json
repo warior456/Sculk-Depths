@@ -3,28 +3,28 @@
   "group": "netherite_ingot",
   "ingredients": [
     {
-      "item": "sculk_depths:quazarith_scrap"
+      "item": "sculk_depths:quazarith_pieces"
     },
     {
-      "item": "sculk_depths:quazarith_scrap"
+      "item": "sculk_depths:quazarith_pieces"
     },
     {
-      "item": "sculk_depths:quazarith_scrap"
+      "item": "sculk_depths:quazarith_pieces"
     },
     {
-      "item": "sculk_depths:quazarith_scrap"
+      "item": "sculk_depths:quazarith_pieces"
     },
     {
-      "item": "minecraft:gold_ingot"
+      "item": "minecraft:diamond"
     },
     {
-      "item": "minecraft:gold_ingot"
+      "item": "minecraft:diamond"
     },
     {
-      "item": "minecraft:gold_ingot"
+      "item": "minecraft:diamond"
     },
     {
-      "item": "minecraft:gold_ingot"
+      "item": "minecraft:diamond"
     }
   ],
   "result": {

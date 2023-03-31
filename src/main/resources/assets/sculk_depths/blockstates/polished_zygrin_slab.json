@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "sculk_depths:block/polished_zygrin_slab"
+    },
+    "type=double": {
+      "model": "sculk_depths:block/polished_zygrin"
+    },
+    "type=top": {
+      "model": "sculk_depths:block/polished_zygrin_slab_top"
+    }
+  }
+}

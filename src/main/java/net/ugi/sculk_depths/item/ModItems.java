@@ -20,14 +20,30 @@ public class ModItems {
     public static final Item QUAZARITH_INGOT = registerItem("quazarith_ingot",
             new Item(new FabricItemSettings()));
 
-    public static final Item QUAZARITH_SCRAP = registerItem("quazarith_scrap",
+    public static final Item QUAZARITH_PIECES = registerItem("quazarith_pieces",
             new Item(new FabricItemSettings()));
 
     //quazarith tools
+
+    public static final Item QUAZARITH_SHOVEL = registerItem("quazarith_shovel",
+            new ShovelItem(ModToolMaterials.QUAZARITH, 2.5F,-3.0F,
+                    new FabricItemSettings()));
+
     public static final Item QUAZARITH_PICKAXE = registerItem("quazarith_pickaxe",
             new PickaxeItem(ModToolMaterials.QUAZARITH, 2, -2.0F,
                     new FabricItemSettings()));
 
+    public static final Item QUAZARITH_AXE = registerItem("quazarith_axe",
+            new AxeItem(ModToolMaterials.QUAZARITH, 7,-3.0F,
+                    new FabricItemSettings()));
+
+    public static final Item QUAZARITH_HOE = registerItem("quazarith_hoe",
+            new HoeItem(ModToolMaterials.QUAZARITH, -4,1.0F,
+                    new FabricItemSettings()));
+
+    public static final Item QUAZARITH_SWORD = registerItem("quazarith_sword",
+            new SwordItem(ModToolMaterials.QUAZARITH, 6,-2.0F,
+                    new FabricItemSettings()));
 
     //quazarith armor
     public static final Item QUAZARITH_HELMET = registerItem("quazarith_helmet",
@@ -50,9 +66,13 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, SOUL_HEART);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_INGOT);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_SCRAP);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_PIECES);
 
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_SHOVEL);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_PICKAXE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_AXE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_HOE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_SWORD);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_HELMET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_CHESTPLATE);

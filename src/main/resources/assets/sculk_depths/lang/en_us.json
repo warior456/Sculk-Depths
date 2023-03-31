@@ -13,6 +13,8 @@
   "block.sculk_depths.umbrusk_brick_slab": "Umbrusk Brick Slab",
   "block.sculk_depths.umbrusk_brick_wall": "Umbrusk Brick Wall",
 
+  "block.sculk_depths.valtrox_leaves": "Valtrox Leaves",
+
   "block.sculk_depths.valtrox_log": "Valtrox Log",
   "block.sculk_depths.valtrox_planks": "Valtrox Planks",
   "block.sculk_depths.valtrox_wood": "Valtrox Wood",
@@ -39,13 +41,35 @@
   "itemgroup.sculk_depths" : "Sculk Depths",
 
   "block.sculk_depths.quazarith_ore": "Quazarith Ore",
+  "item.sculk_depths.quazarith_pieces": "Quazarith Pieces",
+  "item.sculk_depths.quazarith_ingot": "Quazarith Ingot",
 
   "item.sculk_depths.quazarith": "Quazarith",
 
+
+  "item.sculk_depths.quazarith_shovel": "Quazarith Shovel",
   "item.sculk_depths.quazarith_pickaxe": "Quazarith Pickaxe",
+  "item.sculk_depths.quazarith_axe": "Quazarith Axe",
+  "item.sculk_depths.quazarith_hoe": "Quazarith Hoe",
+  "item.sculk_depths.quazarith_sword": "Quazarith Sword",
 
   "item.sculk_depths.quazarith_helmet": "Quazarith Helmet",
   "item.sculk_depths.quazarith_chestplate": "Quazarith Chestplate",
   "item.sculk_depths.quazarith_leggings": "Quazarith Leggings",
-  "item.sculk_depths.quazarith_boots": "Quazarith Boots"
+  "item.sculk_depths.quazarith_boots": "Quazarith Boots",
+
+  "block.sculk_depths.zygrin": "Zygrin",
+  "block.sculk_depths.zygrin_stairs": "Zygrin Stairs",
+  "block.sculk_depths.zygrin_slab": "Zygrin Slab",
+  "block.sculk_depths.zygrin_wall": "Zygrin Wall",
+  "block.sculk_depths.polished_zygrin": "Polished Zygrin",
+  "block.sculk_depths.polished_zygrin_stairs": "Polished Zygrin Stairs",
+  "block.sculk_depths.polished_zygrin_slab": "Polished Zygrin Slab",
+  "block.sculk_depths.polished_zygrin_wall": "Polished Zygrin Wall",
+  "block.sculk_depths.zygrin_bricks": "Zygrin Bricks",
+  "block.sculk_depths.zygrin_brick_stairs": "Zygrin Brick Stairs",
+  "block.sculk_depths.zygrin_brick_slab": "Zygrin Brick Slab",
+  "block.sculk_depths.zygrin_brick_wall": "Zygrin Brick Wall",
+  "block.sculk_depths.zygrin_pillar": "Zygrin Pillar",
+  "block.sculk_depths.chiseled_zygrin": "Chiseled Zygrin"
 }

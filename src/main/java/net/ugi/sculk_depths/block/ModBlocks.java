@@ -127,7 +127,7 @@ public class ModBlocks {
             new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(4.0f)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block CHISELED_ZYGRIN = registerBlock("chiseled_zygrin",
-            new Block(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new PillarBlock(FabricBlockSettings.of(Material.STONE).strength(4.0f)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block POLISHED_ZYGRIN = registerBlock("polished_zygrin",
             new Block(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
@@ -152,6 +152,11 @@ public class ModBlocks {
 
     public static final Block ZYGRIN_BRICK_WALL = registerBlock("zygrin_brick_wall",
             new WallBlock(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    //leaves
+    public static final Block VALTROX_LEAVES = registerBlock("valtrox_leaves",
+            new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).sounds(BlockSoundGroup.GRASS)), ModItemGroup.SCULK_DEPTHS);
+
     //ores
     public static final Block QUAZARITH_ORE = registerBlock("quazarith_ore",
             new Block(FabricBlockSettings.of(Material.STONE).hardness(6.0f).resistance(10f).requiresTool().emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).luminance(1)), ModItemGroup.SCULK_DEPTHS);

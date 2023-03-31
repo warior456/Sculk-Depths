@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "sculk_depths:block/polished_zygrin",
+    "side": "sculk_depths:block/chiseled_zygrin"
+  }
+}
