@@ -14,9 +14,19 @@ When going to this dimension take at least a diamond pickaxe because the world i
 ## FEATURES
   
   - new dimension with custom world gen
-  - 2 new biomes
-  - Soul Heart drops from the warden
-  - 2 new blocksets: Umbrusk and Umbrusk Bricks
+  - 3 new biomes
+  - a new structure (wip)
+  - Soul Heart drops from the warden to open the portal
+  - 9 new blocksets:
+    - Umbrusk (stone type)
+    - Umbrusk Bricks
+    - Valtrox (wood type)
+    - Dried Valtrox
+    - Petrified Valtrox (stone type)
+    - Zygrin (stone type)
+    - Zygrin Bricks
+    - Polished Zygrin
+    
   
   <details>
     <summary> Screenshots </summary>
