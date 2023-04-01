@@ -162,7 +162,7 @@ public class ModBlocks {
 
     //leaves
     public static final Block VALTROX_LEAVES = registerBlock("valtrox_leaves",
-            new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).sounds(BlockSoundGroup.GRASS)), ModItemGroup.SCULK_DEPTHS);
+            new LeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES)), ModItemGroup.SCULK_DEPTHS);
     public static final Block VALTROX_SAPLING = registerBlock("valtrox_sapling", //wip
             new Block(FabricBlockSettings.of(Material.STONE)), ModItemGroup.SCULK_DEPTHS);
 
