@@ -87,14 +87,10 @@
       "height_rand_b": 4
     },
     "foliage_placer": {
-      "type": "minecraft:cherry_foliage_placer",
+      "type": "minecraft:blob_foliage_placer",
       "radius": 3,
       "offset": 2,
-      "height": 4,
-      "hanging_leaves_extension_chance": 0.5,
-      "hanging_leaves_chance": 0.5,
-      "corner_hole_chance": 1,
-      "wide_bottom_layer_hole_chance": 1
+      "height": 4
     },
     "decorators": []
   }
