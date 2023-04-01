@@ -61,7 +61,7 @@ public enum ModArmorMaterials implements ArmorMaterial {
     }
 
     public Ingredient getRepairIngredient() {
-        return (Ingredient)this.repairIngredientSupplier.get();
+        return (Ingredient) this.repairIngredientSupplier.get();
     }
 
     public String getName() {

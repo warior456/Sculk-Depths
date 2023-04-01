@@ -22,8 +22,6 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
     public void generate(Consumer<RecipeJsonProvider> exporter) {
 
 
-
-
         // JUST AN EXAMPLE
 
     }

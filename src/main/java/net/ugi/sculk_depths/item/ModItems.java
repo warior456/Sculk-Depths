@@ -25,24 +25,23 @@ public class ModItems {
     //quazarith tools
 
     public static final Item QUAZARITH_SHOVEL = registerItem("quazarith_shovel",
-            new ShovelItem(ModToolMaterials.QUAZARITH, 2.5F,-3.0F,
+            new ShovelItem(ModToolMaterials.QUAZARITH, 2.5F, -3.0F,
                     new FabricItemSettings()));
     public static final Item QUAZARITH_PICKAXE = registerItem("quazarith_pickaxe",
             new PickaxeItem(ModToolMaterials.QUAZARITH, 2, -2.0F,
                     new FabricItemSettings()));
 
     public static final Item QUAZARITH_AXE = registerItem("quazarith_axe",
-            new AxeItem(ModToolMaterials.QUAZARITH, 7,-3.0F,
+            new AxeItem(ModToolMaterials.QUAZARITH, 7, -3.0F,
                     new FabricItemSettings()));
 
     public static final Item QUAZARITH_HOE = registerItem("quazarith_hoe",
-            new HoeItem(ModToolMaterials.QUAZARITH, -4,1.0F,
+            new HoeItem(ModToolMaterials.QUAZARITH, -4, 1.0F,
                     new FabricItemSettings()));
 
     public static final Item QUAZARITH_SWORD = registerItem("quazarith_sword",
-            new SwordItem(ModToolMaterials.QUAZARITH, 6,-2.0F,
+            new SwordItem(ModToolMaterials.QUAZARITH, 6, -2.0F,
                     new FabricItemSettings()));
-
 
 
     //quazarith armor
@@ -63,7 +62,7 @@ public class ModItems {
         return Registry.register(Registries.ITEM, new Identifier(SculkDepths.MOD_ID, name), item);
     }
 
-    public static void addItemsToItemGroup(){
+    public static void addItemsToItemGroup() {
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, KRYSLUM_BUCKET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, SOUL_HEART);
@@ -84,7 +83,7 @@ public class ModItems {
     }
 
     private static void addToItemGroup(ItemGroup group, Item item) {
-        ItemGroupEvents.modifyEntriesEvent(group).register(entries ->  entries.add((item)));
+        ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add((item)));
     }
 
     public static void registerModItems() {

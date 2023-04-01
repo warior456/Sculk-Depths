@@ -10,7 +10,8 @@ import net.ugi.sculk_depths.block.ModBlocks;
 
 public class ModItemGroup {
     public static ItemGroup SCULK_DEPTHS;
-    public static void registerItemgroups(){
+
+    public static void registerItemgroups() {
         SCULK_DEPTHS = FabricItemGroup.builder(new Identifier(SculkDepths.MOD_ID, "sculk_depths"))
                 .displayName(Text.translatable("itemgroup.sculk_depths"))
                 .icon(() -> new ItemStack(ModBlocks.UMBRUSK)).build();

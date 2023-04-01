@@ -10,7 +10,7 @@ public class ModFluids {
     public static final FlowableFluid KRYSLUM_STILL = register("kryslum_still", new KryslumFluid.Still());
     public static final FlowableFluid KRYSLUM_FLOWING = register("kryslum_flow", new KryslumFluid.Flowing());
 
-    private static FlowableFluid register(String name, FlowableFluid flowableFluid){
+    private static FlowableFluid register(String name, FlowableFluid flowableFluid) {
         return Registry.register(Registries.FLUID, new Identifier(SculkDepths.MOD_ID, name), flowableFluid);
     }
 }
