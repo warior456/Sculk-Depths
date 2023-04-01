@@ -59,7 +59,6 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.BOOTS,
                     new FabricItemSettings()));
 
-
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(SculkDepths.MOD_ID, name), item);
     }
