@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "sculk_depths:kryslum_still",
-    "sculk_depths:kryslum_flowing"
-
+    "sculk_depths:kryslum_flow"
   ]
 }

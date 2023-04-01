@@ -5,11 +5,9 @@
     "sculk_depths:umbrusk_stairs",
     "sculk_depths:umbrusk_slab",
     "sculk_depths:umbrusk_wall",
-
     "sculk_depths:umbrusk_bricks",
     "sculk_depths:umbrusk_brick_stairs",
     "sculk_depths:umbrusk_brick_slab",
-    "sculk_depths:umbrusk_brick_wall",
-    "sculk_depths:petrified_valtrox_log"
+    "sculk_depths:umbrusk_brick_wall"
   ]
 }

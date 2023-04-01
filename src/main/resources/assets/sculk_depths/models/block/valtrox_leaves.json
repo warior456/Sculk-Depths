@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "sculk_depths:block/valtrox_leaves"
+  }
+}

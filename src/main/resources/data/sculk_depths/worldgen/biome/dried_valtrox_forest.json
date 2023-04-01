@@ -1,0 +1,45 @@
+{
+  "temperature": 0.8,
+  "downfall": 0.4,
+  "precipitation": "none",
+  "effects": {
+    "sky_color": 7254527,
+    "fog_color": 153299,
+    "water_color": 928354,
+    "water_fog_color": 328995,
+    "grass_color": 596558,
+    "foliage_color": 596558,
+    "mood_sound": {
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2
+    },
+    "music": {
+      "sound": "minecraft:ambient.sculk_depths_ambient_1",
+      "min_delay": 12000,
+      "max_delay": 24000,
+      "replace_current_music": false
+    }
+  },
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": [
+    ]
+  },
+  "features": [
+    [
+      "sculk_depths:dried_valtrox"
+    ]
+  ]
+}

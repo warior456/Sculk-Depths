@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "sculk_depths:block/chiseled_zygrin",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "sculk_depths:block/chiseled_zygrin"
+    },
+    "axis=z": {
+      "model": "sculk_depths:block/chiseled_zygrin",
+      "x": 90
+    }
+  }
+}

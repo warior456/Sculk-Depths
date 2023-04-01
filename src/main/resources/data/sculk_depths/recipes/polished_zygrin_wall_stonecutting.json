@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "sculk_depths:polished_zygrin"
+  },
+  "result": "sculk_depths:polished_zygrin_wall",
+  "count": 1
+}

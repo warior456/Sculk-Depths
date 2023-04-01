@@ -113,8 +113,8 @@
       },
       "trunk_placer": {
         "type": "minecraft:fancy_trunk_placer",
-        "base_height":2,
-        "height_rand_a": 5,
+        "base_height": 2,
+        "height_rand_a": 7,
         "height_rand_b": 0
       },
       "foliage_placer": {

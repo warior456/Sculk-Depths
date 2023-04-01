@@ -12,7 +12,7 @@
         "Name": "minecraft:deepslate"
       },
       "default_fluid": {
-        "Name": "sculk_depths:kryslum_block"
+        "Name": "sculk_depths:kryslum"
       },
       "noise": {
         "min_y": -256,
@@ -358,7 +358,6 @@
               }
             }
           }
-
         },
         "vein_toggle": 0,
         "vein_ridged": 0,
@@ -393,13 +392,13 @@
       "surface_rule": {
         "type": "minecraft:sequence",
         "sequence": [
-
           {
             "type": "minecraft:condition",
             "if_true": {
               "type": "minecraft:biome",
               "biome_is": [
-                "sculk_depths:petrified_forest"
+                "sculk_depths:petrified_valtrox_forest",
+                "sculk_depths:dried_valtrox_forest"
               ]
             },
             "then_run": {
@@ -487,41 +486,130 @@
         ]
       }
     },
-
     "biome_source": {
       "type": "minecraft:multi_noise",
       "biomes": [
         {
           "biome": "sculk_depths:sculk_caves",
           "parameters": {
-            "temperature": 0,
-            "humidity": 0,
-            "continentalness": 0,
-            "erosion": 0,
-            "weirdness": 0,
+            "temperature": [
+              -1,
+              0.5
+            ],
+            "humidity": [
+              0,
+              0
+            ],
+            "continentalness": [
+              0,
+              0
+            ],
+            "erosion": [
+              0,
+              0
+            ],
+            "weirdness": [
+              0,
+              0
+            ],
             "depth": [
-              0.2,
+              0.18,
               1
             ],
             "offset": 0
           }
-
         },
         {
-          "biome": "sculk_depths:petrified_forest",
+          "biome": "sculk_depths:biome3",
           "parameters": {
-            "temperature": 0,
-            "humidity": 0,
-            "continentalness": 0,
-            "erosion": 0,
-            "weirdness": 0,
-            "depth": 0,
+            "temperature": [
+              0.3,
+              1
+            ],
+            "humidity": [
+              0,
+              0
+            ],
+            "continentalness": [
+              0,
+              0
+            ],
+            "erosion": [
+              0,
+              0
+            ],
+            "weirdness": [
+              0,
+              0
+            ],
+            "depth": [
+              0.18,
+              1
+            ],
             "offset": 0
           }
-
+        },
+        {
+          "biome": "sculk_depths:petrified_valtrox_forest",
+          "parameters": {
+            "temperature": [
+              -0.1,
+              1
+            ],
+            "humidity": [
+              0,
+              0
+            ],
+            "continentalness": [
+              0,
+              0
+            ],
+            "erosion": [
+              0,
+              0
+            ],
+            "weirdness": [
+              0,
+              0
+            ],
+            "depth": [
+              -1,
+              0.18
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "sculk_depths:dried_valtrox_forest",
+          "parameters": {
+            "temperature": [
+              -1,
+              0.1
+            ],
+            "humidity": [
+              0,
+              0
+            ],
+            "continentalness": [
+              0,
+              0
+            ],
+            "erosion": [
+              0,
+              0
+            ],
+            "weirdness": [
+              0,
+              0
+            ],
+            "depth": [
+              -1,
+              0.18
+            ],
+            "offset": 0
+          }
         }
       ]
-
     }
   }
 }

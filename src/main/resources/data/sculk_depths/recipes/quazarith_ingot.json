@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "netherite_ingot",
+  "ingredients": [
+    {
+      "item": "sculk_depths:quazarith_pieces"
+    },
+    {
+      "item": "sculk_depths:quazarith_pieces"
+    },
+    {
+      "item": "sculk_depths:quazarith_pieces"
+    },
+    {
+      "item": "sculk_depths:quazarith_pieces"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    }
+  ],
+  "result": {
+    "item": "sculk_depths:quazarith_ingot"
+  }
+}
