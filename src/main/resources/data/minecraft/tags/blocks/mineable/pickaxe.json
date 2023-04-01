@@ -20,8 +20,21 @@
     "sculk_depths:petrified_valtrox_wood",
     "sculk_depths:petrified_valtrox_slab",
     "sculk_depths:petrified_valtrox_stairs",
-    "sculk_depths:petrified_valtrox_fence"
+    "sculk_depths:petrified_valtrox_fence",
 
+    "sculk_depths:zygrin",
+    "sculk_depths:zygrin_stairs",
+    "sculk_depths:zygrin_slab",
+    "sculk_depths:zygrin_wall",
 
+    "sculk_depths:polished_zygrin",
+    "sculk_depths:polished_zygrin_stairs",
+    "sculk_depths:polished_zygrin_slab",
+    "sculk_depths:polished_zygrin_wall",
+
+    "sculk_depths:zygrin_bricks",
+    "sculk_depths:zygrin_brick_stairs",
+    "sculk_depths:zygrin_brick_slab",
+    "sculk_depths:zygrin_brick_wall"
   ]
 }
