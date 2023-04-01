@@ -10,7 +10,7 @@
           "children": [
             {
               "type": "minecraft:item",
-              "name": "minecraft:valtrox_leaves",
+              "name": "sculk_depths:valtrox_leaves",
               "conditions": [
                 {
                   "condition": "minecraft:alternative",
