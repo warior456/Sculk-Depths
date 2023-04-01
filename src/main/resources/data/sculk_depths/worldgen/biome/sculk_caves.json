@@ -16,7 +16,7 @@
       "offset": 2
     },
     "music": {
-      "sound": "minecraft:music.overworld.deep_dark",
+      "sound": "minecraft:ambient.sculk_depths_ambient_1",
       "min_delay": 12000,
       "max_delay": 24000,
       "replace_current_music": false
@@ -39,14 +39,10 @@
   },
   "features": [
     [
-      /*"sculk_depths:sculk_patch",*/
-      /*"sculk_depths:sculk_fast_patch",*/
-      /*"sculk_depths:sculksensor_fast_patch"*/
       "sculk_depths:sculk_veins_roof_umbrusk",
       "sculk_depths:sculk_veins_floor_umbrusk",
       "sculk_depths:sculk_veins_roof_deepslate",
       "sculk_depths:sculk_veins_floor_deepslate"
-
     ],
     [
       "sculk_depths:ore_flumrock"
@@ -61,7 +57,6 @@
       "sculk_depths:ore_quazarith_west",
       "sculk_depths:ore_quazarith_up",
       "sculk_depths:ore_quazarith_down"
-
     ]
   ]
 }

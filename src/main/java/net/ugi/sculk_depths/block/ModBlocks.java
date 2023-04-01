@@ -4,16 +4,16 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
-import net.minecraft.sound.BlockSoundGroup;
-import net.ugi.sculk_depths.SculkDepths;
-import net.ugi.sculk_depths.fluid.ModFluids;
-import net.ugi.sculk_depths.item.ModItemGroup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.ugi.sculk_depths.SculkDepths;
+import net.ugi.sculk_depths.fluid.ModFluids;
+import net.ugi.sculk_depths.item.ModItemGroup;
 
 public class ModBlocks {
 
@@ -155,7 +155,9 @@ public class ModBlocks {
 
     //leaves
     public static final Block VALTROX_LEAVES = registerBlock("valtrox_leaves",
-            new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).sounds(BlockSoundGroup.GRASS)), ModItemGroup.SCULK_DEPTHS);
+            new LeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES)), ModItemGroup.SCULK_DEPTHS);
+    public static final Block VALTROX_SAPLING = registerBlock("valtrox_sapling", //wip
+            new Block(FabricBlockSettings.of(Material.STONE)), ModItemGroup.SCULK_DEPTHS);
 
     //ores
     public static final Block QUAZARITH_ORE = registerBlock("quazarith_ore",

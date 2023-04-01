@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "sculk_depths:block/umbrusk_bricks" }
+    "": {
+      "model": "sculk_depths:block/umbrusk_bricks"
+    }
   }
 }

@@ -1,16 +1,11 @@
 package net.ugi.sculk_depths.item;
 
-import net.fabricmc.yarn.constants.MiningLevels;
-import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.util.Lazy;
 
 import java.util.function.Supplier;
 
-public enum ModToolMaterials implements ToolMaterial
-{
+public enum ModToolMaterials implements ToolMaterial {
     //GOLD(MiningLevels.WOOD, 32, 12.0f, 0.0f, 22, () -> Ingredient.ofItems(Items.GOLD_INGOT)),
     QUAZARITH(6, 3000, 38.29f, 4.0f, 30, () -> Ingredient.ofItems(ModItems.QUAZARITH_INGOT)); //change to quazarith ingot
     //deepslate instamine miningspeed: 38.29

@@ -1,0 +1,11 @@
+{
+  "ambient.sculk_depths_ambient_1": {
+    "category": "ambient",
+    "sounds": [
+      {
+        "name": "sculk_depths_ambient_1",
+        "stream": true
+      }
+    ]
+  }
+}

@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "sculk_depths:block/quazarith_ore" }
+    "": {
+      "model": "sculk_depths:block/quazarith_ore"
+    }
   }
 }

@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "sculk_depths",
   "version": "${version}",
-
   "name": "Sculk Depths",
   "description": "This mod adds a new dimension accessed from the ancient cities",
   "authors": [
@@ -13,10 +12,8 @@
     "homepage": "https://github.com/warior456/Sculk-Depths/blob/main/README.md",
     "sources": "https://github.com/warior456/sculk_depths"
   },
-
   "license": "Custom License",
   "icon": "assets/sculk_depths/icon.png",
-
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -32,7 +29,6 @@
   "mixins": [
     "sculk_depths.mixins.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.14.17",
     "fabric-api": ">=0.76.0",

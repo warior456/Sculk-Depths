@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 10387312,
+    "separation": 16,
+    "spacing": 46
+  },
+  "structures": [
+    {
+      "structure": "sculk_depths:laboratory",
+      "weight": 1
+    }
+  ]
+}

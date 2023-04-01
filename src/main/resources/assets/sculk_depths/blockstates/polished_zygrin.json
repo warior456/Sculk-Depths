@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "sculk_depths:block/polished_zygrin" }
+    "": {
+      "model": "sculk_depths:block/polished_zygrin"
+    }
   }
 }
