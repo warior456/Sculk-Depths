@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "sculk_depths:umbrusk"
+  },
+  "result": "sculk_depths:umbrusk_bricks",
+  "count": 1
+}
