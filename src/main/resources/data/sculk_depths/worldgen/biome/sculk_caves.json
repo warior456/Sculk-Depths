@@ -16,9 +16,9 @@
       "offset": 2
     },
     "music": {
-      "sound": "sculk_depths:music.sculk_depths_music_1",
-      "min_delay": 1,
-      "max_delay": 5,
+      "sound": "sculk_depths:music.sculk_depths.music_1",
+      "min_delay": 500,
+      "max_delay": 5000,
       "replace_current_music": false
     }
   },
