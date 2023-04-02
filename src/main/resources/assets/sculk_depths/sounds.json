@@ -1,9 +1,9 @@
 {
 	"ambient.sculk_depths_ambient_1":{
-		"category": "ambient",
+		"category": "music",
 		"sounds": [
            {
-				"name":"sculk_depths:sculk_depths_ambient_1",
+				"name":"sculk_depths:sculk_depths_music_1",
 		   		"stream": true
 			}
 		]

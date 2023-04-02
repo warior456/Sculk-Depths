@@ -169,7 +169,7 @@ public class ModBlocks {
     //ores
     public static final Block QUAZARITH_ORE = registerBlock("quazarith_ore",
             new Block(FabricBlockSettings.of(Material.STONE).hardness(6.0f).resistance(10f).requiresTool().emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).luminance(1)), ModItemGroup.SCULK_DEPTHS);
-//testcommit
+
     //fluids
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new ModFluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.of(Material.WATER).noCollision().nonOpaque().dropsNothing()), ModItemGroup.SCULK_DEPTHS);
 

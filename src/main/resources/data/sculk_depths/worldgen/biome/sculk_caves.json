@@ -16,9 +16,9 @@
       "offset": 2
     },
     "music": {
-      "sound": "minecraft:ambient.sculk_depths_ambient_1",
-      "min_delay": 12000,
-      "max_delay": 24000,
+      "sound": "sculk_depths:music.sculk_depths_music_1",
+      "min_delay": 1,
+      "max_delay": 5,
       "replace_current_music": false
     }
   },
