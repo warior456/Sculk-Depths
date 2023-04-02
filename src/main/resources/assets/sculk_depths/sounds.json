@@ -1,0 +1,12 @@
+{
+	"music.sculk_depths.music_1":{
+		"category": "music",
+		"sounds": [
+           {
+				"name":"sculk_depths:sculk_depths_music_1",
+
+		   		"stream": true
+			}
+		]
+    }
+}
