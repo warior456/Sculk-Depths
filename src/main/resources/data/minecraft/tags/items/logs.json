@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "sculk_depths:valtrox_log",
-    "sculk_depths:dried_valtrox_log",
-    "sculk_depths:petrified_valtrox_log"
+    "sculk_depths:dried_valtrox_log"
   ]
 }
