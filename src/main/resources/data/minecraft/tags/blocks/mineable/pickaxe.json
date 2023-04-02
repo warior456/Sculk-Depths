@@ -35,6 +35,9 @@
     "sculk_depths:zygrin_bricks",
     "sculk_depths:zygrin_brick_stairs",
     "sculk_depths:zygrin_brick_slab",
-    "sculk_depths:zygrin_brick_wall"
+    "sculk_depths:zygrin_brick_wall",
+
+    "sculk_depths:zygrin_pillar",
+    "sculk_depths:chiseled_zygrin"
   ]
 }
