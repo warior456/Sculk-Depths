@@ -2,6 +2,7 @@ package net.ugi.sculk_depths.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -27,6 +28,7 @@ public class ModItems {
     public static final Item QUAZARITH_SHOVEL = registerItem("quazarith_shovel",
             new ShovelItem(ModToolMaterials.QUAZARITH, 2.5F, -3.0F,
                     new FabricItemSettings()));
+
     public static final Item QUAZARITH_PICKAXE = registerItem("quazarith_pickaxe",
             new PickaxeItem(ModToolMaterials.QUAZARITH, 2, -2.0F,
                     new FabricItemSettings()));
@@ -43,20 +45,15 @@ public class ModItems {
             new SwordItem(ModToolMaterials.QUAZARITH, 6, -2.0F,
                     new FabricItemSettings()));
 
-
     //quazarith armor
     public static final Item QUAZARITH_HELMET = registerItem("quazarith_helmet",
-            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.HELMET,
-                    new FabricItemSettings()));
+            new ArmorItem(ModArmorMaterials.QUAZARITH, EquipmentSlot.HEAD, new Item.Settings()));
     public static final Item QUAZARITH_CHESTPLATE = registerItem("quazarith_chestplate",
-            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.CHESTPLATE,
-                    new FabricItemSettings()));
+            new ArmorItem(ModArmorMaterials.QUAZARITH, EquipmentSlot.CHEST, new Item.Settings()));
     public static final Item QUAZARITH_LEGGINGS = registerItem("quazarith_leggings",
-            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.LEGGINGS,
-                    new FabricItemSettings()));
+            new ArmorItem(ModArmorMaterials.QUAZARITH, EquipmentSlot.LEGS, new Item.Settings()));
     public static final Item QUAZARITH_BOOTS = registerItem("quazarith_boots",
-            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.BOOTS,
-                    new FabricItemSettings()));
+            new ArmorItem(ModArmorMaterials.QUAZARITH, EquipmentSlot.FEET, new Item.Settings()));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(SculkDepths.MOD_ID, name), item);

@@ -1,7 +1,7 @@
 {
   "temperature": 0.8,
   "downfall": 0.4,
-  "has_precipitation": false,
+  "precipitation": "none",
   "effects": {
     "sky_color": 7254527,
     "fog_color": 853299,
@@ -43,7 +43,6 @@
       "sculk_depths:sculk_veins_floor_umbrusk",
       "sculk_depths:sculk_veins_roof_deepslate",
       "sculk_depths:sculk_veins_floor_deepslate"
-
     ],
     [
       "sculk_depths:ore_flumrock"
@@ -58,7 +57,6 @@
       "sculk_depths:ore_quazarith_west",
       "sculk_depths:ore_quazarith_up",
       "sculk_depths:ore_quazarith_down"
-
     ]
   ]
 }

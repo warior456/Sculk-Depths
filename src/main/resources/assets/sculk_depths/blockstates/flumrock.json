@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "sculk_depths:block/flumrock" }
+    "": {
+      "model": "sculk_depths:block/flumrock"
+    }
   }
 }

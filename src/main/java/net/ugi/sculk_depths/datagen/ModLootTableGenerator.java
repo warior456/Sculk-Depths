@@ -2,8 +2,6 @@ package net.ugi.sculk_depths.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.ugi.sculk_depths.block.ModBlocks;
-import net.ugi.sculk_depths.item.ModItems;
 
 
 public class ModLootTableGenerator extends FabricBlockLootTableProvider {

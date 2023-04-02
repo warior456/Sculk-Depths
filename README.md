@@ -1,23 +1,24 @@
 ## THIS MOD IS IN ALPHA, USE AT YOUR OWN RISK!
-# ABOUT
 
+# ABOUT
 
 This mod adds a new dimension the "Sculk Depths" <br>
 To get to this dimension:
+
 1) Search a deep dark biome with an ancient city
 2) Summon and kill a warden for its new drop the Soul Heart
 3) Go to the center of the city and clear all the sculk veins from the middle of the reinforced deepslate
 4) Light the portal with the soul heart you just got from the Warden <br>
-When going to this dimension take at least a diamond pickaxe because the world is mostly made up of a very hard block Umbrusk
-
+   When going to this dimension take at least a diamond pickaxe because the world is mostly made up of a very hard block
+   Umbrusk
 
 ## FEATURES
-  
-  - new dimension with custom world gen
-  - 3 new biomes
-  - a new structure (wip)
-  - Soul Heart drops from the warden to open the portal
-  - 9 new blocksets:
+
+- new dimension with custom world gen
+- 3 new biomes
+- a new structure (wip)
+- Soul Heart drops from the warden to open the portal
+- 9 new blocksets:
     - Umbrusk (stone type)
     - Umbrusk Bricks
     - Valtrox (wood type)
@@ -26,8 +27,7 @@ When going to this dimension take at least a diamond pickaxe because the world i
     - Zygrin (stone type)
     - Zygrin Bricks
     - Polished Zygrin
-    
-  
+
   <details>
     <summary> Screenshots </summary>
 
@@ -44,10 +44,7 @@ When going to this dimension take at least a diamond pickaxe because the world i
 
 </details>
 
-
-
-
-
 ## License
+
 https://github.com/warior456/Sculk-Depths/blob/main/LICENSE.md
 

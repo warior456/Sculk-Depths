@@ -12,7 +12,6 @@ public class Portals {
     public static void registerModPortals() {
         CustomPortalBuilder.beginPortal()
                 .frameBlock(Blocks.REINFORCED_DEEPSLATE)
-                //.customPortalBlock(Blocks.SCULK)
                 .destDimID(new Identifier("sculk_depths:sculk_depthsdim"))
                 .tintColor(1, 69, 86)
                 .lightWithItem(ModItems.SOUL_HEART)

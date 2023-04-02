@@ -1,0 +1,3 @@
+[submodule "customportalapi"]
+	path = customportalapi
+	url = git@github.com:Nitjsefnie/customportalapi.git

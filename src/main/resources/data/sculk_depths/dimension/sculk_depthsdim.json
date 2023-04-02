@@ -358,7 +358,6 @@
               }
             }
           }
-
         },
         "vein_toggle": 0,
         "vein_ridged": 0,
@@ -393,7 +392,6 @@
       "surface_rule": {
         "type": "minecraft:sequence",
         "sequence": [
-
           {
             "type": "minecraft:condition",
             "if_true": {
@@ -488,7 +486,6 @@
         ]
       }
     },
-
     "biome_source": {
       "type": "minecraft:multi_noise",
       "biomes": [
@@ -521,7 +518,6 @@
             ],
             "offset": 0
           }
-
         },
         {
           "biome": "sculk_depths:biome3",
@@ -552,7 +548,6 @@
             ],
             "offset": 0
           }
-
         },
         {
           "biome": "sculk_depths:petrified_valtrox_forest",
@@ -583,7 +578,6 @@
             ],
             "offset": 0
           }
-
         },
         {
           "biome": "sculk_depths:dried_valtrox_forest",
@@ -614,10 +608,8 @@
             ],
             "offset": 0
           }
-
         }
       ]
-
     }
   }
 }

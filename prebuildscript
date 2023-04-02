@@ -1,0 +1,1 @@
+( cd customportalapi && git pull && chmod +x gradlew && ./gradlew build && cp build/libs/customportalapi-*-1.19.3.jar ../libs/ && chmod -x gradlew; )
