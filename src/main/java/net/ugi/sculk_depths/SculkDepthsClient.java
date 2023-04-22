@@ -3,7 +3,10 @@ package net.ugi.sculk_depths;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.util.Identifier;
+import net.ugi.sculk_depths.entity.ModEntities;
+import net.ugi.sculk_depths.entity.client.GlomperRenderer;
 import net.ugi.sculk_depths.fluid.ModFluids;
 
 public class SculkDepthsClient implements ClientModInitializer {
@@ -19,5 +22,6 @@ public class SculkDepthsClient implements ClientModInitializer {
                         new Identifier("sculk_depths:block/kryslum_flow")
                 )
         );
+        EntityRendererRegistry.register(ModEntities.GLOMPER, GlomperRenderer::new);
     }
 }
