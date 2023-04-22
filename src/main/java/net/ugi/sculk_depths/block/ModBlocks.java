@@ -5,12 +5,14 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.sapling.CherrySaplingGenerator;
+import net.minecraft.block.sapling.OakSaplingGenerator;
 import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.ugi.sculk_depths.SculkDepths;
+import net.ugi.sculk_depths.block.sapling.ValtroxSaplingGenerator;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
 import net.minecraft.item.BlockItem;
@@ -163,8 +165,14 @@ public class ModBlocks {
     //leaves
     public static final Block VALTROX_LEAVES = registerBlock("valtrox_leaves",
             new LeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES)), ModItemGroup.SCULK_DEPTHS);
-    public static final Block VALTROX_SAPLING = registerBlock("valtrox_sapling", //wip
-            new Block(FabricBlockSettings.of(Material.STONE)), ModItemGroup.SCULK_DEPTHS);
+
+    //saplings
+    public static final Block VALTROX_SAPLING = registerBlock("valtrox_sapling",
+            new SaplingBlock(new ValtroxSaplingGenerator(), FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)), ModItemGroup.SCULK_DEPTHS);
+
+    //vegetation
+    public static final Block CEPHLERA = registerBlock("cephlera",
+            new FernBlock(FabricBlockSettings.copyOf(Blocks.GRASS)), ModItemGroup.SCULK_DEPTHS);
 
     //ores
     public static final Block QUAZARITH_ORE = registerBlock("quazarith_ore",
