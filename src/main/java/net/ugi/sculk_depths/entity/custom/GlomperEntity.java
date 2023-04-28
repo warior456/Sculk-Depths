@@ -38,6 +38,8 @@ public class GlomperEntity extends AnimalEntity implements GeoEntity {
 
     @Override
     protected void initGoals() {
+
+        /*
         this.goalSelector.add(1, new SwimGoal(this));
         this.goalSelector.add(2, new MeleeAttackGoal(this, 1.2D, false));
         this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.75f, 1));
@@ -47,8 +49,8 @@ public class GlomperEntity extends AnimalEntity implements GeoEntity {
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, MerchantEntity.class, true));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, ChickenEntity.class, true));
+         */
     }
-
 
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
