@@ -4,13 +4,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
-import net.minecraft.block.sapling.CherrySaplingGenerator;
-import net.minecraft.block.sapling.OakSaplingGenerator;
-import net.minecraft.block.sapling.SaplingGenerator;
-import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.sapling.ValtroxSaplingGenerator;
 import net.ugi.sculk_depths.fluid.ModFluids;
@@ -21,7 +15,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
 
 
 public class ModBlocks {
@@ -172,11 +165,13 @@ public class ModBlocks {
 
     //vegetation
     public static final Block CEPHLERA = registerBlock("cephlera",
-            new FernBlock(FabricBlockSettings.copyOf(Blocks.GRASS)), ModItemGroup.SCULK_DEPTHS);
+            new CephleraBlock(FabricBlockSettings.of(Material.PLANT).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES)), ModItemGroup.SCULK_DEPTHS);
+    public static final Block CEPHLERA_LIGHT = registerBlock("cephlera_light",
+            new CephleraLightBlock(FabricBlockSettings.of(Material.PLANT).noCollision().breakInstantly().emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).luminance(15).sounds(BlockSoundGroup.WEEPING_VINES)), ModItemGroup.SCULK_DEPTHS);
 
     //ores
     public static final Block QUAZARITH_ORE = registerBlock("quazarith_ore",
-            new Block(FabricBlockSettings.of(Material.STONE).hardness(6.0f).resistance(10f).requiresTool().emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).luminance(1)), ModItemGroup.SCULK_DEPTHS);
+            new Block(FabricBlockSettings.of(Material.STONE).hardness(6.0f).resistance(10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     //fluids
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new ModFluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.of(Material.WATER).noCollision().nonOpaque().dropsNothing()), ModItemGroup.SCULK_DEPTHS);
@@ -192,10 +187,11 @@ public class ModBlocks {
     }
 
     private static Item registerBlockItem(String name, Block block, ItemGroup group) {
-        Item item = Registry.register(Registries.ITEM, new Identifier(SculkDepths.MOD_ID, name),
-                new BlockItem(block, new FabricItemSettings()));
-        ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));
-        return item;
+        if(name == "cephlera" ) return null;
+            Item item = Registry.register(Registries.ITEM, new Identifier(SculkDepths.MOD_ID, name),
+                    new BlockItem(block, new FabricItemSettings()));
+            ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));
+            return item;
     }
 
     public static void registerModBlocks() {

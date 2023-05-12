@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "sculk_depths:block/cephlera"
+    "layer0": "sculk_depths:block/cephlera_light"
   }
 }

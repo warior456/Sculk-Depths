@@ -1,0 +1,89 @@
+{
+  "feature": {
+    "type": "minecraft:block_column",
+    "config": {
+      "direction": "down",
+      "allowed_placement": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:air"
+      },
+      "prioritize_tip": false,
+      "layers": [
+        {
+          "height": {
+            "type": "minecraft:uniform",
+            "value": {
+              "min_inclusive": 10,
+              "max_inclusive": 25
+            }
+          },
+          "provider": {
+            "type": "minecraft:simple_state_provider",
+            "state": {
+              "Name": "sculk_depths:cephlera"
+            }
+          }
+        },
+        {
+          "height": 1,
+          "provider": {
+            "type": "minecraft:simple_state_provider",
+            "state": {
+              "Name": "sculk_depths:cephlera_light"
+            }
+          }
+        }
+      ]
+    }
+  }
+,
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 256
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "min_inclusive": {
+          "absolute": -256
+        },
+        "max_inclusive": {
+          "absolute": -128
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:environment_scan",
+      "direction_of_search": "up",
+      "max_steps": 1,
+      "target_condition": {
+        "type": "minecraft:matching_blocks",
+        "offset": [
+          0,
+          1,
+          0
+        ],
+        "blocks": "minecraft:sculk"
+      }
+    },
+    {
+      "type": "minecraft:environment_scan",
+      "direction_of_search": "down",
+      "max_steps": 32,
+      "target_condition": {
+        "type": "minecraft:matching_blocks",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "blocks": "minecraft:air"
+      }
+    }
+  ]
+}

@@ -2,17 +2,73 @@
   "variants": {
     "": [
       {
-        "model": "sculk_depths:block/umbrusk"
+        "model": "sculk_depths:block/umbrusk1"
       },
       {
-        "model": "sculk_depths:block/umbrusk_mirrored"
+        "model": "sculk_depths:block/umbrusk2"
       },
       {
-        "model": "sculk_depths:block/umbrusk",
+        "model": "sculk_depths:block/umbrusk3"
+      },
+      {
+        "model": "sculk_depths:block/umbrusk4"
+      },
+      {
+        "model": "sculk_depths:block/umbrusk5"
+      },
+      {
+        "model": "sculk_depths:block/umbrusk1",
         "y": 180
       },
       {
-        "model": "sculk_depths:block/umbrusk_mirrored",
+        "model": "sculk_depths:block/umbrusk2",
+        "y": 180
+      },
+      {
+        "model": "sculk_depths:block/umbrusk3",
+        "y": 180
+      },
+      {
+        "model": "sculk_depths:block/umbrusk4",
+        "y": 180
+      },
+      {
+        "model": "sculk_depths:block/umbrusk5",
+        "y": 180
+      },
+      {
+        "model": "sculk_depths:block/umbrusk1_mirrored"
+      },
+      {
+        "model": "sculk_depths:block/umbrusk2_mirrored"
+      },
+      {
+        "model": "sculk_depths:block/umbrusk3_mirrored"
+      },
+      {
+        "model": "sculk_depths:block/umbrusk4_mirrored"
+      },
+      {
+        "model": "sculk_depths:block/umbrusk5_mirrored"
+      },
+      {
+        "model": "sculk_depths:block/umbrusk1_mirrored",
+        "y": 180
+      },
+      {
+        "model": "sculk_depths:block/umbrusk2_mirrored",
+        "y": 180
+      },
+      {
+        "model": "sculk_depths:block/umbrusk3_mirrored",
+        "y": 180
+      },
+      {
+        "model": "sculk_depths:block/umbrusk4_mirrored",
+        "y": 180
+      },
+      {
+        "model": "sculk_depths:block/umbrusk5_mirrored",
         "y": 180
       }
     ]

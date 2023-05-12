@@ -49,7 +49,8 @@
       "sculk_depths:ore_flumrock"
     ],
     [
-      "sculk_depths:sculk_vegetation"
+      "sculk_depths:sculk_vegetation",
+      "sculk_depths:cephlera"
     ],
     [
       "sculk_depths:ore_quazarith_north",

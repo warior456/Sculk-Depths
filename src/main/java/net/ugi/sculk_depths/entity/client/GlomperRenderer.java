@@ -15,7 +15,7 @@ public class GlomperRenderer extends GeoEntityRenderer<GlomperEntity> {
 
         @Override
         public Identifier getTextureLocation(GlomperEntity animatable) {
-            return new Identifier(SculkDepths.MOD_ID, "textures/entity/tiger.png");
+            return new Identifier(SculkDepths.MOD_ID, "textures/entity/glomper.png");
         }
 
         @Override

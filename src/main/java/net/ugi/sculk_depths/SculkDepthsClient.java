@@ -28,5 +28,8 @@ public class SculkDepthsClient implements ClientModInitializer {
 
         EntityRendererRegistry.register(ModEntities.GLOMPER, GlomperRenderer::new);
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.VALTROX_SAPLING, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CEPHLERA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CEPHLERA_LIGHT, RenderLayer.getCutout());
+
     }
 }

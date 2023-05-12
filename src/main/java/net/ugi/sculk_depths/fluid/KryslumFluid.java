@@ -46,7 +46,7 @@ public class KryslumFluid extends FlowableFluid {
                 world.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_SCULK_CATALYST_BLOOM, SoundCategory.BLOCKS, random.nextFloat() * 0.5F + 0.8F, random.nextFloat() + 0.5F, false);
             }
         } else if (random.nextInt(10) == 0) {
-            world.addParticle(ParticleTypes.SCULK_SOUL, (double) pos.getX() + random.nextDouble(), (double) pos.getY() + random.nextDouble(), (double) pos.getZ() + random.nextDouble(), 0.0D, 0.0D, 0.0D);
+            world.addParticle(ParticleTypes.SCULK_CHARGE_POP, (double) pos.getX() + random.nextDouble(), (double) pos.getY() + random.nextDouble(), (double) pos.getZ() + random.nextDouble(), 0.0D, 0.0D, 0.0D);
         }
     }
 
@@ -65,7 +65,7 @@ public class KryslumFluid extends FlowableFluid {
     }
 
     public int getFlowSpeed(WorldView world) {
-        return 4;
+        return 1;
     }
 
     public BlockState toBlockState(FluidState state) {
@@ -82,7 +82,7 @@ public class KryslumFluid extends FlowableFluid {
     }
 
     public int getLevelDecreasePerBlock(WorldView world) {
-        return 1;
+        return 2;
     }
 
     @Override
@@ -91,7 +91,7 @@ public class KryslumFluid extends FlowableFluid {
     }
 
     public int getTickRate(WorldView world) {
-        return 5;
+        return 40;
     }
 
     public boolean canBeReplacedWith(FluidState state, BlockView world, BlockPos pos, Fluid fluid, Direction direction) {
