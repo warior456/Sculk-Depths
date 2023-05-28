@@ -6,13 +6,17 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import net.ugi.sculk_depths.entity.ModEntities;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -21,39 +25,43 @@ import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInst
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class GlomperEntity extends AnimalEntity implements GeoEntity {
+public class GlomperEntity extends PathAwareEntity implements GeoEntity {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public GlomperEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    public GlomperEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0f)
-                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 2.0f)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4f);
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0f)
+                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.0f)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f)
+                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.3f);
     }
 
     @Override
-    protected void initGoals() {
+    public void initGoals() {
 
-        /*
-        this.goalSelector.add(1, new SwimGoal(this));
-        this.goalSelector.add(2, new MeleeAttackGoal(this, 1.2D, false));
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.75f, 1));
 
-        this.goalSelector.add(4, new LookAroundGoal(this));
+
+        //
+        //this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.75f, 1));
+
+        //this.goalSelector.add(4, new LookAroundGoal(this));
 
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, MerchantEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, ChickenEntity.class, true));
-         */
+        this.targetSelector.add(2, new ActiveTargetGoal<>(this, ChickenEntity.class, true));
+        //this.goalSelector.add(3, new FlyGoal(this, 1));
+        //this.goalSelector.add(2, new MeleeAttackGoal(this, 1.2D, false));
+        //this.goalSelector.add(1, new FollowMobGoal(this,3,2, ChickenEntity.class.getModifiers()));
     }
 
-    @Override
-    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+
+
+    public MobEntity createChild(ServerWorld world, MobEntity entity) {
         return ModEntities.GLOMPER.create(world);
     }
 
