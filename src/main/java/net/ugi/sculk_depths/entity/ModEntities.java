@@ -15,5 +15,5 @@ public class ModEntities {
     public static final EntityType<GlomperEntity> GLOMPER = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(SculkDepths.MOD_ID, "glomper"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, GlomperEntity::new)
-                    .dimensions(EntityDimensions.fixed(1.5f, 1.5f)).build());
+                    .dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build());
 }
