@@ -1,9 +1,11 @@
 package net.ugi.sculk_depths.entity.client;
 
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
+import software.bernie.example.block.entity.FertilizerBlockEntity;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;
@@ -16,6 +18,10 @@ public class GlomperModel extends GeoModel<GlomperEntity> {
         return new Identifier(SculkDepths.MOD_ID, "geo/glomper.geo.json");
     }
 
+    @Override
+    public RenderLayer getRenderType(GlomperEntity animatable, Identifier texture) {
+        return RenderLayer.getEntityTranslucent(getTextureResource(animatable));
+    }
     @Override
     public Identifier getTextureResource(GlomperEntity animatable) {
         return new Identifier(SculkDepths.MOD_ID, "textures/entity/glomper.png");
