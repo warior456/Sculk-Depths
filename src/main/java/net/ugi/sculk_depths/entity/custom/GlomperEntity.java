@@ -14,9 +14,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.ChickenEntity;
-import net.minecraft.entity.passive.MerchantEntity;
-import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
@@ -50,9 +47,13 @@ public class GlomperEntity extends PathAwareEntity implements GeoEntity {
         return AnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0f)
-                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 2.5f)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 2.5f)
-                .add(EntityAttributes.GENERIC_FLYING_SPEED, 2.5f);
+                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.5f) // doubt this does anything
+                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.2f) // not needed but will corrupt glompers upon removal (REMOVE BEFORE 0.0.6)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5f);
+
+    }
+    protected float getOffGroundSpeed() {
+        return this.getMovementSpeed();//fix movement speed
     }
 
     protected EntityNavigation createNavigation(World world) {
@@ -70,13 +71,13 @@ public class GlomperEntity extends PathAwareEntity implements GeoEntity {
 
     protected void initGoals() {
         //this.goalSelector.add(2, new ProjectileAttackGoal(this, 1.0, 40, 20.0F));
-        this.goalSelector.add(5, new FlyGoal(this, 1.0));
+        this.goalSelector.add(5, new FlyGoal (this, 1.0));
         this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(7, new LookAroundGoal(this));
         //this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
-        this.targetSelector.add(1, new GlomperTargetGoal(this, LivingEntity.class, 0, false, false, CAN_ATTACK_PREDICATE));
+        this.targetSelector.add(1, new GlomperTargetGoal(this, LivingEntity.class, 0, false, true, CAN_ATTACK_PREDICATE));
         this.goalSelector.add(2, new MeleeAttackGoal(this, 2.5D, false));
-
+        //
     }
 
     public class GlomperTargetGoal
