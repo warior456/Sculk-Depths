@@ -25,7 +25,14 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [],
+    "creature": [
+      {
+        "type": "sculk_depths:glomper",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 4
+      }
+    ],
     "misc": [],
     "monster": [],
     "underground_water_creature": [],
