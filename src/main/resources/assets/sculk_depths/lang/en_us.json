@@ -35,7 +35,7 @@
   "block.sculk_depths.petrified_valtrox_wood": "Petrified Valtrox Wood",
   "block.sculk_depths.petrified_valtrox_slab": "Petrified Valtrox Slab",
   "block.sculk_depths.petrified_valtrox_stairs": "Petrified Valtrox Stairs",
-  "block.sculk_depths.petrified_valtrox_fence": "Petrified Valtrox Fence",
+  "block.sculk_depths.petrified_valtrox_wall": "Petrified Valtrox Wall",
 
 
   "block.sculk_depths.flumrock": "Flumrock",
@@ -72,5 +72,7 @@
   "block.sculk_depths.zygrin_brick_slab": "Zygrin Brick Slab",
   "block.sculk_depths.zygrin_brick_wall": "Zygrin Brick Wall",
   "block.sculk_depths.zygrin_pillar": "Zygrin Pillar",
-  "block.sculk_depths.chiseled_zygrin": "Chiseled Zygrin"
+  "block.sculk_depths.chiseled_zygrin": "Chiseled Zygrin",
+
+  "entity.sculk_depths.glomper": "Glomper"
 }
