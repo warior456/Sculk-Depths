@@ -72,5 +72,7 @@
   "block.sculk_depths.zygrin_brick_slab": "Zygrin Brick Slab",
   "block.sculk_depths.zygrin_brick_wall": "Zygrin Brick Wall",
   "block.sculk_depths.zygrin_pillar": "Zygrin Pillar",
-  "block.sculk_depths.chiseled_zygrin": "Chiseled Zygrin"
+  "block.sculk_depths.chiseled_zygrin": "Chiseled Zygrin",
+
+  "entity.sculk_depths.glomper": "Glomper"
 }
