@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_wall_post",
   "textures": {
-    "wall": "sculk_depths:block/umbrusk1"
+    "wall": "sculk_depths:block/petrified_valtrox_slates"
   }
 }
