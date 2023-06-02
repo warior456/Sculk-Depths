@@ -5,6 +5,7 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import org.jetbrains.annotations.Nullable;
@@ -20,7 +21,12 @@ public class GlomperRenderer extends GeoEntityRenderer<GlomperEntity> {
             return new Identifier(SculkDepths.MOD_ID, "textures/entity/glomper.png");
         }
 
-        @Override
+    @Override
+    protected int getBlockLight(GlomperEntity entity, BlockPos pos) {
+        return 14;
+    }
+
+    @Override
         public void render(GlomperEntity entity, float entityYaw, float partialTick, MatrixStack poseStack,
                            VertexConsumerProvider bufferSource, int packedLight) {
             if(entity.isBaby()) {
