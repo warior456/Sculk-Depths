@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/slab_top",
   "textures": {
-    "bottom": "sculk_depths:block/umbrus1",
+    "bottom": "sculk_depths:block/umbrusk1",
     "side": "sculk_depths:block/umbrusk1",
     "top": "sculk_depths:block/umbrusk1"
   }
