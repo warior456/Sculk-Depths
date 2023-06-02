@@ -1,7 +1,6 @@
 package net.ugi.sculk_depths.entity.custom;
 
 
-import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.control.FlightMoveControl;
@@ -15,11 +14,8 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
 import net.ugi.sculk_depths.entity.ModEntities;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -32,28 +28,31 @@ import software.bernie.geckolib.core.object.PlayState;
 import java.util.function.Predicate;
 
 
-public class GlomperEntity extends PathAwareEntity implements GeoEntity {
+public class GlomperEntity extends PathAwareEntity implements GeoEntity{
 
     private static final Predicate<LivingEntity> CAN_ATTACK_PREDICATE = entity -> entity.isPlayer() && entity.isFallFlying();
 
-    private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     public GlomperEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
-        this.moveControl = new FlightMoveControl(this, 20, true);
+        this.moveControl = new FlightMoveControl(this, 0, true);
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0f)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 20.0f)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.5f) // doubt this does anything
                 .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.2f) // not needed but will corrupt glompers upon removal (REMOVE BEFORE 0.0.6)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5f);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2f);
+
 
     }
+
     protected float getOffGroundSpeed() {
-        return this.getMovementSpeed();//fix movement speed
+        return this.getMovementSpeed() * 0.1f;//fix movement speed
     }
 
     protected EntityNavigation createNavigation(World world) {
@@ -64,21 +63,21 @@ public class GlomperEntity extends PathAwareEntity implements GeoEntity {
         return birdNavigation;
     }
 
-
     public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
         return false;
     }
 
     protected void initGoals() {
         //this.goalSelector.add(2, new ProjectileAttackGoal(this, 1.0, 40, 20.0F));
-        this.goalSelector.add(5, new FlyGoal (this, 1.0));
-        this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.add(7, new LookAroundGoal(this));
+        this.goalSelector.add(4, new FlyGoal(this, 1.0));
+        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(5, new LookAroundGoal(this));
         //this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
-        this.targetSelector.add(1, new GlomperTargetGoal(this, LivingEntity.class, 0, false, true, CAN_ATTACK_PREDICATE));
-        this.goalSelector.add(2, new MeleeAttackGoal(this, 2.5D, false));
-        //
+        this.targetSelector.add(1, new GlomperTargetGoal(this, LivingEntity.class, 0, false, false, CAN_ATTACK_PREDICATE));
+        this.goalSelector.add(2, new MeleeAttackGoal(this, 9.0D, false));
+
     }
+
 
     public class GlomperTargetGoal
             extends ActiveTargetGoal {
@@ -104,7 +103,7 @@ public class GlomperEntity extends PathAwareEntity implements GeoEntity {
             if (!this.target.isFallFlying()) {
                 return false;
             }
-            return !(livingEntity instanceof PlayerEntity) || !livingEntity.isSpectator() && !((PlayerEntity)livingEntity).isCreative();
+            return !(livingEntity instanceof PlayerEntity) || !livingEntity.isSpectator() && !((PlayerEntity) livingEntity).isCreative();
 
         }
 

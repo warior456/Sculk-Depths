@@ -4,7 +4,7 @@
       "model": "sculk_depths:block/umbrusk_slab"
     },
     "type=double": {
-      "model": "sculk_depths:block/umbrusk"
+      "model": "sculk_depths:block/umbrusk1"
     },
     "type=top": {
       "model": "sculk_depths:block/umbrusk_slab_top"
