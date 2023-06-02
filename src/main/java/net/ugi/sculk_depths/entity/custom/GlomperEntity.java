@@ -40,13 +40,13 @@ public class GlomperEntity extends PathAwareEntity implements GeoEntity{
 
     public GlomperEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
-        this.moveControl = new FlightMoveControl(this, 60, true);
+        this.moveControl = new FlightMoveControl(this, 0, true);
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0f)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 20.0f)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.5f) // doubt this does anything
                 .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.2f) // not needed but will corrupt glompers upon removal (REMOVE BEFORE 0.0.6)
@@ -74,11 +74,11 @@ public class GlomperEntity extends PathAwareEntity implements GeoEntity{
     protected void initGoals() {
         //this.goalSelector.add(2, new ProjectileAttackGoal(this, 1.0, 40, 20.0F));
         this.goalSelector.add(4, new FlyGoal(this, 1.0));
-        this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.add(7, new LookAroundGoal(this));
+        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(5, new LookAroundGoal(this));
         //this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
         this.targetSelector.add(1, new GlomperTargetGoal(this, LivingEntity.class, 0, false, false, CAN_ATTACK_PREDICATE));
-        this.goalSelector.add(2, new MeleeAttackGoal(this, 12.0D, false));
+        this.goalSelector.add(2, new MeleeAttackGoal(this, 9.0D, false));
 
     }
 

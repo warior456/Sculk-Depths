@@ -109,8 +109,8 @@ public class ModBlocks {
     public static final Block PETRIFIED_VALTROX_STAIRS = registerBlock("petrified_valtrox_stairs",
             new StairsBlock(PETRIFIED_VALTROX_SLATES.getDefaultState(), FabricBlockSettings.of(Material.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block PETRIFIED_VALTROX_FENCE = registerBlock("petrified_valtrox_fence",
-            new FenceBlock(FabricBlockSettings.of(Material.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+    public static final Block PETRIFIED_VALTROX_WALL = registerBlock("petrified_valtrox_wall",
+            new WallBlock(FabricBlockSettings.of(Material.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     //zygrin set
     public static final Block ZYGRIN = registerBlock("zygrin",

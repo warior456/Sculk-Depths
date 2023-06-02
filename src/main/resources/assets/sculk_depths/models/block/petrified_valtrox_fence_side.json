@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/fence_side",
-  "textures": {
-    "texture": "sculk_depths:block/petrified_valtrox_slates"
-  }
-}
