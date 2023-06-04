@@ -31,7 +31,7 @@ dependencies {
 	modImplementation include ("net.kyrptonaught:customportalapi:${project.customportalapi_version}"){
 		exclude group: "net.fabricmc.fabric-api", module: "fabric-gametest-api-v1"}
 
-	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19.4:4.1.3'
+	modImplementation "software.bernie.geckolib:geckolib-${geckolib_version}"
 
 
 	//modLocalRuntime("maven.modrinth:rei:${rei_version}")
