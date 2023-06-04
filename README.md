@@ -14,8 +14,9 @@ When going to this dimension take at least a diamond pickaxe because the world i
 ## FEATURES
   
   - new dimension with custom world gen
-  - 3 new biomes
+  - 4 new biomes
   - a new structure (wip)
+  - a new mob: The glomper, it attacks players using an elytra so be carefull flying around!
   - Soul Heart drops from the warden to open the portal
   - 9 new blocksets:
     - Umbrusk (stone type)
