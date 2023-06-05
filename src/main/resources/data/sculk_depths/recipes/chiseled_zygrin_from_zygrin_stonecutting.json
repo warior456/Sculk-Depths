@@ -1,7 +1,7 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": {
-    "item": "sculk_depths:polished_zygrin"
+    "item": "sculk_depths:zygrin"
   },
   "result": "sculk_depths:chiseled_zygrin",
   "count": 1
