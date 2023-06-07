@@ -1,7 +1,7 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": {
-    "item": "sculk_depths:zygrin_bricks"
+    "item": "sculk_depths:zygrin"
   },
   "result": "sculk_depths:zygrin_pillar",
   "count": 1

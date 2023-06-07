@@ -11,7 +11,8 @@
   ],
   "contact": {
     "homepage": "https://github.com/warior456/Sculk-Depths/blob/main/README.md",
-    "sources": "https://github.com/warior456/sculk_depths"
+    "sources": "https://github.com/warior456/sculk_depths",
+    "issues": "https://github.com/warior456/Sculk-Depths/issues"
   },
 
   "license": "Custom License",

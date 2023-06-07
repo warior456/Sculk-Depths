@@ -524,7 +524,7 @@
 
         },
         {
-          "biome": "sculk_depths:biome3",
+          "biome": "sculk_depths:cephlera_caves",
           "parameters": {
             "temperature": [
               0.3,

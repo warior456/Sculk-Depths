@@ -74,5 +74,8 @@
   "block.sculk_depths.zygrin_pillar": "Zygrin Pillar",
   "block.sculk_depths.chiseled_zygrin": "Chiseled Zygrin",
 
+  "block.sculk_depths.cephlera": "Cephlera",
+  "block.sculk_depths.cephlera_light": "Cephlera Light",
+
   "entity.sculk_depths.glomper": "Glomper"
 }
