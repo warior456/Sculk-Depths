@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "sculk_depths:petrified_valtrox_log"
+  },
+  "result": "sculk_depths:petrified_valtrox_slab",
+  "count": 8
+}

@@ -6,11 +6,11 @@
   ],
   "key": {
     "#": {
-      "item": "sculk_depths:polished_zygrin"
+      "item": "sculk_depths:zygrin"
     }
   },
   "result": {
-    "item": "sculk_depths:zygrin_bricks",
+    "item": "sculk_depths:polished_zygrin",
     "count": 4
   }
 }

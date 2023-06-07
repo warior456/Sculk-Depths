@@ -3,7 +3,7 @@
   "downfall": 0.4,
   "has_precipitation": false,
   "effects": {
-    "sky_color": 16777215,
+    "sky_color": 7254527,
     "fog_color": 853299,
     "water_color": 928354,
     "water_fog_color": 328995,
@@ -25,7 +25,14 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [],
+    "creature": [
+      {
+        "type": "sculk_depths:glomper",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 4
+      }
+    ],
     "misc": [],
     "monster": [],
     "underground_water_creature": [],
@@ -39,7 +46,27 @@
   },
   "features": [
     [
-      "sculk_depths:dried_valtrox"
+      "sculk_depths:sculk_veins_roof_umbrusk",
+      "sculk_depths:sculk_veins_floor_umbrusk",
+      "sculk_depths:sculk_veins_roof_deepslate",
+      "sculk_depths:sculk_veins_floor_deepslate"
+
+    ],
+    [
+      "sculk_depths:ore_flumrock"
+    ],
+    [
+      "sculk_depths:sculk_vegetation",
+      "sculk_depths:cephlera"
+    ],
+    [
+      "sculk_depths:ore_quazarith_north",
+      "sculk_depths:ore_quazarith_east",
+      "sculk_depths:ore_quazarith_south",
+      "sculk_depths:ore_quazarith_west",
+      "sculk_depths:ore_quazarith_up",
+      "sculk_depths:ore_quazarith_down"
+
     ]
   ]
 }
