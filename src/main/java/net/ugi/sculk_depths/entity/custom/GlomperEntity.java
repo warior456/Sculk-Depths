@@ -79,7 +79,7 @@ public class GlomperEntity extends PathAwareEntity implements GeoEntity{
     }
 
 
-    public class GlomperTargetGoal
+    public static class GlomperTargetGoal
             extends ActiveTargetGoal {
 
         private boolean pauseWhenMobIdle;
@@ -100,6 +100,7 @@ public class GlomperEntity extends PathAwareEntity implements GeoEntity{
             if (!this.pauseWhenMobIdle) {
                 return !this.mob.getNavigation().isIdle();
             }
+            assert this.target != null;
             if (!this.target.isFallFlying()) {
                 return false;
             }
