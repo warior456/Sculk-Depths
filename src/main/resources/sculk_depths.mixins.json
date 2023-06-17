@@ -4,11 +4,10 @@
   "package": "net.ugi.sculk_depths.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "NoiseChunkGeneratorMixin",
-    "AllowCropsOnKryslumEnrichedSoil"
+    "CropBlockMixin",
+    "NoiseChunkGeneratorMixin"
   ],
   "client": [
-
   ],
   "injectors": {
     "defaultRequire": 1

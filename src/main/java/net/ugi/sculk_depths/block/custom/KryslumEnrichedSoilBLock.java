@@ -21,7 +21,7 @@ import net.minecraft.world.event.GameEvent;
 import net.ugi.sculk_depths.block.ModBlocks;
 import org.jetbrains.annotations.Nullable;
 
-public class KryslumEnrichedSoilBLock extends Block {
+public class KryslumEnrichedSoilBLock extends FarmlandBlock {
 
     public static final IntProperty MOISTURE = Properties.MOISTURE;
     protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 15.0, 16.0);
@@ -40,7 +40,6 @@ public class KryslumEnrichedSoilBLock extends Block {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockState blockState = world.getBlockState(pos.up());
@@ -50,7 +49,7 @@ public class KryslumEnrichedSoilBLock extends Block {
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         if (!this.getDefaultState().canPlaceAt(ctx.getWorld(), ctx.getBlockPos())) {
-            return ModBlocks.KRYSLUM_ENRICHED_SOIL.getDefaultState();
+            return Blocks.DIRT.getDefaultState();
         }
         return super.getPlacementState(ctx);
     }
@@ -65,10 +64,24 @@ public class KryslumEnrichedSoilBLock extends Block {
         return SHAPE;
     }
 
+    @Override
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if (!state.canPlaceAt(world, pos)) {
+            FarmlandBlock.setToDirt(null, state, world, pos);
+        }
+    }
 
+    @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+    }
+
+    @Override
+    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
 
     }
+
+
+
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
