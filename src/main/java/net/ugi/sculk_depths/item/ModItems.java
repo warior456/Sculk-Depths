@@ -83,7 +83,7 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_BOOTS);
     }
 
-    private static void addToItemGroup(RegistryKey<ItemGroup> group, Item item) {
+    private static void addToItemGroup(ItemGroup group, Item item) {
         ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add((item)));
     }
 
