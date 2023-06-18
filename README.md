@@ -55,5 +55,5 @@ When entering this dimension, it is recommended to bring a netherite pickaxe as 
 ## License
 Please refer to the [LICENSE.md](https://github.com/warior456/Sculk-Depths/blob/main/LICENSE.md) file for licensing details.
 
-For any questions or issues, please reach out to us on our [GitHub repository](https://github.com/warior456/Sculk-Depths).
+For any questions or issues, please reach out to us on our [GitHub repository](https://github.com/warior456/Sculk-Depths) or our [Discord Server](https://discord.gg/dxANwW23Ub)
 
