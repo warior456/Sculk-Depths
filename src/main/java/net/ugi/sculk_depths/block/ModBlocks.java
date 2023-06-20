@@ -185,7 +185,7 @@ public class ModBlocks {
             new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).hardness(6.0f).resistance(10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     //fluids
-    public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new ModFluidBlock(ModFluids.KRYSLUM_STILL, AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.IGNORE).noCollision().nonOpaque().dropsNothing()), ModItemGroup.SCULK_DEPTHS);
+    public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new FluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.copyOf(Blocks.WATER).replaceable().noCollision().strength(100.0f).pistonBehavior(PistonBehavior.DESTROY).dropsNothing().liquid().solid().sounds(BlockSoundGroup.SCULK)), ModItemGroup.SCULK_DEPTHS);
 
     private static Block registerBlock(String name, Block block, RegistryKey<ItemGroup> group) {
         registerBlockItem(name, block, group);
