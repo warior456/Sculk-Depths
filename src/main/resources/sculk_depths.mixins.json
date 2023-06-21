@@ -6,7 +6,8 @@
   "mixins": [
     "CropBlockMixin",
     "FarmLandBlockMixin",
-    "NoiseChunkGeneratorMixin"
+    "NoiseChunkGeneratorMixin",
+    "StemBlockMixin"
   ],
   "client": [
   ],
