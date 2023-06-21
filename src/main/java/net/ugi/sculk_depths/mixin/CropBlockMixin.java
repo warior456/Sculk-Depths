@@ -1,24 +1,27 @@
 package net.ugi.sculk_depths.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.block.*;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.ugi.sculk_depths.block.ModBlocks;
+import net.ugi.sculk_depths.block.custom.KryslumEnrichedSoilBLock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 
 @Mixin(CropBlock.class)
 public abstract class CropBlockMixin {
 
-
-    @Inject(at = @At("RETURN"), method = "canPlantOnTop", cancellable = true)
-    protected void canPlantOnTop(BlockState floor, BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(cir.getReturnValue() || floor.getBlock() instanceof FarmlandBlock);
+    @ModifyReturnValue(
+            method = "canPlantOnTop",
+            at = @At("RETURN")
+    )
+    private boolean allowOnTopOfKryslumEnrichedSoil(boolean original, @Local(ordinal = 0) BlockState floor) {
+        return original || floor.getBlock() instanceof KryslumEnrichedSoilBLock;
     }
 
 

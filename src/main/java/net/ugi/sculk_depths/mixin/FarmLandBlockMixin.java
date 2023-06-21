@@ -20,7 +20,7 @@ public abstract class FarmLandBlockMixin {
             method = "isWaterNearby",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/fluid/FluidState;isIn(Lnet/minecraft/registry/tag/TagKey;)Z")
     )
-    private static boolean addBlockMoistTagForFarmLand(boolean original, @Local(ordinal = 0) WorldView world, @Local(ordinal = 1) BlockPos blockPos ) {
+    private static boolean kryslumWetsFarmland(boolean original, @Local(ordinal = 0) WorldView world, @Local(ordinal = 1) BlockPos blockPos ) {
         return original || world.getBlockState(blockPos).isOf(ModBlocks.KRYSLUM_ENRICHED_SOIL);
     }
 
