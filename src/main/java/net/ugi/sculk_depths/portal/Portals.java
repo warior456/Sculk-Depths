@@ -5,6 +5,7 @@ import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
 import net.kyrptonaught.customportalapi.portal.PortalIgnitionSource;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.item.ModItems;
 
@@ -15,15 +16,16 @@ public class Portals {
                 //.customPortalBlock(Blocks.SCULK)
                 .destDimID(new Identifier("sculk_depths:sculk_depthsdim"))
                 .tintColor(1, 69, 86)
-                .lightWithItem(ModItems.SOUL_HEART)
+                .lightWithItem(ModItems.ENERGISED_FLINT_AND_STEEL)
                 .setPortalSearchYRange(0, 120)
                 .registerIgniteEvent((player, world, portalPos, framePos, portalIgnitionSource) -> {
                     if (portalIgnitionSource.sourceType == PortalIgnitionSource.SourceType.USEITEM && player != null) {
                         if (player.isCreative())
                             return;
-                        ItemStack heldItem = player.getMainHandStack().getItem() == ModItems.SOUL_HEART ?
+                        ItemStack heldItem = player.getMainHandStack().getItem() == ModItems.ENERGISED_FLINT_AND_STEEL ?
                                 player.getMainHandStack() : player.getOffHandStack();
-                        heldItem.decrement(1);
+                        heldItem.damage(10, player, p -> p.sendToolBreakStatus(player.getActiveHand())); //todo configurable damage
+                        //heldItem.setDamage(heldItem.getDamage() + 10); //if above breaks use this with a custom durability check
                     }
                 })
                 .registerPortal();

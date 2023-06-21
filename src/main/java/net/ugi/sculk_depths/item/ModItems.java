@@ -9,6 +9,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.fluid.ModFluids;
+import net.ugi.sculk_depths.item.custom.EnergizedFlintAndSteelItem;
 
 
 public class ModItems {
@@ -25,6 +26,9 @@ public class ModItems {
 
     public static final Item ENERGY_ESSENCE = registerItem("energy_essence",
             new Item(new FabricItemSettings()));
+    public static final Item ENERGISED_FLINT_AND_STEEL = registerItem("energized_flint_and_steel",
+            new EnergizedFlintAndSteelItem(new FabricItemSettings().maxCount(1).maxDamage(128)));
+
 
     //quazarith tools
 
@@ -71,6 +75,7 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, KRYSLUM_BUCKET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, SOUL_HEART);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, ENERGY_ESSENCE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, ENERGISED_FLINT_AND_STEEL);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_INGOT);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_PIECES);

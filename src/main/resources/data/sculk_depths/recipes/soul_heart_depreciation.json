@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "sculk_depths:soul_heart"
+    }
+  ],
+  "result": {
+    "item": "sculk_depths:energy_essence"
+  }
+}
