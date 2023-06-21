@@ -23,6 +23,9 @@ public class ModItems {
     public static final Item QUAZARITH_PIECES = registerItem("quazarith_pieces",
             new Item(new FabricItemSettings()));
 
+    public static final Item ENERGY_ESSENCE = registerItem("energy_essence",
+            new Item(new FabricItemSettings()));
+
     //quazarith tools
 
     public static final Item QUAZARITH_SHOVEL = registerItem("quazarith_shovel",
@@ -67,6 +70,7 @@ public class ModItems {
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, KRYSLUM_BUCKET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, SOUL_HEART);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, ENERGY_ESSENCE);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_INGOT);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_PIECES);

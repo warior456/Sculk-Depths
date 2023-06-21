@@ -1,8 +1,11 @@
 package net.ugi.sculk_depths.block.custom;
 
+import com.mojang.datafixers.types.templates.Tag;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
@@ -23,6 +26,8 @@ public class KryslumEnrichedSoilBLock extends FarmlandBlock {
         super(settings);
         this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(MOISTURE, MAX_MOISTURE));
     }
+
+
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {

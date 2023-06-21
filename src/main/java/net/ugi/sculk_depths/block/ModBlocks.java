@@ -5,7 +5,10 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.registry.tag.TagBuilder;
 import net.minecraft.sound.BlockSoundGroup;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.custom.CephleraBlock;
@@ -32,6 +35,7 @@ public class ModBlocks {
 
     public static final Block KRYSLUM_ENRICHED_SOIL = registerBlock("kryslum_enriched_soil",
             new KryslumEnrichedSoilBLock(FabricBlockSettings.copyOf(Blocks.FARMLAND).ticksRandomly().strength(0.6f).sounds(BlockSoundGroup.GRAVEL)), ModItemGroup.SCULK_DEPTHS);
+
 
 
     //umbrusk blockset
