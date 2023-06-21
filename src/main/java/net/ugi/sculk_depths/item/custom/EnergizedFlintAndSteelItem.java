@@ -16,13 +16,14 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import net.ugi.sculk_depths.block.ModBlocks;
 
 public class EnergizedFlintAndSteelItem extends Item {
 
     public EnergizedFlintAndSteelItem(Settings settings) {
         super(settings);
     }
-/*
+
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) { //originally copied from mc
         BlockPos blockPos;
@@ -41,7 +42,7 @@ public class EnergizedFlintAndSteelItem extends Item {
         BlockPos blockPos2 = blockPos.offset(context.getSide());
         if (AbstractFireBlock.canPlaceAt(world, blockPos2, context.getHorizontalPlayerFacing())) {
             world.playSound(playerEntity, blockPos2, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0f, world.getRandom().nextFloat() * 0.4f + 0.8f);
-            BlockState blockState2 = AbstractFireBlock.getState(world, blockPos2);
+            BlockState blockState2 = ModBlocks.SOUL_FIRE.getDefaultState();
             world.setBlockState(blockPos2, blockState2, Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
             world.emitGameEvent((Entity)playerEntity, GameEvent.BLOCK_PLACE, blockPos);
             ItemStack itemStack = context.getStack();
@@ -54,5 +55,5 @@ public class EnergizedFlintAndSteelItem extends Item {
         return ActionResult.FAIL;
     }
 
- */
+
 }

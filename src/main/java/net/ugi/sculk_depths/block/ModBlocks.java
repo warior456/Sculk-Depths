@@ -14,6 +14,7 @@ import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.custom.CephleraBlock;
 import net.ugi.sculk_depths.block.custom.CephleraLightBlock;
 import net.ugi.sculk_depths.block.custom.KryslumEnrichedSoilBLock;
+import net.ugi.sculk_depths.block.custom.SoulFireBlock;
 import net.ugi.sculk_depths.block.sapling.ValtroxSaplingGenerator;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
@@ -34,7 +35,7 @@ public class ModBlocks {
             new Block(FabricBlockSettings.copyOf(Blocks.DIRT).strength(1.0f).requiresTool().sounds(BlockSoundGroup.ROOTED_DIRT)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block KRYSLUM_ENRICHED_SOIL = registerBlock("kryslum_enriched_soil",
-            new KryslumEnrichedSoilBLock(FabricBlockSettings.copyOf(Blocks.FARMLAND).ticksRandomly().strength(0.6f).sounds(BlockSoundGroup.GRAVEL)), ModItemGroup.SCULK_DEPTHS);
+            new KryslumEnrichedSoilBLock(FabricBlockSettings.copyOf(Blocks.FARMLAND).ticksRandomly().strength(0.8f).sounds(BlockSoundGroup.GRAVEL)), ModItemGroup.SCULK_DEPTHS);
 
 
 
@@ -190,6 +191,8 @@ public class ModBlocks {
 
     //fluids
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new FluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.copyOf(Blocks.WATER).replaceable().noCollision().strength(100.0f).pistonBehavior(PistonBehavior.DESTROY).dropsNothing().liquid().solid().sounds(BlockSoundGroup.SCULK)), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block SOUL_FIRE = registerBlockWithoutBlockItem("soul_fire", new SoulFireBlock( FabricBlockSettings.copyOf(Blocks.SOUL_FIRE)), ModItemGroup.SCULK_DEPTHS);
 
     private static Block registerBlock(String name, Block block, RegistryKey<ItemGroup> group) {
         registerBlockItem(name, block, group);

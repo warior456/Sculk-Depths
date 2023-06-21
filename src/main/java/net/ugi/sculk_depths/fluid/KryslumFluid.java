@@ -95,6 +95,7 @@ public abstract class KryslumFluid extends FlowableFluid {
     }
 
     public boolean canBeReplacedWith(FluidState state, BlockView world, BlockPos pos, Fluid fluid, Direction direction) {
+        //noinspection deprecation
         return direction == Direction.DOWN && !fluid.isIn(FluidTags.WATER);
     }
 
@@ -118,10 +119,6 @@ public abstract class KryslumFluid extends FlowableFluid {
             return state.get(LEVEL);
         }
 
-        @Override
-        public boolean isStill(FluidState state) {
-            return false;
-        }
     }
 
     public static class Still extends KryslumFluid {

@@ -10,13 +10,14 @@ import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.item.ModItems;
 
 public class Portals {
+    public final static PortalIgnitionSource SOUL_FIRE = PortalIgnitionSource.CustomSource(new Identifier("sculk_depths","soul_fire"));
     public static void registerModPortals() {
         CustomPortalBuilder.beginPortal()
                 .frameBlock(Blocks.REINFORCED_DEEPSLATE)
                 //.customPortalBlock(Blocks.SCULK)
                 .destDimID(new Identifier("sculk_depths:sculk_depthsdim"))
                 .tintColor(1, 69, 86)
-                .lightWithItem(ModItems.ENERGISED_FLINT_AND_STEEL)
+                .customIgnitionSource(SOUL_FIRE)
                 .setPortalSearchYRange(0, 120)
                 .registerIgniteEvent((player, world, portalPos, framePos, portalIgnitionSource) -> {
                     if (portalIgnitionSource.sourceType == PortalIgnitionSource.SourceType.USEITEM && player != null) {
