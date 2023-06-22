@@ -169,7 +169,7 @@ public class ModBlocks {
             new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_LIGHT = registerBlock("zygrin_light",
-            new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(4.0f).requiresTool().luminance(blockState -> 15)), ModItemGroup.SCULK_DEPTHS);
+            new LeavesBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(4.0f).requiresTool().luminance(blockState -> 15)), ModItemGroup.SCULK_DEPTHS);
 
     //leaves
     public static final Block VALTROX_LEAVES = registerBlock("valtrox_leaves",
