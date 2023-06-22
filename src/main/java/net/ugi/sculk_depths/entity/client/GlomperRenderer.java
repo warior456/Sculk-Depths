@@ -23,7 +23,7 @@ public class GlomperRenderer extends GeoEntityRenderer<GlomperEntity> {
 
     @Override
     protected int getBlockLight(GlomperEntity entity, BlockPos pos) {
-        return 14;
+        return 15;
     }
 
     @Override
