@@ -11,9 +11,7 @@ import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.TagBuilder;
 import net.minecraft.sound.BlockSoundGroup;
 import net.ugi.sculk_depths.SculkDepths;
-import net.ugi.sculk_depths.block.custom.CephleraBlock;
-import net.ugi.sculk_depths.block.custom.CephleraLightBlock;
-import net.ugi.sculk_depths.block.custom.KryslumEnrichedSoilBLock;
+import net.ugi.sculk_depths.block.custom.*;
 import net.ugi.sculk_depths.block.custom.SoulFireBlock;
 import net.ugi.sculk_depths.block.sapling.ValtroxSaplingGenerator;
 import net.ugi.sculk_depths.fluid.ModFluids;
@@ -169,7 +167,7 @@ public class ModBlocks {
             new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_LIGHT = registerBlock("zygrin_light",
-            new LeavesBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(4.0f).requiresTool().luminance(blockState -> 15)), ModItemGroup.SCULK_DEPTHS);
+            new nonConnectingBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(4.0f).requiresTool().luminance(blockState -> 15)), ModItemGroup.SCULK_DEPTHS);
 
     //leaves
     public static final Block VALTROX_LEAVES = registerBlock("valtrox_leaves",
