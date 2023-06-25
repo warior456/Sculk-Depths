@@ -23,7 +23,7 @@ public class EnergizedFlintAndSteelItem extends Item {
     public EnergizedFlintAndSteelItem(Settings settings) {
         super(settings);
     }
-
+/*
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) { //originally copied from mc
         BlockPos blockPos;
@@ -54,6 +54,6 @@ public class EnergizedFlintAndSteelItem extends Item {
         }
         return ActionResult.FAIL;
     }
-
+*/
 
 }
