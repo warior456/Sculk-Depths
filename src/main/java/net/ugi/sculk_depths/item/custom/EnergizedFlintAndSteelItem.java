@@ -1,5 +1,6 @@
 package net.ugi.sculk_depths.item.custom;
 
+import net.kyrptonaught.customportalapi.portal.PortalPlacer;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
@@ -18,18 +19,31 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.ugi.sculk_depths.block.ModBlocks;
 
+import static net.ugi.sculk_depths.portal.Portals.SOUL_FIRE;
+
 public class EnergizedFlintAndSteelItem extends Item {
 
     public EnergizedFlintAndSteelItem(Settings settings) {
         super(settings);
     }
-/*
+
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) { //originally copied from mc
         BlockPos blockPos;
         PlayerEntity playerEntity = context.getPlayer();
         World world = context.getWorld();
         BlockState blockState = world.getBlockState(blockPos = context.getBlockPos());
+
+        boolean portalLighted = PortalPlacer.attemptPortalLight(world, blockPos.offset(context.getSide()), SOUL_FIRE);
+        System.out.println(portalLighted);
+        if(portalLighted){
+            ItemStack itemStack = context.getStack();
+            if (playerEntity instanceof ServerPlayerEntity) {
+                itemStack.damage(15, playerEntity, p -> p.sendToolBreakStatus(context.getHand())); //todo config damage amount
+            }
+            return ActionResult.success(world.isClient());
+        }
+
         if (CampfireBlock.canBeLit(blockState) || CandleBlock.canBeLit(blockState) || CandleCakeBlock.canBeLit(blockState)) {
             world.playSound(playerEntity, blockPos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0f, world.getRandom().nextFloat() * 0.4f + 0.8f);
             world.setBlockState(blockPos, (BlockState)blockState.with(Properties.LIT, true), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
@@ -52,8 +66,8 @@ public class EnergizedFlintAndSteelItem extends Item {
             }
             return ActionResult.success(world.isClient());
         }
+
         return ActionResult.FAIL;
     }
-*/
 
 }

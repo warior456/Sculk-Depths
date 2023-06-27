@@ -16,8 +16,8 @@ public class Portals {
                 //.customPortalBlock(Blocks.SCULK)
                 .destDimID(new Identifier("sculk_depths:sculk_depthsdim"))
                 .tintColor(1, 69, 86)
-                //.customIgnitionSource(SOUL_FIRE)
-                .lightWithItem(ModItems.ENERGISED_FLINT_AND_STEEL)
+                .customIgnitionSource(SOUL_FIRE)
+                //.lightWithItem(ModItems.ENERGISED_FLINT_AND_STEEL)
                 .setPortalSearchYRange(0, 120)
                 .registerIgniteEvent((player, world, portalPos, framePos, portalIgnitionSource) -> {
                     if (portalIgnitionSource.sourceType == PortalIgnitionSource.SourceType.USEITEM && player != null) {

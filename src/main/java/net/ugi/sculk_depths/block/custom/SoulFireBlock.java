@@ -43,8 +43,4 @@ public class SoulFireBlock extends AbstractFireBlock {
         return true;
     }
 
-    @Override
-    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        PortalPlacer.attemptPortalLight(world, pos, SOUL_FIRE);
-    }
 }
