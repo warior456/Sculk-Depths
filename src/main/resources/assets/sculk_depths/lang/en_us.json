@@ -1,6 +1,9 @@
 {
   "item.sculk_depths.kryslum_bucket": "Kryslum Bucket",
-  "item.sculk_depths.soul_heart": "Soul Heart",
+  "item.sculk_depths.soul_heart": "Soul Heart (DEPRECATED PLEASE CONVERT IN CRAFTING TABLE)",
+  "item.sculk_depths.energy_essence" : "Energy Essence",
+  "item.sculk_depths.energized_flint_and_steel" : "Energized Flint and Steel",
+  "item.sculk_depths.glomper_spawn_egg": "Glomper Spawn Egg",
   "block.sculk_depths.crumbling_dirt" : "Crumbling Dirt",
 
   "block.sculk_depths.umbrusk": "Umbrusk",
@@ -73,9 +76,12 @@
   "block.sculk_depths.zygrin_brick_wall": "Zygrin Brick Wall",
   "block.sculk_depths.zygrin_pillar": "Zygrin Pillar",
   "block.sculk_depths.chiseled_zygrin": "Chiseled Zygrin",
+  "block.sculk_depths.zygrin_light": "Zygrin Light",
 
   "block.sculk_depths.cephlera": "Cephlera",
   "block.sculk_depths.cephlera_light": "Cephlera Light",
+
+  "block.sculk_depths.kryslum_enriched_soil": "Kryslum Enriched Soil",
 
   "entity.sculk_depths.glomper": "Glomper"
 }

@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "sculk_depths:soul_heart"
+          "name": "sculk_depths:energy_essence"
         }
       ],
       "rolls": 1.0

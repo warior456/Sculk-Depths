@@ -13,6 +13,7 @@ import net.ugi.sculk_depths.item.ModItemGroup;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.portal.Portals;
 import net.ugi.sculk_depths.sound.ModSounds;
+import net.ugi.sculk_depths.util.ModLootTableModifiers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,6 +32,7 @@ public class SculkDepths implements ModInitializer {
         ModBlocks.registerModBlocks();
         Portals.registerModPortals();
         ModSounds.registerModSounds();
+        ModLootTableModifiers.modifyLootTables();
         FabricDefaultAttributeRegistry.register(ModEntities.GLOMPER, GlomperEntity.setAttributes());
 
         LOGGER.info("sculk_depths has loaded");

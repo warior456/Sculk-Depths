@@ -4,10 +4,14 @@
   "package": "net.ugi.sculk_depths.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-
+    "AttachedStemBlockMixin",
+    "CropBlockMixin",
+    "FarmLandBlockMixin",
+    "LivingEntityMixin",
+    "NoiseChunkGeneratorMixin",
+    "StemBlockMixin"
   ],
   "client": [
-    "NoiseChunkGeneratorMixin"
   ],
   "injectors": {
     "defaultRequire": 1

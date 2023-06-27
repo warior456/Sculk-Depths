@@ -13,6 +13,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -24,7 +25,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class KryslumFluid extends FlowableFluid {
+public abstract class KryslumFluid extends FlowableFluid {
+    public static final IntProperty LEVEL = Properties.LEVEL_1_8;
     public KryslumFluid() {
     }
 
@@ -40,6 +42,7 @@ public class KryslumFluid extends FlowableFluid {
         return ModItems.KRYSLUM_BUCKET;
     }
 
+    @Override
     public void randomDisplayTick(World world, BlockPos pos, FluidState state, Random random) {
         if (!state.isStill() && !(Boolean) state.get(FALLING)) {
             if (random.nextInt(64) == 0) {
@@ -50,6 +53,7 @@ public class KryslumFluid extends FlowableFluid {
         }
     }
 
+    @Override
     @Nullable
     public ParticleEffect getParticle() {
         return ParticleTypes.SCULK_CHARGE_POP;
@@ -78,23 +82,20 @@ public class KryslumFluid extends FlowableFluid {
     }
 
     public boolean matchesType(Fluid fluid) {
-        return fluid == ModFluids.KRYSLUM_STILL || fluid == ModFluids.KRYSLUM_FLOWING;
+        return fluid == ModFluids.KRYSLUM_STILL || fluid == ModFluids.KRYSLUM_FLOWING; //perhaps here for adding farmland
     }
 
     public int getLevelDecreasePerBlock(WorldView world) {
         return 2;
     }
 
-    @Override
-    public int getLevel(FluidState state) {
-        return 0;
-    }
 
     public int getTickRate(WorldView world) {
         return 40;
     }
 
     public boolean canBeReplacedWith(FluidState state, BlockView world, BlockPos pos, Fluid fluid, Direction direction) {
+        //noinspection deprecation
         return direction == Direction.DOWN && !fluid.isIn(FluidTags.WATER);
     }
 
@@ -107,31 +108,26 @@ public class KryslumFluid extends FlowableFluid {
     }
 
     public static class Flowing extends KryslumFluid {
-        public Flowing() {
-        }
-
+        @Override
         protected void appendProperties(StateManager.Builder<Fluid, FluidState> builder) {
             super.appendProperties(builder);
             builder.add(LEVEL);
         }
 
+        @Override
         public int getLevel(FluidState state) {
             return state.get(LEVEL);
         }
 
-        public boolean isStill(FluidState state) {
-            return false;
-        }
     }
 
     public static class Still extends KryslumFluid {
-        public Still() {
-        }
-
+        @Override
         public int getLevel(FluidState state) {
             return 8;
         }
 
+        @Override
         public boolean isStill(FluidState state) {
             return true;
         }

@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "sculk_depths:petrified_valtrox_fence"
+          "name": "sculk_depths:petrified_valtrox_wall"
         }
       ],
       "conditions": [
