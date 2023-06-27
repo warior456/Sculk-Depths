@@ -7,6 +7,7 @@
     "AttachedStemBlockMixin",
     "CropBlockMixin",
     "FarmLandBlockMixin",
+    "LivingEntityMixin",
     "NoiseChunkGeneratorMixin",
     "StemBlockMixin"
   ],
