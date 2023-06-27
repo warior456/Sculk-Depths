@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "minecraft:block/kryslum_enriched_soil"
+      "model": "sculk_depths:block/kryslum_enriched_soil"
     }
   }
 }

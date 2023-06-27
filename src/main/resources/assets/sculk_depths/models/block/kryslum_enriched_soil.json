@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/template_farmland",
   "textures": {
-    "dirt": "minecraft:block/kryslum_enriched_soil_side",
-    "top": "minecraft:block/kryslum_enriched_soil"
+    "dirt": "sculk_depths:block/kryslum_enriched_soil_side",
+    "top": "sculk_depths:block/kryslum_enriched_soil"
   }
 }
