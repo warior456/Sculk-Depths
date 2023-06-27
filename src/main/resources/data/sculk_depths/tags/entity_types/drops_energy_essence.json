@@ -1,5 +1,13 @@
 {
   "values": [
-    "minecraft:cow"
+    "minecraft:cow",
+    "minecraft:horse",
+    "minecraft:donkey",
+    "minecraft:mule",
+    "minecraft:chicken",
+    "minecraft:pig",
+    "minecraft:sheep",
+    "minecraft:bat",
+    "minecraft:bee"
   ]
 }
