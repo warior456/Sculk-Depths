@@ -12,9 +12,10 @@ This mod adds a new dimension called "Sculk Depths" to Minecraft.
 To access this dimension, follow these steps:
 
 1. Search for a deep dark biome with an ancient city.
-2. Summon and defeat a Warden to obtain its new drop, the Soul Heart.
-3. Clear all the sculk veins from the middle of the reinforced deepslate in the center of the city.
-4. Use the Soul Heart to light the portal.
+2. Summon a Warden and let it kill a passive mob like a cow, sheep, or horse OR kill the warden.
+3. this will drop Energy Essence which is used to craft an Energized Flint and Steel
+4. Clear all the sculk veins from the middle of the reinforced deepslate in the center of the city.
+5. Use the Energized Flint and Steel to light the portal.
 
 When entering this dimension, it is recommended to bring a netherite pickaxe as the dimension is mostly made of a very hard block called Umbrusk.
 
@@ -24,7 +25,7 @@ When entering this dimension, it is recommended to bring a netherite pickaxe as 
 - Four new biomes.
 - A new structure (work in progress).
 - A new hostile mob: The Glomper. It attacks players using an elytra, so be careful while flying around!
-- The Warden drops the Soul Heart, which is used to open the portal.
+- Energy Essence drops when the warden kills a passive mob or when the warden is killed, this is used to craft an Energized Flint and Steel to open the portal.
 - new blocks:
   - Cephlera Light
 - Nine new block sets:
