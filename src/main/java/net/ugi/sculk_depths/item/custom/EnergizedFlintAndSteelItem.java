@@ -35,7 +35,6 @@ public class EnergizedFlintAndSteelItem extends Item {
         BlockState blockState = world.getBlockState(blockPos = context.getBlockPos());
 
         boolean portalLighted = PortalPlacer.attemptPortalLight(world, blockPos.offset(context.getSide()), SOUL_FIRE);
-        System.out.println(portalLighted);
         if(portalLighted){
             ItemStack itemStack = context.getStack();
             if (playerEntity instanceof ServerPlayerEntity) {
