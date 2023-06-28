@@ -169,6 +169,9 @@ public class ModBlocks {
     public static final Block ZYGRIN_LIGHT = registerBlock("zygrin_light",
             new nonConnectingBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(4.0f).requiresTool().luminance(blockState -> 15)), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block ZYGRIN_FLOWBLOCK = registerBlock("zygrin_flowblock",
+            new FlowBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(4.0f)), ModItemGroup.SCULK_DEPTHS);
+
     //leaves
     public static final Block VALTROX_LEAVES = registerBlock("valtrox_leaves",
             new LeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES)), ModItemGroup.SCULK_DEPTHS);
