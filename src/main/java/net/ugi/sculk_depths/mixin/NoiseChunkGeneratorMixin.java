@@ -15,11 +15,10 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin({NoiseChunkGenerator.class})
 public abstract class NoiseChunkGeneratorMixin {
-    @Shadow public abstract RegistryEntry<ChunkGeneratorSettings> getSettings();
 
     /**
      * @author Matteo_fey (@warior456)
-     * @reason Remove the hardcoded -54 lava sea level
+     * @reason Fix the hardcoded -54 lava sea level
      */
     @Overwrite
     private static AquiferSampler.FluidLevelSampler createFluidLevelSampler(ChunkGeneratorSettings settings) {
