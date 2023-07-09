@@ -192,7 +192,7 @@ public class ModBlocks {
 
     //fluids
 
-    public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new ModFluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.of(Material.WATER).noCollision().nonOpaque().dropsNothing()), ModItemGroup.SCULK_DEPTHS);
+    public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new FluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.of(Material.WATER).noCollision().nonOpaque().dropsNothing()), ModItemGroup.SCULK_DEPTHS);
 
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {
