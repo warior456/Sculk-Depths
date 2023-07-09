@@ -35,7 +35,7 @@ public class ModBlocks {
     public static final Block KRYSLUM_ENRICHED_SOIL = registerBlock("kryslum_enriched_soil",
             new KryslumEnrichedSoilBLock(FabricBlockSettings.copyOf(Blocks.FARMLAND).ticksRandomly().strength(0.8f).sounds(BlockSoundGroup.GRAVEL)), ModItemGroup.SCULK_DEPTHS);
 
-
+    public static final Block SOUL_FIRE = registerBlockWithoutBlockItem("soul_fire", new SoulFireBlock(FabricBlockSettings.copyOf(Blocks.SOUL_FIRE)), ModItemGroup.SCULK_DEPTHS);
 
     //umbrusk blockset
     public static final Block UMBRUSK = registerBlock("umbrusk",
@@ -193,8 +193,6 @@ public class ModBlocks {
     //fluids
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new FluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.copyOf(Blocks.WATER).replaceable().noCollision().strength(100.0f).pistonBehavior(PistonBehavior.DESTROY).dropsNothing().liquid().solid().sounds(BlockSoundGroup.SCULK)), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block SOUL_FIRE = registerBlockWithoutBlockItem("soul_fire", new SoulFireBlock( FabricBlockSettings.copyOf(Blocks.SOUL_FIRE)), ModItemGroup.SCULK_DEPTHS);
-
     private static Block registerBlock(String name, Block block, RegistryKey<ItemGroup> group) {
         registerBlockItem(name, block, group);
         return Registry.register(Registries.BLOCK, new Identifier(SculkDepths.MOD_ID, name), block);
@@ -207,10 +205,10 @@ public class ModBlocks {
 
     private static Item registerBlockItem(String name, Block block, RegistryKey<ItemGroup> group) {
 
-            Item item = Registry.register(Registries.ITEM, new Identifier(SculkDepths.MOD_ID, name),
-                    new BlockItem(block, new FabricItemSettings()));
-            ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));
-            return item;
+        Item item = Registry.register(Registries.ITEM, new Identifier(SculkDepths.MOD_ID, name),
+                new BlockItem(block, new FabricItemSettings()));
+        ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));
+        return item;
     }
 
     public static void registerModBlocks() {
