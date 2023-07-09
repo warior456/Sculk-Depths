@@ -12,9 +12,10 @@ This mod adds a new dimension called "Sculk Depths" to Minecraft.
 To access this dimension, follow these steps:
 
 1. Search for a deep dark biome with an ancient city.
-2. Summon and defeat a Warden to obtain its new drop, the Soul Heart.
-3. Clear all the sculk veins from the middle of the reinforced deepslate in the center of the city.
-4. Use the Soul Heart to light the portal.
+2. Summon a Warden and let it kill a passive mob like a cow, sheep, or horse OR kill the warden.
+3. this will drop Energy Essence which is used to craft an Energized Flint and Steel
+4. Clear all the sculk veins from the middle of the reinforced deepslate in the center of the city.
+5. Use the Energized Flint and Steel to light the portal.
 
 When entering this dimension, it is recommended to bring a netherite pickaxe as the dimension is mostly made of a very hard block called Umbrusk.
 
@@ -24,7 +25,8 @@ When entering this dimension, it is recommended to bring a netherite pickaxe as 
 - Four new biomes.
 - A new structure (work in progress).
 - A new hostile mob: The Glomper. It attacks players using an elytra, so be careful while flying around!
-- The Warden drops the Soul Heart, which is used to open the portal.
+- Energy Essence drops when the warden kills a passive mob or when the warden is killed, this is used to craft an Energized Flint and Steel to open the portal.
+- Energized Flint and Steel: can light most blocks with Soul Fire and lights the portal
 - new blocks:
   - Cephlera Light
 - Nine new block sets:
@@ -55,5 +57,9 @@ When entering this dimension, it is recommended to bring a netherite pickaxe as 
 ## License
 Please refer to the [LICENSE.md](https://github.com/warior456/Sculk-Depths/blob/main/LICENSE.md) file for licensing details.
 
-For any questions or issues, please reach out to us on our [GitHub repository](https://github.com/warior456/Sculk-Depths).
+For any questions or issues, please reach out to us on our [GitHub repository](https://github.com/warior456/Sculk-Depths) or our [Discord Server](https://discord.gg/dxANwW23Ub)
+
+## Need a Minecraft server?
+[![pebblehost](https://github.com/warior456/Sculk-Depths/assets/66562258/ae831af6-309b-4f11-b896-5f4eb7567088)](https://billing.pebblehost.com/aff.php?aff=2968)
+Starting at just 1$/month for 1GB RAM [Check it out](https://billing.pebblehost.com/aff.php?aff=2968)
 

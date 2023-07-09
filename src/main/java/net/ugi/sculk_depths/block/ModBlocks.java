@@ -5,12 +5,14 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.registry.tag.TagBuilder;
 import net.minecraft.sound.BlockSoundGroup;
 import net.ugi.sculk_depths.SculkDepths;
-import net.ugi.sculk_depths.block.custom.CephleraBlock;
-import net.ugi.sculk_depths.block.custom.CephleraLightBlock;
-import net.ugi.sculk_depths.block.custom.KryslumEnrichedSoilBLock;
+import net.ugi.sculk_depths.block.custom.*;
+import net.ugi.sculk_depths.block.custom.SoulFireBlock;
 import net.ugi.sculk_depths.block.sapling.ValtroxSaplingGenerator;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
@@ -31,8 +33,9 @@ public class ModBlocks {
             new Block(FabricBlockSettings.copyOf(Blocks.DIRT).strength(1.0f).requiresTool().sounds(BlockSoundGroup.ROOTED_DIRT)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block KRYSLUM_ENRICHED_SOIL = registerBlock("kryslum_enriched_soil",
-            new KryslumEnrichedSoilBLock(FabricBlockSettings.copyOf(Blocks.FARMLAND).ticksRandomly().strength(0.6f).sounds(BlockSoundGroup.GRAVEL)), ModItemGroup.SCULK_DEPTHS);
+            new KryslumEnrichedSoilBLock(FabricBlockSettings.copyOf(Blocks.FARMLAND).ticksRandomly().strength(0.8f).sounds(BlockSoundGroup.GRAVEL)), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block SOUL_FIRE = registerBlockWithoutBlockItem("soul_fire", new SoulFireBlock(FabricBlockSettings.copyOf(Blocks.SOUL_FIRE)), ModItemGroup.SCULK_DEPTHS);
 
     //umbrusk blockset
     public static final Block UMBRUSK = registerBlock("umbrusk",
@@ -163,6 +166,12 @@ public class ModBlocks {
     public static final Block ZYGRIN_BRICK_WALL = registerBlock("zygrin_brick_wall",
             new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block ZYGRIN_LIGHT = registerBlock("zygrin_light",
+            new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(4.0f).requiresTool().luminance(blockState -> 15)), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block ZYGRIN_FLOWBLOCK = registerBlock("zygrin_flowblock",
+            new FlowBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(4.0f)), ModItemGroup.SCULK_DEPTHS);
+
     //leaves
     public static final Block VALTROX_LEAVES = registerBlock("valtrox_leaves",
             new LeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES)), ModItemGroup.SCULK_DEPTHS);
@@ -182,7 +191,9 @@ public class ModBlocks {
             new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).hardness(6.0f).resistance(10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     //fluids
+
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new ModFluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.of(Material.WATER).noCollision().nonOpaque().dropsNothing()), ModItemGroup.SCULK_DEPTHS);
+
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         registerBlockItem(name, block, group);
@@ -194,7 +205,9 @@ public class ModBlocks {
         return Registry.register(Registries.BLOCK, new Identifier(SculkDepths.MOD_ID, name), block);
     }
 
+
     private static Item registerBlockItem(String name, Block block, ItemGroup group) {
+
         Item item = Registry.register(Registries.ITEM, new Identifier(SculkDepths.MOD_ID, name),
                 new BlockItem(block, new FabricItemSettings()));
         ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));

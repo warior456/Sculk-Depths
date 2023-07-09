@@ -2,16 +2,19 @@
   "type": "minecraft:crafting_shaped",
   "group": "wooden_fence",
   "pattern": [
-    "WWW",
-    "WWW"
+    "WIW",
+    "WIW"
   ],
   "key": {
     "W": {
       "item": "sculk_depths:dried_valtrox_planks"
+    },
+    "I": {
+      "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "sculk_depths:dried_valtrox_wall",
-    "count": 6
+    "item": "sculk_depths:dried_valtrox_fence",
+    "count": 3
   }
 }
