@@ -84,5 +84,11 @@
 
   "block.sculk_depths.kryslum_enriched_soil": "Kryslum Enriched Soil",
 
-  "entity.sculk_depths.glomper": "Glomper"
+  "entity.sculk_depths.glomper": "Glomper",
+
+  "advancements.sculk_depths.root": "Exploring the Depths",
+  "advancements.sculk_depths.root.description": "Exploration and Ancient Civilisation",
+
+  "advancements.sculk_depths.kill_a_warden": "Doing it the hard way!",
+  "advancements.sculk_depths.kill_a_warden.description": "Killing a warden instead of giving it a sacrifice"
 }
