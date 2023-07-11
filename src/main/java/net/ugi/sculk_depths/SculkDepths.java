@@ -7,6 +7,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.block.ModBlocks;
+import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import net.ugi.sculk_depths.item.ModItemGroup;
@@ -33,6 +34,7 @@ public class SculkDepths implements ModInitializer {
         Portals.registerModPortals();
         ModSounds.registerModSounds();
         ModLootTableModifiers.modifyLootTables();
+        ModCauldronBehavior.registerBehavior();
         FabricDefaultAttributeRegistry.register(ModEntities.GLOMPER, GlomperEntity.setAttributes());
 
         LOGGER.info("sculk_depths has loaded");
