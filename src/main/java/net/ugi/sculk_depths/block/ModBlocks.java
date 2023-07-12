@@ -193,7 +193,7 @@ public class ModBlocks {
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new FluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.copyOf(Blocks.WATER).replaceable().noCollision().strength(100.0f).pistonBehavior(PistonBehavior.DESTROY).dropsNothing().liquid().solid().sounds(BlockSoundGroup.SCULK)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block FLUMROCK_CAULDRON = registerBlock("flumrock_cauldron", new FlumrockCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)), ModItemGroup.SCULK_DEPTHS);
-    public static final Block KRYSLUM_FLUMROCK_CAULDRON = registerBlock("kryslum_flumrock_cauldron", new KryslumFlumrockCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)), ModItemGroup.SCULK_DEPTHS);
+    public static final Block KRYSLUM_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("kryslum_flumrock_cauldron", new KryslumFlumrockCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)), ModItemGroup.SCULK_DEPTHS);
 
     private static Block registerBlock(String name, Block block, RegistryKey<ItemGroup> group) {
         registerBlockItem(name, block, group);

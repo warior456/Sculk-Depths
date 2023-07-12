@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "minecraft:item/cauldron"
+    "layer0": "sculk_depths:item/flumrock_cauldron"
   }
 }
