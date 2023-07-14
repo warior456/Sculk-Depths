@@ -11,6 +11,7 @@ import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.custom.*;
 import net.ugi.sculk_depths.block.custom.ModCauldron.FlumrockCauldronBlock;
 import net.ugi.sculk_depths.block.custom.ModCauldron.KryslumFlumrockCauldronBlock;
+import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
 import net.ugi.sculk_depths.block.custom.SoulFireBlock;
 import net.ugi.sculk_depths.block.sapling.ValtroxSaplingGenerator;
 import net.ugi.sculk_depths.fluid.ModFluids;
@@ -83,6 +84,9 @@ public class ModBlocks {
     public static final Block VALTROX_FENCE = registerBlock("valtrox_fence",
             new FenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block VALTROX_BUTTON = registerBlock("valtrox_button",
+            new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), BlockSetType.OAK, 30, true), ModItemGroup.SCULK_DEPTHS);
+
     //dried valtrox blockset
     public static final Block DRIED_VALTROX_LOG = registerBlock("dried_valtrox_log",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
@@ -103,6 +107,9 @@ public class ModBlocks {
             new FenceBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
 
 
+    public static final Block DRIED_VALTROX_BUTTON = registerBlock("dried_valtrox_button",
+            new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), BlockSetType.OAK, 30, true), ModItemGroup.SCULK_DEPTHS);
+
     //petrified valtrox blockset
     public static final Block PETRIFIED_VALTROX_LOG = registerBlock("petrified_valtrox_log",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
@@ -121,6 +128,9 @@ public class ModBlocks {
 
     public static final Block PETRIFIED_VALTROX_WALL = registerBlock("petrified_valtrox_wall",
             new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PETRIFIED_VALTROX_BUTTON = registerBlock("petrified_valtrox_button",
+            new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), BlockSetType.STONE, 20, false), ModItemGroup.SCULK_DEPTHS);
 
     //zygrin set
     public static final Block ZYGRIN = registerBlock("zygrin",
@@ -193,7 +203,7 @@ public class ModBlocks {
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new FluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.copyOf(Blocks.WATER).replaceable().noCollision().strength(100.0f).pistonBehavior(PistonBehavior.DESTROY).dropsNothing().liquid().solid().sounds(BlockSoundGroup.SCULK)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block FLUMROCK_CAULDRON = registerBlock("flumrock_cauldron", new FlumrockCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)), ModItemGroup.SCULK_DEPTHS);
-    public static final Block KRYSLUM_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("kryslum_flumrock_cauldron", new KryslumFlumrockCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)), ModItemGroup.SCULK_DEPTHS);
+    public static final Block KRYSLUM_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("kryslum_flumrock_cauldron", new KryslumFlumrockCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON), ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR), ModItemGroup.SCULK_DEPTHS);
 
     private static Block registerBlock(String name, Block block, RegistryKey<ItemGroup> group) {
         registerBlockItem(name, block, group);

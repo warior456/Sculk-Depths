@@ -36,7 +36,6 @@ public abstract class CropBlockMixin {
         BlockState blockState = world.getBlockState(pos.down());
         if (blockState.isOf(ModBlocks.KRYSLUM_ENRICHED_SOIL)) {
             return 7.0f;
-
         }
         return originalValue;
     }
