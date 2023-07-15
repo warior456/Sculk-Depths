@@ -1,8 +1,11 @@
 package net.ugi.sculk_depths.block.custom.ModCauldron;
 
-import net.minecraft.block.*;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsage;
+import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;

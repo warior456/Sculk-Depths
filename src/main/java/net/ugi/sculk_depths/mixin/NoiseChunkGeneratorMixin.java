@@ -1,16 +1,12 @@
 package net.ugi.sculk_depths.mixin;
 
 import net.minecraft.block.Blocks;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldProperties;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.chunk.AquiferSampler;
 import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 import net.minecraft.world.gen.chunk.NoiseChunkGenerator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
 
 
 @Mixin({NoiseChunkGenerator.class})

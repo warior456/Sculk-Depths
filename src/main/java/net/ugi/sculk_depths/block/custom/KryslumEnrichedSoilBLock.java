@@ -1,6 +1,5 @@
 package net.ugi.sculk_depths.block.custom;
 
-import com.mojang.datafixers.types.templates.Tag;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemPlacementContext;
@@ -12,7 +11,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.*;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
 public class KryslumEnrichedSoilBLock extends FarmlandBlock {
 

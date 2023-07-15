@@ -1,0 +1,33 @@
+package net.ugi.sculk_depths.block;
+
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.util.Identifier;
+import net.ugi.sculk_depths.SculkDepths;
+import net.ugi.sculk_depths.block.entity.FlumrockCauldronBlockEntity;
+
+import static net.ugi.sculk_depths.block.ModBlocks.FLUMROCK_CAULDRON;
+import static net.ugi.sculk_depths.block.ModBlocks.KRYSLUM_FLUMROCK_CAULDRON;
+
+public class ModBlockEntities {
+    public static BlockEntityType<FlumrockCauldronBlockEntity> GEM_INFUSING_STATION;
+
+    public static BlockEntityType<FlumrockCauldronBlockEntity> FLUMROCK_CAULDRON_BLOCK_ENTITY;
+
+    public static void registerBlockEntities() {
+        GEM_INFUSING_STATION = Registry.register(Registries.BLOCK_ENTITY_TYPE,
+                new Identifier(SculkDepths.MOD_ID, "gem_infusing_station"),
+                FabricBlockEntityTypeBuilder.create(FlumrockCauldronBlockEntity::new,
+                        FLUMROCK_CAULDRON, KRYSLUM_FLUMROCK_CAULDRON).build(null));
+    }
+
+    public static void registerBlockEntityTypes() {
+                FLUMROCK_CAULDRON_BLOCK_ENTITY = Registry.register(
+                Registries.BLOCK_ENTITY_TYPE,
+                new Identifier(SculkDepths.MOD_ID, "flumrock_cauldron_block_entity"),
+                FabricBlockEntityTypeBuilder.create(FlumrockCauldronBlockEntity::new, FLUMROCK_CAULDRON , KRYSLUM_FLUMROCK_CAULDRON).build());
+    }
+
+}

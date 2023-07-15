@@ -2,6 +2,7 @@ package net.ugi.sculk_depths.block.custom.ModCauldron;
 
 import net.minecraft.block.*;
 import net.minecraft.block.cauldron.CauldronBehavior;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -15,15 +16,15 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.ugi.sculk_depths.block.entity.FlumrockCauldronBlockEntity;
 import net.ugi.sculk_depths.item.ModItems;
-import software.bernie.shadowed.eliotlash.mclib.math.functions.classic.Mod;
 
 import java.util.Map;
 
 import static net.minecraft.block.LeveledCauldronBlock.LEVEL;
 
 
-public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock {
+public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implements BlockEntityProvider{
 
     private final Map<Item, CauldronBehavior> behaviorMap;
 
@@ -71,4 +72,8 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock {
 
     }
 
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new FlumrockCauldronBlockEntity(pos, state);
+    }
 }

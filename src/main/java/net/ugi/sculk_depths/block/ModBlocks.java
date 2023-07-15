@@ -5,23 +5,23 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.sound.BlockSoundGroup;
-import net.ugi.sculk_depths.SculkDepths;
-import net.ugi.sculk_depths.block.custom.*;
-import net.ugi.sculk_depths.block.custom.ModCauldron.FlumrockCauldronBlock;
-import net.ugi.sculk_depths.block.custom.ModCauldron.KryslumFlumrockCauldronBlock;
-import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
-import net.ugi.sculk_depths.block.custom.SoulFireBlock;
-import net.ugi.sculk_depths.block.sapling.ValtroxSaplingGenerator;
-import net.ugi.sculk_depths.fluid.ModFluids;
-import net.ugi.sculk_depths.item.ModItemGroup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.ugi.sculk_depths.SculkDepths;
+import net.ugi.sculk_depths.block.custom.*;
+import net.ugi.sculk_depths.block.custom.ModCauldron.FlumrockCauldronBlock;
+import net.ugi.sculk_depths.block.custom.ModCauldron.KryslumFlumrockCauldronBlock;
+import net.ugi.sculk_depths.block.custom.SoulFireBlock;
+import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
+import net.ugi.sculk_depths.block.sapling.ValtroxSaplingGenerator;
+import net.ugi.sculk_depths.fluid.ModFluids;
+import net.ugi.sculk_depths.item.ModItemGroup;
 
 
 public class ModBlocks {
