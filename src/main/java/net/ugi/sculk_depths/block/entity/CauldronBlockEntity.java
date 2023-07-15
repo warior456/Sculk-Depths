@@ -3,22 +3,32 @@ package net.ugi.sculk_depths.block.entity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.ugi.sculk_depths.block.ModBlockEntities;
-import net.ugi.sculk_depths.block.ModBlocks;
 import org.jetbrains.annotations.Nullable;
 
-public class FlumrockCauldronBlockEntity extends BlockEntity implements SidedInventory {
-    public FlumrockCauldronBlockEntity(BlockPos pos, BlockState state) {
+public class CauldronBlockEntity extends BlockEntity implements SidedInventory {
+
+    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(5, ItemStack.EMPTY);
+
+
+    public CauldronBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.FLUMROCK_CAULDRON_BLOCK_ENTITY , pos, state);
     }
 
     @Override
     public int[] getAvailableSlots(Direction side) {
-        return new int[0];
+        int[] result = new int[this.inventory.size()];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = i;
+        }
+
+        return result;
     }
 
     @Override
@@ -33,32 +43,47 @@ public class FlumrockCauldronBlockEntity extends BlockEntity implements SidedInv
 
     @Override
     public int size() {
-        return 3;
+        return this.inventory.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        for (int i = 0; i < size(); i++) {
+            ItemStack stack = getStack(i);
+            if (!stack.isEmpty()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override
     public ItemStack getStack(int slot) {
-        return new ItemStack(ModBlocks.FLUMROCK, 64);
+        return this.inventory.get(slot);
     }
 
     @Override
     public ItemStack removeStack(int slot, int amount) {
-        return null;
+        ItemStack result = Inventories.splitStack(this.inventory , slot, amount);
+        if (!result.isEmpty()) {
+            markDirty();
+        }
+
+        return result;
     }
 
     @Override
     public ItemStack removeStack(int slot) {
-        return null;
+        return Inventories.removeStack(this.inventory, slot);
     }
 
     @Override
     public void setStack(int slot, ItemStack stack) {
-
+        this.inventory.set(slot, stack);
+        if (stack.getCount() > getMaxCountPerStack()) {
+            stack.setCount(getMaxCountPerStack());
+        }
     }
 
     @Override
@@ -68,6 +93,6 @@ public class FlumrockCauldronBlockEntity extends BlockEntity implements SidedInv
 
     @Override
     public void clear() {
-
+        this.inventory.clear();
     }
 }
