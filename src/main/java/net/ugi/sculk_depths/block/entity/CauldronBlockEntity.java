@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class CauldronBlockEntity extends BlockEntity implements SidedInventory {
 
-    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(5, ItemStack.EMPTY);
+    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
 
 
     public CauldronBlockEntity(BlockPos pos, BlockState state) {
@@ -92,7 +93,21 @@ public class CauldronBlockEntity extends BlockEntity implements SidedInventory {
     }
 
     @Override
+    public void readNbt(NbtCompound nbt) {
+        super.readNbt(nbt);
+        this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
+            Inventories.readNbt(nbt, this.inventory);
+    }
+
+    @Override
+    protected void writeNbt(NbtCompound nbt) {
+        super.writeNbt(nbt);
+            Inventories.writeNbt(nbt, this.inventory);
+    }
+
+    @Override
     public void clear() {
         this.inventory.clear();
     }
+
 }

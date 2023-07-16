@@ -1,44 +1,40 @@
 package net.ugi.sculk_depths.recipe;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
-public class FlumRockCauldronRecipe implements Recipe<SimpleInventory> {
+public class FlumRockCauldronRecipe implements Recipe<Inventory> {
+
+    private final DefaultedList<ItemStack> recipeItems;
+    private final ItemStack outputStack;
     private final Identifier id;
-    private final ItemStack output;
-    private final DefaultedList<Ingredient> recipeItems;
 
 
-    public FlumRockCauldronRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems) {
-        this.id = id;
-        this.output = output;
+    public FlumRockCauldronRecipe(DefaultedList<ItemStack> recipeItems, ItemStack outputStack, Identifier id) {
         this.recipeItems = recipeItems;
+        this.outputStack = outputStack;
+        this.id = id;
     }
 
 
+
     @Override
-    public boolean matches(SimpleInventory inventory, World world) {
-        if(!recipeItems.get(0).test(inventory.getStack(0))) return false;
-
-        if(!recipeItems.get(1).test(inventory.getStack(1))) return false;
-
-        if(!recipeItems.get(2).test(inventory.getStack(2))) return false;
-
-        return true;
+    public boolean matches(Inventory inventory, World world) {
+        if(recipeItems.get(0).getItem() == inventory.getStack(0).getItem() && recipeItems.get(0).getCount() <= inventory.getStack(0).getCount()){
+            inventory.removeStack(0,recipeItems.get(0).getCount());
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public ItemStack craft(SimpleInventory inventory, DynamicRegistryManager registryManager) {
-        return output;
+    public ItemStack craft(Inventory inventory, DynamicRegistryManager registryManager) {
+        return this.getOutput(DynamicRegistryManager.EMPTY).copy();
     }
 
     @Override
@@ -48,7 +44,11 @@ public class FlumRockCauldronRecipe implements Recipe<SimpleInventory> {
 
     @Override
     public ItemStack getOutput(DynamicRegistryManager registryManager) {
-        return output.copy();
+        return outputStack;
+    }
+
+    public DefaultedList<ItemStack> getRecipeItems() {
+        return recipeItems;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class FlumRockCauldronRecipe implements Recipe<SimpleInventory> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return null;
+        return FlumrockCauldronRecipeSerializer.INSTANCE;
     }
 
     @Override
@@ -69,47 +69,8 @@ public class FlumRockCauldronRecipe implements Recipe<SimpleInventory> {
     public static class Type implements RecipeType<FlumRockCauldronRecipe> {
         private Type() { }
         public static final Type INSTANCE = new Type();
-        public static final String ID = "flumrock_cauldron";
+        public static final String ID = "flumrock_cauldron_recipe";
     }
 
-    public static class Serializer implements RecipeSerializer<FlumRockCauldronRecipe> {
-        public static final Serializer INSTANCE = new Serializer();
-        public static final String ID = "flumrock_cauldron";
-        // this is the name given in the json file
 
-        @Override
-        public FlumRockCauldronRecipe read(Identifier id, JsonObject json) {
-            ItemStack output = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "output"));
-
-            JsonArray ingredients = JsonHelper.getArray(json, "ingredients");
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(2, Ingredient.EMPTY);
-
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
-            }
-
-            return new FlumRockCauldronRecipe(id, output, inputs);
-        }
-
-        @Override
-        public FlumRockCauldronRecipe read(Identifier id, PacketByteBuf buf) {
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
-
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromPacket(buf));
-            }
-
-            ItemStack output = buf.readItemStack();
-            return new FlumRockCauldronRecipe(id, output, inputs);
-        }
-
-        @Override
-        public void write(PacketByteBuf buf, FlumRockCauldronRecipe recipe) {
-            buf.writeInt(recipe.getIngredients().size());
-            for (Ingredient ing : recipe.getIngredients()) {
-                ing.write(buf);
-            }
-            buf.writeItemStack(recipe.getOutput(DynamicRegistryManager.EMPTY));
-        }
-    }
 }

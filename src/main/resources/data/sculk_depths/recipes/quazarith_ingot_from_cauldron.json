@@ -1,0 +1,14 @@
+{
+  "type": "sculk_depths:flumrock_cauldron_recipe",
+  "fluid": "kryslum",
+  "ingredient1": "sculk_depths:quazarith_pieces",
+  "ingredient2": "minecraft:diamond",
+  "ingredient3": "minecraft:ancient_debris",
+  "ingredient_counts": [
+    3,
+    3,
+    1
+  ],
+  "outputItem": "sculk_depths:quazarith_ingot",
+  "outputAmount": "1"
+}
