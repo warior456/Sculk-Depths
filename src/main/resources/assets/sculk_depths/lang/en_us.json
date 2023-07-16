@@ -25,6 +25,7 @@
   "block.sculk_depths.valtrox_slab": "Valtrox Slab",
   "block.sculk_depths.valtrox_stairs": "Valtrox Stairs",
   "block.sculk_depths.valtrox_fence": "Valtrox Fence",
+  "block.sculk_depths.valtrox_button": "Valtrox Button",
 
   "block.sculk_depths.dried_valtrox_log": "Dried Valtrox Log",
   "block.sculk_depths.dried_valtrox_planks": "Dried Valtrox Planks",
@@ -32,6 +33,7 @@
   "block.sculk_depths.dried_valtrox_slab": "Dried Valtrox Slab",
   "block.sculk_depths.dried_valtrox_stairs": "Dried Valtrox Stairs",
   "block.sculk_depths.dried_valtrox_fence": "Dried Valtrox Fence",
+  "block.sculk_depths.dried_valtrox_button": "Dried Valtrox Button",
 
   "block.sculk_depths.petrified_valtrox_log": "Petrified Valtrox Log",
   "block.sculk_depths.petrified_valtrox_slates": "Petrified Valtrox Slates",
@@ -39,6 +41,7 @@
   "block.sculk_depths.petrified_valtrox_slab": "Petrified Valtrox Slab",
   "block.sculk_depths.petrified_valtrox_stairs": "Petrified Valtrox Stairs",
   "block.sculk_depths.petrified_valtrox_wall": "Petrified Valtrox Wall",
+  "block.sculk_depths.petrified_valtrox_button": "Petrified Valtrox Button",
 
 
   "block.sculk_depths.flumrock": "Flumrock",
