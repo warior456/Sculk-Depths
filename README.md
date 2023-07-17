@@ -2,6 +2,9 @@
 
 # Sculk Depths
 
+#### We are looking for developers and artists (non paid we don't make money yet)
+#### Interested? join our discord: https://discord.gg/dxANwW23Ub
+
 # Important Notes
 - This mods depends on Geckolib
 - The 1.20 release no longer supports worlds created with older versions. The file "biome3.json" has been removed, causing biome3 to revert to plains. This change does not affect the 1.19 releases, where this biome will continue to be supported (for now).
