@@ -30,7 +30,7 @@ import static net.ugi.sculk_depths.state.property.ModProperties.DIAMOND_LEVEL;
 import static net.ugi.sculk_depths.state.property.ModProperties.QUAZARITH_LEVEL;
 
 
-public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implements BlockEntityProvider{
+public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
 
     public static final IntProperty QUAZARITH = ModProperties.QUAZARITH_LEVEL;
     public static final IntProperty DIAMOND = ModProperties.DIAMOND_LEVEL;
@@ -157,19 +157,15 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implemen
     }
 
     @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return null;
-    }
-
-    @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (state.getBlock() != newState.getBlock()) {
+        if (state.getBlock() != newState.getBlock() && moved == false) {
             DefaultedList<ItemStack> stacks = DefaultedList.ofSize(2, ItemStack.EMPTY);
             stacks.set( 0 , new ItemStack(ModItems.QUAZARITH_PIECES, state.get(QUAZARITH)));
             stacks.set(1 , new ItemStack(Items.DIAMOND, state.get(DIAMOND)));
             ItemScatterer.spawn(world, pos, stacks);
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(state));
-            super.onStateReplaced(state, world, pos, newState, moved);
+
         }
+        super.onStateReplaced(state, world, pos, newState, moved);
     }
 }
