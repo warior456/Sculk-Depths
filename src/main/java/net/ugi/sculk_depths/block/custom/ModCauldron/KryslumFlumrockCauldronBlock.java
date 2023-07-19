@@ -26,6 +26,8 @@ import net.ugi.sculk_depths.state.property.ModProperties;
 import java.util.Map;
 
 import static net.minecraft.block.LeveledCauldronBlock.LEVEL;
+import static net.ugi.sculk_depths.state.property.ModProperties.DIAMOND_LEVEL;
+import static net.ugi.sculk_depths.state.property.ModProperties.QUAZARITH_LEVEL;
 
 
 public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implements BlockEntityProvider{
@@ -87,39 +89,48 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implemen
 
         if(itemStack.getItem() == Items.NETHERITE_HELMET && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 5 && state.get(QUAZARITH) >= 5){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_HELMET);
+            RemoveUsedResources(state, world, pos, 5,5, 2);
             return UpgradeItem(outputItem, player);
         }
 
         if(itemStack.getItem() == Items.NETHERITE_CHESTPLATE && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 8 && state.get(QUAZARITH) >= 8){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_CHESTPLATE);
+            RemoveUsedResources(state, world, pos, 8,8,2);
             return UpgradeItem(outputItem, player);
         }
         if(itemStack.getItem() == Items.NETHERITE_LEGGINGS && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 7 && state.get(QUAZARITH) >= 7){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_LEGGINGS);
+            RemoveUsedResources(state, world, pos, 7,7,2);
             return UpgradeItem(outputItem, player);
         }
         if(itemStack.getItem() == Items.NETHERITE_BOOTS && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 4 && state.get(QUAZARITH) >= 4){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_BOOTS);
+            RemoveUsedResources(state, world, pos, 4,4,2);
             return UpgradeItem(outputItem, player);
         }
         if(itemStack.getItem() == Items.NETHERITE_AXE && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 3 && state.get(QUAZARITH) >= 3){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_AXE);
+            RemoveUsedResources(state, world, pos, 3,3,2);
             return UpgradeItem(outputItem, player);
         }
         if(itemStack.getItem() == Items.NETHERITE_PICKAXE && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 3 && state.get(QUAZARITH) >= 3){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_PICKAXE);
+            RemoveUsedResources(state, world, pos, 3,3, 2);
             return UpgradeItem(outputItem, player);
         }
-        if(itemStack.getItem() == Items.NETHERITE_SHOVEL && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 1 && state.get(QUAZARITH) >= 1){
+        if(itemStack.getItem() == Items.NETHERITE_SHOVEL && state.get(LEVEL) >= 2 && state.get(DIAMOND) >= 1 && state.get(QUAZARITH) >= 1){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_SHOVEL);
+            RemoveUsedResources(state, world, pos, 1,1, 1);
             return UpgradeItem(outputItem, player);
         }
         if(itemStack.getItem() == Items.NETHERITE_SWORD && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 2 && state.get(QUAZARITH) >= 2){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_SWORD);
+            RemoveUsedResources(state, world, pos, 2,2, 2);
             return UpgradeItem(outputItem, player);
         }
         if(itemStack.getItem() == Items.NETHERITE_HOE && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 2 && state.get(QUAZARITH) >= 2){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_HOE);
+            RemoveUsedResources(state, world, pos, 2,2, 2);
             return UpgradeItem(outputItem, player);
         }
 
@@ -134,6 +145,15 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implemen
         }
         player.setStackInHand(Hand.MAIN_HAND, outputItem);
         return ActionResult.SUCCESS;
+    }
+
+    public void RemoveUsedResources(BlockState state, World world, BlockPos pos, int quazarith_pieces, int diamonds, int kryslum){
+        int i = state.get(QUAZARITH_LEVEL) - quazarith_pieces;
+        int j = state.get(DIAMOND_LEVEL) - diamonds;
+        int k = state.get(LEVEL) - kryslum;
+        BlockState blockState = state.with(QUAZARITH_LEVEL, i).with(DIAMOND_LEVEL, j).with(LEVEL, k);
+        world.setBlockState(pos, blockState);
+
     }
 
     @Override
