@@ -19,7 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.block.entity.CauldronBlockEntity;
 import net.ugi.sculk_depths.item.ModItems;
-import net.ugi.sculk_depths.recipe.FlumRockCauldronRecipe;
+
 
 import java.util.Map;
 import java.util.Optional;
