@@ -14,9 +14,11 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 import net.ugi.sculk_depths.block.entity.CauldronBlockEntity;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.state.property.ModProperties;
@@ -142,11 +144,11 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implemen
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof CauldronBlockEntity) {
-                ItemScatterer.spawn(world, pos, (CauldronBlockEntity)blockEntity);
-                world.updateComparators(pos,this);
-            }
+            DefaultedList<ItemStack> stacks = DefaultedList.ofSize(2, ItemStack.EMPTY);
+            stacks.set( 0 , new ItemStack(ModItems.QUAZARITH_PIECES, state.get(QUAZARITH)));
+            stacks.set(1 , new ItemStack(Items.DIAMOND, state.get(DIAMOND)));
+            ItemScatterer.spawn(world, pos, stacks);
+            world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(state));
             super.onStateReplaced(state, world, pos, newState, moved);
         }
     }
