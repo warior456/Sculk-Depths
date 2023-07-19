@@ -3,8 +3,6 @@ package net.ugi.sculk_depths.block.custom.ModCauldron;
 import net.minecraft.block.*;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -12,17 +10,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.block.entity.CauldronBlockEntity;
 import net.ugi.sculk_depths.item.ModItems;
@@ -85,17 +78,9 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implemen
         ActionResult t = ActionResult.FAIL;
         if((itemStack.getItem() == ModItems.QUAZARITH_PIECES || itemStack.getItem() == Items.ANCIENT_DEBRIS || itemStack.getItem() == Items.DIAMOND)){
             //additemtoinventory
-            t = ActionResult.CONSUME;
+            return ActionResult.CONSUME;
         }
 
-        Optional<FlumRockCauldronRecipe> match = world.getRecipeManager()
-                .getFirstMatch(FlumRockCauldronRecipe.Type.INSTANCE, (Inventory) world.getBlockEntity(pos) , world);
-        System.out.println(match);
-        if (match.isPresent()) {
-            // Give the player the item and remove from what he has. Make sure to copy the ItemStack to not ruin it!
-            player.getInventory().offerOrDrop(match.get().getOutput(DynamicRegistryManager.EMPTY).copy());
-            return ActionResult.SUCCESS;
-        }
 
         return ActionResult.FAIL;
 
