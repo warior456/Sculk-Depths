@@ -11,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
@@ -19,6 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.block.entity.CauldronBlockEntity;
 import net.ugi.sculk_depths.item.ModItems;
+import net.ugi.sculk_depths.state.property.ModProperties;
 
 
 import java.util.Map;
@@ -28,6 +31,10 @@ import static net.minecraft.block.LeveledCauldronBlock.LEVEL;
 
 
 public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implements BlockEntityProvider{
+
+    public static final IntProperty QUAZARITH = ModProperties.QUAZARITH_LEVEL;
+    public static final IntProperty DIAMOND = ModProperties.DIAMOND_LEVEL;
+
 
     private final Map<Item, CauldronBehavior> behaviorMap;
 
@@ -62,7 +69,8 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implemen
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(LEVEL);
+        builder.add(LEVEL).add(QUAZARITH).add(DIAMOND);
+
     }
 
 
