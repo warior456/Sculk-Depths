@@ -5,15 +5,12 @@ import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
-import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
@@ -24,15 +21,12 @@ import net.ugi.sculk_depths.block.entity.CauldronBlockEntity;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.state.property.ModProperties;
 
-
 import java.util.Map;
-import java.util.Optional;
 
 import static net.minecraft.block.LeveledCauldronBlock.LEVEL;
-import static net.ugi.sculk_depths.state.property.ModProperties.DIAMOND_LEVEL;
 
 
-public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implements BlockEntityProvider{
+public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implements BlockEntityProvider{ //todo remove blockentity
 
     public static final IntProperty QUAZARITH = ModProperties.QUAZARITH_LEVEL;
     public static final IntProperty DIAMOND = ModProperties.DIAMOND_LEVEL;
@@ -78,7 +72,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implemen
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        ItemStack itemStack = player.getStackInHand(hand);
+        ItemStack itemStack = player.getMainHandStack();
         CauldronBehavior cauldronBehavior = this.behaviorMap.get(itemStack.getItem());
         if(itemStack.getItem() == ModItems.KRYSLUM_BUCKET
                 || itemStack.getItem() == Items.BUCKET
@@ -89,38 +83,55 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implemen
             return cauldronBehavior.interact(state, world, pos, player, hand, itemStack);
         }
 
-        if(itemStack.getItem() == Items.NETHERITE_HELMET && state.get(LEVEL) == 3 && state.get(DIAMOND) == 5 && state.get(QUAZARITH) == 5){
-            player.setStackInHand(hand, ItemUsage.exchangeStack(player.getStackInHand(Hand.MAIN_HAND), player, new ItemStack(ModItems.KRYSLUM_BUCKET)));
-
-
+        if(itemStack.getItem() == Items.NETHERITE_HELMET && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 5 && state.get(QUAZARITH) >= 5){
+            ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_HELMET);
+            return UpgradeItem(outputItem, player);
         }
-        if(itemStack.getItem() == Items.NETHERITE_CHESTPLATE && state.get(LEVEL) == 3 && state.get(DIAMOND) == 8 && state.get(QUAZARITH) == 8){
 
+        if(itemStack.getItem() == Items.NETHERITE_CHESTPLATE && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 8 && state.get(QUAZARITH) >= 8){
+            ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_CHESTPLATE);
+            return UpgradeItem(outputItem, player);
         }
-        if(itemStack.getItem() == Items.NETHERITE_LEGGINGS && state.get(LEVEL) == 3 && state.get(DIAMOND) == 7 && state.get(QUAZARITH) == 7){
-
+        if(itemStack.getItem() == Items.NETHERITE_LEGGINGS && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 7 && state.get(QUAZARITH) >= 7){
+            ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_LEGGINGS);
+            return UpgradeItem(outputItem, player);
         }
-        if(itemStack.getItem() == Items.NETHERITE_BOOTS && state.get(LEVEL) == 3 && state.get(DIAMOND) == 4 && state.get(QUAZARITH) == 4){
-
+        if(itemStack.getItem() == Items.NETHERITE_BOOTS && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 4 && state.get(QUAZARITH) >= 4){
+            ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_BOOTS);
+            return UpgradeItem(outputItem, player);
         }
-        if(itemStack.getItem() == Items.NETHERITE_AXE && state.get(LEVEL) == 3 && state.get(DIAMOND) == 3 && state.get(QUAZARITH) == 3){
-
+        if(itemStack.getItem() == Items.NETHERITE_AXE && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 3 && state.get(QUAZARITH) >= 3){
+            ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_AXE);
+            return UpgradeItem(outputItem, player);
         }
-        if(itemStack.getItem() == Items.NETHERITE_PICKAXE && state.get(LEVEL) == 3 && state.get(DIAMOND) == 3 && state.get(QUAZARITH) == 3){
-
+        if(itemStack.getItem() == Items.NETHERITE_PICKAXE && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 3 && state.get(QUAZARITH) >= 3){
+            ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_PICKAXE);
+            return UpgradeItem(outputItem, player);
         }
-        if(itemStack.getItem() == Items.NETHERITE_SHOVEL && state.get(LEVEL) == 3 && state.get(DIAMOND) == 1 && state.get(QUAZARITH) == 1){
-
+        if(itemStack.getItem() == Items.NETHERITE_SHOVEL && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 1 && state.get(QUAZARITH) >= 1){
+            ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_SHOVEL);
+            return UpgradeItem(outputItem, player);
         }
-        if(itemStack.getItem() == Items.NETHERITE_SWORD && state.get(LEVEL) == 3 && state.get(DIAMOND) == 2 && state.get(QUAZARITH) == 2){
-
+        if(itemStack.getItem() == Items.NETHERITE_SWORD && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 2 && state.get(QUAZARITH) >= 2){
+            ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_SWORD);
+            return UpgradeItem(outputItem, player);
         }
-        if(itemStack.getItem() == Items.NETHERITE_HOE && state.get(LEVEL) == 3 && state.get(DIAMOND) == 2 && state.get(QUAZARITH) == 2){
-
+        if(itemStack.getItem() == Items.NETHERITE_HOE && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 2 && state.get(QUAZARITH) >= 2){
+            ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_HOE);
+            return UpgradeItem(outputItem, player);
         }
 
         return ActionResult.FAIL;
 
+    }
+
+    public ActionResult UpgradeItem(ItemStack outputItem, PlayerEntity player){
+        NbtCompound nbtCompound = player.getMainHandStack().getNbt();
+        if (nbtCompound != null) {
+            outputItem.setNbt(nbtCompound.copy());
+        }
+        player.setStackInHand(Hand.MAIN_HAND, outputItem);
+        return ActionResult.SUCCESS;
     }
 
     @Override
