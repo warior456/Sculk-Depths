@@ -28,7 +28,7 @@ import java.util.Map;
 import static net.minecraft.block.LeveledCauldronBlock.LEVEL;
 
 
-public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implements BlockEntityProvider{ //todo remove blockentity
+public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implements BlockEntityProvider{
 
     public static final IntProperty QUAZARITH = ModProperties.QUAZARITH_LEVEL;
     public static final IntProperty DIAMOND = ModProperties.DIAMOND_LEVEL;
@@ -138,7 +138,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implemen
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new CauldronBlockEntity(pos, state);
+        return null;
     }
 
     @Override
