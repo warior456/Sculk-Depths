@@ -77,6 +77,10 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implemen
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getStackInHand(hand);
         CauldronBehavior cauldronBehavior = this.behaviorMap.get(itemStack.getItem());
+        if(itemStack.getItem() == ModItems.KRYSLUM_BUCKET || itemStack.getItem() == Items.BUCKET) {
+            return cauldronBehavior.interact(state, world, pos, player, hand, itemStack);
+        }
+
 
         ActionResult t = ActionResult.FAIL;
         if((itemStack.getItem() == ModItems.QUAZARITH_PIECES || itemStack.getItem() == Items.ANCIENT_DEBRIS || itemStack.getItem() == Items.DIAMOND)){
@@ -92,7 +96,8 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implemen
             player.getInventory().offerOrDrop(match.get().getOutput(DynamicRegistryManager.EMPTY).copy());
             return ActionResult.SUCCESS;
         }
-        return t;
+
+        return ActionResult.FAIL;
 
     }
 
