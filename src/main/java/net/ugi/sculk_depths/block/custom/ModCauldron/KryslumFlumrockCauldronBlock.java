@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static net.minecraft.block.LeveledCauldronBlock.LEVEL;
+import static net.ugi.sculk_depths.state.property.ModProperties.DIAMOND_LEVEL;
 
 
 public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implements BlockEntityProvider{
@@ -78,17 +79,42 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock implemen
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getStackInHand(hand);
         CauldronBehavior cauldronBehavior = this.behaviorMap.get(itemStack.getItem());
-        if(itemStack.getItem() == ModItems.KRYSLUM_BUCKET || itemStack.getItem() == Items.BUCKET) {
+        if(itemStack.getItem() == ModItems.KRYSLUM_BUCKET
+                || itemStack.getItem() == Items.BUCKET
+                || itemStack.getItem() == ModItems.QUAZARITH_PIECES
+                || itemStack.getItem() == Items.DIAMOND
+                || itemStack.getItem() == ModItems.QUAZARITH_INGOT
+        ) {
             return cauldronBehavior.interact(state, world, pos, player, hand, itemStack);
         }
 
+        if(itemStack.getItem() == Items.NETHERITE_HELMET && state.get(DIAMOND) == 4 && state.get(QUAZARITH) == 4){
 
-        ActionResult t = ActionResult.FAIL;
-        if((itemStack.getItem() == ModItems.QUAZARITH_PIECES || itemStack.getItem() == Items.ANCIENT_DEBRIS || itemStack.getItem() == Items.DIAMOND)){
-            //additemtoinventory
-            return ActionResult.CONSUME;
         }
+        if(itemStack.getItem() == Items.NETHERITE_CHESTPLATE && state.get(DIAMOND) == 4 && state.get(QUAZARITH) == 4){
 
+        }
+        if(itemStack.getItem() == Items.NETHERITE_LEGGINGS && state.get(DIAMOND) == 4 && state.get(QUAZARITH) == 4){
+
+        }
+        if(itemStack.getItem() == Items.NETHERITE_BOOTS && state.get(DIAMOND) == 4 && state.get(QUAZARITH) == 4){
+
+        }
+        if(itemStack.getItem() == Items.NETHERITE_AXE && state.get(DIAMOND) == 4 && state.get(QUAZARITH) == 4){
+
+        }
+        if(itemStack.getItem() == Items.NETHERITE_PICKAXE && state.get(DIAMOND) == 4 && state.get(QUAZARITH) == 4){
+
+        }
+        if(itemStack.getItem() == Items.NETHERITE_SHOVEL && state.get(DIAMOND) == 4 && state.get(QUAZARITH) == 4){
+
+        }
+        if(itemStack.getItem() == Items.NETHERITE_SWORD && state.get(DIAMOND) == 4 && state.get(QUAZARITH) == 4){
+
+        }
+        if(itemStack.getItem() == Items.NETHERITE_BOOTS && state.get(DIAMOND) == 4 && state.get(QUAZARITH) == 4){
+
+        }
 
         return ActionResult.FAIL;
 
