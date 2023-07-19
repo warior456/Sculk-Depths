@@ -69,20 +69,23 @@ public class ModBlocks {
     public static final Block VALTROX_LOG = registerBlock("valtrox_log",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block VALTROX_PLANKS = registerBlock("valtrox_planks",
-            new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
-
     public static final Block VALTROX_WOOD = registerBlock("valtrox_wood",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block VALTROX_SLAB = registerBlock("valtrox_slab",
-            new SlabBlock(FabricBlockSettings.copyOf(Blocks.OAK_SLAB).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
+    public static final Block VALTROX_PLANKS = registerBlock("valtrox_planks",
+            new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block VALTROX_STAIRS = registerBlock("valtrox_stairs",
             new StairsBlock(VALTROX_PLANKS.getDefaultState(), FabricBlockSettings.copyOf(Blocks.OAK_STAIRS).strength(5.0f)), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block VALTROX_SLAB = registerBlock("valtrox_slab",
+            new SlabBlock(FabricBlockSettings.copyOf(Blocks.OAK_SLAB).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
+
     public static final Block VALTROX_FENCE = registerBlock("valtrox_fence",
             new FenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block VALTROX_PRESSURE_PLATE = registerBlock("valtrox_pressure_plate",
+            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING ,FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE) ,  BlockSetType.OAK), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block VALTROX_BUTTON = registerBlock("valtrox_button",
             new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), BlockSetType.OAK, 30, true), ModItemGroup.SCULK_DEPTHS);
@@ -91,21 +94,23 @@ public class ModBlocks {
     public static final Block DRIED_VALTROX_LOG = registerBlock("dried_valtrox_log",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block DRIED_VALTROX_PLANKS = registerBlock("dried_valtrox_planks",
-            new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
-
     public static final Block DRIED_VALTROX_WOOD = registerBlock("dried_valtrox_wood",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block DRIED_VALTROX_SLAB = registerBlock("dried_valtrox_slab",
-            new SlabBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
+    public static final Block DRIED_VALTROX_PLANKS = registerBlock("dried_valtrox_planks",
+            new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block DRIED_VALTROX_STAIRS = registerBlock("dried_valtrox_stairs",
             new StairsBlock(DRIED_VALTROX_PLANKS.getDefaultState(), FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block DRIED_VALTROX_SLAB = registerBlock("dried_valtrox_slab",
+            new SlabBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
+
     public static final Block DRIED_VALTROX_FENCE = registerBlock("dried_valtrox_fence",
             new FenceBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block DRIED_VALTROX_PRESSURE_PLATE = registerBlock("dried_valtrox_pressure_plate",
+            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING ,FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE),  BlockSetType.OAK), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block DRIED_VALTROX_BUTTON = registerBlock("dried_valtrox_button",
             new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), BlockSetType.OAK, 30, true), ModItemGroup.SCULK_DEPTHS);
@@ -114,20 +119,23 @@ public class ModBlocks {
     public static final Block PETRIFIED_VALTROX_LOG = registerBlock("petrified_valtrox_log",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block PETRIFIED_VALTROX_SLATES = registerBlock("petrified_valtrox_slates",
-            new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
-
     public static final Block PETRIFIED_VALTROX_WOOD = registerBlock("petrified_valtrox_wood",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block PETRIFIED_VALTROX_SLAB = registerBlock("petrified_valtrox_slab",
-            new SlabBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+    public static final Block PETRIFIED_VALTROX_SLATES = registerBlock("petrified_valtrox_slates",
+            new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_STAIRS = registerBlock("petrified_valtrox_stairs",
             new StairsBlock(PETRIFIED_VALTROX_SLATES.getDefaultState(), FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block PETRIFIED_VALTROX_SLAB = registerBlock("petrified_valtrox_slab",
+            new SlabBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
     public static final Block PETRIFIED_VALTROX_WALL = registerBlock("petrified_valtrox_wall",
             new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PETRIFIED_VALTROX_PRESSURE_PLATE = registerBlock("petrified_valtrox_pressure_plate",
+            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING ,FabricBlockSettings.copyOf(Blocks.STONE_PRESSURE_PLATE),  BlockSetType.STONE), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_BUTTON = registerBlock("petrified_valtrox_button",
             new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), BlockSetType.STONE, 20, false), ModItemGroup.SCULK_DEPTHS);
