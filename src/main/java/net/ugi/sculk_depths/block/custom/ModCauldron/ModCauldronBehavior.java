@@ -9,21 +9,24 @@ import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
+import net.ugi.sculk_depths.state.property.ModProperties;
 
 import java.util.Map;
 
-import static net.minecraft.block.LeveledCauldronBlock.LEVEL;
 import static net.ugi.sculk_depths.state.property.ModProperties.DIAMOND_LEVEL;
 import static net.ugi.sculk_depths.state.property.ModProperties.QUAZARITH_LEVEL;
 
 
 public interface ModCauldronBehavior {
+
+    public static final IntProperty LEVEL = ModProperties.KRYSLUM_LEVEL;
 
     public static final Map<Item, CauldronBehavior> EMPTY_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap();
     public static final Map<Item, CauldronBehavior> KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap();
@@ -47,7 +50,7 @@ public interface ModCauldronBehavior {
         });
 
         KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.KRYSLUM_BUCKET, (state, world, pos, player, hand, stack) -> {
-            if (state.get(LEVEL) == 3) {
+            if (state.get(LEVEL) == 12) {
                 return ActionResult.PASS;
             }
             if (!world.isClient) {
@@ -62,7 +65,7 @@ public interface ModCauldronBehavior {
         });
 
         KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.QUAZARITH_PIECES, (state, world, pos, player, hand, stack) -> {
-            if (state.get(QUAZARITH_LEVEL) == 64) {
+            if (state.get(QUAZARITH_LEVEL) == 12) {
                 return ActionResult.PASS;
             }
             if (!world.isClient) {
@@ -80,7 +83,7 @@ public interface ModCauldronBehavior {
         });
 
         KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(Items.DIAMOND, (state, world, pos, player, hand, stack) -> {
-            if (state.get(DIAMOND_LEVEL) == 64) {
+            if (state.get(DIAMOND_LEVEL) == 12) {
                 return ActionResult.PASS;
             }
             if (!world.isClient) {
@@ -98,7 +101,7 @@ public interface ModCauldronBehavior {
         });
 
         KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.QUAZARITH_INGOT, (state, world, pos, player, hand, stack) -> {
-            if (state.get(QUAZARITH_LEVEL) > 60 || state.get(DIAMOND_LEVEL) > 60) {
+            if (state.get(QUAZARITH_LEVEL) > 8 || state.get(DIAMOND_LEVEL) > 8) {
                 return ActionResult.PASS;
             }
             if (!world.isClient) {

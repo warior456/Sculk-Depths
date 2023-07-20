@@ -1,13 +1,283 @@
 {
-  "variants": {
-    "level=1": {
-      "model": "sculk_depths:block/kryslum_flumrock_cauldron_level1"
+  "multipart": [
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level1"
+      },
+      "when": {
+        "kryslum": "1"
+      }
     },
-    "level=2": {
-      "model": "sculk_depths:block/kryslum_flumrock_cauldron_level2"
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level2"
+      },
+      "when": {
+        "kryslum": "2"
+      }
     },
-    "level=3": {
-      "model": "sculk_depths:block/kryslum_flumrock_cauldron_full"
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level3"
+      },
+      "when": {
+        "kryslum": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level4"
+      },
+      "when": {
+        "kryslum": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level5"
+      },
+      "when": {
+        "kryslum": "5"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level6"
+      },
+      "when": {
+        "kryslum": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level7"
+      },
+      "when": {
+        "kryslum": "7"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level8"
+      },
+      "when": {
+        "kryslum": "8"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level9"
+      },
+      "when": {
+        "kryslum": "9"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level10"
+      },
+      "when": {
+        "kryslum": "10"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level11"
+      },
+      "when": {
+        "kryslum": "11"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_full"
+      },
+      "when": {
+        "kryslum": "12"
+      }
+    },
+    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "quazarith": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "quazarith": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "quazarith": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "quazarith": "4"
+      }
+    },{
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "quazarith": "5"
+      }
+    },{
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "quazarith": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "quazarith": "7"
+      }
+    },{
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "quazarith": "8"
+      }
+    },{
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "quazarith": "9"
+      }
+    },{
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "quazarith": "10"
+      }
+    },
+    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "quazarith": "11"
+      }
+    },
+    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "quazarith": "12"
+      }
+    },
+    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "diamond": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "diamond": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "diamond": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "diamond": "4"
+      }
+    },    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "diamond": "5"
+      }
+    },    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "diamond": "6"
+      }
+    },    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "diamond": "7"
+      }
+    },    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "diamond": "8"
+      }
+    },
+    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "diamond": "9"
+      }
+    },
+    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "diamond": "10"
+      }
+    },
+    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "diamond": "11"
+      }
+    },
+    {
+      "apply": {
+        "model": ""
+      },
+      "when": {
+        "diamond": "12"
+      }
     }
-  }
+  ]
 }

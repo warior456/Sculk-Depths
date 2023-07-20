@@ -15,8 +15,12 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.ugi.sculk_depths.block.entity.CauldronBlockEntity;
@@ -32,6 +36,8 @@ import static net.ugi.sculk_depths.state.property.ModProperties.QUAZARITH_LEVEL;
 
 public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
 
+    public static final IntProperty LEVEL = ModProperties.KRYSLUM_LEVEL;
+
     public static final IntProperty QUAZARITH = ModProperties.QUAZARITH_LEVEL;
     public static final IntProperty DIAMOND = ModProperties.DIAMOND_LEVEL;
 
@@ -44,10 +50,40 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
         this.setDefaultState(this.stateManager.getDefaultState().with(LEVEL, 1));
     }
 
+    private static final VoxelShape RAYCAST_SHAPE = AbstractCauldronBlock.createCuboidShape(1.5, 2.0, 1.5, 14.5, 16.0, 14.5);
+    protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(VoxelShapes.fullCube(),
+            VoxelShapes.union(
+                    AbstractCauldronBlock.createCuboidShape(0.0, 0.0, 0.0, 16.0, 1.0, 2.0),
+                    AbstractCauldronBlock.createCuboidShape(0.0, 0.0, 14.0, 16.0, 1.0, 16.0),
+                    AbstractCauldronBlock.createCuboidShape(0.0, 0.0, 0.0, 2.0, 1.0, 16.0),
+                    AbstractCauldronBlock.createCuboidShape(14.0, 0.0, 0.0, 16.0, 1.0, 16.0),
+                    AbstractCauldronBlock.createCuboidShape(4.0, 0.0, 2.0, 12.0, 1.0, 14.0),
+                    AbstractCauldronBlock.createCuboidShape(2.0, 0.0, 4.0, 14.0, 1.0, 12.0),
+                    AbstractCauldronBlock.createCuboidShape(0.0, 0.0, 0.0, 16.0, 2.0, 1.0),
+                    AbstractCauldronBlock.createCuboidShape(0.0, 0.0, 15.0, 16.0, 2.0, 16.0),
+                    AbstractCauldronBlock.createCuboidShape(0.0, 0.0, 0.0, 1.0, 2.0, 16.0),
+                    AbstractCauldronBlock.createCuboidShape(15.0, 0.0, 0.0, 16.0, 2.0, 16.0),
+                    AbstractCauldronBlock.createCuboidShape(1.0, 2.0, 1.0, 15.0, 13.0, 15.0),
+                    AbstractCauldronBlock.createCuboidShape(0.0, 13.0, 0.0, 16.0, 15.0, 1.0),
+                    AbstractCauldronBlock.createCuboidShape(0.0, 13.0, 15.0, 16.0, 15.0, 16.0),
+                    AbstractCauldronBlock.createCuboidShape(0.0, 13.0, 0.0, 1.0, 15.0, 16.0),
+                    AbstractCauldronBlock.createCuboidShape(15.0, 13.0, 0.0, 16.0, 15.0, 16.0),
+                    AbstractCauldronBlock.createCuboidShape(1.0, 15.0, 1.0, 15.0, 16.0, 15.0),
+                    RAYCAST_SHAPE), BooleanBiFunction.ONLY_FIRST);
+
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return OUTLINE_SHAPE;
+    }
+
+    @Override
+    public VoxelShape getRaycastShape(BlockState state, BlockView world, BlockPos pos) {
+        return RAYCAST_SHAPE;
+    }
 
     @Override
     public boolean isFull(BlockState state) {
-        return state.get(LEVEL) == 3;
+        return state.get(LEVEL) == 12;
     }
 
     @Override
@@ -87,49 +123,54 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
             return cauldronBehavior.interact(state, world, pos, player, hand, itemStack);
         }
 
-        if(itemStack.getItem() == Items.NETHERITE_HELMET && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 5 && state.get(QUAZARITH) >= 5){
+        if(itemStack.getItem() == Items.NETHERITE_HELMET && state.get(LEVEL) > 5 && state.get(DIAMOND) >= 5 && state.get(QUAZARITH) >= 5){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_HELMET);
-            RemoveUsedResources(state, world, pos, 5,5, 2);
+            RemoveUsedResources(state, world, pos, 5,5, 5);
             return UpgradeItem(outputItem, player);
         }
-        if(itemStack.getItem() == Items.NETHERITE_CHESTPLATE && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 8 && state.get(QUAZARITH) >= 8){
+        if(itemStack.getItem() == Items.NETHERITE_CHESTPLATE && state.get(LEVEL) > 8 && state.get(DIAMOND) >= 8 && state.get(QUAZARITH) >= 8){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_CHESTPLATE);
-            RemoveUsedResources(state, world, pos, 8,8,2);
+            RemoveUsedResources(state, world, pos, 8,8,8);
             return UpgradeItem(outputItem, player);
         }
-        if(itemStack.getItem() == Items.NETHERITE_LEGGINGS && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 7 && state.get(QUAZARITH) >= 7){
+        if(itemStack.getItem() == Items.NETHERITE_LEGGINGS && state.get(LEVEL) > 7 && state.get(DIAMOND) >= 7 && state.get(QUAZARITH) >= 7){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_LEGGINGS);
-            RemoveUsedResources(state, world, pos, 7,7,2);
+            RemoveUsedResources(state, world, pos, 7,7,7);
             return UpgradeItem(outputItem, player);
         }
-        if(itemStack.getItem() == Items.NETHERITE_BOOTS && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 4 && state.get(QUAZARITH) >= 4){
+        if(itemStack.getItem() == Items.NETHERITE_BOOTS && state.get(LEVEL) > 4 && state.get(DIAMOND) >= 4 && state.get(QUAZARITH) >= 4){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_BOOTS);
-            RemoveUsedResources(state, world, pos, 4,4,2);
+            RemoveUsedResources(state, world, pos, 4,4,4);
             return UpgradeItem(outputItem, player);
         }
-        if(itemStack.getItem() == Items.NETHERITE_AXE && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 3 && state.get(QUAZARITH) >= 3){
+        if(itemStack.getItem() == Items.NETHERITE_AXE && state.get(LEVEL) > 3 && state.get(DIAMOND) >= 3 && state.get(QUAZARITH) >= 3){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_AXE);
-            RemoveUsedResources(state, world, pos, 3,3,2);
+            RemoveUsedResources(state, world, pos, 3,3,3);
             return UpgradeItem(outputItem, player);
         }
-        if(itemStack.getItem() == Items.NETHERITE_PICKAXE && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 3 && state.get(QUAZARITH) >= 3){
+        if(itemStack.getItem() == Items.NETHERITE_PICKAXE && state.get(LEVEL) > 3 && state.get(DIAMOND) >= 3 && state.get(QUAZARITH) >= 3){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_PICKAXE);
-            RemoveUsedResources(state, world, pos, 3,3, 2);
+            RemoveUsedResources(state, world, pos, 3,3, 3);
             return UpgradeItem(outputItem, player);
         }
-        if(itemStack.getItem() == Items.NETHERITE_SHOVEL && state.get(LEVEL) >= 2 && state.get(DIAMOND) >= 1 && state.get(QUAZARITH) >= 1){
+        if(itemStack.getItem() == Items.NETHERITE_SHOVEL && state.get(LEVEL) > 1 && state.get(DIAMOND) >= 1 && state.get(QUAZARITH) >= 1){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_SHOVEL);
             RemoveUsedResources(state, world, pos, 1,1, 1);
             return UpgradeItem(outputItem, player);
         }
-        if(itemStack.getItem() == Items.NETHERITE_SWORD && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 2 && state.get(QUAZARITH) >= 2){
+        if(itemStack.getItem() == Items.NETHERITE_SWORD && state.get(LEVEL) > 2 && state.get(DIAMOND) >= 2 && state.get(QUAZARITH) >= 2){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_SWORD);
             RemoveUsedResources(state, world, pos, 2,2, 2);
             return UpgradeItem(outputItem, player);
         }
-        if(itemStack.getItem() == Items.NETHERITE_HOE && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 2 && state.get(QUAZARITH) >= 2){
+        if(itemStack.getItem() == Items.NETHERITE_HOE && state.get(LEVEL) > 2 && state.get(DIAMOND) >= 2 && state.get(QUAZARITH) >= 2){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_HOE);
             RemoveUsedResources(state, world, pos, 2,2, 2);
+            return UpgradeItem(outputItem, player);
+        }
+        if(itemStack.getItem() == Items.AIR && state.get(LEVEL) > 4 && state.get(DIAMOND) >= 4 && state.get(QUAZARITH) >= 4){
+            ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_INGOT);
+            RemoveUsedResources(state, world, pos, 4,4, 4);
             return UpgradeItem(outputItem, player);
         }
 
