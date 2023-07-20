@@ -101,7 +101,6 @@ public class ModItems {
     }
 
     public static void registerModItems() {
-        SculkDepths.LOGGER.info("Registering Mod items for" + SculkDepths.MOD_ID);
         addItemsToItemGroup();
     }
 }

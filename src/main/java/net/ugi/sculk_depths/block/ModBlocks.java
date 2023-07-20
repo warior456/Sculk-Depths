@@ -232,6 +232,5 @@ public class ModBlocks {
     }
 
     public static void registerModBlocks() {
-        SculkDepths.LOGGER.info("Registering ModBlocks for " + SculkDepths.MOD_ID);
     }
 }

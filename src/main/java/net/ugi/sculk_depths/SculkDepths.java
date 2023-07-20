@@ -26,18 +26,27 @@ public class SculkDepths implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        SculkDepths.LOGGER.info("Registering Itemgroups for " + SculkDepths.MOD_ID);
         ModItemGroup.registerItemgroups();
+        SculkDepths.LOGGER.info("Registering items for " + SculkDepths.MOD_ID);
         ModItems.registerModItems();
+        SculkDepths.LOGGER.info("Registering Blocks for " + SculkDepths.MOD_ID);
         ModBlocks.registerModBlocks();
+        SculkDepths.LOGGER.info("Registering Portals for " + SculkDepths.MOD_ID);
         Portals.registerModPortals();
+        SculkDepths.LOGGER.info("Registering Sounds for " + SculkDepths.MOD_ID);
         ModSounds.registerModSounds();
+        SculkDepths.LOGGER.info("Registering LootTables for " + SculkDepths.MOD_ID);
         ModLootTableModifiers.modifyLootTables();
+        SculkDepths.LOGGER.info("Registering ModCauldronBehavior for " + SculkDepths.MOD_ID);
         ModCauldronBehavior.registerBehavior();
-        ModRecipes.register();
-        ModBlockEntities.registerBlockEntityTypes();
-        ModBlockEntities.registerBlockEntities();
+        //SculkDepths.LOGGER.info("Registering Recipes for " + SculkDepths.MOD_ID);
+        //ModRecipes.register();
+        //SculkDepths.LOGGER.info("Registering BlockEntities for " + SculkDepths.MOD_ID);
+        //ModBlockEntities.registerBlockEntities();
+        SculkDepths.LOGGER.info("Registering Entities for " + SculkDepths.MOD_ID);
         FabricDefaultAttributeRegistry.register(ModEntities.GLOMPER, GlomperEntity.setAttributes());
 
-        LOGGER.info("sculk_depths has loaded");
+        LOGGER.info(SculkDepths.MOD_ID + " has loaded");
     }
 }
