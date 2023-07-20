@@ -98,7 +98,7 @@ public interface ModCauldronBehavior {
         });
 
         KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.QUAZARITH_INGOT, (state, world, pos, player, hand, stack) -> {
-            if (state.get(QUAZARITH_LEVEL) > 60 && state.get(DIAMOND_LEVEL) > 60) {
+            if (state.get(QUAZARITH_LEVEL) > 60 || state.get(DIAMOND_LEVEL) > 60) {
                 return ActionResult.PASS;
             }
             if (!world.isClient) {

@@ -92,7 +92,6 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
             RemoveUsedResources(state, world, pos, 5,5, 2);
             return UpgradeItem(outputItem, player);
         }
-
         if(itemStack.getItem() == Items.NETHERITE_CHESTPLATE && state.get(LEVEL) >= 3 && state.get(DIAMOND) >= 8 && state.get(QUAZARITH) >= 8){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_CHESTPLATE);
             RemoveUsedResources(state, world, pos, 8,8,2);
