@@ -14,6 +14,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.state.property.ModProperties;
@@ -112,8 +113,8 @@ public interface ModCauldronBehavior {
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
 
-                int i = state.get(QUAZARITH_LEVEL) + 4;
-                int j = state.get(DIAMOND_LEVEL) + 4;
+                int i = state.get(QUAZARITH_LEVEL) + SculkDepths.CONFIG.quazarith_ingot_quazarith_pieces_cost;
+                int j = state.get(DIAMOND_LEVEL) + SculkDepths.CONFIG.quazarith_ingot_diamond_cost;
                 BlockState blockState = state.with(QUAZARITH_LEVEL, i).with(DIAMOND_LEVEL, j);
                 world.setBlockState(pos, blockState);
 

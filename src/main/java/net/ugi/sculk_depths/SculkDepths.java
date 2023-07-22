@@ -5,6 +5,8 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.ugi.sculk_depths.block.ModBlockEntities;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
+import net.ugi.sculk_depths.config.Config;
+import net.ugi.sculk_depths.config.ConfigHandler;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import net.ugi.sculk_depths.item.ModItemGroup;
@@ -18,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 public class SculkDepths implements ModInitializer {
     public static final String MOD_ID = "sculk_depths";
+    public static ConfigHandler CONFIG;
     public static final Logger LOGGER = LoggerFactory.getLogger("sculk_depths");
 
 
@@ -26,6 +29,8 @@ public class SculkDepths implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        SculkDepths.LOGGER.info("Loading Config for " + SculkDepths.MOD_ID);
+        Config.loadConfig();
         SculkDepths.LOGGER.info("Registering Itemgroups for " + SculkDepths.MOD_ID);
         ModItemGroup.registerItemgroups();
         SculkDepths.LOGGER.info("Registering items for " + SculkDepths.MOD_ID);
