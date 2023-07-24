@@ -5,6 +5,8 @@ public class ConfigHandler {
     public double glomper_health = 20;
     public float glomper_damage = 20;
 
+    public int activate_portal_durability_usage = 15;
+
     //quazarith helmet
     public int quazarith_helmet_kryslum_cost = 5;
     public int quazarith_helmet_diamond_cost = 5;

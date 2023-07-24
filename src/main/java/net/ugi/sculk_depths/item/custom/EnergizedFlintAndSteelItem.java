@@ -16,6 +16,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 
 import static net.ugi.sculk_depths.portal.Portals.SOUL_FIRE;
@@ -37,7 +38,7 @@ public class EnergizedFlintAndSteelItem extends Item {
         if(portalLighted){
             ItemStack itemStack = context.getStack();
             if (playerEntity instanceof ServerPlayerEntity) {
-                itemStack.damage(15, playerEntity, p -> p.sendToolBreakStatus(context.getHand())); //todo config damage amount
+                itemStack.damage(SculkDepths.CONFIG.activate_portal_durability_usage, playerEntity, p -> p.sendToolBreakStatus(context.getHand()));
             }
             return ActionResult.success(world.isClient());
         }
