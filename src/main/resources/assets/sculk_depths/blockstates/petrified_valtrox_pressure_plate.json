@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "sculk_depths:block/petrified_valtrox_pressure_plate"
+    },
+    "powered=true": {
+      "model": "sculk_depths:block/petrified_valtrox_pressure_plate_down"
+    }
+  }
+}
