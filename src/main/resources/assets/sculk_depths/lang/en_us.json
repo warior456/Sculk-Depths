@@ -45,7 +45,13 @@
 
 
   "block.sculk_depths.flumrock": "Flumrock",
+
   "itemgroup.sculk_depths" : "Sculk Depths",
+  "block.sculk_depths.kryslum": "Kryslum",
+  "biome.sculk_depths.sculk_caves": "Sculk Caves",
+  "biome.sculk_depths.cephlera_caves": "Cephlera Caves",
+  "biome.sculk_depths.petrified_valtrox_forest": "Petrified Valtrox Forest",
+  "biome.sculk_depths.dried_valtrox_forest": "Dried Valtrox Forest",
 
   "block.sculk_depths.quazarith_ore": "Quazarith Ore",
   "item.sculk_depths.quazarith_pieces": "Quazarith Pieces",
