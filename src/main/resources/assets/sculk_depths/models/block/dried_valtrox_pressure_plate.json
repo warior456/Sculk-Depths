@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/pressure_plate_up",
+  "textures": {
+    "texture": "sculk_depths:block/dried_valtrox_planks"
+  }
+}

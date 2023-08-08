@@ -26,6 +26,7 @@
   "block.sculk_depths.valtrox_stairs": "Valtrox Stairs",
   "block.sculk_depths.valtrox_fence": "Valtrox Fence",
   "block.sculk_depths.valtrox_button": "Valtrox Button",
+  "block.sculk_depths.valtrox_pressure_plate": "Valtrox Pressure Plate",
 
   "block.sculk_depths.dried_valtrox_log": "Dried Valtrox Log",
   "block.sculk_depths.dried_valtrox_planks": "Dried Valtrox Planks",
@@ -34,6 +35,7 @@
   "block.sculk_depths.dried_valtrox_stairs": "Dried Valtrox Stairs",
   "block.sculk_depths.dried_valtrox_fence": "Dried Valtrox Fence",
   "block.sculk_depths.dried_valtrox_button": "Dried Valtrox Button",
+  "block.sculk_depths.dried_valtrox_pressure_plate": "Dried Valtrox Pressure Plate",
 
   "block.sculk_depths.petrified_valtrox_log": "Petrified Valtrox Log",
   "block.sculk_depths.petrified_valtrox_slates": "Petrified Valtrox Slates",
@@ -42,10 +44,17 @@
   "block.sculk_depths.petrified_valtrox_stairs": "Petrified Valtrox Stairs",
   "block.sculk_depths.petrified_valtrox_wall": "Petrified Valtrox Wall",
   "block.sculk_depths.petrified_valtrox_button": "Petrified Valtrox Button",
+  "block.sculk_depths.petrified_valtrox_pressure_plate": "Petrified Valtrox Pressure Plate",
 
 
   "block.sculk_depths.flumrock": "Flumrock",
+
   "itemgroup.sculk_depths" : "Sculk Depths",
+  "block.sculk_depths.kryslum": "Kryslum",
+  "biome.sculk_depths.sculk_caves": "Sculk Caves",
+  "biome.sculk_depths.cephlera_caves": "Cephlera Caves",
+  "biome.sculk_depths.petrified_valtrox_forest": "Petrified Valtrox Forest",
+  "biome.sculk_depths.dried_valtrox_forest": "Dried Valtrox Forest",
 
   "block.sculk_depths.quazarith_ore": "Quazarith Ore",
   "item.sculk_depths.quazarith_pieces": "Quazarith Pieces",
