@@ -3,7 +3,7 @@
     "type": "minecraft:tree",
     "config": {
       "ignore_vines": true,
-      "force_dirt": false,
+      "force_dirt": true,
       "minimum_size": {
         "type": "minecraft:three_layers_feature_size",
         "min_clipped_height": 0,

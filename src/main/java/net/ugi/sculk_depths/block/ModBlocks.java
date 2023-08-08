@@ -4,7 +4,9 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
+import net.minecraft.block.enums.Instrument;
 import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -12,7 +14,10 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockView;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.custom.*;
 import net.ugi.sculk_depths.block.custom.ModCauldron.FlumrockCauldronBlock;
@@ -206,6 +211,8 @@ public class ModBlocks {
     //ores
     public static final Block QUAZARITH_ORE = registerBlock("quazarith_ore",
             new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).hardness(6.0f).resistance(10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+    //crystals
+    public static final Block WHITE_CRYSTAL = registerBlock("crystal", ModBlocks.createCrystalBlock(DyeColor.WHITE), ModItemGroup.SCULK_DEPTHS);
 
     //fluids
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new FluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.copyOf(Blocks.WATER).replaceable().noCollision().strength(100.0f).pistonBehavior(PistonBehavior.DESTROY).dropsNothing().liquid().solid().sounds(BlockSoundGroup.SCULK)), ModItemGroup.SCULK_DEPTHS);
@@ -213,6 +220,9 @@ public class ModBlocks {
     public static final Block FLUMROCK_CAULDRON = registerBlock("flumrock_cauldron", new FlumrockCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)), ModItemGroup.SCULK_DEPTHS);
     public static final Block KRYSLUM_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("kryslum_flumrock_cauldron", new KryslumFlumrockCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON), ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR), ModItemGroup.SCULK_DEPTHS);
 
+    private static CrystalBlock createCrystalBlock(DyeColor color) {
+        return new CrystalBlock(color, FabricBlockSettings.copyOf(Blocks.GLASS));
+    }
     private static Block registerBlock(String name, Block block, RegistryKey<ItemGroup> group) {
         registerBlockItem(name, block, group);
         return Registry.register(Registries.BLOCK, new Identifier(SculkDepths.MOD_ID, name), block);
