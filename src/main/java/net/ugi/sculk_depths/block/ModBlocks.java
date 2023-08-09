@@ -221,7 +221,7 @@ public class ModBlocks {
     public static final Block KRYSLUM_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("kryslum_flumrock_cauldron", new KryslumFlumrockCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON), ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR), ModItemGroup.SCULK_DEPTHS);
 
     private static CrystalBlock createCrystalBlock(DyeColor color) {
-        return new CrystalBlock(color, FabricBlockSettings.copyOf(Blocks.GLASS));
+        return new CrystalBlock(color, FabricBlockSettings.copyOf(Blocks.GLASS).luminance(10));
     }
     private static Block registerBlock(String name, Block block, RegistryKey<ItemGroup> group) {
         registerBlockItem(name, block, group);
