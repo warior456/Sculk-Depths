@@ -3,7 +3,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "sculk_depths:underground_lab/underground_lab_void",
+        "location": "sculk_depths:underground_lab/underground_lab",
         "processors": {
           "processors": []
         },
