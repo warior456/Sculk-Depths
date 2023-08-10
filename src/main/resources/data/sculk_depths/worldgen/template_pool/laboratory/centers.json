@@ -2,47 +2,21 @@
   "elements": [
     {
       "element": {
-        "element_type": "minecraft:single_pool_element",
+        "element_type": "minecraft:legacy_single_pool_element",
         "location": "sculk_depths:laboratory/centers/center_01",
-        "processors": {
-          "processors": []
-        },
+        "processors": "sculk_depths:enriched_soil_in_lab_center",
         "projection": "rigid"
       },
-      "weight": 1
+      "weight": 10
     },
     {
       "element": {
-        "element_type": "minecraft:single_pool_element",
+        "element_type": "minecraft:legacy_single_pool_element",
         "location": "sculk_depths:laboratory/centers/center_02",
-        "processors": {
-          "processors": []
-        },
+        "processors": "sculk_depths:enriched_soil_in_lab_center",
         "projection": "rigid"
       },
-      "weight": 1
-    },
-    {
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "sculk_depths:laboratory/centers/center_03",
-        "processors": {
-          "processors": []
-        },
-        "projection": "rigid"
-      },
-      "weight": 1
-    },
-    {
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "sculk_depths:laboratory/centers/center_04",
-        "processors": {
-          "processors": []
-        },
-        "projection": "rigid"
-      },
-      "weight": 1
+      "weight": 10
     }
   ],
   "fallback": "minecraft:empty"

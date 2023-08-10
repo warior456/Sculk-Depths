@@ -3,7 +3,7 @@
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
-        "location": "sculk_depths:laboratory/corridors/3_segment_corridor",
+        "location": "sculk_depths:laboratory/generators/kryslum_tank_1",
         "processors": {
           "processors": []
         },
@@ -14,7 +14,7 @@
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
-        "location": "sculk_depths:laboratory/corridors/4_segment_corridor",
+        "location": "sculk_depths:laboratory/generators/kryslum_tank_2",
         "processors": {
           "processors": []
         },
@@ -25,7 +25,7 @@
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
-        "location": "sculk_depths:laboratory/corridors/5_segment_corridor",
+        "location": "sculk_depths:laboratory/generators/kryslum_tank_3",
         "processors": {
           "processors": []
         },
@@ -36,7 +36,7 @@
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
-        "location": "sculk_depths:laboratory/corridors/6_segment_corridor",
+        "location": "sculk_depths:laboratory/generators/kryslum_tank_4",
         "processors": {
           "processors": []
         },
@@ -47,58 +47,91 @@
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
-        "location": "sculk_depths:laboratory/corridors/3_way_corridor",
+        "location": "sculk_depths:laboratory/generators/kryslum_tank_5",
         "processors": {
           "processors": []
         },
         "projection": "rigid"
       },
-      "weight": 2
+      "weight": 10
     },
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
-        "location": "sculk_depths:laboratory/corridors/4_way_corridor",
+        "location": "sculk_depths:laboratory/generators/kryslum_tank_6",
         "processors": {
           "processors": []
         },
         "projection": "rigid"
       },
-      "weight": 2
+      "weight": 10
     },
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
-        "location": "sculk_depths:laboratory/corridors/corridor_turn",
+        "location": "sculk_depths:laboratory/generators/kryslum_tank_7",
         "processors": {
           "processors": []
         },
         "projection": "rigid"
       },
-      "weight": 5
+      "weight": 10
     },
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
-        "location": "sculk_depths:laboratory/corridors/corridor_end",
+        "location": "sculk_depths:laboratory/generators/kryslum_tank_8",
         "processors": {
           "processors": []
         },
         "projection": "rigid"
       },
-      "weight": 2
+      "weight": 10
     },
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
-        "location": "sculk_depths:laboratory/inside_buildings/library",
+        "location": "sculk_depths:laboratory/generators/kryslum_tank_9",
         "processors": {
           "processors": []
         },
         "projection": "rigid"
       },
-      "weight": 4
+      "weight": 10
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "sculk_depths:laboratory/generators/kryslum_tank_10",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 10
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "sculk_depths:laboratory/generators/kryslum_tank_11",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 10
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "sculk_depths:laboratory/generators/kryslum_tank_12",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 10
     }
   ],
-  "fallback": "sculk_depths:laboratory/corridor_ends"
+  "fallback": "minecraft:empty"
 }

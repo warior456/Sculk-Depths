@@ -1,0 +1,35 @@
+{
+  "processors": [
+    {
+      "processor_type": "minecraft:rule",
+      "rules": [
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:random_block_match",
+            "block": "minecraft:dark_oak_wood",
+            "probability": 0.5
+          },
+          "output_state": {
+            "Name": "sculk_depths:kryslum_enriched_soil"
+          }
+        },
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:random_block_match",
+            "block": "minecraft:dark_oak_wood",
+            "probability": 1
+          },
+          "output_state": {
+            "Name": "sculk_depths:crumbling_dirt"
+          }
+        }
+      ]
+    }
+  ]
+}
