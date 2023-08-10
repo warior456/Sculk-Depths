@@ -117,6 +117,21 @@
       "heightmap": "OCEAN_FLOOR"
     },
     {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "offset": [
+          0,
+          -1,
+          0
+        ],
+        "blocks": [
+          "sculk_depths:crumbling_dirt",
+          "minecraft:deepslate"
+        ]
+      }
+    },
+    {
       "type": "minecraft:biome"
     }
   ]

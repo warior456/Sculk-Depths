@@ -2,10 +2,10 @@
   "placement": {
     "type": "minecraft:random_spread",
     "salt": 915487804,
-    "frequency_reduction_method": "legacy_type_2",
-    "frequency": 1,
-    "spacing": 5,
-    "separation": 4
+    "frequency_reduction_method": "legacy_type_3",
+    "frequency": 0.5,
+    "spacing": 10,
+    "separation": 8
   },
   "structures": [
     {

@@ -13,7 +13,7 @@
     },
     {
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
+        "element_type": "minecraft:single_pool_element",
         "location": "sculk_depths:laboratory/corridors/short_corridor",
         "processors": {
           "processors": []
@@ -24,7 +24,7 @@
     },
     {
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
+        "element_type": "minecraft:single_pool_element",
         "location": "sculk_depths:laboratory/corridors/crossing_corridor",
         "processors": {
           "processors": []
