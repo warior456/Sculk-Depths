@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "sculk_depths:petrified_valtrox_slates"
+    }
+  },
+  "result": {
+    "item": "sculk_depths:petrified_valtrox_pressure_plate"
+  }
+}
