@@ -141,7 +141,7 @@
         },
         "projection": "rigid"
       },
-      "weight": 6
+      "weight": 8
     },
     {
       "element": {
@@ -152,7 +152,7 @@
         },
         "projection": "rigid"
       },
-      "weight": 6
+      "weight": 8
     },
     {
       "element": {
@@ -163,7 +163,7 @@
         },
         "projection": "rigid"
       },
-      "weight": 15
+      "weight": 10
     },
     {
       "element": {
@@ -174,7 +174,7 @@
         },
         "projection": "rigid"
       },
-      "weight": 6
+      "weight": 15
     },
     {
       "element": {
@@ -185,8 +185,8 @@
         },
         "projection": "rigid"
       },
-      "weight": 12
+      "weight": 20
     }
   ],
-  "fallback": "sculk_depths:laboratory/corridor_ends"
+  "fallback": "sculk_depths:laboratory/flat_end"
 }

@@ -23,5 +23,5 @@
       "weight": 1
     }
   ],
-  "fallback": "sculk_depths:laboratory/flat_window"
+  "fallback": "minecraft:empty"
 }
