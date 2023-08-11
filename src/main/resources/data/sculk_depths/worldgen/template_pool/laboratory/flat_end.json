@@ -3,7 +3,7 @@
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
-        "location": "sculk_depths:laboratory/corridors/corridor_flat_end",
+        "location": "sculk_depths:laboratory/corridors/corridor_flat_wall",
         "processors": {
           "processors": []
         },
