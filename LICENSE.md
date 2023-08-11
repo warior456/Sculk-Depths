@@ -17,6 +17,8 @@
 7. Configuration files, which refers to
     1. Files ending in `.yml`, `.toml`, and `.mcmeta`
     2. Files named `fabric.mod.json` or `mods.toml` or `quilt.mod.json`
+8. Exceptions are:
+    1. Files ending in `.nbt`
 
 ### 1. Code
   Per the definitions above, Code is licensed under the “MIT” License, found below
