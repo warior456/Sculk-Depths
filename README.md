@@ -10,6 +10,8 @@
 - The 1.20 release no longer supports worlds created with older versions. The file "biome3.json" has been removed, causing biome3 to revert to plains. This change does not affect the 1.19 releases, where this biome will continue to be supported (for now).
 
 # ABOUT
+[Wiki](https://github.com/warior456/Sculk-Depths/wiki)
+
 This mod adds a new dimension called "Sculk Depths" to Minecraft.
 
 To access this dimension, follow these steps:
