@@ -14,6 +14,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 
 public class KryslumEnrichedSoilBLock extends FarmlandBlock {
 
@@ -23,11 +24,15 @@ public class KryslumEnrichedSoilBLock extends FarmlandBlock {
 
     public KryslumEnrichedSoilBLock(AbstractBlock.Settings settings) {
         super(settings);
-        this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(MOISTURE, MAX_MOISTURE));
+        this.setDefaultState((this.stateManager.getDefaultState()).with(MOISTURE, MAX_MOISTURE));
     }
 
 
 
+    @Override
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        return true;
+    }
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (direction == Direction.UP && !state.canPlaceAt(world, pos)) {
@@ -39,10 +44,7 @@ public class KryslumEnrichedSoilBLock extends FarmlandBlock {
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        if (!this.getDefaultState().canPlaceAt(ctx.getWorld(), ctx.getBlockPos())) {
-            return Blocks.DIRT.getDefaultState();
-        }
-        return super.getPlacementState(ctx);
+        return this.getDefaultState();
     }
 
 
@@ -69,5 +71,4 @@ public class KryslumEnrichedSoilBLock extends FarmlandBlock {
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(MOISTURE);
     }
-
 }
