@@ -31,7 +31,7 @@ When entering this dimension, it is recommended to bring a netherite pickaxe as 
 - 2 New Structures:
   - A Laboratory
   - An underground Lab
-- A new hostile mob: The Glomper. It attacks players using an elytra, so be careful while flying around!
+- A new mob: The Glomper. It attacks players using an elytra, so be careful while flying around!
 - Energy Essence drops when the warden kills a passive mob or when the warden is killed, this is used to craft an Energized Flint and Steel to open the portal.
 - Energized Flint and Steel: can light most blocks with Soul Fire and lights the portal
 - new blocks:
