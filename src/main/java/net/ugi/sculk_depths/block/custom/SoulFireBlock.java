@@ -1,15 +1,14 @@
 package net.ugi.sculk_depths.block.custom;
 
 
-import net.kyrptonaught.customportalapi.portal.PortalPlacer;
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.AbstractFireBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-
-import static net.ugi.sculk_depths.portal.Portals.SOUL_FIRE;
 
 
 public class SoulFireBlock extends AbstractFireBlock {

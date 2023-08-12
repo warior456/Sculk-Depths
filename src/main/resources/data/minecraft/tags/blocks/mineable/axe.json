@@ -7,12 +7,14 @@
     "sculk_depths:valtrox_slab",
     "sculk_depths:valtrox_stairs",
     "sculk_depths:valtrox_fence",
+    "sculk_depths:valtrox_button",
 
     "sculk_depths:dried_valtrox_log",
     "sculk_depths:dried_valtrox_planks",
     "sculk_depths:dried_valtrox_wood",
     "sculk_depths:dried_valtrox_slab",
     "sculk_depths:dried_valtrox_stairs",
-    "sculk_depths:dried_valtrox_fence"
+    "sculk_depths:dried_valtrox_fence",
+    "sculk_depths:dried_valtrox_button"
   ]
 }

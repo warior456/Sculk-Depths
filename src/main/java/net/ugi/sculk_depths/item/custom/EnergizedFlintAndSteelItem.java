@@ -5,7 +5,6 @@ import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.FlintAndSteelItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -17,6 +16,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 
 import static net.ugi.sculk_depths.portal.Portals.SOUL_FIRE;
@@ -35,11 +35,10 @@ public class EnergizedFlintAndSteelItem extends Item {
         BlockState blockState = world.getBlockState(blockPos = context.getBlockPos());
 
         boolean portalLighted = PortalPlacer.attemptPortalLight(world, blockPos.offset(context.getSide()), SOUL_FIRE);
-        System.out.println(portalLighted);
         if(portalLighted){
             ItemStack itemStack = context.getStack();
             if (playerEntity instanceof ServerPlayerEntity) {
-                itemStack.damage(15, playerEntity, p -> p.sendToolBreakStatus(context.getHand())); //todo config damage amount
+                itemStack.damage(SculkDepths.CONFIG.activate_portal_durability_usage, playerEntity, p -> p.sendToolBreakStatus(context.getHand()));
             }
             return ActionResult.success(world.isClient());
         }

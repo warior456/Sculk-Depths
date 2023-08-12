@@ -7,8 +7,8 @@
     "fog_color": 853299,
     "water_color": 928354,
     "water_fog_color": 328995,
-    "grass_color": 596558,
-    "foliage_color": 596558,
+    "grass_color": 6448752,
+    "foliage_color": 6448752,
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
       "tick_delay": 6000,
@@ -38,6 +38,10 @@
     ]
   },
   "features": [
+    [],
+    [],
+    [],
+    [],
     [
       "sculk_depths:petrified_valtrox"
     ]

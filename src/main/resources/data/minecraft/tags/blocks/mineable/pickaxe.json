@@ -12,6 +12,7 @@
     "sculk_depths:umbrusk_brick_wall",
 
     "sculk_depths:flumrock",
+    "sculk_depths:flumrock_cauldron",
 
     "sculk_depths:quazarith_ore",
 
@@ -21,11 +22,13 @@
     "sculk_depths:petrified_valtrox_slab",
     "sculk_depths:petrified_valtrox_stairs",
     "sculk_depths:petrified_valtrox_wall",
+    "sculk_depths:petrified_valtrox_button",
 
     "sculk_depths:zygrin",
     "sculk_depths:zygrin_stairs",
     "sculk_depths:zygrin_slab",
     "sculk_depths:zygrin_wall",
+    "sculk_depths:zygrin_light",
 
     "sculk_depths:polished_zygrin",
     "sculk_depths:polished_zygrin_stairs",

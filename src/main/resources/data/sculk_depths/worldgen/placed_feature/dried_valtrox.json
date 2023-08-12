@@ -3,7 +3,7 @@
     "type": "minecraft:tree",
     "config": {
       "ignore_vines": true,
-      "force_dirt": false,
+      "force_dirt": true,
       "minimum_size": {
         "type": "minecraft:three_layers_feature_size",
         "min_clipped_height": 0,
@@ -126,6 +126,21 @@
     {
       "type": "minecraft:heightmap",
       "heightmap": "OCEAN_FLOOR"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "offset": [
+          0,
+          -1,
+          0
+        ],
+        "blocks": [
+          "sculk_depths:crumbling_dirt",
+          "minecraft:deepslate"
+        ]
+      }
     },
     {
       "type": "minecraft:biome"

@@ -2,8 +2,9 @@ package net.ugi.sculk_depths.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.block.*;
-
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.CropBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.ugi.sculk_depths.block.ModBlocks;
@@ -36,7 +37,6 @@ public abstract class CropBlockMixin {
         BlockState blockState = world.getBlockState(pos.down());
         if (blockState.isOf(ModBlocks.KRYSLUM_ENRICHED_SOIL)) {
             return 7.0f;
-
         }
         return originalValue;
     }

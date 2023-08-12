@@ -1,0 +1,57 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"1": "sculk_depths:block/flumrock_cauldron/diamond_3",
+		"particle": "sculk_depths:block/flumrock_cauldron/diamond_3"
+	},
+	"elements": [
+		{
+			"from": [3, 4, 16.01],
+			"to": [13, 8, 16.01],
+			"faces": {
+				"north": {"uv": [0, 0, 10, 4], "texture": "#missing"},
+				"east": {"uv": [0, 0, 0, 4], "texture": "#missing"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"west": {"uv": [0, 0, 0, 4], "texture": "#missing"},
+				"up": {"uv": [0, 0, 10, 0], "texture": "#missing"},
+				"down": {"uv": [0, 0, 10, 0], "texture": "#missing"}
+			}
+		},
+		{
+			"from": [3, 4, -0.01],
+			"to": [13, 8, -0.01],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"east": {"uv": [0, 0, 0, 4], "texture": "#missing"},
+				"south": {"uv": [0, 0, 10, 4], "texture": "#missing"},
+				"west": {"uv": [0, 0, 0, 4], "texture": "#missing"},
+				"up": {"uv": [0, 0, 10, 0], "texture": "#missing"},
+				"down": {"uv": [0, 0, 10, 0], "texture": "#missing"}
+			}
+		},
+		{
+			"from": [-0.01, 4, 3],
+			"to": [-0.01, 8, 13],
+			"faces": {
+				"north": {"uv": [0, 0, 0, 4], "texture": "#missing"},
+				"east": {"uv": [0, 0, 10, 4], "texture": "#missing"},
+				"south": {"uv": [0, 0, 0, 4], "texture": "#missing"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"up": {"uv": [0, 0, 0, 10], "texture": "#missing"},
+				"down": {"uv": [0, 0, 0, 10], "texture": "#missing"}
+			}
+		},
+		{
+			"from": [16.01, 4, 3],
+			"to": [16.01, 8, 13],
+			"faces": {
+				"north": {"uv": [0, 0, 0, 4], "texture": "#missing"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"south": {"uv": [0, 0, 0, 4], "texture": "#missing"},
+				"west": {"uv": [0, 0, 10, 4], "texture": "#missing"},
+				"up": {"uv": [0, 0, 0, 10], "texture": "#missing"},
+				"down": {"uv": [0, 0, 0, 10], "texture": "#missing"}
+			}
+		}
+	]
+}

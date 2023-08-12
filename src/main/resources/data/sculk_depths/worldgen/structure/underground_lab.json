@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:jigsaw",
+  "biomes": [
+    "sculk_depths:sculk_caves",
+    "sculk_depths:cephlera_caves"
+  ],
+  "step": "underground_structures",
+  "spawn_overrides": {},
+  "start_pool": "sculk_depths:underground_lab/center",
+  "size": 7,
+  "start_height": {
+    "type": "minecraft:biased_to_bottom",
+    "min_inclusive": {
+      "above_bottom": 64
+    },
+    "max_inclusive": {
+      "absolute": -128
+    }
+  },
+  "max_distance_from_center": 80,
+  "use_expansion_hack": true
+}

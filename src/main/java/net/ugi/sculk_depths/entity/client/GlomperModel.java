@@ -5,7 +5,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
-import software.bernie.example.block.entity.FertilizerBlockEntity;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;

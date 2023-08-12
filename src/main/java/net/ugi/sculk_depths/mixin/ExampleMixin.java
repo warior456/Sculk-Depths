@@ -1,7 +1,7 @@
 package net.ugi.sculk_depths.mixin;
 
-import net.ugi.sculk_depths.SculkDepths;
 import net.minecraft.client.gui.screen.TitleScreen;
+import net.ugi.sculk_depths.SculkDepths;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

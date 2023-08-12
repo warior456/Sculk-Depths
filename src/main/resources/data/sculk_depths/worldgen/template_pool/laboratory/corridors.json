@@ -3,36 +3,190 @@
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
-        "location": "sculk_depths:laboratory/corridors/long_corridor",
+        "location": "sculk_depths:laboratory/corridors/3_segment_corridor_2jigsaw",
         "processors": {
           "processors": []
         },
         "projection": "rigid"
       },
-      "weight": 1
+      "weight": 10
     },
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
-        "location": "sculk_depths:laboratory/corridors/short_corridor",
+        "location": "sculk_depths:laboratory/corridors/3_segment_corridor_1jigsaw",
         "processors": {
           "processors": []
         },
         "projection": "rigid"
       },
-      "weight": 1
+      "weight": 10
     },
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
-        "location": "sculk_depths:laboratory/corridors/crossing_corridor",
+        "location": "sculk_depths:laboratory/corridors/3_segment_corridor_0jigsaw",
         "processors": {
           "processors": []
         },
         "projection": "rigid"
       },
-      "weight": 1
+      "weight": 10
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "sculk_depths:laboratory/corridors/4_segment_corridor_2jigsaw",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 10
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "sculk_depths:laboratory/corridors/4_segment_corridor_1jigsaw_1",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 10
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "sculk_depths:laboratory/corridors/4_segment_corridor_1jigsaw_2",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 10
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "sculk_depths:laboratory/corridors/5_segment_corridor_4jigsaw",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 10
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "sculk_depths:laboratory/corridors/5_segment_corridor_2jigsaw_1",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 10
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "sculk_depths:laboratory/corridors/5_segment_corridor_2jigsaw_2",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 10
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "sculk_depths:laboratory/corridors/6_segment_corridor_4jigsaw",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 10
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "sculk_depths:laboratory/corridors/6_segment_corridor_2jigsaw_1",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 10
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "sculk_depths:laboratory/corridors/6_segment_corridor_2jigsaw_2",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 10
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "sculk_depths:laboratory/corridors/3_way_corridor",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 8
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "sculk_depths:laboratory/corridors/4_way_corridor",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 8
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "sculk_depths:laboratory/corridors/corridor_turn",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 10
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "sculk_depths:laboratory/corridors/corridor_end",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 15
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "sculk_depths:laboratory/inside_buildings/library",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 20
     }
   ],
-  "fallback": "minecraft:empty"
+  "fallback": "sculk_depths:laboratory/flat_end"
 }

@@ -6,6 +6,9 @@
   "item.sculk_depths.glomper_spawn_egg": "Glomper Spawn Egg",
   "block.sculk_depths.crumbling_dirt" : "Crumbling Dirt",
 
+  "block.sculk_depths.flumrock_cauldron": "Flumrock Cauldron",
+  "block.sculk_depths.kryslum_flumrock_cauldron": "Kryslum Flumrock Cauldron",
+
   "block.sculk_depths.umbrusk": "Umbrusk",
   "block.sculk_depths.umbrusk_stairs": "Umbrusk Stairs",
   "block.sculk_depths.umbrusk_slab": "Umbrusk Slab",
@@ -25,6 +28,8 @@
   "block.sculk_depths.valtrox_slab": "Valtrox Slab",
   "block.sculk_depths.valtrox_stairs": "Valtrox Stairs",
   "block.sculk_depths.valtrox_fence": "Valtrox Fence",
+  "block.sculk_depths.valtrox_button": "Valtrox Button",
+  "block.sculk_depths.valtrox_pressure_plate": "Valtrox Pressure Plate",
 
   "block.sculk_depths.dried_valtrox_log": "Dried Valtrox Log",
   "block.sculk_depths.dried_valtrox_planks": "Dried Valtrox Planks",
@@ -32,6 +37,8 @@
   "block.sculk_depths.dried_valtrox_slab": "Dried Valtrox Slab",
   "block.sculk_depths.dried_valtrox_stairs": "Dried Valtrox Stairs",
   "block.sculk_depths.dried_valtrox_fence": "Dried Valtrox Fence",
+  "block.sculk_depths.dried_valtrox_button": "Dried Valtrox Button",
+  "block.sculk_depths.dried_valtrox_pressure_plate": "Dried Valtrox Pressure Plate",
 
   "block.sculk_depths.petrified_valtrox_log": "Petrified Valtrox Log",
   "block.sculk_depths.petrified_valtrox_slates": "Petrified Valtrox Slates",
@@ -39,10 +46,18 @@
   "block.sculk_depths.petrified_valtrox_slab": "Petrified Valtrox Slab",
   "block.sculk_depths.petrified_valtrox_stairs": "Petrified Valtrox Stairs",
   "block.sculk_depths.petrified_valtrox_wall": "Petrified Valtrox Wall",
+  "block.sculk_depths.petrified_valtrox_button": "Petrified Valtrox Button",
+  "block.sculk_depths.petrified_valtrox_pressure_plate": "Petrified Valtrox Pressure Plate",
 
 
   "block.sculk_depths.flumrock": "Flumrock",
+
   "itemgroup.sculk_depths" : "Sculk Depths",
+  "block.sculk_depths.kryslum": "Kryslum",
+  "biome.sculk_depths.sculk_caves": "Sculk Caves",
+  "biome.sculk_depths.cephlera_caves": "Cephlera Caves",
+  "biome.sculk_depths.petrified_valtrox_forest": "Petrified Valtrox Forest",
+  "biome.sculk_depths.dried_valtrox_forest": "Dried Valtrox Forest",
 
   "block.sculk_depths.quazarith_ore": "Quazarith Ore",
   "item.sculk_depths.quazarith_pieces": "Quazarith Pieces",
@@ -77,11 +92,18 @@
   "block.sculk_depths.zygrin_pillar": "Zygrin Pillar",
   "block.sculk_depths.chiseled_zygrin": "Chiseled Zygrin",
   "block.sculk_depths.zygrin_light": "Zygrin Light",
+  "block.sculk_depths.zygrin_flowblock": "Zygrin Flowblock",
 
   "block.sculk_depths.cephlera": "Cephlera",
   "block.sculk_depths.cephlera_light": "Cephlera Light",
 
   "block.sculk_depths.kryslum_enriched_soil": "Kryslum Enriched Soil",
 
-  "entity.sculk_depths.glomper": "Glomper"
+  "entity.sculk_depths.glomper": "Glomper",
+
+  "advancements.sculk_depths.root": "Exploring the Depths",
+  "advancements.sculk_depths.root.description": "Exploration and Ancient Civilisation",
+
+  "advancements.sculk_depths.kill_a_warden": "Doing it the hard way!",
+  "advancements.sculk_depths.kill_a_warden.description": "Kill a warden instead of giving it a sacrifice"
 }

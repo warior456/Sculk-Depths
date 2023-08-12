@@ -16,6 +16,7 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.entity.ModEntities;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -41,8 +42,8 @@ public class GlomperEntity extends PathAwareEntity implements GeoEntity{
 
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 20.0f)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, SculkDepths.CONFIG.glomper_health)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, SculkDepths.CONFIG.glomper_damage)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.5f) // doubt this does anything
                 .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.2f) // not needed but will corrupt glompers upon removal (REMOVE BEFORE 0.0.6)
