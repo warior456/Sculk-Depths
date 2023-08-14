@@ -25,6 +25,9 @@ public class ModItems {
     public static final Item QUAZARITH_PIECES = registerItem("quazarith_pieces",
             new Item(new FabricItemSettings()));
 
+    public static final Item CRUX = registerItem("crux",
+            new Item(new FabricItemSettings()));
+
     public static final Item ENERGY_ESSENCE = registerItem("energy_essence",
             new Item(new FabricItemSettings()));
     public static final Item ENERGISED_FLINT_AND_STEEL = registerItem("energized_flint_and_steel",
