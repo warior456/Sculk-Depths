@@ -109,11 +109,6 @@
   },
   "placement": [
     {
-      "type": "minecraft:heightmap",
-      "heightmap": "WORLD_SURFACE_WG"
-    },
-
-    {
       "type": "minecraft:count",
       "count": 1
     },
@@ -125,12 +120,37 @@
       "height": {
         "type": "minecraft:uniform",
         "min_inclusive": {
-          "absolute": 45
+          "absolute": 50
         },
         "max_inclusive": {
-          "below_top": 45
+          "below_top": 50
         }
       }
+    },
+    {
+      "type": "minecraft:environment_scan",
+      "direction_of_search": "down",
+      "max_steps": 32,
+      "target_condition": {
+        "type": "minecraft:true"
+      },
+      "allowed_search_condition": {
+        "type": "minecraft:matching_blocks",
+        "offset": [
+          0,
+          7,
+          0
+        ],
+        "blocks": [
+          "sculk_depths:umbrusk",
+          "sculk_depths:flumrock",
+          "minecraft:deepslate",
+          "minecraft:sculk"
+        ]
+      }
+    },
+    {
+      "type": "minecraft:biome"
     }
   ]
 }
