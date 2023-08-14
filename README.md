@@ -28,12 +28,17 @@ When entering this dimension, it is recommended to bring a netherite pickaxe as 
 
 - New dimension with custom world generation.
 - Four new biomes.
-- A new structure (work in progress).
-- A new hostile mob: The Glomper. It attacks players using an elytra, so be careful while flying around!
+- 2 New Structures:
+  - A Laboratory
+  - An underground Lab
+- A new mob: The Glomper. It attacks players using an elytra, so be careful while flying around!
 - Energy Essence drops when the warden kills a passive mob or when the warden is killed, this is used to craft an Energized Flint and Steel to open the portal.
 - Energized Flint and Steel: can light most blocks with Soul Fire and lights the portal
 - new blocks:
   - Cephlera Light
+  - Flumrock Cauldron
+  - Zygrin Light
+  - Zygrin Flow Block
 - Nine new block sets:
   - Umbrusk (stone type)
   - Umbrusk Bricks
@@ -54,7 +59,8 @@ When entering this dimension, it is recommended to bring a netherite pickaxe as 
   ![image](https://user-images.githubusercontent.com/66562258/226136978-d1683dd1-d642-4cae-a204-0a92fb0ad2ba.png)
   ![image](https://user-images.githubusercontent.com/66562258/226213541-25528269-7c6c-46cd-8c4e-f0bab01fd724.png)
   ![image](https://user-images.githubusercontent.com/66562258/227038354-7217dba3-a006-4754-badc-6ff53b1db8f1.png)
-  ![image](https://user-images.githubusercontent.com/66562258/229311855-a1c336c4-e892-4e58-99d7-cd6cbe91376b.png)
+  ![image](https://github.com/warior456/Sculk-Depths/assets/66562258/5c4b29a9-0670-4d8c-be8e-60e0255e51b8)
+  ![image](https://github.com/warior456/Sculk-Depths/assets/66562258/90f1eb2c-3cb5-423f-913c-5021326b142a)
   ![image](https://github.com/warior456/Sculk-Depths/assets/66562258/cd48ee13-0355-4928-86b3-0ba684f9d54d)
   
 </details>
