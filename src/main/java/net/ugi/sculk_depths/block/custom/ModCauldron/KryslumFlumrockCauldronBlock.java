@@ -52,6 +52,10 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
         this.setDefaultState(this.stateManager.getDefaultState().with(LEVEL, 1));
     }
 
+    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+        return new ItemStack(ModBlocks.FLUMROCK_CAULDRON);
+    }
+
     private static final VoxelShape RAYCAST_SHAPE = AbstractCauldronBlock.createCuboidShape(1.5, 2.0, 1.5, 14.5, 16.0, 14.5);
     protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(VoxelShapes.fullCube(),
             VoxelShapes.union(
