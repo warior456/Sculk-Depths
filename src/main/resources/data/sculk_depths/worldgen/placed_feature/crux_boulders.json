@@ -6,80 +6,55 @@
         "filling_provider": {
           "type": "minecraft:simple_state_provider",
           "state": {
-            "Name": "minecraft:air"
+            "Name": "sculk_depths:crux_ore"
           }
         },
         "inner_layer_provider": {
           "type": "minecraft:simple_state_provider",
           "state": {
-            "Name": "minecraft:amethyst_block"
+            "Name": "sculk_depths:zygrin"
           }
         },
         "alternate_inner_layer_provider": {
           "type": "minecraft:simple_state_provider",
           "state": {
-            "Name": "minecraft:budding_amethyst"
+            "Name": "sculk_depths:crux_ore"
           }
         },
         "middle_layer_provider": {
           "type": "minecraft:simple_state_provider",
           "state": {
-            "Name": "minecraft:calcite"
+            "Name": "sculk_depths:zygrin"
           }
         },
         "outer_layer_provider": {
           "type": "minecraft:simple_state_provider",
           "state": {
-            "Name": "minecraft:smooth_basalt"
+            "Name": "sculk_depths:larguth"
           }
         },
         "inner_placements": [
           {
-            "Name": "minecraft:small_amethyst_bud",
-            "Properties": {
-              "facing": "up",
-              "waterlogged": "false"
-            }
-          },
-          {
-            "Name": "minecraft:medium_amethyst_bud",
-            "Properties": {
-              "facing": "up",
-              "waterlogged": "false"
-            }
-          },
-          {
-            "Name": "minecraft:large_amethyst_bud",
-            "Properties": {
-              "facing": "up",
-              "waterlogged": "false"
-            }
-          },
-          {
-            "Name": "minecraft:amethyst_cluster",
-            "Properties": {
-              "facing": "up",
-              "waterlogged": "false"
-            }
+            "Name": "sculk_depths:zygrin"
           }
         ],
         "cannot_replace": "#minecraft:anvil",
         "invalid_blocks": "#minecraft:anvil"
       },
       "layers": {
-        "filling": 1.7,
-        "inner_layer": 2.2,
-        "middle_layer": 3.2,
-        "outer_layer": 4.2
+        "filling": 0.2,
+        "inner_layer": 0.6,
+        "middle_layer": 0.8,
+        "outer_layer": 2.0
       },
       "crack": {
-        "generate_crack_chance": 0.95,
-        "base_crack_size": 2,
+        "generate_crack_chance": 0.2,
+        "base_crack_size": 1,
         "crack_point_offset": 2
       },
       "noise_multiplier": 0.05,
       "use_potential_placements_chance": 0.35,
-      "use_alternate_layer0_chance": 0.083,
+      "use_alternate_layer0_chance": 0.06,
       "placements_require_layer0_alternate": true,
       "outer_wall_distance": {
         "type": "minecraft:uniform",
@@ -98,12 +73,12 @@
       "point_offset": {
         "type": "minecraft:uniform",
         "value": {
-          "min_inclusive": 1,
+          "min_inclusive": 0,
           "max_inclusive": 2
         }
       },
-      "min_gen_offset": -16,
-      "max_gen_offset": 16,
+      "min_gen_offset": -24,
+      "max_gen_offset": 24,
       "invalid_blocks_threshold": 256
     }
   },
@@ -120,10 +95,10 @@
       "height": {
         "type": "minecraft:uniform",
         "min_inclusive": {
-          "absolute": 50
+          "absolute": 48
         },
         "max_inclusive": {
-          "below_top": 50
+          "absolute": 68
         }
       }
     },
@@ -138,7 +113,7 @@
         "type": "minecraft:matching_blocks",
         "offset": [
           0,
-          7,
+          3,
           0
         ],
         "blocks": [

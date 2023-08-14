@@ -42,6 +42,8 @@ public class ModBlocks {
 
     public static final Block SOUL_FIRE = registerBlockWithoutBlockItem("soul_fire", new SoulFireBlock(FabricBlockSettings.copyOf(Blocks.SOUL_FIRE)), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block LARGUTH = registerBlock("larguth",
+            new Block(FabricBlockSettings.copyOf(Blocks.STONE).hardness(40.0f).resistance(1200f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
     //umbrusk blockset
     public static final Block UMBRUSK = registerBlock("umbrusk",
             new Block(FabricBlockSettings.copyOf(Blocks.STONE).hardness(5.0f).resistance(8f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
@@ -211,6 +213,9 @@ public class ModBlocks {
     //ores
     public static final Block QUAZARITH_ORE = registerBlock("quazarith_ore",
             new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).hardness(6.0f).resistance(10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+    public static final Block CRUX_ORE = registerBlock("crux_ore",
+            new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).hardness(6.0f).resistance(10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
     //crystals
     public static final Block WHITE_CRYSTAL = registerBlock("crystal", ModBlocks.createCrystalBlock(DyeColor.WHITE), ModItemGroup.SCULK_DEPTHS);
 
