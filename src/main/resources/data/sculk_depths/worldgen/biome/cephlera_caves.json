@@ -67,6 +67,7 @@
       "sculk_depths:ore_quazarith_up",
       "sculk_depths:ore_quazarith_down"
 
-    ]
+    ],
+    ["sculk_depths:mushroom"]
   ]
 }
