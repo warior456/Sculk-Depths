@@ -76,7 +76,7 @@ public class ModBlocks {
     public static final Block VALTROX_WOOD = registerBlock("valtrox_wood",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block STRIPPED_VALTROX_LOG = registerBlock("valtrox_wood",
+    public static final Block STRIPPED_VALTROX_LOG = registerBlock("stripped_valtrox_log",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block VALTROX_PLANKS = registerBlock("valtrox_planks",
@@ -106,6 +106,14 @@ public class ModBlocks {
     public static final Block VALTROX_BUTTON = registerBlock("valtrox_button",
             new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), BlockSetType.OAK, 30, true), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block VALTROX_SIGN = registerBlock("valtrox_sign",
+            new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block VALTROX_HANGING_SIGN = registerBlock("valtrox_hanging_sign",
+            new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block VALTROX_WALL_HANGING_SIGN = registerBlockWithoutBlockItem("valtrox_wall_hanging_sign",
+            new WallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
     //dried valtrox blockset
     public static final Block DRIED_VALTROX_LOG = registerBlock("dried_valtrox_log",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
@@ -113,7 +121,7 @@ public class ModBlocks {
     public static final Block DRIED_VALTROX_WOOD = registerBlock("dried_valtrox_wood",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block STRIPPED_DRIED_VALTROX_LOG = registerBlock("valtrox_wood",
+    public static final Block STRIPPED_DRIED_VALTROX_LOG = registerBlock("stripped_dried_valtrox_log",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block DRIED_VALTROX_PLANKS = registerBlock("dried_valtrox_planks",
@@ -143,6 +151,15 @@ public class ModBlocks {
     public static final Block DRIED_VALTROX_BUTTON = registerBlock("dried_valtrox_button",
             new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), BlockSetType.OAK, 30, true), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block DRIED_VALTROX_SIGN = registerBlock("dried_valtrox_sign",
+            new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block DRIED_VALTROX_HANGING_SIGN = registerBlock("dried_valtrox_hanging_sign",
+            new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block DRIED_VALTROX_WALL_HANGING_SIGN = registerBlockWithoutBlockItem("dried_valtrox_wall_hanging_sign",
+            new WallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
+
     //petrified valtrox blockset
     public static final Block PETRIFIED_VALTROX_LOG = registerBlock("petrified_valtrox_log",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
@@ -150,7 +167,7 @@ public class ModBlocks {
     public static final Block PETRIFIED_VALTROX_WOOD = registerBlock("petrified_valtrox_wood",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block STRIPPED_PETRIFIED_VALTROX_LOG = registerBlock("valtrox_wood",
+    public static final Block STRIPPED_PETRIFIED_VALTROX_LOG = registerBlock("stripped_petrified_valtrox_log",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_SLATES = registerBlock("petrified_valtrox_slates",
@@ -165,13 +182,13 @@ public class ModBlocks {
     public static final Block PETRIFIED_VALTROX_WALL = registerBlock("petrified_valtrox_wall",
             new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block PETRIFIED_VALTROX_GATE = registerBlock("valtrox_fence_gate",
+    public static final Block PETRIFIED_VALTROX_GATE = registerBlock("petrified_valtrox_fence_gate",
             new FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE_GATE).strength(2.0f), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block PETRIFIED_VALTROX_DOOR = registerBlock("valtrox_door",
+    public static final Block PETRIFIED_VALTROX_DOOR = registerBlock("petrified_valtrox_door",
             new DoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR).strength(2.0f), BlockSetType.OAK), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block PETRIFIED_VALTROX_TRAPDOOR = registerBlock("valtrox_trapdoor",
+    public static final Block PETRIFIED_VALTROX_TRAPDOOR = registerBlock("petrified_valtrox_trapdoor",
             new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE).strength(2.0f), BlockSetType.OAK), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_PRESSURE_PLATE = registerBlock("petrified_valtrox_pressure_plate",
@@ -179,6 +196,15 @@ public class ModBlocks {
 
     public static final Block PETRIFIED_VALTROX_BUTTON = registerBlock("petrified_valtrox_button",
             new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), BlockSetType.STONE, 20, false), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PETRIFIED_VALTROX_SIGN = registerBlock("petrified_valtrox_sign",
+            new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PETRIFIED_VALTROX_HANGING_SIGN = registerBlock("petrified_valtrox_hanging_sign",
+            new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PETRIFIED_VALTROX_WALL_HANGING_SIGN = registerBlockWithoutBlockItem("petrified_valtrox_wall_hanging_sign",
+            new WallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
 
     //zygrin set
     public static final Block ZYGRIN = registerBlock("zygrin",

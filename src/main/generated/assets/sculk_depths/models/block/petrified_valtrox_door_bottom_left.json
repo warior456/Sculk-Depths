@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "textures": {
+    "bottom": "sculk_depths:block/petrified_valtrox_door_bottom",
+    "top": "sculk_depths:block/petrified_valtrox_door_top"
+  }
+}
