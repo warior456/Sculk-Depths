@@ -2,7 +2,6 @@ package net.ugi.sculk_depths.block.custom.ModCauldron;
 
 import net.minecraft.block.*;
 import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -25,13 +24,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
-import net.ugi.sculk_depths.block.entity.CauldronBlockEntity;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.state.property.ModProperties;
 
 import java.util.Map;
 
-import static net.minecraft.block.LeveledCauldronBlock.LEVEL;
 import static net.ugi.sculk_depths.state.property.ModProperties.DIAMOND_LEVEL;
 import static net.ugi.sculk_depths.state.property.ModProperties.QUAZARITH_LEVEL;
 

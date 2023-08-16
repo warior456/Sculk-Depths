@@ -12,6 +12,5 @@ public class ModConfiguredFeatures {
 
     public ModConfiguredFeatures() {
     }
-
 }
 
