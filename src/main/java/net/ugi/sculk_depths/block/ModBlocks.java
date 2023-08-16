@@ -27,6 +27,7 @@ import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
 import net.ugi.sculk_depths.block.sapling.ValtroxSaplingGenerator;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
+import net.ugi.sculk_depths.world.gen.feature.ModConfiguredFeatures;
 
 
 public class ModBlocks {
@@ -219,7 +220,17 @@ public class ModBlocks {
     public static final Block WHITE_CRYSTAL = registerBlock("crystal", ModBlocks.createCrystalBlock(DyeColor.WHITE), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SHINE_SHROOM = registerBlock("penebrium_shine_shroom",
+            new MushroomPlantBlock(FabricBlockSettings.copyOf(Blocks.GLASS).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube), ModConfiguredFeatures.PENEBRIUM_SHINE_SHROOM), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PENEBRIUM_SHINE_SHROOM_BLOCK = registerBlock("penebrium_shine_shroom_block",
             new CrystalBlock(DyeColor.WHITE, FabricBlockSettings.copyOf(Blocks.GLASS).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);
+
+    //public static final Block PENEBRIUM_SHINE_SHROOM_STEM = registerBlock("penebrium_shine_shroom_stem",
+    //        new StemBlock( PENEBRIUM_SHINE_SHROOM_BLOCK, Supplier<Item> pickBlockItem, FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM), ModItemGroup.SCULK_DEPTHS));
+
+    public static final Block PENEBRIUM_SHINE_SHROOM_SPORE_BLOCK = registerBlock("penebrium_shine_shroom_spore_block",
+            new CrystalBlock(DyeColor.WHITE, FabricBlockSettings.copyOf(Blocks.GLASS).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);
+
     //fluids
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new FluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.copyOf(Blocks.WATER).replaceable().noCollision().strength(100.0f).pistonBehavior(PistonBehavior.DESTROY).dropsNothing().liquid().solid().sounds(BlockSoundGroup.SCULK)), ModItemGroup.SCULK_DEPTHS);
 

@@ -6,10 +6,11 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.ConfiguredFeatures;
 
 
-public class ModTreeConfiguredFeatures {
+public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> VALTROX = ConfiguredFeatures.of("sculk_depths:valtrox");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> PENEBRIUM_SHINE_SHROOM = ConfiguredFeatures.of("sculk_depths:valtrox");
 
-    public ModTreeConfiguredFeatures() {
+    public ModConfiguredFeatures() {
     }
 
 }
