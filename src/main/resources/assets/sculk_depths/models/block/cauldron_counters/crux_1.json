@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "sculk_depths:block/flumrock_cauldron/diamond_0",
-		"particle": "sculk_depths:block/flumrock_cauldron/diamond_0"
+		"1": "sculk_depths:block/flumrock_cauldron/crux_1",
+		"particle": "sculk_depths:block/flumrock_cauldron/crux_1"
 	},
 	"elements": [
 		{

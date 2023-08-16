@@ -6,5 +6,5 @@ public class ModProperties {
 
     public static final IntProperty KRYSLUM_LEVEL = IntProperty.of("kryslum", 0, 12);
     public static final IntProperty QUAZARITH_LEVEL = IntProperty.of("quazarith", 0, 12);
-    public static final IntProperty DIAMOND_LEVEL = IntProperty.of("diamond", 0, 12);
+    public static final IntProperty CRUX_LEVEL = IntProperty.of("crux", 0, 12);
 }

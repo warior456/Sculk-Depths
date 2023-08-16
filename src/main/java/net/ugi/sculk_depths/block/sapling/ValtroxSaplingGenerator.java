@@ -11,7 +11,6 @@ public class ValtroxSaplingGenerator extends SaplingGenerator {
     }
 
     protected RegistryKey<ConfiguredFeature<?, ?>> getTreeFeature(Random random, boolean bees) {
-
         return ModConfiguredFeatures.VALTROX;
     }
 }

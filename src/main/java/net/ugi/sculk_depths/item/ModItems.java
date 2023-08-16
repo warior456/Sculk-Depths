@@ -84,6 +84,8 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, ENERGISED_FLINT_AND_STEEL);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, GLOMPER_SPAWN_EGG);
 
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, CRUX);
+
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_INGOT);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_PIECES);
 

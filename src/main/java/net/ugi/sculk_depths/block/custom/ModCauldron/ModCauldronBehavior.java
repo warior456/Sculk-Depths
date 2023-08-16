@@ -21,7 +21,7 @@ import net.ugi.sculk_depths.state.property.ModProperties;
 
 import java.util.Map;
 
-import static net.ugi.sculk_depths.state.property.ModProperties.DIAMOND_LEVEL;
+import static net.ugi.sculk_depths.state.property.ModProperties.CRUX_LEVEL;
 import static net.ugi.sculk_depths.state.property.ModProperties.QUAZARITH_LEVEL;
 
 
@@ -83,18 +83,18 @@ public interface ModCauldronBehavior {
             return ActionResult.success(world.isClient);
         });
 
-        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(Items.DIAMOND, (state, world, pos, player, hand, stack) -> {
-            if (state.get(DIAMOND_LEVEL) == 12) {
+        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.CRUX, (state, world, pos, player, hand, stack) -> {
+            if (state.get(CRUX_LEVEL) == 12) {
                 return ActionResult.PASS;
             }
             if (!world.isClient) {
                 if (!player.isCreative()){
-                    ItemStack heldItem = player.getMainHandStack().getItem() == Items.DIAMOND ?
+                    ItemStack heldItem = player.getMainHandStack().getItem() == ModItems.CRUX ?
                             player.getMainHandStack() : player.getOffHandStack();
                     heldItem.decrement(1);}
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
-            world.setBlockState(pos, state.cycle(DIAMOND_LEVEL));
+            world.setBlockState(pos, state.cycle(CRUX_LEVEL));
                 world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
                 world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
             }
@@ -102,20 +102,20 @@ public interface ModCauldronBehavior {
         });
 
         KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.QUAZARITH_INGOT, (state, world, pos, player, hand, stack) -> {
-            if (state.get(QUAZARITH_LEVEL) > 8 || state.get(DIAMOND_LEVEL) > 8) {
+            if (state.get(QUAZARITH_LEVEL) > 8 || state.get(CRUX_LEVEL) > 8) {
                 return ActionResult.PASS;
             }
             if (!world.isClient) {
                 if (!player.isCreative()){
-                    ItemStack heldItem = player.getMainHandStack().getItem() == Items.DIAMOND ?
+                    ItemStack heldItem = player.getMainHandStack().getItem() == ModItems.CRUX ?
                             player.getMainHandStack() : player.getOffHandStack();
                     heldItem.decrement(1);}
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
 
                 int i = state.get(QUAZARITH_LEVEL) + SculkDepths.CONFIG.quazarith_ingot_quazarith_pieces_cost;
-                int j = state.get(DIAMOND_LEVEL) + SculkDepths.CONFIG.quazarith_ingot_diamond_cost;
-                BlockState blockState = state.with(QUAZARITH_LEVEL, i).with(DIAMOND_LEVEL, j);
+                int j = state.get(CRUX_LEVEL) + SculkDepths.CONFIG.quazarith_ingot_crux_cost;
+                BlockState blockState = state.with(QUAZARITH_LEVEL, i).with(CRUX_LEVEL, j);
                 world.setBlockState(pos, blockState);
 
                 world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
