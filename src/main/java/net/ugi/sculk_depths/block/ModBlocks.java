@@ -111,7 +111,7 @@ public class ModBlocks {
     public static final Block VALTROX_SIGN = registerBlock("valtrox_sign",
             new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block VALTROX_WALL_SIGN = registerBlock("valtrox_wall_sign",
+    public static final Block VALTROX_WALL_SIGN = registerBlockWithoutBlockItem("valtrox_wall_sign",
             new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block VALTROX_HANGING_SIGN = registerBlock("valtrox_hanging_sign",
@@ -159,6 +159,9 @@ public class ModBlocks {
     public static final Block DRIED_VALTROX_SIGN = registerBlock("dried_valtrox_sign",
             new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block DRIED_VALTROX_WALL_SIGN = registerBlockWithoutBlockItem("dried_valtrox_wall_sign",
+            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
+
     public static final Block DRIED_VALTROX_HANGING_SIGN = registerBlock("dried_valtrox_hanging_sign",
             new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
 
@@ -204,6 +207,9 @@ public class ModBlocks {
 
     public static final Block PETRIFIED_VALTROX_SIGN = registerBlock("petrified_valtrox_sign",
             new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PETRIFIED_VALTROX_WALL_SIGN = registerBlockWithoutBlockItem("petrified_valtrox_wall_sign",
+            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_HANGING_SIGN = registerBlock("petrified_valtrox_hanging_sign",
             new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), WoodType.OAK), ModItemGroup.SCULK_DEPTHS);
