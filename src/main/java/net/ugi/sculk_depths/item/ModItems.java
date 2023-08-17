@@ -2,12 +2,15 @@ package net.ugi.sculk_depths.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.SculkDepths;
+import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.custom.EnergizedFlintAndSteelItem;
@@ -75,6 +78,24 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.BOOTS,
                     new FabricItemSettings()));
 
+    public static final Item VALTROX_SIGN = registerItem("valtrox_sign",
+            new SignItem(new FabricItemSettings().maxCount(16), ModBlocks.VALTROX_SIGN, ModBlocks.VALTROX_WALL_SIGN));
+
+    public static final Item VALTROX_HANGING_SIGN = registerItem("valtrox_hanging_sign",
+            new HangingSignItem( ModBlocks.VALTROX_HANGING_SIGN, ModBlocks.VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
+
+    public static final Item DRIED_VALTROX_SIGN = registerItem("dried_valtrox_sign",
+            new SignItem(new FabricItemSettings().maxCount(16), ModBlocks.DRIED_VALTROX_SIGN, ModBlocks.DRIED_VALTROX_WALL_SIGN));
+
+    public static final Item DRIED_VALTROX_HANGING_SIGN = registerItem("dried_valtrox_hanging_sign",
+            new HangingSignItem( ModBlocks.DRIED_VALTROX_HANGING_SIGN, ModBlocks.DRIED_VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
+
+    public static final Item PETRIFIED_VALTROX_SIGN = registerItem("petrified_valtrox_sign",
+            new SignItem(new FabricItemSettings().maxCount(16), ModBlocks.PETRIFIED_VALTROX_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_SIGN));
+
+    public static final Item PETRIFIED_VALTROX_HANGING_SIGN = registerItem("petrified_valtrox_hanging_sign",
+            new HangingSignItem( ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(SculkDepths.MOD_ID, name), item);
     }
@@ -103,6 +124,15 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_CHESTPLATE);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_LEGGINGS);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_BOOTS);
+
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, VALTROX_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, VALTROX_HANGING_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, DRIED_VALTROX_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, DRIED_VALTROX_HANGING_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, PETRIFIED_VALTROX_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, PETRIFIED_VALTROX_HANGING_SIGN);
+
+
     }
 
     private static void addToItemGroup(RegistryKey<ItemGroup> group, Item item) {

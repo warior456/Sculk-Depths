@@ -1,7 +1,6 @@
-
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "sculk_depths:block/dried_valtrox_sign"
+    "layer0": "sculk_depths:item/petrified_valtrox_sign"
   }
 }
