@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "sculk_depths:block/stripped_petrified_valtrox_log",
+    "side": "sculk_depths:block/stripped_petrified_valtrox_log"
+  }
+}

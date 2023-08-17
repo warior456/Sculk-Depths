@@ -1,0 +1,6 @@
+{
+  "parent": "block/template_single_face",
+  "textures": {
+    "texture": "sculk_depths:block/penebrium_shine_shroom_stem_inside"
+  }
+}
