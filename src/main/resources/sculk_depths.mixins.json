@@ -10,7 +10,8 @@
     "FarmLandBlockMixin",
     "LivingEntityMixin",
     "NoiseChunkGeneratorMixin",
-    "StemBlockMixin"
+    "StemBlockMixin",
+    "BlockEntityTypeMixin"
   ],
   "client": [
   ],
