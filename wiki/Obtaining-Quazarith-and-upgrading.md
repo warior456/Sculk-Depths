@@ -1,3 +1,5 @@
+#Obtaining Quazarith and upgrading
+
 # Generation
 * Quazarith can generate at y -192 or lower in a uniform distribution.
 * It only generates exposed to air in veins from 1-3.
