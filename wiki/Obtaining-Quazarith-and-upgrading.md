@@ -1,4 +1,4 @@
-#Obtaining Quazarith and upgrading
+# Obtaining Quazarith and upgrading
 
 # Generation
 * Quazarith can generate at y -192 or lower in a uniform distribution.
