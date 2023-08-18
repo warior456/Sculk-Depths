@@ -1,11 +1,4 @@
 {
-  "variants": {
-    "": {
-      "model": "sculk_depths:block/cephlera"
-    }
-  }
-}
-{
   "multipart": [
     {
       "apply": {
