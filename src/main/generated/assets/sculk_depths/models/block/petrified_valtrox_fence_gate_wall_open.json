@@ -1,7 +1,6 @@
 {
-  "parent": "minecraft:block/template_custom_fence_gate_wall_open",
+  "parent": "minecraft:block/template_fence_gate_wall_open",
   "textures": {
-    "particle": "sculk_depths:block/petrified_valtrox_fence_gate_particle",
-    "texture": "sculk_depths:block/petrified_valtrox_fence_gate"
+    "texture": "sculk_depths:block/petrified_valtrox_slates"
   }
 }
