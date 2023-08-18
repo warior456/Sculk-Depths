@@ -1,13 +1,13 @@
 # Obtaining Quazarith and upgrading
 
-# Generation
+## Generation
 * Quazarith can generate at y -192 or lower in a uniform distribution.
 * It only generates exposed to air in veins from 1-3.
 * When mined Quazarith drops Quazarith pieces (fortune is applied)
   ![image](https://github.com/warior456/Sculk-Depths/assets/66562258/0a8131e5-200e-4d3a-b618-458d079a6df1)
 
 
-# Upgrading tools
+## Upgrading tools
 1. First you will need to craft a Flumrock Cauldron
 ![image](https://github.com/warior456/Sculk-Depths/assets/66562258/0a50c27d-bb59-446e-8dc5-105cdf1fc078)
 2. Next you will need to find Kryslum in a structure or at the bottom of the world and collect quite a bit (a bucket for each slot your tool or armor takes in the crafting table)
