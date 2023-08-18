@@ -1,9 +1,9 @@
 {
-	"music.sculk_depths.music_1":{
+	"music.sculk_depths.main_theme":{
 		"category": "music",
 		"sounds": [
            {
-				"name":"sculk_depths:sculk_depths_music_1",
+				"name":"sculk_depths:sculk_depths_main_theme",
 
 		   		"stream": true
 			}
