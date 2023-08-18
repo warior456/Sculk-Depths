@@ -10,7 +10,7 @@
     },
     {
       "apply": {
-        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level2"
+        "model":"sculk_depths:block/kryslum_flumrock_cauldron_level2"
       },
       "when": {
         "kryslum": "2"

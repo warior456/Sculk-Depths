@@ -31,8 +31,8 @@ public class ModItems {
     public static final Item CRUX = registerItem("crux",
             new Item(new FabricItemSettings()));
 
-    public static final Item PENEBRIUM_SHINE_SHROOM_SPORES = registerItem("penebrium_shine_mushroom_spores",
-            new Item(new FabricItemSettings()));
+    public static final Item PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET = registerItem("penebrium_shine_mushroom_spores",
+            new Item(new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
     public static final Item ENERGY_ESSENCE = registerItem("energy_essence",
             new Item(new FabricItemSettings()));
@@ -109,7 +109,7 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, GLOMPER_SPAWN_EGG);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, CRUX);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, PENEBRIUM_SHINE_SHROOM_SPORES);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_INGOT);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_PIECES);

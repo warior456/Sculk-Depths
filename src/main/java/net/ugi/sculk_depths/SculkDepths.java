@@ -2,6 +2,11 @@ package net.ugi.sculk_depths;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
 import net.ugi.sculk_depths.config.Config;
@@ -10,6 +15,7 @@ import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import net.ugi.sculk_depths.item.ModItemGroup;
 import net.ugi.sculk_depths.item.ModItems;
+import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.portal.Portals;
 import net.ugi.sculk_depths.sound.ModSounds;
 import org.slf4j.Logger;
@@ -19,7 +25,6 @@ public class SculkDepths implements ModInitializer {
     public static final String MOD_ID = "sculk_depths";
     public static ConfigHandler CONFIG;
     public static final Logger LOGGER = LoggerFactory.getLogger("sculk_depths");
-
 
 
 
@@ -48,6 +53,10 @@ public class SculkDepths implements ModInitializer {
         //ModBlockEntities.registerBlockEntities();
         SculkDepths.LOGGER.info("Registering Entities for " + SculkDepths.MOD_ID);
         FabricDefaultAttributeRegistry.register(ModEntities.GLOMPER, GlomperEntity.setAttributes());
+        SculkDepths.LOGGER.info("Registering Particles for " + SculkDepths.MOD_ID);
+        ModParticleTypes.registerModParticles();
+
+
 
         LOGGER.info(SculkDepths.MOD_ID + " has loaded");
     }

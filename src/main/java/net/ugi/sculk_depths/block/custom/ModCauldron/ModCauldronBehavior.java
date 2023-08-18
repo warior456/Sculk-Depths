@@ -29,7 +29,6 @@ public interface ModCauldronBehavior {
 
     public static final IntProperty KRYSLUM_LEVEL = ModProperties.KRYSLUM_LEVEL;
     public static final IntProperty SPORE_LEVEL = ModProperties.SPORE_LEVEL;
-    public static final IntProperty SPORE_X32_LEVEL = ModProperties.SPORE_X32_LEVEL;
 
     public static final Map<Item, CauldronBehavior> EMPTY_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap();
     public static final Map<Item, CauldronBehavior> KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap();
@@ -133,27 +132,31 @@ public interface ModCauldronBehavior {
 
 
 
-        SPORE_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.PENEBRIUM_SHINE_SHROOM_SPORES, (state, world, pos, player, hand, stack) -> {
-            if (state.get(SPORE_X32_LEVEL) == 384) {
+        SPORE_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET, (state, world, pos, player, hand, stack) -> {
+            if (state.get(SPORE_LEVEL) == 12) {
                 return ActionResult.PASS;
             }
             if (!world.isClient) {
-                int ItemCount = 1;
-                if (player.isSneaking()){
-                    ItemCount = player.getOffHandStack().getCount();
-                    if(state.get(SPORE_X32_LEVEL)+ItemCount >= 384){
-                        ItemCount = 384 - state.get(SPORE_X32_LEVEL);
+                int itemCount = 1;
+                SculkDepths.LOGGER.info(Integer.toString(itemCount));
+                if (!player.isSneaking()){
+                    itemCount = player.getMainHandStack().getCount();
+                    SculkDepths.LOGGER.info(Integer.toString(itemCount));
+                    if(state.get(SPORE_LEVEL)+itemCount >= 384){
+                        itemCount = 384 - state.get(SPORE_LEVEL);
+                        SculkDepths.LOGGER.info(Integer.toString(itemCount));
                     }
                 }
                 if (!player.isCreative()){
-                    ItemStack heldItem = player.getMainHandStack().getItem() == ModItems.PENEBRIUM_SHINE_SHROOM_SPORES ?
+                    ItemStack heldItem = player.getMainHandStack().getItem() == ModItems.PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET ?
                             player.getMainHandStack() : player.getOffHandStack();
-                    heldItem.decrement(ItemCount);}
+                    heldItem.decrement(itemCount);}
+                SculkDepths.LOGGER.info(Integer.toString(itemCount));
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
 
-                int i = state.get(SPORE_X32_LEVEL) + ItemCount;
-                BlockState blockState = state.with(SPORE_X32_LEVEL, i);
+                int i = state.get(SPORE_LEVEL) + itemCount;
+                BlockState blockState = state.with(SPORE_LEVEL, i);
                 world.setBlockState(pos, blockState);
 
                 world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
@@ -217,7 +220,7 @@ public interface ModCauldronBehavior {
 
     public static void registerBucketBehavior(Map<Item, CauldronBehavior> behavior) {
         behavior.put(ModItems.KRYSLUM_BUCKET, FILL_WITH_KRYSLUM);
-        behavior.put(ModItems.PENEBRIUM_SHINE_SHROOM_SPORES, FILL_WITH_SPORE);
+        behavior.put(ModItems.PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET, FILL_WITH_SPORE);
 
     }
 }

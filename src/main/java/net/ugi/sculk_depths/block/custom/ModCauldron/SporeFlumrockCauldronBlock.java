@@ -7,6 +7,7 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -25,6 +26,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEvents;
 import net.minecraft.world.event.GameEvent;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
@@ -39,8 +41,6 @@ import static net.ugi.sculk_depths.state.property.ModProperties.*;
 public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
 
     public static final IntProperty LEVEL = ModProperties.SPORE_LEVEL;
-
-    public static final IntProperty SPORES = ModProperties.SPORE_X32_LEVEL;
 
     public static final EnumProperty CRYSTAL = ModProperties.CRYSTAL_TYPE;
 
@@ -114,7 +114,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(LEVEL).add(CRYSTAL).add(CRUX).add(SPORES);
+        builder.add(LEVEL).add(CRYSTAL).add(CRUX);
 
     }
 
@@ -123,8 +123,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getMainHandStack();
         CauldronBehavior cauldronBehavior = this.behaviorMap.get(itemStack.getItem());
-        if(itemStack.getItem() == ModItems.PENEBRIUM_SHINE_SHROOM_SPORES
-                || itemStack.getItem() == ModItems.QUAZARITH_PIECES
+        if(itemStack.getItem() == ModItems.PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET
                 || itemStack.getItem() == ModItems.CRUX
                 || itemStack.getItem() == ModItems.QUAZARITH_INGOT
         ) {
@@ -163,12 +162,22 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock() && moved == false) {
             DefaultedList<ItemStack> stacks = DefaultedList.ofSize(2, ItemStack.EMPTY);
-            stacks.set( 0 , new ItemStack(ModItems.PENEBRIUM_SHINE_SHROOM_SPORES, state.get(SPORES)));
-            stacks.set(1 , new ItemStack(ModItems.CRUX, state.get(CRUX)));
+            stacks.set(0 , new ItemStack(ModItems.CRUX, state.get(CRUX)));
             ItemScatterer.spawn(world, pos, stacks);
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(state));
 
         }
         super.onStateReplaced(state, world, pos, newState, moved);
+    }
+
+    @Override
+    protected void fillFromDripstone(BlockState state, World world, BlockPos pos, Fluid fluid) {
+        if (this.isFull(state)) {
+            return;
+        }
+        BlockState blockState = (BlockState)state.with(LEVEL, state.get(LEVEL) + 1);
+        world.setBlockState(pos, blockState);
+        world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(blockState));
+        world.syncWorldEvent(WorldEvents.POINTED_DRIPSTONE_DRIPS_WATER_INTO_CAULDRON, pos, 0);
     }
 }

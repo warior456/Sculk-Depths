@@ -300,7 +300,7 @@ public class ModBlocks {
             new MushroomBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SHINE_SHROOM_SPORE_BLOCK = registerBlock("penebrium_shine_shroom_spore_block",
-            new CrystalBlock(DyeColor.WHITE, FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);
+            new SporeBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);
 
     //fluids
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new FluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.copyOf(Blocks.WATER).replaceable().noCollision().strength(100.0f).pistonBehavior(PistonBehavior.DESTROY).dropsNothing().liquid().solid().sounds(BlockSoundGroup.SCULK)), ModItemGroup.SCULK_DEPTHS);
