@@ -170,14 +170,4 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
         super.onStateReplaced(state, world, pos, newState, moved);
     }
 
-    @Override
-    protected void fillFromDripstone(BlockState state, World world, BlockPos pos, Fluid fluid) {
-        if (this.isFull(state)) {
-            return;
-        }
-        BlockState blockState = (BlockState)state.with(LEVEL, state.get(LEVEL) + 1);
-        world.setBlockState(pos, blockState);
-        world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(blockState));
-        world.syncWorldEvent(WorldEvents.POINTED_DRIPSTONE_DRIPS_WATER_INTO_CAULDRON, pos, 0);
-    }
 }
