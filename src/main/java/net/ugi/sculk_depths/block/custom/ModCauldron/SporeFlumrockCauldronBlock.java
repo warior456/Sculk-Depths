@@ -146,29 +146,26 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
             if (!world.isClient()) {
 
 
+                int k = crystalItemList.indexOf(player.getMainHandStack().getItem());
+                CrystalType l = crystalStateArray[k];
+
 
                 player.getMainHandStack().decrement(1);
 
+                if (state.get(CRYSTAL) != CrystalType.NONE) {
+                    int i = crystalStateList.indexOf(state.get(CRYSTAL));
+                    Item j = crystalItemArray[i];
 
-            if (state.get(CRYSTAL) != CrystalType.NONE) {
-                int i = crystalStateList.indexOf(state.get(CRYSTAL));
-                Item j = crystalItemArray[i];
-
-                ItemStack outputItem = new ItemStack(j, 1);
-                boolean gaveItem = player.giveItemStack(outputItem);
-                if (gaveItem == false) {
-                    player.dropItem(outputItem, true);
+                    ItemStack outputItem = new ItemStack(j, 1);
+                    boolean gaveItem = player.giveItemStack(outputItem);
+                    if (gaveItem == false) {
+                        player.dropItem(outputItem, true);
+                    }
                 }
+
+                BlockState blockState1 = state.with(CRYSTAL, l);
+                world.setBlockState(pos, blockState1);
             }
-
-
-            int k = crystalItemList.indexOf(player.getMainHandStack().getItem());
-
-            CrystalType l = crystalStateArray[k];
-            BlockState blockState1 = state.with(CRYSTAL, l);
-
-            world.setBlockState(pos, blockState1);
-        }
 
 
 
