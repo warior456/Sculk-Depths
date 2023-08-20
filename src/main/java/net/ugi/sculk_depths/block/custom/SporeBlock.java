@@ -71,7 +71,7 @@ public class SporeBlock extends Block {
             return;
         }
         if(CauldronBlockstate.getBlock() instanceof SporeFlumrockCauldronBlock){
-            if(CauldronBlockstate.get(SporeFlumrockCauldronBlock.LEVEL) >= (ModProperties.SPORE_LEVEL.getValues().size() - 1)){
+            if(CauldronBlockstate.get(SporeFlumrockCauldronBlock.LEVEL) >= (ModProperties.SPORE_LEVEL.getValues().size())){
                 return;
             }
             BlockState newCauldronBlockState = CauldronBlockstate.with(SporeFlumrockCauldronBlock.LEVEL, CauldronBlockstate.get(SporeFlumrockCauldronBlock.LEVEL) + 1);
