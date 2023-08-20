@@ -126,6 +126,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
         if(itemStack.getItem() == ModItems.PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET
                 || itemStack.getItem() == ModItems.CRUX
                 || itemStack.getItem() == ModItems.QUAZARITH_INGOT
+                || itemStack.getItem() == Items.BUCKET
         ) {
             return cauldronBehavior.interact(state, world, pos, player, hand, itemStack);
         }

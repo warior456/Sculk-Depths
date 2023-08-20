@@ -62,6 +62,9 @@ public class SporeBlock extends Block {
         if(CauldronBlockstate == null) {
             return;
         }
+        if(MathHelper.nextInt(random, 0, Math.abs(pos.getY() - pos2.getY())+1) >= 2){
+            return;
+        }
         if(CauldronBlockstate.getBlock() instanceof FlumrockCauldronBlock){
             BlockState newCauldronBlockState = ModBlocks.SPORE_FLUMROCK_CAULDRON.getDefaultState();
             world.setBlockState(pos2, newCauldronBlockState);

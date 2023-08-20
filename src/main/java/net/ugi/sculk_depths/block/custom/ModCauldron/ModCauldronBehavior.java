@@ -46,7 +46,7 @@ public interface ModCauldronBehavior {
                 player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(ModItems.KRYSLUM_BUCKET)));
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(item));
-                decrementFluidLevel(state, world, pos);
+                decrementFluidLevel(KRYSLUM_LEVEL,state, world, pos);
                 world.playSound(null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
                 world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
             }
@@ -130,35 +130,28 @@ public interface ModCauldronBehavior {
         });
 
 
-
+        SPORE_FLUMROCK_CAULDRON_BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
+            if (!world.isClient) {
+                Item item = stack.getItem();
+                player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(ModItems.PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET)));
+                player.incrementStat(Stats.USE_CAULDRON);
+                player.incrementStat(Stats.USED.getOrCreateStat(item));
+                decrementFluidLevel(SPORE_LEVEL,state, world, pos);
+                world.playSound(null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
+            }
+            return ActionResult.success(world.isClient);
+        });
 
         SPORE_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET, (state, world, pos, player, hand, stack) -> {
             if (state.get(SPORE_LEVEL) == 12) {
                 return ActionResult.PASS;
             }
             if (!world.isClient) {
-                int itemCount = 1;
-                SculkDepths.LOGGER.info(Integer.toString(itemCount));
-                if (!player.isSneaking()){
-                    itemCount = player.getMainHandStack().getCount();
-                    SculkDepths.LOGGER.info(Integer.toString(itemCount));
-                    if(state.get(SPORE_LEVEL)+itemCount >= 384){
-                        itemCount = 384 - state.get(SPORE_LEVEL);
-                        SculkDepths.LOGGER.info(Integer.toString(itemCount));
-                    }
-                }
-                if (!player.isCreative()){
-                    ItemStack heldItem = player.getMainHandStack().getItem() == ModItems.PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET ?
-                            player.getMainHandStack() : player.getOffHandStack();
-                    heldItem.decrement(itemCount);}
-                SculkDepths.LOGGER.info(Integer.toString(itemCount));
+                player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(Items.BUCKET)));
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
-
-                int i = state.get(SPORE_LEVEL) + itemCount;
-                BlockState blockState = state.with(SPORE_LEVEL, i);
-                world.setBlockState(pos, blockState);
-
+                world.setBlockState(pos, state.cycle(SPORE_LEVEL));
                 world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
                 world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
             }
@@ -184,36 +177,11 @@ public interface ModCauldronBehavior {
             return ActionResult.success(world.isClient);
         });
 
-        SPORE_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.QUAZARITH_INGOT, (state, world, pos, player, hand, stack) -> {
-            if (state.get(QUAZARITH_LEVEL) > 8 || state.get(CRUX_LEVEL) > 8) {
-                return ActionResult.PASS;
-            }
-            if (!world.isClient) {
-                if (!player.isCreative()){
-                    ItemStack heldItem = player.getMainHandStack().getItem() == ModItems.CRUX ?
-                            player.getMainHandStack() : player.getOffHandStack();
-                    heldItem.decrement(1);}
-                player.incrementStat(Stats.USE_CAULDRON);
-                player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
-
-                int i = state.get(QUAZARITH_LEVEL) + SculkDepths.CONFIG.quazarith_ingot_quazarith_pieces_cost;
-                int j = state.get(CRUX_LEVEL) + SculkDepths.CONFIG.quazarith_ingot_crux_cost;
-                BlockState blockState = state.with(QUAZARITH_LEVEL, i).with(CRUX_LEVEL, j);
-                world.setBlockState(pos, blockState);
-
-                world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
-                world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
-            }
-
-
-            return ActionResult.success(world.isClient);
-        });
-
     }
 
-    public static void decrementFluidLevel(BlockState state, World world, BlockPos pos) {
-        int i = state.get(KRYSLUM_LEVEL) - 1;
-        BlockState blockState = i == 0 ? ModBlocks.FLUMROCK_CAULDRON.getDefaultState() : state.with(KRYSLUM_LEVEL, i);
+    public static void decrementFluidLevel(IntProperty levelName,BlockState state, World world, BlockPos pos) {
+        int i = state.get(levelName) - 1;
+        BlockState blockState = i == 0 ? ModBlocks.FLUMROCK_CAULDRON.getDefaultState() : state.with(levelName, i);
         world.setBlockState(pos, blockState);
         world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(blockState));
     }
