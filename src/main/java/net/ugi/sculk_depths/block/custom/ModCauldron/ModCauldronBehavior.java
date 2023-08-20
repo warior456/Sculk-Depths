@@ -18,6 +18,8 @@ import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.state.property.ModProperties;
+import net.ugi.sculk_depths.tags.ModEntityTags;
+import net.ugi.sculk_depths.tags.ModTags;
 
 import java.util.Map;
 

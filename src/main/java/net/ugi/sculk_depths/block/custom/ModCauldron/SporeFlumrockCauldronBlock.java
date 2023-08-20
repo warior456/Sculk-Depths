@@ -30,15 +30,27 @@ import net.minecraft.world.WorldEvents;
 import net.minecraft.world.event.GameEvent;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
+import net.ugi.sculk_depths.block.enums.CrystalType;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.state.property.ModProperties;
+import net.ugi.sculk_depths.tags.ModTags;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import static net.ugi.sculk_depths.state.property.ModProperties.*;
 
 
 public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
+
+    Item[] crystalItemArray = {ModItems.WHITE_CRYSTAL, ModItems.BLUE_CRYSTAL, ModItems.ORANGE_CRYSTAL, ModItems.LIME_CRYSTAL};
+    CrystalType[] crystalStateArray = {CrystalType.WHITE, CrystalType.BLUE, CrystalType.ORANGE, CrystalType.LIME};
+
+    List crystalItemList = Arrays.asList(crystalItemArray);
+    List crystalStateList = Arrays.asList(crystalStateArray);
+
 
     public static final IntProperty LEVEL = ModProperties.SPORE_LEVEL;
 
@@ -130,6 +142,38 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
         ) {
             return cauldronBehavior.interact(state, world, pos, player, hand, itemStack);
         }
+        if(itemStack.isIn(ModTags.Items.CRYSTALS)) {
+            if (!world.isClient()) {
+
+
+
+                player.getMainHandStack().decrement(1);
+
+
+            if (state.get(CRYSTAL) != CrystalType.NONE) {
+                int i = crystalStateList.indexOf(state.get(CRYSTAL));
+                Item j = crystalItemArray[i];
+
+                ItemStack outputItem = new ItemStack(j, 1);
+                boolean gaveItem = player.giveItemStack(outputItem);
+                if (gaveItem == false) {
+                    player.dropItem(outputItem, true);
+                }
+            }
+
+
+            int k = crystalItemList.indexOf(player.getMainHandStack().getItem());
+
+            CrystalType l = crystalStateArray[k];
+            BlockState blockState1 = state.with(CRYSTAL, l);
+
+            world.setBlockState(pos, blockState1);
+        }
+
+
+
+            return ActionResult.success(world.isClient);
+        }
 
         return ActionResult.FAIL;
 
@@ -164,6 +208,15 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
         if (state.getBlock() != newState.getBlock() && moved == false) {
             DefaultedList<ItemStack> stacks = DefaultedList.ofSize(2, ItemStack.EMPTY);
             stacks.set(0 , new ItemStack(ModItems.CRUX, state.get(CRUX)));
+
+            if (state.get(CRYSTAL) != CrystalType.NONE) {
+                int i = crystalStateList.indexOf(state.get(CRYSTAL));
+                Item j = crystalItemArray[i];
+
+                stacks.set(1 , new ItemStack(j, 1));
+            }
+
+
             ItemScatterer.spawn(world, pos, stacks);
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(state));
 

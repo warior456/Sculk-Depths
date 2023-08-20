@@ -290,9 +290,9 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
         return ActionResult.SUCCESS;
     }
 
-    public void RemoveUsedResources(BlockState state, World world, BlockPos pos, int quazarith_pieces, int cruxs, int kryslum){
+    public void RemoveUsedResources(BlockState state, World world, BlockPos pos, int quazarith_pieces, int crux, int kryslum){
         int i = state.get(QUAZARITH_LEVEL) - quazarith_pieces;
-        int j = state.get(CRUX_LEVEL) - cruxs;
+        int j = state.get(CRUX_LEVEL) - crux;
         int k = state.get(LEVEL) - kryslum;
 
         BlockState blockState1 = state.with(QUAZARITH_LEVEL, i).with(CRUX_LEVEL, j).with(LEVEL, k);

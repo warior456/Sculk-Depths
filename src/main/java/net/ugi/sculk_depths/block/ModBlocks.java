@@ -287,7 +287,10 @@ public class ModBlocks {
             new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).hardness(6.0f).resistance(10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     //crystals
-    public static final Block WHITE_CRYSTAL = registerBlock("crystal", ModBlocks.createCrystalBlock(DyeColor.WHITE), ModItemGroup.SCULK_DEPTHS);
+    public static final Block WHITE_CRYSTAL_BLOCK = registerBlock("white_crystal_block", ModBlocks.createCrystalBlock(DyeColor.WHITE), ModItemGroup.SCULK_DEPTHS);
+    public static final Block BLUE_CRYSTAL_BLOCK = registerBlock("blue_crystal_block", ModBlocks.createCrystalBlock(DyeColor.BLUE), ModItemGroup.SCULK_DEPTHS);
+    public static final Block ORANGE_CRYSTAL_BLOCK = registerBlock("orange_crystal_block", ModBlocks.createCrystalBlock(DyeColor.ORANGE), ModItemGroup.SCULK_DEPTHS);
+    public static final Block LIME_CRYSTAL_BLOCK = registerBlock("lime_crystal_block", ModBlocks.createCrystalBlock(DyeColor.LIME), ModItemGroup.SCULK_DEPTHS);
 
     //penebrium
     public static final Block PENEBRIUM_SHINE_SHROOM = registerBlock("penebrium_shine_shroom",
