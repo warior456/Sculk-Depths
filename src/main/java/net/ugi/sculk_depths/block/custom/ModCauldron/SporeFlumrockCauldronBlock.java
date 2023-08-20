@@ -5,13 +5,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.IntProperty;
@@ -26,21 +23,16 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldEvents;
 import net.minecraft.world.event.GameEvent;
-import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.enums.CrystalType;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.state.property.ModProperties;
 import net.ugi.sculk_depths.tags.ModTags;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import static net.ugi.sculk_depths.state.property.ModProperties.*;
 
 
 public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
@@ -48,13 +40,13 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
     Item[] crystalItemArray = {ModItems.WHITE_CRYSTAL, ModItems.BLUE_CRYSTAL, ModItems.ORANGE_CRYSTAL, ModItems.LIME_CRYSTAL};
     CrystalType[] crystalStateArray = {CrystalType.WHITE, CrystalType.BLUE, CrystalType.ORANGE, CrystalType.LIME};
 
-    List crystalItemList = Arrays.asList(crystalItemArray);
-    List crystalStateList = Arrays.asList(crystalStateArray);
+    List<Item> crystalItemList = Arrays.asList(crystalItemArray);
+    List<CrystalType> crystalStateList = Arrays.asList(crystalStateArray);
 
 
     public static final IntProperty LEVEL = ModProperties.SPORE_LEVEL;
 
-    public static final EnumProperty CRYSTAL = ModProperties.CRYSTAL_TYPE;
+    public static final EnumProperty<CrystalType> CRYSTAL = ModProperties.CRYSTAL_TYPE;
 
     public static final IntProperty CRUX = ModProperties.CRUX_LEVEL;
 
@@ -109,14 +101,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
 
     @Override
     protected double getFluidHeight(BlockState state) {
-        return (6.0 + (double)state.get(LEVEL).intValue() * 3.0) / 16.0;
-    }
-
-    @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (!world.isClient && entity.isOnFire() && this.isEntityTouchingFluid(state, pos, entity)) {
-
-        }
+        return (6.0 + (double) state.get(LEVEL) * 3.0) / 16.0;
     }
 
     @Override
@@ -158,7 +143,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
 
                     ItemStack outputItem = new ItemStack(j, 1);
                     boolean gaveItem = player.giveItemStack(outputItem);
-                    if (gaveItem == false) {
+                    if (!gaveItem) {
                         player.dropItem(outputItem, true);
                     }
                 }
@@ -176,33 +161,9 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
 
     }
 
-    public ActionResult UpgradeItem(ItemStack outputItem, PlayerEntity player){
-        NbtCompound nbtCompound = player.getMainHandStack().getNbt();
-        if (nbtCompound != null) {
-            outputItem.setNbt(nbtCompound.copy());
-        }
-        player.setStackInHand(Hand.MAIN_HAND, outputItem);
-        return ActionResult.SUCCESS;
-    }
-
-    public void RemoveUsedResources(BlockState state, World world, BlockPos pos, int quazarith_pieces, int cruxs, int kryslum){
-        int i = state.get(QUAZARITH_LEVEL) - quazarith_pieces;
-        int j = state.get(CRUX_LEVEL) - cruxs;
-        int k = state.get(LEVEL) - kryslum;
-
-        BlockState blockState1 = state.with(QUAZARITH_LEVEL, i).with(CRUX_LEVEL, j).with(LEVEL, k);
-        world.setBlockState(pos, blockState1);
-
-        if(k == 0) {
-            BlockState blockState2 = ModBlocks.FLUMROCK_CAULDRON.getDefaultState();
-            world.setBlockState(pos, blockState2);
-        }
-
-    }
-
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (state.getBlock() != newState.getBlock() && moved == false) {
+        if (state.getBlock() != newState.getBlock() && !moved) {
             DefaultedList<ItemStack> stacks = DefaultedList.ofSize(2, ItemStack.EMPTY);
             stacks.set(0 , new ItemStack(ModItems.CRUX, state.get(CRUX)));
 
