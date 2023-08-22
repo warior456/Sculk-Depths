@@ -214,7 +214,7 @@
   },
   "placement": [
     {
-      "type": "minecraft:sculk_depths__count_on_every_layer_constant",
+      "type": "sculk_depths:count_on_every_layer_constant",
       "count": 1
     },
     {
