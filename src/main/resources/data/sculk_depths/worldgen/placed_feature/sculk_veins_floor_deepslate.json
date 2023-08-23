@@ -214,8 +214,11 @@
   },
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 12
+      "type": "sculk_depths:count_on_every_layer_constant",
+      "count": 1,
+      "layers": 7,
+      "separation": 10,
+      "start_y": 70
     },
     {
       "type": "minecraft:height_range",

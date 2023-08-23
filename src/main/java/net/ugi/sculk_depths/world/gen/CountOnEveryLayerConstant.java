@@ -1,46 +1,62 @@
-package net.ugi.sculk_depths.util;
+package net.ugi.sculk_depths.world.gen;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
+
 import java.util.stream.Stream;
+
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.feature.FeaturePlacementContext;
-import net.minecraft.world.gen.placementmodifier.CountMultilayerPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 
 public class CountOnEveryLayerConstant
         extends PlacementModifier {
-    public static final Codec<CountOnEveryLayerConstant> MODIFIER_CODEC = IntProvider.createValidatingCodec(0, 256).fieldOf("count").xmap(CountOnEveryLayerConstant::new, CountOnEveryLayerConstant -> CountOnEveryLayerConstant.count).codec();
+
+    public static final Codec<CountOnEveryLayerConstant> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            IntProvider.VALUE_CODEC.fieldOf("count").forGetter(c -> c.count),
+            IntProvider.POSITIVE_CODEC.fieldOf("layers").forGetter(c -> c.layers),
+            IntProvider.VALUE_CODEC.fieldOf("start_y").forGetter(c -> c.startY),
+            IntProvider.VALUE_CODEC.fieldOf("separation").forGetter(c -> c.separation)
+    ).apply(instance, CountOnEveryLayerConstant::new));
     private final IntProvider count;
+    private final IntProvider layers;
 
-    private CountOnEveryLayerConstant(IntProvider count) {
+    private final IntProvider startY;
+    private final IntProvider separation;
+
+    public CountOnEveryLayerConstant(IntProvider count, IntProvider layers, IntProvider startY, IntProvider separation) {
         this.count = count;
+        this.layers = layers;
+        this.startY = startY;
+        this.separation = separation;
     }
 
-    public static CountOnEveryLayerConstant of(IntProvider count) {
-        return new CountOnEveryLayerConstant(count);
-    }
 
-    public static CountOnEveryLayerConstant of(int count) {
-        return CountOnEveryLayerConstant.of(ConstantIntProvider.create(count));
-    }
+
+
 
     @Override
     public Stream<BlockPos> getPositions(FeaturePlacementContext context, Random random, BlockPos pos) {
-        Stream.Builder<BlockPos> builder = Stream.builder();
-        for (int j = 0; j < 25; ++j) {
-            int k = pos.getX();
-            int n = j* -10;
-            int l = pos.getZ();
-            builder.add(new BlockPos(k, n, l));
 
+        int startY = this.startY.get(random);
+
+        Stream.Builder<BlockPos> builder = Stream.builder();
+
+        for(int i = 0; i < this.layers.get(random); i++) {
+            int layerY = startY - (i * this.separation.get(random));
+
+            for(int j = 0; j < this.count.get(random); j++) {
+                int x = pos.getX();
+                int z = pos.getZ();
+
+                builder.add(new BlockPos(x, layerY, z));
+            }
         }
         return builder.build();
     }
