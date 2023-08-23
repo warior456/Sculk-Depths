@@ -21,7 +21,7 @@ To access this dimension, follow these steps:
 4. Clear all the sculk veins from the middle of the reinforced deepslate in the center of the city.
 5. Use the Energized Flint and Steel to light the portal.
 
-When entering this dimension, it is recommended to bring a netherite pickaxe as the dimension is mostly made of a very hard block called Umbrusk.
+When entering this dimension, it is recommended to bring a netherite pickaxe because the planet is mostly made of a very hard block called Umbrusk.
 
 ## FEATURES
 
