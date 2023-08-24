@@ -5,9 +5,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.cauldron.CauldronBehavior;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.Items;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
@@ -24,9 +26,11 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.enums.CrystalType;
 import net.ugi.sculk_depths.item.ModItems;
+import net.ugi.sculk_depths.item.crystal.CrystalArmor;
 import net.ugi.sculk_depths.state.property.ModProperties;
 import net.ugi.sculk_depths.tags.ModTags;
 
@@ -155,6 +159,10 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
 
 
             return ActionResult.success(world.isClient);
+        }
+
+        if(itemStack.isIn(ModTags.Items.CRYSTAL_ARMOR)){
+            return CrystalArmor.createCrystalArmor(itemStack, player,state.get(CRYSTAL));
         }
 
         return ActionResult.FAIL;

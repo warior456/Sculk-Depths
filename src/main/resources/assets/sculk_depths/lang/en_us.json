@@ -105,5 +105,7 @@
   "advancements.sculk_depths.root.description": "Exploration and Ancient Civilisation",
 
   "advancements.sculk_depths.kill_a_warden": "Doing it the hard way!",
-  "advancements.sculk_depths.kill_a_warden.description": "Kill a warden instead of giving it a sacrifice"
+  "advancements.sculk_depths.kill_a_warden.description": "Kill a warden instead of giving it a sacrifice",
+
+  "tooltip.sculk_depths.crystal_armor.tooltip": "Crystal Upgrade:"
 }
