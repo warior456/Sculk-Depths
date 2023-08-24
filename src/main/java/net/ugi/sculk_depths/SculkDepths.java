@@ -13,6 +13,7 @@ import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
 import net.ugi.sculk_depths.item.ModItems;
+import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.portal.Portals;
 import net.ugi.sculk_depths.sound.ModSounds;
@@ -56,6 +57,8 @@ public class SculkDepths implements ModInitializer {
         SculkDepths.LOGGER.info("Registering Particles for " + SculkDepths.MOD_ID);
         ModParticleTypes.registerModParticles();
         ModPlacementModifierType.init();
+
+        CrystalUpgrade.tooltipAdd();
 
         CauldronFluidContent.registerCauldron(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON, ModFluids.KRYSLUM_STILL, FluidConstants.BUCKET, ModProperties.KRYSLUM_LEVEL); //support for mods to see how much fluid is in it (doesn't work for create pipes)
 

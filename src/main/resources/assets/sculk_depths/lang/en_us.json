@@ -107,5 +107,9 @@
   "advancements.sculk_depths.kill_a_warden": "Doing it the hard way!",
   "advancements.sculk_depths.kill_a_warden.description": "Kill a warden instead of giving it a sacrifice",
 
-  "tooltip.sculk_depths.crystal_armor.tooltip": "Crystal Upgrade:"
+  "tooltip.sculk_depths.crystal_upgrade.tooltip": "Crystal Upgrade:",
+  "tooltip.sculk_depths.crystal_upgrade.crystal.\"white\"": " White Crystal",
+  "tooltip.sculk_depths.crystal_upgrade.crystal.\"orange\"": " Orange Crystal",
+  "tooltip.sculk_depths.crystal_upgrade.crystal.\"blue\"": " Blue Crystal",
+  "tooltip.sculk_depths.crystal_upgrade.crystal.\"lime\"": " Lime Crystal"
 }

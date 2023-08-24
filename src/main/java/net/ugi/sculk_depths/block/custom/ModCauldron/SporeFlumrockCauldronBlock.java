@@ -30,13 +30,16 @@ import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.enums.CrystalType;
 import net.ugi.sculk_depths.item.ModItems;
-import net.ugi.sculk_depths.item.crystal.CrystalArmor;
+import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
 import net.ugi.sculk_depths.state.property.ModProperties;
 import net.ugi.sculk_depths.tags.ModTags;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import static net.ugi.sculk_depths.state.property.ModProperties.CRUX_LEVEL;
+import static net.ugi.sculk_depths.state.property.ModProperties.QUAZARITH_LEVEL;
 
 
 public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
@@ -161,11 +164,151 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
             return ActionResult.success(world.isClient);
         }
 
-        if(itemStack.isIn(ModTags.Items.CRYSTAL_ARMOR)){
-            return CrystalArmor.createCrystalArmor(itemStack, player,state.get(CRYSTAL));
+        if((itemStack.getItem() == Items.NETHERITE_HELMET
+                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_spore_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)
+                || (itemStack.getItem() == Items.NETHERITE_HELMET//========================================
+                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_spore_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)){
+            RemoveUsedResources(state, world, pos,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_crux_cost,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_spore_cost);
+            return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
+        }
+        if((itemStack.getItem() == Items.NETHERITE_CHESTPLATE
+                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_spore_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)
+                || (itemStack.getItem() == Items.NETHERITE_CHESTPLATE//========================================
+                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_spore_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)){
+            RemoveUsedResources(state, world, pos,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_crux_cost,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_spore_cost);
+            return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
+        }
+        if((itemStack.getItem() == Items.NETHERITE_LEGGINGS
+                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_spore_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)
+                || (itemStack.getItem() == Items.NETHERITE_LEGGINGS//========================================
+                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_spore_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)){
+            RemoveUsedResources(state, world, pos,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_crux_cost,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_spore_cost);
+            return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
+        }
+        if((itemStack.getItem() == Items.NETHERITE_BOOTS
+                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_spore_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)
+                || (itemStack.getItem() == Items.NETHERITE_BOOTS//========================================
+                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_spore_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)){
+            RemoveUsedResources(state, world, pos,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_crux_cost,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_spore_cost);
+            return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
+        }
+        if((itemStack.getItem() == Items.NETHERITE_SHOVEL
+                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_spore_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)
+                || (itemStack.getItem() == Items.NETHERITE_SHOVEL//========================================
+                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_spore_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)){
+            RemoveUsedResources(state, world, pos,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_crux_cost,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_spore_cost);
+            return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
+        }
+        if((itemStack.getItem() == Items.NETHERITE_PICKAXE
+                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_spore_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)
+                || (itemStack.getItem() == Items.NETHERITE_PICKAXE//========================================
+                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_spore_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)){
+            RemoveUsedResources(state, world, pos,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_crux_cost,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_spore_cost);
+            return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
+        }
+        if((itemStack.getItem() == Items.NETHERITE_AXE
+                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_spore_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)
+                || (itemStack.getItem() == Items.NETHERITE_AXE//========================================
+                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_spore_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)){
+            RemoveUsedResources(state, world, pos,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_crux_cost,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_spore_cost);
+            return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
+        }
+        if((itemStack.getItem() == Items.NETHERITE_HOE
+                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_spore_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)
+                || (itemStack.getItem() == Items.NETHERITE_HOE//========================================
+                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_spore_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)){
+            RemoveUsedResources(state, world, pos,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_crux_cost,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_spore_cost);
+            return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
+        }
+        if((itemStack.getItem() == Items.NETHERITE_SWORD
+                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_spore_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)
+                || (itemStack.getItem() == Items.NETHERITE_SWORD//========================================
+                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_spore_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_crux_cost
+                && state.get(CRYSTAL) != CrystalType.NONE)){
+            RemoveUsedResources(state, world, pos,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_crux_cost,
+                    SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_spore_cost);
+            return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
+        }
+
+        if((itemStack.getItem() == Items.NETHERITE_LEGGINGS
+                && state.get(LEVEL) > 7
+                && state.get(CRUX) >= 7
+                && state.get(CRYSTAL) != CrystalType.NONE)
+                || (itemStack.getItem() == Items.NETHERITE_LEGGINGS//========================================
+                && state.get(LEVEL) == 7
+                && state.get(CRUX) == 7
+                && state.get(CRYSTAL) != CrystalType.NONE)) {
+            RemoveUsedResources(state, world, pos, 7, 7);
+            return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
         }
 
         return ActionResult.FAIL;
+
+    }
+
+    public void RemoveUsedResources(BlockState state, World world, BlockPos pos, int crux, int spore){
+        int j = state.get(CRUX_LEVEL) - crux;
+        int k = state.get(LEVEL) - spore;
+
+        BlockState blockState1 = state.with(CRYSTAL, CrystalType.NONE).with(CRUX_LEVEL, j).with(LEVEL, k);
+        world.setBlockState(pos, blockState1);
+
+        if(k == 0) {
+            BlockState blockState2 = ModBlocks.FLUMROCK_CAULDRON.getDefaultState();
+            world.setBlockState(pos, blockState2);
+        }
 
     }
 

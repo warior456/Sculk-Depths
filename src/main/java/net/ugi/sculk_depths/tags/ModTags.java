@@ -24,8 +24,8 @@ public class ModTags {
                 public static final TagKey<Item> CRYSTALS =
                         createTag("crystals");
 
-                public static final TagKey<Item> CRYSTAL_ARMOR =
-                        createTag("crystal_armor");
+                public static final TagKey<Item> CRYSTAL_UPGRADE_ITEMS =
+                        createTag("crystal_upgrade_items");
                 private static TagKey<Item> createTag(String name) {
                         return TagKey.of(RegistryKeys.ITEM, new Identifier(SculkDepths.MOD_ID, name));
                 }

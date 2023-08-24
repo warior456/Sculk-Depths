@@ -57,6 +57,43 @@ public class ConfigHandler {
     public int quazarith_ingot_kryslum_cost = 4;
     public int quazarith_ingot_crux_cost = 4;
     public int quazarith_ingot_quazarith_pieces_cost = 4;
+
+    //crystal upgrade quazarith helmet
+    public int crystal_upgrade_quazarith_helmet_spore_cost = 5;
+    public int crystal_upgrade_quazarith_helmet_crux_cost = 5;
+
+    //crystal upgrade quazarith chestplate
+    public int crystal_upgrade_quazarith_chestplate_spore_cost = 8;
+    public int crystal_upgrade_quazarith_chestplate_crux_cost = 8;
+
+    //crystal upgrade quazarith leggings
+    public int crystal_upgrade_quazarith_leggings_spore_cost = 7;
+    public int crystal_upgrade_quazarith_leggings_crux_cost = 7;
+
+    //crystal upgrade quazarith boots
+    public int crystal_upgrade_quazarith_boots_spore_cost = 4;
+
+    public int crystal_upgrade_quazarith_boots_crux_cost = 4;
+
+    //crystal upgrade quazarith shovel
+    public int crystal_upgrade_quazarith_shovel_spore_cost = 1;
+    public int crystal_upgrade_quazarith_shovel_crux_cost = 1;
+
+    //crystal upgrade quazarith pickaxe
+    public int crystal_upgrade_quazarith_pickaxe_spore_cost = 3;
+    public int crystal_upgrade_quazarith_pickaxe_crux_cost = 3;
+
+    //crystal upgrade quazarith axe
+    public int crystal_upgrade_quazarith_axe_spore_cost = 3;
+    public int crystal_upgrade_quazarith_axe_crux_cost = 3;
+
+    //crystal upgrade quazarith hoe
+    public int crystal_upgrade_quazarith_hoe_spore_cost = 2;
+    public int crystal_upgrade_quazarith_hoe_crux_cost = 2;
+
+    //crystal upgrade quazarith sword
+    public int crystal_upgrade_quazarith_sword_spore_cost = 2;
+    public int crystal_upgrade_quazarith_sword_crux_cost = 2;
     
     
 }
