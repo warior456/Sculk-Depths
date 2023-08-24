@@ -164,11 +164,11 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
             return ActionResult.success(world.isClient);
         }
 
-        if((itemStack.getItem() == Items.NETHERITE_HELMET
+        if((itemStack.getItem() == ModItems.QUAZARITH_HELMET
                 && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_spore_cost
                 && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == Items.NETHERITE_HELMET//========================================
+                || (itemStack.getItem() == ModItems.QUAZARITH_HELMET//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)){
@@ -177,11 +177,11 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_spore_cost);
             return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
         }
-        if((itemStack.getItem() == Items.NETHERITE_CHESTPLATE
+        if((itemStack.getItem() == ModItems.QUAZARITH_CHESTPLATE
                 && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_spore_cost
                 && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == Items.NETHERITE_CHESTPLATE//========================================
+                || (itemStack.getItem() == ModItems.QUAZARITH_CHESTPLATE//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)){
@@ -190,11 +190,11 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_spore_cost);
             return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
         }
-        if((itemStack.getItem() == Items.NETHERITE_LEGGINGS
+        if((itemStack.getItem() == ModItems.QUAZARITH_LEGGINGS
                 && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_spore_cost
                 && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == Items.NETHERITE_LEGGINGS//========================================
+                || (itemStack.getItem() == ModItems.QUAZARITH_LEGGINGS//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)){
@@ -203,11 +203,11 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_spore_cost);
             return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
         }
-        if((itemStack.getItem() == Items.NETHERITE_BOOTS
+        if((itemStack.getItem() == ModItems.QUAZARITH_BOOTS
                 && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_spore_cost
                 && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == Items.NETHERITE_BOOTS//========================================
+                || (itemStack.getItem() == ModItems.QUAZARITH_BOOTS//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)){
@@ -216,11 +216,11 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_spore_cost);
             return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
         }
-        if((itemStack.getItem() == Items.NETHERITE_SHOVEL
+        if((itemStack.getItem() == ModItems.QUAZARITH_SHOVEL
                 && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_spore_cost
                 && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == Items.NETHERITE_SHOVEL//========================================
+                || (itemStack.getItem() == ModItems.QUAZARITH_SHOVEL//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)){
@@ -229,11 +229,11 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_spore_cost);
             return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
         }
-        if((itemStack.getItem() == Items.NETHERITE_PICKAXE
+        if((itemStack.getItem() == ModItems.QUAZARITH_PICKAXE
                 && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_spore_cost
                 && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == Items.NETHERITE_PICKAXE//========================================
+                || (itemStack.getItem() == ModItems.QUAZARITH_PICKAXE//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)){
@@ -242,11 +242,11 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_spore_cost);
             return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
         }
-        if((itemStack.getItem() == Items.NETHERITE_AXE
+        if((itemStack.getItem() == ModItems.QUAZARITH_AXE
                 && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_spore_cost
                 && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == Items.NETHERITE_AXE//========================================
+                || (itemStack.getItem() == ModItems.QUAZARITH_AXE//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)){
@@ -255,11 +255,11 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_spore_cost);
             return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
         }
-        if((itemStack.getItem() == Items.NETHERITE_HOE
+        if((itemStack.getItem() == ModItems.QUAZARITH_HOE
                 && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_spore_cost
                 && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == Items.NETHERITE_HOE//========================================
+                || (itemStack.getItem() == ModItems.QUAZARITH_HOE//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)){
@@ -268,11 +268,11 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_spore_cost);
             return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
         }
-        if((itemStack.getItem() == Items.NETHERITE_SWORD
+        if((itemStack.getItem() == ModItems.QUAZARITH_SWORD
                 && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_spore_cost
                 && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == Items.NETHERITE_SWORD//========================================
+                || (itemStack.getItem() == ModItems.QUAZARITH_SWORD//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)){
@@ -282,11 +282,11 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
             return CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL), world);
         }
 
-        if((itemStack.getItem() == Items.NETHERITE_LEGGINGS
+        if((itemStack.getItem() == ModItems.QUAZARITH_LEGGINGS
                 && state.get(LEVEL) > 7
                 && state.get(CRUX) >= 7
                 && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == Items.NETHERITE_LEGGINGS//========================================
+                || (itemStack.getItem() == ModItems.QUAZARITH_LEGGINGS//========================================
                 && state.get(LEVEL) == 7
                 && state.get(CRUX) == 7
                 && state.get(CRYSTAL) != CrystalType.NONE)) {
