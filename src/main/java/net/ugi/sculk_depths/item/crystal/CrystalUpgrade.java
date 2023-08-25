@@ -23,7 +23,7 @@ public class CrystalUpgrade extends Item {
         super(settings);
     }
 
-    public static ActionResult createCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal, World world, CrystalType[] crystalStateArray, List<String> crystalItemNbt) {
+    public static ActionResult createCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal) {
 
         addNbtToCrystalUpgrade(stack, player, crystal);
 

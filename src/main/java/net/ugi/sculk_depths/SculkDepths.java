@@ -57,8 +57,6 @@ public class SculkDepths implements ModInitializer {
         SculkDepths.LOGGER.info("Registering Particles for " + SculkDepths.MOD_ID);
         ModParticleTypes.registerModParticles();
         ModPlacementModifierType.init();
-        SculkDepths.LOGGER.info("Registering tooltips for " + SculkDepths.MOD_ID);
-        CrystalUpgrade.tooltipAdd();
 
         CauldronFluidContent.registerCauldron(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON, ModFluids.KRYSLUM_STILL, FluidConstants.BUCKET, ModProperties.KRYSLUM_LEVEL); //support for mods to see how much fluid is in it (doesn't work for create pipes)
 

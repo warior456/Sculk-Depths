@@ -17,12 +17,16 @@ import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.client.GlomperRenderer;
 import net.ugi.sculk_depths.fluid.ModFluids;
+import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 
 public class SculkDepthsClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+
+        SculkDepths.LOGGER.info("Registering tooltips for " + SculkDepths.MOD_ID);
+        CrystalUpgrade.tooltipAdd();
 
 
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.KRYSLUM_STILL,
