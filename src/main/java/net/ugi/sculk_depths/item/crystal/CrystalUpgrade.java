@@ -13,6 +13,8 @@ import net.minecraft.world.World;
 import net.ugi.sculk_depths.block.enums.CrystalType;
 import net.ugi.sculk_depths.tags.ModTags;
 
+import java.util.List;
+
 
 public class CrystalUpgrade extends Item {
 
@@ -21,7 +23,8 @@ public class CrystalUpgrade extends Item {
         super(settings);
     }
 
-    public static ActionResult createCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal, World world) {
+    public static ActionResult createCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal, World world, CrystalType[] crystalStateArray, List<String> crystalItemNbt) {
+
         addNbtToCrystalUpgrade(stack, player, crystal);
 
         return ActionResult.SUCCESS;
