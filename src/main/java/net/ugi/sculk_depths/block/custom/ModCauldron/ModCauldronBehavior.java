@@ -37,7 +37,7 @@ public interface ModCauldronBehavior {
 
     public static final Map<Item, CauldronBehavior> SPORE_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap();
     public static final CauldronBehavior FILL_WITH_KRYSLUM = (state, world, pos, player, hand, stack) -> CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModBlocks.KRYSLUM_FLUMROCK_CAULDRON.getDefaultState(), SoundEvents.ITEM_BUCKET_EMPTY);
-    public static final CauldronBehavior FILL_WITH_SPORE = (state, world, pos, player, hand, stack) -> CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModBlocks.SPORE_FLUMROCK_CAULDRON.getDefaultState(), SoundEvents.ITEM_BUCKET_EMPTY);
+    //public static final CauldronBehavior FILL_WITH_SPORE = (state, world, pos, player, hand, stack) -> CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModBlocks.SPORE_FLUMROCK_CAULDRON.getDefaultState(), SoundEvents.ITEM_BUCKET_EMPTY);
     public static void registerBehavior() {
 
         registerBucketBehavior(EMPTY_FLUMROCK_CAULDRON_BEHAVIOR);
@@ -132,7 +132,7 @@ public interface ModCauldronBehavior {
         });
 
 
-        SPORE_FLUMROCK_CAULDRON_BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
+        /*SPORE_FLUMROCK_CAULDRON_BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient) {
                 Item item = stack.getItem();
                 player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(ModItems.PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET)));
@@ -177,7 +177,7 @@ public interface ModCauldronBehavior {
                 world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
             }
             return ActionResult.success(world.isClient);
-        });
+        });*/
 
     }
 
@@ -190,7 +190,7 @@ public interface ModCauldronBehavior {
 
     public static void registerBucketBehavior(Map<Item, CauldronBehavior> behavior) {
         behavior.put(ModItems.KRYSLUM_BUCKET, FILL_WITH_KRYSLUM);
-        behavior.put(ModItems.PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET, FILL_WITH_SPORE);
+        //behavior.put(ModItems.PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET, FILL_WITH_SPORE);
 
     }
 }
