@@ -23,7 +23,7 @@ public class ModItems {
     public static final Item KRYSLUM_BUCKET = registerItem("kryslum_bucket", new BucketItem(ModFluids.KRYSLUM_STILL,
             new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
     public static final Item QUAZARITH_INGOT = registerItem("quazarith_ingot",
-            new Item(new FabricItemSettings()));
+            new Item(new FabricItemSettings().fireproof()));
 
     public static final Item QUAZARITH_PIECES = registerItem("quazarith_pieces",
             new Item(new FabricItemSettings()));
@@ -59,37 +59,37 @@ public class ModItems {
 
     public static final Item QUAZARITH_SHOVEL = registerItem("quazarith_shovel",
             new ShovelItem(ModToolMaterials.QUAZARITH, 2.5F, -3.0F,
-                    new FabricItemSettings()));
+                    new FabricItemSettings().fireproof()));
     public static final Item QUAZARITH_PICKAXE = registerItem("quazarith_pickaxe",
             new PickaxeItem(ModToolMaterials.QUAZARITH, 2, -2.0F,
-                    new FabricItemSettings()));
+                    new FabricItemSettings().fireproof()));
 
     public static final Item QUAZARITH_AXE = registerItem("quazarith_axe",
             new AxeItem(ModToolMaterials.QUAZARITH, 7, -3.0F,
-                    new FabricItemSettings()));
+                    new FabricItemSettings().fireproof()));
 
     public static final Item QUAZARITH_HOE = registerItem("quazarith_hoe",
             new HoeItem(ModToolMaterials.QUAZARITH, -4, 1.0F,
-                    new FabricItemSettings()));
+                    new FabricItemSettings().fireproof()));
 
     public static final Item QUAZARITH_SWORD = registerItem("quazarith_sword",
             new SwordItem(ModToolMaterials.QUAZARITH, 6, -2.0F,
-                    new FabricItemSettings()));
+                    new FabricItemSettings().fireproof()));
 
 
     //quazarith armor
     public static final Item QUAZARITH_HELMET = registerItem("quazarith_helmet",
             new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.HELMET,
-                    new FabricItemSettings()));
+                    new FabricItemSettings().fireproof()));
     public static final Item QUAZARITH_CHESTPLATE = registerItem("quazarith_chestplate",
             new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.CHESTPLATE,
-                    new FabricItemSettings()));
+                    new FabricItemSettings().fireproof()));
     public static final Item QUAZARITH_LEGGINGS = registerItem("quazarith_leggings",
             new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.LEGGINGS,
-                    new FabricItemSettings()));
+                    new FabricItemSettings().fireproof()));
     public static final Item QUAZARITH_BOOTS = registerItem("quazarith_boots",
             new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.BOOTS,
-                    new FabricItemSettings()));
+                    new FabricItemSettings().fireproof()));
 
     public static final Item VALTROX_SIGN = registerItem("valtrox_sign",
             new SignItem(new FabricItemSettings().maxCount(16), ModBlocks.VALTROX_SIGN, ModBlocks.VALTROX_WALL_SIGN));
