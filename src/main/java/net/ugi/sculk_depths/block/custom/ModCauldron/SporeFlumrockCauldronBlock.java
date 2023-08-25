@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.Map;
 
 import static net.ugi.sculk_depths.state.property.ModProperties.CRUX_LEVEL;
+import static net.ugi.sculk_depths.state.property.ModProperties.QUAZARITH_LEVEL;
 
 
 public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
@@ -304,14 +305,14 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
         int j = state.get(CRUX_LEVEL) - crux;
         int k = state.get(LEVEL) - spore;
 
-        BlockState blockState1 = state.with(CRYSTAL, CrystalType.NONE).with(CRUX_LEVEL, j).with(LEVEL, k);
-        world.setBlockState(pos, blockState1);
-
-        if(k == 0) {
-            BlockState blockState2 = ModBlocks.FLUMROCK_CAULDRON.getDefaultState();
-            world.setBlockState(pos, blockState2);
+        if(k == 0){
+            BlockState newBlockState = state.with(CRUX_LEVEL, j);
+            world.setBlockState(pos, newBlockState);
+            world.setBlockState(pos, ModBlocks.FLUMROCK_CAULDRON.getDefaultState());
+            return;
         }
-
+        BlockState newBlockState = state.with(CRUX_LEVEL, j).with(LEVEL, k);
+        world.setBlockState(pos, newBlockState);
     }
 
     @Override

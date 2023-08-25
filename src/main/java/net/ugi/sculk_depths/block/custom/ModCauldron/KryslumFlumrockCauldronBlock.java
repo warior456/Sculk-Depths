@@ -297,13 +297,16 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
         int j = state.get(CRUX_LEVEL) - crux;
         int k = state.get(LEVEL) - kryslum;
 
-        BlockState blockState1 = state.with(QUAZARITH_LEVEL, i).with(CRUX_LEVEL, j).with(LEVEL, k);
-        world.setBlockState(pos, blockState1);
-
-        if(k == 0) {
-            BlockState blockState2 = ModBlocks.FLUMROCK_CAULDRON.getDefaultState();
-            world.setBlockState(pos, blockState2);
+        if(k == 0){
+            BlockState newBlockState = state.with(QUAZARITH_LEVEL, i).with(CRUX_LEVEL, j);
+            world.setBlockState(pos, newBlockState);
+            world.setBlockState(pos, ModBlocks.FLUMROCK_CAULDRON.getDefaultState());
+            return;
         }
+
+        BlockState newBlockState = state.with(QUAZARITH_LEVEL, i).with(CRUX_LEVEL, j).with(LEVEL, k);
+        world.setBlockState(pos, newBlockState);
+
 
     }
 
