@@ -38,7 +38,7 @@ public class ModModelProvider extends FabricModelProvider {
         /*blockStateModelGenerator.registerDoor(ModBlocks.DRIED_VALTROX_DOOR);
         blockStateModelGenerator.registerTrapdoor(ModBlocks.DRIED_VALTROX_TRAPDOOR);*/
 
-        petrifiedValtroxPool.fenceGate(ModBlocks.PETRIFIED_VALTROX_GATE);
+        petrifiedValtroxPool.fenceGate(ModBlocks.PETRIFIED_VALTROX_WALL_GATE);
         petrifiedValtroxPool.family(BlockFamilies.register(ModBlocks.PETRIFIED_VALTROX_SLATES).sign(ModBlocks.PETRIFIED_VALTROX_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_SIGN).build());
         //blockStateModelGenerator.registerHangingSign(ModBlocks.STRIPPED_PETRIFIED_VALTROX_LOG, ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN);
         /*blockStateModelGenerator.registerDoor(ModBlocks.PETRIFIED_VALTROX_DOOR);
