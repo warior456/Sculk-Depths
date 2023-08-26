@@ -14,19 +14,21 @@
 ![image](https://github.com/warior456/Sculk-Depths/assets/66562258/21e8ad73-aa0f-4fe2-8681-55cca1098ade)
 3. Put the Kryslum in the Flumrock Cauldron
 ![image](https://github.com/warior456/Sculk-Depths/assets/66562258/1bd4abcb-affa-4db3-b4b6-8e7d11222196)
-4. Add diamonds and Quazarith
-![image](https://github.com/warior456/Sculk-Depths/assets/66562258/5000359a-6c7f-4ee7-b9a9-7249e5640647)
-![image](https://github.com/warior456/Sculk-Depths/assets/66562258/b4e94d41-e198-46ac-bc69-1c450a25a8a2)
+4. Add Crux and Quazarith
+![image](https://github.com/warior456/Sculk-Depths/assets/66562258/6d822e81-cc50-4e39-a688-f39748c66535)
+![image](https://github.com/warior456/Sculk-Depths/assets/66562258/ed25e0c5-3d5c-4bf4-9785-f224eaf32d47)
 5. Finally right click your Netherite tools or armor on the cauldron
+![image](https://github.com/warior456/Sculk-Depths/assets/66562258/e3022d0a-c33b-490d-abee-dddb00f02cc2)
 ## Notes: 
-* The amount of Quazarith and diamonds needed to upgrade it depends on the amount of slots the main material takes up in the crafting table
+* The amount of Quazarith and Crux needed to upgrade it depends on the amount of slots the main material takes up in the crafting table
   * helmet cost = 5
   * chestplate cost = 8
-  * leggings = 7
-  * boots = 4
-  * shovel = 1
-  * pickaxe = 3
+  * leggings cost = 7
+  * boots cost = 4
+  * shovel cost = 1
+  * pickaxe cost = 3
   * ...
-* A Flumrock Cauldron can store a maximum of 12 diamonds, Quazarith Pieces and Kryslum Buckets
-  ![image](https://github.com/warior456/Sculk-Depths/assets/66562258/dd080b1e-c43b-4023-ac05-e1193bc4c1c2)
+* A Flumrock Cauldron can store a maximum of 12 Crux, Quazarith Pieces and Kryslum Buckets
+  ![image](https://github.com/warior456/Sculk-Depths/assets/66562258/055d3b05-83d4-4e43-89e2-440c74260c9b)
+
 
