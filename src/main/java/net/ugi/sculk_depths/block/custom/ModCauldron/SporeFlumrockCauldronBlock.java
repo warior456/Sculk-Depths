@@ -168,9 +168,9 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
         }
 
         NbtElement Nbt = itemStack.getNbt().get("sculk_depths.crystal");
+
+
         if(Nbt != null) {
-            SculkDepths.LOGGER.info(crystalItemNbt.toString());
-        SculkDepths.LOGGER.info(Nbt.toString());
             int i = crystalItemNbt.indexOf(Nbt.toString());
             CrystalType j = crystalStateArray[i];
 

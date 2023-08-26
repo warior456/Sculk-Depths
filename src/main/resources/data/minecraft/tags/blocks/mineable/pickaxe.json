@@ -23,13 +23,16 @@
     "sculk_depths:petrified_valtrox_slab",
     "sculk_depths:petrified_valtrox_stairs",
     "sculk_depths:petrified_valtrox_wall",
+    "sculk_depths:petrified_valtrox_wall_gate",
     "sculk_depths:petrified_valtrox_button",
+    "sculk_depths:petrified_valtrox_pressure_plate",
 
     "sculk_depths:zygrin",
     "sculk_depths:zygrin_stairs",
     "sculk_depths:zygrin_slab",
     "sculk_depths:zygrin_wall",
     "sculk_depths:zygrin_light",
+    "sculk_depths:zygrin_flowblock",
 
     "sculk_depths:polished_zygrin",
     "sculk_depths:polished_zygrin_stairs",
@@ -42,6 +45,8 @@
     "sculk_depths:zygrin_brick_wall",
 
     "sculk_depths:zygrin_pillar",
-    "sculk_depths:chiseled_zygrin"
+    "sculk_depths:chiseled_zygrin",
+
+    "sculk_depths:larguth"
   ]
 }
