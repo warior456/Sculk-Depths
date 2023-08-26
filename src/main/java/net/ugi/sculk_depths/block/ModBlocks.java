@@ -192,7 +192,7 @@ public class ModBlocks {
     public static final Block PETRIFIED_VALTROX_WALL = registerBlock("petrified_valtrox_wall",
             new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block PETRIFIED_VALTROX_GATE = registerBlock("petrified_valtrox_fence_gate",
+    public static final Block PETRIFIED_VALTROX_WALL_GATE = registerBlock("petrified_valtrox_wall_gate",
             new FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE_GATE).strength(2.0f), ModWoodType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     /*public static final Block PETRIFIED_VALTROX_DOOR = registerBlock("petrified_valtrox_door",

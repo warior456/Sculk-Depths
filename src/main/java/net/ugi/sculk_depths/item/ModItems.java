@@ -18,8 +18,6 @@ import net.ugi.sculk_depths.item.custom.EnergizedFlintAndSteelItem;
 
 public class ModItems {
 
-    public static final Item SOUL_HEART = registerItem("soul_heart",
-            new Item(new FabricItemSettings().maxCount(16)));
     public static final Item KRYSLUM_BUCKET = registerItem("kryslum_bucket", new BucketItem(ModFluids.KRYSLUM_STILL,
             new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
     public static final Item QUAZARITH_INGOT = registerItem("quazarith_ingot",
@@ -116,7 +114,6 @@ public class ModItems {
     public static void addItemsToItemGroup() {
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, KRYSLUM_BUCKET);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, SOUL_HEART);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, ENERGY_ESSENCE);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, ENERGISED_FLINT_AND_STEEL);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, GLOMPER_SPAWN_EGG);

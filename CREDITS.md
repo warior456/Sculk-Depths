@@ -11,9 +11,13 @@
   - quazarith_hoe.png
   - quazarith_pickaxe.png
   - quazarith_shovel.png
-  - quazarith_sword.png
+  - quazarith armor textures and model
+  - crumbling_dirt.png
+  - crux.png
 # Models:
 - gems_bond (gemsb):
   - model list
+# Builders:
 - Matteo_fey (warior456)
-  - model list
+- gems_bond (gemsb)
+- Esse09
