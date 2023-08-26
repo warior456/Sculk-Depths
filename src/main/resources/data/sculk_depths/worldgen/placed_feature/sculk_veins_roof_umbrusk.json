@@ -4,7 +4,7 @@
     "config": {
       "surface": "ceiling",
       "depth": 3,
-      "vertical_range": 6,
+      "vertical_range": 10,
       "extra_bottom_block_chance": 0,
       "extra_edge_column_chance": 0,
       "vegetation_chance": 1,
@@ -214,8 +214,11 @@
   },
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 48
+      "type": "sculk_depths:count_on_every_layer_constant",
+      "count": 1,
+      "layers": 26,
+      "separation": 10,
+      "start_y": 7
     },
     {
       "type": "minecraft:height_range",

@@ -1,5 +1,3 @@
-## THIS MOD IS IN ALPHA, THINGS MAY CHANGE!
-
 # Sculk Depths
 
 #### We are looking for developers and artists (non paid we don't make money yet)
@@ -7,6 +5,7 @@
 
 # Important Notes
 - This mods depends on Geckolib
+- This mod is in alpha, we keep ourselves the right to make breaking changes (we will try to minimize damage where possible)
 - The 1.20 release no longer supports worlds created with older versions. The file "biome3.json" has been removed, causing biome3 to revert to plains. This change does not affect the 1.19 releases, where this biome will continue to be supported (for now).
 
 # ABOUT
@@ -22,7 +21,7 @@ To access this dimension, follow these steps:
 4. Clear all the sculk veins from the middle of the reinforced deepslate in the center of the city.
 5. Use the Energized Flint and Steel to light the portal.
 
-When entering this dimension, it is recommended to bring a netherite pickaxe as the dimension is mostly made of a very hard block called Umbrusk.
+When entering this dimension, it is recommended to bring a netherite pickaxe because the planet is mostly made of a very hard block called Umbrusk.
 
 ## FEATURES
 
@@ -31,7 +30,7 @@ When entering this dimension, it is recommended to bring a netherite pickaxe as 
 - 2 New Structures:
   - A Laboratory
   - An underground Lab
-- A new hostile mob: The Glomper. It attacks players using an elytra, so be careful while flying around!
+- A new mob: The Glomper. It attacks players using an elytra, so be careful while flying around!
 - Energy Essence drops when the warden kills a passive mob or when the warden is killed, this is used to craft an Energized Flint and Steel to open the portal.
 - Energized Flint and Steel: can light most blocks with Soul Fire and lights the portal
 - new blocks:

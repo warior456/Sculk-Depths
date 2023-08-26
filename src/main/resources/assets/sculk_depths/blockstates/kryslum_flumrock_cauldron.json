@@ -10,7 +10,7 @@
     },
     {
       "apply": {
-        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level2"
+        "model":"sculk_depths:block/kryslum_flumrock_cauldron_level2"
       },
       "when": {
         "kryslum": "2"
@@ -197,102 +197,102 @@
     },
     {
       "apply": {
-        "model": "sculk_depths:block/cauldron_counters/diamond_0"
+        "model": "sculk_depths:block/cauldron_counters/crux_0"
       },
       "when": {
-        "diamond": "0"
+        "crux": "0"
       }
     },
     {
       "apply": {
-        "model": "sculk_depths:block/cauldron_counters/diamond_1"
+        "model": "sculk_depths:block/cauldron_counters/crux_1"
       },
       "when": {
-        "diamond": "1"
+        "crux": "1"
       }
     },
     {
       "apply": {
-        "model": "sculk_depths:block/cauldron_counters/diamond_2"
+        "model": "sculk_depths:block/cauldron_counters/crux_2"
       },
       "when": {
-        "diamond": "2"
+        "crux": "2"
       }
     },
     {
       "apply": {
-        "model": "sculk_depths:block/cauldron_counters/diamond_3"
+        "model": "sculk_depths:block/cauldron_counters/crux_3"
       },
       "when": {
-        "diamond": "3"
+        "crux": "3"
       }
     },
     {
       "apply": {
-        "model": "sculk_depths:block/cauldron_counters/diamond_4"
+        "model": "sculk_depths:block/cauldron_counters/crux_4"
       },
       "when": {
-        "diamond": "4"
+        "crux": "4"
       }
     },    {
       "apply": {
-        "model": "sculk_depths:block/cauldron_counters/diamond_5"
+        "model": "sculk_depths:block/cauldron_counters/crux_5"
       },
       "when": {
-        "diamond": "5"
+        "crux": "5"
       }
     },    {
       "apply": {
-        "model": "sculk_depths:block/cauldron_counters/diamond_6"
+        "model": "sculk_depths:block/cauldron_counters/crux_6"
       },
       "when": {
-        "diamond": "6"
+        "crux": "6"
       }
     },    {
       "apply": {
-        "model": "sculk_depths:block/cauldron_counters/diamond_7"
+        "model": "sculk_depths:block/cauldron_counters/crux_7"
       },
       "when": {
-        "diamond": "7"
+        "crux": "7"
       }
     },    {
       "apply": {
-        "model": "sculk_depths:block/cauldron_counters/diamond_8"
+        "model": "sculk_depths:block/cauldron_counters/crux_8"
       },
       "when": {
-        "diamond": "8"
+        "crux": "8"
       }
     },
     {
       "apply": {
-        "model": "sculk_depths:block/cauldron_counters/diamond_9"
+        "model": "sculk_depths:block/cauldron_counters/crux_9"
       },
       "when": {
-        "diamond": "9"
+        "crux": "9"
       }
     },
     {
       "apply": {
-        "model": "sculk_depths:block/cauldron_counters/diamond_10"
+        "model": "sculk_depths:block/cauldron_counters/crux_10"
       },
       "when": {
-        "diamond": "10"
+        "crux": "10"
       }
     },
     {
       "apply": {
-        "model": "sculk_depths:block/cauldron_counters/diamond_11"
+        "model": "sculk_depths:block/cauldron_counters/crux_11"
       },
       "when": {
-        "diamond": "11"
+        "crux": "11"
       }
     },
     {
       "apply": {
-        "model": "sculk_depths:block/cauldron_counters/diamond_12"
+        "model": "sculk_depths:block/cauldron_counters/crux_12"
       },
       "when": {
-        "diamond": "12"
+        "crux": "12"
       }
     }
   ]

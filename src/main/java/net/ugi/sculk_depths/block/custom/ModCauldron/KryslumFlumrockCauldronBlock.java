@@ -2,7 +2,6 @@ package net.ugi.sculk_depths.block.custom.ModCauldron;
 
 import net.minecraft.block.*;
 import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -25,14 +24,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
-import net.ugi.sculk_depths.block.entity.CauldronBlockEntity;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.state.property.ModProperties;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
-import static net.minecraft.block.LeveledCauldronBlock.LEVEL;
-import static net.ugi.sculk_depths.state.property.ModProperties.DIAMOND_LEVEL;
+import static net.ugi.sculk_depths.state.property.ModProperties.CRUX_LEVEL;
 import static net.ugi.sculk_depths.state.property.ModProperties.QUAZARITH_LEVEL;
 
 
@@ -41,7 +40,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
     public static final IntProperty LEVEL = ModProperties.KRYSLUM_LEVEL;
 
     public static final IntProperty QUAZARITH = ModProperties.QUAZARITH_LEVEL;
-    public static final IntProperty DIAMOND = ModProperties.DIAMOND_LEVEL;
+    public static final IntProperty CRUX = ModProperties.CRUX_LEVEL;
 
 
     private final Map<Item, CauldronBehavior> behaviorMap;
@@ -50,6 +49,10 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
         super(settings, ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR);
         this.behaviorMap = behaviorMap;
         this.setDefaultState(this.stateManager.getDefaultState().with(LEVEL, 1));
+    }
+
+    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+        return new ItemStack(ModBlocks.FLUMROCK_CAULDRON);
     }
 
     private static final VoxelShape RAYCAST_SHAPE = AbstractCauldronBlock.createCuboidShape(1.5, 2.0, 1.5, 14.5, 16.0, 14.5);
@@ -107,7 +110,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(LEVEL).add(QUAZARITH).add(DIAMOND);
+        builder.add(LEVEL).add(QUAZARITH).add(CRUX);
 
     }
 
@@ -119,7 +122,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
         if(itemStack.getItem() == ModItems.KRYSLUM_BUCKET
                 || itemStack.getItem() == Items.BUCKET
                 || itemStack.getItem() == ModItems.QUAZARITH_PIECES
-                || itemStack.getItem() == Items.DIAMOND
+                || itemStack.getItem() == ModItems.CRUX
                 || itemStack.getItem() == ModItems.QUAZARITH_INGOT
         ) {
             return cauldronBehavior.interact(state, world, pos, player, hand, itemStack);
@@ -127,151 +130,151 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
 
         if((itemStack.getItem() == Items.NETHERITE_HELMET
                 && state.get(LEVEL) > SculkDepths.CONFIG.quazarith_helmet_kryslum_cost
-                && state.get(DIAMOND) >= SculkDepths.CONFIG.quazarith_helmet_diamond_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.quazarith_helmet_crux_cost
                 && state.get(QUAZARITH) >= SculkDepths.CONFIG.quazarith_helmet_quazarith_pieces_cost)
                 || (itemStack.getItem() == Items.NETHERITE_HELMET//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_helmet_kryslum_cost
-                && state.get(DIAMOND) == SculkDepths.CONFIG.quazarith_helmet_diamond_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.quazarith_helmet_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_helmet_quazarith_pieces_cost)){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_HELMET);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_helmet_quazarith_pieces_cost,
-                    SculkDepths.CONFIG.quazarith_helmet_diamond_cost,
+                    SculkDepths.CONFIG.quazarith_helmet_crux_cost,
                     SculkDepths.CONFIG.quazarith_helmet_kryslum_cost);
             return UpgradeItem(outputItem, player);
         }
         if((itemStack.getItem() == Items.NETHERITE_CHESTPLATE
                 && state.get(LEVEL) > SculkDepths.CONFIG.quazarith_chestplate_kryslum_cost
-                && state.get(DIAMOND) >= SculkDepths.CONFIG.quazarith_chestplate_diamond_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.quazarith_chestplate_crux_cost
                 && state.get(QUAZARITH) >= SculkDepths.CONFIG.quazarith_chestplate_quazarith_pieces_cost)
                 || (itemStack.getItem() == Items.NETHERITE_CHESTPLATE//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_chestplate_kryslum_cost
-                && state.get(DIAMOND) == SculkDepths.CONFIG.quazarith_chestplate_diamond_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.quazarith_chestplate_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_chestplate_quazarith_pieces_cost)){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_CHESTPLATE);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_chestplate_quazarith_pieces_cost,
-                    SculkDepths.CONFIG.quazarith_chestplate_diamond_cost,
+                    SculkDepths.CONFIG.quazarith_chestplate_crux_cost,
                     SculkDepths.CONFIG.quazarith_chestplate_kryslum_cost);
             return UpgradeItem(outputItem, player);
         }
         if((itemStack.getItem() == Items.NETHERITE_LEGGINGS
                 && state.get(LEVEL) > SculkDepths.CONFIG.quazarith_leggings_kryslum_cost
-                && state.get(DIAMOND) >= SculkDepths.CONFIG.quazarith_leggings_diamond_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.quazarith_leggings_crux_cost
                 && state.get(QUAZARITH) >= SculkDepths.CONFIG.quazarith_leggings_quazarith_pieces_cost)
                 || (itemStack.getItem() == Items.NETHERITE_LEGGINGS//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_leggings_kryslum_cost
-                && state.get(DIAMOND) == SculkDepths.CONFIG.quazarith_leggings_diamond_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.quazarith_leggings_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_leggings_quazarith_pieces_cost)){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_LEGGINGS);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_leggings_quazarith_pieces_cost,
-                    SculkDepths.CONFIG.quazarith_leggings_diamond_cost,
+                    SculkDepths.CONFIG.quazarith_leggings_crux_cost,
                     SculkDepths.CONFIG.quazarith_leggings_kryslum_cost);
             return UpgradeItem(outputItem, player);
         }
         if((itemStack.getItem() == Items.NETHERITE_BOOTS
                 && state.get(LEVEL) > SculkDepths.CONFIG.quazarith_boots_kryslum_cost
-                && state.get(DIAMOND) >= SculkDepths.CONFIG.quazarith_boots_diamond_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.quazarith_boots_crux_cost
                 && state.get(QUAZARITH) >= SculkDepths.CONFIG.quazarith_boots_quazarith_pieces_cost)
                 || (itemStack.getItem() == Items.NETHERITE_BOOTS//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_boots_kryslum_cost
-                && state.get(DIAMOND) == SculkDepths.CONFIG.quazarith_boots_diamond_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.quazarith_boots_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_boots_quazarith_pieces_cost)){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_BOOTS);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_boots_quazarith_pieces_cost,
-                    SculkDepths.CONFIG.quazarith_boots_diamond_cost,
+                    SculkDepths.CONFIG.quazarith_boots_crux_cost,
                     SculkDepths.CONFIG.quazarith_boots_kryslum_cost);
             return UpgradeItem(outputItem, player);
         }
         if((itemStack.getItem() == Items.NETHERITE_SHOVEL
                 && state.get(LEVEL) > SculkDepths.CONFIG.quazarith_shovel_kryslum_cost
-                && state.get(DIAMOND) >= SculkDepths.CONFIG.quazarith_shovel_diamond_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.quazarith_shovel_crux_cost
                 && state.get(QUAZARITH) >= SculkDepths.CONFIG.quazarith_shovel_quazarith_pieces_cost)
                 || (itemStack.getItem() == Items.NETHERITE_SHOVEL//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_shovel_kryslum_cost
-                && state.get(DIAMOND) == SculkDepths.CONFIG.quazarith_shovel_diamond_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.quazarith_shovel_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_shovel_quazarith_pieces_cost)){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_SHOVEL);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_shovel_quazarith_pieces_cost,
-                    SculkDepths.CONFIG.quazarith_shovel_diamond_cost,
+                    SculkDepths.CONFIG.quazarith_shovel_crux_cost,
                     SculkDepths.CONFIG.quazarith_shovel_kryslum_cost);
             return UpgradeItem(outputItem, player);
         }
         if((itemStack.getItem() == Items.NETHERITE_PICKAXE
                 && state.get(LEVEL) > SculkDepths.CONFIG.quazarith_pickaxe_kryslum_cost
-                && state.get(DIAMOND) >= SculkDepths.CONFIG.quazarith_pickaxe_diamond_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.quazarith_pickaxe_crux_cost
                 && state.get(QUAZARITH) >= SculkDepths.CONFIG.quazarith_pickaxe_quazarith_pieces_cost)
                 || (itemStack.getItem() == Items.NETHERITE_PICKAXE//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_pickaxe_kryslum_cost
-                && state.get(DIAMOND) == SculkDepths.CONFIG.quazarith_pickaxe_diamond_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.quazarith_pickaxe_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_pickaxe_quazarith_pieces_cost)){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_PICKAXE);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_pickaxe_quazarith_pieces_cost,
-                    SculkDepths.CONFIG.quazarith_pickaxe_diamond_cost,
+                    SculkDepths.CONFIG.quazarith_pickaxe_crux_cost,
                     SculkDepths.CONFIG.quazarith_pickaxe_kryslum_cost);
             return UpgradeItem(outputItem, player);
         }
         if((itemStack.getItem() == Items.NETHERITE_AXE
                 && state.get(LEVEL) > SculkDepths.CONFIG.quazarith_axe_kryslum_cost
-                && state.get(DIAMOND) >= SculkDepths.CONFIG.quazarith_axe_diamond_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.quazarith_axe_crux_cost
                 && state.get(QUAZARITH) >= SculkDepths.CONFIG.quazarith_axe_quazarith_pieces_cost)
                 || (itemStack.getItem() == Items.NETHERITE_AXE//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_axe_kryslum_cost
-                && state.get(DIAMOND) == SculkDepths.CONFIG.quazarith_axe_diamond_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.quazarith_axe_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_axe_quazarith_pieces_cost)){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_AXE);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_axe_quazarith_pieces_cost,
-                    SculkDepths.CONFIG.quazarith_axe_diamond_cost,
+                    SculkDepths.CONFIG.quazarith_axe_crux_cost,
                     SculkDepths.CONFIG.quazarith_axe_kryslum_cost);
             return UpgradeItem(outputItem, player);
         }
         if((itemStack.getItem() == Items.NETHERITE_HOE
                 && state.get(LEVEL) > SculkDepths.CONFIG.quazarith_hoe_kryslum_cost
-                && state.get(DIAMOND) >= SculkDepths.CONFIG.quazarith_hoe_diamond_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.quazarith_hoe_crux_cost
                 && state.get(QUAZARITH) >= SculkDepths.CONFIG.quazarith_hoe_quazarith_pieces_cost)
                 || (itemStack.getItem() == Items.NETHERITE_HOE//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_hoe_kryslum_cost
-                && state.get(DIAMOND) == SculkDepths.CONFIG.quazarith_hoe_diamond_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.quazarith_hoe_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_hoe_quazarith_pieces_cost)){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_HOE);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_hoe_quazarith_pieces_cost,
-                    SculkDepths.CONFIG.quazarith_hoe_diamond_cost,
+                    SculkDepths.CONFIG.quazarith_hoe_crux_cost,
                     SculkDepths.CONFIG.quazarith_hoe_kryslum_cost);
             return UpgradeItem(outputItem, player);
         }
         if((itemStack.getItem() == Items.NETHERITE_SWORD
                 && state.get(LEVEL) > SculkDepths.CONFIG.quazarith_sword_kryslum_cost
-                && state.get(DIAMOND) >= SculkDepths.CONFIG.quazarith_sword_diamond_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.quazarith_sword_crux_cost
                 && state.get(QUAZARITH) >= SculkDepths.CONFIG.quazarith_sword_quazarith_pieces_cost)
                 || (itemStack.getItem() == Items.NETHERITE_SWORD//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_sword_kryslum_cost
-                && state.get(DIAMOND) == SculkDepths.CONFIG.quazarith_sword_diamond_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.quazarith_sword_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_sword_quazarith_pieces_cost)){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_SWORD);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_sword_quazarith_pieces_cost,
-                    SculkDepths.CONFIG.quazarith_sword_diamond_cost,
+                    SculkDepths.CONFIG.quazarith_sword_crux_cost,
                     SculkDepths.CONFIG.quazarith_sword_kryslum_cost);
             return UpgradeItem(outputItem, player);
         }
         if((itemStack.getItem() == Items.AIR
                 && state.get(LEVEL) > SculkDepths.CONFIG.quazarith_ingot_kryslum_cost
-                && state.get(DIAMOND) >= SculkDepths.CONFIG.quazarith_ingot_diamond_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.quazarith_ingot_crux_cost
                 && state.get(QUAZARITH) >= SculkDepths.CONFIG.quazarith_ingot_quazarith_pieces_cost)
                 || (itemStack.getItem() == Items.AIR//========================================
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_ingot_kryslum_cost
-                && state.get(DIAMOND) == SculkDepths.CONFIG.quazarith_ingot_diamond_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.quazarith_ingot_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_ingot_quazarith_pieces_cost)){
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_INGOT);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_ingot_quazarith_pieces_cost,
-                    SculkDepths.CONFIG.quazarith_ingot_diamond_cost,
+                    SculkDepths.CONFIG.quazarith_ingot_crux_cost,
                     SculkDepths.CONFIG.quazarith_ingot_kryslum_cost);
             return UpgradeItem(outputItem, player);
         }
@@ -289,18 +292,21 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
         return ActionResult.SUCCESS;
     }
 
-    public void RemoveUsedResources(BlockState state, World world, BlockPos pos, int quazarith_pieces, int diamonds, int kryslum){
+    public void RemoveUsedResources(BlockState state, World world, BlockPos pos, int quazarith_pieces, int crux, int kryslum){
         int i = state.get(QUAZARITH_LEVEL) - quazarith_pieces;
-        int j = state.get(DIAMOND_LEVEL) - diamonds;
+        int j = state.get(CRUX_LEVEL) - crux;
         int k = state.get(LEVEL) - kryslum;
 
-        BlockState blockState1 = state.with(QUAZARITH_LEVEL, i).with(DIAMOND_LEVEL, j).with(LEVEL, k);
-        world.setBlockState(pos, blockState1);
-
-        if(k == 0) {
-            BlockState blockState2 = ModBlocks.FLUMROCK_CAULDRON.getDefaultState();
-            world.setBlockState(pos, blockState2);
+        if(k == 0){
+            BlockState newBlockState = state.with(QUAZARITH_LEVEL, i).with(CRUX_LEVEL, j);
+            world.setBlockState(pos, newBlockState);
+            world.setBlockState(pos, ModBlocks.FLUMROCK_CAULDRON.getDefaultState());
+            return;
         }
+
+        BlockState newBlockState = state.with(QUAZARITH_LEVEL, i).with(CRUX_LEVEL, j).with(LEVEL, k);
+        world.setBlockState(pos, newBlockState);
+
 
     }
 
@@ -309,7 +315,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
         if (state.getBlock() != newState.getBlock() && moved == false) {
             DefaultedList<ItemStack> stacks = DefaultedList.ofSize(2, ItemStack.EMPTY);
             stacks.set( 0 , new ItemStack(ModItems.QUAZARITH_PIECES, state.get(QUAZARITH)));
-            stacks.set(1 , new ItemStack(Items.DIAMOND, state.get(DIAMOND)));
+            stacks.set(1 , new ItemStack(ModItems.CRUX, state.get(CRUX)));
             ItemScatterer.spawn(world, pos, stacks);
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(state));
 

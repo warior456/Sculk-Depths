@@ -7,10 +7,10 @@ import net.minecraft.util.Identifier;
 
 public class ModSounds {
 
-    public static final Identifier SCULK_DEPTHS_MUSIC_1 = new Identifier("sculk_depths:music.sculk_depths.music_1");
-    public static SoundEvent SCULK_DEPTHS_MUSIC_1_EVENT = SoundEvent.of(SCULK_DEPTHS_MUSIC_1);
+    public static final Identifier SCULK_DEPTHS_MAIN_THEME = new Identifier("sculk_depths:music.sculk_depths.main_theme");
+    public static SoundEvent SCULK_DEPTHS_MAIN_THEME_EVENT = SoundEvent.of(SCULK_DEPTHS_MAIN_THEME);
 
     public static void registerModSounds() {
-        Registry.register(Registries.SOUND_EVENT, ModSounds.SCULK_DEPTHS_MUSIC_1, SCULK_DEPTHS_MUSIC_1_EVENT);
+        Registry.register(Registries.SOUND_EVENT, ModSounds.SCULK_DEPTHS_MAIN_THEME, SCULK_DEPTHS_MAIN_THEME_EVENT);
     }
 }

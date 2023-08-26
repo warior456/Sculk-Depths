@@ -1,0 +1,3312 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "0"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "1"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "2"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "3"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "4"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "5"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "6"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "7"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "8"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "9"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "10"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "11"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "12"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "13"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "14"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "15"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "16"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "17"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "18"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "19"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "20"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "21"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "22"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "23"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "24"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "25"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "26"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "27"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "28"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "29"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "30"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "31"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "32"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "33"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "34"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "35"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "36"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "37"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "38"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "39"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "40"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "41"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "42"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "43"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "44"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "45"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "46"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "47"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "48"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "49"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "50"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "51"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "52"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "53"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "54"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "55"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "56"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "57"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "58"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "59"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "60"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "61"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "62"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "63"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "64"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "65"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "66"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "67"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "68"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "69"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "70"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "71"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "72"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "73"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "74"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "75"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "76"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "77"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "78"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "79"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "80"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "81"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "82"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "83"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "84"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "85"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "86"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "87"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "88"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "89"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "90"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "91"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "92"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "93"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "94"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "95"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "96"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "97"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "98"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "99"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "100"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "101"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "102"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "103"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "104"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "105"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "106"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "107"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "108"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "109"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "110"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "111"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "112"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "113"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "114"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "115"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "116"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "117"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "118"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "119"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "120"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "121"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "122"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "123"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "124"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "125"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "126"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "127"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "128"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "129"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "130"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "131"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "132"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "133"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "134"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "135"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "136"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "137"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "138"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "139"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "140"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "141"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "142"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "143"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "144"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "145"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "146"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "147"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "148"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "149"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "150"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "151"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "152"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "153"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "154"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "155"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "156"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "157"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "158"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "159"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "160"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "161"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "162"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "163"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "164"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "165"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "166"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "167"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "168"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "169"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "170"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "171"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "172"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "173"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "174"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "175"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "176"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "177"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "178"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "179"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "180"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "181"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "182"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "183"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "184"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "185"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "186"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "187"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "188"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "189"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "190"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "191"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "192"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "193"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "194"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "195"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "196"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "197"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "198"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "199"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "200"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "201"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "202"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "203"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "204"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "205"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "206"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "207"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "208"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "209"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "210"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "211"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "212"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "213"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "214"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "215"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "216"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "217"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "218"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "219"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "220"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "221"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "222"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "223"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "224"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "225"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "226"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "227"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "228"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "229"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "230"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "231"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "232"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "233"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "234"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "235"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "236"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "237"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "238"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "239"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "240"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "241"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "242"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "243"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "244"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "245"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "246"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "247"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "248"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "249"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "250"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "251"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "252"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "253"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "254"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "255"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "256"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "257"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "258"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "259"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "260"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "261"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "262"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "263"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "264"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "265"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "266"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "267"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "268"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "269"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "270"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "271"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "272"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "273"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "274"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "275"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "276"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "277"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "278"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "279"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "280"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "281"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "282"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "283"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "284"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "285"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "286"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "287"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "288"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "289"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "290"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "291"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "292"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "293"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "294"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "295"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "296"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "297"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "298"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "299"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "300"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "301"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "302"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "303"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "304"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "305"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "306"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "307"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "308"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "309"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "310"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "311"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "312"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "313"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "314"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "315"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "316"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "317"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "318"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "319"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "320"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "321"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "322"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "323"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "324"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "325"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "326"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "327"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "328"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "329"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "330"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "331"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "332"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "333"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "334"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "335"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "336"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "337"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "338"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "339"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "340"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "341"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "342"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "343"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "344"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "345"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "346"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "347"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "348"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "349"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "350"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "351"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "352"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "353"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "354"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "355"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "356"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "357"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "358"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "359"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "360"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "361"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "362"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "363"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "364"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "365"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "366"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "367"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "368"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "369"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "370"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "371"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "372"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "373"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "374"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "375"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "376"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "377"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "378"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "379"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "380"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "381"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "382"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/flumrock_cauldron"
+      },
+      "when": {
+        "spore_x32": "383"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level1"
+      },
+      "when": {
+        "spore": "1"
+      }
+    },
+    {
+      "apply": {
+        "model":"sculk_depths:block/kryslum_flumrock_cauldron_level2"
+      },
+      "when": {
+        "spore": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level3"
+      },
+      "when": {
+        "spore": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level4"
+      },
+      "when": {
+        "spore": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level5"
+      },
+      "when": {
+        "spore": "5"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level6"
+      },
+      "when": {
+        "spore": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level7"
+      },
+      "when": {
+        "spore": "7"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level8"
+      },
+      "when": {
+        "spore": "8"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level9"
+      },
+      "when": {
+        "spore": "9"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level10"
+      },
+      "when": {
+        "spore": "10"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_level11"
+      },
+      "when": {
+        "spore": "11"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/kryslum_flumrock_cauldron_full"
+      },
+      "when": {
+        "spore": "12"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/quazarith_0"
+      },
+      "when": {
+        "crystal": "none"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/quazarith_1"
+      },
+      "when": {
+        "crystal": "white"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/quazarith_2"
+      },
+      "when": {
+        "crystal": "blue"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/quazarith_3"
+      },
+      "when": {
+        "crystal": "orange"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/quazarith_4"
+      },
+      "when": {
+        "crystal": "lime"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/crux_0"
+      },
+      "when": {
+        "crux": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/crux_1"
+      },
+      "when": {
+        "crux": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/crux_2"
+      },
+      "when": {
+        "crux": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/crux_3"
+      },
+      "when": {
+        "crux": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/crux_4"
+      },
+      "when": {
+        "crux": "4"
+      }
+    },    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/crux_5"
+      },
+      "when": {
+        "crux": "5"
+      }
+    },    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/crux_6"
+      },
+      "when": {
+        "crux": "6"
+      }
+    },    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/crux_7"
+      },
+      "when": {
+        "crux": "7"
+      }
+    },    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/crux_8"
+      },
+      "when": {
+        "crux": "8"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/crux_9"
+      },
+      "when": {
+        "crux": "9"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/crux_10"
+      },
+      "when": {
+        "crux": "10"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/crux_11"
+      },
+      "when": {
+        "crux": "11"
+      }
+    },
+    {
+      "apply": {
+        "model": "sculk_depths:block/cauldron_counters/crux_12"
+      },
+      "when": {
+        "crux": "12"
+      }
+    }
+  ]
+}

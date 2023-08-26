@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.Instrument;
 import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -16,17 +15,17 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.custom.*;
 import net.ugi.sculk_depths.block.custom.ModCauldron.FlumrockCauldronBlock;
 import net.ugi.sculk_depths.block.custom.ModCauldron.KryslumFlumrockCauldronBlock;
+import net.ugi.sculk_depths.block.custom.ModCauldron.SporeFlumrockCauldronBlock;
 import net.ugi.sculk_depths.block.custom.SoulFireBlock;
 import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
 import net.ugi.sculk_depths.block.sapling.ValtroxSaplingGenerator;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
+import net.ugi.sculk_depths.world.gen.feature.ModConfiguredFeatures;
 
 
 public class ModBlocks {
@@ -42,6 +41,8 @@ public class ModBlocks {
 
     public static final Block SOUL_FIRE = registerBlockWithoutBlockItem("soul_fire", new SoulFireBlock(FabricBlockSettings.copyOf(Blocks.SOUL_FIRE)), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block LARGUTH = registerBlock("larguth",
+            new Block(FabricBlockSettings.copyOf(Blocks.STONE).hardness(40.0f).resistance(1200f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
     //umbrusk blockset
     public static final Block UMBRUSK = registerBlock("umbrusk",
             new Block(FabricBlockSettings.copyOf(Blocks.STONE).hardness(5.0f).resistance(8f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
@@ -77,6 +78,9 @@ public class ModBlocks {
     public static final Block VALTROX_WOOD = registerBlock("valtrox_wood",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
 
+/*    public static final Block STRIPPED_VALTROX_LOG = registerBlock("stripped_valtrox_log",
+            new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);*/
+
     public static final Block VALTROX_PLANKS = registerBlock("valtrox_planks",
             new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
 
@@ -89,18 +93,41 @@ public class ModBlocks {
     public static final Block VALTROX_FENCE = registerBlock("valtrox_fence",
             new FenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block VALTROX_FENCE_GATE = registerBlock("valtrox_fence_gate",
+            new FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE_GATE).strength(2.0f), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+
+    /*public static final Block VALTROX_DOOR = registerBlock("valtrox_door",
+            new DoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR).strength(2.0f), ModBlockSetType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block VALTROX_TRAPDOOR = registerBlock("valtrox_trapdoor",
+            new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR).strength(2.0f), ModBlockSetType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+*/
     public static final Block VALTROX_PRESSURE_PLATE = registerBlock("valtrox_pressure_plate",
-            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING ,FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE) ,  BlockSetType.OAK), ModItemGroup.SCULK_DEPTHS);
+            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING ,FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE) ,  ModBlockSetType.VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block VALTROX_BUTTON = registerBlock("valtrox_button",
-            new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), BlockSetType.OAK, 30, true), ModItemGroup.SCULK_DEPTHS);
+            new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), ModBlockSetType.VALTROX, 30, true), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block VALTROX_SIGN = registerBlockWithoutBlockItem("valtrox_sign",
+            new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block VALTROX_WALL_SIGN = registerBlockWithoutBlockItem("valtrox_wall_sign",
+            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block VALTROX_HANGING_SIGN = registerBlockWithoutBlockItem("valtrox_hanging_sign",
+            new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_HANGING_SIGN), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block VALTROX_WALL_HANGING_SIGN = registerBlockWithoutBlockItem("valtrox_wall_hanging_sign",
+            new WallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_HANGING_SIGN).dropsLike(VALTROX_HANGING_SIGN), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
     //dried valtrox blockset
     public static final Block DRIED_VALTROX_LOG = registerBlock("dried_valtrox_log",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block DRIED_VALTROX_WOOD = registerBlock("dried_valtrox_wood",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
+
+/*    public static final Block STRIPPED_DRIED_VALTROX_LOG = registerBlock("stripped_dried_valtrox_log",
+            new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);*/
 
     public static final Block DRIED_VALTROX_PLANKS = registerBlock("dried_valtrox_planks",
             new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
@@ -114,11 +141,32 @@ public class ModBlocks {
     public static final Block DRIED_VALTROX_FENCE = registerBlock("dried_valtrox_fence",
             new FenceBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block DRIED_VALTROX_FENCE_GATE = registerBlock("dried_valtrox_fence_gate",
+            new FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE_GATE).strength(2.0f), ModWoodType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+
+    /*public static final Block DRIED_VALTROX_DOOR = registerBlock("dried_valtrox_door",
+            new DoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR).strength(2.0f), ModBlockSetType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block DRIED_VALTROX_TRAPDOOR = registerBlock("dried_valtrox_trapdoor",
+            new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR).strength(2.0f), ModBlockSetType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+*/
     public static final Block DRIED_VALTROX_PRESSURE_PLATE = registerBlock("dried_valtrox_pressure_plate",
-            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING ,FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE),  BlockSetType.OAK), ModItemGroup.SCULK_DEPTHS);
+            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING ,FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE),  ModBlockSetType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block DRIED_VALTROX_BUTTON = registerBlock("dried_valtrox_button",
-            new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), BlockSetType.OAK, 30, true), ModItemGroup.SCULK_DEPTHS);
+            new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), ModBlockSetType.DRIED_VALTROX, 30, true), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block DRIED_VALTROX_SIGN = registerBlockWithoutBlockItem("dried_valtrox_sign",
+            new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block DRIED_VALTROX_WALL_SIGN = registerBlockWithoutBlockItem("dried_valtrox_wall_sign",
+            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block DRIED_VALTROX_HANGING_SIGN = registerBlockWithoutBlockItem("dried_valtrox_hanging_sign",
+            new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block DRIED_VALTROX_WALL_HANGING_SIGN = registerBlockWithoutBlockItem("dried_valtrox_wall_hanging_sign",
+            new WallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     //petrified valtrox blockset
     public static final Block PETRIFIED_VALTROX_LOG = registerBlock("petrified_valtrox_log",
@@ -126,6 +174,11 @@ public class ModBlocks {
 
     public static final Block PETRIFIED_VALTROX_WOOD = registerBlock("petrified_valtrox_wood",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+/*
+    public static final Block STRIPPED_PETRIFIED_VALTROX_LOG = registerBlock("stripped_petrified_valtrox_log",
+            new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
+*/
 
     public static final Block PETRIFIED_VALTROX_SLATES = registerBlock("petrified_valtrox_slates",
             new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
@@ -139,11 +192,32 @@ public class ModBlocks {
     public static final Block PETRIFIED_VALTROX_WALL = registerBlock("petrified_valtrox_wall",
             new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block PETRIFIED_VALTROX_WALL_GATE = registerBlock("petrified_valtrox_wall_gate",
+            new FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE_GATE).strength(2.0f), ModWoodType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+
+    /*public static final Block PETRIFIED_VALTROX_DOOR = registerBlock("petrified_valtrox_door",
+            new DoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR).strength(2.0f), ModBlockSetType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PETRIFIED_VALTROX_TRAPDOOR = registerBlock("petrified_valtrox_trapdoor",
+            new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE).strength(2.0f), ModBlockSetType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+*/
     public static final Block PETRIFIED_VALTROX_PRESSURE_PLATE = registerBlock("petrified_valtrox_pressure_plate",
-            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING ,FabricBlockSettings.copyOf(Blocks.STONE_PRESSURE_PLATE),  BlockSetType.STONE), ModItemGroup.SCULK_DEPTHS);
+            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING ,FabricBlockSettings.copyOf(Blocks.STONE_PRESSURE_PLATE),  ModBlockSetType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_BUTTON = registerBlock("petrified_valtrox_button",
-            new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), BlockSetType.STONE, 20, false), ModItemGroup.SCULK_DEPTHS);
+            new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), ModBlockSetType.PETRIFIED_VALTROX, 20, false), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PETRIFIED_VALTROX_SIGN = registerBlockWithoutBlockItem("petrified_valtrox_sign",
+            new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PETRIFIED_VALTROX_WALL_SIGN = registerBlockWithoutBlockItem("petrified_valtrox_wall_sign",
+            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PETRIFIED_VALTROX_HANGING_SIGN = registerBlockWithoutBlockItem("petrified_valtrox_hanging_sign",
+            new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PETRIFIED_VALTROX_WALL_HANGING_SIGN = registerBlockWithoutBlockItem("petrified_valtrox_wall_hanging_sign",
+            new WallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     //zygrin set
     public static final Block ZYGRIN = registerBlock("zygrin",
@@ -211,15 +285,35 @@ public class ModBlocks {
     //ores
     public static final Block QUAZARITH_ORE = registerBlock("quazarith_ore",
             new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).hardness(6.0f).resistance(10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
-    //crystals
-    public static final Block WHITE_CRYSTAL = registerBlock("crystal", ModBlocks.createCrystalBlock(DyeColor.WHITE), ModItemGroup.SCULK_DEPTHS);
+    public static final Block CRUX_ORE = registerBlock("crux_ore",
+            new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).hardness(6.0f).resistance(10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
+    //crystals
+    /*public static final Block WHITE_CRYSTAL_BLOCK = registerBlock("white_crystal_block", ModBlocks.createCrystalBlock(DyeColor.WHITE), ModItemGroup.SCULK_DEPTHS);
+    public static final Block BLUE_CRYSTAL_BLOCK = registerBlock("blue_crystal_block", ModBlocks.createCrystalBlock(DyeColor.BLUE), ModItemGroup.SCULK_DEPTHS);
+    public static final Block ORANGE_CRYSTAL_BLOCK = registerBlock("orange_crystal_block", ModBlocks.createCrystalBlock(DyeColor.ORANGE), ModItemGroup.SCULK_DEPTHS);
+    public static final Block LIME_CRYSTAL_BLOCK = registerBlock("lime_crystal_block", ModBlocks.createCrystalBlock(DyeColor.LIME), ModItemGroup.SCULK_DEPTHS);
+*/
+    //penebrium
+    /*public static final Block PENEBRIUM_SHINE_SHROOM = registerBlock("penebrium_shine_shroom",
+            new MushroomPlantBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube), ModConfiguredFeatures.PENEBRIUM_SHINE_SHROOM), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PENEBRIUM_SHINE_SHROOM_BLOCK = registerBlock("penebrium_shine_shroom_block",
+            new CrystalBlock(DyeColor.WHITE, FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PENEBRIUM_SHINE_SHROOM_STEM = registerBlock("penebrium_shine_shroom_stem",
+            new MushroomBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM)), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block PENEBRIUM_SHINE_SHROOM_SPORE_BLOCK = registerBlock("penebrium_shine_shroom_spore_block",
+            new SporeBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);
+*/
     //fluids
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new FluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.copyOf(Blocks.WATER).replaceable().noCollision().strength(100.0f).pistonBehavior(PistonBehavior.DESTROY).dropsNothing().liquid().solid().sounds(BlockSoundGroup.SCULK)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block FLUMROCK_CAULDRON = registerBlock("flumrock_cauldron", new FlumrockCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)), ModItemGroup.SCULK_DEPTHS);
     public static final Block KRYSLUM_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("kryslum_flumrock_cauldron", new KryslumFlumrockCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON), ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR), ModItemGroup.SCULK_DEPTHS);
-
+    /*public static final Block SPORE_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("spore_flumrock_cauldron", new SporeFlumrockCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON), ModCauldronBehavior.SPORE_FLUMROCK_CAULDRON_BEHAVIOR), ModItemGroup.SCULK_DEPTHS);
+*/
     private static CrystalBlock createCrystalBlock(DyeColor color) {
         return new CrystalBlock(color, FabricBlockSettings.copyOf(Blocks.GLASS).luminance(10));
     }

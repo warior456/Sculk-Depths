@@ -12,11 +12,11 @@
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
       "tick_delay": 6000,
-      "block_search_extent": 8,
+      "block_search_extent": 12,
       "offset": 2
     },
     "music": {
-      "sound": "sculk_depths:music.sculk_depths.music_1",
+      "sound": "sculk_depths:music.sculk_depths.main_theme",
       "min_delay": 500,
       "max_delay": 5000,
       "replace_current_music": false
@@ -53,7 +53,9 @@
 
     ],
     [
-      "sculk_depths:ore_flumrock"
+      "sculk_depths:ore_flumrock",
+      "sculk_depths:deepslate_flumrock_rocks",
+      "sculk_depths:crux_boulders"
     ],
     [
       "sculk_depths:sculk_vegetation",
@@ -67,6 +69,7 @@
       "sculk_depths:ore_quazarith_up",
       "sculk_depths:ore_quazarith_down"
 
-    ]
+    ],
+    ["sculk_depths:penebrium_shine_shroom"]
   ]
 }
