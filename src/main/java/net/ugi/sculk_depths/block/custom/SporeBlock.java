@@ -52,7 +52,7 @@ public class SporeBlock extends Block {
         return true;
     }
 
-/*    @Override
+    @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         BlockPos pos2 = getCauldronPos(world, pos);
         if(pos2 == null){
@@ -77,7 +77,7 @@ public class SporeBlock extends Block {
             BlockState newCauldronBlockState = CauldronBlockstate.with(SporeFlumrockCauldronBlock.LEVEL, CauldronBlockstate.get(SporeFlumrockCauldronBlock.LEVEL) + 1);
             world.setBlockState(pos2, newCauldronBlockState);
         }
-    }*/
+    }
 
     @Nullable
     private static BlockPos getCauldronPos(World world, BlockPos pos2) {

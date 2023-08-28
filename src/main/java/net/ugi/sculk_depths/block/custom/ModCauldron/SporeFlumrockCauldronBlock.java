@@ -45,13 +45,13 @@ import static net.ugi.sculk_depths.state.property.ModProperties.QUAZARITH_LEVEL;
 
 public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
 
-    //Item[] crystalItemArray = {ModItems.WHITE_CRYSTAL, ModItems.BLUE_CRYSTAL, ModItems.ORANGE_CRYSTAL, ModItems.LIME_CRYSTAL};
+    Item[] crystalItemArray = {ModItems.WHITE_CRYSTAL, ModItems.BLUE_CRYSTAL, ModItems.ORANGE_CRYSTAL, ModItems.LIME_CRYSTAL};
     CrystalType[] crystalStateArray = {CrystalType.WHITE, CrystalType.BLUE, CrystalType.ORANGE, CrystalType.LIME};
 
 
     List<String> crystalItemNbt = Arrays.asList("\"white\"","\"blue\"","\"orange\"","\"lime\"");
 
-    //List<Item> crystalItemList = Arrays.asList(crystalItemArray);
+    List<Item> crystalItemList = Arrays.asList(crystalItemArray);
     List<CrystalType> crystalStateList = Arrays.asList(crystalStateArray);
 
 
@@ -126,7 +126,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
 
     }
 
-/*
+
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getMainHandStack();
@@ -334,6 +334,6 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
 
         }
         super.onStateReplaced(state, world, pos, newState, moved);
-    }*/
+    }
 
 }
