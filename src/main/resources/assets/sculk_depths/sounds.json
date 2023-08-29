@@ -1,12 +1,29 @@
 {
-	"music.sculk_depths.main_theme":{
+	"music.sculk_depths.main_soundtrack":{
 		"category": "music",
 		"sounds": [
            {
 				"name":"sculk_depths:sculk_depths_main_theme",
-
 		   		"stream": true
 			}
 		]
-    }
+    },
+	"sculk_depths.petrified_forest.additions": {
+		"category": "ambient",
+		"sounds": [
+			{
+				"name":"minecraft:ambient/nether/soulsand_valley/wind1"
+			},
+			{
+				"name":"minecraft:ambient/nether/soulsand_valley/wind2"
+			},
+			{
+				"name":"minecraft:ambient/nether/soulsand_valley.wind3"
+			},
+			{
+				"name":"minecraft:ambient/nether/soulsand_valley/wind4"
+			}
+		]
+	}
+
 }
