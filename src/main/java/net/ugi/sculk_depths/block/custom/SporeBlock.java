@@ -1,6 +1,7 @@
 package net.ugi.sculk_depths.block.custom;
 
 import net.minecraft.block.*;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
@@ -43,6 +44,7 @@ public class SporeBlock extends Block {
             mutable.set(i + MathHelper.nextInt(random, -10, 10), j - random.nextInt(10), k + MathHelper.nextInt(random, -10, 10));
             BlockState blockState = world.getBlockState(mutable);
             if (blockState.isFullCube(world, mutable)) continue;
+            //ParticleTypes.ASH
             world.addParticle(ModParticleTypes.PENEBRIUM_SPORES, (double)mutable.getX() + random.nextDouble(), (double)mutable.getY() + random.nextDouble(), (double)mutable.getZ() + random.nextDouble(), 0.0, 0.0, 0.0);
         }
     }

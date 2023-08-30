@@ -15,11 +15,21 @@
       "block_search_extent": 12,
       "offset": 2
     },
+    "additions_sound": {
+      "sound": "sculk_depths:sculk_depths.petrified_forest.additions",
+      "tick_chance": 0.003
+    },
     "music": {
       "sound": "sculk_depths:music.sculk_depths.main_soundtrack",
       "min_delay": 500,
       "max_delay": 5000,
       "replace_current_music": false
+    },
+    "particle": {
+      "options": {
+        "type": "sculk_depths:surface_wind"
+      },
+      "probability": 0.02
     }
   },
   "spawners": {

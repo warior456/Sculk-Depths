@@ -17,7 +17,7 @@
     },
     "additions_sound": {
       "sound": "sculk_depths:sculk_depths.petrified_forest.additions",
-      "tick_chance": 0.01
+      "tick_chance": 0.008
     },
     "music": {
       "sound": "sculk_depths:music.sculk_depths.main_soundtrack",
@@ -27,9 +27,9 @@
     },
     "particle": {
       "options": {
-        "type": "minecraft:white_ash"
+        "type": "sculk_depths:surface_wind"
       },
-      "probability": 0.118093334
+      "probability": 0.1
     }
   },
   "spawners": {

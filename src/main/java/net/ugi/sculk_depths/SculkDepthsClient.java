@@ -19,6 +19,7 @@ import net.ugi.sculk_depths.entity.client.GlomperRenderer;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
+import net.ugi.sculk_depths.particle.SurfaceWindParticle;
 
 public class SculkDepthsClient implements ClientModInitializer {
 
@@ -61,6 +62,7 @@ public class SculkDepthsClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PETRIFIED_VALTROX_TRAPDOOR, RenderLayer.getCutout());
 
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.PENEBRIUM_SPORES, WaterSuspendParticle.SporeBlossomAirFactory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticleTypes.SURFACE_WIND, SurfaceWindParticle.Factory::new);
 
     }
 }
