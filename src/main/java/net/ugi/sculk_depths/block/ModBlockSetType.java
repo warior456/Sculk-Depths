@@ -15,5 +15,6 @@ public class ModBlockSetType {
     public static final BlockSetType PETRIFIED_VALTROX = BlockSetTypeBuilder.copyOf(BlockSetType.STONE).register(
             new Identifier(SculkDepths.MOD_ID, "petrified_valtrox"));
 
-    public void init() {}
+    public void init() {
+    }
 }

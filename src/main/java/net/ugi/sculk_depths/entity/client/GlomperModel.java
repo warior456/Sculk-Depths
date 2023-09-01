@@ -21,16 +21,15 @@ public class GlomperModel extends GeoModel<GlomperEntity> {
     public RenderLayer getRenderType(GlomperEntity animatable, Identifier texture) {
         return RenderLayer.getEntityTranslucent(getTextureResource(animatable));
     }
+
     @Override
     public Identifier getTextureResource(GlomperEntity animatable) {
         return new Identifier(SculkDepths.MOD_ID, "textures/entity/glomper.png");
     }
 
-
     @Override
     public Identifier getAnimationResource(GlomperEntity animatable) {
         return new Identifier(SculkDepths.MOD_ID, "animations/glomper.animation.json");
-
     }
 
 

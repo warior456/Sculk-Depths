@@ -15,5 +15,6 @@ public class ModWoodType {
     public static final WoodType PETRIFIED_VALTROX = WoodTypeBuilder.copyOf(WoodType.OAK).register(
             new Identifier(SculkDepths.MOD_ID, "petrified_valtrox"), ModBlockSetType.PETRIFIED_VALTROX);
 
-    public void init() {}
+    public void init() {
+    }
 }

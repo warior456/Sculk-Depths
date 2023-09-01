@@ -1,11 +1,8 @@
 package net.ugi.sculk_depths.state.property;
 
-import net.ugi.sculk_depths.block.enums.CrystalType;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.util.math.Direction;
+import net.ugi.sculk_depths.block.enums.CrystalType;
 
 public class ModProperties {
 

@@ -28,11 +28,11 @@ public class KryslumEnrichedSoilBLock extends FarmlandBlock {
     }
 
 
-
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         return true;
     }
+
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (direction == Direction.UP && !state.canPlaceAt(world, pos)) {
@@ -64,7 +64,6 @@ public class KryslumEnrichedSoilBLock extends FarmlandBlock {
     @Override
     public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
     }
-
 
 
     @Override

@@ -14,6 +14,7 @@ import net.ugi.sculk_depths.block.ModBlocks;
 
 public class ModItemGroup {
     public static final RegistryKey<ItemGroup> SCULK_DEPTHS = RegistryKey.of(RegistryKeys.ITEM_GROUP, new Identifier(SculkDepths.MOD_ID, "sculk_depths"));
+
     public static void registerItemgroups() {
 
 
@@ -22,8 +23,8 @@ public class ModItemGroup {
         //        .icon(() -> new ItemStack(ModBlocks.UMBRUSK)).build();
 
         Registry.register(Registries.ITEM_GROUP, SCULK_DEPTHS, FabricItemGroup.builder()
-                       .icon(() -> new ItemStack(ModBlocks.UMBRUSK))
-                       .displayName(Text.translatable("itemgroup.sculk_depths"))
-                       .build()); // build() no longer registers by itself
+                .icon(() -> new ItemStack(ModBlocks.UMBRUSK))
+                .displayName(Text.translatable("itemgroup.sculk_depths"))
+                .build()); // build() no longer registers by itself
     }
 }

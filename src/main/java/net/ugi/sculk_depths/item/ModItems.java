@@ -2,8 +2,6 @@ package net.ugi.sculk_depths.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -93,19 +91,19 @@ public class ModItems {
             new SignItem(new FabricItemSettings().maxCount(16), ModBlocks.VALTROX_SIGN, ModBlocks.VALTROX_WALL_SIGN));
 
     public static final Item VALTROX_HANGING_SIGN = registerItem("valtrox_hanging_sign",
-            new HangingSignItem( ModBlocks.VALTROX_HANGING_SIGN, ModBlocks.VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
+            new HangingSignItem(ModBlocks.VALTROX_HANGING_SIGN, ModBlocks.VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
 
     public static final Item DRIED_VALTROX_SIGN = registerItem("dried_valtrox_sign",
             new SignItem(new FabricItemSettings().maxCount(16), ModBlocks.DRIED_VALTROX_SIGN, ModBlocks.DRIED_VALTROX_WALL_SIGN));
 
     public static final Item DRIED_VALTROX_HANGING_SIGN = registerItem("dried_valtrox_hanging_sign",
-            new HangingSignItem( ModBlocks.DRIED_VALTROX_HANGING_SIGN, ModBlocks.DRIED_VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
+            new HangingSignItem(ModBlocks.DRIED_VALTROX_HANGING_SIGN, ModBlocks.DRIED_VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
 
     public static final Item PETRIFIED_VALTROX_SIGN = registerItem("petrified_valtrox_sign",
             new SignItem(new FabricItemSettings().maxCount(16), ModBlocks.PETRIFIED_VALTROX_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_SIGN));
 
     public static final Item PETRIFIED_VALTROX_HANGING_SIGN = registerItem("petrified_valtrox_hanging_sign",
-            new HangingSignItem( ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
+            new HangingSignItem(ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(SculkDepths.MOD_ID, name), item);

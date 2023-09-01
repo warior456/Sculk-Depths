@@ -42,17 +42,17 @@ public class ConfigHandler {
     public int quazarith_axe_kryslum_cost = 3;
     public int quazarith_axe_crux_cost = 3;
     public int quazarith_axe_quazarith_pieces_cost = 3;
-    
+
     //quazarith hoe
     public int quazarith_hoe_kryslum_cost = 2;
     public int quazarith_hoe_crux_cost = 2;
     public int quazarith_hoe_quazarith_pieces_cost = 2;
-    
+
     //quazarith sword
     public int quazarith_sword_kryslum_cost = 2;
     public int quazarith_sword_crux_cost = 2;
     public int quazarith_sword_quazarith_pieces_cost = 2;
-    
+
     //quazarith ingot
     public int quazarith_ingot_kryslum_cost = 4;
     public int quazarith_ingot_crux_cost = 4;
@@ -94,6 +94,6 @@ public class ConfigHandler {
     //crystal upgrade quazarith sword
     public int crystal_upgrade_quazarith_sword_spore_cost = 2;
     public int crystal_upgrade_quazarith_sword_crux_cost = 2;
-    
-    
+
+
 }

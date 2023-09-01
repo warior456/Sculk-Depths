@@ -9,9 +9,7 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Colors;
 import net.minecraft.util.Formatting;
-import net.minecraft.world.World;
 import net.ugi.sculk_depths.block.enums.CrystalType;
 import net.ugi.sculk_depths.tags.ModTags;
 
@@ -21,8 +19,8 @@ import java.util.List;
 
 public class CrystalUpgrade extends Item {
 
-    static int[] crystalUpgradeColorArray = {16777215,65526,16742144,1703680};
-    static List<String> crystalItemNbtList = Arrays.asList("\"white\"","\"blue\"","\"orange\"","\"lime\"");
+    static int[] crystalUpgradeColorArray = {16777215, 65526, 16742144, 1703680};
+    static List<String> crystalItemNbtList = Arrays.asList("\"white\"", "\"blue\"", "\"orange\"", "\"lime\"");
 
 
     public CrystalUpgrade(Settings settings) {
@@ -52,7 +50,7 @@ public class CrystalUpgrade extends Item {
             if (stack.isIn(ModTags.Items.CRYSTAL_UPGRADE_ITEMS)) {
                 NbtElement nbtData = stack.getNbt().get("sculk_depths.crystal");
 
-                if(nbtData != null) {
+                if (nbtData != null) {
                     int i = crystalItemNbtList.indexOf(nbtData.toString());
                     int crystalUpgradeColor = crystalUpgradeColorArray[i];
 

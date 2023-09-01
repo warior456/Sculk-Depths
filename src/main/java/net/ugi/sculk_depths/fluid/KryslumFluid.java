@@ -32,6 +32,7 @@ import java.util.Optional;
 
 public abstract class KryslumFluid extends FlowableFluid {
     public static final IntProperty LEVEL = Properties.LEVEL_1_8;
+
     public KryslumFluid() {
     }
 

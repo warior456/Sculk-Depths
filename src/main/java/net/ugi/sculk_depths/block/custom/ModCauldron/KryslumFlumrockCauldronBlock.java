@@ -27,8 +27,6 @@ import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.state.property.ModProperties;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import static net.ugi.sculk_depths.state.property.ModProperties.CRUX_LEVEL;

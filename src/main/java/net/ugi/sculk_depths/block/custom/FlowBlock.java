@@ -19,7 +19,7 @@ public class FlowBlock extends RodBlock {
     public FlowBlock(AbstractBlock.Settings settings) {
 
         super(settings);
-        this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(FACING, Direction.UP));
+        this.setDefaultState((BlockState) ((BlockState) this.stateManager.getDefaultState()).with(FACING, Direction.UP));
     }
 
     @Override
@@ -41,12 +41,14 @@ public class FlowBlock extends RodBlock {
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
         return false;
     }
+
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         Direction direction = ctx.getSide();
         BlockState blockState = ctx.getWorld().getBlockState(ctx.getBlockPos().offset(direction.getOpposite()));
-        return (BlockState)this.getDefaultState().with(FACING, direction);
+        return (BlockState) this.getDefaultState().with(FACING, direction);
     }
+
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING);

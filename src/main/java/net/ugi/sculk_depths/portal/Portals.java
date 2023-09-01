@@ -7,7 +7,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 
 public class Portals {
-    public final static PortalIgnitionSource SOUL_FIRE = PortalIgnitionSource.CustomSource(new Identifier("sculk_depths","soul_fire"));
+    public final static PortalIgnitionSource SOUL_FIRE = PortalIgnitionSource.CustomSource(new Identifier("sculk_depths", "soul_fire"));
+
     public static void registerModPortals() {
         CustomPortalBuilder.beginPortal()
                 .frameBlock(Blocks.REINFORCED_DEEPSLATE)

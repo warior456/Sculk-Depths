@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
-import net.minecraft.block.enums.Instrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -19,9 +18,9 @@ import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.custom.*;
 import net.ugi.sculk_depths.block.custom.ModCauldron.FlumrockCauldronBlock;
 import net.ugi.sculk_depths.block.custom.ModCauldron.KryslumFlumrockCauldronBlock;
-import net.ugi.sculk_depths.block.custom.ModCauldron.SporeFlumrockCauldronBlock;
-import net.ugi.sculk_depths.block.custom.SoulFireBlock;
 import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
+import net.ugi.sculk_depths.block.custom.SoulFireBlock;
+import net.ugi.sculk_depths.block.custom.ModCauldron.SporeFlumrockCauldronBlock;
 import net.ugi.sculk_depths.block.sapling.ValtroxSaplingGenerator;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
@@ -103,7 +102,7 @@ public class ModBlocks {
             new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR).strength(2.0f), ModBlockSetType.VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block VALTROX_PRESSURE_PLATE = registerBlock("valtrox_pressure_plate",
-            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING ,FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE) ,  ModBlockSetType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE), ModBlockSetType.VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block VALTROX_BUTTON = registerBlock("valtrox_button",
             new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), ModBlockSetType.VALTROX, 30, true), ModItemGroup.SCULK_DEPTHS);
@@ -151,7 +150,7 @@ public class ModBlocks {
             new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR).strength(2.0f), ModBlockSetType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block DRIED_VALTROX_PRESSURE_PLATE = registerBlock("dried_valtrox_pressure_plate",
-            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING ,FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE),  ModBlockSetType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE), ModBlockSetType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block DRIED_VALTROX_BUTTON = registerBlock("dried_valtrox_button",
             new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), ModBlockSetType.DRIED_VALTROX, 30, true), ModItemGroup.SCULK_DEPTHS);
@@ -200,7 +199,7 @@ public class ModBlocks {
             new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE).strength(2.0f), ModBlockSetType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_PRESSURE_PLATE = registerBlock("petrified_valtrox_pressure_plate",
-            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING ,FabricBlockSettings.copyOf(Blocks.STONE_PRESSURE_PLATE),  ModBlockSetType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, FabricBlockSettings.copyOf(Blocks.STONE_PRESSURE_PLATE), ModBlockSetType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_BUTTON = registerBlock("petrified_valtrox_button",
             new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), ModBlockSetType.PETRIFIED_VALTROX, 20, false), ModItemGroup.SCULK_DEPTHS);
@@ -315,6 +314,7 @@ public class ModBlocks {
     private static CrystalBlock createCrystalBlock(DyeColor color) {
         return new CrystalBlock(color, FabricBlockSettings.copyOf(Blocks.GLASS).luminance(10));
     }
+
     private static Block registerBlock(String name, Block block, RegistryKey<ItemGroup> group) {
         registerBlockItem(name, block, group);
         return Registry.register(Registries.BLOCK, new Identifier(SculkDepths.MOD_ID, name), block);

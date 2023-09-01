@@ -23,7 +23,7 @@ public abstract class NoiseChunkGeneratorMixin {
         AquiferSampler.FluidLevel fluidLevel2 = new AquiferSampler.FluidLevel(i, settings.defaultFluid());
         AquiferSampler.FluidLevel fluidLevel3 = new AquiferSampler.FluidLevel(DimensionType.MIN_HEIGHT * 2, Blocks.AIR.getDefaultState());
         return (x, y, z) -> {
-            if (y < Math.min(settings.seaLevel() -117 , i)) { //todo configurable (in other mod)
+            if (y < Math.min(settings.seaLevel() - 117, i)) { //todo configurable (in other mod)
                 return fluidLevel;
             }
             return fluidLevel2;

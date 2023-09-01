@@ -29,7 +29,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import java.util.function.Predicate;
 
 
-public class GlomperEntity extends PathAwareEntity implements GeoEntity{
+public class GlomperEntity extends PathAwareEntity implements GeoEntity {
 
     private static final Predicate<LivingEntity> CAN_ATTACK_PREDICATE = entity -> entity.isPlayer() && entity.isFallFlying();
 

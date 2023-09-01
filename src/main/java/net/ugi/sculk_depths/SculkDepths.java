@@ -13,7 +13,6 @@ import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
 import net.ugi.sculk_depths.item.ModItems;
-import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.portal.Portals;
 import net.ugi.sculk_depths.sound.ModSounds;
@@ -26,8 +25,6 @@ public class SculkDepths implements ModInitializer {
     public static final String MOD_ID = "sculk_depths";
     public static ConfigHandler CONFIG;
     public static final Logger LOGGER = LoggerFactory.getLogger("sculk_depths");
-
-
 
 
     @Override
