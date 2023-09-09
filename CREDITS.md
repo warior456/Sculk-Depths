@@ -3,20 +3,22 @@
 - gems_bond (gemsb)
 # Textures:
 - gems_bond (gemsb):
-  - texture list
+  - most unmentioned textures
 - Matteo_fey (warior456)
-  - texture list
+  - probably not many
 - DKXLY
   - quazarith_axe.png
   - quazarith_hoe.png
   - quazarith_pickaxe.png
   - quazarith_shovel.png
-  - quazarith armor textures and model
+  - quazarith armor textures and models
   - crumbling_dirt.png
   - crux.png
-# Models:
+# Models and animations:
 - gems_bond (gemsb):
-  - model list
+  - glomper
+- Matteo_fey (warior456)
+  - glomper 
 # Builders:
 - Matteo_fey (warior456)
 - gems_bond (gemsb)
