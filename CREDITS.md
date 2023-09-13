@@ -17,6 +17,9 @@
 # Models:
 - gems_bond (gemsb):
   - model list
+# Music:
+- Soosss
+  - Sculk Depths main theme
 # Builders:
 - Matteo_fey (warior456)
 - gems_bond (gemsb)
