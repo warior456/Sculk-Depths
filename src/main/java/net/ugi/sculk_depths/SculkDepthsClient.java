@@ -6,16 +6,22 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.particle.WaterSuspendParticle;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.client.GlomperRenderer;
 import net.ugi.sculk_depths.fluid.ModFluids;
+import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.particle.SurfaceWindParticle;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class SculkDepthsClient implements ClientModInitializer {
 
@@ -33,6 +39,23 @@ public class SculkDepthsClient implements ClientModInitializer {
                         new Identifier("sculk_depths:block/kryslum_flow")
                 )
         );
+
+
+
+
+        ModelPredicateProviderRegistry.register(ModItems.QUAZARITH_AXE, new Identifier("crystal"), (itemStack, clientWorld, livingEntity, seed) -> {
+
+            NbtElement nbtData = itemStack.getNbt().get("sculk_depths.crystal");
+
+            if (nbtData == null) {return 0.0F;}
+
+            List<String> crystalItemNbtList = Arrays.asList("\"white\"", "\"blue\"", "\"orange\"", "\"lime\"");
+
+            return (crystalItemNbtList.indexOf(nbtData.toString()) + 1) * 0.1F;
+        });
+
+
+
 
         EntityRendererRegistry.register(ModEntities.GLOMPER, GlomperRenderer::new);
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.VALTROX_SAPLING, RenderLayer.getCutout());
