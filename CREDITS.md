@@ -18,7 +18,10 @@
 - gems_bond (gemsb):
   - glomper
 - Matteo_fey (warior456)
-  - glomper 
+  - glomper
+# Music:
+- Soosss
+  - Sculk Depths main theme
 # Builders:
 - Matteo_fey (warior456)
 - gems_bond (gemsb)
