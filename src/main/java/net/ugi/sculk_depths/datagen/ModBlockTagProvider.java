@@ -2,7 +2,11 @@ package net.ugi.sculk_depths.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
+import net.ugi.sculk_depths.block.ModBlocks;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -37,9 +41,13 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.DEEPSLATE_RUBY_ORE);
 
-        getOrCreateTagBuilder(TagKey.of(RegistryKeys.BLOCK, new Identifier("fabric", "needs_tool_level_4")))
-                .add(ModBlocks.END_STONE_RUBY_ORE);
-
          */
+
+        getOrCreateTagBuilder(TagKey.of(RegistryKeys.BLOCK, new Identifier("fabric", "needs_tool_level_4")))
+                .add(ModBlocks.QUAZARITH_BLOCK)
+                .add(ModBlocks.QUAZARITH_ORE);
+
+
+
     }
 }

@@ -18,13 +18,9 @@ public class ModItemGroup {
     public static void registerItemgroups() {
 
 
-        //SCULK_DEPTHS = FabricItemGroup.builder(new Identifier(SculkDepths.MOD_ID, "sculk_depths"))
-        //        .displayName(Text.translatable("itemgroup.sculk_depths"))
-        //        .icon(() -> new ItemStack(ModBlocks.UMBRUSK)).build();
-
         Registry.register(Registries.ITEM_GROUP, SCULK_DEPTHS, FabricItemGroup.builder()
                 .icon(() -> new ItemStack(ModBlocks.UMBRUSK))
                 .displayName(Text.translatable("itemgroup.sculk_depths"))
-                .build()); // build() no longer registers by itself
+                .build());
     }
 }

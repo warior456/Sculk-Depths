@@ -279,6 +279,9 @@ public class ModBlocks {
     public static final Block CEPHLERA_LIGHT = registerBlock("cephlera_light",
             new CephleraLightBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).noCollision().breakInstantly().emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).luminance(blockState -> 15).sounds(BlockSoundGroup.WEEPING_VINES)), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block QUAZARITH_BLOCK = registerBlock("quazarith_block",
+            new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).hardness(6.0f).resistance(10f).requiresTool()), ModItemGroup.SCULK_DEPTHS); //check hardness
+
     //ores
     public static final Block QUAZARITH_ORE = registerBlock("quazarith_ore",
             new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).hardness(6.0f).resistance(10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);

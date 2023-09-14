@@ -26,6 +26,8 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.PENEBRIUM_SHINE_SHROOM_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.PENEBRIUM_SHINE_SHROOM_SPORE_BLOCK);
 
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.QUAZARITH_BLOCK);
+
         valtroxPool.fenceGate(ModBlocks.VALTROX_FENCE_GATE);
         valtroxPool.family(BlockFamilies.register(ModBlocks.VALTROX_PLANKS).sign(ModBlocks.VALTROX_SIGN, ModBlocks.VALTROX_WALL_SIGN).build());
         blockStateModelGenerator.registerHangingSign(ModBlocks.STRIPPED_VALTROX_LOG, ModBlocks.VALTROX_HANGING_SIGN, ModBlocks.VALTROX_WALL_HANGING_SIGN);
