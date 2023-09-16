@@ -109,6 +109,7 @@ public class ModItems {
         return Registry.register(Registries.ITEM, new Identifier(SculkDepths.MOD_ID, name), item);
     }
 
+
     public static void addItemsToItemGroup() {
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, KRYSLUM_BUCKET);

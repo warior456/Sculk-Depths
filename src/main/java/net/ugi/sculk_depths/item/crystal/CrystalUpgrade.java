@@ -1,6 +1,10 @@
 package net.ugi.sculk_depths.item.crystal;
 
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,7 +14,10 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
+import net.minecraft.world.World;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.enums.CrystalType;
+import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.tags.ModTags;
 
 import java.util.Arrays;
@@ -18,6 +25,7 @@ import java.util.List;
 
 
 public class CrystalUpgrade extends Item {
+
 
     static int[] crystalUpgradeColorArray = {16777215, 65526, 16742144, 1703680};
     static List<String> crystalItemNbtList = Arrays.asList("\"white\"", "\"blue\"", "\"orange\"", "\"lime\"");
@@ -65,5 +73,36 @@ public class CrystalUpgrade extends Item {
             }
 
         });
+    }
+    public void inventoryTick(ItemStack stack, World world, Entity entity,int slot, boolean selected) {
+        if(!world.isClient()){
+            if (entity instanceof PlayerEntity player){
+                //mainhand
+                ItemStack mainHandItem = player.getEquippedStack(EquipmentSlot.OFFHAND);
+                if (mainHandItem.getItem() == ModItems.QUAZARITH_AXE){
+                    if (mainHandItem.getNbt().get("sculk_depths.crystal") != null){
+                        if (mainHandItem.getNbt().get("sculk_depths.crystal").toString().equals("\"white\"")) {
+                            int i = player.getStatusEffect(StatusEffects.STRENGTH) != null ?
+                                    player.getStatusEffect(StatusEffects.STRENGTH).getAmplifier() + 1 : 0;
+                            player.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 0, i, false, false));
+                        }
+                    }
+                }
+
+                //offhand
+                ItemStack offHandItem = player.getEquippedStack(EquipmentSlot.OFFHAND);
+                if (offHandItem.getItem() == ModItems.QUAZARITH_AXE){
+                    if (offHandItem.getNbt().get("sculk_depths.crystal") != null){
+                        if (offHandItem.getNbt().get("sculk_depths.crystal").toString().equals("\"white\"")) {
+                            int i = player.getStatusEffect(StatusEffects.STRENGTH) != null ?
+                                    player.getStatusEffect(StatusEffects.STRENGTH).getAmplifier() + 1 : 0;
+                            player.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 0, i, false, false));
+                        }
+                    }
+                }
+            }
+
+        }
+        super.inventoryTick(stack, world, entity, slot, selected);
     }
 }
