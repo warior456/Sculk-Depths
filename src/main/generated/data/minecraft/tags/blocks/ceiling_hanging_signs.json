@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "sculk_depths:valtrox_hanging_sign",
+    "sculk_depths:dried_valtrox_hanging_sign",
+    "sculk_depths:petrified_valtrox_hanging_sign"
+  ]
+}
