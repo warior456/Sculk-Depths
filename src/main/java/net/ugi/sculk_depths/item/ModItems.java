@@ -40,7 +40,7 @@ public class ModItems {
             new Item(new FabricItemSettings()));
 
 
-    public static final Item PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET = registerItem("penebrium_shine_mushroom_spore_bucket",
+    public static final Item PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET = registerItem("penebrium_shine_shroom_spore_bucket",
             new Item(new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
     public static final Item ENERGY_ESSENCE = registerItem("energy_essence",
