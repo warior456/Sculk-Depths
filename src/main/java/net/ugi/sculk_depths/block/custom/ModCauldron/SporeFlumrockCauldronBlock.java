@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
@@ -32,6 +33,7 @@ import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
 import net.ugi.sculk_depths.state.property.ModProperties;
 import net.ugi.sculk_depths.tags.ModTags;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -163,15 +165,17 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock {
             return ActionResult.success(world.isClient);
         }
 
-        NbtElement Nbt = itemStack.getNbt().get("sculk_depths.crystal");
-
+        @Nullable
+        NbtCompound Nbt = itemStack.getNbt();
 
         if (Nbt != null) {
-            int i = crystalItemNbt.indexOf(Nbt.toString());
-            CrystalType j = crystalStateArray[i];
+            if(Nbt.get("sculk_depths.crystal") != null){
+                int i = crystalItemNbt.indexOf(Nbt.get("sculk_depths.crystal").toString());
+                CrystalType j = crystalStateArray[i];
 
-            if (j == state.get(CRYSTAL)) {
-                return ActionResult.FAIL;
+                if (j == state.get(CRYSTAL)) {
+                    return ActionResult.FAIL;
+                }
             }
         }
 

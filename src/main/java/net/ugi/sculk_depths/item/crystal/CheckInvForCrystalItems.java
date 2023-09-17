@@ -29,11 +29,8 @@ public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick{
                     if (mainHandStack.getNbt().get("sculk_depths.crystal") != null) {
                         //white crystal
                         if (mainHandStack.getNbt().get("sculk_depths.crystal").toString().equals("\"white\"")) {
-                            int i = serverPlayer.getStatusEffect(StatusEffects.STRENGTH) != null ?
-                                    serverPlayer.getStatusEffect(StatusEffects.STRENGTH).getAmplifier() + 1 : 0;
-                            int j = serverPlayer.getStatusEffect(StatusEffects.STRENGTH) != null ?
-                                    serverPlayer.getStatusEffect(StatusEffects.STRENGTH).getDuration() : 2;
-                            serverPlayer.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, j, i, false, false));
+
+                            serverPlayer.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 2, 0, false, false));
                         }
                     }
                 }
@@ -47,11 +44,8 @@ public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick{
                     if (offHandStack.getNbt().get("sculk_depths.crystal") != null) {
                         //white crystal
                         if (offHandStack.getNbt().get("sculk_depths.crystal").toString().equals("\"white\"")) {
-                            int i = serverPlayer.getStatusEffect(StatusEffects.STRENGTH) != null ?
-                                    serverPlayer.getStatusEffect(StatusEffects.STRENGTH).getAmplifier() + 1 : 0;
-                            int j = serverPlayer.getStatusEffect(StatusEffects.STRENGTH) != null ?
-                                    serverPlayer.getStatusEffect(StatusEffects.STRENGTH).getDuration() : 2;
-                            serverPlayer.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, j, i, false, false));
+
+                            serverPlayer.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 2, 0, false, false));
                         }
                     }
                 }
@@ -59,3 +53,8 @@ public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick{
         }
     }
 }
+
+//                            int i = serverPlayer.getStatusEffect(StatusEffects.STRENGTH) != null ?
+//                                    serverPlayer.getStatusEffect(StatusEffects.STRENGTH).getAmplifier() + 1 : 0;
+//                            int j = serverPlayer.getStatusEffect(StatusEffects.STRENGTH) != null ?
+//                                    serverPlayer.getStatusEffect(StatusEffects.STRENGTH).getDuration() : 2;

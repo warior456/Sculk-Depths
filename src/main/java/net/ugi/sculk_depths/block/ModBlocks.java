@@ -78,7 +78,10 @@ public class ModBlocks {
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block STRIPPED_VALTROX_LOG = registerBlock("stripped_valtrox_log",
-            new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
+            new PillarBlock(FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_LOG).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block STRIPPED_VALTROX_WOOD = registerBlock("stripped_valtrox_wood",
+            new PillarBlock(FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_WOOD).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block VALTROX_PLANKS = registerBlock("valtrox_planks",
             new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
@@ -128,6 +131,9 @@ public class ModBlocks {
     public static final Block STRIPPED_DRIED_VALTROX_LOG = registerBlock("stripped_dried_valtrox_log",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block STRIPPED_DRIED_VALTROX_WOOD = registerBlock("stripped_dried_valtrox_wood",
+            new PillarBlock(FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_WOOD).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
+
     public static final Block DRIED_VALTROX_PLANKS = registerBlock("dried_valtrox_planks",
             new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
 
@@ -176,6 +182,9 @@ public class ModBlocks {
 
     public static final Block STRIPPED_PETRIFIED_VALTROX_LOG = registerBlock("stripped_petrified_valtrox_log",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block STRIPPED_PETRIFIED_VALTROX_WOOD = registerBlock("stripped_petrified_valtrox_wood",
+            new PillarBlock(FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_WOOD).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_SLATES = registerBlock("petrified_valtrox_slates",
             new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(3.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
@@ -296,7 +305,7 @@ public class ModBlocks {
 
     //penebrium
     public static final Block PENEBRIUM_SHINE_SHROOM = registerBlock("penebrium_shine_shroom",
-            new MushroomPlantBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube), ModConfiguredFeatures.PENEBRIUM_SHINE_SHROOM), ModItemGroup.SCULK_DEPTHS);
+            new MushroomPlantBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).noCollision(), ModConfiguredFeatures.PENEBRIUM_SHINE_SHROOM), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SHINE_SHROOM_BLOCK = registerBlock("penebrium_shine_shroom_block",
             new CrystalBlock(DyeColor.WHITE, FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);

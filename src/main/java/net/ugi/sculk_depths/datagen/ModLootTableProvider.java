@@ -27,6 +27,10 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.DRIED_VALTROX_PRESSURE_PLATE, drops(ModBlocks.DRIED_VALTROX_PRESSURE_PLATE.asItem()));
         addDrop(ModBlocks.PETRIFIED_VALTROX_PRESSURE_PLATE, drops(ModBlocks.PETRIFIED_VALTROX_PRESSURE_PLATE.asItem()));
         addDrop(ModBlocks.QUAZARITH_BLOCK, drops(ModBlocks.QUAZARITH_BLOCK.asItem()));
+        addDrop(ModBlocks.STRIPPED_VALTROX_WOOD, ModBlocks.STRIPPED_VALTROX_WOOD.asItem());
+        addDrop(ModBlocks.STRIPPED_DRIED_VALTROX_WOOD, ModBlocks.STRIPPED_DRIED_VALTROX_WOOD.asItem());
+        addDrop(ModBlocks.STRIPPED_PETRIFIED_VALTROX_WOOD, ModBlocks.STRIPPED_PETRIFIED_VALTROX_WOOD.asItem());
+
     }
 
     public LootTable.Builder copperLikeOreDrops(Block drop, Item item) {
