@@ -5,9 +5,26 @@
            {
 				"name":"sculk_depths:sculk_depths_main_theme",
 		   		"stream": true
+			},
+			{
+				"name":"minecraft:music/game/nether/soulsand_valley/so_below",
+				"stream": true
+			},
+			{
+				"name":"minecraft:music/game/ancestry",
+				"stream": true
 			}
 		]
     },
+	"music.sculk_depths.main_theme":{
+		"category": "music",
+		"sounds": [
+			{
+				"name":"sculk_depths:sculk_depths_main_theme",
+				"stream": true
+			}
+		]
+	},
 	"sculk_depths.petrified_forest.additions": {
 		"category": "ambient",
 		"sounds": [
@@ -18,7 +35,7 @@
 				"name":"minecraft:ambient/nether/soulsand_valley/wind2"
 			},
 			{
-				"name":"minecraft:ambient/nether/soulsand_valley.wind3"
+				"name":"minecraft:ambient/nether/soulsand_valley/wind3"
 			},
 			{
 				"name":"minecraft:ambient/nether/soulsand_valley/wind4"
