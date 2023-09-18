@@ -24,6 +24,7 @@ import net.ugi.sculk_depths.block.custom.ModCauldron.SporeFlumrockCauldronBlock;
 import net.ugi.sculk_depths.block.sapling.ValtroxSaplingGenerator;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
+import net.ugi.sculk_depths.util.ModStrippableBlocks;
 import net.ugi.sculk_depths.world.gen.feature.ModConfiguredFeatures;
 
 
@@ -346,5 +347,6 @@ public class ModBlocks {
     }
 
     public static void registerModBlocks() {
+        ModStrippableBlocks.registerStrippables();
     }
 }
