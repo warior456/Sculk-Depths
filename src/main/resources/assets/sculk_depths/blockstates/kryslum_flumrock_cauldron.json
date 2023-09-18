@@ -2,6 +2,11 @@
   "multipart": [
     {
       "apply": {
+        "model": "sculk_depths:block/flumrock_cauldron"
+      }
+    },
+    {
+      "apply": {
         "model": "sculk_depths:block/kryslum_flumrock_cauldron_level1"
       },
       "when": {
