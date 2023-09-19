@@ -50,34 +50,6 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.QUAZARITH_ORE);
 
 
-        getOrCreateTagBuilder(BlockTags.ALL_SIGNS)
-                .add(ModBlocks.VALTROX_SIGN)
-                .add(ModBlocks.VALTROX_WALL_SIGN)
-                .add(ModBlocks.VALTROX_HANGING_SIGN)
-                .add(ModBlocks.VALTROX_WALL_HANGING_SIGN)
-
-                .add(ModBlocks.DRIED_VALTROX_SIGN)
-                .add(ModBlocks.DRIED_VALTROX_WALL_SIGN)
-                .add(ModBlocks.DRIED_VALTROX_HANGING_SIGN)
-                .add(ModBlocks.DRIED_VALTROX_WALL_HANGING_SIGN)
-
-                .add(ModBlocks.PETRIFIED_VALTROX_SIGN)
-                .add(ModBlocks.PETRIFIED_VALTROX_WALL_SIGN)
-                .add(ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN)
-                .add(ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN);
-
-
-        getOrCreateTagBuilder(BlockTags.SIGNS)
-                .add(ModBlocks.VALTROX_SIGN)
-                .add(ModBlocks.VALTROX_WALL_SIGN)
-
-                .add(ModBlocks.DRIED_VALTROX_SIGN)
-                .add(ModBlocks.DRIED_VALTROX_WALL_SIGN)
-
-                .add(ModBlocks.PETRIFIED_VALTROX_SIGN)
-                .add(ModBlocks.PETRIFIED_VALTROX_WALL_SIGN);
-
-
         getOrCreateTagBuilder(BlockTags.STANDING_SIGNS)
                 .add(ModBlocks.VALTROX_SIGN)
 
@@ -91,16 +63,6 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.DRIED_VALTROX_WALL_SIGN)
 
                 .add(ModBlocks.PETRIFIED_VALTROX_WALL_SIGN);
-
-        getOrCreateTagBuilder(BlockTags.ALL_HANGING_SIGNS)
-                .add(ModBlocks.VALTROX_HANGING_SIGN)
-                .add(ModBlocks.VALTROX_WALL_HANGING_SIGN)
-
-                .add(ModBlocks.DRIED_VALTROX_HANGING_SIGN)
-                .add(ModBlocks.DRIED_VALTROX_WALL_HANGING_SIGN)
-
-                .add(ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN)
-                .add(ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN);
 
         getOrCreateTagBuilder(BlockTags.CEILING_HANGING_SIGNS)
                 .add(ModBlocks.VALTROX_HANGING_SIGN)
