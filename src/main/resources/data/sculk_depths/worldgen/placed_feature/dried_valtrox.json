@@ -25,13 +25,13 @@
           {
             "weight": 1,
             "data": {
-              "Name": "sculk_depths:valtrox_log"
+              "Name": "sculk_depths:dried_valtrox_log"
             }
           },
           {
             "weight": 4,
             "data": {
-              "Name": "sculk_depths:dried_valtrox_log"
+              "Name": "sculk_depths:stripped_dried_valtrox_log"
             }
           }
 
@@ -51,13 +51,13 @@
             {
               "weight": 1,
               "data": {
-                "Name": "sculk_depths:valtrox_log"
+                "Name": "sculk_depths:dried_valtrox_log"
               }
             },
             {
               "weight": 4,
               "data": {
-                "Name": "sculk_depths:dried_valtrox_log"
+                "Name": "sculk_depths:stripped_dried_valtrox_log"
               }
             },
             {
@@ -81,13 +81,13 @@
               {
                 "weight": 1,
                 "data": {
-                  "Name": "sculk_depths:valtrox_log"
+                  "Name": "sculk_depths:dried_valtrox_log"
                 }
               },
               {
                 "weight": 4,
                 "data": {
-                  "Name": "sculk_depths:dried_valtrox_log"
+                  "Name": "sculk_depths:stripped_dried_valtrox_log"
                 }
               },
               {
