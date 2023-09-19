@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier;
 public class ModSounds {
 
     public static final Identifier SCULK_DEPTHS_MAIN_SOUNDTRACK = new Identifier("sculk_depths:music.sculk_depths.main_soundtrack");
-    public static final Identifier SCULK_DEPTHS_MAIN_THEME = new Identifier("sculk_depths:music.sculk_depths.main_soundtrack");
+    public static final Identifier SCULK_DEPTHS_MAIN_THEME = new Identifier("sculk_depths:music.sculk_depths.main_theme");
     public static final Identifier SCULK_DEPTHS_PETRIFIED_FOREST_ADDITIONS = new Identifier("sculk_depths:sculk_depths.petrified_forest.additions");
     public static SoundEvent SCULK_DEPTHS_MAIN_SOUNDTRACK_EVENT = SoundEvent.of(SCULK_DEPTHS_MAIN_SOUNDTRACK);
     public static SoundEvent SCULK_DEPTHS_MAIN_THEME_EVENT = SoundEvent.of(SCULK_DEPTHS_MAIN_THEME);
