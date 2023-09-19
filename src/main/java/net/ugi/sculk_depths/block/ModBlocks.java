@@ -24,6 +24,7 @@ import net.ugi.sculk_depths.block.custom.ModCauldron.SporeFlumrockCauldronBlock;
 import net.ugi.sculk_depths.block.sapling.ValtroxSaplingGenerator;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
+import net.ugi.sculk_depths.util.ModStrippableBlocks;
 import net.ugi.sculk_depths.world.gen.feature.ModConfiguredFeatures;
 
 
@@ -114,13 +115,13 @@ public class ModBlocks {
             new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block VALTROX_WALL_SIGN = registerBlockWithoutBlockItem("valtrox_wall_sign",
-            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_WALL_SIGN), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block VALTROX_HANGING_SIGN = registerBlockWithoutBlockItem("valtrox_hanging_sign",
             new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_HANGING_SIGN), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block VALTROX_WALL_HANGING_SIGN = registerBlockWithoutBlockItem("valtrox_wall_hanging_sign",
-            new WallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_HANGING_SIGN).dropsLike(VALTROX_HANGING_SIGN), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new WallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_WALL_HANGING_SIGN).dropsLike(VALTROX_HANGING_SIGN), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
     //dried valtrox blockset
     public static final Block DRIED_VALTROX_LOG = registerBlock("dried_valtrox_log",
             new PillarBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(2.5f)), ModItemGroup.SCULK_DEPTHS);
@@ -165,13 +166,13 @@ public class ModBlocks {
             new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block DRIED_VALTROX_WALL_SIGN = registerBlockWithoutBlockItem("dried_valtrox_wall_sign",
-            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_WALL_SIGN), ModWoodType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block DRIED_VALTROX_HANGING_SIGN = registerBlockWithoutBlockItem("dried_valtrox_hanging_sign",
-            new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_HANGING_SIGN), ModWoodType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block DRIED_VALTROX_WALL_HANGING_SIGN = registerBlockWithoutBlockItem("dried_valtrox_wall_hanging_sign",
-            new WallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new WallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_WALL_HANGING_SIGN), ModWoodType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     //petrified valtrox blockset
     public static final Block PETRIFIED_VALTROX_LOG = registerBlock("petrified_valtrox_log",
@@ -217,13 +218,13 @@ public class ModBlocks {
             new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_WALL_SIGN = registerBlockWithoutBlockItem("petrified_valtrox_wall_sign",
-            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_WALL_SIGN), ModWoodType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_HANGING_SIGN = registerBlockWithoutBlockItem("petrified_valtrox_hanging_sign",
-            new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_HANGING_SIGN), ModWoodType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_WALL_HANGING_SIGN = registerBlockWithoutBlockItem("petrified_valtrox_wall_hanging_sign",
-            new WallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), ModWoodType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new WallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_WALL_HANGING_SIGN), ModWoodType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     //zygrin set
     public static final Block ZYGRIN = registerBlock("zygrin",
@@ -346,5 +347,6 @@ public class ModBlocks {
     }
 
     public static void registerModBlocks() {
+        ModStrippableBlocks.registerStrippables();
     }
 }

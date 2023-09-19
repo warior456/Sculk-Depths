@@ -26,3 +26,6 @@
 - Matteo_fey (warior456)
 - gems_bond (gemsb)
 - Esse09
+# Translators:
+- unroman
+  - uk_au
