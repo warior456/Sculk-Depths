@@ -115,7 +115,7 @@ public class ModBlocks {
             new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN).solid(), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block VALTROX_WALL_SIGN = registerBlockWithoutBlockItem("valtrox_wall_sign",
-            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_WALL_SIGN).solid(), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_WALL_SIGN).dropsLike(ModBlocks.VALTROX_SIGN).solid(), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block VALTROX_HANGING_SIGN = registerBlockWithoutBlockItem("valtrox_hanging_sign",
             new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_HANGING_SIGN).solid(), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
@@ -166,7 +166,7 @@ public class ModBlocks {
             new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN).solid(), ModWoodType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block DRIED_VALTROX_WALL_SIGN = registerBlockWithoutBlockItem("dried_valtrox_wall_sign",
-            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_WALL_SIGN).solid(), ModWoodType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_WALL_SIGN).dropsLike(ModBlocks.DRIED_VALTROX_SIGN).solid(), ModWoodType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block DRIED_VALTROX_HANGING_SIGN = registerBlockWithoutBlockItem("dried_valtrox_hanging_sign",
             new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_HANGING_SIGN).solid(), ModWoodType.DRIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
@@ -218,7 +218,7 @@ public class ModBlocks {
             new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN).solid(), ModWoodType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_WALL_SIGN = registerBlockWithoutBlockItem("petrified_valtrox_wall_sign",
-            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_WALL_SIGN).solid(), ModWoodType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_WALL_SIGN).dropsLike(ModBlocks.PETRIFIED_VALTROX_SIGN).solid(), ModWoodType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_HANGING_SIGN = registerBlockWithoutBlockItem("petrified_valtrox_hanging_sign",
             new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_HANGING_SIGN).solid(), ModWoodType.PETRIFIED_VALTROX), ModItemGroup.SCULK_DEPTHS);
