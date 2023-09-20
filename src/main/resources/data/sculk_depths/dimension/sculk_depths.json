@@ -1,5 +1,5 @@
 {
-  "type": "sculk_depths:sculk_depthsdim",
+  "type": "sculk_depths:sculk_depths_type",
   "generator": {
     "type": "minecraft:noise",
     "settings": {

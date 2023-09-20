@@ -23,9 +23,10 @@ public class DryableBlock extends Block implements Dryable {
     }
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        /*if(world.getDimension() == ModDimensions.SCULK_DEPTHS_TYPE){*/
-            SculkDepths.LOGGER.info("e");
+        if(world.getDimensionKey() == ModDimensions.SCULK_DEPTHS_TYPE){
+
+            SculkDepths.LOGGER.info(String.valueOf(world.getDimensionKey()));
             Dryable.DryBlock(state, world, pos, random, this.asBlock());
-        //}
+        }
     }
 }

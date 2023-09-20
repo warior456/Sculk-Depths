@@ -15,9 +15,9 @@ import java.util.OptionalLong;
 
 public class ModDimensions {
     public static final RegistryKey<DimensionOptions> SCULK_DEPTHS = RegistryKey.of(RegistryKeys.DIMENSION,
-            new Identifier(SculkDepths.MOD_ID, "kaupendim"));
+            new Identifier(SculkDepths.MOD_ID, "sculk_depths"));
     public static final RegistryKey<World> KAUPENDIM_LEVEL_KEY = RegistryKey.of(RegistryKeys.WORLD,
-            new Identifier(SculkDepths.MOD_ID, "kaupendim"));
+            new Identifier(SculkDepths.MOD_ID, "sculk_depths"));
     public static final RegistryKey<DimensionType> SCULK_DEPTHS_TYPE = RegistryKey.of(RegistryKeys.DIMENSION_TYPE,
-            new Identifier(SculkDepths.MOD_ID, "kaupendim_type"));
+            new Identifier(SculkDepths.MOD_ID, "sculk_depths_type"));
 }

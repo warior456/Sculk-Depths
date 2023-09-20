@@ -1,5 +1,5 @@
 {
-    "name": "sculk_depthsdim",
+    "name": "sculk_depths",
     "has_raids": false,
     "logical_height": 256,
     "effects": "minecraft:the_nether",
