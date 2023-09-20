@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "sculk_depths:valtrox_wall_sign",
+    "sculk_depths:coated_valtrox_wall_sign",
     "sculk_depths:dried_valtrox_wall_sign",
     "sculk_depths:petrified_valtrox_wall_sign"
   ]
