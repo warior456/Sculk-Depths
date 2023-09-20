@@ -93,6 +93,12 @@ public class ModItems {
     public static final Item VALTROX_HANGING_SIGN = registerItem("valtrox_hanging_sign",
             new HangingSignItem(ModBlocks.VALTROX_HANGING_SIGN, ModBlocks.VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
 
+    public static final Item COATED_VALTROX_SIGN = registerItem("coated_valtrox_sign",
+            new SignItem(new FabricItemSettings().maxCount(16), ModBlocks.COATED_VALTROX_SIGN, ModBlocks.COATED_VALTROX_WALL_SIGN));
+
+    public static final Item COATED_VALTROX_HANGING_SIGN = registerItem("coated_valtrox_hanging_sign",
+            new HangingSignItem(ModBlocks.COATED_VALTROX_HANGING_SIGN, ModBlocks.COATED_VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
+
     public static final Item DRIED_VALTROX_SIGN = registerItem("dried_valtrox_sign",
             new SignItem(new FabricItemSettings().maxCount(16), ModBlocks.DRIED_VALTROX_SIGN, ModBlocks.DRIED_VALTROX_WALL_SIGN));
 
@@ -140,6 +146,8 @@ public class ModItems {
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, VALTROX_SIGN);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, VALTROX_HANGING_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, COATED_VALTROX_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, COATED_VALTROX_HANGING_SIGN);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, DRIED_VALTROX_SIGN);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, DRIED_VALTROX_HANGING_SIGN);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, PETRIFIED_VALTROX_SIGN);
