@@ -306,7 +306,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock {
         int k = state.get(LEVEL) - spore;
 
         if (k == 0) {
-            BlockState newBlockState = state.with(CRUX_LEVEL, j);
+            BlockState newBlockState = state.with(CRUX_LEVEL, j).with(CRYSTAL, CrystalType.NONE);
             world.setBlockState(pos, newBlockState);
             world.setBlockState(pos, ModBlocks.FLUMROCK_CAULDRON.getDefaultState());
             return;
