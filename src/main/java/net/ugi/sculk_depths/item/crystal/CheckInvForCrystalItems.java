@@ -26,7 +26,6 @@ import net.ugi.sculk_depths.item.ModItems;
 import java.util.List;
 import java.util.UUID;
 
-import static net.minecraft.server.command.AttributeCommand.MODIFIER_ALREADY_PRESENT_EXCEPTION;
 
 public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick{
 
