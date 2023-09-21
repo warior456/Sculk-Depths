@@ -103,14 +103,6 @@
     },
     {
       "apply": {
-        "model": "sculk_depths:block/cauldron_counters/crystal_none"
-      },
-      "when": {
-        "crystal": "none"
-      }
-    },
-    {
-      "apply": {
         "model": "sculk_depths:block/cauldron_counters/crystal_white"
       },
       "when": {
@@ -139,14 +131,6 @@
       },
       "when": {
         "crystal": "lime"
-      }
-    },
-    {
-      "apply": {
-        "model": "sculk_depths:block/cauldron_counters/crux_0"
-      },
-      "when": {
-        "crux": "0"
       }
     },
     {

@@ -103,14 +103,6 @@
     },
     {
       "apply": {
-        "model": "sculk_depths:block/cauldron_counters/quazarith_0"
-      },
-      "when": {
-        "quazarith": "0"
-      }
-    },
-    {
-      "apply": {
         "model": "sculk_depths:block/cauldron_counters/quazarith_1"
       },
       "when": {
@@ -198,14 +190,6 @@
       },
       "when": {
         "quazarith": "12"
-      }
-    },
-    {
-      "apply": {
-        "model": "sculk_depths:block/cauldron_counters/crux_0"
-      },
-      "when": {
-        "crux": "0"
       }
     },
     {

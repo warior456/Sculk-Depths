@@ -1,19 +1,14 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"9": "sculk_depths:block/flumrock_cauldron/spore"
+		"0": "sculk_depths:block/flumrock_cauldron/spore"
 	},
 	"elements": [
 		{
 			"from": [1, 5, 1],
 			"to": [15, 5, 15],
 			"faces": {
-				"north": {"uv": [0, 0, 14, 0], "texture": "#missing"},
-				"east": {"uv": [0, 0, 14, 0], "texture": "#missing"},
-				"south": {"uv": [0, 0, 14, 0], "texture": "#missing"},
-				"west": {"uv": [0, 0, 14, 0], "texture": "#missing"},
-				"up": {"uv": [1, 1, 15, 15], "texture": "#9"},
-				"down": {"uv": [0, 0, 14, 14], "texture": "#missing"}
+				"up": {"uv": [1, 1, 15, 15], "texture": "#0"}
 			}
 		}
 	]

@@ -1,56 +1,36 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "sculk_depths:block/flumrock_cauldron/crux_12",
+		"0": "sculk_depths:block/flumrock_cauldron/crux_12",
 		"particle": "sculk_depths:block/flumrock_cauldron/crux_12"
 	},
 	"elements": [
 		{
-			"from": [3, 4, 16.01],
-			"to": [13, 8, 16.01],
+			"from": [2, 4, 16.01],
+			"to": [14, 8, 16.01],
 			"faces": {
-				"north": {"uv": [0, 0, 10, 4], "texture": "#missing"},
-				"east": {"uv": [0, 0, 0, 4], "texture": "#missing"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "#1"},
-				"west": {"uv": [0, 0, 0, 4], "texture": "#missing"},
-				"up": {"uv": [0, 0, 10, 0], "texture": "#missing"},
-				"down": {"uv": [0, 0, 10, 0], "texture": "#missing"}
+				"south": {"uv": [0, 0, 16, 16], "texture": "#0"}
 			}
 		},
 		{
-			"from": [3, 4, -0.01],
-			"to": [13, 8, -0.01],
+			"from": [2, 4, -0.01],
+			"to": [14, 8, -0.01],
 			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#1"},
-				"east": {"uv": [0, 0, 0, 4], "texture": "#missing"},
-				"south": {"uv": [0, 0, 10, 4], "texture": "#missing"},
-				"west": {"uv": [0, 0, 0, 4], "texture": "#missing"},
-				"up": {"uv": [0, 0, 10, 0], "texture": "#missing"},
-				"down": {"uv": [0, 0, 10, 0], "texture": "#missing"}
+				"north": {"uv": [0, 0, 16, 16], "texture": "#0"}
 			}
 		},
 		{
-			"from": [-0.01, 4, 3],
-			"to": [-0.01, 8, 13],
+			"from": [-0.01, 4, 2],
+			"to": [-0.01, 8, 14],
 			"faces": {
-				"north": {"uv": [0, 0, 0, 4], "texture": "#missing"},
-				"east": {"uv": [0, 0, 10, 4], "texture": "#missing"},
-				"south": {"uv": [0, 0, 0, 4], "texture": "#missing"},
-				"west": {"uv": [0, 0, 16, 16], "texture": "#1"},
-				"up": {"uv": [0, 0, 0, 10], "texture": "#missing"},
-				"down": {"uv": [0, 0, 0, 10], "texture": "#missing"}
+				"west": {"uv": [0, 0, 16, 16], "texture": "#0"}
 			}
 		},
 		{
-			"from": [16.01, 4, 3],
-			"to": [16.01, 8, 13],
+			"from": [16.01, 4, 2],
+			"to": [16.01, 8, 14],
 			"faces": {
-				"north": {"uv": [0, 0, 0, 4], "texture": "#missing"},
-				"east": {"uv": [0, 0, 16, 16], "texture": "#1"},
-				"south": {"uv": [0, 0, 0, 4], "texture": "#missing"},
-				"west": {"uv": [0, 0, 10, 4], "texture": "#missing"},
-				"up": {"uv": [0, 0, 0, 10], "texture": "#missing"},
-				"down": {"uv": [0, 0, 0, 10], "texture": "#missing"}
+				"east": {"uv": [0, 0, 16, 16], "texture": "#0"}
 			}
 		}
 	]
