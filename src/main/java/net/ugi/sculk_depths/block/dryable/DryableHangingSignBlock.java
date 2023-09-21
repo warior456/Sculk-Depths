@@ -8,7 +8,9 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
+import net.ugi.sculk_depths.dimension.ModDimensions;
 
 public class DryableHangingSignBlock extends HangingSignBlock implements Dryable {
     public DryableHangingSignBlock(Settings settings, WoodType woodType) {
@@ -21,6 +23,11 @@ public class DryableHangingSignBlock extends HangingSignBlock implements Dryable
     }
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        Dryable.DryBlock(state, world, pos, random, this.asBlock());
+        if (MathHelper.nextInt(random, 0, 100) == 0) {
+            if(world.getDimensionKey() == ModDimensions.SCULK_DEPTHS_TYPE) {
+
+                Dryable.DryBlock(state, world, pos);
+            }
+        }
     }
 }

@@ -10,6 +10,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.World;
 import net.ugi.sculk_depths.block.ModBlocks;
 
 import java.util.function.Supplier;
@@ -60,18 +61,27 @@ public interface Dryable {
         return DRY_LEVEL_INCREASES.get().get(block);
     }
 
-    static void DryBlock(BlockState state, ServerWorld world, BlockPos pos, Random random, Block block) {
-        if (MathHelper.nextInt(random, 0, 100) == 0) {
+    static Block getNonDriedBlock(Block block) {
+        return DRY_LEVEL_DECREASES.get().get(block);
+    }
 
-            Block driedblock = getDriedBlock(block);
-            world.setBlockState(pos, driedblock.getStateWithProperties(state));
+    static void DryBlock(BlockState state, ServerWorld world, BlockPos pos) {
+        Block block = state.getBlock();
 
-            if (block == ModBlocks.VALTROX_DOOR){
-                world.setBlockState(pos.up(), driedblock.getStateWithProperties(state.with(HALF, DoubleBlockHalf.UPPER)));
-                world.setBlockState(pos, driedblock.getStateWithProperties(state.with(HALF, DoubleBlockHalf.LOWER)));
-                world.setBlockState(pos.up(), driedblock.getStateWithProperties(state.with(HALF, DoubleBlockHalf.UPPER)));
-            }
+        Block driedblock = getDriedBlock(block);
+        world.setBlockState(pos, driedblock.getStateWithProperties(state));
+
+        if (block == ModBlocks.VALTROX_DOOR){
+            world.setBlockState(pos.up(), driedblock.getStateWithProperties(state.with(HALF, DoubleBlockHalf.UPPER)));
+            world.setBlockState(pos, driedblock.getStateWithProperties(state.with(HALF, DoubleBlockHalf.LOWER)));
+            world.setBlockState(pos.up(), driedblock.getStateWithProperties(state.with(HALF, DoubleBlockHalf.UPPER)));
         }
     }
 
+    static void ReviveBlock(BlockState state, World world, BlockPos pos) {
+        Block block = state.getBlock();
+
+        Block driedblock = getNonDriedBlock(block);
+        world.setBlockState(pos, driedblock.getStateWithProperties(state));
+    }
 }
