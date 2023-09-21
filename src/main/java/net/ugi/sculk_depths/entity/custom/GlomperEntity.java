@@ -46,6 +46,7 @@ public class GlomperEntity extends PathAwareEntity implements GeoEntity {
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, SculkDepths.CONFIG.glomper_damage)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.5f) // doubt this does anything
+                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.2f) //needed to not crash for some frigging reason
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2f);
     }
 
