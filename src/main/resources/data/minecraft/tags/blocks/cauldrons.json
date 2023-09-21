@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "sculk_depths:flumrock_cauldron",
-    "sculk_depths:kryslum_flumrock_cauldron"
+    "sculk_depths:kryslum_flumrock_cauldron",
+    "sculk_depths:spore_flumrock_cauldron"
   ]
 }
