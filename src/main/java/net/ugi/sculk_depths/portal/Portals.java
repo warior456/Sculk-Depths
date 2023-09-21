@@ -5,6 +5,7 @@ import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
 import net.kyrptonaught.customportalapi.portal.PortalIgnitionSource;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
+import net.ugi.sculk_depths.dimension.ModDimensions;
 
 public class Portals {
     public final static PortalIgnitionSource SOUL_FIRE = PortalIgnitionSource.CustomSource(new Identifier("sculk_depths", "soul_fire"));
@@ -13,7 +14,7 @@ public class Portals {
         CustomPortalBuilder.beginPortal()
                 .frameBlock(Blocks.REINFORCED_DEEPSLATE)
                 //.customPortalBlock(Blocks.SCULK)
-                .destDimID(new Identifier("sculk_depths:sculk_depthsdim"))
+                .destDimID(new Identifier("sculk_depths:sculk_depths"))
                 .tintColor(1, 69, 86)
                 .customIgnitionSource(SOUL_FIRE)
                 //.lightWithItem(ModItems.ENERGISED_FLINT_AND_STEEL)
