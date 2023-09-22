@@ -43,16 +43,7 @@ public class SculkDepthsClient implements ClientModInitializer {
 
 
 
-        ModelPredicateProviderRegistry.register(ModItems.QUAZARITH_AXE, new Identifier("crystal"), (itemStack, clientWorld, livingEntity, seed) -> {
-
-            NbtElement nbtData = itemStack.getNbt().get("sculk_depths.crystal");
-
-            if (nbtData == null) {return 0.0F;}
-
-            List<String> crystalItemNbtList = Arrays.asList("\"white\"", "\"blue\"", "\"orange\"", "\"lime\"");
-
-            return (crystalItemNbtList.indexOf(nbtData.toString()) + 1) * 0.1F;
-        });
+        CustomItemModels.QuazarithAxeModels();
 
 
 

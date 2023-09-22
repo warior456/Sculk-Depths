@@ -150,31 +150,31 @@ public class ModBlocks {
             new FenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE).strength(2.0f)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block COATED_VALTROX_FENCE_GATE = registerBlock("coated_valtrox_fence_gate",
-            new FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE_GATE).strength(2.0f), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE_GATE).strength(2.0f), ModWoodType.COATED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block COATED_VALTROX_DOOR = registerBlock("coated_valtrox_door",
-            new DoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR).strength(2.0f), ModBlockSetType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new DoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR).strength(2.0f), ModBlockSetType.COATED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block COATED_VALTROX_TRAPDOOR = registerBlock("coated_valtrox_trapdoor",
-            new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR).strength(2.0f), ModBlockSetType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR).strength(2.0f), ModBlockSetType.COATED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block COATED_VALTROX_PRESSURE_PLATE = registerBlock("coated_valtrox_pressure_plate",
-            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE), ModBlockSetType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE), ModBlockSetType.COATED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block COATED_VALTROX_BUTTON = registerBlock("coated_valtrox_button",
-            new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), ModBlockSetType.VALTROX, 30, true), ModItemGroup.SCULK_DEPTHS);
+            new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), ModBlockSetType.COATED_VALTROX, 30, true), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block COATED_VALTROX_SIGN = registerBlockWithoutBlockItem("coated_valtrox_sign",
-            new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN).solid(), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new SignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN).solid(), ModWoodType.COATED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block COATED_VALTROX_WALL_SIGN = registerBlockWithoutBlockItem("coated_valtrox_wall_sign",
-            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_WALL_SIGN).dropsLike(ModBlocks.VALTROX_SIGN).solid(), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new WallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_WALL_SIGN).dropsLike(ModBlocks.VALTROX_SIGN).solid(), ModWoodType.COATED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block COATED_VALTROX_HANGING_SIGN = registerBlockWithoutBlockItem("coated_valtrox_hanging_sign",
-            new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_HANGING_SIGN).solid(), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_HANGING_SIGN).solid(), ModWoodType.COATED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block COATED_VALTROX_WALL_HANGING_SIGN = registerBlockWithoutBlockItem("coated_valtrox_wall_hanging_sign",
-            new WallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_WALL_HANGING_SIGN).dropsLike(VALTROX_HANGING_SIGN).solid(), ModWoodType.VALTROX), ModItemGroup.SCULK_DEPTHS);
+            new WallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_WALL_HANGING_SIGN).dropsLike(VALTROX_HANGING_SIGN).solid(), ModWoodType.COATED_VALTROX), ModItemGroup.SCULK_DEPTHS);
 
 
 

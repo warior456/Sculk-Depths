@@ -9,6 +9,8 @@ public class ModBlockSetType {
     public static final BlockSetType VALTROX = BlockSetTypeBuilder.copyOf(BlockSetType.OAK).register(
             new Identifier(SculkDepths.MOD_ID, "valtrox"));
 
+    public static final BlockSetType COATED_VALTROX = BlockSetTypeBuilder.copyOf(BlockSetType.OAK).register(
+            new Identifier(SculkDepths.MOD_ID, "valtrox"));
     public static final BlockSetType DRIED_VALTROX = BlockSetTypeBuilder.copyOf(BlockSetType.OAK).register(
             new Identifier(SculkDepths.MOD_ID, "dried_valtrox"));
 
