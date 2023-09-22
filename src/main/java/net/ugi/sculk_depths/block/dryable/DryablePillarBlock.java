@@ -51,6 +51,7 @@ public class DryablePillarBlock extends PillarBlock implements Dryable {
                         }
                     }
                 }
+                else Dryable.DryBlock(state, world, pos);
             }
         }
     }

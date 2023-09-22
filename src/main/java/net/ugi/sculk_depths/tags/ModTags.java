@@ -13,7 +13,8 @@ public class ModTags {
     public static class Blocks {
 /*                public static final TagKey<Block> METAL_DETECTOR_DETECTABLE_BLOCKS =
                         createTag("metal_detector_detectable_blocks");*/
-
+        public static final TagKey<Block> COATABLE_BLOCKS =
+            createTag("coatable_blocks");
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, new Identifier(SculkDepths.MOD_ID, name));
         }

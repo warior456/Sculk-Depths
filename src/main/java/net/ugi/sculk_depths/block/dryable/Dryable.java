@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 import static net.minecraft.block.DoorBlock.HALF;
 
 public interface Dryable {
-    Supplier<BiMap<Block, Block>> DRY_LEVEL_INCREASES = Suppliers.memoize(() -> ((ImmutableBiMap.Builder)
+    Supplier<BiMap<Block, Block>> DRY_LEVEL_INCREASES = Suppliers.memoize(() ->
             ((ImmutableBiMap.Builder)
                     ((ImmutableBiMap.Builder)
                             ((ImmutableBiMap.Builder)
@@ -35,7 +35,8 @@ public interface Dryable {
                                                                                                                     ((ImmutableBiMap.Builder)
                                                                                                                             ((ImmutableBiMap.Builder)
                                                                                                                                     ((ImmutableBiMap.Builder)
-                                                                                                                                            ImmutableBiMap.builder()
+                                                                                                                                            ((ImmutableBiMap.Builder)
+                                                                                                                                                    ImmutableBiMap.builder()
                                                                                                                                                     .put(ModBlocks.VALTROX_LOG, ModBlocks.DRIED_VALTROX_LOG))
                                                                                                                                             .put(ModBlocks.VALTROX_WOOD, ModBlocks.DRIED_VALTROX_WOOD))
                                                                                                                                     .put(ModBlocks.STRIPPED_VALTROX_LOG, ModBlocks.STRIPPED_DRIED_VALTROX_LOG))
@@ -81,7 +82,7 @@ public interface Dryable {
     static void ReviveBlock(BlockState state, World world, BlockPos pos) {
         Block block = state.getBlock();
 
-        Block driedblock = getNonDriedBlock(block);
-        world.setBlockState(pos, driedblock.getStateWithProperties(state));
+        Block nonDriedblock = getNonDriedBlock(block);
+        world.setBlockState(pos, nonDriedblock.getStateWithProperties(state));
     }
 }

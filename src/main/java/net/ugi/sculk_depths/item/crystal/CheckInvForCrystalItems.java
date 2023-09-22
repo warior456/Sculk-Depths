@@ -1,6 +1,7 @@
 package net.ugi.sculk_depths.item.crystal;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,6 +29,7 @@ public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick{
                         //white crystal
                         if (mainHandStack.getNbt().get("sculk_depths.crystal").toString().equals("\"white\"")) {
                             //AttributeCommand.register();
+                           //mainHandStack.addAttributeModifier();
 
 
                             serverPlayer.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 2, 0, false, false));

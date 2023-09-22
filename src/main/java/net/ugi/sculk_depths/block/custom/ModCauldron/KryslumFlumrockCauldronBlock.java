@@ -276,6 +276,21 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
                     SculkDepths.CONFIG.quazarith_ingot_kryslum_cost);
             return UpgradeItem(outputItem, player);
         }
+        if((itemStack.getItem() == Items.NETHERITE_BLOCK
+                && state.get(LEVEL) > SculkDepths.CONFIG.quazarith_block_kryslum_cost
+                && state.get(CRUX) >= SculkDepths.CONFIG.quazarith_block_crux_cost
+                && state.get(QUAZARITH) >= SculkDepths.CONFIG.quazarith_block_quazarith_pieces_cost)
+                || (itemStack.getItem() == Items.AIR//========================================
+                && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_block_kryslum_cost
+                && state.get(CRUX) == SculkDepths.CONFIG.quazarith_block_crux_cost
+                && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_block_quazarith_pieces_cost)){
+            ItemStack outputItem = new ItemStack(ModBlocks.QUAZARITH_BLOCK);
+            RemoveUsedResources(state, world, pos,
+                    SculkDepths.CONFIG.quazarith_block_quazarith_pieces_cost,
+                    SculkDepths.CONFIG.quazarith_block_crux_cost,
+                    SculkDepths.CONFIG.quazarith_block_kryslum_cost);
+            return UpgradeItem(outputItem, player);
+        }
 
         return ActionResult.FAIL;
 
