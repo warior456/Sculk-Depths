@@ -3,6 +3,7 @@ package net.ugi.sculk_depths.block;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.kyrptonaught.customportalapi.CustomPortalBlock;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
@@ -372,6 +373,10 @@ public class ModBlocks {
 
     public static final Block PENEBRIUM_SHINE_SHROOM_SPORE_BLOCK = registerBlock("penebrium_shine_shroom_spore_block",
             new SporeBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);
+
+    //misc
+    public static final CustomPortalBlock SCULK_DEPTHS_PORTAL = (CustomPortalBlock) registerBlock("sculk_depths_portal",
+            new CustomPortalBlock(FabricBlockSettings.copyOf(Blocks.NETHER_PORTAL).luminance(5).dropsNothing().noCollision().strength(-1f, 10f)),ModItemGroup.SCULK_DEPTHS );
 
     //fluids
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new FluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.copyOf(Blocks.WATER).replaceable().noCollision().strength(100.0f).pistonBehavior(PistonBehavior.DESTROY).dropsNothing().liquid().solid().sounds(BlockSoundGroup.SCULK)), ModItemGroup.SCULK_DEPTHS);
