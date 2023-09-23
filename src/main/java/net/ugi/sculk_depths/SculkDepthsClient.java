@@ -42,9 +42,15 @@ public class SculkDepthsClient implements ClientModInitializer {
 
 
 
-
+        CustomItemModels.QuazarithSwordModels();
         CustomItemModels.QuazarithAxeModels();
-
+        CustomItemModels.QuazarithPickaxeModels();
+        CustomItemModels.QuazarithHoeModels();
+        CustomItemModels.QuazarithSwordModels();
+        CustomItemModels.QuazarithHelmetModels();
+        CustomItemModels.QuazarithChestplateModels();
+        CustomItemModels.QuazarithLeggingsModels();
+        CustomItemModels.QuazarithBootsModels();
 
 
 
@@ -64,6 +70,9 @@ public class SculkDepthsClient implements ClientModInitializer {
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.VALTROX_DOOR, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.VALTROX_TRAPDOOR, RenderLayer.getCutout());
+
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.COATED_VALTROX_DOOR, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.COATED_VALTROX_TRAPDOOR, RenderLayer.getCutout());
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DRIED_VALTROX_DOOR, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DRIED_VALTROX_TRAPDOOR, RenderLayer.getCutout());

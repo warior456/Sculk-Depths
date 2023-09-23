@@ -7,7 +7,17 @@
     "sculk_depths:valtrox_planks",
     "sculk_depths:valtrox_stairs",
     "sculk_depths:valtrox_slab",
-    "sculk_depths:valtrox_fence"
+    "sculk_depths:valtrox_fence",
+    "sculk_depths:valtrox_fence_gate",
+    "sculk_depths:valtrox_door",
+    "sculk_depths:valtrox_trapdoor",
+    "sculk_depths:valtrox_sign",
+    "sculk_depths:valtrox_wall_sign",
+    "sculk_depths:valtrox_hanging_sign",
+    "sculk_depths:valtrox_wall_hanging_sign"
+
+
+
 
 
   ]
