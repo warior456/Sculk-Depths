@@ -5,6 +5,7 @@ import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
 import net.kyrptonaught.customportalapi.portal.PortalIgnitionSource;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
+import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.dimension.ModDimensions;
 
 public class Portals {
@@ -13,7 +14,7 @@ public class Portals {
     public static void registerModPortals() {
         CustomPortalBuilder.beginPortal()
                 .frameBlock(Blocks.REINFORCED_DEEPSLATE)
-                //.customPortalBlock(Blocks.SCULK)
+                .customPortalBlock(ModBlocks.SCULK_DEPTHS_PORTAL)
                 .destDimID(new Identifier("sculk_depths:sculk_depths"))
                 .tintColor(1, 69, 86)
                 .customIgnitionSource(SOUL_FIRE)

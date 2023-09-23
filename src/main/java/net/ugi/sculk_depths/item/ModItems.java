@@ -125,6 +125,7 @@ public class ModItems {
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, KRYSLUM_BUCKET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, ENERGY_ESSENCE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, ENERGISED_FLINT_AND_STEEL);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, GLOMPER_GLUX);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, GLOMPER_SPAWN_EGG);
