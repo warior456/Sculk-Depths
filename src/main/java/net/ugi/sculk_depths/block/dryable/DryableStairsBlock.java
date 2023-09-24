@@ -1,23 +1,11 @@
 package net.ugi.sculk_depths.block.dryable;
 
 import net.minecraft.block.*;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.stat.Stats;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
-import net.ugi.sculk_depths.SculkDepths;
-import net.ugi.sculk_depths.block.ModBlocks;
-import net.ugi.sculk_depths.dimension.ModDimensions;
-import net.ugi.sculk_depths.item.ModItems;
+import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class DryableStairsBlock extends StairsBlock implements Dryable {
     public DryableStairsBlock(BlockState baseBlockState, Settings settings) {

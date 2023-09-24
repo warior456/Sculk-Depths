@@ -2,6 +2,7 @@ package net.ugi.sculk_depths;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
@@ -19,6 +20,8 @@ import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.particle.SurfaceWindParticle;
+import net.ugi.sculk_depths.sound.ConditionalSoundPlayer;
+import net.ugi.sculk_depths.sound.ConditionalSoundPlayerClient;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,6 +34,8 @@ public class SculkDepthsClient implements ClientModInitializer {
         SculkDepths.LOGGER.info("Registering tooltips for " + SculkDepths.MOD_ID);
         CrystalUpgrade.tooltipAdd();
 
+        SculkDepths.LOGGER.info("Registering clientSounds for " + SculkDepths.MOD_ID);
+        ClientTickEvents.START_WORLD_TICK.register(new ConditionalSoundPlayerClient());
 
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.KRYSLUM_STILL,
                 ModFluids.KRYSLUM_FLOWING,

@@ -9,7 +9,6 @@ import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
 import net.ugi.sculk_depths.config.Config;
 import net.ugi.sculk_depths.config.ConfigHandler;
-import net.ugi.sculk_depths.dimension.ModDimensions;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import net.ugi.sculk_depths.fluid.ModFluids;
@@ -18,6 +17,7 @@ import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.item.crystal.CheckInvForCrystalItems;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.portal.Portals;
+import net.ugi.sculk_depths.sound.ConditionalSoundPlayer;
 import net.ugi.sculk_depths.sound.ModSounds;
 import net.ugi.sculk_depths.state.property.ModProperties;
 import net.ugi.sculk_depths.world.gen.ModPlacementModifierType;
@@ -45,6 +45,7 @@ public class SculkDepths implements ModInitializer {
         Portals.registerModPortals();
         SculkDepths.LOGGER.info("Registering Sounds for " + SculkDepths.MOD_ID);
         ModSounds.registerModSounds();
+        ServerTickEvents.START_WORLD_TICK.register(new ConditionalSoundPlayer());
         //SculkDepths.LOGGER.info("Registering LootTables for " + SculkDepths.MOD_ID);
         //ModLootTableModifiers.modifyLootTables();
         SculkDepths.LOGGER.info("Registering ModCauldronBehavior for " + SculkDepths.MOD_ID);
@@ -60,6 +61,8 @@ public class SculkDepths implements ModInitializer {
         ModPlacementModifierType.init();
 
         ServerTickEvents.START_WORLD_TICK.register(new CheckInvForCrystalItems());
+
+
 
         CauldronFluidContent.registerCauldron(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON, ModFluids.KRYSLUM_STILL, FluidConstants.BUCKET, ModProperties.KRYSLUM_LEVEL); //support for mods to see how much fluid is in it (doesn't work for create pipes)
 

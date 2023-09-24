@@ -1,17 +1,11 @@
-package net.ugi.sculk_depths.dimension;
+package net.ugi.sculk_depths.world.dimension;
 
 import net.minecraft.registry.*;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionOptions;
 import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.dimension.DimensionTypes;
 import net.ugi.sculk_depths.SculkDepths;
-
-import java.awt.*;
-import java.util.OptionalLong;
 
 public class ModDimensions {
     public static final RegistryKey<DimensionOptions> SCULK_DEPTHS = RegistryKey.of(RegistryKeys.DIMENSION,

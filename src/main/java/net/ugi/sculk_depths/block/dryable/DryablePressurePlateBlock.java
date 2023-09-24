@@ -1,6 +1,5 @@
 package net.ugi.sculk_depths.block.dryable;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockSetType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PressurePlateBlock;
@@ -8,9 +7,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
-import net.ugi.sculk_depths.SculkDepths;
-import net.ugi.sculk_depths.block.ModBlocks;
-import net.ugi.sculk_depths.dimension.ModDimensions;
+import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class DryablePressurePlateBlock extends PressurePlateBlock implements Dryable {
     public DryablePressurePlateBlock(ActivationRule type, Settings settings, BlockSetType blockSetType) {
