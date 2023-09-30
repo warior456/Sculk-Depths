@@ -49,7 +49,9 @@ public class CrystalUpgrade extends Item {
     public static void addNbtToCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal) {
 
         if(stack.getItem() == ModItems.QUAZARITH_SHOVEL){
-            ;
+
+            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 7.5,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
+            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier("Attack Speed", 1,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
             if (crystal == CrystalType.WHITE){
                 stack.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier("Movement Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
             }
