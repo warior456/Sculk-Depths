@@ -32,19 +32,19 @@ public class QuazarithArmorItem extends ArmorItem {
         this.leggingsAttributeModifiers = builder.build();
     }
 
-    @Override
-    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
-        if (slot == this.type.getEquipmentSlot()) {
-            if(this == ModItems.QUAZARITH_LEGGINGS){
-                System.out.println(this);
-                System.out.println(this.getDefaultStack());
-                System.out.println(this.getDefaultStack().getNbt());
-
-
-                return leggingsAttributeModifiers;
-            }
-            return this.defaultAttributeModifiers;
-        }
-        return super.getAttributeModifiers(slot);
-    }
+//    @Override
+//    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
+//        if (slot == this.type.getEquipmentSlot()) {
+//            if(this == ModItems.QUAZARITH_LEGGINGS){
+//                System.out.println(this);
+//                System.out.println(this.getDefaultStack());
+//                System.out.println(this.getDefaultStack().getNbt());
+//
+//
+//                return leggingsAttributeModifiers;
+//            }
+//            return this.defaultAttributeModifiers;
+//        }
+//        return super.getAttributeModifiers(slot);
+//    }
 }

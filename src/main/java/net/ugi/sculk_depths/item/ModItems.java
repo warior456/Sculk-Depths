@@ -81,13 +81,13 @@ public class ModItems {
 
     //quazarith armor
     public static final Item QUAZARITH_HELMET = registerItem("quazarith_helmet",
-            new QuazarithArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.HELMET,
+            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.HELMET,
                     new FabricItemSettings().fireproof()));
     public static final Item QUAZARITH_CHESTPLATE = registerItem("quazarith_chestplate",
-            new QuazarithArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.CHESTPLATE,
+            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.CHESTPLATE,
                     new FabricItemSettings().fireproof()));
     public static final Item QUAZARITH_LEGGINGS = registerItem("quazarith_leggings",
-            new QuazarithArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.LEGGINGS,
+            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.LEGGINGS,
                     new FabricItemSettings().fireproof()));
     public static final Item QUAZARITH_BOOTS = registerItem("quazarith_boots",
             new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.BOOTS,
