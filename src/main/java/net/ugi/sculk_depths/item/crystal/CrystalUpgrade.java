@@ -50,11 +50,8 @@ public class CrystalUpgrade extends Item {
 
         if(stack.getItem() == ModItems.QUAZARITH_SHOVEL){
 
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR, new EntityAttributeModifier("Movement Speed", ,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR, new EntityAttributeModifier("Movement Speed", ModToolMaterials.QUAZARITH.get(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getToughness(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getKnockbackResistance(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-
+            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", ,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
+            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier("Attack Speed", ,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
             if (crystal == CrystalType.WHITE){
                 stack.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier("Movement Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
             }
@@ -62,10 +59,8 @@ public class CrystalUpgrade extends Item {
 
         if(stack.getItem() == ModItems.QUAZARITH_AXE){
 
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getProtection(ArmorItem.Type.LEGGINGS),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getToughness(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getKnockbackResistance(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-
+            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", ,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
+            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier("Attack Speed", ,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
             if (crystal == CrystalType.WHITE){
                 stack.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier("Movement Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
             }
@@ -73,10 +68,8 @@ public class CrystalUpgrade extends Item {
 
         if(stack.getItem() == ModItems.QUAZARITH_PICKAXE){
 
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getProtection(ArmorItem.Type.LEGGINGS),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getToughness(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getKnockbackResistance(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-
+            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", ,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
+            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier("Attack Speed", ,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
             if (crystal == CrystalType.WHITE){
                 stack.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier("Movement Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
             }
@@ -85,10 +78,8 @@ public class CrystalUpgrade extends Item {
 
         if(stack.getItem() == ModItems.QUAZARITH_HOE){
 
-        stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getProtection(ArmorItem.Type.LEGGINGS),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-        stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getToughness(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-        stack.addAttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getKnockbackResistance(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-
+            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", ,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
+            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier("Attack Speed", ,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
             if (crystal == CrystalType.WHITE){
                 stack.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier("Movement Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
             }
@@ -96,10 +87,8 @@ public class CrystalUpgrade extends Item {
 
         if(stack.getItem() == ModItems.QUAZARITH_SWORD){
 
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getProtection(ArmorItem.Type.LEGGINGS),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getToughness(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getKnockbackResistance(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-
+            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", ,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
+            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier("Attack Speed", ,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
             if (crystal == CrystalType.WHITE){
                 stack.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier("Movement Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
             }
