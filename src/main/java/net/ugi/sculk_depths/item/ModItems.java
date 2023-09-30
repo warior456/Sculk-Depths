@@ -13,6 +13,7 @@ import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.custom.EnergizedFlintAndSteelItem;
 import net.ugi.sculk_depths.item.custom.GlomperGlux;
+import net.ugi.sculk_depths.item.custom.QuazarithArmorItem;
 
 
 public class ModItems {
@@ -80,13 +81,13 @@ public class ModItems {
 
     //quazarith armor
     public static final Item QUAZARITH_HELMET = registerItem("quazarith_helmet",
-            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.HELMET,
+            new QuazarithArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.HELMET,
                     new FabricItemSettings().fireproof()));
     public static final Item QUAZARITH_CHESTPLATE = registerItem("quazarith_chestplate",
-            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.CHESTPLATE,
+            new QuazarithArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.CHESTPLATE,
                     new FabricItemSettings().fireproof()));
     public static final Item QUAZARITH_LEGGINGS = registerItem("quazarith_leggings",
-            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.LEGGINGS,
+            new QuazarithArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.LEGGINGS,
                     new FabricItemSettings().fireproof()));
     public static final Item QUAZARITH_BOOTS = registerItem("quazarith_boots",
             new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.BOOTS,
