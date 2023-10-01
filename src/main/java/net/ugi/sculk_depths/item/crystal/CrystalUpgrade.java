@@ -1,8 +1,12 @@
 package net.ugi.sculk_depths.item.crystal;
 
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.attribute.ClampedEntityAttribute;
+import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -25,6 +29,7 @@ import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.item.ModToolMaterials;
 import net.ugi.sculk_depths.tags.ModTags;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -47,14 +52,30 @@ public class CrystalUpgrade extends Item {
     }
 
     public static void addNbtToCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal) {
+        EquipmentSlot slot = EquipmentSlot.MAINHAND;
+        ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
+        Multimap<EntityAttribute, EntityAttributeModifier> modifiers = stack.getAttributeModifiers(slot);
+        System.out.println("start");
+        System.out.println(modifiers);
+        System.out.println("next");
+        System.out.println(modifiers.size());
+        System.out.println("next2");
+        System.out.println(modifiers.entries());
+        System.out.println("next3");
+        System.out.println(modifiers.entries().size());
+        System.out.println("end");
+        builder.putAll(modifiers);
+
 
         if(stack.getItem() == ModItems.QUAZARITH_SHOVEL){
-
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 7.5,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier("Attack Speed", 1,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
-            if (crystal == CrystalType.WHITE){
+            //if (crystal == CrystalType.WHITE){
                 stack.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier("Movement Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
-            }
+            //}
+
+                modifiers.forEach((entityAttribute, entityAttributeModifier) -> {
+
+                    stack.addAttributeModifier(entityAttribute, entityAttributeModifier, EquipmentSlot.MAINHAND);
+                });
         }
 
         if(stack.getItem() == ModItems.QUAZARITH_AXE){
