@@ -160,8 +160,6 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, DRIED_VALTROX_HANGING_SIGN);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, PETRIFIED_VALTROX_SIGN);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, PETRIFIED_VALTROX_HANGING_SIGN);
-
-
     }
 
     private static void addToItemGroup(RegistryKey<ItemGroup> group, Item item) {

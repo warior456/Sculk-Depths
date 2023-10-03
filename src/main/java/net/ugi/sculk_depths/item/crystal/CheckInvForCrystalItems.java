@@ -7,11 +7,13 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.ugi.sculk_depths.item.ModItems;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,18 +24,40 @@ public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick{
         List<ServerPlayerEntity> serverPlayers = world.getPlayers();
         for (ServerPlayerEntity serverPlayer : serverPlayers) {
             PlayerEntity player = world.getClosestPlayer(serverPlayer.getX(),serverPlayer.getY(),serverPlayer.getZ(),0.1,false);
+
+            Iterable<ItemStack> armor = serverPlayer.getArmorItems();
+            ArrayList<ItemStack> armorItems = new ArrayList<ItemStack>();
+            armor.forEach(ItemStack -> {
+                armorItems.add(ItemStack);
+            });
+
+            if(armorItems.get(3).getItem() == ModItems.QUAZARITH_HELMET) {
+                ItemStack helmet = armorItems.get(3);
+                if (helmet.getNbt().get("sculk_depths.crystal") != null) {
+                    if (helmet.getNbt().get("sculk_depths.crystal").toString().equals("\"white\"")) {
+                        player.removeStatusEffect(StatusEffects.BLINDNESS);
+                        player.removeStatusEffect(StatusEffects.DARKNESS);
+                    }
+                }
+            }
+            if(armorItems.get(2).getItem() == ModItems.QUAZARITH_CHESTPLATE){
+                ItemStack chestplate = armorItems.get(2);
+            }
+            if(armorItems.contains(ModItems.QUAZARITH_LEGGINGS.getDefaultStack())){
+
+            }
+            if(armorItems.contains(ModItems.QUAZARITH_BOOTS.getDefaultStack())){
+
+            }
+
             //mainHand
             ItemStack mainHandStack = serverPlayer.getMainHandStack();
-
             if (mainHandStack.getItem() == ModItems.QUAZARITH_AXE){
                 if (mainHandStack.getNbt() != null) {
                     if (mainHandStack.getNbt().get("sculk_depths.crystal") != null) {
                         //white crystal
                         if (mainHandStack.getNbt().get("sculk_depths.crystal").toString().equals("\"white\"")) {
 
-
-
-                            serverPlayer.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 2, 0, false, false));
                         }
                     }
                 }
@@ -41,14 +65,12 @@ public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick{
 
             //offHand
             ItemStack offHandStack = serverPlayer.getOffHandStack();
-
             if (offHandStack.getItem() == ModItems.QUAZARITH_AXE){
                 if (offHandStack.getNbt() != null) {
                     if (offHandStack.getNbt().get("sculk_depths.crystal") != null) {
                         //white crystal
                         if (offHandStack.getNbt().get("sculk_depths.crystal").toString().equals("\"white\"")) {
 
-                            serverPlayer.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 2, 0, false, false));
                         }
                     }
                 }
