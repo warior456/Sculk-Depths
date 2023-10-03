@@ -1,11 +1,14 @@
 package net.ugi.sculk_depths.item.crystal;
 
+import com.google.common.base.Suppliers;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.ClampedEntityAttribute;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -23,6 +26,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.SculkDepths;
+import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.enums.CrystalType;
 import net.ugi.sculk_depths.item.ModArmorMaterials;
 import net.ugi.sculk_depths.item.ModItems;
@@ -32,10 +36,34 @@ import net.ugi.sculk_depths.tags.ModTags;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 
 public class CrystalUpgrade extends Item {
 
+
+    static EquipmentSlot getEquipmentSlot(Item item) {
+        if(item == ModItems.QUAZARITH_SHOVEL || item == ModItems.QUAZARITH_AXE || item == ModItems.QUAZARITH_PICKAXE || item == ModItems.QUAZARITH_HOE || item == ModItems.QUAZARITH_SWORD){
+            return EquipmentSlot.MAINHAND;
+        }
+        if(item == ModItems.QUAZARITH_HELMET){
+            return EquipmentSlot.HEAD;
+
+        }
+        if(item == ModItems.QUAZARITH_CHESTPLATE){
+            return EquipmentSlot.CHEST;
+
+        }
+        if(item == ModItems.QUAZARITH_LEGGINGS){
+            return EquipmentSlot.LEGS;
+
+        }
+        if(item == ModItems.QUAZARITH_BOOTS){
+            return EquipmentSlot.FEET;
+
+        }
+        return null;
+    }
 
     static int[] crystalUpgradeColorArray = {16777215, 65526, 16742144, 1703680};
     static List<String> crystalItemNbtList = Arrays.asList("\"white\"", "\"blue\"", "\"orange\"", "\"lime\"");
@@ -47,119 +75,87 @@ public class CrystalUpgrade extends Item {
 
     public static ActionResult createCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal) {
         addNbtToCrystalUpgrade(stack, player, crystal);
+        addAttributeToCrystalUpgrade(stack, player, crystal);
 
         return ActionResult.SUCCESS;
     }
-
-    public static void addNbtToCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal) {
+    public static void addAttributeToCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal) {
         EquipmentSlot slot = EquipmentSlot.MAINHAND;
-        ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
         Multimap<EntityAttribute, EntityAttributeModifier> modifiers = stack.getAttributeModifiers(slot);
-        System.out.println("start");
-        System.out.println(modifiers);
-        System.out.println("next");
-        System.out.println(modifiers.size());
-        System.out.println("next2");
-        System.out.println(modifiers.entries());
-        System.out.println("next3");
-        System.out.println(modifiers.entries().size());
-        System.out.println("end");
-        builder.putAll(modifiers);
 
 
         if(stack.getItem() == ModItems.QUAZARITH_SHOVEL){
-            //if (crystal == CrystalType.WHITE){
-                stack.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier("Movement Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
-            //}
-
-                modifiers.forEach((entityAttribute, entityAttributeModifier) -> {
-
-                    stack.addAttributeModifier(entityAttribute, entityAttributeModifier, EquipmentSlot.MAINHAND);
-                });
+            if (crystal == CrystalType.WHITE){
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
+            }
         }
 
         if(stack.getItem() == ModItems.QUAZARITH_AXE){
 
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID,"Attack Damage", 12,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID,"Attack Speed", 1,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
             if (crystal == CrystalType.WHITE){
-                stack.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier("Movement Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
             }
         }
 
         if(stack.getItem() == ModItems.QUAZARITH_PICKAXE){
 
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 7,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier("Attack Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
             if (crystal == CrystalType.WHITE){
-                stack.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier("Movement Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
             }
         }
 
 
         if(stack.getItem() == ModItems.QUAZARITH_HOE){
 
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 1,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier("Attack Speed", 5,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
             if (crystal == CrystalType.WHITE){
-                stack.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier("Movement Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
             }
         }
 
         if(stack.getItem() == ModItems.QUAZARITH_SWORD){
 
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 11,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier("Attack Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
             if (crystal == CrystalType.WHITE){
-                stack.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier("Movement Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
             }
         }
 
         if(stack.getItem() == ModItems.QUAZARITH_HELMET){
 
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR, new EntityAttributeModifier("Armor", ModArmorMaterials.QUAZARITH.getProtection(ArmorItem.Type.HELMET),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.HEAD);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, new EntityAttributeModifier("Armor Toughness", ModArmorMaterials.QUAZARITH.getToughness(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.HEAD);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, new EntityAttributeModifier("Knockback Resistance", ModArmorMaterials.QUAZARITH.getKnockbackResistance(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.HEAD);
-
             if (crystal == CrystalType.WHITE){
-                stack.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier("Movement Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.HEAD);
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
             }
         }
 
         if(stack.getItem() == ModItems.QUAZARITH_CHESTPLATE){
 
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR, new EntityAttributeModifier("Armor", ModArmorMaterials.QUAZARITH.getProtection(ArmorItem.Type.CHESTPLATE),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.CHEST);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getToughness(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.CHEST);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getKnockbackResistance(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.CHEST);
-
             if (crystal == CrystalType.WHITE){
-                stack.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier("Movement Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.CHEST);
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
             }
         }
 
         if(stack.getItem() == ModItems.QUAZARITH_LEGGINGS){
 
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getProtection(ArmorItem.Type.LEGGINGS),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getToughness(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getKnockbackResistance(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
-
             if (crystal == CrystalType.WHITE){
-                stack.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier("Movement Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
             }
         }
 
         if(stack.getItem() == ModItems.QUAZARITH_BOOTS){
 
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getProtection(ArmorItem.Type.BOOTS),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.FEET);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getToughness(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.FEET);
-            stack.addAttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, new EntityAttributeModifier("Movement Speed", ModArmorMaterials.QUAZARITH.getKnockbackResistance(),EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.FEET);
-
             if (crystal == CrystalType.WHITE){
-                stack.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier("Movement Speed", 2,EntityAttributeModifier.Operation.ADDITION), EquipmentSlot.FEET);
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
             }
         }
 
+        EquipmentSlot slot2 = getEquipmentSlot(stack.getItem());
 
+        modifiers.forEach((entityAttribute, entityAttributeModifier) -> {
+
+            stack.addAttributeModifier(entityAttribute, entityAttributeModifier, slot2);
+        });
+    }
+
+    public static void addNbtToCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal) {
 
         NbtCompound nbtData = stack.getNbt();
 
