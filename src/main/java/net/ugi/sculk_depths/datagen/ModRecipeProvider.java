@@ -18,5 +18,4 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
     }
 
-
 }
