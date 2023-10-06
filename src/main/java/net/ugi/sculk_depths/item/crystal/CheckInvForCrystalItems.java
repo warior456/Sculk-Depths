@@ -43,10 +43,10 @@ public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick{
             if(armorItems.get(2).getItem() == ModItems.QUAZARITH_CHESTPLATE){
                 ItemStack chestplate = armorItems.get(2);
             }
-            if(armorItems.contains(ModItems.QUAZARITH_LEGGINGS.getDefaultStack())){
+            if(armorItems.get(1).getItem() == ModItems.QUAZARITH_LEGGINGS){
 
             }
-            if(armorItems.contains(ModItems.QUAZARITH_BOOTS.getDefaultStack())){
+            if(armorItems.get(1).getItem() == ModItems.QUAZARITH_BOOTS){
 
             }
 
