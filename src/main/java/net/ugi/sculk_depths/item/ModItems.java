@@ -13,7 +13,7 @@ import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.custom.EnergizedFlintAndSteelItem;
 import net.ugi.sculk_depths.item.custom.GlomperGlux;
-import net.ugi.sculk_depths.item.custom.QuazarithArmorItem;
+
 
 
 public class ModItems {
