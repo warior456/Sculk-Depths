@@ -84,10 +84,9 @@ public class CrystalUpgrade extends Item {
         EquipmentSlot slot = EquipmentSlot.MAINHAND;
         Multimap<EntityAttribute, EntityAttributeModifier> modifiers = stack.getAttributeModifiers(slot);
 
-
         if(stack.getItem() == ModItems.QUAZARITH_SHOVEL){
             if (crystal == CrystalType.WHITE){
-                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
+                modifiers.put(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier(UUID.randomUUID(), "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
             }
         }
 
@@ -151,8 +150,7 @@ public class CrystalUpgrade extends Item {
         EquipmentSlot slot2 = getEquipmentSlot(stack.getItem());
 
         modifiers.forEach((entityAttribute, entityAttributeModifier) -> {
-
-            stack.addAttributeModifier(entityAttribute, entityAttributeModifier, slot2);
+            stack.addAttributeModifier(entityAttribute, new EntityAttributeModifier(Item.ATTACK_DAMAGE_MODIFIER_ID, entityAttributeModifier.getName(), entityAttributeModifier.getValue(), entityAttributeModifier.getOperation()) , slot2);
         });
     }
 
