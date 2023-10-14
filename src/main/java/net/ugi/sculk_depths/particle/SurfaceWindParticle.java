@@ -33,7 +33,7 @@ public class SurfaceWindParticle extends AscendingParticle {
             if (clientWorld.getTopPosition(Heightmap.Type.MOTION_BLOCKING, new BlockPos((int) d, (int) e, (int) f)).getY() > e) {
                 return null;
             }
-            return new SurfaceWindParticle(clientWorld, d, e, f, 0.1f, 0.01f, 0.1f, 0.4f, -0.05f, 0.4f, 1.0f, this.spriteProvider, 0.9f, 20, 0.002f, true);
+            return new SurfaceWindParticle(clientWorld, d, e, f, 0.5f, 0.05f, 0.5f, 0.4f, -0.05f, 0.4f, 1.0f, this.spriteProvider, 0.9f, 20, 0.002f, true);
         }
 
 
