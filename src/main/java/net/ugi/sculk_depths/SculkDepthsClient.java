@@ -22,6 +22,7 @@ import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.particle.SurfaceWindParticle;
 import net.ugi.sculk_depths.sound.ConditionalSoundPlayer;
 import net.ugi.sculk_depths.sound.ConditionalSoundPlayerClient;
+import net.ugi.sculk_depths.sound.SoundPlayerGetterClient;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +37,7 @@ public class SculkDepthsClient implements ClientModInitializer {
 
         SculkDepths.LOGGER.info("Registering clientSounds for " + SculkDepths.MOD_ID);
         ClientTickEvents.START_WORLD_TICK.register(new ConditionalSoundPlayerClient());
+        ClientTickEvents.START_CLIENT_TICK.register(new SoundPlayerGetterClient());
 
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.KRYSLUM_STILL,
                 ModFluids.KRYSLUM_FLOWING,
