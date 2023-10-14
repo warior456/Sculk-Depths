@@ -38,10 +38,8 @@ public class ConditionalSoundPlayerClient implements ClientTickEvents.StartWorld
     private void playSound(ClientWorld world, PlayerEntity player, BlockPos pos) {
         if(pos.getY() >= world.getTopY(Heightmap.Type.MOTION_BLOCKING, pos.getX(), pos.getZ())){
             player.playSound(ModSounds.SCULK_DEPTHS_PETRIFIED_FOREST_ADDITIONS_EVENT, 1,1);
-            System.out.println("normal");
         }else {
             player.playSound(ModSounds.SCULK_DEPTHS_PETRIFIED_FOREST_ADDITIONS_EVENT, 0.4f,0.6f);
-            System.out.println("lower");
         }
     }
 }
