@@ -23,14 +23,15 @@ public class ConditionalSoundPlayerClient implements ClientTickEvents.StartWorld
     public void onStartTick(ClientWorld world) {
         PlayerEntity player = SoundPlayerGetterClient.player;
         BlockPos pos = player.getBlockPos();
-        if (ModBiomes.DRIED_FOREST == world.getBiome(pos).getKey().get()) {
-            if(Math.random() > 0.002 ) return;
-            playSound(world, player, pos);
 
+        if(Math.random() > 0.01) return;
+        if (ModBiomes.DRIED_FOREST == world.getBiome(pos).getKey().get()) {
+            if(Math.random() > 0.2 ) return;
+            playSound(world, player, pos);
         }
 
         if (ModBiomes.PETRIFIED_FOREST == world.getBiome(pos).getKey().get()) {
-            if(Math.random() > 0.006 ) return;
+            if(Math.random() > 0.6 ) return;
             playSound(world, player, pos);
         }
     }

@@ -49,7 +49,7 @@ public interface ModCauldronBehavior {
                 player.incrementStat(Stats.USED.getOrCreateStat(item));
                 decrementFluidLevel(KRYSLUM_LEVEL, state, world, pos);
                 world.playSound(null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
-                world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
+                world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
             return ActionResult.success(world.isClient);
         });
@@ -64,7 +64,7 @@ public interface ModCauldronBehavior {
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
                 world.setBlockState(pos, state.cycle(KRYSLUM_LEVEL));
                 world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
-                world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
+                world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
             return ActionResult.success(world.isClient);
         });
@@ -83,7 +83,7 @@ public interface ModCauldronBehavior {
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
                 world.setBlockState(pos, state.cycle(QUAZARITH_LEVEL));
                 world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
-                world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
+                world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
             return ActionResult.success(world.isClient);
         });
@@ -102,7 +102,7 @@ public interface ModCauldronBehavior {
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
                 world.setBlockState(pos, state.cycle(CRUX_LEVEL));
                 world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
-                world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
+                world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
             return ActionResult.success(world.isClient);
         });
@@ -126,7 +126,7 @@ public interface ModCauldronBehavior {
                 world.setBlockState(pos, blockState);
 
                 world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
-                world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
+                world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
 
 
@@ -142,7 +142,7 @@ public interface ModCauldronBehavior {
                 player.incrementStat(Stats.USED.getOrCreateStat(item));
                 decrementFluidLevel(SPORE_LEVEL, state, world, pos);
                 world.playSound(null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
-                world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
+                world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
             return ActionResult.success(world.isClient);
         });
@@ -157,7 +157,7 @@ public interface ModCauldronBehavior {
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
                 world.setBlockState(pos, state.cycle(SPORE_LEVEL));
                 world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
-                world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
+                world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
             return ActionResult.success(world.isClient);
         });
@@ -177,7 +177,7 @@ public interface ModCauldronBehavior {
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
                 world.setBlockState(pos, state.cycle(CRUX_LEVEL));
                 world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
-                world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
+                world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
             return ActionResult.success(world.isClient);
         });
