@@ -10,10 +10,16 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
+import net.ugi.sculk_depths.entity.custom.LesterEntity;
 
 public class ModEntities {
     public static final EntityType<GlomperEntity> GLOMPER = Registry.register(
             Registries.ENTITY_TYPE, new Identifier(SculkDepths.MOD_ID, "glomper"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, GlomperEntity::new)
                     .dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build());
+
+    public static final EntityType<LesterEntity> PORCUPINE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(SculkDepths.MOD_ID, "lester"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, LesterEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.7f, 1.6f)).build());
 }

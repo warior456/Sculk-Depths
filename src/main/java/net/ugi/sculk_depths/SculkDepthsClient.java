@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.particle.WaterSuspendParticle;
@@ -15,6 +16,9 @@ import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.client.GlomperRenderer;
+import net.ugi.sculk_depths.entity.client.LesterModel;
+import net.ugi.sculk_depths.entity.client.LesterRenderer;
+import net.ugi.sculk_depths.entity.client.ModModelLayers;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
@@ -62,6 +66,9 @@ public class SculkDepthsClient implements ClientModInitializer {
 
 
         EntityRendererRegistry.register(ModEntities.GLOMPER, GlomperRenderer::new);
+        EntityRendererRegistry.register(ModEntities.PORCUPINE, LesterRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.PORCUPINE, LesterModel::getTexturedModelData);
+
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.VALTROX_SAPLING, RenderLayer.getCutout());
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CEPHLERA, RenderLayer.getCutout());
