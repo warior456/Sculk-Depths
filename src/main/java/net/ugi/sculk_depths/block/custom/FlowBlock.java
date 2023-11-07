@@ -10,8 +10,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
 public class FlowBlock extends RodBlock {
-    protected static final float field_31233 = 6.0f;
-    protected static final float field_31234 = 10.0f;
     protected static final VoxelShape Y_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
     protected static final VoxelShape Z_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
     protected static final VoxelShape X_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
@@ -19,7 +17,7 @@ public class FlowBlock extends RodBlock {
     public FlowBlock(AbstractBlock.Settings settings) {
 
         super(settings);
-        this.setDefaultState((BlockState) ((BlockState) this.stateManager.getDefaultState()).with(FACING, Direction.UP));
+        this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.UP));
     }
 
     @Override
@@ -45,8 +43,7 @@ public class FlowBlock extends RodBlock {
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         Direction direction = ctx.getSide();
-        BlockState blockState = ctx.getWorld().getBlockState(ctx.getBlockPos().offset(direction.getOpposite()));
-        return (BlockState) this.getDefaultState().with(FACING, direction);
+        return this.getDefaultState().with(FACING, direction);
     }
 
     @Override

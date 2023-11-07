@@ -8,10 +8,8 @@ import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.particle.WaterSuspendParticle;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.nbt.NbtElement;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
@@ -20,16 +18,11 @@ import net.ugi.sculk_depths.entity.client.LesterModel;
 import net.ugi.sculk_depths.entity.client.LesterRenderer;
 import net.ugi.sculk_depths.entity.client.ModModelLayers;
 import net.ugi.sculk_depths.fluid.ModFluids;
-import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.particle.SurfaceWindParticle;
-import net.ugi.sculk_depths.sound.ConditionalSoundPlayer;
 import net.ugi.sculk_depths.sound.ConditionalSoundPlayerClient;
 import net.ugi.sculk_depths.sound.SoundPlayerGetterClient;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class SculkDepthsClient implements ClientModInitializer {
 

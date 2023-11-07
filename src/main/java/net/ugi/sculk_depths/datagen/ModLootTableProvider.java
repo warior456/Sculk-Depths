@@ -14,7 +14,6 @@ import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.ugi.sculk_depths.block.ModBlocks;
-import software.bernie.shadowed.eliotlash.mclib.math.functions.classic.Mod;
 
 public class ModLootTableProvider extends FabricBlockLootTableProvider {
     public ModLootTableProvider(FabricDataOutput dataOutput) {

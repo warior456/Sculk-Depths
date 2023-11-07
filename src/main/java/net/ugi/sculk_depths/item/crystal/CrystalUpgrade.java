@@ -1,21 +1,12 @@
 package net.ugi.sculk_depths.item.crystal;
 
-import com.google.common.base.Suppliers;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.ImmutableBiMap;
-import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -24,20 +15,13 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
-import net.minecraft.world.World;
-import net.ugi.sculk_depths.SculkDepths;
-import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.enums.CrystalType;
-import net.ugi.sculk_depths.item.ModArmorMaterials;
 import net.ugi.sculk_depths.item.ModItems;
-import net.ugi.sculk_depths.item.ModToolMaterials;
 import net.ugi.sculk_depths.tags.ModTags;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.function.Supplier;
 
 
 public class CrystalUpgrade extends Item {
@@ -77,7 +61,6 @@ public class CrystalUpgrade extends Item {
     public static ActionResult createCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal) {
         addNbtToCrystalUpgrade(stack, player, crystal);
         addAttributeToCrystalUpgrade(stack, player, crystal);
-
         return ActionResult.SUCCESS;
     }
     public static void addAttributeToCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal) {

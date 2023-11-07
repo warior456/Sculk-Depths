@@ -6,8 +6,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import net.ugi.sculk_depths.SculkDepths;
 
-import java.util.Optional;
-
 public class ModBiomes {
     public static final RegistryKey<Biome> PETRIFIED_FOREST = register("petrified_valtrox_forest");
     public static final RegistryKey<Biome> DRIED_FOREST = register("dried_valtrox_forest");

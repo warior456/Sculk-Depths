@@ -8,7 +8,6 @@ import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.block.ModBlocks;
-import software.bernie.shadowed.eliotlash.mclib.math.functions.classic.Mod;
 
 import java.util.concurrent.CompletableFuture;
 

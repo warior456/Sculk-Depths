@@ -1,9 +1,9 @@
 package net.ugi.sculk_depths.entity.animations;
 
+import net.minecraft.client.render.entity.animation.Animation;
 import net.minecraft.client.render.entity.animation.AnimationHelper;
 import net.minecraft.client.render.entity.animation.Keyframe;
 import net.minecraft.client.render.entity.animation.Transformation;
-import net.minecraft.client.render.entity.animation.Animation;
 
 public class ModAnimations {
     public static final Animation LESTER_IDLE = Animation.Builder.create(2f).looping()

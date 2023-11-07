@@ -1,7 +1,5 @@
 package net.ugi.sculk_depths.config;
 
-import net.ugi.sculk_depths.SculkDepths;
-
 public class ConfigHandler {
     public int config_version = 2;
     public double glomper_health = 20;

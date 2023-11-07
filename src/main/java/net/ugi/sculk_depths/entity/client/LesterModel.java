@@ -2,11 +2,8 @@ package net.ugi.sculk_depths.entity.client;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
 import net.ugi.sculk_depths.entity.animations.ModAnimations;
 import net.ugi.sculk_depths.entity.custom.LesterEntity;
 
