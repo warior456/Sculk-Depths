@@ -42,7 +42,7 @@ public class ModItems {
             new Item(new FabricItemSettings()));
 
 
-    public static final Item PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET = registerItem("penebrium_shine_shroom_spore_bucket",
+    public static final Item PENEBRIUM_SPORE_BUCKET = registerItem("penebrium_spore_bucket",
             new Item(new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
     public static final Item ENERGY_ESSENCE = registerItem("energy_essence",
@@ -136,7 +136,7 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, BLUE_CRYSTAL);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, ORANGE_CRYSTAL);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, LIME_CRYSTAL);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, PENEBRIUM_SPORE_BUCKET);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_INGOT);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_PIECES);

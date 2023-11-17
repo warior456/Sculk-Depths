@@ -129,7 +129,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getMainHandStack();
         CauldronBehavior cauldronBehavior = this.behaviorMap.get(itemStack.getItem());
-        if (itemStack.getItem() == ModItems.PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET
+        if (itemStack.getItem() == ModItems.PENEBRIUM_SPORE_BUCKET
                 || itemStack.getItem() == ModItems.CRUX
                 || itemStack.getItem() == Items.BUCKET
         ) {

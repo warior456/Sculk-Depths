@@ -14,6 +14,8 @@
   - quazarith armor textures and models
   - crumbling_dirt.png
   - crux.png
+  - penebrium_spore_bucket.png
+  - penebrium_
 # Models and animations:
 - gems_bond (gemsb):
   - glomper

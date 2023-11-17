@@ -23,8 +23,8 @@ public class ModModelProvider extends FabricModelProvider {
         BlockStateModelGenerator.BlockTexturePool driedValtroxPlankPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.DRIED_VALTROX_PLANKS);
         BlockStateModelGenerator.BlockTexturePool petrifiedValtroxPlankPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.PETRIFIED_VALTROX_SLATES);
 
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.PENEBRIUM_SHINE_SHROOM_BLOCK);
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.PENEBRIUM_SHINE_SHROOM_SPORE_BLOCK);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.PENEBRIUM_SHROOM_BLOCK);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.PENEBRIUM_SPORE_BLOCK);
 
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.QUAZARITH_BLOCK);
 

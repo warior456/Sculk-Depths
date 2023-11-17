@@ -362,16 +362,16 @@ public class ModBlocks {
     public static final Block LIME_CRYSTAL_BLOCK = registerBlock("lime_crystal_block", ModBlocks.createCrystalBlock(DyeColor.LIME), ModItemGroup.SCULK_DEPTHS);
 
     //penebrium
-    public static final Block PENEBRIUM_SHINE_SHROOM = registerBlock("penebrium_shine_shroom",
-            new MushroomPlantBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).noCollision(), ModConfiguredFeatures.PENEBRIUM_SHINE_SHROOM), ModItemGroup.SCULK_DEPTHS);
+    public static final Block PENEBRIUM_SHROOM = registerBlock("penebrium_shroom",
+            new MushroomPlantBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).noCollision(), ModConfiguredFeatures.PENEBRIUM_SHROOM), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block PENEBRIUM_SHINE_SHROOM_BLOCK = registerBlock("penebrium_shine_shroom_block",
+    public static final Block PENEBRIUM_SHROOM_BLOCK = registerBlock("penebrium_shroom_block",
             new CrystalBlock(DyeColor.WHITE, FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block PENEBRIUM_SHINE_SHROOM_STEM = registerBlock("penebrium_shine_shroom_stem",
+    public static final Block PENEBRIUM_SHROOM_STEM = registerBlock("penebrium_shroom_stem",
             new MushroomBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM)), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block PENEBRIUM_SHINE_SHROOM_SPORE_BLOCK = registerBlock("penebrium_shine_shroom_spore_block",
+    public static final Block PENEBRIUM_SPORE_BLOCK = registerBlock("penebrium_spore_block",
             new SporeBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);
 
     //misc

@@ -30,12 +30,12 @@ public class LesterModel <T extends LesterEntity> extends SinglePartEntityModel<
 
 		ModelPartData cube_r1 = head.addChild("cube_r1", ModelPartBuilder.create().uv(0, 20).cuboid(-6.0F, -4.125F, -9.5F, 12.0F, 3.0F, 10.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.875F, -0.5F, -0.7418F, 0.0F, 0.0F));
 
-		ModelPartData cube_r2 = head.addChild("cube_r2", ModelPartBuilder.create().uv(4, 5).cuboid(-5.0F, -1.8F, 0.0F, 1.0F, 1.0F, 0.0F, new Dilation(0.0F))
-				.uv(2, 5).cuboid(-1.0F, -1.8F, 0.0F, 1.0F, 1.0F, 0.0F, new Dilation(0.0F))
-				.uv(0, 1).cuboid(2.0F, -0.8F, 0.0F, 3.0F, 1.0F, 0.0F, new Dilation(0.0F))
-				.uv(0, 5).cuboid(3.0F, -1.8F, 0.0F, 1.0F, 1.0F, 0.0F, new Dilation(0.0F))
-				.uv(0, 0).cuboid(-2.0F, -0.8F, 0.0F, 3.0F, 1.0F, 0.0F, new Dilation(0.0F))
-				.uv(0, 4).cuboid(-5.0F, -0.8F, 0.0F, 2.0F, 1.0F, 0.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -5.25F, -6.0F, 0.3491F, 0.0F, -3.1416F));
+		ModelPartData cube_r2 = head.addChild("cube_r2", ModelPartBuilder.create().uv(4, 5).cuboid(-5.0F, -1.7F, 0.0F, 1.0F, 1.0F, 0.0F, new Dilation(0.0F))
+				.uv(2, 5).cuboid(-1.0F, -1.7F, 0.0F, 1.0F, 1.0F, 0.0F, new Dilation(0.0F))
+				.uv(0, 1).cuboid(2.0F, -0.7F, 0.0F, 3.0F, 1.0F, 0.0F, new Dilation(0.0F))
+				.uv(0, 5).cuboid(3.0F, -1.7F, 0.0F, 1.0F, 1.0F, 0.0F, new Dilation(0.0F))
+				.uv(0, 0).cuboid(-2.0F, -0.7F, 0.0F, 3.0F, 1.0F, 0.0F, new Dilation(0.0F))
+				.uv(0, 4).cuboid(-5.0F, -0.7F, 0.0F, 2.0F, 1.0F, 0.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -5.25F, -6.0F, 0.3491F, 0.0F, -3.1416F));
 
 		ModelPartData chest = body.addChild("chest", ModelPartBuilder.create().uv(0, 6).cuboid(3.0F, -8.25F, -3.0F, 1.0F, 1.0F, 0.0F, new Dilation(0.0F))
 				.uv(0, 2).cuboid(2.0F, -7.25F, -3.0F, 3.0F, 1.0F, 0.0F, new Dilation(0.0F))
