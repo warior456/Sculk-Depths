@@ -285,52 +285,52 @@ public class ModBlocks {
 
     //zygrin set
     public static final Block ZYGRIN = registerBlock("zygrin",
-            new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(4.0f,7.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(6.0f,9.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_STAIRS = registerBlock("zygrin_stairs",
-            new StairsBlock(ZYGRIN.getDefaultState(), FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).strength(4.0f,7.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new StairsBlock(ZYGRIN.getDefaultState(), FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_SLAB = registerBlock("zygrin_slab",
-            new SlabBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).strength(4.0f,7.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new SlabBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_WALL = registerBlock("zygrin_wall",
-            new WallBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).strength(4.0f,7.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new WallBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_PILLAR = registerBlock("zygrin_pillar",
-            new PillarBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).strength(4.0f,7.0f)), ModItemGroup.SCULK_DEPTHS);
+            new PillarBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block CHISELED_ZYGRIN = registerBlock("chiseled_zygrin",
-            new PillarBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).strength(4.0f,7.0f)), ModItemGroup.SCULK_DEPTHS);
+            new PillarBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block POLISHED_ZYGRIN = registerBlock("polished_zygrin",
-            new Block(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).strength(4.0f,7.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new Block(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block POLISHED_ZYGRIN_STAIRS = registerBlock("polished_zygrin_stairs",
-            new StairsBlock(POLISHED_ZYGRIN.getDefaultState(), FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).strength(4.0f,7.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new StairsBlock(POLISHED_ZYGRIN.getDefaultState(), FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block POLISHED_ZYGRIN_SLAB = registerBlock("polished_zygrin_slab",
-            new SlabBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).strength(4.0f,7.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new SlabBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block POLISHED_ZYGRIN_WALL = registerBlock("polished_zygrin_wall",
-            new WallBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).strength(4.0f,7.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new WallBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_BRICKS = registerBlock("zygrin_bricks",
-            new Block(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).strength(4.0f,7.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new Block(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_BRICK_STAIRS = registerBlock("zygrin_brick_stairs",
-            new StairsBlock(ZYGRIN_BRICKS.getDefaultState(), FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).strength(4.0f,7.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new StairsBlock(ZYGRIN_BRICKS.getDefaultState(), FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_BRICK_SLAB = registerBlock("zygrin_brick_slab",
-            new SlabBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).strength(4.0f,7.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new SlabBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_BRICK_WALL = registerBlock("zygrin_brick_wall",
-            new WallBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).strength(4.0f,7.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new WallBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_LIGHT = registerBlock("zygrin_light",
-            new Block(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).strength(4.0f,7.0f).requiresTool().luminance(15)), ModItemGroup.SCULK_DEPTHS);
+            new Block(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).requiresTool().luminance(15)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block ZYGRIN_FLOWBLOCK = registerBlock("zygrin_flowblock",
-            new FlowBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).strength(4.0f,7.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new FlowBlock(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     //leaves
     public static final Block VALTROX_LEAVES = registerBlock("valtrox_leaves",
