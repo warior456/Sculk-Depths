@@ -34,7 +34,14 @@
       }
     ],
     "misc": [],
-    "monster": [],
+    "monster": [
+      {
+        "type": "sculk_depths:lester",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 4
+      }
+    ],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []
@@ -54,7 +61,6 @@
     ],
     [
       "sculk_depths:ore_flumrock",
-      "sculk_depths:deepslate_flumrock_rocks",
       "sculk_depths:crux_boulders"
     ],
     [

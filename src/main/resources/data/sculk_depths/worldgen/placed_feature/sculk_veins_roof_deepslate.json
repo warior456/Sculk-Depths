@@ -221,21 +221,9 @@
       "start_y": 70
     },
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "minecraft:uniform",
-        "min_inclusive": {
-          "absolute": 0
-        },
-        "max_inclusive": {
-          "absolute": 32
-        }
-      }
-    },
-    {
       "type": "minecraft:environment_scan",
       "direction_of_search": "up",
-      "max_steps": 32,
+      "max_steps": 11,
       "target_condition": {
         "type": "minecraft:matching_blocks",
         "offset": [
