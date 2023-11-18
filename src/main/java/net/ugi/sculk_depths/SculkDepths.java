@@ -57,7 +57,7 @@ public class SculkDepths implements ModInitializer {
         //ModBlockEntities.registerBlockEntities();
         SculkDepths.LOGGER.info("Registering Entities for " + SculkDepths.MOD_ID);
         FabricDefaultAttributeRegistry.register(ModEntities.GLOMPER, GlomperEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.PORCUPINE, LesterEntity.createLesterAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.LESTER, LesterEntity.createLesterAttributes());
         SculkDepths.LOGGER.info("Registering Particles for " + SculkDepths.MOD_ID);
         ModParticleTypes.registerModParticles();
         ModPlacementModifierType.init();
