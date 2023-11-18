@@ -18,7 +18,7 @@ public class ModEntities {
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, GlomperEntity::new)
                     .dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build());
 
-    public static final EntityType<LesterEntity> PORCUPINE = Registry.register(Registries.ENTITY_TYPE,
+    public static final EntityType<LesterEntity> LESTER = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(SculkDepths.MOD_ID, "lester"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LesterEntity::new)
                     .dimensions(EntityDimensions.fixed(0.7f, 1.6f)).build());

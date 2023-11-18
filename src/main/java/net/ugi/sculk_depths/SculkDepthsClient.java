@@ -59,7 +59,7 @@ public class SculkDepthsClient implements ClientModInitializer {
 
 
         EntityRendererRegistry.register(ModEntities.GLOMPER, GlomperRenderer::new);
-        EntityRendererRegistry.register(ModEntities.PORCUPINE, LesterRenderer::new);
+        EntityRendererRegistry.register(ModEntities.LESTER, LesterRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.PORCUPINE, LesterModel::getTexturedModelData);
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.VALTROX_SAPLING, RenderLayer.getCutout());
