@@ -13,10 +13,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
-import net.ugi.sculk_depths.entity.client.GlomperRenderer;
-import net.ugi.sculk_depths.entity.client.LesterModel;
-import net.ugi.sculk_depths.entity.client.LesterRenderer;
-import net.ugi.sculk_depths.entity.client.ModModelLayers;
+import net.ugi.sculk_depths.entity.client.*;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
@@ -60,7 +57,9 @@ public class SculkDepthsClient implements ClientModInitializer {
 
         EntityRendererRegistry.register(ModEntities.GLOMPER, GlomperRenderer::new);
         EntityRendererRegistry.register(ModEntities.LESTER, LesterRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.PORCUPINE, LesterModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.LESTER, LesterModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.CHOMPER_COLOSSUS, ChomperColossusRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CHOMPER_COLOSSUS, ChomperColossusModel::getTexturedModelData);
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.VALTROX_SAPLING, RenderLayer.getCutout());
 

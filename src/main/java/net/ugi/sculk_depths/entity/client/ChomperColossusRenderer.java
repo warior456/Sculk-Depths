@@ -6,22 +6,22 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.SculkDepths;
-import net.ugi.sculk_depths.entity.custom.LesterEntity;
+import net.ugi.sculk_depths.entity.custom.ChomperColossusEntity;
 
-public class LesterRenderer extends MobEntityRenderer<LesterEntity, LesterModel<LesterEntity>> {
-    private static final Identifier TEXTURE = new Identifier(SculkDepths.MOD_ID, "textures/entity/lester.png");
+public class ChomperColossusRenderer extends MobEntityRenderer<ChomperColossusEntity, ChomperColossusModel<ChomperColossusEntity>> {
+    private static final Identifier TEXTURE = new Identifier(SculkDepths.MOD_ID, "textures/entity/chomper_colossus.png");
 
-    public LesterRenderer(EntityRendererFactory.Context context) {
-        super(context, new LesterModel<>(context.getPart(ModModelLayers.LESTER)), 0.6f);
+    public ChomperColossusRenderer(EntityRendererFactory.Context context) {
+        super(context, new ChomperColossusModel<>(context.getPart(ModModelLayers.CHOMPER_COLOSSUS)), 0.6f);
     }
 
     @Override
-    public Identifier getTexture(LesterEntity entity) {
+    public Identifier getTexture(ChomperColossusEntity entity) {
         return TEXTURE;
     }
 
     @Override
-    public void render(LesterEntity mobEntity, float f, float g, MatrixStack matrixStack,
+    public void render(ChomperColossusEntity mobEntity, float f, float g, MatrixStack matrixStack,
                        VertexConsumerProvider vertexConsumerProvider, int i) {
         if(mobEntity.isBaby()) {
             matrixStack.scale(0.5f, 0.5f, 0.5f);
