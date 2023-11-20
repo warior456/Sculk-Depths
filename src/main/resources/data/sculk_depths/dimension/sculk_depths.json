@@ -31,8 +31,79 @@
         "erosion": "minecraft:overworld/erosion",
         "depth": "sculk_depths:depth",
         "ridges": "minecraft:overworld/ridges",
-        "initial_density_without_jaggedness": 0,
+        "initial_density_without_jaggedness": {
+          "type": "minecraft:add",
+          "argument1": 0.1171875,
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": {
+              "type": "minecraft:y_clamped_gradient",
+              "from_y": -256,
+              "to_y": -240,
+              "from_value": 0,
+              "to_value": 1
+            },
+            "argument2": {
+              "type": "minecraft:add",
+              "argument1": -0.1171875,
+              "argument2": {
+                "type": "minecraft:add",
+                "argument1": -0.078125,
+                "argument2": {
+                  "type": "minecraft:mul",
+                  "argument1": {
+                    "type": "minecraft:y_clamped_gradient",
+                    "from_y": 32,
+                    "to_y": 64,
+                    "from_value": 1,
+                    "to_value": 0
+                  },
+                  "argument2": {
+                    "type": "minecraft:add",
+                    "argument1": 0.078125,
+                    "argument2": {
+                      "type": "minecraft:clamp",
+                      "input": {
+                        "type": "minecraft:add",
+                        "argument1": -0.703125,
+                        "argument2": {
+                          "type": "minecraft:mul",
+                          "argument1": 4,
+                          "argument2": {
+                            "type": "minecraft:quarter_negative",
+                            "argument": {
+                              "type": "minecraft:mul",
+                              "argument1": "minecraft:overworld/depth",
+                              "argument2": {
+                                "type": "minecraft:cache_2d",
+                                "argument": "minecraft:overworld/factor"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "min": -256,
+                      "max": 64
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "final_density": {
+          "type": "minecraft:min",
+          "argument1": "sculk_depths:depth",
+          "argument2": {
+            "type": "minecraft:add",
+            "argument1": {
+              "type": "minecraft:y_clamped_gradient",
+              "from_y": 20,
+              "to_y": 80,
+              "from_value": 0,
+              "to_value": 1
+            },
+            "argument2": {
           "type": "minecraft:min",
           "argument1": {
             "type": "minecraft:squeeze",
@@ -62,16 +133,25 @@
                           "type": "minecraft:add",
                           "argument1": -0.078125,
                           "argument2": {
+                            "type": "minecraft:mul",
+                            "argument1": {
+                              "type": "minecraft:y_clamped_gradient",
+                              "from_y": 160,
+                              "to_y": 192,
+                              "from_value": 1,
+                              "to_value": 0
+                            },
+                            "argument2": {
                               "type": "minecraft:add",
                               "argument1": 0.078125,
                               "argument2": {
                                 "type": "minecraft:range_choice",
-                                "input": "sculk_depths:depth",
+                                "input": "minecraft:overworld/sloped_cheese",
                                 "min_inclusive": -1000000,
                                 "max_exclusive": 1.5625,
                                 "when_in_range": {
                                   "type": "minecraft:min",
-                                  "argument1": "sculk_depths:depth",
+                                  "argument1": "minecraft:overworld/sloped_cheese",
                                   "argument2": {
                                     "type": "minecraft:mul",
                                     "argument1": 5,
@@ -152,6 +232,7 @@
                               }
                             }
                           }
+                        }
                       }
                     }
                   }
@@ -251,7 +332,7 @@
                   }
                 }
               }
-            }
+            }}}
           }
 
         },
