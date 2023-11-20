@@ -5,15 +5,16 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AttachedStemBlockMixin",
+    "BlockEntityTypeMixin",
     "BlockMixin",
     "CropBlockMixin",
     "FarmLandBlockMixin",
     "LivingEntityMixin",
     "NoiseChunkGeneratorMixin",
-    "StemBlockMixin",
-    "BlockEntityTypeMixin"
+    "StemBlockMixin"
   ],
   "client": [
+    "BackgroundRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
