@@ -39,21 +39,38 @@ public class BackgroundRendererMixin {
         )
         );
 
+        /*if(entity.isSpectator()){
+            return;
+        }*/
         if (cameraSubmersionType == CameraSubmersionType.WATER) {
             if(entity.isSubmergedIn(ModTags.Fluids.KRYSLUM)){ //fluid fog
                 overrideWaterToKryslum(viewDistance, entity);
             }
 
         }  else if (cameraSubmersionType == CameraSubmersionType.NONE) {
-            BlockPos pos = entity.getBlockPos();
-            if(entity.getEntityWorld().getBiome(pos).getKey().get() == ModBiomes.DRIED_FOREST || entity.getEntityWorld().getBiome(pos).getKey().get() == ModBiomes.PETRIFIED_FOREST) {
-                float start = viewDistance - MathHelper.clamp(viewDistance / 10.0F, 4.0F, 64.0F);
-                overrideFog(viewDistance, start * 100, viewDistance * 100);
-            } else if(entity.getEntityWorld().getBiome(pos).getKey().get() == ModBiomes.SCULK_CAVES|| entity.getEntityWorld().getBiome(pos).getKey().get() == ModBiomes.CEPHLERA_CAVES){
-                float end = (float) (Math.min(viewDistance, 192.0F) * 0.5);
+            if(entity.getEntityWorld().getDimensionKey() == ModDimensions.SCULK_DEPTHS_TYPE) {
+
+                BlockPos pos = entity.getBlockPos();
+                float y_modifier = pos.getY()+256;// value between 0 and one when y is between -256 and 160
+                System.out.println(y_modifier);
+
+  /*              if(y_modifier < 0.3) y_modifier = 0.3f;
+                if(y_modifier > 1.5) y_modifier = 1.5f;*/
+
+
+                float start = viewDistance * 0.03F ; //viewDistance - MathHelper.clamp(viewDistance / 10.0F, 4.0F, 64.0F);
+                float end = y_modifier * viewDistance/512 * 0.5f; //*x to stop wierd black border on the surface
+                if(end <= 32) end = 32;//TODO make the last couple render distances more optimized to their limit
+                System.out.println(viewDistance);
+                System.out.println(start);
+                System.out.println(end);
+                System.out.println("//");
+                overrideFog(viewDistance, start, end);
+            } /*else if(entity.getEntityWorld().getBiome(pos).getKey().get() == ModBiomes.SCULK_CAVES|| entity.getEntityWorld().getBiome(pos).getKey().get() == ModBiomes.CEPHLERA_CAVES){
                 float start = viewDistance * 0.05F;
-                overrideFog(viewDistance, start * 100, end * 100);
-            }
+                float end = (float) (Math.min(viewDistance, 192.0F) * 0.5);
+                overrideFog(viewDistance, start, end);
+            }*/
         }
     }
     /*
@@ -86,8 +103,8 @@ public class BackgroundRendererMixin {
 
     private static void overrideFog(float viewDistance, float start, float end) {
         float fogStart, fogEnd;
-        fogStart = start * 0.01f;
-        fogEnd = end * 0.01f;
+        fogStart = start;
+        fogEnd = end;
         RenderSystem.setShaderFogStart(fogStart);
         RenderSystem.setShaderFogEnd(fogEnd);
     }
