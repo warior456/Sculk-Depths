@@ -14,8 +14,8 @@ import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import net.ugi.sculk_depths.entity.custom.LesterEntity;
 
 public class ModEntities {
-    public static final EntityType<GlomperEntity> GLOMPER = Registry.register(
-            Registries.ENTITY_TYPE, new Identifier(SculkDepths.MOD_ID, "glomper"),
+    public static final EntityType<GlomperEntity> GLOMPER = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(SculkDepths.MOD_ID, "glomper"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, GlomperEntity::new)
                     .dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build());
 
@@ -27,5 +27,5 @@ public class ModEntities {
     public static final EntityType<ChomperColossusEntity> CHOMPER_COLOSSUS = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(SculkDepths.MOD_ID, "chomper_colossus"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ChomperColossusEntity::new)
-                    .dimensions(EntityDimensions.fixed(15,15)).build());
+                    .dimensions(EntityDimensions.fixed(8,11)).build());
 }

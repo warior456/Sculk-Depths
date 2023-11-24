@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ChomperColossusEntity extends PathAwareEntity {
 
-
+    private static double renderDistanceMultiplier = 1.0;
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
     public ChomperColossusEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
@@ -33,6 +33,13 @@ public class ChomperColossusEntity extends PathAwareEntity {
             --this.idleAnimationTimeout;
         }
     }
+
+    @Override
+    public boolean shouldRender(double distance) {
+        double d = 30;
+        return distance < (d *= 64.0 * renderDistanceMultiplier) * d;
+    }
+
 
     @Override
     protected void updateLimbs(float posDelta) {
@@ -63,9 +70,9 @@ public class ChomperColossusEntity extends PathAwareEntity {
 
     public static DefaultAttributeContainer.Builder createChomperColossusAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 15)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 50f)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2f)
-                .add(EntityAttributes.GENERIC_ARMOR, 0.5f)
+                .add(EntityAttributes.GENERIC_ARMOR, 20f)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2);
     }
 
@@ -74,18 +81,18 @@ public class ChomperColossusEntity extends PathAwareEntity {
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_FOX_AMBIENT;
+        return SoundEvents.ENTITY_BLAZE_AMBIENT;
     }
 
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_CAT_HURT;
+        return SoundEvents.ENCHANT_THORNS_HIT;
     }
 
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_DOLPHIN_DEATH;
+        return SoundEvents.ENTITY_BEE_DEATH;
     }
 }

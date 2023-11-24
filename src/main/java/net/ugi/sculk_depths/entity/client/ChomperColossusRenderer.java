@@ -28,7 +28,7 @@ public class ChomperColossusRenderer extends MobEntityRenderer<ChomperColossusEn
         } else {
             matrixStack.scale(1f, 1f, 1f);
         }
-
+        matrixStack.translate(0,0,0);
         super.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, i);
     }
 }
