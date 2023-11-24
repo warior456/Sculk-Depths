@@ -86,7 +86,7 @@ public class BackgroundRendererMixin {
     private static void overrideWaterToKryslum(float viewDistance, Entity entity) {
         float fogStart, fogEnd;
         fogStart = viewDistance * -20.0f * 0.01f;//waterstart
-        fogEnd = viewDistance *  90.0f * 0.01f;//waterend
+        fogEnd = viewDistance *  40.0f * 0.01f;//waterend
         if (entity instanceof ClientPlayerEntity) {
             ClientPlayerEntity clientPlayerEntity = (ClientPlayerEntity) entity;
             RegistryEntry<Biome> biomeHolder = clientPlayerEntity.getWorld().getBiome(clientPlayerEntity.getBlockPos());
@@ -95,7 +95,7 @@ public class BackgroundRendererMixin {
             }
             fogEnd *= Math.max(0.25f, clientPlayerEntity.getUnderwaterVisibility());
         }
-        RenderSystem.setShaderFogColor(0,51,0);
+        //RenderSystem.setShaderFogColor(0,51,0);
 
         RenderSystem.setShaderFogStart(fogStart);
         RenderSystem.setShaderFogEnd(fogEnd);
