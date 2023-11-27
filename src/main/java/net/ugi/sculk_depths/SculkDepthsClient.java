@@ -100,6 +100,6 @@ public class SculkDepthsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.SURFACE_WIND, SurfaceWindParticle.Factory::new);
 
 
-        //DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY_IDK, SculkDepthsSkyRenderer);
+        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY_IDK,new SculkDepthsSkyRenderer());
     }
 }
