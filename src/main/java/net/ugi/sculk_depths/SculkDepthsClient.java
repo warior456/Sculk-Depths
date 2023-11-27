@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
+import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.particle.WaterSuspendParticle;
@@ -18,8 +19,10 @@ import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.particle.SurfaceWindParticle;
+import net.ugi.sculk_depths.render.SculkDepthsSkyRenderer;
 import net.ugi.sculk_depths.sound.ConditionalSoundPlayerClient;
 import net.ugi.sculk_depths.sound.SoundPlayerGetterClient;
+import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class SculkDepthsClient implements ClientModInitializer {
 
@@ -57,9 +60,11 @@ public class SculkDepthsClient implements ClientModInitializer {
 
         EntityRendererRegistry.register(ModEntities.GLOMPER, GlomperRenderer::new);
         EntityRendererRegistry.register(ModEntities.LESTER, LesterRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.LESTER, LesterModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.CHOMPER_COLOSSUS, ChomperColossusRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.GLOMPER, GlomperModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.LESTER, LesterModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CHOMPER_COLOSSUS, ChomperColossusModel::getTexturedModelData);
+        //RenderLayer.getEntityTranslucent(GlomperRenderer.GLOMPER_TEXTURE,false);
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.VALTROX_SAPLING, RenderLayer.getCutout());
 
@@ -93,5 +98,8 @@ public class SculkDepthsClient implements ClientModInitializer {
 
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.PENEBRIUM_SPORES, WaterSuspendParticle.SporeBlossomAirFactory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.SURFACE_WIND, SurfaceWindParticle.Factory::new);
+
+
+        //DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY_IDK, SculkDepthsSkyRenderer);
     }
 }

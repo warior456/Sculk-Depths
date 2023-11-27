@@ -6,6 +6,8 @@ import net.minecraft.client.render.entity.animation.Keyframe;
 import net.minecraft.client.render.entity.animation.Transformation;
 
 public class ModAnimations {
+
+    public static final Animation GLOMPER_IDLE = Animation.Builder.create(1f).looping().build();
     public static final Animation LESTER_IDLE = Animation.Builder.create(2f).looping()
             .addBoneAnimation("head",
                     new Transformation(Transformation.Targets.ROTATE,
