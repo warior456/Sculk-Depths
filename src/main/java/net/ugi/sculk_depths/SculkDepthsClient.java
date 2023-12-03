@@ -19,7 +19,7 @@ import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.particle.SurfaceWindParticle;
-import net.ugi.sculk_depths.render.SculkDepthsSkyRenderer;
+import net.ugi.sculk_depths.render.SculkDepthsSkyRendererClient;
 import net.ugi.sculk_depths.sound.ConditionalSoundPlayerClient;
 import net.ugi.sculk_depths.sound.SoundPlayerGetterClient;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
@@ -99,7 +99,6 @@ public class SculkDepthsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.PENEBRIUM_SPORES, WaterSuspendParticle.SporeBlossomAirFactory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.SURFACE_WIND, SurfaceWindParticle.Factory::new);
 
-
-        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY_IDK,new SculkDepthsSkyRenderer());
+        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY_IDK,new SculkDepthsSkyRendererClient());
     }
 }
