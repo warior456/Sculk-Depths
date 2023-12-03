@@ -29,11 +29,15 @@ public class SurfaceWindParticle extends AscendingParticle {
         }
 
         @Override
-        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            if ((clientWorld.getTopPosition(Heightmap.Type.MOTION_BLOCKING, new BlockPos((int) d, (int) e, (int) f)).getY()) > e) {
+        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double x, double y, double z, double g, double h, double i) {
+            BlockPos pos = new BlockPos((int) x, (int) y, (int) z);
+            // Check if the top Y position is greater than y, if so return null to spawn no particle
+            if (clientWorld.getTopPosition(Heightmap.Type.MOTION_BLOCKING, pos).getY() > y) {
                 return null;
             }
-            return new SurfaceWindParticle(clientWorld, d, e, f, 0.5f, 0.05f, 0.5f, 0.4f, -0.05f, 0.4f, 1.0f, this.spriteProvider, 0.9f, 20, 0.002f, true);
+
+            SurfaceWindParticle particle = new SurfaceWindParticle(clientWorld, x, y, z, 0.5f, 0.05f, 0.5f, 0.4f, -0.05f, 0.4f, 1.0f, this.spriteProvider, 0.9f, 20, 0.002f, true);
+            return particle;
         }
 
 
