@@ -1,5 +1,6 @@
 package net.ugi.sculk_depths.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.item.ItemPlacementContext;
@@ -10,6 +11,11 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
 public class FlowBlock extends RodBlock {
+    @Override
+    protected MapCodec<? extends RodBlock> getCodec() {
+        return null;
+    }
+
     protected static final float field_31233 = 6.0f;
     protected static final float field_31234 = 10.0f;
     protected static final VoxelShape Y_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);

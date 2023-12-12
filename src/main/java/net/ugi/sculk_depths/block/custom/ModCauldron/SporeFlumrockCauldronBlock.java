@@ -1,5 +1,6 @@
 package net.ugi.sculk_depths.block.custom.ModCauldron;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.AbstractCauldronBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -44,6 +45,10 @@ import static net.ugi.sculk_depths.state.property.ModProperties.QUAZARITH_LEVEL;
 
 
 public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
+    @Override
+    protected MapCodec<? extends AbstractCauldronBlock> getCodec() {
+        return null;
+    }
 
     //Item[] crystalItemArray = {ModItems.WHITE_CRYSTAL, ModItems.BLUE_CRYSTAL, ModItems.ORANGE_CRYSTAL, ModItems.LIME_CRYSTAL};
     CrystalType[] crystalStateArray = {CrystalType.WHITE, CrystalType.BLUE, CrystalType.ORANGE, CrystalType.LIME};

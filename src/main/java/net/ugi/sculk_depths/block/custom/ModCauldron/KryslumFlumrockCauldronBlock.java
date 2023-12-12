@@ -1,5 +1,6 @@
 package net.ugi.sculk_depths.block.custom.ModCauldron;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
@@ -36,6 +37,10 @@ import static net.ugi.sculk_depths.state.property.ModProperties.QUAZARITH_LEVEL;
 
 
 public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
+    @Override
+    protected MapCodec<? extends AbstractCauldronBlock> getCodec() {
+        return null;
+    }
 
     public static final IntProperty LEVEL = ModProperties.KRYSLUM_LEVEL;
 
@@ -90,6 +95,8 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
     public boolean isFull(BlockState state) {
         return state.get(LEVEL) == 12;
     }
+
+
 
     @Override
     protected double getFluidHeight(BlockState state) {

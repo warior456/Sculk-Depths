@@ -32,17 +32,17 @@ public interface ModCauldronBehavior {
     public static final IntProperty KRYSLUM_LEVEL = ModProperties.KRYSLUM_LEVEL;
     public static final IntProperty SPORE_LEVEL = ModProperties.SPORE_LEVEL;
 
-    public static final Map<Item, CauldronBehavior> EMPTY_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap();
-    public static final Map<Item, CauldronBehavior> KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap();
+    public static final CauldronBehavior.CauldronBehaviorMap EMPTY_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap("empty_flumrock_cauldron");
+    public static final CauldronBehavior.CauldronBehaviorMap KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap("kryslum_flumrock_cauldron");
 
-    public static final Map<Item, CauldronBehavior> SPORE_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap();
+    public static final CauldronBehavior.CauldronBehaviorMap SPORE_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap("spore_flumrock_cauldron");
     public static final CauldronBehavior FILL_WITH_KRYSLUM = (state, world, pos, player, hand, stack) -> CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModBlocks.KRYSLUM_FLUMROCK_CAULDRON.getDefaultState(), SoundEvents.ITEM_BUCKET_EMPTY);
     //public static final CauldronBehavior FILL_WITH_SPORE = (state, world, pos, player, hand, stack) -> CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModBlocks.SPORE_FLUMROCK_CAULDRON.getDefaultState(), SoundEvents.ITEM_BUCKET_EMPTY);
     public static void registerBehavior() {
 
-        registerBucketBehavior(EMPTY_FLUMROCK_CAULDRON_BEHAVIOR);
+        registerBucketBehavior(EMPTY_FLUMROCK_CAULDRON_BEHAVIOR.map());
 
-        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
+        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient) {
                 Item item = stack.getItem();
                 player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(ModItems.KRYSLUM_BUCKET)));
@@ -55,7 +55,7 @@ public interface ModCauldronBehavior {
             return ActionResult.success(world.isClient);
         });
 
-        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.KRYSLUM_BUCKET, (state, world, pos, player, hand, stack) -> {
+        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().put(ModItems.KRYSLUM_BUCKET, (state, world, pos, player, hand, stack) -> {
             if (state.get(KRYSLUM_LEVEL) == 12) {
                 return ActionResult.PASS;
             }
@@ -70,7 +70,7 @@ public interface ModCauldronBehavior {
             return ActionResult.success(world.isClient);
         });
 
-        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.QUAZARITH_PIECES, (state, world, pos, player, hand, stack) -> {
+        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().put(ModItems.QUAZARITH_PIECES, (state, world, pos, player, hand, stack) -> {
             if (state.get(QUAZARITH_LEVEL) == 12) {
                 return ActionResult.PASS;
             }
@@ -88,7 +88,7 @@ public interface ModCauldronBehavior {
             return ActionResult.success(world.isClient);
         });
 
-        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.CRUX, (state, world, pos, player, hand, stack) -> {
+        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().put(ModItems.CRUX, (state, world, pos, player, hand, stack) -> {
             if (state.get(CRUX_LEVEL) == 12) {
                 return ActionResult.PASS;
             }
@@ -106,7 +106,7 @@ public interface ModCauldronBehavior {
             return ActionResult.success(world.isClient);
         });
 
-        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.QUAZARITH_INGOT, (state, world, pos, player, hand, stack) -> {
+        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().put(ModItems.QUAZARITH_INGOT, (state, world, pos, player, hand, stack) -> {
             if (state.get(QUAZARITH_LEVEL) > 8 || state.get(CRUX_LEVEL) > 8) {
                 return ActionResult.PASS;
             }

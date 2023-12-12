@@ -1,10 +1,8 @@
 package net.ugi.sculk_depths.block.custom;
 
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.AbstractFireBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.block.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldAccess;
@@ -12,7 +10,10 @@ import net.minecraft.world.WorldView;
 
 
 public class SoulFireBlock extends AbstractFireBlock {
-
+    @Override
+    protected MapCodec<? extends AbstractFireBlock> getCodec() {
+        return null;
+    }
 
 
     public SoulFireBlock(AbstractBlock.Settings settings) {

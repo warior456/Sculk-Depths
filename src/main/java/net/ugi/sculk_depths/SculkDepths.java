@@ -18,6 +18,7 @@ import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.portal.Portals;
 import net.ugi.sculk_depths.sound.ModSounds;
 import net.ugi.sculk_depths.state.property.ModProperties;
+import net.ugi.sculk_depths.world.WorldGenerator;
 import net.ugi.sculk_depths.world.gen.ModPlacementModifierType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,8 @@ public class SculkDepths implements ModInitializer {
         ModItems.registerModItems();
         SculkDepths.LOGGER.info("Registering Blocks for " + SculkDepths.MOD_ID);
         ModBlocks.registerModBlocks();
+        SculkDepths.LOGGER.info("Registering Worldgen for " + SculkDepths.MOD_ID);
+        WorldGenerator.initWorldGen();
         SculkDepths.LOGGER.info("Registering Portals for " + SculkDepths.MOD_ID);
         Portals.registerModPortals();
         SculkDepths.LOGGER.info("Registering Sounds for " + SculkDepths.MOD_ID);
