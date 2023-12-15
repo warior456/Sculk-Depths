@@ -38,7 +38,7 @@ dependencies {
 
 	modImplementation "software.bernie.geckolib:geckolib-${geckolib_version}"
 
-	modImplementation files('libs/customportalapi-1.20.2.jar')
+	//modImplementation files('libs/customportalapi-1.20.2.jar')
 
 	//modLocalRuntime("maven.modrinth:rei:${rei_version}")
 	//modLocalRuntime("maven.modrinth:architectury-api:${architectury_api_version}")
