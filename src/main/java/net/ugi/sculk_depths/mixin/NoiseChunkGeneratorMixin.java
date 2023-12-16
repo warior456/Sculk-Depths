@@ -9,9 +9,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
 
-@Mixin({NoiseChunkGenerator.class})
+@Mixin(value = NoiseChunkGenerator.class, priority = 1100)
 public abstract class NoiseChunkGeneratorMixin {
-
     /**
      * @author Matteo_fey (@warior456)
      * @reason Fix the hardcoded -54 lava sea level
