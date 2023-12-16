@@ -5,6 +5,7 @@
 
 # Important Notes
 - This mods depends on Geckolib
+- Quilt has been found to work with the right combination of fabric api and quilt loader but is not (yet) officialy supported
 - This mod is in alpha, we keep ourselves the right to make breaking changes (we will try to minimize damage where possible)
 - The 1.20 release no longer supports worlds created with older versions. The file "biome3.json" has been removed, causing biome3 to revert to plains. This change does not affect the 1.19 releases, where this biome will continue to be supported (for now).
 
