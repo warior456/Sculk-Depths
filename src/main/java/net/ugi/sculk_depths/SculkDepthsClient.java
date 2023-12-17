@@ -39,8 +39,8 @@ public class SculkDepthsClient implements ClientModInitializer {
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.KRYSLUM_STILL,
                 ModFluids.KRYSLUM_FLOWING,
                 new SimpleFluidRenderHandler(
-                        new Identifier("sculk_depths:block/kryslum_still"),
-                        new Identifier("sculk_depths:block/kryslum_flow")
+                        new Identifier(SculkDepths.MOD_ID,  "block/kryslum_still"),
+                        new Identifier(SculkDepths.MOD_ID, "block/kryslum_flow")
                 )
         );
 
@@ -99,6 +99,6 @@ public class SculkDepthsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.PENEBRIUM_SPORES, WaterSuspendParticle.SporeBlossomAirFactory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.SURFACE_WIND, SurfaceWindParticle.Factory::new);
 
-        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY_IDK,new SculkDepthsSkyRendererClient());
+        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY,new SculkDepthsSkyRendererClient());
     }
 }

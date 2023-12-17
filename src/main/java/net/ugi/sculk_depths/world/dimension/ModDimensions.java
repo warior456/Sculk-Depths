@@ -11,7 +11,7 @@ import net.ugi.sculk_depths.SculkDepths;
 public class ModDimensions {
     public static final RegistryKey<DimensionOptions> SCULK_DEPTHS = RegistryKey.of(RegistryKeys.DIMENSION,
             new Identifier(SculkDepths.MOD_ID, "sculk_depths"));
-    public static final RegistryKey<World> SCULK_DEPTHS_LEVEL_KEY_IDK = RegistryKey.of(RegistryKeys.WORLD,
+    public static final RegistryKey<World> SCULK_DEPTHS_LEVEL_KEY = RegistryKey.of(RegistryKeys.WORLD,
             new Identifier(SculkDepths.MOD_ID, "sculk_depths"));
 
     public static final RegistryKey<DimensionType> SCULK_DEPTHS_TYPE = RegistryKey.of(RegistryKeys.DIMENSION_TYPE,
