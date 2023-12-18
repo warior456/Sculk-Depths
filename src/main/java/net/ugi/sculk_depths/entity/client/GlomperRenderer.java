@@ -8,12 +8,16 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.client.render.entity.feature.SlimeOverlayFeatureRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.SlimeEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RotationAxis;
+import net.minecraft.world.LightType;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import net.ugi.sculk_depths.entity.custom.LesterEntity;
@@ -23,6 +27,11 @@ public class GlomperRenderer extends MobEntityRenderer<GlomperEntity, GlomperMod
 
     public GlomperRenderer(EntityRendererFactory.Context context) {
         super(context, new GlomperModel<>(context.getPart(ModModelLayers.GLOMPER)), 0.25f);
+        //this.addFeature(new GlomperOverlayFeatureRenderer<GlomperEntity>(this, context.getModelLoader()));
+    }
+    @Override
+    protected int getBlockLight(GlomperEntity entity, BlockPos pos) {
+            return 15;
     }
 
     @Override
@@ -48,9 +57,9 @@ public class GlomperRenderer extends MobEntityRenderer<GlomperEntity, GlomperMod
         }
         VertexConsumer vertexConsumer = bl ? vertexConsumerProvider.getBuffer(RenderLayer.getOutline(this.getTexture(mobEntity))) : vertexConsumerProvider.getBuffer(RenderLayer.getEntityTranslucent(this.getTexture(mobEntity)));
 
-        this.model.render(matrixStack, vertexConsumer, i, LivingEntityRenderer.getOverlay(mobEntity, 0.0f), 1.0f, 1.0f, 1.0f, 1.0f);
+        //this.model.render(matrixStack, vertexConsumer, i, LivingEntityRenderer.getOverlay(mobEntity, 0.0f), 1.0f, 1.0f, 1.0f, 1.0f); //transparent but broken
+
+
+        super.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, i); //works except transparent
     }
-
-
-
 }

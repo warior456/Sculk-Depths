@@ -88,7 +88,7 @@ public class GlomperEntity extends PathAwareEntity {
 
     protected void initGoals() {
         this.goalSelector.add(4, new FlyGoal(this, 1.0));
-        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        //this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(5, new LookAroundGoal(this));
         //this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
         this.targetSelector.add(1, new GlomperEntity.GlomperTargetGoal(this, LivingEntity.class, 0, false, false, CAN_ATTACK_PREDICATE));

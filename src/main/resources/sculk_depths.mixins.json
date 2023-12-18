@@ -14,7 +14,8 @@
     "StemBlockMixin"
   ],
   "client": [
-    "BackgroundRendererMixin"
+    "BackgroundRendererMixin",
+    "LivingEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
