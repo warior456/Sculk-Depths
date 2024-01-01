@@ -70,9 +70,9 @@ public class ChomperColossusEntity extends PathAwareEntity {
 
     public static DefaultAttributeContainer.Builder createChomperColossusAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 50f)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 200f)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2f)
-                .add(EntityAttributes.GENERIC_ARMOR, 20f)
+                .add(EntityAttributes.GENERIC_ARMOR, 5f)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2);
     }
 
