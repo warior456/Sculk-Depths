@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
 
-@Mixin(value = NoiseChunkGenerator.class, priority = 1100)
+@Mixin(value = NoiseChunkGenerator.class, priority = 1200)
 public abstract class NoiseChunkGeneratorMixin {
     /**
      * @author Matteo_fey (@warior456)
