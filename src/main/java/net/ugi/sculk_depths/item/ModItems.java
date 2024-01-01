@@ -57,6 +57,12 @@ public class ModItems {
     public static final Item GLOMPER_SPAWN_EGG = registerItem("glomper_spawn_egg",
             new SpawnEggItem(ModEntities.GLOMPER, 1769607, 42751, new FabricItemSettings()));
 
+    public static final Item LESTER_SPAWN_EGG = registerItem("lester_spawn_egg",
+            new SpawnEggItem(ModEntities.LESTER, 856599, 12305307, new FabricItemSettings()));
+
+    public static final Item CHOMPER_COLOSSUS_SPAWN_EGG = registerItem("chomper_colossus_spawn_egg",
+            new SpawnEggItem(ModEntities.CHOMPER_COLOSSUS, 5860206, 9800821, new FabricItemSettings()));
+
     //quazarith tools
 
     public static final Item QUAZARITH_SHOVEL = registerItem("quazarith_shovel",
@@ -130,6 +136,8 @@ public class ModItems {
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, GLOMPER_GLUX);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, GLOMPER_SPAWN_EGG);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, LESTER_SPAWN_EGG);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, CHOMPER_COLOSSUS_SPAWN_EGG);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, CRUX);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, WHITE_CRYSTAL);
