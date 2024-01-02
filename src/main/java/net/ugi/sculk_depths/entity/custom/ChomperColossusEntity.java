@@ -3,7 +3,9 @@ package net.ugi.sculk_depths.entity.custom;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -57,7 +59,8 @@ public class ChomperColossusEntity extends PathAwareEntity {
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(2, new TemptGoal(this, 1.25D, Ingredient.ofItems(ModItems.QUAZARITH_PIECES), false));
+        this.goalSelector.add(1, new WanderAroundFarGoal(this, 1D));
+        this.goalSelector.add(2, new LookAroundGoal(this));
 /*        this.goalSelector.add(0, new SwimGoal(this));
 
 
