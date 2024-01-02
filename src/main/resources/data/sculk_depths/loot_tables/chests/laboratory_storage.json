@@ -1,0 +1,80 @@
+{
+  "pools": [
+    {
+      "rolls": {
+        "min": 8,
+        "max": 12
+      },
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 50,
+          "name": "sculk_depths:glomper_glux"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 75,
+          "name": "sculk_depths:coated_valtrox_planks",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 75,
+          "name": "sculk_depths:valtrox_planks",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "sculk_depths:penebrium_spore_bucket"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 25,
+          "name": "sculk_depths:valtrox_sapling"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 50,
+          "name": "sculk_depths:cephlera_light"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 50,
+          "name": "sculk_depths:crux",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "sculk_depths:kryslum_enriched_soil"
+        }
+      ]
+    }
+  ]
+}
