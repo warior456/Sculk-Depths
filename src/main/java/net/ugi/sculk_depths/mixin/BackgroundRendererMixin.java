@@ -39,9 +39,9 @@ public class BackgroundRendererMixin {
         )
         );
 
-        if(entity.isSpectator()){
+/*        if(entity.isSpectator()){
             return;
-        }
+        }*/
         if (cameraSubmersionType == CameraSubmersionType.WATER) {
             if(entity.isSubmergedIn(ModTags.Fluids.KRYSLUM)){ //fluid fog
                 overrideWaterToKryslum(viewDistance, entity);
@@ -51,20 +51,13 @@ public class BackgroundRendererMixin {
             if(entity.getEntityWorld().getDimensionKey() == ModDimensions.SCULK_DEPTHS_TYPE) {
 
                 BlockPos pos = entity.getBlockPos();
-                float y_modifier = pos.getY()+256;// value between 0 and one when y is between -256 and 160
-                //System.out.println(y_modifier);
+                float y = pos.getY();
 
-  /*              if(y_modifier < 0.3) y_modifier = 0.3f;
-                if(y_modifier > 1.5) y_modifier = 1.5f;*/
+                if(y <= -200f) y = -200f;
+                float start = (y+256) * (viewDistance/426) * ((float) 1/4);
+                float end = start * 4f;
 
 
-                float start = viewDistance * 0.03F ; //viewDistance - MathHelper.clamp(viewDistance / 10.0F, 4.0F, 64.0F);
-                float end = y_modifier * viewDistance/512 * 0.5f; //*x to stop wierd black border on the surface
-                if(end <= 32) end = 32;//TODO make the last couple render distances more optimized to their limit
-/*                System.out.println(viewDistance);
-                System.out.println(start);
-                System.out.println(end);
-                System.out.println("//");*/
                 overrideFog(viewDistance, start, end);
             } /*else if(entity.getEntityWorld().getBiome(pos).getKey().get() == ModBiomes.SCULK_CAVES|| entity.getEntityWorld().getBiome(pos).getKey().get() == ModBiomes.CEPHLERA_CAVES){
                 float start = viewDistance * 0.05F;
@@ -73,16 +66,7 @@ public class BackgroundRendererMixin {
             }*/
         }
     }
-    /*
-       if (cameraSubmersionType == CameraSubmersionType.LAVA) {
-        } else if (cameraSubmersionType == CameraSubmersionType.POWDER_SNOW) {
 
-        } else if (mobEffect) {
-
-        } else*/
-        /*else if (thickFog) {
-            overrideNetherFog(viewDistance);
-        }*/
     private static void overrideWaterToKryslum(float viewDistance, Entity entity) {
         float fogStart, fogEnd;
         fogStart = viewDistance * -20.0f * 0.01f;//waterstart

@@ -51,7 +51,7 @@
 			}
 		]
 	},
-	"sculk_depths.petrified_forest.additions": {
+	"ambient.wind.additions": {
 		"category": "ambient",
 		"sounds": [
 			{
@@ -65,6 +65,26 @@
 			},
 			{
 				"name":"minecraft:ambient/nether/soulsand_valley/wind4"
+			}
+		]
+	},
+	"ambient.cave.additions": {
+		"category": "ambient",
+		"sounds": [
+			{
+				"name":"minecraft:ambient/nether/basalt_deltas/debris1"
+			},
+			{
+				"name":"minecraft:ambient/nether/basalt_deltas/debris2"
+			},
+			{
+				"name":"minecraft:ambient/nether/basalt_deltas/debris3"
+			},
+			{
+				"name":"minecraft:ambient/nether/basalt_deltas/long_debris1"
+			},
+			{
+				"name":"minecraft:ambient/nether/basalt_deltas/long_debris2"
 			}
 		]
 	}
