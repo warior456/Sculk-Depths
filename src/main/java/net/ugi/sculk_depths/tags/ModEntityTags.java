@@ -8,4 +8,5 @@ import net.ugi.sculk_depths.SculkDepths;
 
 public class ModEntityTags {
     public static final TagKey<EntityType<?>> DROPS_ENERGY_ESSENCE = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(SculkDepths.MOD_ID, "drops_energy_essence"));
+    public static final TagKey<EntityType<?>> NO_WARDEN_ANGER = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(SculkDepths.MOD_ID, "no_warden_anger"));
 }

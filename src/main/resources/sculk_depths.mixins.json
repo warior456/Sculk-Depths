@@ -11,7 +11,8 @@
     "FarmLandBlockMixin",
     "LivingEntityMixin",
     "NoiseChunkGeneratorMixin",
-    "StemBlockMixin"
+    "StemBlockMixin",
+    "WardenEntityMixin"
   ],
   "client": [
     "BackgroundRendererMixin",
