@@ -48,7 +48,7 @@
   "spawn_costs": {
     "sculk_depths:chomper_colossus": {
       "energy_budget": 0.15,
-      "charge": 100
+      "charge": 150
     }
   },
   "carvers": {

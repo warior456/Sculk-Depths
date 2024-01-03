@@ -54,8 +54,8 @@ public class BackgroundRendererMixin {
                 float y = pos.getY();
 
                 if(y <= -200f) y = -200f;
-                float start = (y+256) * (viewDistance/426) * ((float) 1/4);
-                float end = start * 4f;
+                float start = (y+256) * (viewDistance/426) * ((float) 1/10);
+                float end = start * 10f;
 
 
                 overrideFog(viewDistance, start, end);
