@@ -10,6 +10,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.IntProperty;
@@ -155,7 +157,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock {
                         player.dropItem(outputItem, true);
                     }
                 }
-
+                world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
                 BlockState blockState1 = state.with(CRYSTAL, l);
                 world.setBlockState(pos, blockState1);
             }
@@ -186,6 +188,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock {
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)) {
+            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_crux_cost,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_spore_cost);
@@ -199,6 +202,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock {
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)) {
+            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_crux_cost,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_spore_cost);
@@ -212,6 +216,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock {
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)) {
+            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_crux_cost,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_spore_cost);
@@ -225,6 +230,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock {
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)) {
+            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_crux_cost,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_spore_cost);
@@ -238,6 +244,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock {
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)) {
+            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_crux_cost,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_spore_cost);
@@ -251,6 +258,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock {
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)) {
+            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_crux_cost,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_spore_cost);
@@ -264,6 +272,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock {
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)) {
+            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_crux_cost,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_spore_cost);
@@ -277,6 +286,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock {
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)) {
+            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_crux_cost,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_spore_cost);
@@ -290,6 +300,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock {
                 && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_spore_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_crux_cost
                 && state.get(CRYSTAL) != CrystalType.NONE)) {
+            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_crux_cost,
                     SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_spore_cost);

@@ -33,12 +33,24 @@
     "axolotls": [],
     "creature": [],
     "misc": [],
-    "monster": [],
+    "monster": [
+      {
+        "type": "sculk_depths:chomper_colossus",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []
   },
-  "spawn_costs": {},
+  "spawn_costs": {
+    "sculk_depths:chomper_colossus": {
+      "energy_budget": 0.15,
+      "charge": 100
+    }
+  },
   "carvers": {
     "air": [
     ]

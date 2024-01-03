@@ -35,19 +35,18 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [
+    "creature": [],
+    "misc": [],
+    "monster": [
       {
         "type": "sculk_depths:glomper",
         "weight": 1,
         "minCount": 1,
-        "maxCount": 4
-      }
-    ],
-    "misc": [],
-    "monster": [
+        "maxCount": 2
+      },
       {
         "type": "sculk_depths:lester",
-        "weight": 1,
+        "weight": 30,
         "minCount": 1,
         "maxCount": 4
       }

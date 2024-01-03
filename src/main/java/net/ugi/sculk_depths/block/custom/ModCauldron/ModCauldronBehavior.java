@@ -35,7 +35,7 @@ public interface ModCauldronBehavior {
 
     public static final Map<Item, CauldronBehavior> SPORE_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap();
     public static final CauldronBehavior FILL_WITH_KRYSLUM = (state, world, pos, player, hand, stack) -> CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModBlocks.KRYSLUM_FLUMROCK_CAULDRON.getDefaultState(), SoundEvents.ITEM_BUCKET_EMPTY);
-    public static final CauldronBehavior FILL_WITH_SPORE = (state, world, pos, player, hand, stack) -> CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModBlocks.SPORE_FLUMROCK_CAULDRON.getDefaultState(), SoundEvents.ITEM_BUCKET_EMPTY);
+    public static final CauldronBehavior FILL_WITH_SPORE = (state, world, pos, player, hand, stack) -> CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModBlocks.SPORE_FLUMROCK_CAULDRON.getDefaultState(), SoundEvents.BLOCK_MOSS_PLACE);
 
     public static void registerBehavior() {
 
@@ -82,7 +82,7 @@ public interface ModCauldronBehavior {
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
                 world.setBlockState(pos, state.cycle(QUAZARITH_LEVEL));
-                world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH_HIGH_SPEED, SoundCategory.BLOCKS, 0.2f, 1.0f);
                 world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
             return ActionResult.success(world.isClient);
@@ -101,7 +101,7 @@ public interface ModCauldronBehavior {
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
                 world.setBlockState(pos, state.cycle(CRUX_LEVEL));
-                world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH_HIGH_SPEED, SoundCategory.BLOCKS, 0.2f, 1f);
                 world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
             return ActionResult.success(world.isClient);
@@ -125,7 +125,7 @@ public interface ModCauldronBehavior {
                 BlockState blockState = state.with(QUAZARITH_LEVEL, i).with(CRUX_LEVEL, j);
                 world.setBlockState(pos, blockState);
 
-                world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH_HIGH_SPEED, SoundCategory.BLOCKS, 0.2f, 1.0f);
                 world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
 
@@ -141,7 +141,7 @@ public interface ModCauldronBehavior {
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(item));
                 decrementFluidLevel(SPORE_LEVEL, state, world, pos);
-                world.playSound(null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                world.playSound(null, pos, SoundEvents.BLOCK_MOSS_BREAK, SoundCategory.BLOCKS, 1.0f, 1.0f);
                 world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
             return ActionResult.success(world.isClient);
@@ -156,7 +156,7 @@ public interface ModCauldronBehavior {
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
                 world.setBlockState(pos, state.cycle(SPORE_LEVEL));
-                world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                world.playSound(null, pos, SoundEvents.BLOCK_MOSS_PLACE, SoundCategory.BLOCKS, 1.0f, 1.0f);
                 world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
             return ActionResult.success(world.isClient);
@@ -176,7 +176,7 @@ public interface ModCauldronBehavior {
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
                 world.setBlockState(pos, state.cycle(CRUX_LEVEL));
-                world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
                 world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
             return ActionResult.success(world.isClient);

@@ -16,7 +16,7 @@ import net.ugi.sculk_depths.entity.custom.LesterEntity;
 public class ModEntities {
     public static final EntityType<GlomperEntity> GLOMPER = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(SculkDepths.MOD_ID, "glomper"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, GlomperEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, GlomperEntity::new)
                     .dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build());
 
     public static final EntityType<LesterEntity> LESTER = Registry.register(Registries.ENTITY_TYPE,
