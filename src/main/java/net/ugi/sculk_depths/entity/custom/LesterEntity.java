@@ -49,7 +49,9 @@ public class LesterEntity extends PathAwareEntity {
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(2, new TemptGoal(this, 1.25D, Ingredient.ofItems(ModItems.QUAZARITH_PIECES), false));
+        //this.goalSelector.add(2, new TemptGoal(this, 1.25D, Ingredient.ofItems(ModItems.QUAZARITH_PIECES), false));
+        this.goalSelector.add(1, new WanderAroundFarGoal(this, 1D));
+        this.goalSelector.add(2, new LookAroundGoal(this));
 /*        this.goalSelector.add(0, new SwimGoal(this));
 
 
