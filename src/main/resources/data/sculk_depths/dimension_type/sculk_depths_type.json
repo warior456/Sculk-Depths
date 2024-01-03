@@ -13,7 +13,7 @@
     "has_skylight": false,
     "has_ceiling": false,
     "coordinate_scale": 1,
-    "fixed_time": 18000,
+    "fixed_time": 6000,
     "height": 448,
     "min_y": -256,
     "monster_spawn_block_light_limit": 0,
