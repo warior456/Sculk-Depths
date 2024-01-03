@@ -51,6 +51,11 @@ public class GlomperEntity extends PathAwareEntity {
         return entityData;
     }
 
+    @Override
+    public boolean occludeVibrationSignals() {
+        return true;
+    }
+
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, SculkDepths.CONFIG.glomper_health)
