@@ -20,6 +20,7 @@ repositories {
 	maven { url 'https://maven.kyrptonaught.dev/' }
 	maven { url "https://api.modrinth.com/maven" }
 	maven { url = "https://jitpack.io" }
+	maven { url "https://api.modrinth.com/maven"}
 }
 
 dependencies {
@@ -36,6 +37,7 @@ dependencies {
 	modImplementation include ("net.kyrptonaught:customportalapi:${project.customportalapi_version}"){
 		exclude group: "net.fabricmc.fabric-api", module: "fabric-gametest-api-v1"}
 
+	include(modImplementation("maven.modrinth:fstats:${project.fstats_version}"))
 	//modImplementation "software.bernie.geckolib:geckolib-${geckolib_version}"
 
 	//modImplementation files('libs/geckolib-1.20.jar')

@@ -41,6 +41,10 @@
     "java": ">=17"
   },
   "suggests": {
-    "another-mod": "*"
+    "another-mod": "*",
+    "fstats-api": "*"
+  },
+  "custom": {
+    "fstats": 40
   }
 }
