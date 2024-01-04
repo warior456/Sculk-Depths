@@ -39,7 +39,7 @@ public class BackgroundRendererMixin {
         )
         );
 
-/*        if(entity.isSpectator()){
+    /*    if(entity.isSpectator()){
             return;
         }*/
         if (cameraSubmersionType == CameraSubmersionType.WATER) {
