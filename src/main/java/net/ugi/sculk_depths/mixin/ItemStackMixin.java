@@ -8,7 +8,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Uuids;
 import org.apache.logging.log4j.core.config.plugins.convert.TypeConverters;
+import org.slf4j.Logger;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.UUID;
@@ -16,22 +19,20 @@ import java.util.UUID;
 @Mixin(ItemStack.class)
 public class ItemStackMixin{
 
+    @Shadow @Final private static Logger LOGGER;
+
     @ModifyExpressionValue(
             method = "getTooltip",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/attribute/EntityAttributeModifier;getId()Ljava/util/UUID;")
 
     )
     private static UUID fixBug(UUID original){
-        if (original.equals(Item.ATTACK_DAMAGE_MODIFIER_ID)) {
-            return Item.ATTACK_DAMAGE_MODIFIER_ID;
+        if (original.equals(ItemAccessorMixin.getATTACK_DAMAGE_MODIFIER_ID())) {
+            return ItemAccessorMixin.getATTACK_DAMAGE_MODIFIER_ID();
+        }
+        if (original.equals(ItemAccessorMixin.getATTACK_SPEED_MODIFIER_ID())) {
+            return ItemAccessorMixin.getATTACK_SPEED_MODIFIER_ID();
         }
         return original;
     }
-
-/*    @ModifyExpressionValue(
-            method = "getTooltip",
-            at = @At(value = "HEAD", target = "Lnet/minecraft/item/Item;ATTACK_DAMAGE_MODIFIER_ID:Ljava/util/UUID")
-
-    )*/
-
 }

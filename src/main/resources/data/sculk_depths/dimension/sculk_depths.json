@@ -469,7 +469,7 @@
             "type": "minecraft:condition",
             "if_true": {
               "type": "minecraft:vertical_gradient",
-              "random_name": "minecraft:deepslate",
+              "random_name": "sculk_depths:amalgamite",
               "true_at_and_below": {
                 "absolute": 72
               },
@@ -480,7 +480,7 @@
             "then_run": {
               "type": "minecraft:block",
               "result_state": {
-                "Name": "minecraft:deepslate",
+                "Name": "sculk_depths:amalgamite",
                 "Properties": {
                   "axis": "y"
                 }

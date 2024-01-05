@@ -1,5 +1,6 @@
 package net.ugi.sculk_depths.item.crystal;
 
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.minecraft.entity.EquipmentSlot;
@@ -9,12 +10,14 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.enums.CrystalType;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.tags.ModTags;
@@ -66,6 +69,8 @@ public class CrystalUpgrade extends Item {
     public static void addAttributeToCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal) {
         EquipmentSlot slot = EquipmentSlot.MAINHAND;
         Multimap<EntityAttribute, EntityAttributeModifier> modifiers = stack.getAttributeModifiers(slot);
+        SculkDepths.LOGGER.info(modifiers.toString());
+        Multimap<EntityAttribute, EntityAttributeModifier> modifiers2 = HashMultimap.create();
 
         if(stack.getItem() == ModItems.QUAZARITH_SHOVEL){
             if (crystal == CrystalType.WHITE){
@@ -98,7 +103,13 @@ public class CrystalUpgrade extends Item {
         if(stack.getItem() == ModItems.QUAZARITH_SWORD){
 
             if (crystal == CrystalType.WHITE){
-                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
+                modifiers2 = addAttribute(modifiers,modifiers2, EntityAttributes.GENERIC_ATTACK_DAMAGE, Item.ATTACK_DAMAGE_MODIFIER_ID,"Attack Damage", 20,EntityAttributeModifier.Operation.ADDITION);
+                modifiers2 = addAttribute(modifiers,modifiers2, EntityAttributes.GENERIC_ATTACK_SPEED, Item.ATTACK_SPEED_MODIFIER_ID,"Attack Speed", 2,EntityAttributeModifier.Operation.ADDITION);
+                modifiers2 = addAttribute(modifiers,modifiers2, EntityAttributes.GENERIC_MOVEMENT_SPEED, UUID.randomUUID(),"Movement Speed", 20,EntityAttributeModifier.Operation.ADDITION);
+            }
+            if (crystal == CrystalType.ORANGE){
+
+                modifiers2 = addAttribute(modifiers,modifiers2, EntityAttributes.GENERIC_MOVEMENT_SPEED, UUID.randomUUID(),"Movement Speed", 20,EntityAttributeModifier.Operation.ADDITION);
             }
         }
 
@@ -126,15 +137,55 @@ public class CrystalUpgrade extends Item {
         if(stack.getItem() == ModItems.QUAZARITH_BOOTS){
 
             if (crystal == CrystalType.WHITE){
-                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2, EntityAttributeModifier.Operation.ADDITION));
             }
         }
 
+        Multimap<EntityAttribute, EntityAttributeModifier> finalModifiers = modifiers2;
+        modifiers.forEach((entityAttribute, entityAttributeModifier) -> {
+            int check[] = {0};
+            finalModifiers.forEach((entityAttribute2, entityAttributeModifier2) -> {
+                SculkDepths.LOGGER.info(entityAttribute.toString() + ", " + entityAttributeModifier.toString());
+                if (entityAttributeModifier2.getId().equals(entityAttributeModifier.getId())) {
+                    check[0] = 1;
+                }
+
+            });
+            if (check[0] == 0){
+                finalModifiers.put(entityAttribute,entityAttributeModifier);
+            }
+
+
+        });
+
+
         EquipmentSlot slot2 = getEquipmentSlot(stack.getItem());
 
-        modifiers.forEach((entityAttribute, entityAttributeModifier) -> {
-            stack.addAttributeModifier(entityAttribute, new EntityAttributeModifier(Item.ATTACK_DAMAGE_MODIFIER_ID, entityAttributeModifier.getName(), entityAttributeModifier.getValue(), entityAttributeModifier.getOperation()) , slot2);
+        finalModifiers.forEach((entityAttribute, entityAttributeModifier) -> {
+            stack.addAttributeModifier(entityAttribute, new EntityAttributeModifier(entityAttributeModifier.getId(), entityAttributeModifier.getName(), entityAttributeModifier.getValue(), entityAttributeModifier.getOperation()) , slot2);
         });
+    }
+
+    public static Multimap<EntityAttribute, EntityAttributeModifier> addAttribute(Multimap<EntityAttribute, EntityAttributeModifier> modifiers,Multimap<EntityAttribute, EntityAttributeModifier> modifiers2, EntityAttribute attribute, UUID uuid, String name, double value, EntityAttributeModifier.Operation operation){
+        final int[] check = {0};
+        modifiers.forEach((entityAttribute, entityAttributeModifier) -> {
+            if (entityAttributeModifier.getId().equals(uuid)) {
+                check[0] = 1;
+                if (operation == EntityAttributeModifier.Operation.ADDITION){
+                    double originalValue = entityAttributeModifier.getValue();
+                    modifiers2.put(attribute, new EntityAttributeModifier(uuid,name, originalValue + value, operation));
+                }
+                if (operation == EntityAttributeModifier.Operation.MULTIPLY_TOTAL){
+                    double originalValue = entityAttributeModifier.getValue();
+                    modifiers2.put(attribute, new EntityAttributeModifier(uuid,name, originalValue * value, operation));
+                }
+            }
+
+        });
+        if (check[0] == 0){
+            modifiers2.put(attribute, new EntityAttributeModifier( uuid,name, value, operation));
+        }
+        return modifiers2;
     }
 
     public static void addNbtToCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal) {

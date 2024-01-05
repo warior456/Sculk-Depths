@@ -36,64 +36,13 @@
             "Name": "minecraft:sculk"
           },
           {
-            "Name": "minecraft:deepslate"
+            "Name": "sculk_depths:amalgamite"
           },
           {
-            "Name": "minecraft:deepslate"
+            "Name": "sculk_depths:amalgamite"
           },
           {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:sculk"
-          },
-          {
-            "Name": "minecraft:sculk"
-          },
-          {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:sculk"
-          },
-          {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:deepslate"
+            "Name": "sculk_depths:amalgamite"
           },
           {
             "Name": "minecraft:sculk"
@@ -102,22 +51,73 @@
             "Name": "minecraft:sculk"
           },
           {
-            "Name": "minecraft:deepslate"
+            "Name": "sculk_depths:amalgamite"
           },
           {
-            "Name": "minecraft:deepslate"
+            "Name": "sculk_depths:amalgamite"
           },
           {
-            "Name": "minecraft:deepslate"
+            "Name": "sculk_depths:amalgamite"
           },
           {
-            "Name": "minecraft:deepslate"
+            "Name": "sculk_depths:amalgamite"
           },
           {
-            "Name": "minecraft:deepslate"
+            "Name": "sculk_depths:amalgamite"
           },
           {
-            "Name": "minecraft:deepslate"
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
           },
           {
             "Name": "minecraft:sculk"
@@ -129,49 +129,49 @@
             "Name": "minecraft:sculk"
           },
           {
-            "Name": "minecraft:deepslate"
+            "Name": "sculk_depths:amalgamite"
           },
           {
-            "Name": "minecraft:deepslate"
+            "Name": "sculk_depths:amalgamite"
           },
           {
-            "Name": "minecraft:deepslate"
+            "Name": "sculk_depths:amalgamite"
           },
           {
-            "Name": "minecraft:deepslate"
+            "Name": "sculk_depths:amalgamite"
           },
           {
-            "Name": "minecraft:deepslate"
+            "Name": "sculk_depths:amalgamite"
           },
           {
-            "Name": "minecraft:deepslate"
+            "Name": "sculk_depths:amalgamite"
           },
           {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:sculk"
-          },
-          {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:deepslate"
-          },
-          {
-            "Name": "minecraft:deepslate"
+            "Name": "sculk_depths:amalgamite"
           },
           {
             "Name": "minecraft:sculk"
           },
           {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
             "Name": "minecraft:sculk"
           },
           {
-            "Name": "minecraft:deepslate"
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
           }
         ]
       },
@@ -186,7 +186,7 @@
             "can_place_on_ceiling": true,
             "can_place_on_wall": true,
             "can_be_placed_on": [
-              "minecraft:deepslate"
+              "sculk_depths:amalgamite"
             ]
           }
         },
@@ -231,7 +231,7 @@
           -1,
           0
         ],
-        "blocks": "minecraft:deepslate"
+        "blocks": "sculk_depths:amalgamite"
       }
     },
     {

@@ -43,6 +43,8 @@ public class ModBlocks {
 
     public static final Block SOUL_FIRE = registerBlockWithoutBlockItem("soul_fire", new SoulFireBlock(FabricBlockSettings.copyOf(Blocks.SOUL_FIRE)), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block AMALGAMITE = registerBlock("amalgamite",
+            new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).strength(5.0f,8f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
     public static final Block LARGUTH = registerBlock("larguth",
             new Block(FabricBlockSettings.copyOf(Blocks.OBSIDIAN).strength(40.0f,1000f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
     //umbrusk blockset
