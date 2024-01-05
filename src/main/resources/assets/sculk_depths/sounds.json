@@ -7,7 +7,7 @@
 		   		"stream": true
 			},
 			{
-				"name":"minecraft:music/game/nether/soulsand_valley/so_below",
+				"name":"sculk_depths:ost-1",
 				"stream": true
 			},
 			{
@@ -28,7 +28,7 @@
 				"stream": true
 			},
 			{
-				"name":"minecraft:music/game/nether/soulsand_valley/so_below",
+				"name":"sculk_depths:ost-1",
 				"stream": true
 			}
 		]
@@ -47,6 +47,15 @@
 		"sounds": [
 			{
 				"name":"sculk_depths:zinnia",
+				"stream": true
+			}
+		]
+	},
+	"music.sculk_depths.ost-1":{
+		"category": "music",
+		"sounds": [
+			{
+				"name":"sculk_depths:ost-1",
 				"stream": true
 			}
 		]
