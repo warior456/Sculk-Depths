@@ -369,7 +369,7 @@ public class ModBlocks {
             new CrystalBlock(DyeColor.WHITE, FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SHROOM_STEM = registerBlock("penebrium_shroom_stem",
-            new MushroomBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM)), ModItemGroup.SCULK_DEPTHS);
+            new MushroomBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SPORE_BLOCK = registerBlock("penebrium_spore_block",
             new SporeBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);
