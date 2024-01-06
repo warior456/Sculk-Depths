@@ -353,7 +353,7 @@ public class ModBlocks {
 
     //ores
     public static final Block QUAZARITH_ORE = registerBlock("quazarith_ore",
-            new Block(FabricBlockSettings.copyOf(ModBlocks.UMBRUSK).strength(5.5f,9.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new LesterSpawningBlock(FabricBlockSettings.copyOf(ModBlocks.UMBRUSK).strength(5.5f,9.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
     public static final Block CRUX_ORE = registerBlock("crux_ore",
             new Block(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).strength(4.5f,8.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
