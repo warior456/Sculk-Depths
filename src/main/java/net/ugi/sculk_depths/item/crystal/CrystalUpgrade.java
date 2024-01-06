@@ -141,6 +141,7 @@ public class CrystalUpgrade extends Item {
             }
         }
 
+        // to add attributes that haven't been modified with the addAttribute function
         Multimap<EntityAttribute, EntityAttributeModifier> finalModifiers = modifiers2;
         modifiers.forEach((entityAttribute, entityAttributeModifier) -> {
             int check[] = {0};

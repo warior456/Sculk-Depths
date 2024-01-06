@@ -37,7 +37,7 @@ public class SculkDepths implements ModInitializer {
     @Override
     public void onInitialize() {
 
-        SpawnRestriction.register(ModEntities.LESTER, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (type, world, reason, pos, random) -> true);
+        SpawnRestriction.register(ModEntities.LESTER, SpawnRestriction.Location.ON_GROUND, null, (type, world, reason, pos, random) -> true);
         SpawnRestriction.register(ModEntities.CHOMPER_COLOSSUS, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (type, world, reason, pos, random) -> true);
 
         SculkDepths.LOGGER.info("Loading Config for " + SculkDepths.MOD_ID);

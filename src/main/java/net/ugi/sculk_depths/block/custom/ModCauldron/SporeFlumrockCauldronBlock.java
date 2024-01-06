@@ -171,12 +171,7 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock {
 
         if (Nbt != null) {
             if(Nbt.get("sculk_depths.crystal") != null){
-                int i = crystalItemNbt.indexOf(Nbt.get("sculk_depths.crystal").toString());
-                CrystalType j = crystalStateArray[i];
-
-                if (j == state.get(CRYSTAL)) {
                     return ActionResult.FAIL;
-                }
             }
         }
 
