@@ -19,8 +19,6 @@ import java.util.UUID;
 @Mixin(ItemStack.class)
 public class ItemStackMixin{
 
-    @Shadow @Final private static Logger LOGGER;
-
     @ModifyExpressionValue(
             method = "getTooltip",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/attribute/EntityAttributeModifier;getId()Ljava/util/UUID;")
