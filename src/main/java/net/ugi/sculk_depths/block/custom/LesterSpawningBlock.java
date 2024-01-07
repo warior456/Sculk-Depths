@@ -31,9 +31,7 @@ public class LesterSpawningBlock extends Block {
     @Override
     public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
         if(world.isClient())return;
-        SculkDepths.LOGGER.info(pos.toString());
         pos = checkForRoof(world,pos, "Up",0,300);
-        SculkDepths.LOGGER.info(pos.toString());
         int count = MathHelper.nextInt(Random.create(), 4, 9);
 
         for(;count > 0; count--){
@@ -65,20 +63,21 @@ public class LesterSpawningBlock extends Block {
         BlockPos pos2 = pos;
         if(op == "Up"){
             do{
+                if(i > max) return null;
                 pos2 = pos2.up(1);
                 i++;
-                SculkDepths.LOGGER.info(pos2.toString());
-            }while(world.getBlockState(pos2).isIn(ModTags.Blocks.LESTER_SPAWN_AIR_BLOCKS) && i <= max);
+            }while(world.getBlockState(pos2).isIn(ModTags.Blocks.LESTER_SPAWN_AIR_BLOCKS));
         }
 
         if(op == "Down"){
             do{
+                if(i > max) return null;
                 pos2 = pos2.down(1);
                 i++;
-            }while(! world.getBlockState(pos2).isIn(ModTags.Blocks.LESTER_SPAWN_AIR_BLOCKS) && i <= max);
+            }while(! world.getBlockState(pos2).isIn(ModTags.Blocks.LESTER_SPAWN_AIR_BLOCKS));
         }
-        if (i < min){return null;}
-        if (pos2 == pos){return null;}
+        if (i < min) return null;
+        if (pos2 == pos) return null;
         return pos2;
 
     }
