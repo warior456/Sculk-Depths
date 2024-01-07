@@ -31,7 +31,7 @@ public class LesterSpawningBlock extends Block {
     @Override
     public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
         if(world.isClient())return;
-        pos = new BlockPos(pos.getX(),(int)Math.round(world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 10.0d, false).getPos().getY()),pos.getZ());
+        pos = new BlockPos(pos.getX(),(int)Math.round(world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 15.0d, false).getPos().getY()),pos.getZ());
         int count = MathHelper.nextInt(Random.create(), 4, 9);
 
         for(;count > 0; count--){
