@@ -5,14 +5,7 @@
         "model": "sculk_depths:block/amalgamite"
       },
       {
-        "model": "sculk_depths:block/amalgamite_mirrored"
-      },
-      {
         "model": "sculk_depths:block/amalgamite",
-        "y": 180
-      },
-      {
-        "model": "sculk_depths:block/amalgamite_mirrored",
         "y": 180
       }
     ]
