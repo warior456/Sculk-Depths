@@ -31,7 +31,7 @@ public class LesterSpawningBlock extends Block {
     @Override
     public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
         if(world.isClient())return;
-        pos = new BlockPos(pos.getX(),(int)Math.round(world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 15.0d, false).getPos().getY()),pos.getZ());
+        pos = checkForRoof(world,pos, "Up",0,300);
         int count = MathHelper.nextInt(Random.create(), 4, 9);
 
         for(;count > 0; count--){
@@ -42,8 +42,12 @@ public class LesterSpawningBlock extends Block {
             pos2 = pos2.east(XOffset);
             int ZOffset = MathHelper.nextInt(Random.create(), -5, 5);
             pos2 = pos2.south(ZOffset);
+            if(world.getBlockState(pos2).isIn(ModTags.Blocks.LESTER_SPAWN_AIR_BLOCKS)){
+                pos2 = checkForRoof(world,pos2, "Up",0,300);
+            }
+            else pos2 = checkForRoof(world,pos2, "Down",0,10);
 
-            pos2 = checkForRoof(world,pos2, 3,300);
+
             if(pos2 == null){ continue;}
 
 
@@ -54,14 +58,28 @@ public class LesterSpawningBlock extends Block {
         }
 
     }
-    BlockPos checkForRoof(WorldAccess world, BlockPos pos, int min, int max){
+    BlockPos checkForRoof(WorldAccess world, BlockPos pos, String op, int min, int max){
         int i = 0;
-        do{
-            pos = pos.up(1);
-            i++;
-        }while(world.getBlockState(pos.up(1)).isIn(ModTags.Blocks.LESTER_SPAWN_AIR_BLOCKS));
-        if (i < min){return null;}
-        return pos;
+        BlockPos pos2 = pos;
+        if(op == "Up"){
+            do{
+                if(i > max) return null;
+                pos2 = pos2.up(1);
+                i++;
+            }while(world.getBlockState(pos2).isIn(ModTags.Blocks.LESTER_SPAWN_AIR_BLOCKS));
+        }
+
+        if(op == "Down"){
+            do{
+                if(i > max) return null;
+                pos2 = pos2.down(1);
+                i++;
+            }while(! world.getBlockState(pos2).isIn(ModTags.Blocks.LESTER_SPAWN_AIR_BLOCKS));
+        }
+        if (i < min) return null;
+        if (pos2 == pos) return null;
+        return pos2;
+
     }
 
 }
