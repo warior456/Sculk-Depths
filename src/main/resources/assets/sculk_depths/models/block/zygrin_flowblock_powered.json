@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "sculk_depths:block/zygrin_flowblock_powered",
+    "side": "sculk_depths:block/zygrin_flowblock_powered"
+  }
+}
