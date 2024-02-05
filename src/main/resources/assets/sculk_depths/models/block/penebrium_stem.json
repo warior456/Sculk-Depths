@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_single_face",
   "textures": {
-    "texture": "sculk_depths:block/penebrium_shroom_block"
+    "texture": "sculk_depths:block/penebrium_stem"
   }
 }
