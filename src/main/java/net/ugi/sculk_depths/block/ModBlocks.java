@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.kyrptonaught.customportalapi.CustomPortalBlock;
 import net.minecraft.block.*;
+import net.minecraft.block.enums.Instrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -47,6 +48,11 @@ public class ModBlocks {
             new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).strength(5.0f,8f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
     public static final Block LARGUTH = registerBlock("larguth",
             new Block(FabricBlockSettings.copyOf(Blocks.OBSIDIAN).strength(40.0f,1000f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block FURNACE = registerBlock("furnace",
+            new ModFurnaceBlock(FabricBlockSettings.copyOf(Blocks.FURNACE).strength(10.0f,10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+
     //umbrusk blockset
     public static final Block UMBRUSK = registerBlock("umbrusk",
             new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(5.0f,8f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
@@ -368,10 +374,10 @@ public class ModBlocks {
             new MushroomPlantBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).noCollision(), ModConfiguredFeatures.PENEBRIUM_SHROOM), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SHROOM_BLOCK = registerBlock("penebrium_shroom_block",
-            new MushroomBlock( FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);
+            new PenebriumShroomBlock( FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SHROOM_STEM = registerBlock("penebrium_shroom_stem",
-            new PillarBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
+            new PenebriumShroomBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SPORE_BLOCK = registerBlock("penebrium_spore_block",
             new SporeBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);

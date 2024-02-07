@@ -43,13 +43,11 @@ public class FlowBlock extends FacingBlock {
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {//todo check for kryslum on placing
-        Direction direction = ctx.getSide();
-        return this.getDefaultState().with(FACING, direction);
+        return this.getDefaultState().with(FACING, ctx.getPlayerLookDirection());
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING).add(ModProperties.KRYSLUM_POWERED);
     }
-
 }

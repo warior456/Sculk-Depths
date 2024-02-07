@@ -43,12 +43,6 @@
         "weight": 1,
         "minCount": 1,
         "maxCount": 3
-      },
-      {
-        "type": "sculk_depths:lester",
-        "weight": 20,
-        "minCount": 1,
-        "maxCount": 4
       }
     ],
     "underground_water_creature": [],
@@ -59,10 +53,6 @@
     "sculk_depths:glomper": {
       "energy_budget": 100,
       "charge": 15
-    },
-    "sculk_depths:lester": {
-      "energy_budget": 100,
-      "charge": 25
     }
   },
   "carvers": {
