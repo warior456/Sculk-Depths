@@ -37,6 +37,10 @@ public class LesterEntity extends PathAwareEntity {
         return true;
     }
 
+    public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+        return false;
+    }
+
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
             this.idleAnimationTimeout = this.random.nextInt(40) + 80;

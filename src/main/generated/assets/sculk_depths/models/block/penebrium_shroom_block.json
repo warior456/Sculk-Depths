@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/template_single_face",
   "textures": {
-    "all": "sculk_depths:block/penebrium_shroom_block"
+    "texture": "sculk_depths:block/penebrium_shroom_block"
   }
 }
