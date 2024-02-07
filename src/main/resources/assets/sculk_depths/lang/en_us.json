@@ -13,6 +13,7 @@
   "block.sculk_depths.kryslum_flumrock_cauldron": "Kryslum Flumrock Cauldron",
 
   "block.sculk_depths.larguth": "Larguth",
+  "block.sculk_depths.amalgamite" : "Amalgamite",
 
   "block.sculk_depths.umbrusk": "Umbrusk",
   "block.sculk_depths.umbrusk_stairs": "Umbrusk Stairs",
@@ -141,6 +142,12 @@
 
   "block.sculk_depths.cephlera": "Cephlera",
   "block.sculk_depths.cephlera_light": "Cephlera Light",
+
+  "block.sculk_depths.penebrium_shroom": "Penebrium Shroom",
+  "block.sculk_depths.penebrium_shroom_block": "Penebrium Shroom Block",
+  "block.sculk_depths.penebrium_spore_block": "Penebrium Spore Block",
+  "block.sculk_depths.penebrium_shroom_stem": "Penebrium Shroom Stem",
+
 
   "block.sculk_depths.kryslum_enriched_soil": "Kryslum Enriched Soil",
 
