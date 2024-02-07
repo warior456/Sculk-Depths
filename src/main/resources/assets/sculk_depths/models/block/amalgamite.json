@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
-    "down": "sculk_depths:block/amalgamite_bottom",
+    "down": "sculk_depths:block/amalgamite_top",
     "east": "sculk_depths:block/amalgamite",
     "north": "sculk_depths:block/amalgamite",
     "particle": "sculk_depths:block/amalgamite",

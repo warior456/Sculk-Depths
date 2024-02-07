@@ -3,10 +3,6 @@
     "": [
       {
         "model": "sculk_depths:block/amalgamite"
-      },
-      {
-        "model": "sculk_depths:block/amalgamite",
-        "y": 180
       }
     ]
   }
