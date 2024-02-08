@@ -55,7 +55,6 @@ public class BackgroundRendererMixin {
                 BlockPos pos = entity.getBlockPos();
                 float y = pos.getY();
                 float mul = 1;
-                //-----
 
                 int count = 0;
                 int radius = 5;
@@ -71,7 +70,7 @@ public class BackgroundRendererMixin {
 
                 mul = 2/3f + 1/3 - 1/3f * count/((radius*2+1) * (radius*2+1));
 
-                //-----
+
                 if(y <= -200f) y = -200f;
                 float start = ((y+256) * (viewDistance/426) * ((float)1/10)) * mul;
                 float end = (start * 10f ) * mul;
