@@ -140,10 +140,10 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, CHOMPER_COLOSSUS_SPAWN_EGG);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, CRUX);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, WHITE_CRYSTAL);
+/*        addToItemGroup(ModItemGroup.SCULK_DEPTHS, WHITE_CRYSTAL); //TODO UNCOMMENT AFTER 0.0.10 release
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, BLUE_CRYSTAL);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, ORANGE_CRYSTAL);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, LIME_CRYSTAL);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, LIME_CRYSTAL);*/
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, PENEBRIUM_SPORE_BUCKET);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_INGOT);
