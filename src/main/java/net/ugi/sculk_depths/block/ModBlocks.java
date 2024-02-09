@@ -45,11 +45,11 @@ public class ModBlocks {
     public static final Block SOUL_FIRE = registerBlockWithoutBlockItem("soul_fire", new SoulFireBlock(FabricBlockSettings.copyOf(Blocks.SOUL_FIRE)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block AMALGAMITE = registerBlock("amalgamite",
-            new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).strength(5.0f,8f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).strength(3.0f, 6.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
     public static final Block LARGUTH = registerBlock("larguth",
             new Block(FabricBlockSettings.copyOf(Blocks.OBSIDIAN).strength(40.0f,1000f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block FURNACE = registerBlock("furnace",
+    public static final Block FURNACE = registerBlockWithoutBlockItem("furnace", //TODO RETURN TO NORMAL BLOCK AFTER 0.0.10 release
             new ModFurnaceBlock(FabricBlockSettings.copyOf(Blocks.FURNACE).strength(10.0f,10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
 
@@ -364,23 +364,25 @@ public class ModBlocks {
             new Block(FabricBlockSettings.copyOf(ModBlocks.ZYGRIN).strength(4.5f,8.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     //crystals
-    public static final Block WHITE_CRYSTAL_BLOCK = registerBlock("white_crystal_block", ModBlocks.createCrystalBlock(DyeColor.WHITE), ModItemGroup.SCULK_DEPTHS);
-    public static final Block BLUE_CRYSTAL_BLOCK = registerBlock("blue_crystal_block", ModBlocks.createCrystalBlock(DyeColor.BLUE), ModItemGroup.SCULK_DEPTHS);
-    public static final Block ORANGE_CRYSTAL_BLOCK = registerBlock("orange_crystal_block", ModBlocks.createCrystalBlock(DyeColor.ORANGE), ModItemGroup.SCULK_DEPTHS);
-    public static final Block LIME_CRYSTAL_BLOCK = registerBlock("lime_crystal_block", ModBlocks.createCrystalBlock(DyeColor.LIME), ModItemGroup.SCULK_DEPTHS);
+
+    //TODO RETURN ALL OF THESE BACK TO NORMAL BLOCK AFTER 0.0.10 release
+    public static final Block WHITE_CRYSTAL_BLOCK = registerBlockWithoutBlockItem("white_crystal_block", ModBlocks.createCrystalBlock(DyeColor.WHITE), ModItemGroup.SCULK_DEPTHS);
+    public static final Block BLUE_CRYSTAL_BLOCK = registerBlockWithoutBlockItem("blue_crystal_block", ModBlocks.createCrystalBlock(DyeColor.BLUE), ModItemGroup.SCULK_DEPTHS);
+    public static final Block ORANGE_CRYSTAL_BLOCK = registerBlockWithoutBlockItem("orange_crystal_block", ModBlocks.createCrystalBlock(DyeColor.ORANGE), ModItemGroup.SCULK_DEPTHS);
+    public static final Block LIME_CRYSTAL_BLOCK = registerBlockWithoutBlockItem("lime_crystal_block", ModBlocks.createCrystalBlock(DyeColor.LIME), ModItemGroup.SCULK_DEPTHS);
 
     //penebrium
     public static final Block PENEBRIUM_SHROOM = registerBlock("penebrium_shroom",
             new MushroomPlantBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).noCollision(), ModConfiguredFeatures.PENEBRIUM_SHROOM), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SHROOM_BLOCK = registerBlock("penebrium_shroom_block",
-            new PenebriumShroomBlock( FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);
+            new PenebriumShroomBlock( FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SHROOM_STEM = registerBlock("penebrium_shroom_stem",
             new PenebriumShroomBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SPORE_BLOCK = registerBlock("penebrium_spore_block",
-            new SporeBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);
+            new SporeBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
 
     //misc
     public static final CustomPortalBlock SCULK_DEPTHS_PORTAL = (CustomPortalBlock) registerBlockWithoutBlockItem("sculk_depths_portal",

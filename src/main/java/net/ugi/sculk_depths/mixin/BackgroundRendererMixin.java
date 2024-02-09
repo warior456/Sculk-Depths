@@ -16,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.event.listener.GameEventListener;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.fluid.ModFluids;
@@ -62,7 +63,7 @@ public class BackgroundRendererMixin {
                     for(int j = pos.getZ() - radius;j < pos.getZ() + radius + 1;j += 1){
                         BlockPos pos2 = new BlockPos(i,pos.getY(),j);
 
-                        if(entity.getEntityWorld().getBiome(pos2).getKey().get() == ModBiomes.INFECTED_COLUMNS){
+                        if(entity.getEntityWorld().getBiome(pos2).getKey().get() == BiomeKeys.THE_VOID){ //TODO CHANGE TO INFECTED_COLUMNS after 0.0.10 release
                             count += 1;
                         }
                     }
