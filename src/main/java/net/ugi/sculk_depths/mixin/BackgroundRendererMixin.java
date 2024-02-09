@@ -14,8 +14,10 @@ import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.event.listener.GameEventListener;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.tags.ModTags;
 import net.ugi.sculk_depths.world.biome.ModBiomes;
@@ -52,18 +54,30 @@ public class BackgroundRendererMixin {
 
                 BlockPos pos = entity.getBlockPos();
                 float y = pos.getY();
+                float mul = 1;
+
+                int count = 0;
+                int radius = 5;
+                for(int i = pos.getX() - radius;i < pos.getX() + radius + 1;i += 1){
+                    for(int j = pos.getZ() - radius;j < pos.getZ() + radius + 1;j += 1){
+                        BlockPos pos2 = new BlockPos(i,pos.getY(),j);
+
+                        if(entity.getEntityWorld().getBiome(pos2).getKey().get() == ModBiomes.INFECTED_COLUMNS){
+                            count += 1;
+                        }
+                    }
+                }
+
+                mul = 2/3f + 1/3 - 1/3f * count/((radius*2+1) * (radius*2+1));
+
 
                 if(y <= -200f) y = -200f;
-                float start = (y+256) * (viewDistance/426) * ((float) 1/10);
-                float end = start * 10f;
+                float start = ((y+256) * (viewDistance/426) * ((float)1/10)) * mul;
+                float end = (start * 10f ) * mul;
 
 
                 overrideFog(viewDistance, start, end);
-            } /*else if(entity.getEntityWorld().getBiome(pos).getKey().get() == ModBiomes.SCULK_CAVES|| entity.getEntityWorld().getBiome(pos).getKey().get() == ModBiomes.CEPHLERA_CAVES){
-                float start = viewDistance * 0.05F;
-                float end = (float) (Math.min(viewDistance, 192.0F) * 0.5);
-                overrideFog(viewDistance, start, end);
-            }*/
+            }
         }
     }
 
