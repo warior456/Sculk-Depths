@@ -88,7 +88,7 @@ public class ChomperColossusEntity extends PathAwareEntity {
 
 
 
-    @Nullable
+/*    @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_BLAZE_AMBIENT;
@@ -104,5 +104,5 @@ public class ChomperColossusEntity extends PathAwareEntity {
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_BEE_DEATH;
-    }
+    }*/
 }

@@ -8,6 +8,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
@@ -67,8 +68,10 @@ public class LesterEntity extends PathAwareEntity {
     @Override
     protected void initGoals() {
         //this.goalSelector.add(2, new TemptGoal(this, 1.25D, Ingredient.ofItems(ModItems.QUAZARITH_PIECES), false));
-        this.goalSelector.add(1, new WanderAroundFarGoal(this, 1D));
-        this.goalSelector.add(2, new LookAroundGoal(this));
+        this.goalSelector.add(5, new WanderAroundFarGoal(this, 1D));
+        this.goalSelector.add(4, new LookAroundGoal(this));
+        this.goalSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.goalSelector.add(2, new MeleeAttackGoal(this, 1.2f, false));
 /*        this.goalSelector.add(0, new SwimGoal(this));
 
 
@@ -84,12 +87,12 @@ public class LesterEntity extends PathAwareEntity {
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 15)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2f)
                 .add(EntityAttributes.GENERIC_ARMOR, 0.5f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2);
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.5f);
     }
 
 
 
-    @Nullable
+/*    @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_FOX_AMBIENT;
@@ -105,5 +108,5 @@ public class LesterEntity extends PathAwareEntity {
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_DOLPHIN_DEATH;
-    }
+    }*/
 }
