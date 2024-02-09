@@ -376,13 +376,13 @@ public class ModBlocks {
             new MushroomPlantBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).noCollision(), ModConfiguredFeatures.PENEBRIUM_SHROOM), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SHROOM_BLOCK = registerBlock("penebrium_shroom_block",
-            new PenebriumShroomBlock( FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);
+            new PenebriumShroomBlock( FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SHROOM_STEM = registerBlock("penebrium_shroom_stem",
             new PenebriumShroomBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SPORE_BLOCK = registerBlock("penebrium_spore_block",
-            new SporeBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube)), ModItemGroup.SCULK_DEPTHS);
+            new SporeBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
 
     //misc
     public static final CustomPortalBlock SCULK_DEPTHS_PORTAL = (CustomPortalBlock) registerBlockWithoutBlockItem("sculk_depths_portal",
