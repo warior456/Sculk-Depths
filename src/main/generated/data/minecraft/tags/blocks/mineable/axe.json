@@ -39,6 +39,9 @@
     "sculk_depths:dried_valtrox_door",
     "sculk_depths:dried_valtrox_trapdoor",
     "sculk_depths:dried_valtrox_pressure_plate",
-    "sculk_depths:dried_valtrox_button"
+    "sculk_depths:dried_valtrox_button",
+    "sculk_depths:penebrium_shroom_block",
+    "sculk_depths:penebrium_shroom_stem",
+    "sculk_depths:penebrium_spore_block"
   ]
 }

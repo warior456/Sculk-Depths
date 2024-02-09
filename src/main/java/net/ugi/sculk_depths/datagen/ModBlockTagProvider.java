@@ -116,7 +116,11 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.DRIED_VALTROX_DOOR)
                 .add(ModBlocks.DRIED_VALTROX_TRAPDOOR)
                 .add(ModBlocks.DRIED_VALTROX_PRESSURE_PLATE)
-                .add(ModBlocks.DRIED_VALTROX_BUTTON);
+                .add(ModBlocks.DRIED_VALTROX_BUTTON)
+
+                .add(ModBlocks.PENEBRIUM_SHROOM_BLOCK)
+                .add(ModBlocks.PENEBRIUM_SHROOM_STEM)
+                .add(ModBlocks.PENEBRIUM_SPORE_BLOCK);
 
 /*
 
