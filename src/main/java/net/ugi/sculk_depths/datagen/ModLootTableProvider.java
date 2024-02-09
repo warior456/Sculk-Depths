@@ -29,6 +29,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.STRIPPED_VALTROX_WOOD, ModBlocks.STRIPPED_VALTROX_WOOD.asItem());
         addDrop(ModBlocks.STRIPPED_DRIED_VALTROX_WOOD, ModBlocks.STRIPPED_DRIED_VALTROX_WOOD.asItem());
         addDrop(ModBlocks.STRIPPED_PETRIFIED_VALTROX_WOOD, ModBlocks.STRIPPED_PETRIFIED_VALTROX_WOOD.asItem());
+
         addDrop(ModBlocks.AMALGAMITE, ModBlocks.AMALGAMITE.asItem());
 
         addDrop(ModBlocks.PENEBRIUM_SHROOM);
