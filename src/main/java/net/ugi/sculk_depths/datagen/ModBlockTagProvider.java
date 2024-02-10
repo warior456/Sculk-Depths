@@ -38,6 +38,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.QUAZARITH_BLOCK)
                 .add(ModBlocks.QUAZARITH_ORE)
 
+                .add(ModBlocks.CRUX_ORE)
+
                 .add(ModBlocks.PETRIFIED_VALTROX_LOG)
                 .add(ModBlocks.PETRIFIED_VALTROX_WOOD)
                 .add(ModBlocks.STRIPPED_PETRIFIED_VALTROX_LOG)
