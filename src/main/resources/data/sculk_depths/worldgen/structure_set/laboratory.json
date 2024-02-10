@@ -1,16 +1,15 @@
 {
-  "placement": {
-    "type": "minecraft:random_spread",
-    "salt": 15654652,
-    "frequency_reduction_method": "legacy_type_3",
-    "frequency": 1,
-    "spacing": 36,
-    "separation": 23
-  },
   "structures": [
     {
       "structure": "sculk_depths:laboratory",
       "weight": 1
     }
-  ]
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 15654652,
+    "frequency": 0.7,
+    "spacing": 40,
+    "separation": 10
+  }
 }

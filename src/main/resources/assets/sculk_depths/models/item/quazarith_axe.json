@@ -2,5 +2,11 @@
   "parent": "minecraft:item/handheld",
   "textures": {
     "layer0": "sculk_depths:item/quazarith_axe"
-  }
+  },
+  "overrides": [
+    { "predicate": {"crystal": 0.1}, "model": "sculk_depths:item/quazarith_axe_white_crystal"},
+    { "predicate": {"crystal": 0.2}, "model": "sculk_depths:item/quazarith_axe_blue_crystal"},
+    { "predicate": {"crystal": 0.3}, "model": "sculk_depths:item/quazarith_axe_orange_crystal"},
+    { "predicate": {"crystal": 0.4}, "model": "sculk_depths:item/quazarith_axe_lime_crystal"}
+  ]
 }

@@ -5,16 +5,12 @@ package net.ugi.sculk_depths.block.enums;
 
 import net.minecraft.util.StringIdentifiable;
 
-public enum CrystalType implements StringIdentifiable
-{
+public enum CrystalType implements StringIdentifiable {
     NONE("none"),
     WHITE("white"),
     BLUE("blue"),
     ORANGE("orange"),
     LIME("lime");
-
-
-
 
 
     private final String name;

@@ -8,6 +8,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
@@ -27,8 +29,6 @@ import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.state.property.ModProperties;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import static net.ugi.sculk_depths.state.property.ModProperties.CRUX_LEVEL;
@@ -136,6 +136,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_helmet_kryslum_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.quazarith_helmet_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_helmet_quazarith_pieces_cost)){
+            world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH_HIGH_SPEED, SoundCategory.BLOCKS, 0.2f, 1.0f);
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_HELMET);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_helmet_quazarith_pieces_cost,
@@ -151,6 +152,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_chestplate_kryslum_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.quazarith_chestplate_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_chestplate_quazarith_pieces_cost)){
+            world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH_HIGH_SPEED, SoundCategory.BLOCKS, 0.2f, 1.0f);
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_CHESTPLATE);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_chestplate_quazarith_pieces_cost,
@@ -166,6 +168,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_leggings_kryslum_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.quazarith_leggings_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_leggings_quazarith_pieces_cost)){
+            world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH_HIGH_SPEED, SoundCategory.BLOCKS, 0.2f, 1.0f);
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_LEGGINGS);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_leggings_quazarith_pieces_cost,
@@ -181,6 +184,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_boots_kryslum_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.quazarith_boots_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_boots_quazarith_pieces_cost)){
+            world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH_HIGH_SPEED, SoundCategory.BLOCKS, 0.2f, 1.0f);
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_BOOTS);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_boots_quazarith_pieces_cost,
@@ -196,6 +200,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_shovel_kryslum_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.quazarith_shovel_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_shovel_quazarith_pieces_cost)){
+            world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH_HIGH_SPEED, SoundCategory.BLOCKS, 0.2f, 1.0f);
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_SHOVEL);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_shovel_quazarith_pieces_cost,
@@ -211,6 +216,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_pickaxe_kryslum_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.quazarith_pickaxe_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_pickaxe_quazarith_pieces_cost)){
+            world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH_HIGH_SPEED, SoundCategory.BLOCKS, 0.2f, 1.0f);
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_PICKAXE);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_pickaxe_quazarith_pieces_cost,
@@ -226,6 +232,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_axe_kryslum_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.quazarith_axe_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_axe_quazarith_pieces_cost)){
+            world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH_HIGH_SPEED, SoundCategory.BLOCKS, 0.2f, 1.0f);
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_AXE);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_axe_quazarith_pieces_cost,
@@ -241,6 +248,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_hoe_kryslum_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.quazarith_hoe_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_hoe_quazarith_pieces_cost)){
+            world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH_HIGH_SPEED, SoundCategory.BLOCKS, 0.2f, 1.0f);
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_HOE);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_hoe_quazarith_pieces_cost,
@@ -256,6 +264,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_sword_kryslum_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.quazarith_sword_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_sword_quazarith_pieces_cost)){
+            world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH_HIGH_SPEED, SoundCategory.BLOCKS, 0.2f, 1.0f);
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_SWORD);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_sword_quazarith_pieces_cost,
@@ -271,6 +280,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
                 && state.get(LEVEL) == SculkDepths.CONFIG.quazarith_ingot_kryslum_cost
                 && state.get(CRUX) == SculkDepths.CONFIG.quazarith_ingot_crux_cost
                 && state.get(QUAZARITH) == SculkDepths.CONFIG.quazarith_ingot_quazarith_pieces_cost)){
+            world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH_HIGH_SPEED, SoundCategory.BLOCKS, 0.2f, 1.0f);
             ItemStack outputItem = new ItemStack(ModItems.QUAZARITH_INGOT);
             RemoveUsedResources(state, world, pos,
                     SculkDepths.CONFIG.quazarith_ingot_quazarith_pieces_cost,

@@ -3,8 +3,8 @@
   "downfall": 0.4,
   "has_precipitation": false,
   "effects": {
-    "sky_color": 16777215,
-    "fog_color": 853299,
+    "sky_color": 984350,
+    "fog_color": 655415,
     "water_color": 928354,
     "water_fog_color": 328995,
     "grass_color": 6448752,
@@ -16,10 +16,16 @@
       "offset": 2
     },
     "music": {
-      "sound": "sculk_depths:music.sculk_depths.main_theme",
-      "min_delay": 500,
-      "max_delay": 5000,
+      "sound": "sculk_depths:music.sculk_depths.main_soundtrack",
+      "min_delay": 1000,
+      "max_delay": 6000,
       "replace_current_music": false
+    },
+    "particle": {
+      "options": {
+        "type": "sculk_depths:surface_wind"
+      },
+      "probability": 0.02
     }
   },
   "spawners": {
@@ -38,7 +44,9 @@
     ]
   },
   "features": [
-    [],
+    [
+      "sculk_depths:crux_veins"
+    ],
     [],
     [],
     [],

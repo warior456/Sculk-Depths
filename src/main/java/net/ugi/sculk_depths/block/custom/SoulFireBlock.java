@@ -14,7 +14,6 @@ import net.minecraft.world.WorldView;
 public class SoulFireBlock extends AbstractFireBlock {
 
 
-
     public SoulFireBlock(AbstractBlock.Settings settings) {
         super(settings, 2);
     }

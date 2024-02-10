@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "sculk_depths:block/valtrox_slab"
+    },
+    "type=double": {
+      "model": "sculk_depths:block/valtrox_planks"
+    },
+    "type=top": {
+      "model": "sculk_depths:block/valtrox_slab_top"
+    }
+  }
+}
