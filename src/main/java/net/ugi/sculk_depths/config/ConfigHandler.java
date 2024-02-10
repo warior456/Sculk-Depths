@@ -58,10 +58,6 @@ public class ConfigHandler {
     public int quazarith_ingot_crux_cost = 4;
     public int quazarith_ingot_quazarith_pieces_cost = 4;
 
-    //quazarith block
-    public int quazarith_block_kryslum_cost = 9;
-    public int quazarith_block_crux_cost = 9;
-    public int quazarith_block_quazarith_pieces_cost = 9;
     //crystal upgrade quazarith helmet
     public int crystal_upgrade_quazarith_helmet_spore_cost = 5;
     public int crystal_upgrade_quazarith_helmet_crux_cost = 5;
