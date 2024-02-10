@@ -2,8 +2,6 @@ package net.ugi.sculk_depths.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -14,6 +12,8 @@ import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.custom.EnergizedFlintAndSteelItem;
+import net.ugi.sculk_depths.item.custom.GlomperGlux;
+
 
 
 public class ModItems {
@@ -29,7 +29,7 @@ public class ModItems {
     public static final Item CRUX = registerItem("crux",
             new Item(new FabricItemSettings()));
 
-/*    public static final Item WHITE_CRYSTAL = registerItem("white_crystal",
+    public static final Item WHITE_CRYSTAL = registerItem("white_crystal",
             new Item(new FabricItemSettings()));
 
     public static final Item BLUE_CRYSTAL = registerItem("blue_crystal",
@@ -39,19 +39,29 @@ public class ModItems {
             new Item(new FabricItemSettings()));
 
     public static final Item LIME_CRYSTAL = registerItem("lime_crystal",
-            new Item(new FabricItemSettings()));*/
+            new Item(new FabricItemSettings()));
 
 
-/*    public static final Item PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET = registerItem("penebrium_shine_mushroom_spore_bucket",
-            new Item(new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));*/
+    public static final Item PENEBRIUM_SPORE_BUCKET = registerItem("penebrium_spore_bucket",
+            new Item(new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
     public static final Item ENERGY_ESSENCE = registerItem("energy_essence",
             new Item(new FabricItemSettings()));
     public static final Item ENERGISED_FLINT_AND_STEEL = registerItem("energized_flint_and_steel",
             new EnergizedFlintAndSteelItem(new FabricItemSettings().maxCount(1).maxDamage(128)));
 
+    public static final Item GLOMPER_GLUX = registerItem("glomper_glux",
+            new GlomperGlux(new FabricItemSettings()));
+
+
     public static final Item GLOMPER_SPAWN_EGG = registerItem("glomper_spawn_egg",
             new SpawnEggItem(ModEntities.GLOMPER, 1769607, 42751, new FabricItemSettings()));
+
+    public static final Item LESTER_SPAWN_EGG = registerItem("lester_spawn_egg",
+            new SpawnEggItem(ModEntities.LESTER, 856599, 12305307, new FabricItemSettings()));
+
+    public static final Item CHOMPER_COLOSSUS_SPAWN_EGG = registerItem("chomper_colossus_spawn_egg",
+            new SpawnEggItem(ModEntities.CHOMPER_COLOSSUS, 5860206, 9800821, new FabricItemSettings()));
 
     //quazarith tools
 
@@ -89,41 +99,52 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.BOOTS,
                     new FabricItemSettings().fireproof()));
 
-    /*public static final Item VALTROX_SIGN = registerItem("valtrox_sign",
+    public static final Item VALTROX_SIGN = registerItem("valtrox_sign",
             new SignItem(new FabricItemSettings().maxCount(16), ModBlocks.VALTROX_SIGN, ModBlocks.VALTROX_WALL_SIGN));
 
     public static final Item VALTROX_HANGING_SIGN = registerItem("valtrox_hanging_sign",
-            new HangingSignItem( ModBlocks.VALTROX_HANGING_SIGN, ModBlocks.VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
+            new HangingSignItem(ModBlocks.VALTROX_HANGING_SIGN, ModBlocks.VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
+
+    public static final Item COATED_VALTROX_SIGN = registerItem("coated_valtrox_sign",
+            new SignItem(new FabricItemSettings().maxCount(16), ModBlocks.COATED_VALTROX_SIGN, ModBlocks.COATED_VALTROX_WALL_SIGN));
+
+    public static final Item COATED_VALTROX_HANGING_SIGN = registerItem("coated_valtrox_hanging_sign",
+            new HangingSignItem(ModBlocks.COATED_VALTROX_HANGING_SIGN, ModBlocks.COATED_VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
 
     public static final Item DRIED_VALTROX_SIGN = registerItem("dried_valtrox_sign",
             new SignItem(new FabricItemSettings().maxCount(16), ModBlocks.DRIED_VALTROX_SIGN, ModBlocks.DRIED_VALTROX_WALL_SIGN));
 
     public static final Item DRIED_VALTROX_HANGING_SIGN = registerItem("dried_valtrox_hanging_sign",
-            new HangingSignItem( ModBlocks.DRIED_VALTROX_HANGING_SIGN, ModBlocks.DRIED_VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
+            new HangingSignItem(ModBlocks.DRIED_VALTROX_HANGING_SIGN, ModBlocks.DRIED_VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
 
     public static final Item PETRIFIED_VALTROX_SIGN = registerItem("petrified_valtrox_sign",
             new SignItem(new FabricItemSettings().maxCount(16), ModBlocks.PETRIFIED_VALTROX_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_SIGN));
 
     public static final Item PETRIFIED_VALTROX_HANGING_SIGN = registerItem("petrified_valtrox_hanging_sign",
-            new HangingSignItem( ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
-*/
+            new HangingSignItem(ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN, new FabricItemSettings().maxCount(16)));
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(SculkDepths.MOD_ID, name), item);
     }
+
 
     public static void addItemsToItemGroup() {
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, KRYSLUM_BUCKET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, ENERGY_ESSENCE);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, ENERGISED_FLINT_AND_STEEL);
+
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, GLOMPER_GLUX);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, GLOMPER_SPAWN_EGG);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, LESTER_SPAWN_EGG);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, CHOMPER_COLOSSUS_SPAWN_EGG);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, CRUX);
-/*        addToItemGroup(ModItemGroup.SCULK_DEPTHS, WHITE_CRYSTAL);
+/*        addToItemGroup(ModItemGroup.SCULK_DEPTHS, WHITE_CRYSTAL); //TODO UNCOMMENT AFTER 0.0.10 release
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, BLUE_CRYSTAL);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, ORANGE_CRYSTAL);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, LIME_CRYSTAL);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, PENEBRIUM_SHINE_SHROOM_SPORE_BUCKET);*/
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, LIME_CRYSTAL);*/
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, PENEBRIUM_SPORE_BUCKET);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_INGOT);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_PIECES);
@@ -139,14 +160,14 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_LEGGINGS);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_BOOTS);
 
-/*        addToItemGroup(ModItemGroup.SCULK_DEPTHS, VALTROX_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, VALTROX_SIGN);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, VALTROX_HANGING_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, COATED_VALTROX_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, COATED_VALTROX_HANGING_SIGN);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, DRIED_VALTROX_SIGN);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, DRIED_VALTROX_HANGING_SIGN);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS, PETRIFIED_VALTROX_SIGN);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, PETRIFIED_VALTROX_HANGING_SIGN);*/
-
-
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS, PETRIFIED_VALTROX_HANGING_SIGN);
     }
 
     private static void addToItemGroup(RegistryKey<ItemGroup> group, Item item) {

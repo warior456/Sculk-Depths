@@ -99,6 +99,9 @@
         ],
         "blocks": "minecraft:sculk"
       }
+    },
+    {
+      "type": "minecraft:biome"
     }
   ]
 }

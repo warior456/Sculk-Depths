@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#W#",
+    " # "
+  ],
+  "key": {
+    "W": {
+      "item": "sculk_depths:zygrin"
+    },
+    "#": {
+      "item": "sculk_depths:cephlera_light"
+    }
+  },
+  "result": {
+    "item": "sculk_depths:zygrin_light",
+    "count": 1
+  }
+}

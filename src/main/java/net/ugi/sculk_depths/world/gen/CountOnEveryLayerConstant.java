@@ -1,19 +1,17 @@
 package net.ugi.sculk_depths.world.gen;
 
 import com.mojang.serialization.Codec;
-
-import java.util.stream.Stream;
-
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.gen.feature.FeaturePlacementContext;
 import net.minecraft.world.gen.placementmodifier.PlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
+
+import java.util.stream.Stream;
 
 public class CountOnEveryLayerConstant
         extends PlacementModifier {
@@ -38,9 +36,6 @@ public class CountOnEveryLayerConstant
     }
 
 
-
-
-
     @Override
     public Stream<BlockPos> getPositions(FeaturePlacementContext context, Random random, BlockPos pos) {
 
@@ -48,10 +43,10 @@ public class CountOnEveryLayerConstant
 
         Stream.Builder<BlockPos> builder = Stream.builder();
 
-        for(int i = 0; i < this.layers.get(random); i++) {
+        for (int i = 0; i < this.layers.get(random); i++) {
             int layerY = startY - (i * this.separation.get(random));
 
-            for(int j = 0; j < this.count.get(random); j++) {
+            for (int j = 0; j < this.count.get(random); j++) {
                 int x = pos.getX();
                 int z = pos.getZ();
 

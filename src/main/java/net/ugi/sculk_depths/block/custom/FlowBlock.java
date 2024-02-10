@@ -8,18 +8,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.WorldAccess;
+import net.ugi.sculk_depths.state.property.ModProperties;
 
-public class FlowBlock extends RodBlock {
-    protected static final float field_31233 = 6.0f;
-    protected static final float field_31234 = 10.0f;
+public class FlowBlock extends FacingBlock {
     protected static final VoxelShape Y_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
     protected static final VoxelShape Z_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
     protected static final VoxelShape X_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
 
     public FlowBlock(AbstractBlock.Settings settings) {
-
         super(settings);
-        this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(FACING, Direction.UP));
+        this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.UP).with(ModProperties.KRYSLUM_POWERED, false));
     }
 
     @Override
@@ -41,14 +40,14 @@ public class FlowBlock extends RodBlock {
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
         return false;
     }
+
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        Direction direction = ctx.getSide();
-        BlockState blockState = ctx.getWorld().getBlockState(ctx.getBlockPos().offset(direction.getOpposite()));
-        return (BlockState)this.getDefaultState().with(FACING, direction);
+    public BlockState getPlacementState(ItemPlacementContext ctx) {//todo check for kryslum on placing
+        return this.getDefaultState().with(FACING, ctx.getPlayerLookDirection());
     }
+
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING).add(ModProperties.KRYSLUM_POWERED);
     }
 }

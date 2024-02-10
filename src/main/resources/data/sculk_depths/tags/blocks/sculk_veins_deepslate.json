@@ -1,5 +1,6 @@
 {
   "values": [
-    "minecraft:deepslate"
+    "minecraft:deepslate",
+    "sculk_depths:amalgamite"
   ]
 }

@@ -1,11 +1,9 @@
 package net.ugi.sculk_depths.state.property;
 
-import net.ugi.sculk_depths.block.enums.CrystalType;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.util.math.Direction;
+import net.ugi.sculk_depths.block.enums.CrystalType;
 
 public class ModProperties {
 
@@ -15,4 +13,6 @@ public class ModProperties {
 
     public static final IntProperty SPORE_LEVEL = IntProperty.of("spore", 1, 12);
     public static final EnumProperty<CrystalType> CRYSTAL_TYPE = EnumProperty.of("crystal", CrystalType.class);
+
+    public static final BooleanProperty KRYSLUM_POWERED = BooleanProperty.of("kryslum_powered");
 }
