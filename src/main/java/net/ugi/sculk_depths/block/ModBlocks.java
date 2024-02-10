@@ -49,7 +49,7 @@ public class ModBlocks {
     public static final Block LARGUTH = registerBlock("larguth",
             new Block(FabricBlockSettings.copyOf(Blocks.OBSIDIAN).strength(40.0f,1000f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block FURNACE = registerBlockWithoutBlockItem("furnace", //TODO RETURN TO NORMAL BLOCK AFTER 0.0.10 release
+    public static final Block FURNACE = registerBlock("furnace",
             new ModFurnaceBlock(FabricBlockSettings.copyOf(Blocks.FURNACE).strength(10.0f,10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
 
@@ -367,11 +367,10 @@ public class ModBlocks {
 
     //crystals
 
-    //TODO RETURN ALL OF THESE BACK TO NORMAL BLOCK AFTER 0.0.10 release
-    public static final Block WHITE_CRYSTAL_BLOCK = registerBlockWithoutBlockItem("white_crystal_block", ModBlocks.createCrystalBlock(DyeColor.WHITE), ModItemGroup.SCULK_DEPTHS);
-    public static final Block BLUE_CRYSTAL_BLOCK = registerBlockWithoutBlockItem("blue_crystal_block", ModBlocks.createCrystalBlock(DyeColor.BLUE), ModItemGroup.SCULK_DEPTHS);
-    public static final Block ORANGE_CRYSTAL_BLOCK = registerBlockWithoutBlockItem("orange_crystal_block", ModBlocks.createCrystalBlock(DyeColor.ORANGE), ModItemGroup.SCULK_DEPTHS);
-    public static final Block LIME_CRYSTAL_BLOCK = registerBlockWithoutBlockItem("lime_crystal_block", ModBlocks.createCrystalBlock(DyeColor.LIME), ModItemGroup.SCULK_DEPTHS);
+    public static final Block WHITE_CRYSTAL_BLOCK = registerBlock("white_crystal_block", ModBlocks.createCrystalBlock(DyeColor.WHITE), ModItemGroup.SCULK_DEPTHS);
+    public static final Block BLUE_CRYSTAL_BLOCK = registerBlock("blue_crystal_block", ModBlocks.createCrystalBlock(DyeColor.BLUE), ModItemGroup.SCULK_DEPTHS);
+    public static final Block ORANGE_CRYSTAL_BLOCK = registerBlock("orange_crystal_block", ModBlocks.createCrystalBlock(DyeColor.ORANGE), ModItemGroup.SCULK_DEPTHS);
+    public static final Block LIME_CRYSTAL_BLOCK = registerBlock("lime_crystal_block", ModBlocks.createCrystalBlock(DyeColor.LIME), ModItemGroup.SCULK_DEPTHS);
 
     //penebrium
     public static final Block PENEBRIUM_SHROOM = registerBlock("penebrium_shroom",
