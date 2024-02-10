@@ -17,8 +17,8 @@ public class ModTags {
         public static final TagKey<Block> COATABLE_BLOCKS =
             createTag("coatable_blocks");
 
-        public static final TagKey<Block> LESTER_SPAWN_AIR_BLOCKS =
-                createTag("lester_spawn_air_blocks");
+        public static final TagKey<Block> LESTER_SPAWN_BLOCKS =
+                createTag("lester_spawn_blocks");
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, new Identifier(SculkDepths.MOD_ID, name));

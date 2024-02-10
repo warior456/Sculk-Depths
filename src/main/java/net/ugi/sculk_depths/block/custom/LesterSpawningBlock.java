@@ -42,7 +42,7 @@ public class LesterSpawningBlock extends Block {
             pos2 = pos2.east(XOffset);
             int ZOffset = MathHelper.nextInt(Random.create(), -5, 5);
             pos2 = pos2.south(ZOffset);
-            if(world.getBlockState(pos2).isIn(ModTags.Blocks.LESTER_SPAWN_AIR_BLOCKS)){
+            if(!world.getBlockState(pos2).isIn(ModTags.Blocks.LESTER_SPAWN_BLOCKS)){
                 pos2 = checkForRoof(world,pos2, "Up",0,300);
             }
             else pos2 = checkForRoof(world,pos2, "Down",0,10);
@@ -66,7 +66,7 @@ public class LesterSpawningBlock extends Block {
                 if(i > max) return null;
                 pos2 = pos2.up(1);
                 i++;
-            }while(world.getBlockState(pos2).isIn(ModTags.Blocks.LESTER_SPAWN_AIR_BLOCKS));
+            }while(!world.getBlockState(pos2).isIn(ModTags.Blocks.LESTER_SPAWN_BLOCKS));
         }
 
         if(op == "Down"){
@@ -74,7 +74,7 @@ public class LesterSpawningBlock extends Block {
                 if(i > max) return null;
                 pos2 = pos2.down(1);
                 i++;
-            }while(! world.getBlockState(pos2).isIn(ModTags.Blocks.LESTER_SPAWN_AIR_BLOCKS));
+            }while(world.getBlockState(pos2).isIn(ModTags.Blocks.LESTER_SPAWN_BLOCKS));
         }
         if (i < min) return null;
         if (pos2 == pos) return null;
