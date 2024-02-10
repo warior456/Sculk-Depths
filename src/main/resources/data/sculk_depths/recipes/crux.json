@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "sculk_depths:crux_ore"
+  },
+  "result": "sculk_depths:crux",
+  "experience": 1,
+  "cookingtime": 200
+}
