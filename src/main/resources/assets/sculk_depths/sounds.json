@@ -20,7 +20,7 @@
 		"category": "music",
 		"sounds": [
 			{
-				"name": "music.sculk_depths.zinnia",
+				"name": "sculk_depths:zinnia",
 				"stream": true
 			},
 			{
