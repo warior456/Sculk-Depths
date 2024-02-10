@@ -10,6 +10,8 @@ public class ModBiomes {
     public static final RegistryKey<Biome> PETRIFIED_FOREST = register("petrified_valtrox_forest");
     public static final RegistryKey<Biome> DRIED_FOREST = register("dried_valtrox_forest");
 
+    public static final RegistryKey<Biome> INFECTED_COLUMNS = register("infected_columns");
+
     public static final RegistryKey<Biome> CEPHLERA_CAVES = register("cephlera_caves");
     public static final RegistryKey<Biome> SCULK_CAVES = register("sculk_caves");
 

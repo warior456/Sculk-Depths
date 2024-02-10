@@ -9,6 +9,8 @@ import net.minecraft.client.render.FogShape;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.registry.tag.FluidTags;
@@ -57,19 +59,26 @@ public class BackgroundRendererMixin {
                 float y = pos.getY();
                 float mul = 1;
 
-                int count = 0;
-                int radius = 5;
+                int countInfestedColumns = 0;
+                int remainder = 0;
+                int radius = 10;
                 for(int i = pos.getX() - radius;i < pos.getX() + radius + 1;i += 1){
                     for(int j = pos.getZ() - radius;j < pos.getZ() + radius + 1;j += 1){
-                        BlockPos pos2 = new BlockPos(i,pos.getY(),j);
 
-                        if(entity.getEntityWorld().getBiome(pos2).getKey().get() == BiomeKeys.THE_VOID){ //TODO CHANGE TO INFECTED_COLUMNS after 0.0.10 release
-                            count += 1;
+                        BlockPos pos2 = new BlockPos(i,pos.getY(),j);
+                        RegistryKey<Biome> biome = entity.getEntityWorld().getBiome(pos2).getKey().get();
+
+                        if (biome.equals(ModBiomes.INFECTED_COLUMNS)) {
+                            countInfestedColumns += 1;
+                        }  else {
+                            remainder += 1;
                         }
                     }
                 }
 
-                mul = 2/3f + 1/3 - 1/3f * count/((radius*2+1) * (radius*2+1));
+                mul = (   1f * remainder                                                         // default           mul = 1
+                        + 2/3f * countInfestedColumns                                            //Infested Columns   mul = 2/3
+                ) / ((radius*2+1) * (radius*2+1));
 
 
                 if(y <= -200f) y = -200f;

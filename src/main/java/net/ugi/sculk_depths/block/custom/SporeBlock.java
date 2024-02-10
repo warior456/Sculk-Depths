@@ -25,7 +25,7 @@ import java.util.Optional;
 import java.util.function.BiPredicate;
 
 
-public class SporeBlock extends MushroomBlock {
+public class SporeBlock extends PenebriumShroomBlock {
 
     private static final VoxelShape DRIP_COLLISION_SHAPE = Block.createCuboidShape(6.0, 0.0, 6.0, 10.0, 16.0, 10.0);
 
