@@ -40,7 +40,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
         addDrop(ModBlocks.QUAZARITH_BLOCK, drops(ModBlocks.QUAZARITH_BLOCK.asItem()));
 
-        addDrop(ModBlocks.LARGUTH, drops(ModBlocks.QUAZARITH_BLOCK.asItem()));
+        addDrop(ModBlocks.LARGUTH, drops(ModBlocks.LARGUTH.asItem()));
 
         addDropWithSilkTouch(ModBlocks.ZYGRIN_LIGHT);
 
