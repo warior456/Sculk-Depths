@@ -56,7 +56,9 @@
     ]
   },
   "features": [
-    [],
+    [
+      "sculk_depths:crux_veins"
+    ],
     [],
     [],
     [],
