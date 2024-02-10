@@ -356,6 +356,8 @@ public class ModBlocks {
 
     public static final Block QUAZARITH_BLOCK = registerBlock("quazarith_block",
             new Block(FabricBlockSettings.copyOf(Blocks.NETHERITE_BLOCK).strength(60.0f,1400.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+    public static final Block CRUX_BLOCK = registerBlock("crux_block",
+            new Block(FabricBlockSettings.copyOf(Blocks.DIAMOND_BLOCK).strength(5.0F, 6.0F).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     //ores
     public static final Block QUAZARITH_ORE = registerBlock("quazarith_ore",
