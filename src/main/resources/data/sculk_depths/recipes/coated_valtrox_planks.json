@@ -3,7 +3,7 @@
   "group": "planks",
   "ingredients": [
     {
-      "tag": "sculk_depths:coated_valtrox_logs"
+      "item": "sculk_depths:coated_valtrox_log"
     }
   ],
   "result": {
