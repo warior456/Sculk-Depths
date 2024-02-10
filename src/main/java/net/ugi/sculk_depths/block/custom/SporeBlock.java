@@ -1,6 +1,8 @@
 package net.ugi.sculk_depths.block.custom;
 
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.MushroomBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
@@ -9,7 +11,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.*;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.custom.ModCauldron.FlumrockCauldronBlock;
 import net.ugi.sculk_depths.block.custom.ModCauldron.SporeFlumrockCauldronBlock;
@@ -21,8 +25,7 @@ import java.util.Optional;
 import java.util.function.BiPredicate;
 
 
-
-public class SporeBlock extends Block {
+public class SporeBlock extends PenebriumShroomBlock {
 
     private static final VoxelShape DRIP_COLLISION_SHAPE = Block.createCuboidShape(6.0, 0.0, 6.0, 10.0, 16.0, 10.0);
 
@@ -43,7 +46,8 @@ public class SporeBlock extends Block {
             mutable.set(i + MathHelper.nextInt(random, -10, 10), j - random.nextInt(10), k + MathHelper.nextInt(random, -10, 10));
             BlockState blockState = world.getBlockState(mutable);
             if (blockState.isFullCube(world, mutable)) continue;
-            world.addParticle(ModParticleTypes.PENEBRIUM_SPORES, (double)mutable.getX() + random.nextDouble(), (double)mutable.getY() + random.nextDouble(), (double)mutable.getZ() + random.nextDouble(), 0.0, 0.0, 0.0);
+            //ParticleTypes.ASH
+            world.addParticle(ModParticleTypes.PENEBRIUM_SPORES, (double) mutable.getX() + random.nextDouble(), (double) mutable.getY() + random.nextDouble(), (double) mutable.getZ() + random.nextDouble(), 0.0, 0.0, 0.0);
         }
     }
 
@@ -52,38 +56,39 @@ public class SporeBlock extends Block {
         return true;
     }
 
-/*    @Override
+    @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         BlockPos pos2 = getCauldronPos(world, pos);
-        if(pos2 == null){
+        if (pos2 == null) {
             return;
         }
         BlockState CauldronBlockstate = world.getBlockState(pos2);
-        if(CauldronBlockstate == null) {
+        if (CauldronBlockstate == null) {
             return;
         }
-        if(MathHelper.nextInt(random, 0, Math.abs(pos.getY() - pos2.getY())+1) >= 2){
+        if (MathHelper.nextInt(random, 0, Math.abs(pos.getY() - pos2.getY()) + 1) >= 2) {
             return;
         }
-        if(CauldronBlockstate.getBlock() instanceof FlumrockCauldronBlock){
+        if (CauldronBlockstate.getBlock() instanceof FlumrockCauldronBlock) {
             BlockState newCauldronBlockState = ModBlocks.SPORE_FLUMROCK_CAULDRON.getDefaultState();
             world.setBlockState(pos2, newCauldronBlockState);
             return;
         }
-        if(CauldronBlockstate.getBlock() instanceof SporeFlumrockCauldronBlock){
-            if(CauldronBlockstate.get(SporeFlumrockCauldronBlock.LEVEL) >= (ModProperties.SPORE_LEVEL.getValues().size())){
+        if (CauldronBlockstate.getBlock() instanceof SporeFlumrockCauldronBlock) {
+            if (CauldronBlockstate.get(SporeFlumrockCauldronBlock.LEVEL) >= (ModProperties.SPORE_LEVEL.getValues().size())) {
                 return;
             }
             BlockState newCauldronBlockState = CauldronBlockstate.with(SporeFlumrockCauldronBlock.LEVEL, CauldronBlockstate.get(SporeFlumrockCauldronBlock.LEVEL) + 1);
             world.setBlockState(pos2, newCauldronBlockState);
         }
-    }*/
+    }
 
     @Nullable
     private static BlockPos getCauldronPos(World world, BlockPos pos2) {
         BiPredicate<BlockPos, BlockState> biPredicate = (pos, state) -> SporeBlock.canDripThrough(world, pos, state);
         return SporeBlock.searchInDirection(world, pos2, Direction.DOWN.getDirection(), biPredicate, 11).orElse(null);
     }
+
     private static boolean canDripThrough(BlockView world, BlockPos pos, BlockState state) {
         if (state.isAir()) {
             return true;

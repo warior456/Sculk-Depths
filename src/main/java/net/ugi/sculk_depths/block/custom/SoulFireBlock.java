@@ -15,7 +15,6 @@ public class SoulFireBlock extends AbstractFireBlock {
         return null;
     }
 
-
     public SoulFireBlock(AbstractBlock.Settings settings) {
         super(settings, 2);
     }

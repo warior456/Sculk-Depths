@@ -1,12 +1,101 @@
 {
-	"music.sculk_depths.main_theme":{
+	"music.sculk_depths.main_soundtrack":{
 		"category": "music",
 		"sounds": [
            {
 				"name":"sculk_depths:sculk_depths_main_theme",
-
 		   		"stream": true
+			},
+			{
+				"name":"sculk_depths:ost-1",
+				"stream": true
+			},
+			{
+				"name":"minecraft:music/game/ancestry",
+				"stream": true
 			}
 		]
-    }
+    },
+	"music.sculk_depths.cephlera_soundtrack":{
+		"category": "music",
+		"sounds": [
+			{
+				"name": "sculk_depths:zinnia",
+				"stream": true
+			},
+			{
+				"name":"sculk_depths:sculk_depths_main_theme",
+				"stream": true
+			},
+			{
+				"name":"sculk_depths:ost-1",
+				"stream": true
+			}
+		]
+	},
+	"music.sculk_depths.main_theme":{
+		"category": "music",
+		"sounds": [
+			{
+				"name":"sculk_depths:sculk_depths_main_theme",
+				"stream": true
+			}
+		]
+	},
+	"music.sculk_depths.zinnia":{
+		"category": "music",
+		"sounds": [
+			{
+				"name":"sculk_depths:zinnia",
+				"stream": true
+			}
+		]
+	},
+	"music.sculk_depths.ost-1":{
+		"category": "music",
+		"sounds": [
+			{
+				"name":"sculk_depths:ost-1",
+				"stream": true
+			}
+		]
+	},
+	"ambient.wind.additions": {
+		"category": "ambient",
+		"sounds": [
+			{
+				"name":"minecraft:ambient/nether/soulsand_valley/wind1"
+			},
+			{
+				"name":"minecraft:ambient/nether/soulsand_valley/wind2"
+			},
+			{
+				"name":"minecraft:ambient/nether/soulsand_valley/wind3"
+			},
+			{
+				"name":"minecraft:ambient/nether/soulsand_valley/wind4"
+			}
+		]
+	},
+	"ambient.cave.additions": {
+		"category": "ambient",
+		"sounds": [
+			{
+				"name":"minecraft:ambient/nether/basalt_deltas/debris1"
+			},
+			{
+				"name":"minecraft:ambient/nether/basalt_deltas/debris2"
+			},
+			{
+				"name":"minecraft:ambient/nether/basalt_deltas/debris3"
+			},
+			{
+				"name":"minecraft:ambient/nether/basalt_deltas/long_debris1"
+			},
+			{
+				"name":"minecraft:ambient/nether/basalt_deltas/long_debris2"
+			}
+		]
+	}
+
 }

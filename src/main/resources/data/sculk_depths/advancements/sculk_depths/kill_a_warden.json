@@ -19,6 +19,17 @@
     "minecraft:warden": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "dimension": "minecraft:overworld"
+              }
+            }
+          }
+        ],
         "entity": [
           {
             "condition": "minecraft:entity_properties",

@@ -3,8 +3,8 @@
   "downfall": 0.4,
   "has_precipitation": false,
   "effects": {
-    "sky_color": 7254527,
-    "fog_color": 853299,
+    "sky_color": 984350,
+    "fog_color": 655415,
     "water_color": 928354,
     "water_fog_color": 328995,
     "grass_color": 6448752,
@@ -15,31 +15,46 @@
       "block_search_extent": 12,
       "offset": 2
     },
+    "additions_sound": {
+      "sound": "sculk_depths:ambient.cave.additions",
+      "tick_chance": 0.002
+    },
     "music": {
-      "sound": "sculk_depths:music.sculk_depths.main_theme",
-      "min_delay": 500,
-      "max_delay": 5000,
+      "sound": "sculk_depths:music.sculk_depths.main_soundtrack",
+      "min_delay": 1000,
+      "max_delay": 6000,
       "replace_current_music": false
+    },
+    "particle": {
+      "options": {
+        "type": "sculk_depths:cave_falling_particle"
+      },
+      "probability": 0.01
     }
   },
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [
+    "creature": [],
+    "misc": [],
+    "monster": [
       {
         "type": "sculk_depths:glomper",
         "weight": 1,
         "minCount": 1,
-        "maxCount": 4
+        "maxCount": 3
       }
     ],
-    "misc": [],
-    "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []
   },
-  "spawn_costs": {},
+  "spawn_costs": {
+    "sculk_depths:glomper": {
+      "energy_budget": 100,
+      "charge": 15
+    }
+  },
   "carvers": {
     "air": [
     ]
@@ -53,9 +68,7 @@
 
     ],
     [
-      "sculk_depths:ore_flumrock",
-      "sculk_depths:deepslate_flumrock_rocks",
-      "sculk_depths:crux_boulders"
+      "sculk_depths:ore_flumrock"
 
     ],
     [

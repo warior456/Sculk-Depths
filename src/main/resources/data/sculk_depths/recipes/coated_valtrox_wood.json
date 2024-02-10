@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bark",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "sculk_depths:coated_valtrox_log"
+    }
+  },
+  "result": {
+    "item": "sculk_depths:coated_valtrox_wood",
+    "count": 3
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "item.sculk_depths.kryslum_bucket": "Відро крислуму",
+  "item.sculk_depths.soul_heart": "Серце душ",
+  "item.sculk_depths.energy_essence" : "Енергетична есенція",
+  "item.sculk_depths.energized_flint_and_steel" : "Заряджене кресало",
+  "item.sculk_depths.glomper_spawn_egg": "Яйце виклику ґлумпера",
+  "block.sculk_depths.crumbling_dirt" : "Розсипчастий ґрунт",
+
+  "block.sculk_depths.flumrock_cauldron": "Казан із флумроку",
+  "block.sculk_depths.kryslum_flumrock_cauldron": "Казан із флумроку з крислумом",
+
+  "block.sculk_depths.larguth": "Ларґут",
+
+  "block.sculk_depths.umbrusk": "Тіньовик",
+  "block.sculk_depths.umbrusk_stairs": "Тіньовикові сходи",
+  "block.sculk_depths.umbrusk_slab": "Тіньовикова плита",
+  "block.sculk_depths.umbrusk_wall": "Тіньовикова стіна",
+
+  "block.sculk_depths.umbrusk_bricks": "Тіньовикова цегла",
+  "block.sculk_depths.umbrusk_brick_stairs": "Сходи з тіньовикової цегли",
+  "block.sculk_depths.umbrusk_brick_slab": "Плита з тіньовикової цегли",
+  "block.sculk_depths.umbrusk_brick_wall": "Стіна з тіньовикової цегли",
+
+  "block.sculk_depths.valtrox_leaves": "Валтроксове листя",
+  "block.sculk_depths.valtrox_sapling": "Паросток валтрокса",
+
+  "block.sculk_depths.valtrox_log": "Валтроксова колода",
+  "block.sculk_depths.valtrox_planks": "Валтроксові дошки",
+  "block.sculk_depths.valtrox_wood": "Валтроксова деревина",
+  "block.sculk_depths.valtrox_slab": "Валтроксова плита",
+  "block.sculk_depths.valtrox_stairs": "Валтроксові сходи",
+  "block.sculk_depths.valtrox_fence": "Валтроксовий паркан",
+  "block.sculk_depths.valtrox_fence_gate": "Валтроксова хвіртка",
+  "block.sculk_depths.valtrox_button": "Валтроксова кнопка",
+  "block.sculk_depths.valtrox_pressure_plate": "Валтроксова натискна плита",
+
+  "block.sculk_depths.dried_valtrox_log": "Висушена валтроксова колода",
+  "block.sculk_depths.dried_valtrox_planks": "Висушені валтроксові дошки",
+  "block.sculk_depths.dried_valtrox_wood": "Висушена валтроксова деревина",
+  "block.sculk_depths.dried_valtrox_slab": "Висушена валтроксова плита",
+  "block.sculk_depths.dried_valtrox_stairs": "Висушені валтроксові сходи",
+  "block.sculk_depths.dried_valtrox_fence": "Висушений валтроксовий паркан",
+  "block.sculk_depths.dried_valtrox_fence_gate": "Висушена валтроксова хвіртка",
+  "block.sculk_depths.dried_valtrox_button": "Висушена валтроксова кнопка",
+  "block.sculk_depths.dried_valtrox_pressure_plate": "Висушена валтроксова натискна плита",
+
+  "block.sculk_depths.petrified_valtrox_log": "Скам'яніла валтроксова колода",
+  "block.sculk_depths.petrified_valtrox_slates": "Скам'янілі валтроксові сланці",
+  "block.sculk_depths.petrified_valtrox_wood": "Скам'яніла валтроксова деревина",
+  "block.sculk_depths.petrified_valtrox_slab": "Скам'яніла валтроксова плита",
+  "block.sculk_depths.petrified_valtrox_stairs": "Скам'янілі валтроксові сходи",
+  "block.sculk_depths.petrified_valtrox_wall": "Скам'яніла валтроксова стіна",
+  "block.sculk_depths.petrified_valtrox_wall_gate": "Скам'яніла валтроксова хвіртка",
+  "block.sculk_depths.petrified_valtrox_button": "Скам'яніла валтроксова кнопка",
+  "block.sculk_depths.petrified_valtrox_pressure_plate": "Скам'яніла валтроксова натискна плита",
+
+
+  "block.sculk_depths.flumrock": "Флумрок",
+
+  "itemgroup.sculk_depths" : "Sculk Depths",
+  "block.sculk_depths.kryslum": "Крислум",
+  "biome.sculk_depths.sculk_caves": "Скалкові печери",
+  "biome.sculk_depths.cephlera_caves": "Цефлерові печери",
+  "biome.sculk_depths.petrified_valtrox_forest": "Скам'янілий валтроксовий ліс",
+  "biome.sculk_depths.dried_valtrox_forest": "Висушений валтроксовий ліс",
+
+  "block.sculk_depths.quazarith_ore": "Квазаритова руда",
+  "item.sculk_depths.quazarith_pieces": "Шматки квазариту",
+  "item.sculk_depths.quazarith_ingot": "Квазаритовий злиток",
+
+  "block.sculk_depths.crux_ore": "Круксова руда",
+  "item.sculk_depths.crux": "Крукс",
+
+  "item.sculk_depths.quazarith_shovel": "Квазаритова лопата",
+  "item.sculk_depths.quazarith_pickaxe": "Квазаритове кайло",
+  "item.sculk_depths.quazarith_axe": "Квазаритова сокира",
+  "item.sculk_depths.quazarith_hoe": "Квазаритова мотика",
+  "item.sculk_depths.quazarith_sword": "Квазаритовий меч",
+
+  "item.sculk_depths.quazarith_helmet": "Квазаритовий шолом",
+  "item.sculk_depths.quazarith_chestplate": "Квазаритовий нагрудник",
+  "item.sculk_depths.quazarith_leggings": "Квазаритові наголінники",
+  "item.sculk_depths.quazarith_boots": "Квазаритові чоботи",
+
+  "block.sculk_depths.soul_fire": "Вогонь душ",
+
+  "block.sculk_depths.zygrin": "Зиґрин",
+  "block.sculk_depths.zygrin_stairs": "Зиґринові сходи",
+  "block.sculk_depths.zygrin_slab": "Зиґринова плита",
+  "block.sculk_depths.zygrin_wall": "Зиґринова стіна",
+  "block.sculk_depths.polished_zygrin": "Полірований зиґрин",
+  "block.sculk_depths.polished_zygrin_stairs": "Сходи з полірованого зиґрину",
+  "block.sculk_depths.polished_zygrin_slab": "Плита з полірованого зиґрину",
+  "block.sculk_depths.polished_zygrin_wall": "Стіна з полірованого зиґрину",
+  "block.sculk_depths.zygrin_bricks": "Зиґринова цегла",
+  "block.sculk_depths.zygrin_brick_stairs": "Сходи із зиґринової цегли",
+  "block.sculk_depths.zygrin_brick_slab": "Плита із зиґринової цегли",
+  "block.sculk_depths.zygrin_brick_wall": "Стіна із зиґринової цегли",
+  "block.sculk_depths.zygrin_pillar": "Зиґринова колона",
+  "block.sculk_depths.chiseled_zygrin": "Різьблений зиґрин",
+  "block.sculk_depths.zygrin_light": "Зиґриновий світильник",
+  "block.sculk_depths.zygrin_flowblock": "Зиґриновий текучий блок",
+
+  "block.sculk_depths.cephlera": "Цефлера",
+  "block.sculk_depths.cephlera_light": "Цефлеровий світильник",
+
+  "block.sculk_depths.kryslum_enriched_soil": "Крислумовий збагачений ґрунт",
+
+  "entity.sculk_depths.glomper": "Ґлумпер",
+
+  "advancements.sculk_depths.root": "Досліджуючи глибини",
+  "advancements.sculk_depths.root.description": "Дослідіть стародавню цивілізацію",
+
+  "advancements.sculk_depths.kill_a_warden": "Довгий шлях!",
+  "advancements.sculk_depths.kill_a_warden.description": "Нещадіть боронителя та нанесіть вирішальний удар!",
+
+  "tooltip.sculk_depths.crystal_upgrade.tooltip": "Кристалічне покращення:",
+  "tooltip.sculk_depths.crystal_upgrade.crystal.\"white\"": " Білий кристал",
+  "tooltip.sculk_depths.crystal_upgrade.crystal.\"orange\"": " Помаранчевий кристал",
+  "tooltip.sculk_depths.crystal_upgrade.crystal.\"blue\"": " Синій кристал",
+  "tooltip.sculk_depths.crystal_upgrade.crystal.\"lime\"": " Лаймовий кристал"
+}

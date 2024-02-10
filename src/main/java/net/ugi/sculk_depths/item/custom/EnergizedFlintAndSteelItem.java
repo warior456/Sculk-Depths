@@ -35,7 +35,7 @@ public class EnergizedFlintAndSteelItem extends Item {
         BlockState blockState = world.getBlockState(blockPos = context.getBlockPos());
 
         boolean portalLighted = PortalPlacer.attemptPortalLight(world, blockPos.offset(context.getSide()), SOUL_FIRE);
-        if(portalLighted){
+        if (portalLighted) {
             ItemStack itemStack = context.getStack();
             if (playerEntity instanceof ServerPlayerEntity) {
                 itemStack.damage(SculkDepths.CONFIG.activate_portal_durability_usage, playerEntity, p -> p.sendToolBreakStatus(context.getHand()));
@@ -45,8 +45,8 @@ public class EnergizedFlintAndSteelItem extends Item {
 
         if (CampfireBlock.canBeLit(blockState) || CandleBlock.canBeLit(blockState) || CandleCakeBlock.canBeLit(blockState)) {
             world.playSound(playerEntity, blockPos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0f, world.getRandom().nextFloat() * 0.4f + 0.8f);
-            world.setBlockState(blockPos, (BlockState)blockState.with(Properties.LIT, true), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
-            world.emitGameEvent((Entity)playerEntity, GameEvent.BLOCK_CHANGE, blockPos);
+            world.setBlockState(blockPos, (BlockState) blockState.with(Properties.LIT, true), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
+            world.emitGameEvent((Entity) playerEntity, GameEvent.BLOCK_CHANGE, blockPos);
             if (playerEntity != null) {
                 context.getStack().damage(1, playerEntity, p -> p.sendToolBreakStatus(context.getHand()));
             }
@@ -57,10 +57,10 @@ public class EnergizedFlintAndSteelItem extends Item {
             world.playSound(playerEntity, blockPos2, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0f, world.getRandom().nextFloat() * 0.4f + 0.8f);
             BlockState blockState2 = ModBlocks.SOUL_FIRE.getDefaultState();
             world.setBlockState(blockPos2, blockState2, Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
-            world.emitGameEvent((Entity)playerEntity, GameEvent.BLOCK_PLACE, blockPos);
+            world.emitGameEvent((Entity) playerEntity, GameEvent.BLOCK_PLACE, blockPos);
             ItemStack itemStack = context.getStack();
             if (playerEntity instanceof ServerPlayerEntity) {
-                Criteria.PLACED_BLOCK.trigger((ServerPlayerEntity)playerEntity, blockPos2, itemStack);
+                Criteria.PLACED_BLOCK.trigger((ServerPlayerEntity) playerEntity, blockPos2, itemStack);
                 itemStack.damage(1, playerEntity, p -> p.sendToolBreakStatus(context.getHand()));
             }
             return ActionResult.success(world.isClient());
