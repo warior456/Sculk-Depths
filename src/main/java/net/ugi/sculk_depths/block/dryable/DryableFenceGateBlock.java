@@ -10,8 +10,8 @@ import net.minecraft.util.math.random.Random;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class DryableFenceGateBlock extends FenceGateBlock implements Dryable {
-    public DryableFenceGateBlock(Settings settings, WoodType type) {
-        super(settings, type);
+    public DryableFenceGateBlock(WoodType type, Settings settings) {
+        super(type, settings);
     }
 
     @Override

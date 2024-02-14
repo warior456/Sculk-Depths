@@ -10,8 +10,8 @@ import net.minecraft.util.math.random.Random;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class DryableTrapdoorBlock extends TrapdoorBlock implements Dryable {
-    public DryableTrapdoorBlock(Settings settings, BlockSetType blockSetType) {
-        super(settings, blockSetType);
+    public DryableTrapdoorBlock(BlockSetType type, Settings settings) {
+        super(type, settings);
     }
 
     @Override

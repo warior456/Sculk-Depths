@@ -10,8 +10,8 @@ import net.minecraft.util.math.random.Random;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class DryableButtonBlock extends ButtonBlock implements Dryable {
-    public DryableButtonBlock(Settings settings, BlockSetType blockSetType, int pressTicks, boolean wooden) {
-        super(settings, blockSetType, pressTicks, wooden);
+    public DryableButtonBlock(BlockSetType blockSetType, int pressTicks, Settings settings) {
+        super(blockSetType, pressTicks, settings);
     }
 
     @Override

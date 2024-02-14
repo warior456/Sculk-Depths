@@ -10,8 +10,8 @@ import net.minecraft.util.math.random.Random;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class DryableWallHangingSignBlock extends WallHangingSignBlock implements Dryable {
-    public DryableWallHangingSignBlock(Settings settings, WoodType woodType) {
-        super(settings, woodType);
+    public DryableWallHangingSignBlock(WoodType woodType, Settings settings) {
+        super(woodType, settings);
     }
 
     @Override

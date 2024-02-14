@@ -11,8 +11,8 @@ import net.minecraft.util.math.random.Random;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class DryableDoorBlock extends DoorBlock implements Dryable {
-    public DryableDoorBlock(Settings settings, BlockSetType blockSetType) {
-        super(settings, blockSetType);
+    public DryableDoorBlock(BlockSetType type, Settings settings) {
+        super(type, settings);
     }
 
     @Override

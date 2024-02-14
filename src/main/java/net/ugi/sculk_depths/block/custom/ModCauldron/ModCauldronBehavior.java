@@ -134,7 +134,7 @@ public interface ModCauldronBehavior {
         });
 
 
-        SPORE_FLUMROCK_CAULDRON_BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
+        SPORE_FLUMROCK_CAULDRON_BEHAVIOR.map().put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient) {
                 Item item = stack.getItem();
                 player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(ModItems.PENEBRIUM_SPORE_BUCKET)));
@@ -147,7 +147,7 @@ public interface ModCauldronBehavior {
             return ActionResult.success(world.isClient);
         });
 
-        SPORE_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.PENEBRIUM_SPORE_BUCKET, (state, world, pos, player, hand, stack) -> {
+        SPORE_FLUMROCK_CAULDRON_BEHAVIOR.map().put(ModItems.PENEBRIUM_SPORE_BUCKET, (state, world, pos, player, hand, stack) -> {
             if (state.get(SPORE_LEVEL) == 12) {
                 return ActionResult.PASS;
             }
@@ -163,7 +163,7 @@ public interface ModCauldronBehavior {
         });
 
 
-        SPORE_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.CRUX, (state, world, pos, player, hand, stack) -> {
+        SPORE_FLUMROCK_CAULDRON_BEHAVIOR.map().put(ModItems.CRUX, (state, world, pos, player, hand, stack) -> {
             if (state.get(CRUX_LEVEL) == 12) {
                 return ActionResult.PASS;
             }

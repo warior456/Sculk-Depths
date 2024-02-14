@@ -10,8 +10,8 @@ import net.minecraft.util.math.random.Random;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class DryablePressurePlateBlock extends PressurePlateBlock implements Dryable {
-    public DryablePressurePlateBlock(ActivationRule type, Settings settings, BlockSetType blockSetType) {
-        super(type, settings, blockSetType);
+    public DryablePressurePlateBlock(BlockSetType type, Settings settings) {
+        super(type, settings);
     }
 
     @Override

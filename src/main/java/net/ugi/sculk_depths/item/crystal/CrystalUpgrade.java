@@ -162,8 +162,8 @@ public class CrystalUpgrade extends Item {
 
         EquipmentSlot slot2 = getEquipmentSlot(stack.getItem());
 
-        finalModifiers.forEach((entityAttribute, entityAttributeModifier) -> {
-            stack.addAttributeModifier(entityAttribute, new EntityAttributeModifier(entityAttributeModifier.getId(), entityAttributeModifier.getName(), entityAttributeModifier.getValue(), entityAttributeModifier.getOperation()) , slot2);
+        finalModifiers.forEach((entityAttribute, entityAttributeModifier) -> {                                        //used to be getname() might be broken
+            stack.addAttributeModifier(entityAttribute, new EntityAttributeModifier(entityAttributeModifier.getId(), entityAttributeModifier.getOperation().name(), entityAttributeModifier.getValue(), entityAttributeModifier.getOperation()) , slot2);
         });
     }
 
