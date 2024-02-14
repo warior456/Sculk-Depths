@@ -34,3 +34,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ### 3. ModPacks
 
 This mod is allowed to be included in any modpack hosted on curseforge or modrinth
+
+### 4. Redistribution
+
+This mod's files are not allowed to be hosted anywhere else than the official Github, official Modrinth or official Curseforge page
