@@ -2,8 +2,8 @@ package net.ugi.sculk_depths.block.custom;
 
 import net.minecraft.block.FurnaceBlock;
 
-public class ModFurnaceBlock extends FurnaceBlock {
-    public ModFurnaceBlock(Settings settings) {
+public class ZygrinFurnaceBlock extends FurnaceBlock {
+    public ZygrinFurnaceBlock(Settings settings) {
         super(settings);
     }
 

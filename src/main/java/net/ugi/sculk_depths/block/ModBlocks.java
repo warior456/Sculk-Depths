@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.kyrptonaught.customportalapi.CustomPortalBlock;
 import net.minecraft.block.*;
-import net.minecraft.block.enums.Instrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -49,8 +48,8 @@ public class ModBlocks {
     public static final Block LARGUTH = registerBlock("larguth",
             new Block(FabricBlockSettings.copyOf(Blocks.OBSIDIAN).strength(40.0f,1000f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block FURNACE = registerBlock("furnace",
-            new ModFurnaceBlock(FabricBlockSettings.copyOf(Blocks.FURNACE).strength(10.0f,10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+    public static final Block ZYGRIN_FURNACE = registerBlock("zygrin_furnace",
+            new ZygrinFurnaceBlock(FabricBlockSettings.copyOf(Blocks.FURNACE).strength(10.0f,10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
 
     //umbrusk blockset
