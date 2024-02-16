@@ -16,7 +16,7 @@
   },
   "parent": "sculk_depths:sculk_depths/root",
   "criteria": {
-    "minecraft:warden": {
+    "sculk_depths:warden_killed_by_player_in_overworld": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
         "player": [
@@ -44,7 +44,7 @@
   },
   "requirements": [
     [
-      "minecraft:warden"
+      "sculk_depths:warden_killed_by_player_in_overworld"
     ]
   ],
   "sends_telemetry_event": false

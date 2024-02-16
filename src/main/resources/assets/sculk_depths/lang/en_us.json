@@ -155,10 +155,13 @@
   "entity.sculk_depths.t": "Glomper",
 
   "advancements.sculk_depths.root": "Exploring the Depths",
-  "advancements.sculk_depths.root.description": "Exploration and Ancient Civilisation",
+  "advancements.sculk_depths.root.description": "Exploration and Ancient Civilization",
 
   "advancements.sculk_depths.kill_a_warden": "Doing it the hard way!",
   "advancements.sculk_depths.kill_a_warden.description": "Kill a warden instead of giving it a sacrifice",
+
+  "advancements.sculk_depths.lester": "Lesters on your face",
+  "advancements.sculk_depths.lester.description": "Lesters don't like it when you mine Quazarith",//todo maybe change the description
 
   "tooltip.sculk_depths.crystal_upgrade.tooltip": "Crystal Upgrade:",
   "tooltip.sculk_depths.crystal_upgrade.crystal.\"white\"": " White Crystal",
