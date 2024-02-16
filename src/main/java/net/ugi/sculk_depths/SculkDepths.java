@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.CauldronFluidContent;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.world.Heightmap;
+import net.ugi.sculk_depths.block.ModBlockEntities;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
 import net.ugi.sculk_depths.config.Config;
@@ -59,8 +60,8 @@ public class SculkDepths implements ModInitializer {
         ModCauldronBehavior.registerBehavior();
         //SculkDepths.LOGGER.info("Registering Recipes for " + SculkDepths.MOD_ID);
         //ModRecipes.register();
-        //SculkDepths.LOGGER.info("Registering BlockEntities for " + SculkDepths.MOD_ID);
-        //ModBlockEntities.registerBlockEntities();
+        SculkDepths.LOGGER.info("Registering BlockEntities for " + SculkDepths.MOD_ID);
+        ModBlockEntities.registerBlockEntities();
         SculkDepths.LOGGER.info("Registering Entities for " + SculkDepths.MOD_ID);
         FabricDefaultAttributeRegistry.register(ModEntities.GLOMPER, GlomperEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.LESTER, LesterEntity.createLesterAttributes());
