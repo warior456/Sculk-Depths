@@ -26,12 +26,16 @@ When entering this dimension, it is recommended to bring a netherite pickaxe bec
 
 ## FEATURES
 
+(outdated list check changelog for recent additions)
 - New dimension with custom world generation.
 - Four new biomes.
 - 2 New Structures:
   - A Laboratory
   - An underground Lab
-- A new mob: The Glomper. It attacks players using an elytra, so be careful while flying around!
+- 3 new mobs:
+  - The Glomper: It attacks players using an elytra, so be careful while flying around!
+  - Lester: Might jumpscare you while mining Quazarith
+  - Chomper Colossus: work in progress spawns randomly on the surface
 - Energy Essence drops when the warden kills a passive mob or when the warden is killed, this is used to craft an Energized Flint and Steel to open the portal.
 - Energized Flint and Steel: can light most blocks with Soul Fire and lights the portal
 - new blocks:
