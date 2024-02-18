@@ -46,6 +46,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.block.ModBlockEntities;
 import net.ugi.sculk_depths.entity.ModEntities;
+import net.ugi.sculk_depths.screen.ZygrinFurnaceScreenHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -91,9 +92,8 @@ public class ZygrinFurnaceBlockEntity
         return Text.translatable("container.furnace");
     }
 
-    @Override
     protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-        return new FurnaceScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+        return new ZygrinFurnaceScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
     
     //end my added / edited stuff
@@ -277,7 +277,7 @@ public class ZygrinFurnaceBlockEntity
         boolean bl = blockEntity.isBurning();
         boolean bl2 = false;
         if (blockEntity.isBurning()) {
-            blockEntity.burnTime = 1;//infinite fuel here
+            blockEntity.burnTime = 200;//infinite fuel here
         }
         ItemStack itemStack = blockEntity.inventory.get(1);
         boolean bl3 = !blockEntity.inventory.get(0).isEmpty();
