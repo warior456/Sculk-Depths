@@ -22,7 +22,7 @@ import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.item.crystal.CheckInvForCrystalItems;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.portal.Portals;
-import net.ugi.sculk_depths.screen.ModScreenHandlerTypes;
+import net.ugi.sculk_depths.screen.ModScreenHandlers;
 import net.ugi.sculk_depths.sound.ConditionalSoundPlayer;
 import net.ugi.sculk_depths.sound.ModSounds;
 import net.ugi.sculk_depths.state.property.ModProperties;
@@ -70,7 +70,7 @@ public class SculkDepths implements ModInitializer {
         SculkDepths.LOGGER.info("Registering Particles for " + SculkDepths.MOD_ID);
         ModParticleTypes.registerModParticles();
         SculkDepths.LOGGER.info("Registering ScreenHandlers for " + SculkDepths.MOD_ID);
-        ModScreenHandlerTypes.registerModScreenHandlers();
+        ModScreenHandlers.registerModScreenHandlers();
         ModPlacementModifierType.init();
 
         ServerTickEvents.START_WORLD_TICK.register(new CheckInvForCrystalItems());

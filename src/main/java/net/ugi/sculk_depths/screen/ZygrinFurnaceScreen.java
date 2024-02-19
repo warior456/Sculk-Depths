@@ -11,18 +11,20 @@ import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.screen.FurnaceScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.ugi.sculk_depths.SculkDepths;
 
 @Environment(EnvType.CLIENT)
-public class ZygrinFurnaceScreen extends AbstractFurnaceScreen<ZygrinFurnaceScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier("textures/gui/container/dispenser.png");
+public class ZygrinFurnaceScreen extends AbstractZygrinFurnaceScreen<ZygrinFurnaceScreenHandler> {
+    private static final Identifier TEXTURE = new Identifier("textures/gui/container/furnace.png");
+    //private static final Identifier TEXTURE = new Identifier(SculkDepths.MOD_ID,"textures/gui/container/zygrin_furnace.png"); //todo make this texture
 
-    public ZygrinFurnaceScreen(ZygrinFurnaceScreenHandler handler, AbstractFurnaceRecipeBookScreen recipeBook, PlayerInventory inventory, Text title, Identifier background) {
+/*    public ZygrinFurnaceScreen(ZygrinFurnaceScreenHandler handler, AbstractFurnaceRecipeBookScreen recipeBook, PlayerInventory inventory, Text title, Identifier background) {
         super(handler, recipeBook, inventory, title, TEXTURE);
     }
 
     public ZygrinFurnaceScreen(ZygrinFurnaceScreenHandler handler, AbstractFurnaceRecipeBookScreen recipeBook, PlayerInventory inventory, Text title) {
         super(handler, recipeBook, inventory, title, TEXTURE);
-    }
+    }*/
 
     public ZygrinFurnaceScreen(ZygrinFurnaceScreenHandler zygrinFurnaceScreenHandler, PlayerInventory playerInventory, Text text) {
         super(zygrinFurnaceScreenHandler, new FurnaceRecipeBookScreen() , playerInventory, text, TEXTURE);
