@@ -23,7 +23,7 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
     private static final int field_30743 = 3;
     private static final int field_30744 = 30;
     private static final int field_30745 = 30;
-    private static final int field_30746 = 39;
+    private static final int field_30746 = 38;
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
     protected final World world;
@@ -108,12 +108,11 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
             ItemStack itemStack2 = slot2.getStack();
             itemStack = itemStack2.copy();
             if (slot == 2) {
-                if (!this.insertItem(itemStack2, 3, 39, true)) {
+                if (!this.insertItem(itemStack2, 3, 38, true)) {
                     return ItemStack.EMPTY;
                 }
                 slot2.onQuickTransfer(itemStack2, itemStack);
-                //todo: line below causes crash when shift clicking items
-            } else if (slot == 1 || slot == 0 ? !this.insertItem(itemStack2, 3, 39, false) : (this.isSmeltable(itemStack2) ? !this.insertItem(itemStack2, 0, 1, false) : (this.isFuel(itemStack2) ? !this.insertItem(itemStack2, 1, 2, false) : (slot >= 3 && slot < 30 ? !this.insertItem(itemStack2, 30, 39, false) : slot >= 30 && slot < 39 && !this.insertItem(itemStack2, 3, 30, false))))) {
+            } else if (slot == 1 || slot == 0 ? !this.insertItem(itemStack2, 3, 38, false) : (this.isSmeltable(itemStack2) ? !this.insertItem(itemStack2, 0, 1, false) : (this.isFuel(itemStack2) ? !this.insertItem(itemStack2, 1, 2, false) : (slot >= 3 && slot < 30 ? !this.insertItem(itemStack2, 30, 38, false) : slot >= 30 && slot < 39 && !this.insertItem(itemStack2, 3, 30, false))))) {
                 return ItemStack.EMPTY;
             }
             if (itemStack2.isEmpty()) {
@@ -147,13 +146,12 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
     }
 
     public int getFuelProgress() {
-        int i = this.propertyDelegate.get(1);
-        if (i == 0) {
-            i = 200;
+//return 12 for full fire
+        if(this.propertyDelegate.get(0) > 0) { // checks if burntime is greater than 0
+            return 12;
+        } else {
+            return 0;
         }
-        System.out.println("return the below value");
-        System.out.println(this.propertyDelegate.get(0) * 13 / i);
-        return this.propertyDelegate.get(0) * 13 / i;
     }
 
     public boolean isBurning() {

@@ -1,5 +1,7 @@
 package net.ugi.sculk_depths.screen;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.recipebook.AbstractFurnaceRecipeBookScreen;
@@ -14,6 +16,7 @@ import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
+@Environment(value= EnvType.CLIENT)
 public class AbstractZygrinFurnaceScreen<T extends AbstractZygrinFurnaceScreenHandler>
         extends HandledScreen<T>
         implements RecipeBookProvider {

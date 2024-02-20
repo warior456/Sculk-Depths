@@ -28,6 +28,7 @@ import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.screen.FurnaceScreenHandler;
@@ -47,6 +48,7 @@ import net.minecraft.world.World;
 import net.ugi.sculk_depths.block.ModBlockEntities;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.screen.ZygrinFurnaceScreenHandler;
+import net.ugi.sculk_depths.tags.ModTags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -97,7 +99,14 @@ public class ZygrinFurnaceBlockEntity
     }
 
     private boolean isBurning() {
-        return true; //fuel check here this.burnTime > 0
+        if(this.burnTime > 0) return true;// todo: test if 0 works or not
+        for (BlockPos blockPos : BlockPos.iterate(pos.add(-20, -20, -20), pos.add(20, 20, 20))) {
+            if (!world.getFluidState(blockPos).isIn(ModTags.Fluids.KRYSLUM)) continue;
+            this.burnTime = 50; // set not more ticks than minimum cook time (2.5 sec * 20 or 10 sec * 20)
+            return true;
+        }
+        this.burnTime = 0;
+        return false;
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, ZygrinFurnaceBlockEntity blockEntity) {
@@ -105,7 +114,7 @@ public class ZygrinFurnaceBlockEntity
         boolean bl = blockEntity.isBurning();
         boolean bl2 = false;
         if (blockEntity.isBurning()) {
-            blockEntity.burnTime = 200;//infinite fuel here
+            --blockEntity.burnTime;//count down to "cache" checks for fuel
         }
         ItemStack itemStack = blockEntity.inventory.get(1);
         boolean bl3 = !blockEntity.inventory.get(0).isEmpty();
