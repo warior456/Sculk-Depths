@@ -17,7 +17,7 @@ public class WardenEntityMixin {
 
     @Inject(method="isValidTarget", at=@At("RETURN"), cancellable=true)
     public void doNotAttack(Entity entity, CallbackInfoReturnable<Boolean> cir){
-        if (entity.getType().isIn(ModEntityTags.NO_WARDEN_ANGER)) cir.setReturnValue(false);
+        if (entity != null && entity.getType().isIn(ModEntityTags.NO_WARDEN_ANGER)) cir.setReturnValue(false);
     }
     //Lnet/minecraft/entity/mob/WardenEntity;isValidTarget(Lnet/minecraft/entity/Entity;)Z
 }
