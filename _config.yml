@@ -144,7 +144,7 @@ inc_after_header :
 inc_before_tail : 
 inc_after_tail : 
 inc_before_tools : 
-inc_after_tools : sidebar.html
+inc_after_tools :
 
 inc_before_page_list : sidebar.html
 inc_after_page_list : 
