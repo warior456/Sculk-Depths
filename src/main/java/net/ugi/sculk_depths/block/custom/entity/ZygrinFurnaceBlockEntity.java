@@ -44,6 +44,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.block.ModBlockEntities;
 import net.ugi.sculk_depths.entity.ModEntities;
@@ -104,12 +105,16 @@ public class ZygrinFurnaceBlockEntity
     }
     private int checkBurning(){
         if(this.burnTime > 1) return 0;
-        for (BlockPos blockPos : BlockPos.iterate(pos.add(-20, -20, -20), pos.add(20, 20, 20))) {
-            if (!world.getFluidState(blockPos).isIn(ModTags.Fluids.KRYSLUM)) continue;
-            this.burnTime = 50; // set not more ticks than minimum cook time (2.5 sec * 20 or 10 sec * 20)
-            return 1;
+        if(this.burnTime <= 1 && this.burnTime >= -1){
+            for (BlockPos blockPos : BlockPos.iterate(pos.add(-20, -20, -20), pos.add(20, 20, 20))) {
+                if (!world.getFluidState(blockPos).isIn(ModTags.Fluids.KRYSLUM)) continue;
+                return 1;
+            }
+            return 2;
+        }else {
+            return 3;
         }
-        return 2;
+
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, ZygrinFurnaceBlockEntity blockEntity) {
@@ -122,10 +127,16 @@ public class ZygrinFurnaceBlockEntity
                 --blockEntity.burnTime;
                 break;
             case 1: //lighting or checking for fuel source
-                blockEntity.burnTime = 50;
+                blockEntity.burnTime = 50;// set not more ticks than minimum cook time (2.5 sec * 20 or 10 sec * 20)
+                // todo make corrolate to burnspeed and configurable
                 break;
-            case 2: //no fuel source
-                blockEntity.burnTime = 0;
+            case 2: //no fuel source and cache at -1
+                System.out.println("cachee");
+                blockEntity.burnTime = -20 + MathHelper.nextInt(Random.create(), -2, 2); //todo maybe configurable?
+                break;
+            case 3: //no fuel source and valid cache
+                ++blockEntity.burnTime;
+                System.out.println("++burntime");
                 break;
         }
 
