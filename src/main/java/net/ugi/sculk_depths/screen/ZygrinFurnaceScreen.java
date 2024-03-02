@@ -15,8 +15,7 @@ import net.ugi.sculk_depths.SculkDepths;
 
 @Environment(EnvType.CLIENT)
 public class ZygrinFurnaceScreen extends AbstractZygrinFurnaceScreen<ZygrinFurnaceScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier("textures/gui/container/furnace.png");
-    //private static final Identifier TEXTURE = new Identifier(SculkDepths.MOD_ID,"textures/gui/container/zygrin_furnace.png"); //todo make this texture
+    private static final Identifier TEXTURE = new Identifier(SculkDepths.MOD_ID,"textures/gui/container/zygrin_furnace.png"); //todo make this texture
 
 /*    public ZygrinFurnaceScreen(ZygrinFurnaceScreenHandler handler, AbstractFurnaceRecipeBookScreen recipeBook, PlayerInventory inventory, Text title, Identifier background) {
         super(handler, recipeBook, inventory, title, TEXTURE);

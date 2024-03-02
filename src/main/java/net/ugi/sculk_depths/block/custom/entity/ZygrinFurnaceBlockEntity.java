@@ -99,23 +99,36 @@ public class ZygrinFurnaceBlockEntity
     }
 
     private boolean isBurning() {
-        if(this.burnTime > 0) return true;// todo: test if 0 works or not
+        if(this.burnTime > 0) return true;
+        return false;
+    }
+    private int checkBurning(){
+        if(this.burnTime > 1) return 0;
         for (BlockPos blockPos : BlockPos.iterate(pos.add(-20, -20, -20), pos.add(20, 20, 20))) {
             if (!world.getFluidState(blockPos).isIn(ModTags.Fluids.KRYSLUM)) continue;
             this.burnTime = 50; // set not more ticks than minimum cook time (2.5 sec * 20 or 10 sec * 20)
-            return true;
+            return 1;
         }
-        this.burnTime = 0;
-        return false;
+        return 2;
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, ZygrinFurnaceBlockEntity blockEntity) {
         boolean bl4;
         boolean bl = blockEntity.isBurning();
         boolean bl2 = false;
-        if (blockEntity.isBurning()) {
-            --blockEntity.burnTime;//count down to "cache" checks for fuel
+        int handleBurning = blockEntity.checkBurning();
+        switch (handleBurning){
+            case 0: //burning and above 0 ticks left
+                --blockEntity.burnTime;
+                break;
+            case 1: //lighting or checking for fuel source
+                blockEntity.burnTime = 50;
+                break;
+            case 2: //no fuel source
+                blockEntity.burnTime = 0;
+                break;
         }
+
         ItemStack itemStack = blockEntity.inventory.get(1);
         boolean bl3 = !blockEntity.inventory.get(0).isEmpty();
         boolean bl5 = bl4 = !itemStack.isEmpty();

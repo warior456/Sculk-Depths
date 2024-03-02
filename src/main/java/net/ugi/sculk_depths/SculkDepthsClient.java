@@ -44,11 +44,10 @@ public class SculkDepthsClient implements ClientModInitializer {
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.KRYSLUM_STILL,
                 ModFluids.KRYSLUM_FLOWING,
                 new SimpleFluidRenderHandler(
-                        new Identifier(SculkDepths.MOD_ID,  "block/kryslum_still"),
+                        new Identifier(SculkDepths.MOD_ID, "block/kryslum_still"),
                         new Identifier(SculkDepths.MOD_ID, "block/kryslum_flow")
                 )
         );
-
 
 
         CustomItemModels.QuazarithSwordModels();
@@ -60,7 +59,6 @@ public class SculkDepthsClient implements ClientModInitializer {
         CustomItemModels.QuazarithChestplateModels();
         CustomItemModels.QuazarithLeggingsModels();
         CustomItemModels.QuazarithBootsModels();
-
 
 
         EntityRendererRegistry.register(ModEntities.GLOMPER, GlomperRenderer::new);
@@ -110,7 +108,7 @@ public class SculkDepthsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.CAVE_FALLING_PARTICLE, CaveFallingParticle.Factory::new);
 
         DimensionRenderingRegistry.registerCloudRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY, new SculkDepthsCloudRendererClient());
-        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY,new SculkDepthsSkyRendererClient());
+        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY, new SculkDepthsSkyRendererClient());
 
         HandledScreens.register(ModScreenHandlers.ZYGRIN_FURNACE_SCREEN_HANDLER, ZygrinFurnaceScreen::new); //if this doesn't work for some reason use the line below instead
         //HandledScreens.register(ModScreenHandlerTypes.ZYGRIN_FURNACE_SCREEN_HANDLER, (HandledScreens.Provider<ZygrinFurnaceScreenHandler, ZygrinFurnaceScreen>) ZygrinFurnaceScreen::new);
