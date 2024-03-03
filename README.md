@@ -65,13 +65,12 @@ When entering this dimension, it is recommended to bring a netherite pickaxe bec
   <summary>Click to view screenshots</summary>
   
   ![Sculk Depths portal](https://github.com/warior456/Sculk-Depths/assets/66562258/de043541-5ea0-430d-b137-3b56628469cb)
-  ![image](https://user-images.githubusercontent.com/66562258/226136962-843025cf-957b-4331-a343-f8b4e9265709.png)
-  ![image](https://user-images.githubusercontent.com/66562258/226136978-d1683dd1-d642-4cae-a204-0a92fb0ad2ba.png)
-  ![image](https://user-images.githubusercontent.com/66562258/226213541-25528269-7c6c-46cd-8c4e-f0bab01fd724.png)
-  ![image](https://user-images.githubusercontent.com/66562258/227038354-7217dba3-a006-4754-badc-6ff53b1db8f1.png)
-  ![image](https://github.com/warior456/Sculk-Depths/assets/66562258/5c4b29a9-0670-4d8c-be8e-60e0255e51b8)
-  ![image](https://github.com/warior456/Sculk-Depths/assets/66562258/90f1eb2c-3cb5-423f-913c-5021326b142a)
-  ![image](https://github.com/warior456/Sculk-Depths/assets/66562258/cd48ee13-0355-4928-86b3-0ba684f9d54d)
+  ![Cephlera Caves](https://github.com/warior456/Sculk-Depths/assets/66562258/5676fd14-0ad4-4bee-8cb5-ad1ed80537be)
+  ![Laboratory](https://github.com/warior456/Sculk-Depths/assets/66562258/5c4b29a9-0670-4d8c-be8e-60e0255e51b8)
+  ![Underground Lab](https://github.com/warior456/Sculk-Depths/assets/66562258/90f1eb2c-3cb5-423f-913c-5021326b142a)
+  ![Sculk Caves](https://user-images.githubusercontent.com/66562258/226136962-843025cf-957b-4331-a343-f8b4e9265709.png)
+  ![Sculk Caves](https://user-images.githubusercontent.com/66562258/226136978-d1683dd1-d642-4cae-a204-0a92fb0ad2ba.png)
+  ![Cephlera Caves](https://github.com/warior456/Sculk-Depths/assets/66562258/cd48ee13-0355-4928-86b3-0ba684f9d54d)
   
 </details>
 
