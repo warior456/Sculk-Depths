@@ -28,7 +28,13 @@ When entering this dimension, it is recommended to bring a netherite pickaxe bec
 
 (outdated list check changelog for recent additions)
 - New dimension with custom world generation.
-- Four new biomes.
+- Four new biomes:
+  - 2 Cave Biomes:
+    - Cephlera caves
+    - Sculk Caves
+  - 2 Surface Biomes
+    - Dried Forest
+    - Petrified Forest
 - 2 New Structures:
   - A Laboratory
   - An underground Lab
