@@ -27,9 +27,9 @@
     },
     "particle": {
       "options": {
-        "type": "sculk_depths:cave_falling_particle" //TODO change to sculk_depths:penebrium_spores
+        "type": "sculk_depths:penebrium_spores"
       },
-      "probability": 0.0002
+      "probability": 0.0001
     }
   },
   "spawners": {
