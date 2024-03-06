@@ -163,6 +163,12 @@
   "advancements.sculk_depths.lester": "Lesters on your face",
   "advancements.sculk_depths.lester.description": "Lesters don't like it when you mine Quazarith",//todo maybe change the description
 
+  "advancements.sculk_depths.find_laboratory": "Living Remnants",
+  "advancements.sculk_depths.find_laboratory.description": "Find a Laboratory",
+
+  "advancements.sculk_depths.enter_sculk_depths": "todo",
+  "advancements.sculk_depths.enter_sculk_depths.description": "Enter the Sculk Depths",
+
   "tooltip.sculk_depths.crystal_upgrade.tooltip": "Crystal Upgrade:",
   "tooltip.sculk_depths.crystal_upgrade.crystal.\"white\"": " White Crystal",
   "tooltip.sculk_depths.crystal_upgrade.crystal.\"orange\"": " Orange Crystal",

@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "sculk_depths:kryslum_enriched_soil"
+    },
+    "title": {
+      "translate": "advancements.sculk_depths.enter_sculk_depths"
+    },
+    "description": {
+      "translate": "advancements.sculk_depths.enter_sculk_depths.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "sculk_depths:sculk_depths/root",
+  "criteria": {
+    "entered_sculk_depths": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "sculk_depths:sculk_depths"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "entered_sculk_depths"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

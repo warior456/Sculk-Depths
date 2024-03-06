@@ -14,7 +14,7 @@
     "announce_to_chat": true,
     "hidden": true
   },
-  "parent": "sculk_depths:sculk_depths/root",
+  "parent": "sculk_depths:sculk_depths/enter_sculk_depths",
   "criteria": {
     "sculk_depths:taken_damage_from_lester": {
       "trigger": "minecraft:entity_hurt_player",
