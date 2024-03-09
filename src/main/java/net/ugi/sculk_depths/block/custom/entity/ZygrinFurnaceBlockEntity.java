@@ -131,12 +131,10 @@ public class ZygrinFurnaceBlockEntity
                 // todo make corrolate to burnspeed and configurable
                 break;
             case 2: //no fuel source and cache at -1
-                System.out.println("cachee");
                 blockEntity.burnTime = -20 + MathHelper.nextInt(Random.create(), -2, 2); //todo maybe configurable?
                 break;
             case 3: //no fuel source and valid cache
                 ++blockEntity.burnTime;
-                System.out.println("++burntime");
                 break;
         }
 
