@@ -1,3 +1,4 @@
 # Welcome to the Sculk-Depths wiki!
 
-the wiki is still work-in-progress and incomplete since a lot of features are still being balanced and changed
+The wiki will be updated according to updates and essential stuff will be added by us
+For less essential stuff we rely on community contributions
