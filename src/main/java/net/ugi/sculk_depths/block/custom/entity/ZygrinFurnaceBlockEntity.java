@@ -36,10 +36,12 @@ import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.function.LazyIterationConsumer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
@@ -47,15 +49,18 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.block.ModBlockEntities;
+import net.ugi.sculk_depths.block.custom.FlowBlock;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.screen.ZygrinFurnaceScreenHandler;
+import net.ugi.sculk_depths.state.property.ModProperties;
 import net.ugi.sculk_depths.tags.ModTags;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class ZygrinFurnaceBlockEntity
         extends LockableContainerBlockEntity
@@ -103,25 +108,51 @@ public class ZygrinFurnaceBlockEntity
         if(this.burnTime > 0) return true;
         return false;
     }
-    private int checkBurning(){
+    private int checkBurning(BlockPos pos){
         if(this.burnTime > 1) return 0;
         if(this.burnTime <= 1 && this.burnTime >= -1){
-            for (BlockPos blockPos : BlockPos.iterate(pos.add(-20, -20, -20), pos.add(20, 20, 20))) {
+            if(findValidKryslum(pos)>0) return 1;
+            //possibly fastest method is BlockPos.iterateRecursively();
+/*            for (BlockPos blockPos : BlockPos.iterate(pos.add(-20, -20, -20), pos.add(20, 20, 20))) {
                 if (!world.getFluidState(blockPos).isIn(ModTags.Fluids.KRYSLUM)) continue;
                 return 1;
-            }
+            }*/
             return 2;
         }else {
             return 3;
         }
+    }
 
+    public int findValidKryslum(BlockPos pos){
+        int valid_kryslum = 0;
+        ArrayList<BlockPos> blockPosArrayList = new ArrayList<BlockPos>();
+        blockPosArrayList.add(pos.offset(Direction.NORTH));
+        blockPosArrayList.add(pos.offset(Direction.EAST));
+        blockPosArrayList.add(pos.offset(Direction.SOUTH));
+        blockPosArrayList.add(pos.offset(Direction.WEST));
+        blockPosArrayList.add(pos.offset(Direction.UP));
+        blockPosArrayList.add(pos.offset(Direction.DOWN));
+        for (BlockPos blockPos : blockPosArrayList) {
+            BlockState blockState = world.getBlockState(blockPos);
+            if(blockState.isIn(ModTags.Blocks.KRYSLUM_FLOWABLE_BLOCKS)){
+                System.out.println("furnacescheduletick");
+                blockState.scheduledTick((ServerWorld) world, blockPos, Random.create());
+                if(blockState.get(ModProperties.KRYSLUM_POWERED)){
+                    return 1;
+                }
+            } else if (blockState.getFluidState().isIn(ModTags.Fluids.KRYSLUM)) {
+                return 1;
+            }
+        }
+        
+        return 0;
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, ZygrinFurnaceBlockEntity blockEntity) {
         boolean bl4;
         boolean bl = blockEntity.isBurning();
         boolean bl2 = false;
-        int handleBurning = blockEntity.checkBurning();
+        int handleBurning = blockEntity.checkBurning(pos);
         switch (handleBurning){
             case 0: //burning and above 0 ticks left
                 --blockEntity.burnTime;
@@ -305,7 +336,7 @@ public class ZygrinFurnaceBlockEntity
 
     /**
      * {@return whether the provided {@code item} is in the {@link
-     * net.minecraft.registry.tag.ItemTags#NON_FLAMMABLE_WOOD non_flammable_wood} tag}
+     * ItemTags#NON_FLAMMABLE_WOOD non_flammable_wood} tag}
      */
     private static boolean isNonFlammableWood(Item item) {
         return item.getRegistryEntry().isIn(ItemTags.NON_FLAMMABLE_WOOD);

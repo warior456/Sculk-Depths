@@ -20,6 +20,9 @@ public class ModTags {
         public static final TagKey<Block> LESTER_SPAWN_BLOCKS =
                 createTag("lester_spawn_blocks");
 
+        public static final TagKey<Block> KRYSLUM_FLOWABLE_BLOCKS =
+                createTag("kryslum_flowable_blocks");
+
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, new Identifier(SculkDepths.MOD_ID, name));
         }
