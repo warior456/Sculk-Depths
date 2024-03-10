@@ -135,7 +135,6 @@ public class ZygrinFurnaceBlockEntity
         for (BlockPos blockPos : blockPosArrayList) {
             BlockState blockState = world.getBlockState(blockPos);
             if(blockState.isIn(ModTags.Blocks.KRYSLUM_FLOWABLE_BLOCKS)){
-                System.out.println("furnacescheduletick");
                 blockState.scheduledTick((ServerWorld) world, blockPos, Random.create());
                 if(blockState.get(ModProperties.KRYSLUM_POWERED)){
                     return 1;

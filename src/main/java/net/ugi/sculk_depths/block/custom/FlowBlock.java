@@ -140,10 +140,7 @@ public class FlowBlock extends FacingBlock {
         for (BlockPos blockPos : blockPosArrayList) {
             BlockState blockState = world.getBlockState(blockPos);
             if(blockState.isIn(ModTags.Blocks.KRYSLUM_FLOWABLE_BLOCKS)){
-                System.out.println(new BlockPos(blockPos.getX() - pos.getX(), blockPos.getY() - pos.getY(), blockPos.getZ() - pos.getZ()));
                 Direction direction =  Direction.fromVector(blockPos.getX() - pos.getX(), blockPos.getY() - pos.getY(), blockPos.getZ() - pos.getZ());
-
-                System.out.println(direction);
                 switch (direction){
                     case NORTH:
 
