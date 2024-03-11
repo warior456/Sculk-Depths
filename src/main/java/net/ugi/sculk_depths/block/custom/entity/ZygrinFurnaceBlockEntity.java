@@ -48,7 +48,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlockEntities;
+import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.custom.FlowBlock;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.screen.ZygrinFurnaceScreenHandler;
@@ -111,7 +113,7 @@ public class ZygrinFurnaceBlockEntity
     private int checkBurning(BlockPos pos){
         if(this.burnTime > 1) return 0;
         if(this.burnTime <= 1 && this.burnTime >= -1){
-            if(findValidKryslum(pos)>0) return 1;
+            if(findKryslumFurnace(pos)) return 1;
             //possibly fastest method is BlockPos.iterateRecursively();
 /*            for (BlockPos blockPos : BlockPos.iterate(pos.add(-20, -20, -20), pos.add(20, 20, 20))) {
                 if (!world.getFluidState(blockPos).isIn(ModTags.Fluids.KRYSLUM)) continue;
@@ -121,6 +123,37 @@ public class ZygrinFurnaceBlockEntity
         }else {
             return 3;
         }
+    }
+
+    public boolean findKryslumFurnace(BlockPos pos){
+        int foundFlowBlock = 0;
+        if (world.getBlockState(pos.offset(Direction.NORTH)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.SOUTH)) foundFlowBlock += findKryslumFlowBlock(pos.offset(Direction.NORTH),100);
+        if (world.getBlockState(pos.offset(Direction.EAST)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.WEST)) foundFlowBlock += findKryslumFlowBlock(pos.offset(Direction.EAST),100);
+        if (world.getBlockState(pos.offset(Direction.SOUTH)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.NORTH)) foundFlowBlock += findKryslumFlowBlock(pos.offset(Direction.SOUTH),100);
+        if (world.getBlockState(pos.offset(Direction.WEST)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.EAST)) foundFlowBlock += findKryslumFlowBlock(pos.offset(Direction.WEST),100);
+        if (world.getBlockState(pos.offset(Direction.UP)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.DOWN)) foundFlowBlock += findKryslumFlowBlock(pos.offset(Direction.UP),100);
+        if (world.getBlockState(pos.offset(Direction.DOWN)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.UP)) foundFlowBlock += findKryslumFlowBlock(pos.offset(Direction.DOWN),100);
+
+        return foundFlowBlock > 0;
+    }
+
+    public int findKryslumFlowBlock(BlockPos pos, int count){
+        if(count == 0) return 0;
+        if (world.getBlockState(pos.offset(Direction.NORTH)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.SOUTH)) return findKryslumFlowBlock(pos.offset(Direction.NORTH),count - 1);
+        else if (world.getBlockState(pos.offset(Direction.EAST)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.WEST)) return findKryslumFlowBlock(pos.offset(Direction.EAST),count - 1);
+        else if (world.getBlockState(pos.offset(Direction.SOUTH)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.NORTH)) return findKryslumFlowBlock(pos.offset(Direction.SOUTH),count - 1);
+        else if (world.getBlockState(pos.offset(Direction.WEST)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.EAST)) return findKryslumFlowBlock(pos.offset(Direction.WEST),count - 1);
+        else if (world.getBlockState(pos.offset(Direction.UP)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.DOWN)) return findKryslumFlowBlock(pos.offset(Direction.UP),count - 1);
+        else if (world.getBlockState(pos.offset(Direction.DOWN)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.UP)) return findKryslumFlowBlock(pos.offset(Direction.DOWN),count - 1);
+
+        else if (world.getBlockState(pos) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.SOUTH) && world.getBlockState(pos.offset(Direction.NORTH)) == ModBlocks.KRYSLUM.getDefaultState()) return 1;
+        else if (world.getBlockState(pos) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.WEST) && world.getBlockState(pos.offset(Direction.EAST)) == ModBlocks.KRYSLUM.getDefaultState()) return 1;
+        else if (world.getBlockState(pos) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.NORTH) && world.getBlockState(pos.offset(Direction.SOUTH)) == ModBlocks.KRYSLUM.getDefaultState()) return 1;
+        else if (world.getBlockState(pos) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.EAST) && world.getBlockState(pos.offset(Direction.WEST)) == ModBlocks.KRYSLUM.getDefaultState()) return 1;
+        else if (world.getBlockState(pos) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.DOWN) && world.getBlockState(pos.offset(Direction.UP)) == ModBlocks.KRYSLUM.getDefaultState()) return 1;
+        else if (world.getBlockState(pos) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.SOUTH) && world.getBlockState(pos.offset(Direction.DOWN)) == ModBlocks.KRYSLUM.getDefaultState()) return 1;
+
+        else return 0;
     }
 
     public int findValidKryslum(BlockPos pos){
