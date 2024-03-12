@@ -1,4 +1,4 @@
-## Info
+## Blocks Catalog
 
 ### Flumrock Cauldron
 
