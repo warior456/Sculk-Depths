@@ -18,7 +18,8 @@
 ![Quazarith Upgrade Step 4](https://github.com/warior456/Sculk-Depths/assets/66562258/6d822e81-cc50-4e39-a688-f39748c66535)
 ![Quazarith Upgrade Step 4-b](https://github.com/warior456/Sculk-Depths/assets/66562258/ed25e0c5-3d5c-4bf4-9785-f224eaf32d47)
 5. Finally right click your Netherite tools or armor on the cauldron
-![Quazarith Upgrade Step 5](https://github.com/warior456/Sculk-Depths/blob/wiki/assets/images/quazarith_upgrade_last_step.png)
+![Quazarith Upgrade Step 5](https://github.com/warior456/Sculk-Depths/assets/66562258/44f6f848-1a2a-4559-908c-c0482ac4758f)
+
 ## Notes: 
 * The amount of Quazarith and Crux needed to upgrade it depends on the amount of slots the main material takes up in the crafting table
   * helmet cost = 5
