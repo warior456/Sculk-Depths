@@ -29,6 +29,7 @@
 - Soosss
   - Sculk Depths main theme
   - Zinnia
+  - Sculk Depths ost 1
 # Builders:
 - Matteo_fey (warior456)
 - gems_bond (gemsb)

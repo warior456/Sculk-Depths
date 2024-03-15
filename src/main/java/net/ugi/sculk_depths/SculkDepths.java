@@ -26,6 +26,7 @@ import net.ugi.sculk_depths.screen.ModScreenHandlers;
 import net.ugi.sculk_depths.sound.ConditionalSoundPlayer;
 import net.ugi.sculk_depths.sound.ModSounds;
 import net.ugi.sculk_depths.state.property.ModProperties;
+import net.ugi.sculk_depths.world.gen.ModFeatures;
 import net.ugi.sculk_depths.world.gen.ModPlacementModifierType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,6 +73,7 @@ public class SculkDepths implements ModInitializer {
         SculkDepths.LOGGER.info("Registering ScreenHandlers for " + SculkDepths.MOD_ID);
         ModScreenHandlers.registerModScreenHandlers();
         ModPlacementModifierType.init();
+        ModFeatures.init();
 
         ServerTickEvents.START_WORLD_TICK.register(new CheckInvForCrystalItems());
 
