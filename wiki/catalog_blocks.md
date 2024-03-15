@@ -7,7 +7,7 @@
   - 12 Quazarith Pieces
 
   and it is used for crafting
-  ![Filled Kryslum Flumrock Cauldron](https://github.com/warior456/Sculk-Depths/assets/66562258/615461c4-dc53-40b7-8958-291683a24834)
+  ![Filled Kryslum Flumrock Cauldron](https://github.com/warior456/Sculk-Depths/assets/66562258/b050d4aa-9d00-45a2-a24a-5a8c2667cfbf)
 
 
 ### Zygrin Flow Block
