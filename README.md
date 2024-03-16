@@ -10,20 +10,12 @@
 - The 1.20 release no longer supports worlds created with older versions. The file "biome3.json" has been removed, causing biome3 to revert to plains. This change does not affect the 1.19 releases, where this biome will continue to be supported (for now).
 
 # ABOUT
-[Wiki](https://warior456.github.io/Sculk-Depths/)
+This mod adds a brand new dimension Sculk Depths, the name of this dimension was given by the player based on his first impressions.
+However the dimension contains so much more than just sculk, it has it's intire own ecosystem as if it's a whole new planet...
 
-This mod adds a new dimension called "Sculk Depths" to Minecraft.
+Download the mod and explore
 
-To access this dimension, follow these steps:
-
-1. Search for a deep dark biome with an ancient city.
-2. Summon a Warden and let it kill a passive mob like a cow, sheep, or horse OR kill the warden.
-3. this will drop Energy Essence which is used to craft an Energized Flint and Steel
-4. Clear all the sculk veins from the middle of the reinforced deepslate in the center of the city.
-5. Use the Energized Flint and Steel to light the portal.
-
-When entering this dimension, it is recommended to bring a netherite pickaxe because the planet is mostly made of a very hard block called Umbrusk.
-
+[Visit the wiki for more information](https://warior456.github.io/Sculk-Depths/)
 ## FEATURES
 
 (outdated list check changelog for recent additions)
