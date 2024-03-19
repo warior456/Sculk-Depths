@@ -16,7 +16,7 @@
   - Boosted crop Growth by a factor of 2,33..
   - It can act as water for normal farmland even in the nether.
 
-![Kryslum Enriched Soil with Carrots](https://github.com/warior456/Sculk-Depths/assets/66562258/a3b535b6-8d0e-464c-9609-f3547b77a58f)
+![Kryslum Enriched Soil](https://github.com/warior456/Sculk-Depths/assets/66562258/a3b535b6-8d0e-464c-9609-f3547b77a58f)
 
 ### Quazarith Ore
 Generation:
@@ -25,7 +25,7 @@ Generation:
 
 Uses:
  - Used for upgrading tools and armor
-![2024-03-15_22 55 05](https://github.com/warior456/Sculk-Depths/assets/66562258/47d856aa-8f47-419d-a410-36d6bda97df7)
+![Quazarith Ore](https://github.com/warior456/Sculk-Depths/assets/66562258/47d856aa-8f47-419d-a410-36d6bda97df7)
 
 
 ### ...
