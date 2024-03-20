@@ -25,6 +25,7 @@ Generation:
 
 Uses:
  - Used for upgrading tools and armor
+
 ![Quazarith Ore](https://github.com/warior456/Sculk-Depths/assets/66562258/47d856aa-8f47-419d-a410-36d6bda97df7)
 
 
