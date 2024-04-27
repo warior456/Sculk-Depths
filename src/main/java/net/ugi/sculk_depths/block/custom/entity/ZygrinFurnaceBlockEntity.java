@@ -156,7 +156,7 @@ public class ZygrinFurnaceBlockEntity
         else return 0;
     }
 
-    public boolean findValidKryslum(BlockPos pos){
+/*    public boolean findValidKryslum(BlockPos pos){
         ArrayList<BlockPos> blockPosArrayList = new ArrayList<BlockPos>();
         blockPosArrayList.add(pos.offset(Direction.NORTH));
         blockPosArrayList.add(pos.offset(Direction.EAST));
@@ -177,7 +177,7 @@ public class ZygrinFurnaceBlockEntity
         }
         
         return false;
-    }
+    }*/
 
     public static void tick(World world, BlockPos pos, BlockState state, ZygrinFurnaceBlockEntity blockEntity) {
         boolean bl4;

@@ -36,9 +36,7 @@ public class GlomperGlux extends Item implements Coatable{
             else {
                 Coatable.CoatBlock(blockState, world, blockPos);
             }
-
-
-
+            context.getStack().decrement(1);
             return ActionResult.SUCCESS;
 
         }
