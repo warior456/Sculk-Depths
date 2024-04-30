@@ -7,9 +7,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Heightmap;
+import net.minecraft.particle.BlockStateParticleEffect;
 
 public class CaveFallingParticle extends AscendingParticle {
 
@@ -21,7 +19,7 @@ public class CaveFallingParticle extends AscendingParticle {
 
     @Environment(value = EnvType.CLIENT)
     public static class Factory
-            implements ParticleFactory<DefaultParticleType> {
+            implements ParticleFactory<BlockStateParticleEffect> {
         private final SpriteProvider spriteProvider;
 
         public Factory(SpriteProvider spriteProvider) {
@@ -29,12 +27,9 @@ public class CaveFallingParticle extends AscendingParticle {
         }
 
         @Override
-        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double x, double y, double z, double g, double h, double i) {
-
+        public Particle createParticle(BlockStateParticleEffect parameters, ClientWorld clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
             CaveFallingParticle particle = new CaveFallingParticle(clientWorld, x, y, z, 0.4f, 0.1f, 0.4f, 0f, -0.05f, 0f, 1.0f, this.spriteProvider, 0.12f, 40, 0.005f, false);
             return particle;
         }
-
-
     }
 }

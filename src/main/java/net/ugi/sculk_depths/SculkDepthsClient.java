@@ -11,12 +11,14 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.particle.WaterSuspendParticle;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.particle.ParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.client.*;
 import net.ugi.sculk_depths.fluid.ModFluids;
-import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
+//import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
 import net.ugi.sculk_depths.particle.CaveFallingParticle;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.particle.PenebriumSporeParticle;
@@ -33,7 +35,7 @@ public class SculkDepthsClient implements ClientModInitializer {
     public void onInitializeClient() {
 
         SculkDepths.LOGGER.info("Registering tooltips for " + SculkDepths.MOD_ID);
-        CrystalUpgrade.tooltipAdd();
+        //CrystalUpgrade.tooltipAdd();
 
         SculkDepths.LOGGER.info("Registering clientSounds for " + SculkDepths.MOD_ID);
         ClientTickEvents.START_WORLD_TICK.register(new ConditionalSoundPlayerClient());

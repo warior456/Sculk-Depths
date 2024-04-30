@@ -1,8 +1,10 @@
+/*
 package net.ugi.sculk_depths.item.crystal;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -17,6 +19,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.ItemActionResult;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.enums.CrystalType;
 import net.ugi.sculk_depths.item.ModItems;
@@ -61,34 +64,34 @@ public class CrystalUpgrade extends Item {
         super(settings);
     }
 
-    public static ActionResult createCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal) {
+    public static ItemActionResult createCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal) {
         addNbtToCrystalUpgrade(stack, player, crystal);
         addAttributeToCrystalUpgrade(stack, player, crystal);
-        return ActionResult.SUCCESS;
+        return ItemActionResult.SUCCESS;
     }
     public static void addAttributeToCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal) {
         EquipmentSlot slot = EquipmentSlot.MAINHAND;
-        Multimap<EntityAttribute, EntityAttributeModifier> modifiers = stack.getAttributeModifiers(slot);
+        Multimap<EntityAttribute, EntityAttributeModifier> modifiers = (Multimap<EntityAttribute, EntityAttributeModifier>) stack.get(DataComponentTypes.ATTRIBUTE_MODIFIERS).modifiers();
         SculkDepths.LOGGER.info(modifiers.toString());
         Multimap<EntityAttribute, EntityAttributeModifier> modifiers2 = HashMultimap.create();
 
         if(stack.getItem() == ModItems.QUAZARITH_SHOVEL){
             if (crystal == CrystalType.WHITE){
-                modifiers.put(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier(UUID.randomUUID(), "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
+                modifiers.put((EntityAttribute) EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier(UUID.randomUUID(), "Attack Damage", 2, EntityAttributeModifier.Operation.ADD_VALUE));
             }
         }
 
         if(stack.getItem() == ModItems.QUAZARITH_AXE){
 
             if (crystal == CrystalType.WHITE){
-                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
+                modifiers.put((EntityAttribute) EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADD_VALUE));
             }
         }
 
         if(stack.getItem() == ModItems.QUAZARITH_PICKAXE){
 
             if (crystal == CrystalType.WHITE){
-                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
+                modifiers.put((EntityAttribute) EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADD_VALUE));
             }
         }
 
@@ -96,7 +99,7 @@ public class CrystalUpgrade extends Item {
         if(stack.getItem() == ModItems.QUAZARITH_HOE){
 
             if (crystal == CrystalType.WHITE){
-                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
+                modifiers.put((EntityAttribute) EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADD_VALUE));
             }
         }
 
@@ -222,4 +225,4 @@ public class CrystalUpgrade extends Item {
         });
     }
 
-}
+}*/

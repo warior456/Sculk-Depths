@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "sculk_depths:quazarith_block"
-            ]
+            "items": "sculk_depths:quazarith_block"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_quazarith_block",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_quazarith_block"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:quazarith_ingot"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

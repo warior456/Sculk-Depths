@@ -10,10 +10,8 @@
       "vegetation_chance": 0.1,
       "xz_radius": {
         "type": "minecraft:uniform",
-        "value": {
           "min_inclusive": 4,
           "max_inclusive": 8
-        }
       },
       "replaceable": "#sculk_depths:sculk",
       "ground_state": {

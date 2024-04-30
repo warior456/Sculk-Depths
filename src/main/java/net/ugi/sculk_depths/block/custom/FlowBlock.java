@@ -45,11 +45,6 @@ public class FlowBlock extends FacingBlock {
 
 
     @Override
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
-        return false;
-    }
-
-    @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {//todo check for kryslum on placing
         return this.getDefaultState().with(FACING, ctx.getPlayerLookDirection());
     }

@@ -5,6 +5,8 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.CauldronFluidContent;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
+import net.minecraft.entity.SpawnLocation;
+import net.minecraft.entity.SpawnLocationTypes;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.world.Heightmap;
 import net.ugi.sculk_depths.block.ModBlocks;
@@ -38,8 +40,8 @@ public class SculkDepths implements ModInitializer {
     @Override
     public void onInitialize() {
 
-        SpawnRestriction.register(ModEntities.LESTER, SpawnRestriction.Location.ON_GROUND, null, (type, world, reason, pos, random) -> true);
-        SpawnRestriction.register(ModEntities.CHOMPER_COLOSSUS, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (type, world, reason, pos, random) -> true);
+        SpawnRestriction.register(ModEntities.LESTER, SpawnLocationTypes.ON_GROUND, null, (type, world, reason, pos, random) -> true);
+        SpawnRestriction.register(ModEntities.CHOMPER_COLOSSUS, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (type, world, reason, pos, random) -> true);
 
         SculkDepths.LOGGER.info("Loading Config for " + SculkDepths.MOD_ID);
         Config.loadConfig();

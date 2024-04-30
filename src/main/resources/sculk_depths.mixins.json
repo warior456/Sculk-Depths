@@ -9,8 +9,6 @@
     "BlockMixin",
     "CropBlockMixin",
     "FarmLandBlockMixin",
-    "ItemAccessorMixin",
-    "ItemStackMixin",
     "LivingEntityMixin",
     "NoiseChunkGeneratorMixin",
     "StemBlockMixin",

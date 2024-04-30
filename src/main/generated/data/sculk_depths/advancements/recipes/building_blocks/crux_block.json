@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "sculk_depths:crux"
-            ]
+            "items": "sculk_depths:crux"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_crux",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_crux"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:crux_block"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

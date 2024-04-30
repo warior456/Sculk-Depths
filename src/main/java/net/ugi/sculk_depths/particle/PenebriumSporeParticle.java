@@ -4,12 +4,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.random.Random;
 
-import java.util.Optional;
 
 public class PenebriumSporeParticle
         extends AscendingParticle {
@@ -23,7 +20,7 @@ public class PenebriumSporeParticle
 
     @Environment(value = EnvType.CLIENT)
     public static class Factory
-            implements ParticleFactory<DefaultParticleType> {
+            implements ParticleFactory<BlockStateParticleEffect> {
         private final SpriteProvider spriteProvider;
 
         public Factory(SpriteProvider spriteProvider) {
@@ -31,7 +28,7 @@ public class PenebriumSporeParticle
         }
 
         @Override
-        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double x, double y, double z, double g, double h, double i) {
+        public Particle createParticle(BlockStateParticleEffect blockStateParticleEffect, ClientWorld clientWorld, double x, double y, double z, double g, double h, double i) {
 
             PenebriumSporeParticle particle = new PenebriumSporeParticle(clientWorld, x, y, z, 0.3f, 0.1f, 0.3f, 0f, -0.01f, 0f, 0.18f, this.spriteProvider, 1f, 40, 0.01f, false);
             particle.setColor(1,1,1);

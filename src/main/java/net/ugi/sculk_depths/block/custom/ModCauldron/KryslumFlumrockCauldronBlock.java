@@ -3,6 +3,7 @@ package net.ugi.sculk_depths.block.custom.ModCauldron;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.cauldron.CauldronBehavior;
+import net.minecraft.component.ComponentMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -15,6 +16,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.function.BooleanBiFunction;
@@ -123,7 +125,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
 
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getMainHandStack();
         CauldronBehavior cauldronBehavior = this.behaviorMap.get(itemStack.getItem());
         if(itemStack.getItem() == ModItems.KRYSLUM_BUCKET
@@ -296,17 +298,18 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock{
             return UpgradeItem(outputItem, player);
         }
 
-        return ActionResult.FAIL;
+        return ItemActionResult.FAIL;
 
     }
 
-    public ActionResult UpgradeItem(ItemStack outputItem, PlayerEntity player){
-        NbtCompound nbtCompound = player.getMainHandStack().getNbt();
-        if (nbtCompound != null) {
-            outputItem.setNbt(nbtCompound.copy());
+    public ItemActionResult UpgradeItem(ItemStack outputItem, PlayerEntity player){
+
+        ComponentMap componentMap = player.getMainHandStack().getComponents();
+        if (componentMap != null) {
+            outputItem.applyComponentsFrom(componentMap);
         }
         player.setStackInHand(Hand.MAIN_HAND, outputItem);
-        return ActionResult.SUCCESS;
+        return ItemActionResult.SUCCESS;
     }
 
     public void RemoveUsedResources(BlockState state, World world, BlockPos pos, int quazarith_pieces, int crux, int kryslum){

@@ -1,6 +1,7 @@
 package net.ugi.sculk_depths.item.crystal;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -28,8 +29,8 @@ public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick{
 
             if(armorItems.get(3).getItem() == ModItems.QUAZARITH_HELMET) {
                 ItemStack helmet = armorItems.get(3);
-                if (helmet.getNbt().get("sculk_depths.crystal") != null) {
-                    if (helmet.getNbt().get("sculk_depths.crystal").toString().equals("\"white\"")) {
+                if (helmet.get(DataComponentTypes.CUSTOM_DATA).getNbt().get("sculk_depths.crystal") != null) {
+                    if (helmet.get(DataComponentTypes.CUSTOM_DATA).getNbt().get("sculk_depths.crystal").toString().equals("\"white\"")) {
                         player.removeStatusEffect(StatusEffects.BLINDNESS);
                         player.removeStatusEffect(StatusEffects.DARKNESS);
                     }
@@ -48,10 +49,10 @@ public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick{
             //mainHand
             ItemStack mainHandStack = serverPlayer.getMainHandStack();
             if (mainHandStack.getItem() == ModItems.QUAZARITH_AXE){
-                if (mainHandStack.getNbt() != null) {
-                    if (mainHandStack.getNbt().get("sculk_depths.crystal") != null) {
+                if (mainHandStack.get(DataComponentTypes.CUSTOM_DATA).getNbt() != null) {
+                    if (mainHandStack.get(DataComponentTypes.CUSTOM_DATA).getNbt().get("sculk_depths.crystal") != null) {
                         //white crystal
-                        if (mainHandStack.getNbt().get("sculk_depths.crystal").toString().equals("\"white\"")) {
+                        if (mainHandStack.get(DataComponentTypes.CUSTOM_DATA).getNbt().get("sculk_depths.crystal").toString().equals("\"white\"")) {
 
                         }
                     }
@@ -61,10 +62,10 @@ public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick{
             //offHand
             ItemStack offHandStack = serverPlayer.getOffHandStack();
             if (offHandStack.getItem() == ModItems.QUAZARITH_AXE){
-                if (offHandStack.getNbt() != null) {
-                    if (offHandStack.getNbt().get("sculk_depths.crystal") != null) {
+                if (offHandStack.get(DataComponentTypes.CUSTOM_DATA).getNbt() != null) {
+                    if (offHandStack.get(DataComponentTypes.CUSTOM_DATA).getNbt().get("sculk_depths.crystal") != null) {
                         //white crystal
-                        if (offHandStack.getNbt().get("sculk_depths.crystal").toString().equals("\"white\"")) {
+                        if (offHandStack.get(DataComponentTypes.CUSTOM_DATA).getNbt().get("sculk_depths.crystal").toString().equals("\"white\"")) {
 
                         }
                     }
@@ -96,7 +97,7 @@ public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick{
     }*/
 }
 
-//                            int i = serverPlayer.getStatusEffect(StatusEffects.STRENGTH) != null ?
-//                                    serverPlayer.getStatusEffect(StatusEffects.STRENGTH).getAmplifier() + 1 : 0;
-//                            int j = serverPlayer.getStatusEffect(StatusEffects.STRENGTH) != null ?
-//                                    serverPlayer.getStatusEffect(StatusEffects.STRENGTH).getDuration() : 2;
+//                            int i = serverPlayer.get("statusEffect(StatusEffects.STRENGTH) != null ?
+//                                    serverPlayer.get("statusEffect(StatusEffects.STRENGTH).getAmplifier() + 1 : 0;
+//                            int j = serverPlayer.get("statusEffect(StatusEffects.STRENGTH) != null ?
+//                                    serverPlayer.get("statusEffect(StatusEffects.STRENGTH).getDuration() : 2;

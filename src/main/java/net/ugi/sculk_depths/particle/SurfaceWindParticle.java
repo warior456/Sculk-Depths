@@ -7,7 +7,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 
@@ -21,7 +21,7 @@ public class SurfaceWindParticle extends AscendingParticle {
 
     @Environment(value = EnvType.CLIENT)
     public static class Factory
-            implements ParticleFactory<DefaultParticleType> {
+            implements ParticleFactory<BlockStateParticleEffect> {
         private final SpriteProvider spriteProvider;
 
         public Factory(SpriteProvider spriteProvider) {
@@ -29,7 +29,7 @@ public class SurfaceWindParticle extends AscendingParticle {
         }
 
         @Override
-        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double x, double y, double z, double g, double h, double i) {
+        public Particle createParticle(BlockStateParticleEffect blockStateParticleEffect, ClientWorld clientWorld, double x, double y, double z, double g, double h, double i) {
             BlockPos pos = new BlockPos((int) x, (int) y, (int) z);
             // Check if the top Y position is greater than y, if so return null to spawn no particle
             if (clientWorld.getTopPosition(Heightmap.Type.MOTION_BLOCKING, pos).getY() > y) {

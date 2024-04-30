@@ -1,7 +1,9 @@
 package net.ugi.sculk_depths.item;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.tag.TagKey;
 
 import java.util.function.Supplier;
 
@@ -41,8 +43,8 @@ public enum ModToolMaterials implements ToolMaterial {
     }
 
     @Override
-    public int getMiningLevel() {
-        return this.miningLevel;
+    public TagKey<Block> getInverseTag() {
+        return null;
     }
 
     @Override

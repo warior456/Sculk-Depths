@@ -53,7 +53,7 @@ public class BackgroundRendererMixin {
             }
 
         }  else if (cameraSubmersionType == CameraSubmersionType.NONE) {
-            if(entity.getEntityWorld().getDimensionKey() == ModDimensions.SCULK_DEPTHS_TYPE) {
+            if(entity.getEntityWorld().getDimensionEntry() == ModDimensions.SCULK_DEPTHS_TYPE) {
 
                 BlockPos pos = entity.getBlockPos();
                 float y = pos.getY();

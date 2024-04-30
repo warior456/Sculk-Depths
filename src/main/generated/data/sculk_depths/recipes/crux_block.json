@@ -12,7 +12,7 @@
     "###"
   ],
   "result": {
-    "item": "sculk_depths:crux_block"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "sculk_depths:crux_block"
+  }
 }

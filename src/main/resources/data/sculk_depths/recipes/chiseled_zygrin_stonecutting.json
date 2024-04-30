@@ -3,6 +3,8 @@
   "ingredient": {
     "item": "sculk_depths:polished_zygrin"
   },
-  "result": "sculk_depths:chiseled_zygrin",
-  "count": 1
+  "result": {
+    "count": 1,
+    "id": "sculk_depths:chiseled_zygrin"
+  }
 }

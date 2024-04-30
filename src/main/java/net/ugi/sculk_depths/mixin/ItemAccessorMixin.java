@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 import java.util.UUID;
 
+/*
 @Mixin(Item.class)
 public interface ItemAccessorMixin {
     @Accessor
@@ -19,3 +20,4 @@ public interface ItemAccessorMixin {
         throw new AssertionError(); // never called
     }
 }
+*/

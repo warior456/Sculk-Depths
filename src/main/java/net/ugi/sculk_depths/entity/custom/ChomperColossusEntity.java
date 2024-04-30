@@ -28,11 +28,11 @@ public class ChomperColossusEntity extends PathAwareEntity {
         super(entityType, world);
     }
 
-    @Override
+/*    @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
         super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
         return entityData;
-    }
+    }*/
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
