@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:umbrusk_slab"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_umbrusk": {
+      "conditions": {
+        "items": [
+          {
+            "items": "sculk_depths:umbrusk"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_umbrusk"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:umbrusk_slab"
+    ]
+  }
+}

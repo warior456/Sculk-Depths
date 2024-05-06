@@ -15,5 +15,4 @@ public class WorldGenerator {
             Optional.empty(),
             Optional.empty()
     );
-
  }

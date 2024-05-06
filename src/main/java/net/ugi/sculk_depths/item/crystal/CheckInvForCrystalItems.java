@@ -17,7 +17,7 @@ public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick{
 
     @Override
     public void onStartTick(ServerWorld world) {
-        List<ServerPlayerEntity> serverPlayers = world.getPlayers();
+        /*List<ServerPlayerEntity> serverPlayers = world.getPlayers(); //Todo: reenable if game loads
         for (ServerPlayerEntity serverPlayer : serverPlayers) {
             PlayerEntity player = world.getClosestPlayer(serverPlayer.getX(),serverPlayer.getY(),serverPlayer.getZ(),0.1,false);
 
@@ -71,7 +71,7 @@ public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick{
                     }
                 }
             }
-        }
+        }*/
     }
 
     /*private static int executeModifierAdd(ServerCommandSource source, Entity

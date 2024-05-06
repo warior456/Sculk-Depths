@@ -1,7 +1,6 @@
 
 package net.ugi.sculk_depths.world.gen;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;

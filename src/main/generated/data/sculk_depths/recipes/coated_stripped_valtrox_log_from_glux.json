@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "todo",
+  "ingredients": [
+    {
+      "item": "sculk_depths:glomper_glux"
+    },
+    {
+      "item": "sculk_depths:stripped_valtrox_log"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "sculk_depths:coated_stripped_valtrox_log"
+  }
+}
