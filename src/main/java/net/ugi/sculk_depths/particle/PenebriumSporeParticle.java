@@ -5,7 +5,9 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.BlockStateParticleEffect;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.math.MathHelper;
+import org.jetbrains.annotations.Nullable;
 
 
 public class PenebriumSporeParticle
@@ -20,15 +22,16 @@ public class PenebriumSporeParticle
 
     @Environment(value = EnvType.CLIENT)
     public static class Factory
-            implements ParticleFactory<BlockStateParticleEffect> {
+            implements ParticleFactory<SimpleParticleType> {
         private final SpriteProvider spriteProvider;
 
         public Factory(SpriteProvider spriteProvider) {
             this.spriteProvider = spriteProvider;
         }
 
+        @Nullable
         @Override
-        public Particle createParticle(BlockStateParticleEffect blockStateParticleEffect, ClientWorld clientWorld, double x, double y, double z, double g, double h, double i) {
+        public Particle createParticle(SimpleParticleType parameters, ClientWorld clientWorld, double x, double y, double z, double g, double h, double i) {
 
             PenebriumSporeParticle particle = new PenebriumSporeParticle(clientWorld, x, y, z, 0.3f, 0.1f, 0.3f, 0f, -0.01f, 0f, 0.18f, this.spriteProvider, 1f, 40, 0.01f, false);
             particle.setColor(1,1,1);
@@ -36,7 +39,6 @@ public class PenebriumSporeParticle
             particle.gravityStrength = 0.01f;
             return particle;
         }
-
 
     }
 }
