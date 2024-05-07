@@ -20,6 +20,9 @@ public class ModTags {
         public static final TagKey<Block> LESTER_SPAWN_BLOCKS =
                 createTag("lester_spawn_blocks");
 
+        public static final TagKey<Block> INCORRECT_FOR_QUAZARITH_TOOL =
+                createTag("incorrect_for_quazarith_tool");
+
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, new Identifier(SculkDepths.MOD_ID, name));
         }

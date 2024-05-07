@@ -8,6 +8,8 @@ import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.BlockStateParticleEffect;
+import net.minecraft.particle.SimpleParticleType;
+import org.jetbrains.annotations.Nullable;
 
 public class CaveFallingParticle extends AscendingParticle {
 
@@ -19,15 +21,16 @@ public class CaveFallingParticle extends AscendingParticle {
 
     @Environment(value = EnvType.CLIENT)
     public static class Factory
-            implements ParticleFactory<BlockStateParticleEffect> {
+            implements ParticleFactory<SimpleParticleType> {
         private final SpriteProvider spriteProvider;
 
         public Factory(SpriteProvider spriteProvider) {
             this.spriteProvider = spriteProvider;
         }
 
+        @Nullable
         @Override
-        public Particle createParticle(BlockStateParticleEffect parameters, ClientWorld clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        public Particle createParticle(SimpleParticleType parameters, ClientWorld clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
             CaveFallingParticle particle = new CaveFallingParticle(clientWorld, x, y, z, 0.4f, 0.1f, 0.4f, 0f, -0.05f, 0f, 1.0f, this.spriteProvider, 0.12f, 40, 0.005f, false);
             return particle;
         }
