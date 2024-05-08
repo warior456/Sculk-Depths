@@ -127,6 +127,14 @@ public class ZygrinFurnaceBlockEntity
 
     public boolean findKryslumFurnace(BlockPos pos){
         int foundFlowBlock = 0;
+
+        if (world.getFluidState(pos.offset(Direction.NORTH)).isIn(ModTags.Fluids.KRYSLUM)) return true;
+        if (world.getFluidState(pos.offset(Direction.EAST)).isIn(ModTags.Fluids.KRYSLUM)) return true;
+        if (world.getFluidState(pos.offset(Direction.SOUTH)).isIn(ModTags.Fluids.KRYSLUM)) return true;
+        if (world.getFluidState(pos.offset(Direction.WEST)).isIn(ModTags.Fluids.KRYSLUM)) return true;
+        if (world.getFluidState(pos.offset(Direction.UP)).isIn(ModTags.Fluids.KRYSLUM)) return true;
+        if (world.getFluidState(pos.offset(Direction.DOWN)).isIn(ModTags.Fluids.KRYSLUM)) return true;
+
         if (world.getBlockState(pos.offset(Direction.NORTH)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.SOUTH)) foundFlowBlock += findKryslumFlowBlock(pos.offset(Direction.NORTH),256);
         if (world.getBlockState(pos.offset(Direction.EAST)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.WEST)) foundFlowBlock += findKryslumFlowBlock(pos.offset(Direction.EAST),256);
         if (world.getBlockState(pos.offset(Direction.SOUTH)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.NORTH)) foundFlowBlock += findKryslumFlowBlock(pos.offset(Direction.SOUTH),256);
