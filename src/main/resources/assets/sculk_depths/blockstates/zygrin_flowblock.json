@@ -1,57 +1,30 @@
 {
   "variants": {
-    "facing=down,kryslum_powered=false": {
-      "model": "sculk_depths:block/zygrin_flowblock",
-      "x": 180
-    },
-    "facing=east,kryslum_powered=false": {
-      "model": "sculk_depths:block/zygrin_flowblock",
-      "x": 90,
-      "y": 90
-    },
-    "facing=north,kryslum_powered=false": {
-      "model": "sculk_depths:block/zygrin_flowblock",
-      "x": 90
-    },
-    "facing=south,kryslum_powered=false": {
-      "model": "sculk_depths:block/zygrin_flowblock",
-      "x": 90,
-      "y": 180
-    },
-    "facing=up,kryslum_powered=false": {
+    "facing=down": {
       "model": "sculk_depths:block/zygrin_flowblock"
     },
-    "facing=west,kryslum_powered=false": {
+    "facing=east": {
       "model": "sculk_depths:block/zygrin_flowblock",
       "x": 90,
       "y": 270
     },
-
-    "facing=down,kryslum_powered=true": {
-      "model": "sculk_depths:block/zygrin_flowblock_powered",
-      "x": 180
-    },
-    "facing=east,kryslum_powered=true": {
-      "model": "sculk_depths:block/zygrin_flowblock_powered",
-      "x": 90,
-      "y": 90
-    },
-    "facing=north,kryslum_powered=true": {
-      "model": "sculk_depths:block/zygrin_flowblock_powered",
-      "x": 90
-    },
-    "facing=south,kryslum_powered=true": {
-      "model": "sculk_depths:block/zygrin_flowblock_powered",
+    "facing=north": {
+      "model": "sculk_depths:block/zygrin_flowblock",
       "x": 90,
       "y": 180
     },
-    "facing=up,kryslum_powered=true": {
-      "model": "sculk_depths:block/zygrin_flowblock_powered"
+    "facing=south": {
+      "model": "sculk_depths:block/zygrin_flowblock",
+      "x": 90
     },
-    "facing=west,kryslum_powered=true": {
-      "model": "sculk_depths:block/zygrin_flowblock_powered",
+    "facing=up": {
+      "model": "sculk_depths:block/zygrin_flowblock",
+      "x": 180
+    },
+    "facing=west": {
+      "model": "sculk_depths:block/zygrin_flowblock",
       "x": 90,
-      "y": 270
+      "y": 90
     }
   }
 }

@@ -14,5 +14,4 @@ public class ModProperties {
     public static final IntProperty SPORE_LEVEL = IntProperty.of("spore", 1, 12);
     public static final EnumProperty<CrystalType> CRYSTAL_TYPE = EnumProperty.of("crystal", CrystalType.class);
 
-    public static final BooleanProperty KRYSLUM_POWERED = BooleanProperty.of("kryslum_powered");
 }

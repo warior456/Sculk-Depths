@@ -25,7 +25,7 @@ public class FlowBlock extends FacingBlock {
 
     public FlowBlock(AbstractBlock.Settings settings) {
         super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.UP).with(ModProperties.KRYSLUM_POWERED, false));
+        this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.UP));
     }
 
     @Override
@@ -42,7 +42,7 @@ public class FlowBlock extends FacingBlock {
         return Y_SHAPE;
     }
 
-    @Override
+/*    @Override
     @Deprecated
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         ArrayList<BlockPos> blockPosArrayList = new ArrayList<BlockPos>();
@@ -133,9 +133,9 @@ public class FlowBlock extends FacingBlock {
                 break;
         }
 
-    }
+    }*/
 
-    public boolean kryslumPoweredOrNeighbourPowered(ServerWorld world, ArrayList<BlockPos> blockPosArrayList, BlockPos pos){
+    /*public boolean kryslumPoweredOrNeighbourPowered(ServerWorld world, ArrayList<BlockPos> blockPosArrayList, BlockPos pos){
 
         for (BlockPos blockPos : blockPosArrayList) {
             BlockState blockState = world.getBlockState(blockPos);
@@ -210,7 +210,7 @@ public class FlowBlock extends FacingBlock {
             }
         }
         return false;
-    }
+    }*/
 
     @Override
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
@@ -218,12 +218,12 @@ public class FlowBlock extends FacingBlock {
     }
 
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {//todo check for kryslum on placing
-        return this.getDefaultState().with(FACING, ctx.getPlayerLookDirection());
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        return this.getDefaultState().with(FACING, ctx.getSide().getOpposite());
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING).add(ModProperties.KRYSLUM_POWERED);
+        builder.add(FACING);
     }
 }
