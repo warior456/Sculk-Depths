@@ -1,9 +1,10 @@
+<img src="https://github.com/warior456/Sculk-Depths/assets/66562258/076ff4f4-a41c-4bf4-b3f3-a7c5d5f936d9"  width="60%" alt="Sculk Depths">
+
 # Welcome to the Sculk-Depths wiki!
 
 The wiki will be updated according to updates and essential stuff will be added by us
 For less essential stuff we rely on community contributions
 
-# Sculk Depths
 
 # Important Notes
 - versions 0.0.9_b and earlier require Geckolib
