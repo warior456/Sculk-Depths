@@ -127,6 +127,14 @@ public class ZygrinFurnaceBlockEntity
 
     public boolean findKryslumFurnace(BlockPos pos){
         int foundFlowBlock = 0;
+
+        if (world.getBlockState(pos.offset(Direction.NORTH)) == ModBlocks.KRYSLUM.getDefaultState()) return true;
+        if (world.getBlockState(pos.offset(Direction.EAST)) == ModBlocks.KRYSLUM.getDefaultState()) return true;
+        if (world.getBlockState(pos.offset(Direction.SOUTH)) == ModBlocks.KRYSLUM.getDefaultState()) return true;
+        if (world.getBlockState(pos.offset(Direction.WEST)) == ModBlocks.KRYSLUM.getDefaultState()) return true;
+        if (world.getBlockState(pos.offset(Direction.UP)) == ModBlocks.KRYSLUM.getDefaultState()) return true;
+        if (world.getBlockState(pos.offset(Direction.DOWN)) == ModBlocks.KRYSLUM.getDefaultState()) return true;
+
         if (world.getBlockState(pos.offset(Direction.NORTH)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.SOUTH)) foundFlowBlock += findKryslumFlowBlock(pos.offset(Direction.NORTH),256);
         if (world.getBlockState(pos.offset(Direction.EAST)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.WEST)) foundFlowBlock += findKryslumFlowBlock(pos.offset(Direction.EAST),256);
         if (world.getBlockState(pos.offset(Direction.SOUTH)) == ModBlocks.ZYGRIN_FLOWBLOCK.getDefaultState().with(Properties.FACING,Direction.NORTH)) foundFlowBlock += findKryslumFlowBlock(pos.offset(Direction.SOUTH),256);
@@ -156,7 +164,7 @@ public class ZygrinFurnaceBlockEntity
         else return 0;
     }
 
-    public boolean findValidKryslum(BlockPos pos){
+/*    public boolean findValidKryslum(BlockPos pos){
         ArrayList<BlockPos> blockPosArrayList = new ArrayList<BlockPos>();
         blockPosArrayList.add(pos.offset(Direction.NORTH));
         blockPosArrayList.add(pos.offset(Direction.EAST));
@@ -177,7 +185,7 @@ public class ZygrinFurnaceBlockEntity
         }
         
         return false;
-    }
+    }*/
 
     public static void tick(World world, BlockPos pos, BlockState state, ZygrinFurnaceBlockEntity blockEntity) {
         boolean bl4;
