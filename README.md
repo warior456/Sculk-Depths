@@ -7,7 +7,7 @@
 - versions 0.0.9_b and earlier require Geckolib
 - Quilt has been found to work with the right combination of fabric api and quilt loader but is not (yet) officialy supported
 - This mod is in alpha, we keep ourselves the right to make breaking changes (we will try to minimize damage where possible)
-- The 1.20 release no longer supports worlds created with older versions. The file "biome3.json" has been removed, causing biome3 to revert to plains. This change does not affect the 1.19 releases, where this biome will continue to be supported (for now).
+- Upgrading from 1.19 to 1.20 is unsupported and will break biomes!
 
 # ABOUT
 This mod adds a brand new dimension Sculk Depths, the name of this dimension was given by the player based on his first impressions.
@@ -17,39 +17,13 @@ Download the mod and explore
 
 [Visit the wiki for more information](https://warior456.github.io/Sculk-Depths/)
 ## FEATURES
-
-(outdated list check changelog for recent additions)
-- New dimension with custom world generation.
-- Four new biomes:
-  - 2 Cave Biomes:
-    - Cephlera caves
-    - Sculk Caves
-  - 2 Surface Biomes
-    - Dried Forest
-    - Petrified Forest
-- 2 New Structures:
-  - A Laboratory
-  - An underground Lab
-- 3 new mobs:
-  - The Glomper: It attacks players using an elytra, so be careful while flying around!
-  - Lester: Might jumpscare you while mining Quazarith
-  - Chomper Colossus: work in progress spawns randomly on the surface
-- Energy Essence drops when the warden kills a passive mob or when the warden is killed, this is used to craft an Energized Flint and Steel to open the portal.
-- Energized Flint and Steel: can light most blocks with Soul Fire and lights the portal
-- new blocks:
-  - Cephlera Light
-  - Flumrock Cauldron
-  - Zygrin Light
-  - Zygrin Flow Block
-- Nine new block sets:
-  - Umbrusk (stone type)
-  - Umbrusk Bricks
-  - Valtrox (wood type)
-  - Dried Valtrox
-  - Petrified Valtrox (stone type)
-  - Zygrin (stone type)
-  - Zygrin Bricks
-  - Polished Zygrin
+- New dimension with four new biomes
+- 2 New Structures
+- 3 new mobs
+- many new blocks and blocksets
+- Many new items, including:
+  - Energy Essence: drops when the warden kills a passive mob or when the warden is killed, this is used to craft an Energized Flint and Steel to open the portal.
+  - Energized Flint and Steel: can light most blocks with Soul Fire and lights the portal
 
 ## Screenshots
 

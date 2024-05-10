@@ -27,6 +27,7 @@ public class ModModelProvider extends FabricModelProvider {
 
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.QUAZARITH_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUX_BLOCK);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.AURIC_SPORE_BLOCK);
 
 
         valtroxPlankPool.fenceGate(ModBlocks.VALTROX_FENCE_GATE);
