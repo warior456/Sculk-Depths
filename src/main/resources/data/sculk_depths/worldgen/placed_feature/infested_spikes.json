@@ -1,5 +1,8 @@
 {
-  "feature": "minecraft:ice_spike",
+  "feature": {
+    "type": "sculk_depths:configurable_spikes",
+    "config": {}
+  },
   "placement": [
     {
       "type": "minecraft:count",

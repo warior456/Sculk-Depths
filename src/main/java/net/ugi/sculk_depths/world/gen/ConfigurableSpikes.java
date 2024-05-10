@@ -5,11 +5,17 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.StructureWorldAccess;
+import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.ugi.sculk_depths.block.ModBlocks;
 
 public class ConfigurableSpikes
         extends Feature<DefaultFeatureConfig> {
@@ -20,48 +26,103 @@ public class ConfigurableSpikes
 
     @Override
     public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
-        int l;
-        int k;
+
         BlockPos blockPos = context.getOrigin();
         Random random = context.getRandom();
         StructureWorldAccess structureWorldAccess = context.getWorld();
-        while (structureWorldAccess.isAir(blockPos) && blockPos.getY() > structureWorldAccess.getBottomY() + 2) {
+        while (structureWorldAccess.isAir(blockPos) && blockPos.getY() > structureWorldAccess.getBottomY() + 2) {//downwards raycast
             blockPos = blockPos.down();
         }
-        if (!structureWorldAccess.getBlockState(blockPos).isOf(Blocks.SNOW_BLOCK)) {
-            return false;
+        int topRange = 20; //xz coordinaterange
+        int yTop = random.nextInt(8) + 23; //height multiplier (size is bound atm) //original 4 + 7
+        int xTopOffset = random.nextBetween(-topRange, topRange);
+        int zTopOffset = random.nextBetween(-topRange, topRange);
+        Vec3d relativeVector = new Vec3d(xTopOffset, yTop, zTopOffset);//vector in the shape of the center line of blocks
+
+        final int totalLength = (int) Math.sqrt( Math.pow(yTop,2) + Math.sqrt( Math.pow(xTopOffset,2) + Math.pow(zTopOffset,2))); //pythagoras length
+        int length = totalLength;
+
+        int radiusSetting = totalLength / 15 + random.nextInt(1);//radius first step of calculation
+
+
+        Vec3d normalized3dVector = relativeVector.normalize(); //used for moving setblock one step at a time
+        double x = blockPos.getX();
+        double y = blockPos.getY();
+        double z = blockPos.getZ();
+
+        while (length>0){
+            int radius = 2;//todo second step of radius calculation based on local location relative to length
+            System.out.println("length: " + length);
+            System.out.println("radiusSetting: " + radiusSetting);
+            System.out.println("radius: " + radius);
+            BlockPos currentCenterBlockPos = new BlockPos(MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z)); //current blockpos
+            //sets a block on the floor rounded coordinates
+            this.setBlockState(structureWorldAccess, new BlockPos( MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z)), ModBlocks.PETRIFIED_VALTROX_LOG.getDefaultState());
+            //non rounded tracking of coordinates
+            x = x + normalized3dVector.getX();
+            y = y + normalized3dVector.getY();
+            z = z + normalized3dVector.getZ();
+
+            int radiusSquared = radius * radius;
+            Iterable<BlockPos> blockPosIterable = BlockPos.iterateOutwards(new BlockPos( MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z)), radius, radius, radius);
+            blockPosIterable.forEach(blockPos1 -> {
+                int distanceSquared = (int) blockPos1.getSquaredDistance(currentCenterBlockPos);
+                if (distanceSquared <= radiusSquared) {//ball instead of rectangle
+                    this.setBlockState(structureWorldAccess, blockPos1, ModBlocks.PETRIFIED_VALTROX_LOG.getDefaultState());
+                }
+            });
+            length--;
         }
-        blockPos = blockPos.up(random.nextInt(4));
-        int i = random.nextInt(4) + 7;
-        int j = i / 4 + random.nextInt(2);
-        if (j > 1 && random.nextInt(60) == 0) {
+        return true;
+    }
+
+
+    /*@Override
+    public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
+        int l;
+        int yOfsset;
+        BlockPos blockPos = context.getOrigin();
+        Random random = context.getRandom();
+        StructureWorldAccess structureWorldAccess = context.getWorld();
+        while (structureWorldAccess.isAir(blockPos) && blockPos.getY() > structureWorldAccess.getBottomY() + 2) {//downwards raycast
+            blockPos = blockPos.down();
+        }
+        blockPos = blockPos.up(random.nextInt(4)); //height ofsett with wierd support pillar (missing blocks) //original 4
+        int i = random.nextInt(8) + 8; //height multiplier (size is bound atm) //original 4 + 7
+        int j = i / 4 + random.nextInt(1); //pancake multiplier (higher = flatter) //original 2
+        if (j > 1 && random.nextInt(60) == 0) { //chance to start higher? //original 60
             blockPos = blockPos.up(10 + random.nextInt(30));
         }
-        for (k = 0; k < i; ++k) {
-            float f = (1.0f - (float)k / (float)i) * (float)j;
+        for (yOfsset = 0; yOfsset < i; ++yOfsset) {
+            float f = (1.0f - (float)yOfsset / i) * j;
             l = MathHelper.ceil(f);
-            for (int m = -l; m <= l; ++m) {
-                float g = (float)MathHelper.abs(m) - 0.25f;
-                for (int n = -l; n <= l; ++n) {
-                    float h = (float)MathHelper.abs(n) - 0.25f;
-                    if ((m != 0 || n != 0) && g * g + h * h > f * f || (m == -l || m == l || n == -l || n == l) && random.nextFloat() > 0.75f) continue;
-                    BlockState blockState = structureWorldAccess.getBlockState(blockPos.add(m, k, n));
-                    if (blockState.isAir() || net.minecraft.world.gen.feature.IceSpikeFeature.isSoil(blockState) || blockState.isOf(Blocks.SNOW_BLOCK) || blockState.isOf(Blocks.ICE)) {
-                        this.setBlockState(structureWorldAccess, blockPos.add(m, k, n), Blocks.PACKED_ICE.getDefaultState());
+            for (int xOfsset = -l; xOfsset <= l; ++xOfsset) {
+                float g = (float)MathHelper.abs(xOfsset) - 0.25f;
+
+                for (int zOfsset = -l; zOfsset <= l; ++zOfsset) {
+                    float h = (float)MathHelper.abs(zOfsset) - 0.25f;
+
+                    if ((xOfsset != 0 || zOfsset != 0) && g * g + h * h > f * f || (xOfsset == -l || xOfsset == l || zOfsset == -l || zOfsset == l) && random.nextFloat() > 0.75f) continue;
+
+                    BlockState blockState = structureWorldAccess.getBlockState(blockPos.add(xOfsset, yOfsset, zOfsset));
+
+                    if (blockState.isAir() || blockState.isOf(ModBlocks.AMALGAMITE)) { //check if the block is allowed to be replaced
+                        this.setBlockState(structureWorldAccess, blockPos.add(xOfsset, yOfsset, zOfsset), ModBlocks.PETRIFIED_VALTROX_LOG.getDefaultState());
                     }
-                    if (k == 0 || l <= 1 || !(blockState = structureWorldAccess.getBlockState(blockPos.add(m, -k, n))).isAir() && !net.minecraft.world.gen.feature.IceSpikeFeature.isSoil(blockState) && !blockState.isOf(Blocks.SNOW_BLOCK) && !blockState.isOf(Blocks.ICE)) continue;
-                    this.setBlockState(structureWorldAccess, blockPos.add(m, -k, n), Blocks.PACKED_ICE.getDefaultState());
+                    //   yoffset is 0 or l? smaller than 1 OR nOt(set blockstate = blockstatefrompos)=air
+                    if (yOfsset == 0 || l <= 1 || !(structureWorldAccess.getBlockState(blockPos.add(xOfsset, -yOfsset, zOfsset))).isAir() && !blockState.isOf(ModBlocks.AMALGAMITE)) continue;
+                    this.setBlockState(structureWorldAccess, blockPos.add(xOfsset, -yOfsset, zOfsset), ModBlocks.COATED_STRIPPED_VALTROX_WOOD.getDefaultState());
                 }
             }
         }
-        k = j - 1;
-        if (k < 0) {
-            k = 0;
-        } else if (k > 1) {
-            k = 1;
+        yOfsset = j - 1;
+        if (yOfsset < 0) {
+            yOfsset = 0;
+        } else if (yOfsset > 1) {
+            yOfsset = 1;
         }
-        for (int o = -k; o <= k; ++o) {
-            for (l = -k; l <= k; ++l) {
+        for (int o = -yOfsset; o <= yOfsset; ++o) {
+            for (l = -yOfsset; l <= yOfsset; ++l) {
                 BlockState blockState2;
                 BlockPos blockPos2 = blockPos.add(o, -1, l);
                 int p = 50;
@@ -69,7 +130,7 @@ public class ConfigurableSpikes
                     p = random.nextInt(5);
                 }
                 while (blockPos2.getY() > 50 && ((blockState2 = structureWorldAccess.getBlockState(blockPos2)).isAir() || net.minecraft.world.gen.feature.IceSpikeFeature.isSoil(blockState2) || blockState2.isOf(Blocks.SNOW_BLOCK) || blockState2.isOf(Blocks.ICE) || blockState2.isOf(Blocks.PACKED_ICE))) {
-                    this.setBlockState(structureWorldAccess, blockPos2, Blocks.PACKED_ICE.getDefaultState());
+                    this.setBlockState(structureWorldAccess, blockPos2, ModBlocks.CRUX_BLOCK.getDefaultState()); //no idea what triggers this
                     blockPos2 = blockPos2.down();
                     if (--p > 0) continue;
                     blockPos2 = blockPos2.down(random.nextInt(5) + 1);
@@ -78,5 +139,6 @@ public class ConfigurableSpikes
             }
         }
         return true;
-    }
+    }*/
+
 }
