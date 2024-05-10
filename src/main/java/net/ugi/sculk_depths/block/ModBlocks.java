@@ -388,6 +388,13 @@ public class ModBlocks {
     public static final CustomPortalBlock SCULK_DEPTHS_PORTAL = (CustomPortalBlock) registerBlockWithoutBlockItem("sculk_depths_portal",
             new CustomPortalBlock(FabricBlockSettings.copyOf(Blocks.NETHER_PORTAL).luminance(6).dropsNothing().noCollision().strength(-1.0f,3600000.0f)),ModItemGroup.SCULK_DEPTHS );
 
+    //auric
+    public static final Block AURIC_SPORE_BLOCK = registerBlock("auric_spore_block",
+            new Block(FabricBlockSettings.create().strength(0.3f).sounds(BlockSoundGroup.MOSS_BLOCK)), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block AURIC_SPORE_SPOUTS = registerBlock("auric_spore_sprouts",
+            new SproutsBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES)), ModItemGroup.SCULK_DEPTHS);
+
     //fluids
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new FluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.copyOf(Blocks.WATER).replaceable().noCollision().strength(100.0f).pistonBehavior(PistonBehavior.DESTROY).dropsNothing().liquid().solid().sounds(BlockSoundGroup.SCULK)), ModItemGroup.SCULK_DEPTHS);
 
