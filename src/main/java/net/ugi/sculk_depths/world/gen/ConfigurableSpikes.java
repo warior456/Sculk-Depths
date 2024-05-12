@@ -39,7 +39,7 @@ public class ConfigurableSpikes
         if (!context.getWorld().getBlockState(blockPos.down()).isOf(ModBlocks.AMALGAMITE)) return false;
 
         //config
-        int topOffsetRange = 20; //xz coordinaterange
+        int topOffsetRange = 16; //xz coordinaterange
         int maxHeight = random.nextInt(20) + 27; //height of spike
         int cruxChance = 5; //percentage
 
