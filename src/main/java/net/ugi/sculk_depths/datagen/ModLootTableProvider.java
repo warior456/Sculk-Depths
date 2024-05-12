@@ -3,15 +3,19 @@ package net.ugi.sculk_depths.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.server.loottable.BlockLootTableGenerator;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
+import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.LeafEntry;
 import net.minecraft.loot.entry.LootPoolEntry;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
+import net.minecraft.loot.function.CopyNameLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.ugi.sculk_depths.block.ModBlocks;
 
@@ -43,7 +47,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.LARGUTH, drops(ModBlocks.LARGUTH.asItem()));
 
         addDropWithSilkTouch(ModBlocks.ZYGRIN_LIGHT);
-
+        addDrop(ModBlocks.ZYGRIN_FURNACE, this::nameableContainerDrops);
 
 /*        addDrop(ModBlocks.VALTROX_LOG, ModBlocks.VALTROX_LOG.asItem());
         addDrop(ModBlocks.VALTROX_WOOD, ModBlocks.VALTROX_WOOD.asItem());
@@ -65,6 +69,10 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.PENEBRIUM_SHROOM);
         addDropWithSilkTouch(ModBlocks.PENEBRIUM_SHROOM_STEM);
         addDropWithSilkTouch(ModBlocks.PENEBRIUM_SHROOM_BLOCK);
+    }
+
+    public LootTable.Builder nameableContainerDrops(Block drop) {
+        return LootTable.builder().pool(this.addSurvivesExplosionCondition(drop, LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0f)).with(ItemEntry.builder(drop).apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.BLOCK_ENTITY)))));
     }
 
     public LootTable.Builder copperLikeOreDrops(Block drop, Item item) {
