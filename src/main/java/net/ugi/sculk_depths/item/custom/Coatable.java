@@ -5,6 +5,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -69,11 +70,12 @@ public interface Coatable {
         Block coatedblock = getCoatedBlock(block);
 
         if (block == ModBlocks.VALTROX_DOOR){
+            world.setBlockState(pos,Blocks.AIR.getDefaultState());
+            world.setBlockState(pos.up(),Blocks.AIR.getDefaultState());
             world.setBlockState(pos, coatedblock.getStateWithProperties(state.with(HALF, DoubleBlockHalf.LOWER)));
             world.setBlockState(pos.up(), coatedblock.getStateWithProperties(state.with(HALF, DoubleBlockHalf.UPPER)));
-        } else {
-            world.setBlockState(pos, coatedblock.getStateWithProperties(state));
         }
+        else world.setBlockState(pos, coatedblock.getStateWithProperties(state));
     }
 
     static void unCoatBlock(BlockState state, World world, BlockPos pos) {
