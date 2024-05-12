@@ -76,7 +76,6 @@ public class ConfigurableSpikes
             double finalX = x;
             double finalY = y;
             double finalZ = z;
-            int finalLength = length;
             blockPosIterable.forEach(blockPos1 -> {
                 int distance = (int) ((blockPos1.getX() - finalX)*(blockPos1.getX() - finalX) + ((blockPos1.getY() - finalY)/1.5)*((blockPos1.getY() - finalY)/1.5) + (blockPos1.getZ() - finalZ)*(blockPos1.getZ() - finalZ));
                 if (distance <= radiusSquared) {//ball instead of rectangle
