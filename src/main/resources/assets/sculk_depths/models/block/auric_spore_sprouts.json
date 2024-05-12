@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "sculk_depths:block/auric_spore_sprouts"
+  }
+}

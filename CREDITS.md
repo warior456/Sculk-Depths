@@ -4,6 +4,7 @@
 # Textures:
 - gems_bond (gemsb):
   - most unmentioned textures
+  - (the rest of the penebrium set that is not mentioned)
 - Matteo_fey (warior456):
   - probably not many
 - DKXLY
@@ -16,6 +17,17 @@
   - crux.png
   - penebrium_spore_bucket.png
   - penebrium_stem
+- LordYvain
+  - amalgamite
+  - auric_shroom_block
+  - auric_shroom_stem
+  - auric_spore_sprouts 
+  - zygrin_furnace_side
+- jimtendo_
+  - penebrium_shroom
+  - ui/zygrin_furnace
+  - zygrin_furnace_front
+  - zygrin_furnace_top
 # Models and animations:
 - gems_bond (gemsb):
   - glomper
@@ -38,5 +50,6 @@
 - unroman
   - uk_au
 # Ideas and Concept art:
-  - LordYvain
-    - Chomper Colossus (base visual idea)
+- LordYvain
+  - Chomper Colossus (base visual idea)
+  - Infected Columns (basic + working out the ideas)
