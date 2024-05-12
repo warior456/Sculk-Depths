@@ -58,12 +58,10 @@ public class ConfigurableSpikes
 
         while (length>0){
             int radius = MathHelper.ceil(radiusSetting * (length+0.5f)/totalLength);//todo second step of radius calculation based on local location relative to length
-            //System.out.println("length: " + length);
-            //System.out.println("radiusSetting: " + radiusSetting);
-            //System.out.println("radius: " + radius);
+
             BlockPos currentCenterBlockPos = new BlockPos((int)Math.round(x), (int)Math.round(y), (int)Math.round(z)); //current blockpos
-            //sets a block on the floor rounded coordinates
-            this.setBlockState(structureWorldAccess, new BlockPos( (int)Math.round(x), (int)Math.round(y), (int)Math.round(z)), ModBlocks.PETRIFIED_VALTROX_LOG.getDefaultState());
+            //sets a block in the center of the spike/column
+            this.setBlockState(structureWorldAccess, currentCenterBlockPos, ModBlocks.PETRIFIED_VALTROX_LOG.getDefaultState());
             //non rounded tracking of coordinates
             x = x + normalized3dVector.getX();
             y = y + normalized3dVector.getY();
@@ -73,10 +71,9 @@ public class ConfigurableSpikes
             Iterable<BlockPos> blockPosIterable = BlockPos.iterateOutwards(new BlockPos( (int)Math.round(x), (int)Math.round(y), (int)Math.round(z)), radius, radius, radius);
             blockPosIterable.forEach(blockPos1 -> {
                 int distanceSquared = (int) blockPos1.getSquaredDistance(currentCenterBlockPos);
-/*                if (distanceSquared <= radiusSquared) {//ball instead of rectangle
-
-                }*/
-                this.setBlockState(structureWorldAccess, blockPos1, ModBlocks.PETRIFIED_VALTROX_LOG.getDefaultState());
+                if (distanceSquared <= radiusSquared) {//ball instead of rectangle
+                    this.setBlockState(structureWorldAccess, blockPos1, ModBlocks.PETRIFIED_VALTROX_LOG.getDefaultState());
+                }
             });
             length--;
         }
