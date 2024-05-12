@@ -1,6 +1,7 @@
 package net.ugi.sculk_depths.world.gen;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -28,13 +29,18 @@ public class ConfigurableSpikes
     public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
 
         BlockPos blockPos = context.getOrigin();
+
         Random random = context.getRandom();
         StructureWorldAccess structureWorldAccess = context.getWorld();
-        while (structureWorldAccess.isAir(blockPos) && blockPos.getY() > structureWorldAccess.getBottomY() + 2) {//downwards raycast
+        /*while (structureWorldAccess.isAir(blockPos) && blockPos.getY() > structureWorldAccess.getBottomY() + 2) {//downwards raycast
             blockPos = blockPos.down();
-        }
+        }*/
+
+        if (context.getWorld().getBlockState(blockPos.down()).isOf(ModBlocks.PETRIFIED_VALTROX_LOG)) return false;
+        if (context.getWorld().getBlockState(blockPos.down()).isOf(Blocks.AIR)) return false;
+
         int topRange = 20; //xz coordinaterange
-        int yTop = random.nextInt(8) + 23; //height multiplier (size is bound atm) //original 4 + 7
+        int yTop = random.nextInt(20) + 10; //height multiplier (size is bound atm) //original 4 + 7
         int xTopOffset = random.nextBetween(-topRange, topRange);
         int zTopOffset = random.nextBetween(-topRange, topRange);
         Vec3d relativeVector = new Vec3d(xTopOffset, yTop, zTopOffset);//vector in the shape of the center line of blocks
@@ -51,20 +57,20 @@ public class ConfigurableSpikes
         double z = blockPos.getZ();
 
         while (length>0){
-            int radius = 2;//todo second step of radius calculation based on local location relative to length
-            System.out.println("length: " + length);
-            System.out.println("radiusSetting: " + radiusSetting);
-            System.out.println("radius: " + radius);
-            BlockPos currentCenterBlockPos = new BlockPos(MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z)); //current blockpos
+            int radius = 3;//todo second step of radius calculation based on local location relative to length
+            //System.out.println("length: " + length);
+            //System.out.println("radiusSetting: " + radiusSetting);
+            //System.out.println("radius: " + radius);
+            BlockPos currentCenterBlockPos = new BlockPos((int)Math.round(x), (int)Math.round(y), (int)Math.round(z)); //current blockpos
             //sets a block on the floor rounded coordinates
-            this.setBlockState(structureWorldAccess, new BlockPos( MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z)), ModBlocks.PETRIFIED_VALTROX_LOG.getDefaultState());
+            this.setBlockState(structureWorldAccess, new BlockPos( (int)Math.round(x), (int)Math.round(y), (int)Math.round(z)), ModBlocks.PETRIFIED_VALTROX_LOG.getDefaultState());
             //non rounded tracking of coordinates
             x = x + normalized3dVector.getX();
             y = y + normalized3dVector.getY();
             z = z + normalized3dVector.getZ();
 
             int radiusSquared = radius * radius;
-            Iterable<BlockPos> blockPosIterable = BlockPos.iterateOutwards(new BlockPos( MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z)), radius, radius, radius);
+            Iterable<BlockPos> blockPosIterable = BlockPos.iterateOutwards(new BlockPos( (int)Math.round(x), (int)Math.round(y), (int)Math.round(z)), radius, 0, radius);
             blockPosIterable.forEach(blockPos1 -> {
                 int distanceSquared = (int) blockPos1.getSquaredDistance(currentCenterBlockPos);
                 if (distanceSquared <= radiusSquared) {//ball instead of rectangle
