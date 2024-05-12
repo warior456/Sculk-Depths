@@ -48,7 +48,7 @@ public class ConfigurableSpikes
         final int totalLength = (int) Math.sqrt( Math.pow(yTop,2) + Math.sqrt( Math.pow(xTopOffset,2) + Math.pow(zTopOffset,2))); //pythagoras length
         int length = totalLength;
 
-        int radiusSetting = totalLength / 15 + random.nextInt(1);//radius first step of calculation
+        int radiusSetting = totalLength / 10 + random.nextInt(2);//radius first step of calculation
 
 
         Vec3d normalized3dVector = relativeVector.normalize(); //used for moving setblock one step at a time
@@ -57,7 +57,7 @@ public class ConfigurableSpikes
         double z = blockPos.getZ();
 
         while (length>0){
-            int radius = 3;//todo second step of radius calculation based on local location relative to length
+            int radius = MathHelper.ceil(radiusSetting * (length+0.5f)/totalLength);//todo second step of radius calculation based on local location relative to length
             //System.out.println("length: " + length);
             //System.out.println("radiusSetting: " + radiusSetting);
             //System.out.println("radius: " + radius);
@@ -70,12 +70,13 @@ public class ConfigurableSpikes
             z = z + normalized3dVector.getZ();
 
             int radiusSquared = radius * radius;
-            Iterable<BlockPos> blockPosIterable = BlockPos.iterateOutwards(new BlockPos( (int)Math.round(x), (int)Math.round(y), (int)Math.round(z)), radius, 0, radius);
+            Iterable<BlockPos> blockPosIterable = BlockPos.iterateOutwards(new BlockPos( (int)Math.round(x), (int)Math.round(y), (int)Math.round(z)), radius, radius, radius);
             blockPosIterable.forEach(blockPos1 -> {
                 int distanceSquared = (int) blockPos1.getSquaredDistance(currentCenterBlockPos);
-                if (distanceSquared <= radiusSquared) {//ball instead of rectangle
-                    this.setBlockState(structureWorldAccess, blockPos1, ModBlocks.PETRIFIED_VALTROX_LOG.getDefaultState());
-                }
+/*                if (distanceSquared <= radiusSquared) {//ball instead of rectangle
+
+                }*/
+                this.setBlockState(structureWorldAccess, blockPos1, ModBlocks.PETRIFIED_VALTROX_LOG.getDefaultState());
             });
             length--;
         }
