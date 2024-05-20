@@ -23,9 +23,9 @@
     },
     "particle": {
       "options": {
-        "type": "sculk_depths:surface_wind"
+        "type": "sculk_depths:auric_spores"
       },
-      "probability": 0.02
+      "probability": 0.005
     }
   },
   "spawners": {
