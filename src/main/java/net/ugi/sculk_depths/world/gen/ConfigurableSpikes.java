@@ -16,10 +16,17 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.Callable;
+
 public class ConfigurableSpikes
-        extends Feature<DefaultFeatureConfig> {
+        extends Feature<DefaultFeatureConfig> { 
+    Block[] canSpawnOn;
 
     public ConfigurableSpikes(Codec<DefaultFeatureConfig> configCodec) {
         super(configCodec);
@@ -27,25 +34,48 @@ public class ConfigurableSpikes
 
     @Override
     public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
-
         BlockPos blockPos = context.getOrigin();
+
+        Random random = context.getRandom();
+        int topOffsetRangeMax = 16; //xz coordinaterange
+        int topOffsetRangeMin = 0;
+        int maxHeight = random.nextInt(20) + 27; //height of spike
+        int cruxChance = 5; //percentage
+        this.canSpawnOn = new Block[] {ModBlocks.AURIC_SPORE_BLOCK};
+
+        return makeSpike(context,blockPos,topOffsetRangeMax, topOffsetRangeMin,maxHeight,cruxChance);
+    }
+    public static boolean genSpike(FeatureContext<DefaultFeatureConfig> context, BlockPos blockPos, int topOffsetRangeMax,int topOffsetRangeMin, int maxHeight, int cruxChance, Block[] canSpawnOn){
+        ConfigurableSpikes obj = new ConfigurableSpikes(DefaultFeatureConfig.CODEC);
+        obj.canSpawnOn = canSpawnOn;
+        return obj.makeSpike(context, blockPos, topOffsetRangeMax,topOffsetRangeMin, maxHeight, cruxChance);
+
+    }
+    public boolean makeSpike(FeatureContext<DefaultFeatureConfig> context, BlockPos blockPos, int topOffsetRangeMax,int topOffsetRangeMin, int maxHeight, int cruxChance) {
 
         Random random = context.getRandom();
         StructureWorldAccess structureWorldAccess = context.getWorld();
         /*while (structureWorldAccess.isAir(blockPos) && blockPos.getY() > structureWorldAccess.getBottomY() + 2) {//downwards raycast
             blockPos = blockPos.down();
         }*/
+        //raycast down 20 blocks
+        int i = 0;
+        while(i < 20 && context.getWorld().getBlockState(blockPos).isOf(Blocks.AIR)){
+            blockPos = blockPos.down();
+            i++;
+        }
 
-        if (!context.getWorld().getBlockState(blockPos.down()).isOf(ModBlocks.AMALGAMITE)) return false;
+        for (Block block : this.canSpawnOn) {
+            if(!context.getWorld().getBlockState(blockPos.down()).isOf(block)){
+                return false;
+            }
+            
+        }
 
-        //config
-        int topOffsetRange = 16; //xz coordinaterange
-        int maxHeight = random.nextInt(20) + 27; //height of spike
-        int cruxChance = 5; //percentage
-
-
-        int xTopOffset = random.nextBetween(-topOffsetRange, topOffsetRange);//x pos of top
-        int zTopOffset = random.nextBetween(-topOffsetRange, topOffsetRange);//z pos of top
+        int radiusTopOffset = (int)Math.sqrt((random.nextBetween(0, topOffsetRangeMax-topOffsetRangeMin)+topOffsetRangeMin)*(random.nextBetween(0, topOffsetRangeMax-topOffsetRangeMin)+topOffsetRangeMin));
+        int angleTopOffset =  random.nextBetween(0, 360);
+        int xTopOffset = (int)Math.round(Math.cos(Math.toRadians(angleTopOffset))*radiusTopOffset);
+        int zTopOffset = (int)Math.round(Math.sin(Math.toRadians(angleTopOffset))*radiusTopOffset);
 
         Vec3d relativeVector = new Vec3d(xTopOffset, maxHeight, zTopOffset);//vector in the direction of the center line of blocks (base to top)
         Vec3d normalized3dVector = relativeVector.normalize(); //used for moving setblock one step at a time
@@ -79,7 +109,8 @@ public class ConfigurableSpikes
             blockPosIterable.forEach(blockPos1 -> {
                 int distance = (int) ((blockPos1.getX() - finalX)*(blockPos1.getX() - finalX) + ((blockPos1.getY() - finalY)/1.5)*((blockPos1.getY() - finalY)/1.5) + (blockPos1.getZ() - finalZ)*(blockPos1.getZ() - finalZ));
                 if (distance <= radiusSquared) {//ball instead of rectangle
-                    if (spawnCrux < cruxChance) {
+                    if(context.getWorld().getBlockState(blockPos1).isOf(ModBlocks.LARGUTH)){}
+                    else if (spawnCrux < cruxChance) {
                         if(!context.getWorld().getBlockState(blockPos1.up()).isOf(Blocks.AIR) &&
                                 !context.getWorld().getBlockState(blockPos1.down()).isOf(Blocks.AIR) &&
                                 !context.getWorld().getBlockState(blockPos1.north()).isOf(Blocks.AIR) &&
