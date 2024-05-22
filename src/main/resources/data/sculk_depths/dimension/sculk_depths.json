@@ -395,18 +395,6 @@
                 "sculk_depths:dried_valtrox_forest"
               ]
             },
-            "then_run": {
-              "type": "minecraft:condition",
-              "if_true": {
-                "type": "minecraft:vertical_gradient",
-                "random_name": "sculk_depths:crumbling_dirt",
-                "true_at_and_below": {
-                  "absolute": 150
-                },
-                "false_at_and_above": {
-                  "absolute": 150
-                }
-              },
               "then_run": {
                 "type": "minecraft:condition",
                 "if_true": {
@@ -421,6 +409,30 @@
                   "result_state": {
                     "Name": "sculk_depths:crumbling_dirt"
                   }
+                }
+              }
+          },
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:biome",
+              "biome_is": [
+                "sculk_depths:infected_columns"
+              ]
+            },
+            "then_run": {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:stone_depth",
+                "offset": 1,
+                "surface_type": "floor",
+                "add_surface_depth": false,
+                "secondary_depth_range": 0
+              },
+              "then_run": {
+                "type": "minecraft:block",
+                "result_state": {
+                  "Name": "sculk_depths:auric_spore_block"
                 }
               }
             }
