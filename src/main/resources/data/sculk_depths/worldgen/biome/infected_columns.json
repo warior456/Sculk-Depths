@@ -44,7 +44,7 @@
     ]
   },
   "features": [
-    [
+    ["sculk_depths:pillars"
     ],
     ["sculk_depths:infested_spikes"],
     [],
