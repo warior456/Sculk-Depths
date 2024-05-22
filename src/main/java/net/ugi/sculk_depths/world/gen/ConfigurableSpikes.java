@@ -72,7 +72,7 @@ public class ConfigurableSpikes
             
         }
 
-        int radiusTopOffset = (int)Math.sqrt((random.nextBetween(0, topOffsetRangeMax-topOffsetRangeMin)+topOffsetRangeMin)*(random.nextBetween(0, topOffsetRangeMax-topOffsetRangeMin)+topOffsetRangeMin));
+        int radiusTopOffset = (int)Math.ceil(Math.sqrt(random.nextBetween(2, (topOffsetRangeMax - topOffsetRangeMin) * 16) + topOffsetRangeMin * 16));
         int angleTopOffset =  random.nextBetween(0, 360);
         int xTopOffset = (int)Math.round(Math.cos(Math.toRadians(angleTopOffset))*radiusTopOffset);
         int zTopOffset = (int)Math.round(Math.sin(Math.toRadians(angleTopOffset))*radiusTopOffset);
