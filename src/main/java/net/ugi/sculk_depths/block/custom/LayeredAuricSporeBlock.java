@@ -57,8 +57,4 @@ public class LayeredAuricSporeBlock extends SnowBlock {
 
     }
 
-    @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return LAYERS_TO_SHAPE[(Integer)state.get(LAYERS)];
-    }
 }
