@@ -10,6 +10,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
+import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
+import net.minecraft.loot.condition.EntityPropertiesLootCondition;
+import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.entry.AlternativeEntry;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.LeafEntry;
 import net.minecraft.loot.entry.LootPoolEntry;
@@ -20,7 +24,9 @@ import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.operator.BoundedIntUnaryOperator;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
+import net.minecraft.predicate.StatePredicate;
 import net.ugi.sculk_depths.block.ModBlocks;
+import net.ugi.sculk_depths.block.custom.LayeredAuricSporeBlock;
 
 public class ModLootTableProvider extends FabricBlockLootTableProvider {
     public ModLootTableProvider(FabricDataOutput dataOutput) {
@@ -76,8 +82,14 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.AURIC_SPORE_SPROUTS);
         addDropWithSilkTouch(ModBlocks.AURIC_SHROOM_STEM);
         addDropWithSilkTouch(ModBlocks.AURIC_SHROOM_BLOCK);
+        addDropWithSilkTouch(ModBlocks.AURIC_SPORE_BLOCK);
         addDrop(ModBlocks.AURIC_SHROOM_BLOCK, mushroomBlockDrops(ModBlocks.AURIC_SHROOM_BLOCK, ModBlocks.AURIC_SPORE_SPROUTS));
 
+        addDrop(ModBlocks.AURIC_SPORE_LAYER, (block) -> {
+            return LootTable.builder().pool(LootPool.builder().conditionally(EntityPropertiesLootCondition.create(LootContext.EntityTarget.THIS)).with(AlternativeEntry.builder(LayeredAuricSporeBlock.LAYERS.getValues() , (integer) -> {
+                return ItemEntry.builder(ModBlocks.AURIC_SPORE_LAYER).apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create((float) integer ))).conditionally(BlockStatePropertyLootCondition.builder(block).properties(StatePredicate.Builder.create().exactMatch(LayeredAuricSporeBlock.LAYERS, integer )));
+            }).conditionally(WITH_SILK_TOUCH)));
+        });
     }
 
     public LootTable.Builder mushroomBlockDrops(Block dropWithSilkTouch, ItemConvertible drop) {

@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.kyrptonaught.customportalapi.CustomPortalBlock;
 import net.minecraft.block.*;
+import net.minecraft.block.enums.Instrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -391,6 +392,11 @@ public class ModBlocks {
     //auric //TODO check blocksettings
     public static final Block AURIC_SPORE_BLOCK = registerBlock("auric_spore_block",
             new ShroomBlock(FabricBlockSettings.create().strength(0.3f).sounds(BlockSoundGroup.MOSS_BLOCK)), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block AURIC_SPORE_LAYER = registerBlock("auric_spore_layer",
+            new LayeredAuricSporeBlock(FabricBlockSettings.create().mapColor(MapColor.PALE_YELLOW).instrument(Instrument.SNARE).strength(0.5F).sounds(BlockSoundGroup.SAND).notSolid().ticksRandomly()
+                    .blockVision((state, world, pos) -> {return (Integer)state.get(SnowBlock.LAYERS) >= 8;})
+                    .pistonBehavior(PistonBehavior.DESTROY)), ModItemGroup.SCULK_DEPTHS);
     public static final Block AURIC_SHROOM_BLOCK = registerBlock("auric_shroom_block",
             new ShroomBlock(FabricBlockSettings.create().strength(0.3f).sounds(BlockSoundGroup.MOSS_BLOCK)), ModItemGroup.SCULK_DEPTHS);
 
