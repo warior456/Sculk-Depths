@@ -13,7 +13,7 @@ import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
 import net.ugi.sculk_depths.config.Config;
 import net.ugi.sculk_depths.config.ConfigHandler;
 import net.ugi.sculk_depths.entity.ModEntities;
-import net.ugi.sculk_depths.entity.custom.ChomperColossusEntity;
+import net.ugi.sculk_depths.entity.custom.multipart.ChomperColossusEntity;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import net.ugi.sculk_depths.entity.custom.LesterEntity;
 import net.ugi.sculk_depths.fluid.ModFluids;

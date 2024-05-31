@@ -2,13 +2,10 @@ package net.ugi.sculk_depths.entity.client;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.mob.PathAwareEntity;
 import net.ugi.sculk_depths.entity.animations.ModAnimations;
-import net.ugi.sculk_depths.entity.custom.ChomperColossusEntity;
-import net.ugi.sculk_depths.entity.custom.LesterEntity;
+import net.ugi.sculk_depths.entity.custom.multipart.ChomperColossusEntity;
 
 public class ChomperColossusModel <T extends ChomperColossusEntity> extends SinglePartEntityModel<T> {
 

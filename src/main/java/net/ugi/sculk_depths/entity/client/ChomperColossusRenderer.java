@@ -6,7 +6,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.SculkDepths;
-import net.ugi.sculk_depths.entity.custom.ChomperColossusEntity;
+import net.ugi.sculk_depths.entity.custom.multipart.ChomperColossusEntity;
 
 public class ChomperColossusRenderer extends MobEntityRenderer<ChomperColossusEntity, ChomperColossusModel<ChomperColossusEntity>> {
     private static final Identifier TEXTURE = new Identifier(SculkDepths.MOD_ID, "textures/entity/chomper_colossus.png");

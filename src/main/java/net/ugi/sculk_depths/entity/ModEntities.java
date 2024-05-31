@@ -9,9 +9,10 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.SculkDepths;
-import net.ugi.sculk_depths.entity.custom.ChomperColossusEntity;
+import net.ugi.sculk_depths.entity.custom.multipart.ChomperColossusEntity;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import net.ugi.sculk_depths.entity.custom.LesterEntity;
+import net.ugi.sculk_depths.entity.custom.multipart.MultipartEntity;
 
 public class ModEntities {
     public static final EntityType<GlomperEntity> GLOMPER = Registry.register(Registries.ENTITY_TYPE,
