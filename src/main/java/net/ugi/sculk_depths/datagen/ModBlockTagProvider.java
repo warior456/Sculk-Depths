@@ -59,6 +59,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.PETRIFIED_VALTROX_BUTTON)
 
                 .add(ModBlocks.ZYGRIN)
+                .add(ModBlocks.ZYGRIN_FURNACE)
                 .add(ModBlocks.ZYGRIN_STAIRS)
                 .add(ModBlocks.ZYGRIN_SLAB)
                 .add(ModBlocks.ZYGRIN_WALL)
