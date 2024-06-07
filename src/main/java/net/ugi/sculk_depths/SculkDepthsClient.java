@@ -9,12 +9,22 @@ import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.impl.client.rendering.EntityRendererRegistryImpl;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.entity.EnderDragonEntityRenderer;
+import net.minecraft.client.render.entity.EntityRenderers;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.client.*;
+import net.ugi.sculk_depths.entity.custom.multipart.ChomperColossusEntity;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
 import net.ugi.sculk_depths.particle.*;
@@ -25,6 +35,8 @@ import net.ugi.sculk_depths.screen.ZygrinFurnaceScreen;
 import net.ugi.sculk_depths.sound.ConditionalSoundPlayerClient;
 import net.ugi.sculk_depths.sound.SoundPlayerGetterClient;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
+
+import static com.ibm.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 public class SculkDepthsClient implements ClientModInitializer {
 
@@ -61,6 +73,10 @@ public class SculkDepthsClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.GLOMPER, GlomperRenderer::new);
         EntityRendererRegistry.register(ModEntities.LESTER, LesterRenderer::new);
         EntityRendererRegistry.register(ModEntities.CHOMPER_COLOSSUS, ChomperColossusRenderer::new);
+        //EntityRendererRegistry.register(ModEntities.CHOMPER_COLOSSUS, ChomperColossusRenderer::new);
+        //Registry.register(Registries.ENTITY_TYPE, new Identifier(SculkDepths.MOD_ID, "chomper_colossus"), EntityType.Builder.create(ChomperColossusEntity::new, SpawnGroup.MONSTER).makeFireImmune().setDimensions(16.0f, 8.0f).maxTrackingRange(10).build(String.valueOf(new Identifier(SculkDepths.MOD_ID, "chomper_colossus"))));
+
+
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.GLOMPER, GlomperModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.LESTER, LesterModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CHOMPER_COLOSSUS, ChomperColossusModel::getTexturedModelData);

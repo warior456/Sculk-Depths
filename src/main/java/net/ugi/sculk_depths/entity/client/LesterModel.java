@@ -1,5 +1,7 @@
 package net.ugi.sculk_depths.entity.client;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
@@ -10,6 +12,7 @@ import net.ugi.sculk_depths.entity.custom.LesterEntity;
 // Made with Blockbench 4.6.5
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
+@Environment(value= EnvType.CLIENT)
 public class LesterModel <T extends LesterEntity> extends SinglePartEntityModel<T> {
 	private final ModelPart lester;
 

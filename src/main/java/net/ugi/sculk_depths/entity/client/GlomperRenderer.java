@@ -1,5 +1,7 @@
 package net.ugi.sculk_depths.entity.client;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.RenderLayer;
@@ -21,7 +23,7 @@ import net.minecraft.world.LightType;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import net.ugi.sculk_depths.entity.custom.LesterEntity;
-
+@Environment(value= EnvType.CLIENT)
 public class GlomperRenderer extends MobEntityRenderer<GlomperEntity, GlomperModel<GlomperEntity>> {
     public static final Identifier GLOMPER_TEXTURE = new Identifier(SculkDepths.MOD_ID, "textures/entity/glomper.png");
 

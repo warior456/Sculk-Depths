@@ -8,16 +8,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
-import net.ugi.sculk_depths.entity.custom.multipart.MultipartEntity;
 import org.jetbrains.annotations.Nullable;
 
-public class EntityPart
+public class ChomperColossusPart
         extends Entity {
-    public final MultipartEntity owner;
+    public final ChomperColossusEntity owner;
     public final String name;
     private final EntityDimensions partDimensions;
 
-    public EntityPart(MultipartEntity owner, String name, float width, float height) {
+    public ChomperColossusPart(ChomperColossusEntity owner, String name, float width, float height) {
         super(owner.getType(), owner.getWorld());
         this.partDimensions = EntityDimensions.changing(width, height);
         this.calculateDimensions();
