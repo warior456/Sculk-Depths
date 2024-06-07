@@ -49,8 +49,8 @@ public class ModBlocks {
     public static final Block LARGUTH = registerBlock("larguth",
             new Block(AbstractBlock.Settings.copy(Blocks.OBSIDIAN).strength(40.0f,1000f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
-    public static final Block FURNACE = registerBlockWithoutBlockItem("furnace", //TODO RETURN TO NORMAL BLOCK AFTER 0.0.10 release
-            new ModFurnaceBlock(AbstractBlock.Settings.copy(Blocks.FURNACE).strength(10.0f,10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+    public static final Block ZYGRIN_FURNACE = registerBlock("zygrin_furnace",
+            new ZygrinFurnaceBlock(AbstractBlock.Settings.copy(Blocks.FURNACE).strength(10.0f,10f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
 
     //umbrusk blockset
@@ -368,11 +368,10 @@ public class ModBlocks {
 
     //crystals
 
-    //TODO RETURN ALL OF THESE BACK TO NORMAL BLOCK AFTER 0.0.10 release
-    public static final Block WHITE_CRYSTAL_BLOCK = registerBlockWithoutBlockItem("white_crystal_block", ModBlocks.createCrystalBlock(DyeColor.WHITE), ModItemGroup.SCULK_DEPTHS);
-    public static final Block BLUE_CRYSTAL_BLOCK = registerBlockWithoutBlockItem("blue_crystal_block", ModBlocks.createCrystalBlock(DyeColor.BLUE), ModItemGroup.SCULK_DEPTHS);
-    public static final Block ORANGE_CRYSTAL_BLOCK = registerBlockWithoutBlockItem("orange_crystal_block", ModBlocks.createCrystalBlock(DyeColor.ORANGE), ModItemGroup.SCULK_DEPTHS);
-    public static final Block LIME_CRYSTAL_BLOCK = registerBlockWithoutBlockItem("lime_crystal_block", ModBlocks.createCrystalBlock(DyeColor.LIME), ModItemGroup.SCULK_DEPTHS);
+    public static final Block WHITE_CRYSTAL_BLOCK = registerBlock("white_crystal_block", ModBlocks.createCrystalBlock(DyeColor.WHITE), ModItemGroup.SCULK_DEPTHS);
+    public static final Block BLUE_CRYSTAL_BLOCK = registerBlock("blue_crystal_block", ModBlocks.createCrystalBlock(DyeColor.BLUE), ModItemGroup.SCULK_DEPTHS);
+    public static final Block ORANGE_CRYSTAL_BLOCK = registerBlock("orange_crystal_block", ModBlocks.createCrystalBlock(DyeColor.ORANGE), ModItemGroup.SCULK_DEPTHS);
+    public static final Block LIME_CRYSTAL_BLOCK = registerBlock("lime_crystal_block", ModBlocks.createCrystalBlock(DyeColor.LIME), ModItemGroup.SCULK_DEPTHS);
 
     //penebrium
     public static final Block PENEBRIUM_SHROOM = registerBlock("penebrium_shroom",
@@ -390,6 +389,23 @@ public class ModBlocks {
     //misc
     public static final CustomPortalBlock SCULK_DEPTHS_PORTAL = (CustomPortalBlock) registerBlockWithoutBlockItem("sculk_depths_portal",
             new CustomPortalBlock(AbstractBlock.Settings.copy(Blocks.NETHER_PORTAL).luminance((state) -> 6).dropsNothing().noCollision().strength(-1.0f,3600000.0f)),ModItemGroup.SCULK_DEPTHS );
+
+    //auric //TODO check blocksettings
+    public static final Block AURIC_SPORE_BLOCK = registerBlock("auric_spore_block",
+            new ShroomBlock(FabricBlockSettings.create().strength(0.3f).sounds(BlockSoundGroup.MOSS_BLOCK)), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block AURIC_SPORE_LAYER = registerBlock("auric_spore_layer",
+            new LayeredAuricSporeBlock(FabricBlockSettings.create().mapColor(MapColor.PALE_YELLOW).instrument(Instrument.SNARE).strength(0.5F).sounds(BlockSoundGroup.SAND).notSolid().ticksRandomly()
+                    .blockVision((state, world, pos) -> {return (Integer)state.get(SnowBlock.LAYERS) >= 8;})
+                    .pistonBehavior(PistonBehavior.DESTROY)), ModItemGroup.SCULK_DEPTHS);
+    public static final Block AURIC_SHROOM_BLOCK = registerBlock("auric_shroom_block",
+            new ShroomBlock(FabricBlockSettings.create().strength(0.3f).sounds(BlockSoundGroup.MOSS_BLOCK)), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block AURIC_SHROOM_STEM = registerBlock("auric_shroom_stem",
+            new ShroomBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block AURIC_SPORE_SPROUTS = registerBlock("auric_spore_sprouts",
+            new ShroomPlantBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES), ModConfiguredFeatures.AURIC_SHROOM) , ModItemGroup.SCULK_DEPTHS);//todo
 
     //fluids
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new FluidBlock(ModFluids.KRYSLUM_STILL, AbstractBlock.Settings.copy(Blocks.WATER).replaceable().noCollision().strength(100.0f).pistonBehavior(PistonBehavior.DESTROY).dropsNothing().liquid().solid().sounds(BlockSoundGroup.SCULK)), ModItemGroup.SCULK_DEPTHS);

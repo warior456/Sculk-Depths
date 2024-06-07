@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "sculk_depths:block/zygrin_furnace_front",
+    "side": "sculk_depths:block/zygrin_furnace_side",
+    "top": "sculk_depths:block/zygrin_furnace_top"
+  }
+}

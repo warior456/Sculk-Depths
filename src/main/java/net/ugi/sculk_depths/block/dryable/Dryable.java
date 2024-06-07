@@ -5,6 +5,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -68,13 +69,14 @@ public interface Dryable {
         Block block = state.getBlock();
 
         Block driedblock = getDriedBlock(block);
-        world.setBlockState(pos, driedblock.getStateWithProperties(state));
 
         if (block == ModBlocks.VALTROX_DOOR){
-            world.setBlockState(pos.up(), driedblock.getStateWithProperties(state.with(HALF, DoubleBlockHalf.UPPER)));
+            world.setBlockState(pos, Blocks.AIR.getDefaultState());
+            world.setBlockState(pos.up(),Blocks.AIR.getDefaultState());
             world.setBlockState(pos, driedblock.getStateWithProperties(state.with(HALF, DoubleBlockHalf.LOWER)));
             world.setBlockState(pos.up(), driedblock.getStateWithProperties(state.with(HALF, DoubleBlockHalf.UPPER)));
         }
+        else world.setBlockState(pos, driedblock.getStateWithProperties(state));
     }
 
     static void ReviveBlock(BlockState state, World world, BlockPos pos) {

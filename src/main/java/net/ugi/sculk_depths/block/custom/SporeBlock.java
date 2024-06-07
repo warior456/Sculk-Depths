@@ -2,8 +2,6 @@ package net.ugi.sculk_depths.block.custom;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MushroomBlock;
-import net.minecraft.particle.ParticleEffect;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
@@ -26,7 +24,7 @@ import java.util.Optional;
 import java.util.function.BiPredicate;
 
 
-public class SporeBlock extends PenebriumShroomBlock {
+public class SporeBlock extends ShroomBlock {
 
     private static final VoxelShape DRIP_COLLISION_SHAPE = Block.createCuboidShape(6.0, 0.0, 6.0, 10.0, 16.0, 10.0);
 

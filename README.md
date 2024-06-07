@@ -4,50 +4,26 @@
 #### Interested? join our discord: https://discord.gg/dxANwW23Ub
 
 # Important Notes
-- This mods depends on Geckolib
+- versions 0.0.9_b and earlier require Geckolib
 - Quilt has been found to work with the right combination of fabric api and quilt loader but is not (yet) officialy supported
 - This mod is in alpha, we keep ourselves the right to make breaking changes (we will try to minimize damage where possible)
-- The 1.20 release no longer supports worlds created with older versions. The file "biome3.json" has been removed, causing biome3 to revert to plains. This change does not affect the 1.19 releases, where this biome will continue to be supported (for now).
+- Upgrading from 1.19 to 1.20 is unsupported and will break biomes!
 
 # ABOUT
-[Wiki](https://warior456.github.io/Sculk-Depths/)
+This mod adds a brand new dimension Sculk Depths, the name of this dimension was given by the player based on his first impressions.
+However the dimension contains so much more than just sculk, it has it's intire own ecosystem as if it's a whole new planet...
 
-This mod adds a new dimension called "Sculk Depths" to Minecraft.
+Download the mod and explore
 
-To access this dimension, follow these steps:
-
-1. Search for a deep dark biome with an ancient city.
-2. Summon a Warden and let it kill a passive mob like a cow, sheep, or horse OR kill the warden.
-3. this will drop Energy Essence which is used to craft an Energized Flint and Steel
-4. Clear all the sculk veins from the middle of the reinforced deepslate in the center of the city.
-5. Use the Energized Flint and Steel to light the portal.
-
-When entering this dimension, it is recommended to bring a netherite pickaxe because the planet is mostly made of a very hard block called Umbrusk.
-
+[Visit the wiki for more information](https://warior456.github.io/Sculk-Depths/)
 ## FEATURES
-
-- New dimension with custom world generation.
-- Four new biomes.
-- 2 New Structures:
-  - A Laboratory
-  - An underground Lab
-- A new mob: The Glomper. It attacks players using an elytra, so be careful while flying around!
-- Energy Essence drops when the warden kills a passive mob or when the warden is killed, this is used to craft an Energized Flint and Steel to open the portal.
-- Energized Flint and Steel: can light most blocks with Soul Fire and lights the portal
-- new blocks:
-  - Cephlera Light
-  - Flumrock Cauldron
-  - Zygrin Light
-  - Zygrin Flow Block
-- Nine new block sets:
-  - Umbrusk (stone type)
-  - Umbrusk Bricks
-  - Valtrox (wood type)
-  - Dried Valtrox
-  - Petrified Valtrox (stone type)
-  - Zygrin (stone type)
-  - Zygrin Bricks
-  - Polished Zygrin
+- New dimension with four new biomes
+- 2 New Structures
+- 3 new mobs
+- many new blocks and blocksets
+- Many new items, including:
+  - Energy Essence: drops when the warden kills a passive mob or when the warden is killed, this is used to craft an Energized Flint and Steel to open the portal.
+  - Energized Flint and Steel: can light most blocks with Soul Fire and lights the portal
 
 ## Screenshots
 
@@ -55,13 +31,12 @@ When entering this dimension, it is recommended to bring a netherite pickaxe bec
   <summary>Click to view screenshots</summary>
   
   ![Sculk Depths portal](https://github.com/warior456/Sculk-Depths/assets/66562258/de043541-5ea0-430d-b137-3b56628469cb)
-  ![image](https://user-images.githubusercontent.com/66562258/226136962-843025cf-957b-4331-a343-f8b4e9265709.png)
-  ![image](https://user-images.githubusercontent.com/66562258/226136978-d1683dd1-d642-4cae-a204-0a92fb0ad2ba.png)
-  ![image](https://user-images.githubusercontent.com/66562258/226213541-25528269-7c6c-46cd-8c4e-f0bab01fd724.png)
-  ![image](https://user-images.githubusercontent.com/66562258/227038354-7217dba3-a006-4754-badc-6ff53b1db8f1.png)
-  ![image](https://github.com/warior456/Sculk-Depths/assets/66562258/5c4b29a9-0670-4d8c-be8e-60e0255e51b8)
-  ![image](https://github.com/warior456/Sculk-Depths/assets/66562258/90f1eb2c-3cb5-423f-913c-5021326b142a)
-  ![image](https://github.com/warior456/Sculk-Depths/assets/66562258/cd48ee13-0355-4928-86b3-0ba684f9d54d)
+  ![Cephlera Caves](https://github.com/warior456/Sculk-Depths/assets/66562258/5676fd14-0ad4-4bee-8cb5-ad1ed80537be)
+  ![Laboratory](https://github.com/warior456/Sculk-Depths/assets/66562258/5c4b29a9-0670-4d8c-be8e-60e0255e51b8)
+  ![Underground Lab](https://github.com/warior456/Sculk-Depths/assets/66562258/90f1eb2c-3cb5-423f-913c-5021326b142a)
+  ![Sculk Caves](https://user-images.githubusercontent.com/66562258/226136962-843025cf-957b-4331-a343-f8b4e9265709.png)
+  ![Sculk Caves](https://user-images.githubusercontent.com/66562258/226136978-d1683dd1-d642-4cae-a204-0a92fb0ad2ba.png)
+  ![Cephlera Caves](https://github.com/warior456/Sculk-Depths/assets/66562258/cd48ee13-0355-4928-86b3-0ba684f9d54d)
   
 </details>
 

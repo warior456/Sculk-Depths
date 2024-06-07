@@ -22,6 +22,9 @@ public class ModTags {
 
         public static final TagKey<Block> INCORRECT_FOR_QUAZARITH_TOOL =
                 createTag("incorrect_for_quazarith_tool");
+                
+        public static final TagKey<Block> KRYSLUM_FLOWABLE_BLOCKS =
+                createTag("kryslum_flowable_blocks");
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, new Identifier(SculkDepths.MOD_ID, name));

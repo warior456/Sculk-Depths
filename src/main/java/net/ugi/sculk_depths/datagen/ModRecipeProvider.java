@@ -13,6 +13,10 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.ShapelessRecipe;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.block.Blocks;
+import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
@@ -27,6 +31,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     ////https://github.com/Tutorials-By-Kaupenjoe/Fabric-Tutorial-1.20.X/blob/a1ce57390adb5ef0f1cd6ba7a0bf6b1b659074f5/src/main/java/net/kaupenjoe/tutorialmod/datagen/ModRecipeProvider.java
 
 
+
     @Override
     public void generate(RecipeExporter exporter) {
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_ZYGRIN, ModBlocks.ZYGRIN);
@@ -39,6 +44,13 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         StairsRecipe(exporter, ModBlocks.UMBRUSK, ModBlocks.UMBRUSK_STAIRS);
         SlabRecipe(exporter, ModBlocks.UMBRUSK, ModBlocks.UMBRUSK_SLAB);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.AURIC_SPORE_LAYER.asItem(), 6)
+            .pattern("###")
+            .input('#', ModBlocks.AURIC_SPORE_BLOCK)
+            .criterion(hasItem(ModBlocks.AURIC_SPORE_BLOCK), conditionsFromItem(ModBlocks.AURIC_SPORE_BLOCK))
+            .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.AURIC_SPORE_LAYER)));
+
 //todo recipecategory check
 //todo recipegroups
 
@@ -60,7 +72,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('X', input.asItem())
                 .criterion(hasItem(input.asItem()), conditionsFromItem(input.asItem()))
                 .offerTo(exporter, new Identifier(getRecipeName(output.asItem())));
+
     }
+
 
     void StairsRecipe(RecipeExporter exporter, Block input, Block output){
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, output, 4)

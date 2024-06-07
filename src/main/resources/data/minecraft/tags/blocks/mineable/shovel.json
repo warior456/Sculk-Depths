@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "sculk_depths:crumbling_dirt",
-    "sculk_depths:kryslum_enriched_soil"
+    "sculk_depths:kryslum_enriched_soil",
+    "sculk_depths:auric_spore_block",
+    "sculk_depths:auric_spore_layer"
   ]
 }

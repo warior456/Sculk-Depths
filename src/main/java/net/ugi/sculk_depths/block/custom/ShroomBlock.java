@@ -14,10 +14,10 @@ import net.minecraft.world.WorldAccess;
 
 import java.util.Map;
 
-public class PenebriumShroomBlock
-        extends TranslucentBlock {
+public class ShroomBlock
+        extends AbstractGlassBlock {
 
-    public PenebriumShroomBlock(Settings settings) {
+    public ShroomBlock(Settings settings) {
         super(settings);
     }
 
