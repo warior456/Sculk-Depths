@@ -1,11 +1,20 @@
 {
-	"required": true,
-	"package": "net.ugi.sculk_depths.mixin",
-	"compatibilityLevel": "JAVA_21",
-	"mixins": [
-		"ExampleMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
+  "required": true,
+  "package": "net.ugi.sculk_depths.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AttachedStemBlockMixin",
+    "BlockEntityTypeMixin",
+    "BlockMixin",
+    "CropBlockMixin",
+    "ExampleMixin",
+    "FarmLandBlockMixin",
+    "LivingEntityMixin",
+    "NoiseChunkGeneratorMixin",
+    "StemBlockMixin",
+    "WardenEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
 	}
 }

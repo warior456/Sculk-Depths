@@ -22,6 +22,9 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(ModTags.Blocks.KRYSLUM_FLOWABLE_BLOCKS)
                 .add(ModBlocks.ZYGRIN_FLOWBLOCK);
 
+        getOrCreateTagBuilder(ModTags.Blocks.INCORRECT_FOR_QUAZARITH_TOOL);
+
+
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
                 .add(ModBlocks.AMALGAMITE)
 

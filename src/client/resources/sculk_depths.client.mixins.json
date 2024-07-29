@@ -3,6 +3,7 @@
   "package": "net.ugi.sculk_depths.mixin.client",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "BackgroundRendererMixin",
     "ExampleClientMixin",
     "LivingEntityRendererMixin"
   ],
