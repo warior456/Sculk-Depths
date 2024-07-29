@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "sculk_depths:petrified_valtrox_logs"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "sculk_depths:petrified_valtrox_slates"
+  }
+}

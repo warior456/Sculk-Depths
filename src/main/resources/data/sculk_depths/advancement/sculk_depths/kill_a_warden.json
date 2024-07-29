@@ -1,0 +1,51 @@
+{
+  "display": {
+    "icon": {
+      "id": "sculk_depths:energy_essence"
+    },
+    "title": {
+      "translate": "advancements.sculk_depths.kill_a_warden"
+    },
+    "description": {
+      "translate": "advancements.sculk_depths.kill_a_warden.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "sculk_depths:sculk_depths/root",
+  "criteria": {
+    "sculk_depths:warden_killed_by_player_in_overworld": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "dimension": "minecraft:overworld"
+              }
+            }
+          }
+        ],
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:warden"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "sculk_depths:warden_killed_by_player_in_overworld"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

@@ -15,7 +15,7 @@ public interface ModPlacementModifierType<P extends PlacementModifier> {
 
 
     private static <P extends PlacementModifier> PlacementModifierType<P> register(String id, MapCodec<P> codec) {
-        return Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, new Identifier(SculkDepths.MOD_ID, id), () -> {
+        return Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, SculkDepths.identifier( id), () -> {
             return codec;
         });
     }

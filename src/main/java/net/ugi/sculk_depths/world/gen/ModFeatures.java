@@ -13,7 +13,7 @@ public class ModFeatures {
     public static final Feature<DefaultFeatureConfig> CONFIG_PILLARS = new ConfigurablePillars(DefaultFeatureConfig.CODEC);
 
     public static void init(){
-        Registry.register(Registries.FEATURE, new Identifier(SculkDepths.MOD_ID, "configurable_spikes"), CONFIG_SPIKES);
-        Registry.register(Registries.FEATURE, new Identifier(SculkDepths.MOD_ID, "pillars"), CONFIG_PILLARS);
+        Registry.register(Registries.FEATURE, SculkDepths.identifier( "configurable_spikes"), CONFIG_SPIKES);
+        Registry.register(Registries.FEATURE, SculkDepths.identifier( "pillars"), CONFIG_PILLARS);
     }
 }

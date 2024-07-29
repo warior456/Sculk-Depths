@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:coated_valtrox_slab_from_glux"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_valtrox_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": "sculk_depths:valtrox_slab"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_valtrox_slab"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:coated_valtrox_slab_from_glux"
+    ]
+  }
+}

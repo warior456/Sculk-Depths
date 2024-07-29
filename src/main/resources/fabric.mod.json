@@ -1,50 +1,50 @@
 {
-  "schemaVersion": 1,
-  "id": "sculk_depths",
-  "version": "${version}",
-
-  "name": "Sculk Depths",
-  "description": "This mod adds a new dimension accessed from the ancient cities",
-  "authors": [
-    "Matteo_fey",
-    "gems_bond"
-  ],
-  "contact": {
-    "homepage": "https://github.com/warior456/Sculk-Depths/blob/main/README.md",
-    "sources": "https://github.com/warior456/sculk_depths",
-    "issues": "https://github.com/warior456/Sculk-Depths/issues"
-  },
-
-  "license": "Custom License",
-  "icon": "assets/sculk_depths/icon.png",
-
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "net.ugi.sculk_depths.SculkDepths"
-    ],
-    "client": [
-      "net.ugi.sculk_depths.SculkDepthsClient"
-    ],
-    "fabric-datagen": [
-      "net.ugi.sculk_depths.SculkDepthsDataGenerator"
-    ]
-  },
-  "mixins": [
-    "sculk_depths.mixins.json"
-  ],
-
-  "depends": {
-    "fabricloader": ">=0.15.10",
-    "fabric-api": ">=0.97.0",
-    "minecraft": ">=1.20.5",
-    "java": ">=17"
-  },
-  "suggests": {
-    "another-mod": "*",
-    "fstats-api": "*"
-  },
-  "custom": {
-    "fstats": 40
-  }
+	"schemaVersion": 1,
+	"id": "sculk_depths",
+	"version": "${version}",
+	"name": "Sculk Depths",
+	"description": "This mod adds a new dimension accessed from the ancient cities",
+	"authors": [
+		"Matteo_fey",
+		"gems_bond"
+	],
+	"contact": {
+		"homepage": "https://github.com/warior456/Sculk-Depths/blob/main/README.md",
+		"sources": "https://github.com/warior456/sculk_depths",
+		"issues": "https://github.com/warior456/Sculk-Depths/issues"
+	},
+	"license": "Custom License",
+	"icon": "assets/sculk_depths/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.ugi.sculk_depths.SculkDepths"
+		],
+		"client": [
+			"net.ugi.sculk_depths.SculkDepthsClient"
+		],
+		"fabric-datagen": [
+			"net.ugi.sculk_depths.SculkDepthsDataGenerator"
+		]
+	},
+	"mixins": [
+		"sculk_depths.mixins.json",
+		{
+			"config": "sculk_depths.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": ">=0.100.7"
+	},
+	"suggests": {
+		"another-mod": "*",
+		"fstats-api": "*"
+	},
+	"custom": {
+		"fstats": 40
+	}
 }

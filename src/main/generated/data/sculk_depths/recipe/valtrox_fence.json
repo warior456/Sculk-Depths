@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wooden_fence",
+  "key": {
+    "W": {
+      "item": "sculk_depths:valtrox_planks"
+    },
+    "X": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "WXW",
+    "WXW"
+  ],
+  "result": {
+    "count": 3,
+    "id": "sculk_depths:valtrox_fence"
+  }
+}

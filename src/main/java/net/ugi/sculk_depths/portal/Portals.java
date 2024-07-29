@@ -1,14 +1,14 @@
 package net.ugi.sculk_depths.portal;
 
 
-import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
-import net.kyrptonaught.customportalapi.portal.PortalIgnitionSource;
+/*import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
+import net.kyrptonaught.customportalapi.portal.PortalIgnitionSource;*/
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.block.ModBlocks;
 
 public class Portals {
-    public final static PortalIgnitionSource SOUL_FIRE = PortalIgnitionSource.CustomSource(new Identifier("sculk_depths", "soul_fire"));
+    /*public final static PortalIgnitionSource SOUL_FIRE = PortalIgnitionSource.CustomSource(new Identifier("sculk_depths", "soul_fire"));//todo portalapi
 
     public static void registerModPortals() {
         CustomPortalBuilder.beginPortal()
@@ -19,7 +19,7 @@ public class Portals {
                 .customIgnitionSource(SOUL_FIRE)
                 //.lightWithItem(ModItems.ENERGISED_FLINT_AND_STEEL)
                 .setPortalSearchYRange(0, 120)
-                /*
+                *//*
                 .registerIgniteEvent((player, world, portalPos, framePos, portalIgnitionSource) -> {
                     if (portalIgnitionSource.sourceType == PortalIgnitionSource.SourceType.USEITEM && player != null) {
                         if (player.isCreative())
@@ -30,8 +30,8 @@ public class Portals {
                         //heldItem.setDamage(heldItem.getDamage() + 10); //if above breaks use this with a custom durability check
                     }
                 })
-                 */
+                 *//*
                 .registerPortal();
 
-    }
+    }*/
 }

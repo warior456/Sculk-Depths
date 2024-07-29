@@ -220,10 +220,8 @@ public class FlowBlock extends FacingBlock {
         return false;
     }*/
 
-    @Override
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
-        return false;
-    }
+
+    
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {

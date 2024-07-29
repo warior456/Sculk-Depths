@@ -1,7 +1,7 @@
 package net.ugi.sculk_depths.item;
 
 import com.google.common.base.Suppliers;
-import net.fabricmc.yarn.constants.MiningLevels;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;

@@ -1,30 +1,44 @@
 plugins {
-	id 'fabric-loom' version '1.6-SNAPSHOT'
+	id 'fabric-loom' version '1.7-SNAPSHOT'
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_21
-targetCompatibility = JavaVersion.VERSION_21
-
-archivesBaseName = project.archives_base_name
-
-version = version = project.minecraft_version + "-" + project.mod_version
-
+version = project.mod_version
 group = project.maven_group
 
-
-
+base {
+	archivesName = project.archives_base_name
+}
 
 repositories {
-	//maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+	// Add repositories to retrieve artifacts from in here.
+	// You should only use this when depending on other mods because
+	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
+	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
+	// for more information about repositories.
 	maven { url 'https://maven.kyrptonaught.dev/' }
 	maven { url "https://api.modrinth.com/maven" }
 	maven { url = "https://jitpack.io" }
 	maven { url "https://api.modrinth.com/maven"}
 }
 
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"sculk_depths" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+
+}
+
+fabricApi {
+	configureDataGeneration()
+}
+
 dependencies {
-	//include(implementation(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:0.2.0-beta.8")))
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
@@ -33,21 +47,10 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modImplementation include ("net.kyrptonaught:customportalapi:${project.customportalapi_version}"){
-		exclude group: "net.fabricmc.fabric-api", module: "fabric-gametest-api-v1"}
+/*	modImplementation include ("net.kyrptonaught:customportalapi:${project.customportalapi_version}"){//TODO
+		exclude group: "net.fabricmc.fabric-api", module: "fabric-gametest-api-v1"}*/
 
 	include(modImplementation("maven.modrinth:fstats:${project.fstats_version}"))
-	//modImplementation "software.bernie.geckolib:geckolib-${geckolib_version}"
-
-	//modImplementation files('libs/customportalapi-1.20.2.jar')
-
-	//modLocalRuntime("maven.modrinth:rei:${rei_version}")
-	//modLocalRuntime("maven.modrinth:architectury-api:${architectury_api_version}")
-	//modLocalRuntime("maven.modrinth:cloth-config:${cloth_config_version}")
-	// Uncomment the following line to enable the deprecated Fabric API modules. 
-	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
-
-	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 }
 
 processResources {
@@ -59,8 +62,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
-	it.options.release = 17
+	it.options.release = 21
 }
 
 java {
@@ -68,18 +70,22 @@ java {
 	// if it is present.
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
 
 jar {
 	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
+		rename { "${it}_${project.base.archivesName.get()}"}
 	}
 }
 
 // configure the maven publication
 publishing {
 	publications {
-		mavenJava(MavenPublication) {
+		create("mavenJava", MavenPublication) {
+			artifactId = project.archives_base_name
 			from components.java
 		}
 	}
@@ -93,32 +99,3 @@ publishing {
 	}
 }
 
-loom {
-	runs {
-		//
-		// This adds a new gradle task that runs the datagen API: "gradlew runDatagenClient"
-		//
-		datagenClient {
-			inherit client
-			name "Data Generation"
-			vmArg "-Dfabric-api.datagen"
-			vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
-			vmArg "-Dfabric-api.datagen.modid=${archives_base_name}"
-
-			runDir "build/datagen"
-		}
-	}
-}
-
-//
-// Adds the generated files into the jar you distribute to players.
-//
-sourceSets {
-	main {
-		resources {
-			srcDirs += [
-					'src/main/generated'
-			]
-		}
-	}
-}

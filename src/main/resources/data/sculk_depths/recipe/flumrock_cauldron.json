@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "X X",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "sculk_depths:flumrock"
+    }
+  },
+  "result": {
+    "id": "sculk_depths:flumrock_cauldron"
+  }
+}
