@@ -13,7 +13,7 @@ import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 
 public class ModItemGroup {
-    public static final RegistryKey<ItemGroup> SCULK_DEPTHS = RegistryKey.of(RegistryKeys.ITEM_GROUP, new Identifier(SculkDepths.MOD_ID, "sculk_depths"));
+    public static final RegistryKey<ItemGroup> SCULK_DEPTHS = RegistryKey.of(RegistryKeys.ITEM_GROUP, SculkDepths.identifier( "sculk_depths"));
 
     public static void registerItemgroups() {
 

@@ -8,13 +8,13 @@ import net.ugi.sculk_depths.SculkDepths;
 
 public class ModSounds {
 
-    public static final Identifier SCULK_DEPTHS_MAIN_SOUNDTRACK = new Identifier(SculkDepths.MOD_ID, "music.sculk_depths.main_soundtrack");
-    public static final Identifier SCULK_DEPTHS_CEPHLERA_SOUNDTRACK = new Identifier(SculkDepths.MOD_ID, "music.sculk_depths.cephlera_soundtrack");
-    public static final Identifier SCULK_DEPTHS_MAIN_THEME = new Identifier("sculk_depths:music.sculk_depths.main_theme");
-    public static final Identifier SCULK_DEPTHS_ZINNIA = new Identifier("sculk_depths:music.sculk_depths.zinnia");
-    public static final Identifier SCULK_DEPTHS_OST_1 = new Identifier("sculk_depths:music.sculk_depths.ost-1");
-    public static final Identifier AMBIENT_WIND_ADDITIONS = new Identifier("sculk_depths:ambient.wind.additions");
-    public static final Identifier AMBIENT_CAVE_ADDITIONS = new Identifier("sculk_depths:ambient.cave.additions");
+    public static final Identifier SCULK_DEPTHS_MAIN_SOUNDTRACK = SculkDepths.identifier( "music.sculk_depths.main_soundtrack");
+    public static final Identifier SCULK_DEPTHS_CEPHLERA_SOUNDTRACK = SculkDepths.identifier( "music.sculk_depths.cephlera_soundtrack");
+    public static final Identifier SCULK_DEPTHS_MAIN_THEME = SculkDepths.identifier("music.sculk_depths.main_theme");
+    public static final Identifier SCULK_DEPTHS_ZINNIA = SculkDepths.identifier("music.sculk_depths.zinnia");
+    public static final Identifier SCULK_DEPTHS_OST_1 = SculkDepths.identifier("music.sculk_depths.ost-1");
+    public static final Identifier AMBIENT_WIND_ADDITIONS = SculkDepths.identifier("ambient.wind.additions");
+    public static final Identifier AMBIENT_CAVE_ADDITIONS = SculkDepths.identifier("ambient.cave.additions");
     public static SoundEvent SCULK_DEPTHS_MAIN_SOUNDTRACK_EVENT = SoundEvent.of(SCULK_DEPTHS_MAIN_SOUNDTRACK);
     public static SoundEvent SCULK_DEPTHS_CEPHLERA_SOUNDTRACK_EVENT = SoundEvent.of(SCULK_DEPTHS_CEPHLERA_SOUNDTRACK);
     public static SoundEvent SCULK_DEPTHS_MAIN_THEME_EVENT = SoundEvent.of(SCULK_DEPTHS_MAIN_THEME);

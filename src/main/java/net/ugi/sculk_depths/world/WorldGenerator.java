@@ -10,7 +10,7 @@ import java.util.Optional;
 public class WorldGenerator {
     public static void initWorldGen() {}
     public static final SaplingGenerator VALTROX_SAPLING_GENERATOR = new SaplingGenerator(
-            new Identifier(SculkDepths.MOD_ID, "valtrox").toString(),
+            SculkDepths.identifier( "valtrox").toString(),
             Optional.of(ModConfiguredFeatures.VALTROX),
             Optional.empty(),
             Optional.empty()

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dried_valtrox_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "sculk_depths:dried_valtrox_planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:dried_valtrox_sign"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_dried_valtrox_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:dried_valtrox_sign"
+    ]
+  }
+}

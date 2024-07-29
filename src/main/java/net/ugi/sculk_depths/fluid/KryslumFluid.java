@@ -121,6 +121,11 @@ public abstract class KryslumFluid extends FlowableFluid {
         }
 
         @Override
+        protected int getMaxFlowDistance(WorldView world) {
+            return 4;//TODO CHECK THIS
+        }
+
+        @Override
         public int getLevel(FluidState state) {
             return state.get(LEVEL);
         }
@@ -128,6 +133,11 @@ public abstract class KryslumFluid extends FlowableFluid {
     }
 
     public static class Still extends KryslumFluid {
+        @Override
+        protected int getMaxFlowDistance(WorldView world) {
+            return 4;//TODO CHECK THIS
+        }
+
         @Override
         public int getLevel(FluidState state) {
             return 8;

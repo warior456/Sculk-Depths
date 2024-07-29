@@ -26,8 +26,9 @@ public class ModTags {
         public static final TagKey<Block> KRYSLUM_FLOWABLE_BLOCKS =
                 createTag("kryslum_flowable_blocks");
 
+
         private static TagKey<Block> createTag(String name) {
-            return TagKey.of(RegistryKeys.BLOCK, new Identifier(SculkDepths.MOD_ID, name));
+            return TagKey.of(RegistryKeys.BLOCK, SculkDepths.identifier( name));
         }
     }
 
@@ -39,8 +40,21 @@ public class ModTags {
         public static final TagKey<Item> CRYSTAL_UPGRADE_ITEMS =
                 createTag("crystal_upgrade_items");
 
+
+        public static final TagKey<Item> VALTROX_LOGS =
+                createTag("valtrox_logs");
+
+        public static final TagKey<Item> COATED_VALTROX_LOGS =
+                createTag("coated_valtrox_logs");
+
+        public static final TagKey<Item> DRIED_VALTROX_LOGS =
+                createTag("dried_valtrox_logs");
+
+        public static final TagKey<Item> PETRIFIED_VALTROX_LOGS =
+                createTag("petrified_valtrox_logs");
+
         private static TagKey<Item> createTag(String name) {
-            return TagKey.of(RegistryKeys.ITEM, new Identifier(SculkDepths.MOD_ID, name));
+            return TagKey.of(RegistryKeys.ITEM, SculkDepths.identifier( name));
         }
     }
 
@@ -48,7 +62,7 @@ public class ModTags {
         public static final TagKey<Fluid> KRYSLUM = of("kryslum");
 
         private static TagKey<Fluid> of(String name) {
-            return TagKey.of(RegistryKeys.FLUID, new Identifier(SculkDepths.MOD_ID, name));
+            return TagKey.of(RegistryKeys.FLUID, SculkDepths.identifier( name));
         }
     }
 

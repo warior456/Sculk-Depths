@@ -123,7 +123,7 @@ public class ModItems {
             new HangingSignItem(ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN, new Item.Settings().maxCount(16)));
 
     private static Item registerItem(String name, Item item) {
-        return Registry.register(Registries.ITEM, new Identifier(SculkDepths.MOD_ID, name), item);
+        return Registry.register(Registries.ITEM, SculkDepths.identifier( name), item);
     }
 
 

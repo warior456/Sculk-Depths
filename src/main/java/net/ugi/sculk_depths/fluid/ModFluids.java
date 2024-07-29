@@ -12,6 +12,6 @@ public class ModFluids {
 
 
     private static FlowableFluid register(String name, FlowableFluid flowableFluid) {
-        return Registry.register(Registries.FLUID, new Identifier(SculkDepths.MOD_ID, name), flowableFluid);
+        return Registry.register(Registries.FLUID, SculkDepths.identifier( name), flowableFluid);
     }
 }

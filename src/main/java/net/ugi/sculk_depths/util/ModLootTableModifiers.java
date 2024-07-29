@@ -3,7 +3,7 @@ package net.ugi.sculk_depths.util;
 public class ModLootTableModifiers {
 /*
     private static Identifier buildInjectionRoute(Identifier id) {
-        return new Identifier(SculkDepths.MOD_ID, "injections/" + id.getNamespace() + "/" + id.getPath());
+        return SculkDepths.identifier( "injections/" + id.getNamespace() + "/" + id.getPath());
     }
 
     public static void modifyLootTables() {

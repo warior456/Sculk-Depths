@@ -16,6 +16,6 @@ public class ModBiomes {
     public static final RegistryKey<Biome> SCULK_CAVES = register("sculk_caves");
 
     private static RegistryKey<Biome> register(String name) {
-        return RegistryKey.of(RegistryKeys.BIOME, new Identifier(SculkDepths.MOD_ID, name));
+        return RegistryKey.of(RegistryKeys.BIOME, SculkDepths.identifier( name));
     }
 }

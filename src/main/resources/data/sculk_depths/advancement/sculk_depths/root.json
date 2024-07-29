@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:deepslate"
+    },
+    "title": {
+      "translate": "advancements.sculk_depths.root"
+    },
+    "description": {
+      "translate": "advancements.sculk_depths.root.description"
+    },
+    "background": "sculk_depths:textures/block/kryslum_enriched_soil.png",
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "find_deep_dark": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "location": {}
+        }
+      }
+    }
+  },
+  "rewards": {
+    "recipes": [
+      "sculk_depths:energized_flint_and_steel"
+    ]
+  }
+}

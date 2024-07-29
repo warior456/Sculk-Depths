@@ -1,9 +1,9 @@
 package net.ugi.sculk_depths.block;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.kyrptonaught.customportalapi.CustomPortalBlock;
+//import net.kyrptonaught.customportalapi.CustomPortalBlock;
 import net.minecraft.block.*;
-import net.minecraft.block.enums.Instrument;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -378,31 +378,33 @@ public class ModBlocks {
             new MushroomPlantBlock(ModConfiguredFeatures.PENEBRIUM_SHROOM, AbstractBlock.Settings.copy(Blocks.WARPED_FUNGUS).luminance((state) -> 5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).noCollision()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SHROOM_BLOCK = registerBlock("penebrium_shroom_block",
-            new PenebriumShroomBlock(AbstractBlock.Settings.copy(Blocks.MUSHROOM_STEM).luminance((state) -> 5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
+            new ShroomBlock(AbstractBlock.Settings.copy(Blocks.MUSHROOM_STEM).luminance((state) -> 5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SHROOM_STEM = registerBlock("penebrium_shroom_stem",
-            new PenebriumShroomBlock(AbstractBlock.Settings.copy(Blocks.MUSHROOM_STEM).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
+            new ShroomBlock(AbstractBlock.Settings.copy(Blocks.MUSHROOM_STEM).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SPORE_BLOCK = registerBlock("penebrium_spore_block",
             new SporeBlock(AbstractBlock.Settings.copy(Blocks.MUSHROOM_STEM).luminance((state) -> 5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
 
     //misc
+/*//TODO
     public static final CustomPortalBlock SCULK_DEPTHS_PORTAL = (CustomPortalBlock) registerBlockWithoutBlockItem("sculk_depths_portal",
             new CustomPortalBlock(AbstractBlock.Settings.copy(Blocks.NETHER_PORTAL).luminance((state) -> 6).dropsNothing().noCollision().strength(-1.0f,3600000.0f)),ModItemGroup.SCULK_DEPTHS );
+*/
 
     //auric //TODO check blocksettings
     public static final Block AURIC_SPORE_BLOCK = registerBlock("auric_spore_block",
-            new ShroomBlock(FabricBlockSettings.create().strength(0.3f).sounds(BlockSoundGroup.MOSS_BLOCK)), ModItemGroup.SCULK_DEPTHS);
+            new ShroomBlock(AbstractBlock.Settings.create().strength(0.3f).sounds(BlockSoundGroup.MOSS_BLOCK)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block AURIC_SPORE_LAYER = registerBlock("auric_spore_layer",
-            new LayeredAuricSporeBlock(FabricBlockSettings.create().mapColor(MapColor.PALE_YELLOW).instrument(Instrument.SNARE).strength(0.5F).sounds(BlockSoundGroup.SAND).notSolid().ticksRandomly()
+            new LayeredAuricSporeBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND).notSolid().ticksRandomly()
                     .blockVision((state, world, pos) -> {return (Integer)state.get(SnowBlock.LAYERS) >= 8;})
                     .pistonBehavior(PistonBehavior.DESTROY)), ModItemGroup.SCULK_DEPTHS);
     public static final Block AURIC_SHROOM_BLOCK = registerBlock("auric_shroom_block",
-            new ShroomBlock(FabricBlockSettings.create().strength(0.3f).sounds(BlockSoundGroup.MOSS_BLOCK)), ModItemGroup.SCULK_DEPTHS);
+            new ShroomBlock(AbstractBlock.Settings.create().strength(0.3f).sounds(BlockSoundGroup.MOSS_BLOCK)), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block AURIC_SHROOM_STEM = registerBlock("auric_shroom_stem",
-            new ShroomBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
+            new ShroomBlock(AbstractBlock.Settings.copy(Blocks.MUSHROOM_STEM).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block AURIC_SPORE_SPROUTS = registerBlock("auric_spore_sprouts",
             new ShroomPlantBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES), ModConfiguredFeatures.AURIC_SHROOM) , ModItemGroup.SCULK_DEPTHS);//todo
@@ -420,17 +422,17 @@ public class ModBlocks {
 
     private static Block registerBlock(String name, Block block, RegistryKey<ItemGroup> group) {
         registerBlockItem(name, block, group);
-        return Registry.register(Registries.BLOCK, new Identifier(SculkDepths.MOD_ID, name), block);
+        return Registry.register(Registries.BLOCK, SculkDepths.identifier( name), block);
     }
 
 
     private static Block registerBlockWithoutBlockItem(String name, Block block, RegistryKey<ItemGroup> group) {
-        return Registry.register(Registries.BLOCK, new Identifier(SculkDepths.MOD_ID, name), block);
+        return Registry.register(Registries.BLOCK, SculkDepths.identifier(name), block);
     }
 
     private static Item registerBlockItem(String name, Block block, RegistryKey<ItemGroup> group) {
 
-        Item item = Registry.register(Registries.ITEM, new Identifier(SculkDepths.MOD_ID, name),
+        Item item = Registry.register(Registries.ITEM, SculkDepths.identifier( name),
                 new BlockItem(block, new Item.Settings()));
         ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));
         return item;
