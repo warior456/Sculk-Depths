@@ -373,11 +373,11 @@ public class ModBlocks {
     public static final Block LIME_CRYSTAL_BLOCK = registerBlock("lime_crystal_block", ModBlocks.createCrystalBlock(DyeColor.LIME), ModItemGroup.SCULK_DEPTHS);
 
     //penebrium
-    public static final Block PENEBRIUM_SHROOM = registerBlock("penebrium_shroom",
+    public static final Block PENEBRIUM_SHROOM = registerBlock("penebrium_shroom",//todo fix emissiveLighting bug
             new ShroomPlantBlock(FabricBlockSettings.copyOf(Blocks.WARPED_FUNGUS).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).noCollision(), ModConfiguredFeatures.PENEBRIUM_SHROOM), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SHROOM_BLOCK = registerBlock("penebrium_shroom_block",
-            new ShroomBlock( FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
+            new ShroomBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).luminance(5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PENEBRIUM_SHROOM_STEM = registerBlock("penebrium_shroom_stem",
             new ShroomBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
@@ -404,7 +404,7 @@ public class ModBlocks {
             new ShroomBlock(FabricBlockSettings.copyOf(Blocks.MUSHROOM_STEM).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block AURIC_SPORE_SPROUTS = registerBlock("auric_spore_sprouts",
-            new ShroomPlantBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES), ModConfiguredFeatures.AURIC_SHROOM) , ModItemGroup.SCULK_DEPTHS);//todo
+            new ShroomPlantBlock(FabricBlockSettings.copyOf(Blocks.WARPED_FUNGUS).noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES), ModConfiguredFeatures.AURIC_SHROOM) , ModItemGroup.SCULK_DEPTHS);//todo
 
     //fluids
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new FluidBlock(ModFluids.KRYSLUM_STILL, FabricBlockSettings.copyOf(Blocks.WATER).replaceable().noCollision().strength(100.0f).pistonBehavior(PistonBehavior.DESTROY).dropsNothing().liquid().solid().sounds(BlockSoundGroup.SCULK)), ModItemGroup.SCULK_DEPTHS);

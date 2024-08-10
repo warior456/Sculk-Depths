@@ -78,7 +78,7 @@ public class ConfigurablePillars
             blockPosIterable.forEach(blockPos1 -> {
                 int distance = (int) ((blockPos1.getX() - finalX)*(blockPos1.getX() - finalX) + ((blockPos1.getY() - finalY)/1)*((blockPos1.getY() - finalY)/1) + (blockPos1.getZ() - finalZ)*(blockPos1.getZ() - finalZ));
                 if (distance <= radiusSquared) {//ball instead of rectangle
-                    this.setBlockState(structureWorldAccess, blockPos1, ModBlocks.AMALGAMITE.getDefaultState());
+                    this.setBlockState(structureWorldAccess, blockPos1, ModBlocks.FLUMROCK.getDefaultState());
                 }
             });
             length--;
@@ -87,7 +87,7 @@ public class ConfigurablePillars
         for(x = 0; x < totalLength/20; x++){
             int randomY = random.nextInt(maxHeight-40);
             BlockPos blockPos2 = blockPos.up(randomY);
-            Block[] canSpawnOn = {ModBlocks.AMALGAMITE};
+            Block[] canSpawnOn = {ModBlocks.FLUMROCK};
             ConfigurableSpikes.genSpike(context,blockPos2,16, radiusSetting+2,random.nextInt(20) + 15,5,canSpawnOn);
         }
         return true;
