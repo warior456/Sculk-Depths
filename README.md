@@ -1,3 +1,16 @@
+
+<html>
+  <head>
+    <title>Redirecting...</title>
+    <link rel="canonical" href="https://warior456.github.io/Sculk-Depths-Wiki/" />
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0; url=https://warior456.github.io/Sculk-Depths-Wiki/" />
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>
+
 <img src="https://github.com/warior456/Sculk-Depths/assets/66562258/076ff4f4-a41c-4bf4-b3f3-a7c5d5f936d9"  width="500" alt="Sculk Depths">
 
 # Welcome to the Sculk-Depths wiki!
