@@ -1,4 +1,7 @@
 {
+  "effect.sculk_depths.infected" : "Infected",
+
+
   "block.sculk_depths.crumbling_dirt" : "Crumbling Dirt",
   "item.sculk_depths.chomper_colossus_spawn_egg": "Chomper Colossus Spawn Egg",
   "item.sculk_depths.energized_flint_and_steel" : "Energized Flint and Steel",

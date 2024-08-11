@@ -16,6 +16,7 @@ import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.custom.ChomperColossusEntity;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import net.ugi.sculk_depths.entity.custom.LesterEntity;
+import net.ugi.sculk_depths.entity.effect.ModStatusEffects;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
 import net.ugi.sculk_depths.item.ModItems;
@@ -55,6 +56,8 @@ public class SculkDepths implements ModInitializer {
         Portals.registerModPortals();
         SculkDepths.LOGGER.info("Registering Sounds for " + SculkDepths.MOD_ID);
         ModSounds.registerModSounds();
+        SculkDepths.LOGGER.info("Registering Effects for " + SculkDepths.MOD_ID);
+        ModStatusEffects.init();
         ServerTickEvents.START_WORLD_TICK.register(new ConditionalSoundPlayer());
         //SculkDepths.LOGGER.info("Registering LootTables for " + SculkDepths.MOD_ID);
         //ModLootTableModifiers.modifyLootTables();
@@ -76,6 +79,7 @@ public class SculkDepths implements ModInitializer {
         ModFeatures.init();
 
         ServerTickEvents.START_WORLD_TICK.register(new CheckInvForCrystalItems());
+        ServerTickEvents.START_WORLD_TICK.register(new ModBiomeEffects());
 
 
         CauldronFluidContent.registerCauldron(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON, ModFluids.KRYSLUM_STILL, FluidConstants.BUCKET, ModProperties.KRYSLUM_LEVEL); //support for mods to see how much fluid is in it (doesn't work for create pipes)
