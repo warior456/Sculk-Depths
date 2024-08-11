@@ -1,3 +1,15 @@
+<html>
+  <head>
+    <title>Redirecting...</title>
+    <link rel="canonical" href="https://warior456.github.io/Sculk-Depths-Wiki/wiki/sacrificable_mob_list/" />
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0; url=https://warior456.github.io/Sculk-Depths-Wiki/wiki/sacrificable_mob_list/" />
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>
+
 - allay
 - axolotl
 - bee

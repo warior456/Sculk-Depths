@@ -1,3 +1,15 @@
+<html>
+  <head>
+    <title>Redirecting...</title>
+    <link rel="canonical" href="https://warior456.github.io/Sculk-Depths-Wiki/wiki/getting-started/" />
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0; url=https://warior456.github.io/Sculk-Depths-Wiki/wiki/getting-started/" />
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>
+
 # Getting Started
 ## Overview
 1. Search for a deep dark biome with an ancient city.

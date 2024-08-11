@@ -1,3 +1,15 @@
+<html>
+  <head>
+    <title>Redirecting...</title>
+    <link rel="canonical" href="https://warior456.github.io/Sculk-Depths-Wiki/wiki/feature_catalog/catalog_blocks/" />
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0; url=https://warior456.github.io/Sculk-Depths-Wiki/wiki/feature_catalog/catalog_blocks/" />
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>
+
 ## Block Catalog
 
 ### Flumrock Cauldron
