@@ -20,6 +20,8 @@ import net.ugi.sculk_depths.tags.ModTags;
 
 import java.util.ArrayList;
 
+import static net.minecraft.util.BlockRotation.CLOCKWISE_180;
+
 public class FlowBlock extends FacingBlock {
     protected static final VoxelShape Y_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
     protected static final VoxelShape Z_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
@@ -31,13 +33,15 @@ public class FlowBlock extends FacingBlock {
     }
 
     @Override
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return (BlockState)state.with(FACING, rotation.rotate(state.get(FACING)));
+    public BlockState rotate(BlockState blockState, BlockRotation rotation) {
+        BlockState blockState1 = blockState.with(FACING, rotation.rotate(blockState.get(FACING))); //TODO when redoing structures return on this line
+        return blockState1.with(FACING, CLOCKWISE_180.rotate(blockState1.get(FACING)));//temporary fix for structures with flowblocks
+
     }
 
     @Override
-    public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation(state.get(FACING)));
+    public BlockState mirror(BlockState blockState, BlockMirror mirror) {
+        return blockState.rotate(mirror.getRotation(blockState.get(FACING)));
     }
 
 
