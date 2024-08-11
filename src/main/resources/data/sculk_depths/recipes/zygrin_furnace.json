@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ZZZ",
+    "ZCZ",
+    "QQQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "sculk_depths:quazarith_ingot"
+    },
+    "C": {
+      "item": "sculk_depths:crux_block"
+    },
+    "Z": {
+      "item": "sculk_depths:zygrin"
+    }
+  },
+  "result": {
+    "item": "sculk_depths:zygrin_furnace"
+  }
+}

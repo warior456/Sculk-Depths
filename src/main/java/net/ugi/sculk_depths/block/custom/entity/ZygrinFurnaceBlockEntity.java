@@ -99,7 +99,7 @@ public class ZygrinFurnaceBlockEntity
     
     @Override
     protected Text getContainerName() {
-        return Text.translatable("container.furnace");
+        return Text.translatable("block.sculk_depths.zygrin_furnace");
     }
 
     protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {

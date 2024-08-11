@@ -124,6 +124,9 @@
 
   "block.sculk_depths.soul_fire": "Soul Fire",
 
+  "block.sculk_depths.zygrin_furnace": "Zygrin Furnace",
+
+
   "block.sculk_depths.zygrin": "Zygrin",
   "block.sculk_depths.zygrin_stairs": "Zygrin Stairs",
   "block.sculk_depths.zygrin_slab": "Zygrin Slab",
@@ -172,7 +175,18 @@
   "advancements.sculk_depths.find_laboratory.description": "Find a Laboratory",
 
   "advancements.sculk_depths.enter_sculk_depths": "Sculk? Depths?",
-  "advancements.sculk_depths.enter_sculk_depths.description": "Enter the Sculk Depths",
+  "advancements.sculk_depths.enter_sculk_depths.description": "Maybe the sculk is in the depths",
+
+  "block.sculk_depths.white_crystal_block": "WIP",
+  "block.sculk_depths.blue_crystal_block": "WIP",
+  "block.sculk_depths.orange_crystal_block": "WIP",
+  "block.sculk_depths.lime_crystal_block": "WIP",
+
+  "item.sculk_depths.white_crystal": "WIP",
+  "item.sculk_depths.blue_crystal": "WIP",
+  "item.sculk_depths.orange_crystal": "WIP",
+  "item.sculk_depths.lime_crystal": "WIP",
+
 
   "tooltip.sculk_depths.crystal_upgrade.tooltip": "Crystal Upgrade:",
   "tooltip.sculk_depths.crystal_upgrade.crystal.\"white\"": " White Crystal",
