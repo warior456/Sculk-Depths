@@ -3,6 +3,6 @@
   "textures": {
     "bottom": "sculk_depths:block/zygrin_flowblock_out",
     "side": "sculk_depths:block/zygrin_flowblock",
-    "top": "sculk_depths:block/zygrin_flowblock_back"
+    "top": "sculk_depths:block/zygrin_flowblock_in"
   }
 }

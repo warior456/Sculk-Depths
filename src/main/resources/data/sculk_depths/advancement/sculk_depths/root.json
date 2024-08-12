@@ -11,7 +11,7 @@
     },
     "background": "sculk_depths:textures/block/kryslum_enriched_soil.png",
     "frame": "task",
-    "show_toast": false,
+    "show_toast": true,
     "announce_to_chat": false
   },
   "criteria": {

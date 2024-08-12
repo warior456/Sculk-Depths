@@ -42,7 +42,6 @@ public class ConfigurablePillars
         //config
         int topOffsetRange = 0; //xz coordinaterange
         int maxHeight = random.nextInt(50) + 70; //height of spike
-        int cruxChance = 5; //percentage
 
         int xTopOffset = random.nextBetween(-topOffsetRange, topOffsetRange);//x pos of top
         int zTopOffset = random.nextBetween(-topOffsetRange, topOffsetRange);//z pos of top
@@ -79,7 +78,7 @@ public class ConfigurablePillars
             blockPosIterable.forEach(blockPos1 -> {
                 int distance = (int) ((blockPos1.getX() - finalX)*(blockPos1.getX() - finalX) + ((blockPos1.getY() - finalY)/1)*((blockPos1.getY() - finalY)/1) + (blockPos1.getZ() - finalZ)*(blockPos1.getZ() - finalZ));
                 if (distance <= radiusSquared) {//ball instead of rectangle
-                    this.setBlockState(structureWorldAccess, blockPos1, ModBlocks.LARGUTH.getDefaultState());
+                    this.setBlockState(structureWorldAccess, blockPos1, ModBlocks.FLUMROCK.getDefaultState());
                 }
             });
             length--;
@@ -88,7 +87,7 @@ public class ConfigurablePillars
         for(x = 0; x < totalLength/20; x++){
             int randomY = random.nextInt(maxHeight-40);
             BlockPos blockPos2 = blockPos.up(randomY);
-            Block[] canSpawnOn = {ModBlocks.LARGUTH};
+            Block[] canSpawnOn = {ModBlocks.FLUMROCK};
             ConfigurableSpikes.genSpike(context,blockPos2,16, radiusSetting+2,random.nextInt(20) + 15,5,canSpawnOn);
         }
         return true;

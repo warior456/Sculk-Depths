@@ -46,9 +46,9 @@ public class BackgroundRendererMixin {
         )
         );
 
-    /*    if(entity.isSpectator()){
+        if(entity.isSpectator()){
             return;
-        }*/
+        }
         if(FabricLoader.getInstance().isModLoaded("distanthorizons")){ //dh compat
             if(RenderSystem.getShaderFogStart() == 4.20694194E14F) return;
         }
@@ -64,7 +64,7 @@ public class BackgroundRendererMixin {
                 float y = pos.getY();
                 float mul = 1;
 
-                int countInfestedColumns = 0;
+                int countInfectedColumns = 0;
                 int remainder = 0;
                 int radius = 10;
                 for(int i = pos.getX() - radius;i < pos.getX() + radius + 1;i += 1){
@@ -72,7 +72,7 @@ public class BackgroundRendererMixin {
                         BlockPos pos2 = new BlockPos(i,pos.getY(),j);
                         RegistryKey<Biome> biome = entity.getEntityWorld().getBiome(pos2).getKey().get();
                         if (biome.equals(ModBiomes.INFECTED_COLUMNS)) {
-                            countInfestedColumns += 1;
+                            countInfectedColumns += 1;
                         }  else {
                             remainder += 1;
                         }
@@ -80,7 +80,7 @@ public class BackgroundRendererMixin {
                 }
 
                 mul = (   1f * remainder                                                         // default           mul = 1
-                        + 2/3f * countInfestedColumns                                            //Infested Columns   mul = 2/3
+                        + 2/3f * countInfectedColumns                                            //Infected Columns   mul = 2/3
                 ) / ((radius*2+1) * (radius*2+1));
 
 

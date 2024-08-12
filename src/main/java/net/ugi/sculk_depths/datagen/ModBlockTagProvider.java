@@ -130,7 +130,11 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
                 .add(ModBlocks.PENEBRIUM_SHROOM_BLOCK)
                 .add(ModBlocks.PENEBRIUM_SHROOM_STEM)
-                .add(ModBlocks.PENEBRIUM_SPORE_BLOCK);
+                .add(ModBlocks.PENEBRIUM_SPORE_BLOCK)
+
+                .add(ModBlocks.AURIC_SHROOM_STEM)
+                .add(ModBlocks.AURIC_SHROOM_BLOCK);
+
 
 /*
 
