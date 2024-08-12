@@ -31,7 +31,7 @@ public class LivingEntityRendererMixin {
             method = "getRenderLayer",
             at = @At("RETURN")
     )
-    private RenderLayer allowOnTopOfKryslumEnrichedSoil(@Nullable RenderLayer original, @Local(ordinal = 0) LivingEntity livingEntity) {
+    private RenderLayer AllowGlomperTranslucency(@Nullable RenderLayer original, @Local(ordinal = 0) LivingEntity livingEntity) {
         if(livingEntity.getClass() == GlomperEntity.class){
             return RenderLayer.getEntityTranslucent(GlomperRenderer.GLOMPER_TEXTURE); //TODO unhardcode this
         }

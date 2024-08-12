@@ -8,6 +8,7 @@ import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.block.ModBlocks;
+import net.ugi.sculk_depths.tags.ModTags;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -18,6 +19,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup arg) {
+        getOrCreateTagBuilder(ModTags.Blocks.KRYSLUM_FLOWABLE_BLOCKS)
+                .add(ModBlocks.ZYGRIN_FLOWBLOCK);
 
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
                 .add(ModBlocks.AMALGAMITE)
@@ -56,6 +59,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.PETRIFIED_VALTROX_BUTTON)
 
                 .add(ModBlocks.ZYGRIN)
+                .add(ModBlocks.ZYGRIN_FURNACE)
                 .add(ModBlocks.ZYGRIN_STAIRS)
                 .add(ModBlocks.ZYGRIN_SLAB)
                 .add(ModBlocks.ZYGRIN_WALL)
@@ -123,7 +127,11 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
                 .add(ModBlocks.PENEBRIUM_SHROOM_BLOCK)
                 .add(ModBlocks.PENEBRIUM_SHROOM_STEM)
-                .add(ModBlocks.PENEBRIUM_SPORE_BLOCK);
+                .add(ModBlocks.PENEBRIUM_SPORE_BLOCK)
+
+                .add(ModBlocks.AURIC_SHROOM_STEM)
+                .add(ModBlocks.AURIC_SHROOM_BLOCK);
+
 
 /*
 

@@ -1,0 +1,36 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "sculk_depths:block/auric_spore_block"
+      },
+      {
+        "model": "sculk_depths:block/auric_spore_block_mirrored"
+      },
+      {
+        "model": "sculk_depths:block/auric_spore_block",
+        "y": 180
+      },
+      {
+        "model": "sculk_depths:block/auric_spore_block_mirrored",
+        "y": 180
+      },
+      {
+        "model": "sculk_depths:block/auric_spore_block",
+        "y": 90
+      },
+      {
+        "model": "sculk_depths:block/auric_spore_block_mirrored",
+        "y": 90
+      },
+      {
+        "model": "sculk_depths:block/auric_spore_block",
+        "y": 270
+      },
+      {
+        "model": "sculk_depths:block/auric_spore_block_mirrored",
+        "y": 270
+      }
+    ]
+  }
+}

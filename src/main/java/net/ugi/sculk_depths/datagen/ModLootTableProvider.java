@@ -3,17 +3,30 @@ package net.ugi.sculk_depths.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.server.loottable.BlockLootTableGenerator;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
+import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
+import net.minecraft.loot.condition.EntityPropertiesLootCondition;
+import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.entry.AlternativeEntry;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.LeafEntry;
 import net.minecraft.loot.entry.LootPoolEntry;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
+import net.minecraft.loot.function.CopyNameLootFunction;
+import net.minecraft.loot.function.LimitCountLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
+import net.minecraft.loot.operator.BoundedIntUnaryOperator;
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
+import net.minecraft.predicate.StatePredicate;
 import net.ugi.sculk_depths.block.ModBlocks;
+import net.ugi.sculk_depths.block.custom.LayeredAuricSporeBlock;
 
 public class ModLootTableProvider extends FabricBlockLootTableProvider {
     public ModLootTableProvider(FabricDataOutput dataOutput) {
@@ -43,7 +56,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.LARGUTH, drops(ModBlocks.LARGUTH.asItem()));
 
         addDropWithSilkTouch(ModBlocks.ZYGRIN_LIGHT);
-
+        addDrop(ModBlocks.ZYGRIN_FURNACE, this::nameableContainerDrops);
 
 /*        addDrop(ModBlocks.VALTROX_LOG, ModBlocks.VALTROX_LOG.asItem());
         addDrop(ModBlocks.VALTROX_WOOD, ModBlocks.VALTROX_WOOD.asItem());
@@ -59,12 +72,38 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.VALTROX_PRESSURE_PLATE, drops(ModBlocks.VALTROX_PRESSURE_PLATE.asItem()));
         addDrop(ModBlocks.VALTROX_BUTTON, drops(ModBlocks.VALTROX_BUTTON.asItem()));*/
 
-
         addDrop(ModBlocks.AMALGAMITE, ModBlocks.AMALGAMITE.asItem());
 
         addDrop(ModBlocks.PENEBRIUM_SHROOM);
         addDropWithSilkTouch(ModBlocks.PENEBRIUM_SHROOM_STEM);
         addDropWithSilkTouch(ModBlocks.PENEBRIUM_SHROOM_BLOCK);
+        addDrop(ModBlocks.PENEBRIUM_SPORE_BLOCK, mushroomBlockDrops(ModBlocks.PENEBRIUM_SPORE_BLOCK, ModBlocks.PENEBRIUM_SHROOM));
+
+        addDrop(ModBlocks.AURIC_SPORE_SPROUTS);
+        addDropWithSilkTouch(ModBlocks.AURIC_SHROOM_STEM);
+        addDropWithSilkTouch(ModBlocks.AURIC_SHROOM_BLOCK);
+        addDropWithSilkTouch(ModBlocks.AURIC_SPORE_BLOCK);
+        addDrop(ModBlocks.AURIC_SHROOM_BLOCK, mushroomBlockDrops(ModBlocks.AURIC_SHROOM_BLOCK, ModBlocks.AURIC_SPORE_SPROUTS));
+
+        addDrop(ModBlocks.AURIC_SPORE_LAYER, (block) -> {
+            return LootTable.builder().pool(LootPool.builder().conditionally(EntityPropertiesLootCondition.create(LootContext.EntityTarget.THIS)).with(AlternativeEntry.builder(LayeredAuricSporeBlock.LAYERS.getValues() , (integer) -> {
+                return ItemEntry.builder(ModBlocks.AURIC_SPORE_LAYER).apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create((float) integer ))).conditionally(BlockStatePropertyLootCondition.builder(block).properties(StatePredicate.Builder.create().exactMatch(LayeredAuricSporeBlock.LAYERS, integer )));
+            }).conditionally(WITH_SILK_TOUCH)));
+        });
+    }
+
+    public LootTable.Builder mushroomBlockDrops(Block dropWithSilkTouch, ItemConvertible drop) {
+        return BlockLootTableGenerator.dropsWithSilkTouch(dropWithSilkTouch, this.applyExplosionDecay(dropWithSilkTouch,
+                ((LeafEntry.Builder<?>)
+                        ItemEntry.builder(drop)
+                                .apply(SetCountLootFunction
+                                        .builder(UniformLootNumberProvider
+                                                .create(-6.0f, 2.0f))))
+                        .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.createMin(0)))));
+    }
+
+    public LootTable.Builder nameableContainerDrops(Block drop) {
+        return LootTable.builder().pool(this.addSurvivesExplosionCondition(drop, LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0f)).with(ItemEntry.builder(drop).apply(CopyNameLootFunction.builder(CopyNameLootFunction.Source.BLOCK_ENTITY)))));
     }
 
     public LootTable.Builder copperLikeOreDrops(Block drop, Item item) {

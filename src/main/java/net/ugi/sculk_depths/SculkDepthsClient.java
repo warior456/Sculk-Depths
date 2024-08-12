@@ -9,7 +9,7 @@ import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.particle.WaterSuspendParticle;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.block.ModBlocks;
@@ -17,12 +17,11 @@ import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.client.*;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
-import net.ugi.sculk_depths.particle.CaveFallingParticle;
-import net.ugi.sculk_depths.particle.ModParticleTypes;
-import net.ugi.sculk_depths.particle.PenebriumSporeParticle;
-import net.ugi.sculk_depths.particle.SurfaceWindParticle;
+import net.ugi.sculk_depths.particle.*;
 import net.ugi.sculk_depths.render.SculkDepthsCloudRendererClient;
 import net.ugi.sculk_depths.render.SculkDepthsSkyRendererClient;
+import net.ugi.sculk_depths.screen.ModScreenHandlers;
+import net.ugi.sculk_depths.screen.ZygrinFurnaceScreen;
 import net.ugi.sculk_depths.sound.ConditionalSoundPlayerClient;
 import net.ugi.sculk_depths.sound.SoundPlayerGetterClient;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
@@ -42,11 +41,10 @@ public class SculkDepthsClient implements ClientModInitializer {
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.KRYSLUM_STILL,
                 ModFluids.KRYSLUM_FLOWING,
                 new SimpleFluidRenderHandler(
-                        new Identifier(SculkDepths.MOD_ID,  "block/kryslum_still"),
+                        new Identifier(SculkDepths.MOD_ID, "block/kryslum_still"),
                         new Identifier(SculkDepths.MOD_ID, "block/kryslum_flow")
                 )
         );
-
 
 
         CustomItemModels.QuazarithSwordModels();
@@ -60,7 +58,6 @@ public class SculkDepthsClient implements ClientModInitializer {
         CustomItemModels.QuazarithBootsModels();
 
 
-
         EntityRendererRegistry.register(ModEntities.GLOMPER, GlomperRenderer::new);
         EntityRendererRegistry.register(ModEntities.LESTER, LesterRenderer::new);
         EntityRendererRegistry.register(ModEntities.CHOMPER_COLOSSUS, ChomperColossusRenderer::new);
@@ -71,6 +68,7 @@ public class SculkDepthsClient implements ClientModInitializer {
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.VALTROX_SAPLING, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PENEBRIUM_SHROOM, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.AURIC_SPORE_SPROUTS, RenderLayer.getCutout());
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CEPHLERA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CEPHLERA_LIGHT, RenderLayer.getCutout());
@@ -104,10 +102,14 @@ public class SculkDepthsClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PENEBRIUM_SPORE_BLOCK, RenderLayer.getTranslucent());
 
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.PENEBRIUM_SPORES, PenebriumSporeParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticleTypes.AURIC_SPORES, AuricSporeParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.SURFACE_WIND, SurfaceWindParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.CAVE_FALLING_PARTICLE, CaveFallingParticle.Factory::new);
 
         DimensionRenderingRegistry.registerCloudRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY, new SculkDepthsCloudRendererClient());
-        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY,new SculkDepthsSkyRendererClient());
+        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY, new SculkDepthsSkyRendererClient());
+
+        HandledScreens.register(ModScreenHandlers.ZYGRIN_FURNACE_SCREEN_HANDLER, ZygrinFurnaceScreen::new); //if this doesn't work for some reason use the line below instead
+        //HandledScreens.register(ModScreenHandlerTypes.ZYGRIN_FURNACE_SCREEN_HANDLER, (HandledScreens.Provider<ZygrinFurnaceScreenHandler, ZygrinFurnaceScreen>) ZygrinFurnaceScreen::new);
     }
 }

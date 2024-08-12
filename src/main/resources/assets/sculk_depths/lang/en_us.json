@@ -1,4 +1,7 @@
 {
+  "effect.sculk_depths.infected" : "Infected",
+
+
   "block.sculk_depths.crumbling_dirt" : "Crumbling Dirt",
   "item.sculk_depths.chomper_colossus_spawn_egg": "Chomper Colossus Spawn Egg",
   "item.sculk_depths.energized_flint_and_steel" : "Energized Flint and Steel",
@@ -124,6 +127,9 @@
 
   "block.sculk_depths.soul_fire": "Soul Fire",
 
+  "block.sculk_depths.zygrin_furnace": "Zygrin Furnace",
+
+
   "block.sculk_depths.zygrin": "Zygrin",
   "block.sculk_depths.zygrin_stairs": "Zygrin Stairs",
   "block.sculk_depths.zygrin_slab": "Zygrin Slab",
@@ -149,16 +155,47 @@
   "block.sculk_depths.penebrium_spore_block": "Penebrium Spore Block",
   "block.sculk_depths.penebrium_shroom_stem": "Penebrium Shroom Stem",
 
+  "block.sculk_depths.auric_spore_sprouts": "Auric Spore Sprouts",
+  "block.sculk_depths.auric_shroom_block": "Auric Shroom Block",
+  "block.sculk_depths.auric_spore_block": "Auric Spore Block",
+  "block.sculk_depths.auric_spore_layer": "Auric Spore Layer",
+  "block.sculk_depths.auric_shroom_stem": "Auric Shroom Stem",
 
   "block.sculk_depths.kryslum_enriched_soil": "Kryslum Enriched Soil",
 
-  "entity.sculk_depths.t": "Glomper",
+  "entity.sculk_depths.glomper": "Glomper",
 
   "advancements.sculk_depths.root": "Exploring the Depths",
-  "advancements.sculk_depths.root.description": "Exploration and Ancient Civilisation",
+  "advancements.sculk_depths.root.description": "Exploration and Ancient Civilization",
 
   "advancements.sculk_depths.kill_a_warden": "Doing it the hard way!",
   "advancements.sculk_depths.kill_a_warden.description": "Kill a warden instead of giving it a sacrifice",
+
+  "advancements.sculk_depths.lester": "Lesters on your face",
+  "advancements.sculk_depths.lester.description": "Lesters don't like it when you mine Quazarith",//todo maybe change the description
+
+  "advancements.sculk_depths.find_laboratory": "Living Remnants",
+  "advancements.sculk_depths.find_laboratory.description": "Find a Laboratory",
+
+  "advancements.sculk_depths.get_quazarith": "Acquire Upgrades",
+  "advancements.sculk_depths.get_quazarith.description": "Craft a Quazarith item",
+
+  "advancements.sculk_depths.get_zygrin_furnace": "Powerless Furnace",
+  "advancements.sculk_depths.get_zygrin_furnace.description": "Power it with Kryslum and Flowblocks",
+
+  "advancements.sculk_depths.enter_sculk_depths": "Sculk? Depths?",
+  "advancements.sculk_depths.enter_sculk_depths.description": "Maybe the sculk is in the depths",
+
+  "block.sculk_depths.white_crystal_block": "WIP",
+  "block.sculk_depths.blue_crystal_block": "WIP",
+  "block.sculk_depths.orange_crystal_block": "WIP",
+  "block.sculk_depths.lime_crystal_block": "WIP",
+
+  "item.sculk_depths.white_crystal": "WIP",
+  "item.sculk_depths.blue_crystal": "WIP",
+  "item.sculk_depths.orange_crystal": "WIP",
+  "item.sculk_depths.lime_crystal": "WIP",
+
 
   "tooltip.sculk_depths.crystal_upgrade.tooltip": "Crystal Upgrade:",
   "tooltip.sculk_depths.crystal_upgrade.crystal.\"white\"": " White Crystal",

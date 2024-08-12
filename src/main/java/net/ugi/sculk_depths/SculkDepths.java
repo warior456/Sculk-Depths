@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.CauldronFluidContent;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.world.Heightmap;
+import net.ugi.sculk_depths.block.ModBlockEntities;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
 import net.ugi.sculk_depths.config.Config;
@@ -15,15 +16,18 @@ import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.custom.ChomperColossusEntity;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import net.ugi.sculk_depths.entity.custom.LesterEntity;
+import net.ugi.sculk_depths.entity.effect.ModStatusEffects;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.item.crystal.CheckInvForCrystalItems;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.portal.Portals;
+import net.ugi.sculk_depths.screen.ModScreenHandlers;
 import net.ugi.sculk_depths.sound.ConditionalSoundPlayer;
 import net.ugi.sculk_depths.sound.ModSounds;
 import net.ugi.sculk_depths.state.property.ModProperties;
+import net.ugi.sculk_depths.world.gen.ModFeatures;
 import net.ugi.sculk_depths.world.gen.ModPlacementModifierType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,6 +56,8 @@ public class SculkDepths implements ModInitializer {
         Portals.registerModPortals();
         SculkDepths.LOGGER.info("Registering Sounds for " + SculkDepths.MOD_ID);
         ModSounds.registerModSounds();
+        SculkDepths.LOGGER.info("Registering Effects for " + SculkDepths.MOD_ID);
+        ModStatusEffects.init();
         ServerTickEvents.START_WORLD_TICK.register(new ConditionalSoundPlayer());
         //SculkDepths.LOGGER.info("Registering LootTables for " + SculkDepths.MOD_ID);
         //ModLootTableModifiers.modifyLootTables();
@@ -59,17 +65,21 @@ public class SculkDepths implements ModInitializer {
         ModCauldronBehavior.registerBehavior();
         //SculkDepths.LOGGER.info("Registering Recipes for " + SculkDepths.MOD_ID);
         //ModRecipes.register();
-        //SculkDepths.LOGGER.info("Registering BlockEntities for " + SculkDepths.MOD_ID);
-        //ModBlockEntities.registerBlockEntities();
+        SculkDepths.LOGGER.info("Registering BlockEntities for " + SculkDepths.MOD_ID);
+        ModBlockEntities.registerBlockEntities();
         SculkDepths.LOGGER.info("Registering Entities for " + SculkDepths.MOD_ID);
         FabricDefaultAttributeRegistry.register(ModEntities.GLOMPER, GlomperEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.LESTER, LesterEntity.createLesterAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.CHOMPER_COLOSSUS, ChomperColossusEntity.createChomperColossusAttributes());
         SculkDepths.LOGGER.info("Registering Particles for " + SculkDepths.MOD_ID);
         ModParticleTypes.registerModParticles();
+        SculkDepths.LOGGER.info("Registering ScreenHandlers for " + SculkDepths.MOD_ID);
+        ModScreenHandlers.registerModScreenHandlers();
         ModPlacementModifierType.init();
+        ModFeatures.init();
 
         ServerTickEvents.START_WORLD_TICK.register(new CheckInvForCrystalItems());
+        ServerTickEvents.START_WORLD_TICK.register(new ModBiomeEffects());
 
 
         CauldronFluidContent.registerCauldron(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON, ModFluids.KRYSLUM_STILL, FluidConstants.BUCKET, ModProperties.KRYSLUM_LEVEL); //support for mods to see how much fluid is in it (doesn't work for create pipes)
