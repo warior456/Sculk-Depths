@@ -3,10 +3,6 @@ package net.ugi.sculk_depths.entity.effect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import org.apache.logging.log4j.core.jmx.Server;
 
 public class InfectedStatusEffect extends StatusEffect {
     protected InfectedStatusEffect(StatusEffectCategory category, Integer color) {
