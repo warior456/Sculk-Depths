@@ -15,6 +15,6 @@ public class ModFeatures {
     public static void init(){
         Registry.register(Registries.FEATURE, SculkDepths.identifier( "configurable_spikes"), CONFIG_SPIKES);
         Registry.register(Registries.FEATURE, SculkDepths.identifier("pillars"), CONFIG_PILLARS);
-        Registry.register(Registries.FEATURE, SculkDepths.identifier("auric_shroom"), AURIC_MUSHROOM);
+        Registry.register(Registries.FEATURE, SculkDepths.identifier("auric_shroom"), AURIC_SHROOM);
     }
 }
