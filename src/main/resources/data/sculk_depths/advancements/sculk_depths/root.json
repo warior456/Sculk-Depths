@@ -13,7 +13,7 @@
       "translate": "advancements.sculk_depths.root.description"
     },
     "frame": "task",
-    "show_toast": false,
+    "show_toast": true,
     "announce_to_chat": false,
     "background": "sculk_depths:textures/block/kryslum_enriched_soil.png"
 
