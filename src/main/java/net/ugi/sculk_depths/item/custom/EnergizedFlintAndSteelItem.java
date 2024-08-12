@@ -1,6 +1,7 @@
 package net.ugi.sculk_depths.item.custom;
 
 
+import net.kyrptonaught.customportalapi.portal.PortalPlacer;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
@@ -20,6 +21,8 @@ import net.minecraft.world.event.GameEvent;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 
+import static net.ugi.sculk_depths.portal.Portals.SOUL_FIRE;
+
 //import static net.ugi.sculk_depths.portal.Portals.SOUL_FIRE;
 
 public class EnergizedFlintAndSteelItem extends Item {
@@ -35,7 +38,7 @@ public class EnergizedFlintAndSteelItem extends Item {
         World world = context.getWorld();
         BlockState blockState = world.getBlockState(blockPos = context.getBlockPos());
 
-        boolean portalLighted = false;//PortalPlacer.attemptPortalLight(world, blockPos.offset(context.getSide()), SOUL_FIRE);//TODO (customportalapi)
+        boolean portalLighted = PortalPlacer.attemptPortalLight(world, blockPos.offset(context.getSide()), SOUL_FIRE);
         if (portalLighted) {
             ItemStack itemStack = context.getStack();
             if (playerEntity instanceof ServerPlayerEntity) {

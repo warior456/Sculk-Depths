@@ -48,8 +48,8 @@ public class SculkDepths implements ModInitializer {
 	}
 	@Override
 	public void onInitialize() {
-        SpawnRestriction.register(ModEntities.LESTER, SpawnRestriction.Location.ON_GROUND, null, (type, world, reason, pos, random) -> true);
-        SpawnRestriction.register(ModEntities.CHOMPER_COLOSSUS, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (type, world, reason, pos, random) -> true);
+        SpawnRestriction.register(ModEntities.LESTER, SpawnLocationTypes.ON_GROUND, null, (type, world, reason, pos, random) -> true);
+        SpawnRestriction.register(ModEntities.CHOMPER_COLOSSUS, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (type, world, reason, pos, random) -> true);
 
         SculkDepths.LOGGER.info("Loading Config for " + SculkDepths.MOD_ID);
         Config.loadConfig();
@@ -81,7 +81,7 @@ public class SculkDepths implements ModInitializer {
         SculkDepths.LOGGER.info("Registering Particles for " + SculkDepths.MOD_ID);
         ModParticleTypes.registerModParticles();
         SculkDepths.LOGGER.info("Registering ScreenHandlers for " + SculkDepths.MOD_ID);
-        ModScreenHandlers.registerModScreenHandlers();
+        //ModScreenHandlers.registerModScreenHandlers();
         ModPlacementModifierType.init();
         ModFeatures.init();
 

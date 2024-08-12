@@ -16,11 +16,13 @@ public class InfectedStatusEffect extends StatusEffect {
         return  true;
     }
 
+    @Override
     // This method is called when it applies the status effect.
-    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         if(entity.getWorld().getTime()%40 != 0){
-            return;
+            return true;
         }
         entity.damage(entity.getDamageSources().generic(), 0.75f);//TODO custom damagesource
+        return true;
     }
 }
