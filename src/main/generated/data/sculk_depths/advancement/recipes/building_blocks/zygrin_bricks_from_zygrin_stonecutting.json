@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:zygrin_bricks_from_zygrin_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_zygrin": {
+      "conditions": {
+        "items": [
+          {
+            "items": "sculk_depths:zygrin"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_zygrin"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:zygrin_bricks_from_zygrin_stonecutting"
+    ]
+  }
+}

@@ -1,7 +1,10 @@
 package net.ugi.sculk_depths.block.custom;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.particle.ParticleEffect;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
@@ -16,6 +19,8 @@ import net.minecraft.world.WorldAccess;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.custom.ModCauldron.FlumrockCauldronBlock;
 import net.ugi.sculk_depths.block.custom.ModCauldron.SporeFlumrockCauldronBlock;
+
+
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.state.property.ModProperties;
 import org.jetbrains.annotations.Nullable;
@@ -46,7 +51,7 @@ public class SporeBlock extends ShroomBlock {
             BlockState blockState = world.getBlockState(mutable);
             if (blockState.isFullCube(world, mutable)) continue;
             //ParticleTypes.ASH
-            world.addParticle(ModParticleTypes.PENEBRIUM_SPORES, (double) mutable.getX() + random.nextDouble(), (double) mutable.getY() + random.nextDouble(), (double) mutable.getZ() + random.nextDouble(), 0.0, 0.0, 0.0);
+            world.addParticle((ParticleEffect) ModParticleTypes.PENEBRIUM_SPORES, (double) mutable.getX() + random.nextDouble(), (double) mutable.getY() + random.nextDouble(), (double) mutable.getZ() + random.nextDouble(), 0.0, 0.0, 0.0);
         }
     }
 

@@ -1,0 +1,41 @@
+{
+  "display": {
+    "icon": {
+      "id": "sculk_depths:quazarith_pieces"
+    },
+    "title": {
+      "translate": "advancements.sculk_depths.lester"
+    },
+    "description": {
+      "translate": "advancements.sculk_depths.lester.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "sculk_depths:sculk_depths/enter_sculk_depths",
+  "criteria": {
+    "sculk_depths:taken_damage_from_lester": {
+      "trigger": "minecraft:entity_hurt_player",
+      "conditions": {
+        "damage": {
+          "type": {
+            "source_entity": {
+              "type": "sculk_depths:lester"
+            }
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "sculk_depths:taken_damage_from_lester"
+    ]
+  ],
+  "rewards": {
+    "experience": 10
+  },
+  "sends_telemetry_event": false
+}

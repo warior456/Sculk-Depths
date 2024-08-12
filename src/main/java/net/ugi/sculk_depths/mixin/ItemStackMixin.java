@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.UUID;
 
+/*
 @Mixin(ItemStack.class)
 public class ItemStackMixin{
 
@@ -34,3 +35,4 @@ public class ItemStackMixin{
         return original;
     }
 }
+*/

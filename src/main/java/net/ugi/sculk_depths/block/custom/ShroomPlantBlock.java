@@ -25,7 +25,7 @@ public class ShroomPlantBlock
 
 
     public ShroomPlantBlock(Settings settings, RegistryKey<ConfiguredFeature<?, ?>> featureKey) {
-        super(settings, featureKey);
+        super(featureKey, settings);
         this.featureKey = featureKey;
     }
 
@@ -84,10 +84,6 @@ public class ShroomPlantBlock
         return false;
     }
 
-    @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
-        return true;
-    }
 
     @Override
     public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {

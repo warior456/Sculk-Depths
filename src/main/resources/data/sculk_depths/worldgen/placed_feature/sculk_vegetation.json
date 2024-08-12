@@ -10,10 +10,8 @@
       "vegetation_chance": 0.1,
       "xz_radius": {
         "type": "minecraft:uniform",
-        "value": {
-          "min_inclusive": 4,
-          "max_inclusive": 8
-        }
+        "min_inclusive": 4,
+        "max_inclusive": 8
       },
       "replaceable": "#sculk_depths:sculk",
       "ground_state": {
@@ -32,7 +30,12 @@
                 {
                   "weight": 40,
                   "data": {
-                    "Name": "minecraft:sculk_sensor"
+                    "Name": "minecraft:sculk_sensor",
+                    "Properties": {
+                      "power": "0",
+                      "sculk_sensor_phase": "inactive",
+                      "waterlogged": "false"
+                    }
                   }
                 },
                 {
@@ -49,7 +52,10 @@
                 {
                   "weight": 5,
                   "data": {
-                    "Name": "minecraft:sculk_catalyst"
+                    "Name": "minecraft:sculk_catalyst",
+                    "Properties": {
+                      "bloom": "false"
+                    }
                   }
                 }
               ]

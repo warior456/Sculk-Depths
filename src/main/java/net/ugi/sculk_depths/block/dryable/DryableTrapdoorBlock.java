@@ -10,8 +10,8 @@ import net.minecraft.util.math.random.Random;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class DryableTrapdoorBlock extends TrapdoorBlock implements Dryable {
-    public DryableTrapdoorBlock(Settings settings, BlockSetType blockSetType) {
-        super(settings, blockSetType);
+    public DryableTrapdoorBlock(BlockSetType type, Settings settings) {
+        super(type, settings);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class DryableTrapdoorBlock extends TrapdoorBlock implements Dryable {
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (MathHelper.nextInt(random, 0, 100) == 0) {
-            if(world.getDimensionKey() == ModDimensions.SCULK_DEPTHS_TYPE) {
+            if(world.getDimensionEntry() == ModDimensions.SCULK_DEPTHS_TYPE) {
 
                 Dryable.DryBlock(state, world, pos);
             }

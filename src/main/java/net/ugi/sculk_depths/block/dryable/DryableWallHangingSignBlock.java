@@ -10,8 +10,8 @@ import net.minecraft.util.math.random.Random;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class DryableWallHangingSignBlock extends WallHangingSignBlock implements Dryable {
-    public DryableWallHangingSignBlock(Settings settings, WoodType woodType) {
-        super(settings, woodType);
+    public DryableWallHangingSignBlock(WoodType woodType, Settings settings) {
+        super(woodType, settings);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class DryableWallHangingSignBlock extends WallHangingSignBlock implements
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (MathHelper.nextInt(random, 0, 100) == 0) {
-            if(world.getDimensionKey() == ModDimensions.SCULK_DEPTHS_TYPE) {
+            if(world.getDimensionEntry() == ModDimensions.SCULK_DEPTHS_TYPE) {
 
                 Dryable.DryBlock(state, world, pos);
             }

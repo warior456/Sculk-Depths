@@ -11,6 +11,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
@@ -30,18 +31,18 @@ public interface ModCauldronBehavior {
     public static final IntProperty KRYSLUM_LEVEL = ModProperties.KRYSLUM_LEVEL;
     public static final IntProperty SPORE_LEVEL = ModProperties.SPORE_LEVEL;
 
-    public static final Map<Item, CauldronBehavior> EMPTY_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap();
-    public static final Map<Item, CauldronBehavior> KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap();
+    public static final CauldronBehavior.CauldronBehaviorMap EMPTY_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap("empty_flumrock_cauldron");
+    public static final CauldronBehavior.CauldronBehaviorMap KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap("kryslum_flumrock_cauldron");
 
-    public static final Map<Item, CauldronBehavior> SPORE_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap();
+    public static final CauldronBehavior.CauldronBehaviorMap SPORE_FLUMROCK_CAULDRON_BEHAVIOR = CauldronBehavior.createMap("spore_flumrock_cauldron");
     public static final CauldronBehavior FILL_WITH_KRYSLUM = (state, world, pos, player, hand, stack) -> CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModBlocks.KRYSLUM_FLUMROCK_CAULDRON.getDefaultState(), SoundEvents.ITEM_BUCKET_EMPTY);
     public static final CauldronBehavior FILL_WITH_SPORE = (state, world, pos, player, hand, stack) -> CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModBlocks.SPORE_FLUMROCK_CAULDRON.getDefaultState(), SoundEvents.BLOCK_MOSS_PLACE);
 
     public static void registerBehavior() {
 
-        registerBucketBehavior(EMPTY_FLUMROCK_CAULDRON_BEHAVIOR);
+        registerBucketBehavior(EMPTY_FLUMROCK_CAULDRON_BEHAVIOR.map());
 
-        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
+        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient) {
                 Item item = stack.getItem();
                 player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(ModItems.KRYSLUM_BUCKET)));
@@ -51,12 +52,12 @@ public interface ModCauldronBehavior {
                 world.playSound(null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
                 world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
-            return ActionResult.success(world.isClient);
+            return ItemActionResult.success(world.isClient);
         });
 
-        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.KRYSLUM_BUCKET, (state, world, pos, player, hand, stack) -> {
+        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().put(ModItems.KRYSLUM_BUCKET, (state, world, pos, player, hand, stack) -> {
             if (state.get(KRYSLUM_LEVEL) == 12) {
-                return ActionResult.PASS;
+                return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
             }
             if (!world.isClient) {
                 player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(Items.BUCKET)));
@@ -66,12 +67,12 @@ public interface ModCauldronBehavior {
                 world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
                 world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
-            return ActionResult.success(world.isClient);
+            return ItemActionResult.success(world.isClient);
         });
 
-        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.QUAZARITH_PIECES, (state, world, pos, player, hand, stack) -> {
+        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().put(ModItems.QUAZARITH_PIECES, (state, world, pos, player, hand, stack) -> {
             if (state.get(QUAZARITH_LEVEL) == 12) {
-                return ActionResult.PASS;
+                return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
             }
             if (!world.isClient) {
                 if (!player.isCreative()) {
@@ -85,12 +86,12 @@ public interface ModCauldronBehavior {
                 world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH_HIGH_SPEED, SoundCategory.BLOCKS, 0.2f, 1.0f);
                 world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
-            return ActionResult.success(world.isClient);
+            return ItemActionResult.success(world.isClient);
         });
 
-        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.CRUX, (state, world, pos, player, hand, stack) -> {
+        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().put(ModItems.CRUX, (state, world, pos, player, hand, stack) -> {
             if (state.get(CRUX_LEVEL) == 12) {
-                return ActionResult.PASS;
+                return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
             }
             if (!world.isClient) {
                 if (!player.isCreative()) {
@@ -104,12 +105,12 @@ public interface ModCauldronBehavior {
                 world.playSound(null, pos, SoundEvents.ENTITY_PLAYER_SPLASH_HIGH_SPEED, SoundCategory.BLOCKS, 0.2f, 1f);
                 world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
-            return ActionResult.success(world.isClient);
+            return ItemActionResult.success(world.isClient);
         });
 
-        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.QUAZARITH_INGOT, (state, world, pos, player, hand, stack) -> {
+        KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().put(ModItems.QUAZARITH_INGOT, (state, world, pos, player, hand, stack) -> {
             if (state.get(QUAZARITH_LEVEL) > 8 || state.get(CRUX_LEVEL) > 8) {
-                return ActionResult.PASS;
+                return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
             }
             if (!world.isClient) {
                 if (!player.isCreative()) {
@@ -130,11 +131,11 @@ public interface ModCauldronBehavior {
             }
 
 
-            return ActionResult.success(world.isClient);
+            return ItemActionResult.success(world.isClient);
         });
 
 
-        SPORE_FLUMROCK_CAULDRON_BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
+        SPORE_FLUMROCK_CAULDRON_BEHAVIOR.map().put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient) {
                 Item item = stack.getItem();
                 player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(ModItems.PENEBRIUM_SPORE_BUCKET)));
@@ -144,12 +145,12 @@ public interface ModCauldronBehavior {
                 world.playSound(null, pos, SoundEvents.BLOCK_MOSS_BREAK, SoundCategory.BLOCKS, 1.0f, 1.0f);
                 world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
-            return ActionResult.success(world.isClient);
+            return ItemActionResult.success(world.isClient);
         });
 
-        SPORE_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.PENEBRIUM_SPORE_BUCKET, (state, world, pos, player, hand, stack) -> {
+        SPORE_FLUMROCK_CAULDRON_BEHAVIOR.map().put(ModItems.PENEBRIUM_SPORE_BUCKET, (state, world, pos, player, hand, stack) -> {
             if (state.get(SPORE_LEVEL) == 12) {
-                return ActionResult.PASS;
+                return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
             }
             if (!world.isClient) {
                 player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(Items.BUCKET)));
@@ -159,13 +160,13 @@ public interface ModCauldronBehavior {
                 world.playSound(null, pos, SoundEvents.BLOCK_MOSS_PLACE, SoundCategory.BLOCKS, 1.0f, 1.0f);
                 world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
-            return ActionResult.success(world.isClient);
+            return ItemActionResult.success(world.isClient);
         });
 
 
-        SPORE_FLUMROCK_CAULDRON_BEHAVIOR.put(ModItems.CRUX, (state, world, pos, player, hand, stack) -> {
+        SPORE_FLUMROCK_CAULDRON_BEHAVIOR.map().put(ModItems.CRUX, (state, world, pos, player, hand, stack) -> {
             if (state.get(CRUX_LEVEL) == 12) {
-                return ActionResult.PASS;
+                return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
             }
             if (!world.isClient) {
                 if (!player.isCreative()) {
@@ -179,7 +180,7 @@ public interface ModCauldronBehavior {
                 world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
                 world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             }
-            return ActionResult.success(world.isClient);
+            return ItemActionResult.success(world.isClient);
         });
 
     }

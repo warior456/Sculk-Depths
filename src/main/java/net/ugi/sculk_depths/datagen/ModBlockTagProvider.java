@@ -22,6 +22,9 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(ModTags.Blocks.KRYSLUM_FLOWABLE_BLOCKS)
                 .add(ModBlocks.ZYGRIN_FLOWBLOCK);
 
+        getOrCreateTagBuilder(ModTags.Blocks.INCORRECT_FOR_QUAZARITH_TOOL);
+
+
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
                 .add(ModBlocks.AMALGAMITE)
 
@@ -142,7 +145,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
          */
 
-        getOrCreateTagBuilder(TagKey.of(RegistryKeys.BLOCK, new Identifier("fabric", "needs_tool_level_4")))
+        getOrCreateTagBuilder(TagKey.of(RegistryKeys.BLOCK, Identifier.of("fabric", "needs_tool_level_4")))
                 .add(ModBlocks.QUAZARITH_BLOCK)
                 .add(ModBlocks.QUAZARITH_ORE);
 

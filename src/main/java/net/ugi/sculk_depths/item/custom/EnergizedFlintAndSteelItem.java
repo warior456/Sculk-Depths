@@ -1,9 +1,11 @@
 package net.ugi.sculk_depths.item.custom;
 
+
 import net.kyrptonaught.customportalapi.portal.PortalPlacer;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,6 +22,8 @@ import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 
 import static net.ugi.sculk_depths.portal.Portals.SOUL_FIRE;
+
+//import static net.ugi.sculk_depths.portal.Portals.SOUL_FIRE;
 
 public class EnergizedFlintAndSteelItem extends Item {
 
@@ -38,7 +42,7 @@ public class EnergizedFlintAndSteelItem extends Item {
         if (portalLighted) {
             ItemStack itemStack = context.getStack();
             if (playerEntity instanceof ServerPlayerEntity) {
-                itemStack.damage(SculkDepths.CONFIG.activate_portal_durability_usage, playerEntity, p -> p.sendToolBreakStatus(context.getHand()));
+                itemStack.damage(SculkDepths.CONFIG.activate_portal_durability_usage, playerEntity, EquipmentSlot.MAINHAND);
             }
             return ActionResult.success(world.isClient());
         }
@@ -48,7 +52,7 @@ public class EnergizedFlintAndSteelItem extends Item {
             world.setBlockState(blockPos, (BlockState) blockState.with(Properties.LIT, true), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
             world.emitGameEvent((Entity) playerEntity, GameEvent.BLOCK_CHANGE, blockPos);
             if (playerEntity != null) {
-                context.getStack().damage(1, playerEntity, p -> p.sendToolBreakStatus(context.getHand()));
+                context.getStack().damage(1, playerEntity, EquipmentSlot.MAINHAND);
             }
             return ActionResult.success(world.isClient());
         }
@@ -61,7 +65,7 @@ public class EnergizedFlintAndSteelItem extends Item {
             ItemStack itemStack = context.getStack();
             if (playerEntity instanceof ServerPlayerEntity) {
                 Criteria.PLACED_BLOCK.trigger((ServerPlayerEntity) playerEntity, blockPos2, itemStack);
-                itemStack.damage(1, playerEntity, p -> p.sendToolBreakStatus(context.getHand()));
+                itemStack.damage(1, playerEntity, EquipmentSlot.MAINHAND);
             }
             return ActionResult.success(world.isClient());
         }

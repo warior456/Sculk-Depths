@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "sculk_depths:petrified_valtrox_slates"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "sculk_depths:petrified_valtrox_button"
+  }
+}

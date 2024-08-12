@@ -1,5 +1,6 @@
 package net.ugi.sculk_depths.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.*;
@@ -23,16 +24,21 @@ public class ZygrinFurnaceBlock extends AbstractFurnaceBlock {
     }
 
     @Override
+    protected MapCodec<? extends AbstractFurnaceBlock> getCodec() {
+        return null;
+    }
+
+    @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new ZygrinFurnaceBlockEntity(pos, state);
     }
 
 
-    @Override
+/*    @Override
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return checkTypeF(world, type, ModBlockEntities.ZYGRIN_FURNACE_BLOCK_ENTITY);
-    }
+    }*/
 
 
 
@@ -68,8 +74,8 @@ public class ZygrinFurnaceBlock extends AbstractFurnaceBlock {
     }
 
 
-    @Nullable
+/*    @Nullable
     protected static <T extends BlockEntity> BlockEntityTicker<T> checkTypeF(World world, BlockEntityType givenType, BlockEntityType<ZygrinFurnaceBlockEntity> expectedType) {
         return world.isClient ? null : AbstractFurnaceBlock.checkType(givenType, expectedType, ZygrinFurnaceBlockEntity::tick);
-    }
+    }*/
 }
