@@ -1,0 +1,39 @@
+{
+  "display": {
+    "icon": {
+      "item": "sculk_depths:zygrin_furnace"
+    },
+    "title": {
+      "translate": "advancements.sculk_depths.get_zygrin_furnace"
+    },
+    "description": {
+      "translate": "advancements.sculk_depths.get_zygrin_furnace.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "sculk_depths:sculk_depths/get_quazarith",
+  "criteria": {
+    "get_zygrin_furnace": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "sculk_depths:zygrin_furnace"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_zygrin_furnace"
+    ]
+  ],
+  "rewards": {},
+  "sends_telemetry_event": false
+}

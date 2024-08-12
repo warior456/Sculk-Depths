@@ -1,0 +1,41 @@
+{
+  "display": {
+    "icon": {
+      "item": "sculk_depths:quazarith_ingot"
+    },
+    "title": {
+      "translate": "advancements.sculk_depths.get_quazarith"
+    },
+    "description": {
+      "translate": "advancements.sculk_depths.get_quazarith.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "sculk_depths:sculk_depths/enter_sculk_depths",
+  "criteria": {
+    "acquire_any_quazarith": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "sculk_depths:quazarith"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "acquire_any_quazarith"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "sculk_depths:zygrin_furnace"
+    ]
+  },
+  "sends_telemetry_event": false
+}
