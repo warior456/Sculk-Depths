@@ -10,11 +10,11 @@ import net.ugi.sculk_depths.SculkDepths;
 public class ModFeatures {
     public static final Feature<DefaultFeatureConfig> CONFIG_SPIKES = new ConfigurableSpikes(DefaultFeatureConfig.CODEC);
     public static final Feature<DefaultFeatureConfig> CONFIG_PILLARS = new ConfigurablePillars(DefaultFeatureConfig.CODEC);
-    public static final Feature<DefaultFeatureConfig> AURIC_MUSHROOM = new AuricMushroom(DefaultFeatureConfig.CODEC);
+    public static final Feature<DefaultFeatureConfig> AURIC_SHROOM = new AuricMushroom(DefaultFeatureConfig.CODEC);
 
     public static void init(){
         Registry.register(Registries.FEATURE, new Identifier(SculkDepths.MOD_ID, "configurable_spikes"), CONFIG_SPIKES);
         Registry.register(Registries.FEATURE, new Identifier(SculkDepths.MOD_ID, "pillars"), CONFIG_PILLARS);
-        Registry.register(Registries.FEATURE, new Identifier(SculkDepths.MOD_ID, "auric_mushroom"), AURIC_MUSHROOM);
+        Registry.register(Registries.FEATURE, new Identifier(SculkDepths.MOD_ID, "auric_shroom"), AURIC_SHROOM);
     }
 }
