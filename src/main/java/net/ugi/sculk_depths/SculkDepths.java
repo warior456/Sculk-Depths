@@ -1,11 +1,14 @@
 package net.ugi.sculk_depths;
 
 import net.fabricmc.api.ModInitializer;
+
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.CauldronFluidContent;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
+import net.minecraft.entity.SpawnLocationTypes;
 import net.minecraft.entity.SpawnRestriction;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.Heightmap;
 import net.ugi.sculk_depths.block.ModBlockEntities;
 import net.ugi.sculk_depths.block.ModBlocks;
@@ -23,26 +26,30 @@ import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.item.crystal.CheckInvForCrystalItems;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.portal.Portals;
-import net.ugi.sculk_depths.screen.ModScreenHandlers;
 import net.ugi.sculk_depths.sound.ConditionalSoundPlayer;
 import net.ugi.sculk_depths.sound.ModSounds;
 import net.ugi.sculk_depths.state.property.ModProperties;
+import net.ugi.sculk_depths.world.WorldGenerator;
 import net.ugi.sculk_depths.world.gen.ModFeatures;
 import net.ugi.sculk_depths.world.gen.ModPlacementModifierType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SculkDepths implements ModInitializer {
-    public static final String MOD_ID = "sculk_depths";
-    public static ConfigHandler CONFIG;
-    public static final Logger LOGGER = LoggerFactory.getLogger("sculk_depths");
+	// This logger is used to write text to the console and the log file.
+	// It is considered best practice to use your mod id as the logger's name.
+	// That way, it's clear which mod wrote info, warnings, and errors.
+	public static final String MOD_ID = "sculk_depths";
+	public static ConfigHandler CONFIG;
+	public static final Logger LOGGER = LoggerFactory.getLogger("sculk_depths");
 
-
-    @Override
-    public void onInitialize() {
-
-        SpawnRestriction.register(ModEntities.LESTER, SpawnRestriction.Location.ON_GROUND, null, (type, world, reason, pos, random) -> true);
-        SpawnRestriction.register(ModEntities.CHOMPER_COLOSSUS, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (type, world, reason, pos, random) -> true);
+	public static Identifier identifier(String path) {
+		return Identifier.of(SculkDepths.MOD_ID, path);
+	}
+	@Override
+	public void onInitialize() {
+        SpawnRestriction.register(ModEntities.LESTER, SpawnLocationTypes.ON_GROUND, null, (type, world, reason, pos, random) -> true);
+        SpawnRestriction.register(ModEntities.CHOMPER_COLOSSUS, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (type, world, reason, pos, random) -> true);
 
         SculkDepths.LOGGER.info("Loading Config for " + SculkDepths.MOD_ID);
         Config.loadConfig();
@@ -74,7 +81,7 @@ public class SculkDepths implements ModInitializer {
         SculkDepths.LOGGER.info("Registering Particles for " + SculkDepths.MOD_ID);
         ModParticleTypes.registerModParticles();
         SculkDepths.LOGGER.info("Registering ScreenHandlers for " + SculkDepths.MOD_ID);
-        ModScreenHandlers.registerModScreenHandlers();
+        //ModScreenHandlers.registerModScreenHandlers();
         ModPlacementModifierType.init();
         ModFeatures.init();
 

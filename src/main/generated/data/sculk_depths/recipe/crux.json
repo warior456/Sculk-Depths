@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "sculk_depths:crux_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "sculk_depths:crux"
+  }
+}

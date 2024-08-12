@@ -43,13 +43,13 @@ public class GlomperEntity extends PathAwareEntity {
         this.moveControl = new FlightMoveControl(this, 0, true);
     }
 
-    @Override
+/*    @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
 
-        super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+        super.initialize(world, difficulty, spawnReason, entityData);
         this.setNoGravity(true);
         return entityData;
-    }
+    }*/
 
     @Override
     public boolean occludeVibrationSignals() {

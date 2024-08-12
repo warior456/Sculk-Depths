@@ -11,8 +11,8 @@ import net.minecraft.util.math.random.Random;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class DryableDoorBlock extends DoorBlock implements Dryable {
-    public DryableDoorBlock(Settings settings, BlockSetType blockSetType) {
-        super(settings, blockSetType);
+    public DryableDoorBlock(BlockSetType type, Settings settings) {
+        super(type, settings);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class DryableDoorBlock extends DoorBlock implements Dryable {
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (state.get(HALF) == DoubleBlockHalf.LOWER){
             if (MathHelper.nextInt(random, 0, 100) == 0) {
-                if(world.getDimensionKey() == ModDimensions.SCULK_DEPTHS_TYPE) {
+                if(world.getDimensionEntry() == ModDimensions.SCULK_DEPTHS_TYPE) {
 
                     Dryable.DryBlock(state, world, pos);
                 }

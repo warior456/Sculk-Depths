@@ -1,6 +1,8 @@
 package net.ugi.sculk_depths.block.custom.ModCauldron;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.AbstractCauldronBlock;
+import net.minecraft.block.AbstractPlantStemBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.util.function.BooleanBiFunction;
@@ -10,6 +12,11 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 
 public class FlumrockCauldronBlock extends AbstractCauldronBlock {
+    @Override
+    protected MapCodec<? extends AbstractCauldronBlock> getCodec() {
+        return null;
+    }
+
 
     private static final VoxelShape RAYCAST_SHAPE = AbstractCauldronBlock.createCuboidShape(1.5, 2.0, 1.5, 14.5, 16.0, 14.5);
     protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(VoxelShapes.fullCube(),

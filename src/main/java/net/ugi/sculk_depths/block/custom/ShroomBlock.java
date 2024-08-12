@@ -15,7 +15,7 @@ import net.minecraft.world.WorldAccess;
 import java.util.Map;
 
 public class ShroomBlock
-        extends AbstractGlassBlock {
+        extends TransparentBlock {
 
     public ShroomBlock(Settings settings) {
         super(settings);

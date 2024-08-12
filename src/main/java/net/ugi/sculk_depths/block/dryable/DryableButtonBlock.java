@@ -10,8 +10,8 @@ import net.minecraft.util.math.random.Random;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class DryableButtonBlock extends ButtonBlock implements Dryable {
-    public DryableButtonBlock(Settings settings, BlockSetType blockSetType, int pressTicks, boolean wooden) {
-        super(settings, blockSetType, pressTicks, wooden);
+    public DryableButtonBlock(BlockSetType blockSetType, int pressTicks, Settings settings) {
+        super(blockSetType, pressTicks, settings);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class DryableButtonBlock extends ButtonBlock implements Dryable {
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (MathHelper.nextInt(random, 0, 100) == 0) {
-            if(world.getDimensionKey() == ModDimensions.SCULK_DEPTHS_TYPE) {
+            if(world.getDimensionEntry() == ModDimensions.SCULK_DEPTHS_TYPE) {
 
                 Dryable.DryBlock(state, world, pos);
             }

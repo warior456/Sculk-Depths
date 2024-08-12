@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "sculk_depths:quazarith_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "sculk_depths:quazarith_ingot"
+  }
+}

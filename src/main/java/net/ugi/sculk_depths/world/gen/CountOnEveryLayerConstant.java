@@ -1,6 +1,6 @@
 package net.ugi.sculk_depths.world.gen;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -15,18 +15,20 @@ import java.util.stream.Stream;
 
 public class CountOnEveryLayerConstant
         extends PlacementModifier {
-
-    public static final Codec<CountOnEveryLayerConstant> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            IntProvider.VALUE_CODEC.fieldOf("count").forGetter(c -> c.count),
-            IntProvider.POSITIVE_CODEC.fieldOf("layers").forGetter(c -> c.layers),
-            IntProvider.VALUE_CODEC.fieldOf("start_y").forGetter(c -> c.startY),
-            IntProvider.VALUE_CODEC.fieldOf("separation").forGetter(c -> c.separation)
-    ).apply(instance, CountOnEveryLayerConstant::new));
     private final IntProvider count;
     private final IntProvider layers;
 
     private final IntProvider startY;
     private final IntProvider separation;
+
+    public static final MapCodec<CountOnEveryLayerConstant> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            IntProvider.VALUE_CODEC.fieldOf("count").forGetter(c ->  c.count),
+            IntProvider.POSITIVE_CODEC.fieldOf("layers").forGetter(c -> c.layers),
+            IntProvider.VALUE_CODEC.fieldOf("start_y").forGetter(c -> c.startY),
+            IntProvider.VALUE_CODEC.fieldOf("separation").forGetter(c -> c.separation)
+    ).apply(instance, CountOnEveryLayerConstant::new));
+
+
 
     public CountOnEveryLayerConstant(IntProvider count, IntProvider layers, IntProvider startY, IntProvider separation) {
         this.count = count;

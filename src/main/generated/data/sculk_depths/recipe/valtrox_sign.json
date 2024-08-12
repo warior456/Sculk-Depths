@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wooden_sign",
+  "key": {
+    "W": {
+      "item": "sculk_depths:valtrox_planks"
+    },
+    "X": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "WWW",
+    " X "
+  ],
+  "result": {
+    "count": 3,
+    "id": "sculk_depths:valtrox_sign"
+  }
+}
