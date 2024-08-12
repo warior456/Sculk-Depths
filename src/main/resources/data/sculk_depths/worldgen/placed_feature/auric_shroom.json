@@ -1,8 +1,5 @@
 {
-  "feature": {
-    "type": "sculk_depths:auric_mushroom",
-    "config": {}
-  },
+  "feature": "sculk_depths:auric_shroom",
   "placement": [
     {
       "type": "minecraft:count",
