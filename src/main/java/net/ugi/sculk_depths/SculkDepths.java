@@ -85,6 +85,9 @@ public class SculkDepths implements ModInitializer {
         ModPlacementModifierType.init();
         ModFeatures.init();
 
+        WorldGenerator.initWorldGen();
+
+
         ServerTickEvents.START_WORLD_TICK.register(new CheckInvForCrystalItems());
         ServerTickEvents.START_WORLD_TICK.register(new ModBiomeEffects());
 
