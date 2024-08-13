@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "sculk_depths:quazarith"
+            "items": "#sculk_depths:quazarith"
           }
         ]
       }
