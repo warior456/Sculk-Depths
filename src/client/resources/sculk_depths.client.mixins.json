@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "net.ugi.sculk_depths.mixin.client",
+  "package": "net.ugi.sculk_depths.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
     "BackgroundRendererMixin",
@@ -9,5 +9,5 @@
   ],
   "injectors": {
     "defaultRequire": 1
-	}
+  }
 }

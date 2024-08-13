@@ -1,4 +1,4 @@
-package net.ugi.sculk_depths.mixin.client;
+package net.ugi.sculk_depths.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.fabric.impl.resource.loader.FabricLifecycledResourceManager;
@@ -56,10 +56,11 @@ public class BackgroundRendererMixin {
             if(entity.isSubmergedIn(ModTags.Fluids.KRYSLUM)){ //fluid fog
                 overrideWaterToKryslum(viewDistance, entity);
             }
-
         }  else if (cameraSubmersionType == CameraSubmersionType.NONE) {
-            if(entity.getEntityWorld().getDimensionEntry() == ModDimensions.SCULK_DEPTHS_TYPE) {
-
+            System.out.println(entity.getEntityWorld().getDimensionEntry().getKey().get());
+            System.out.println(ModDimensions.SCULK_DEPTHS_TYPE);
+            if(entity.getEntityWorld().getDimensionEntry().getKey().get() == ModDimensions.SCULK_DEPTHS_TYPE) {
+                System.out.println("dimension passed passed");
                 BlockPos pos = entity.getBlockPos();
                 float y = pos.getY();
                 float mul = 1;
@@ -83,7 +84,7 @@ public class BackgroundRendererMixin {
                         + 2/3f * countInfectedColumns                                            //Infected Columns   mul = 2/3
                 ) / ((radius*2+1) * (radius*2+1));
 
-
+                System.out.println("backgroundrendering4");
                 if(y <= -200f) y = -200f;
                 float start = ((y+256) * (viewDistance/426) * ((float)1/10)) * mul;
                 float end = (start * 10f ) * mul;
@@ -118,5 +119,6 @@ public class BackgroundRendererMixin {
         fogEnd = end;
         RenderSystem.setShaderFogStart(fogStart);
         RenderSystem.setShaderFogEnd(fogEnd);
+        System.out.println("backgroundrendering645");
     }
 }

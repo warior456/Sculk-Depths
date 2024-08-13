@@ -1,4 +1,4 @@
-package net.ugi.sculk_depths.mixin.client;
+package net.ugi.sculk_depths.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
