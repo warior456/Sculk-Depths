@@ -19,11 +19,18 @@
       "trigger": "minecraft:location",
       "conditions": {
         "player": {
-          "location": {}
+          "location": {
+            "biomes": "minecraft:deep_dark"
+          }
         }
       }
     }
   },
+  "requirements": [
+    [
+      "find_deep_dark"
+    ]
+  ],
   "rewards": {
     "recipes": [
       "sculk_depths:energized_flint_and_steel"
