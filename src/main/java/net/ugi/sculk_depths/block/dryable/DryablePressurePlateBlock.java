@@ -21,7 +21,7 @@ public class DryablePressurePlateBlock extends PressurePlateBlock implements Dry
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (MathHelper.nextInt(random, 0, 100) == 0) {
-            if(world.getDimensionEntry() == ModDimensions.SCULK_DEPTHS_TYPE) {
+            if(world.getDimensionEntry().getKey().get() == ModDimensions.SCULK_DEPTHS_TYPE) {
 
                 Dryable.DryBlock(state, world, pos);
             }

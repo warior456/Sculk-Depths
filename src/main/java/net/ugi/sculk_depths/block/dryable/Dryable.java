@@ -71,8 +71,6 @@ public interface Dryable {
         Block driedblock = getDriedBlock(block);
 
         if (block == ModBlocks.VALTROX_DOOR){
-            world.setBlockState(pos, Blocks.AIR.getDefaultState());
-            world.setBlockState(pos.up(),Blocks.AIR.getDefaultState());
             world.setBlockState(pos, driedblock.getStateWithProperties(state.with(HALF, DoubleBlockHalf.LOWER)));
             world.setBlockState(pos.up(), driedblock.getStateWithProperties(state.with(HALF, DoubleBlockHalf.UPPER)));
         }

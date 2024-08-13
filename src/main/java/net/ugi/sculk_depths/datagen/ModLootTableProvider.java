@@ -74,7 +74,6 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.VALTROX_SLAB, ModBlocks.VALTROX_SLAB.asItem());
         addDrop(ModBlocks.VALTROX_FENCE, ModBlocks.VALTROX_FENCE.asItem());
         addDrop(ModBlocks.VALTROX_FENCE_GATE, ModBlocks.VALTROX_FENCE_GATE.asItem());
-        addDrop(ModBlocks.VALTROX_DOOR, ModBlocks.VALTROX_DOOR.asItem());
         addDrop(ModBlocks.VALTROX_TRAPDOOR, ModBlocks.VALTROX_TRAPDOOR.asItem());
         addDrop(ModBlocks.VALTROX_PRESSURE_PLATE, drops(ModBlocks.VALTROX_PRESSURE_PLATE.asItem()));
         addDrop(ModBlocks.VALTROX_BUTTON, drops(ModBlocks.VALTROX_BUTTON.asItem()));
