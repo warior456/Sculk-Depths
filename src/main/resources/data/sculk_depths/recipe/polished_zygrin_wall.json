@@ -1,16 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###",
-    "###"
-  ],
-  "key": {
-    "#": {
-      "item": "sculk_depths:polished_zygrin"
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "sculk_depths:polished_zygrin"
+        }
+    },
+    "result": {
+        "id": "sculk_depths:polished_zygrin_wall",
+        "count": 6
     }
-  },
-  "result": {
-    "item": "sculk_depths:polished_zygrin_wall",
-    "count": 6
-  }
 }
