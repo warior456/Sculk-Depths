@@ -47,6 +47,10 @@ public class ModBlocks {
 
     public static final Block AMALGAMITE = registerBlock("amalgamite",
             new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE).strength(3.0f, 6.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
+    public static final Block AMALGAMITE_BRICKS = registerBlock("amalgamite_bricks",
+            new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE).strength(2.9f, 6.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+
     public static final Block LARGUTH = registerBlock("larguth",
             new Block(AbstractBlock.Settings.copy(Blocks.OBSIDIAN).strength(40.0f,1000f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
