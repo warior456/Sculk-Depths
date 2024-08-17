@@ -354,6 +354,8 @@ public class ModBlocks {
     public static final Block VALTROX_SAPLING = registerBlock("valtrox_sapling",
             new SaplingBlock(WorldGenerator.VALTROX_SAPLING_GENERATOR, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING)), ModItemGroup.SCULK_DEPTHS);
 
+    public static final Block POTTED_VALTROX_SAPLING = registerBlockWithoutBlockItem("potted_valtrox_sapling", Blocks.createFlowerPotBlock(ModBlocks.VALTROX_SAPLING), ModItemGroup.SCULK_DEPTHS);
+
     //vegetation
     public static final Block CEPHLERA = registerBlockWithoutBlockItem("cephlera",
             new CephleraBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES)), ModItemGroup.SCULK_DEPTHS);
