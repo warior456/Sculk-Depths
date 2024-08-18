@@ -354,7 +354,10 @@ public class ModBlocks {
     public static final Block VALTROX_SAPLING = registerBlock("valtrox_sapling",
             new SaplingBlock(WorldGenerator.VALTROX_SAPLING_GENERATOR, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING)), ModItemGroup.SCULK_DEPTHS);
 
+    //potted stuff
     public static final Block POTTED_VALTROX_SAPLING = registerBlockWithoutBlockItem("potted_valtrox_sapling", Blocks.createFlowerPotBlock(ModBlocks.VALTROX_SAPLING), ModItemGroup.SCULK_DEPTHS);
+    public static final Block POTTED_PENEBRIUM_SHROOM = registerBlockWithoutBlockItem("potted_penebrium_shroom", Blocks.createFlowerPotBlock(ModBlocks.PENEBRIUM_SHROOM), ModItemGroup.SCULK_DEPTHS);
+    //public static final Block POTTED_AURIC_SPORE_SPROUTS = registerBlockWithoutBlockItem("potted_auric_spore_sprouts", Blocks.createFlowerPotBlock(ModBlocks.AURIC_SPORE_SPROUTS), ModItemGroup.SCULK_DEPTHS);
 
     //vegetation
     public static final Block CEPHLERA = registerBlockWithoutBlockItem("cephlera",
@@ -382,7 +385,7 @@ public class ModBlocks {
 
     //penebrium
     public static final Block PENEBRIUM_SHROOM = registerBlock("penebrium_shroom",
-            new MushroomPlantBlock(ModConfiguredFeatures.PENEBRIUM_SHROOM, AbstractBlock.Settings.copy(Blocks.WARPED_FUNGUS).luminance((state) -> 5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).noCollision()), ModItemGroup.SCULK_DEPTHS);
+            new MushroomPlantBlock(ModConfiguredFeatures.PENEBRIUM_SHROOM, AbstractBlock.Settings.copy(Blocks.BROWN_MUSHROOM)), ModItemGroup.SCULK_DEPTHS);//.luminance((state) -> 5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube))
 
     public static final Block PENEBRIUM_SHROOM_BLOCK = registerBlock("penebrium_shroom_block",
             new ShroomBlock(AbstractBlock.Settings.copy(Blocks.MUSHROOM_STEM).luminance((state) -> 5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
@@ -394,7 +397,7 @@ public class ModBlocks {
             new SporeBlock(AbstractBlock.Settings.copy(Blocks.MUSHROOM_STEM).luminance((state) -> 5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
 
     //misc
-//TODO
+
     public static final CustomPortalBlock SCULK_DEPTHS_PORTAL = (CustomPortalBlock) registerBlockWithoutBlockItem("sculk_depths_portal",
             new CustomPortalBlock(AbstractBlock.Settings.copy(Blocks.NETHER_PORTAL).luminance((state) -> 6).dropsNothing().noCollision().strength(-1.0f,3600000.0f)),ModItemGroup.SCULK_DEPTHS );
 
@@ -414,7 +417,7 @@ public class ModBlocks {
             new ShroomBlock(AbstractBlock.Settings.copy(Blocks.MUSHROOM_STEM).nonOpaque()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block AURIC_SPORE_SPROUTS = registerBlock("auric_spore_sprouts",
-            new ShroomPlantBlock(AbstractBlock.Settings.copy(Blocks.WARPED_FUNGUS).noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES), ModConfiguredFeatures.AURIC_SHROOM) , ModItemGroup.SCULK_DEPTHS);//todo
+            new ShroomPlantBlock(AbstractBlock.Settings.copy(Blocks.BROWN_MUSHROOM).noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES), ModConfiguredFeatures.AURIC_SHROOM) , ModItemGroup.SCULK_DEPTHS);//todo
 
     //fluids
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new FluidBlock(ModFluids.KRYSLUM_STILL, AbstractBlock.Settings.copy(Blocks.WATER).replaceable().noCollision().strength(100.0f).pistonBehavior(PistonBehavior.DESTROY).dropsNothing().liquid().solid().sounds(BlockSoundGroup.SCULK)), ModItemGroup.SCULK_DEPTHS);
