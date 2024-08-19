@@ -6,17 +6,23 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
+import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.client.*;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.particle.*;
+import net.ugi.sculk_depths.render.SculkDepthsCloudRendererClient;
+import net.ugi.sculk_depths.render.SculkDepthsSkyRendererClient;
 import net.ugi.sculk_depths.screen.ModScreenHandlers;
+import net.ugi.sculk_depths.screen.ZygrinFurnaceScreen;
 import net.ugi.sculk_depths.sound.ConditionalSoundPlayerClient;
 import net.ugi.sculk_depths.sound.SoundPlayerGetterClient;
+import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class SculkDepthsClient implements ClientModInitializer {
 	@Override
@@ -93,18 +99,16 @@ public class SculkDepthsClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PENEBRIUM_SHROOM_BLOCK, RenderLayer.getTranslucent());
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PENEBRIUM_SPORE_BLOCK, RenderLayer.getTranslucent());
 
-		SculkDepths.LOGGER.info("Registering ScreenHandlers for " + SculkDepths.MOD_ID);
-		ModScreenHandlers.registerModScreenHandlers();
 
 		ParticleFactoryRegistry.getInstance().register(ModParticleTypes.PENEBRIUM_SPORES, PenebriumSporeParticle.Factory::new);
 		ParticleFactoryRegistry.getInstance().register(ModParticleTypes.AURIC_SPORES, AuricSporeParticle.Factory::new);
 		ParticleFactoryRegistry.getInstance().register(ModParticleTypes.SURFACE_WIND, SurfaceWindParticle.Factory::new);
 		ParticleFactoryRegistry.getInstance().register(ModParticleTypes.CAVE_FALLING_PARTICLE, CaveFallingParticle.Factory::new);
-/*
+
 		DimensionRenderingRegistry.registerCloudRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY, new SculkDepthsCloudRendererClient());
 		DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY, new SculkDepthsSkyRendererClient());
 
-		HandledScreens.register(ModScreenHandlers.ZYGRIN_FURNACE_SCREEN_HANDLER, ZygrinFurnaceScreen::new); //if this doesn't work for some reason use the line below instead*/
+		HandledScreens.register(ModScreenHandlers.ZYGRIN_FURNACE_SCREEN_HANDLER, ZygrinFurnaceScreen::new); //if this doesn't work for some reason use the line below instead
 		//HandledScreens.register(ModScreenHandlerTypes.ZYGRIN_FURNACE_SCREEN_HANDLER, (HandledScreens.Provider<ZygrinFurnaceScreenHandler, ZygrinFurnaceScreen>) ZygrinFurnaceScreen::new);
 	}
 }

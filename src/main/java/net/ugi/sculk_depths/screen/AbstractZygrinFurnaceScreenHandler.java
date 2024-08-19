@@ -10,7 +10,6 @@ import net.minecraft.recipe.*;
 import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.screen.*;
-import net.minecraft.screen.slot.FurnaceFuelSlot;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.world.World;
@@ -147,11 +146,13 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
 
     public int getFuelProgress() {
 //return 12 for full fire
-        if(this.propertyDelegate.get(0) > 0) { // checks if burntime is greater than 0
+/*        if(this.propertyDelegate.get(0) > 0) { // checks if burntime is greater than 0
             return 12;
         } else {
             return 0;
-        }
+        }*/
+        System.out.println(this.propertyDelegate.get(0)*0.24);
+        return (int) (this.propertyDelegate.get(0)*0.24);
     }
 
     public boolean isBurning() {

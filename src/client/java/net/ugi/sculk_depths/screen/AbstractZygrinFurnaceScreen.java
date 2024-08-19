@@ -34,7 +34,7 @@ public class AbstractZygrinFurnaceScreen<T extends AbstractZygrinFurnaceScreenHa
     public void init() {
         super.init();
         this.narrow = this.width < 379;
-        this.recipeBook.initialize(this.width, this.height, this.client, this.narrow, (AbstractRecipeScreenHandler)this.handler);
+        this.recipeBook.initialize(this.width, this.height, this.client, this.narrow, this.handler);
         this.x = this.recipeBook.findLeftEdge(this.width, this.backgroundWidth);
         this.addDrawableChild(new TexturedButtonWidget(this.x + 20, this.height / 2 - 49, 20, 18, RecipeBookWidget.BUTTON_TEXTURES, (button) -> {
             this.recipeBook.toggleOpen();
@@ -70,11 +70,11 @@ public class AbstractZygrinFurnaceScreen<T extends AbstractZygrinFurnaceScreenHa
         int i = this.x;
         int j = this.y;
         context.drawTexture(this.background, i, j, 0, 0, this.backgroundWidth, this.backgroundHeight);
-        if (((AbstractZygrinFurnaceScreenHandler)this.handler).isBurning()) {
-            k = ((AbstractZygrinFurnaceScreenHandler)this.handler).getFuelProgress();
+        if (this.handler.isBurning()) {
+            k = this.handler.getFuelProgress();
             context.drawTexture(this.background, i + 56, j + 36 + 12 - k, 176, 12 - k, 14, k + 1);
         }
-        k = ((AbstractZygrinFurnaceScreenHandler)this.handler).getCookProgress();
+        k = this.handler.getCookProgress();
         context.drawTexture(this.background, i + 79, j + 34, 176, 14, k + 1, 16);
     }
 
