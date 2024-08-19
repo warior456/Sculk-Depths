@@ -3,6 +3,7 @@ package net.ugi.sculk_depths.block.custom;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
@@ -34,13 +35,11 @@ public class ZygrinFurnaceBlock extends AbstractFurnaceBlock {
     }
 
 
-/*    @Override
     @Nullable
+    @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkTypeF(world, type, ModBlockEntities.ZYGRIN_FURNACE_BLOCK_ENTITY);
-    }*/
-
-
+        return BlockWithEntity.validateTicker(type, ModBlockEntities.ZYGRIN_FURNACE_BLOCK_ENTITY, ZygrinFurnaceBlockEntity::tick);
+    }
 
     @Override
     protected void openScreen(World world, BlockPos pos, PlayerEntity player) {
@@ -73,9 +72,4 @@ public class ZygrinFurnaceBlock extends AbstractFurnaceBlock {
         world.addParticle(ParticleTypes.FLAME, d + i, e + j, f + k, 0.0, 0.0, 0.0);
     }
 
-
-/*    @Nullable
-    protected static <T extends BlockEntity> BlockEntityTicker<T> checkTypeF(World world, BlockEntityType givenType, BlockEntityType<ZygrinFurnaceBlockEntity> expectedType) {
-        return world.isClient ? null : AbstractFurnaceBlock.checkType(givenType, expectedType, ZygrinFurnaceBlockEntity::tick);
-    }*/
 }
