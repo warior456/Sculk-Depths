@@ -12,6 +12,7 @@ import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.screen.*;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHandler<SingleStackRecipeInput, AbstractCookingRecipe> {
@@ -135,24 +136,24 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
         return AbstractFurnaceBlockEntity.canUseAsFuel(itemStack);
     }
 
-    public int getCookProgress() {
+    public float getCookProgress() {
         int i = this.propertyDelegate.get(2);
         int j = this.propertyDelegate.get(3);
-        if (j == 0 || i == 0) {
-            return 0;
-        }
-        return i * 24 / j;
+        return j != 0 && i != 0 ? MathHelper.clamp((float)i / (float)j, 0.0F, 1.0F) : 0.0F;
     }
 
-    public int getFuelProgress() {
+    public float getFuelProgress() {
+        int i = this.propertyDelegate.get(1);
+        if (i == 0) {
+            i = 200;
+        }
 //return 12 for full fire
-/*        if(this.propertyDelegate.get(0) > 0) { // checks if burntime is greater than 0
-            return 12;
+        if(this.propertyDelegate.get(0) > 0) { // checks if burntime is greater than 0
+            return 1f;
         } else {
             return 0;
-        }*/
-        System.out.println(this.propertyDelegate.get(0)*0.24);
-        return (int) (this.propertyDelegate.get(0)*0.24);
+        }
+        //return (int) (this.propertyDelegate.get(0)*0.25);//todo discuss to use this alternate or not
     }
 
     public boolean isBurning() {
