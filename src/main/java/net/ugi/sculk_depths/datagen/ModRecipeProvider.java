@@ -47,7 +47,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         //tools
         ShapelessRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.ENERGISED_FLINT_AND_STEEL)
-                .input(ModItems.GLOMPER_GLUX)
                 .input(ModItems.ENERGY_ESSENCE)
                 .input(Items.FLINT_AND_STEEL)
                 .criterion(hasItem(ModItems.ENERGY_ESSENCE), conditionsFromItem(ModItems.ENERGY_ESSENCE))

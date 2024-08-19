@@ -274,7 +274,7 @@ public class ModBlocks {
             new FenceGateBlock(ModWoodType.PETRIFIED_VALTROX, AbstractBlock.Settings.copy(Blocks.STONE).strength(3.0f,5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_DOOR = registerBlock("petrified_valtrox_door",
-            new DoorBlock(ModBlockSetType.PETRIFIED_VALTROX, AbstractBlock.Settings.copy(Blocks.STONE).strength(3.0f,5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
+            new DoorBlock(ModBlockSetType.PETRIFIED_VALTROX, AbstractBlock.Settings.copy(Blocks.STONE).strength(3.0f,5.0f).requiresTool().nonOpaque()), ModItemGroup.SCULK_DEPTHS);
 
     public static final Block PETRIFIED_VALTROX_TRAPDOOR = registerBlock("petrified_valtrox_trapdoor",
             new TrapdoorBlock(ModBlockSetType.PETRIFIED_VALTROX, AbstractBlock.Settings.copy(Blocks.STONE).strength(3.0f,5.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS);
