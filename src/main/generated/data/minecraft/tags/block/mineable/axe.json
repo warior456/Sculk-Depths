@@ -41,6 +41,8 @@
     "sculk_depths:dried_valtrox_button",
     "sculk_depths:penebrium_shroom_block",
     "sculk_depths:penebrium_shroom_stem",
-    "sculk_depths:penebrium_spore_block"
+    "sculk_depths:penebrium_spore_block",
+    "sculk_depths:auric_shroom_stem",
+    "sculk_depths:auric_shroom_block"
   ]
 }

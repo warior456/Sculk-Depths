@@ -52,6 +52,7 @@ import net.ugi.sculk_depths.block.ModBlockEntities;
 
 
 import net.ugi.sculk_depths.block.ModBlocks;
+import net.ugi.sculk_depths.screen.ZygrinFurnaceScreenHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -89,7 +90,7 @@ public class ZygrinFurnaceBlockEntity extends LockableContainerBlockEntity imple
     }
 
     protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-        return new FurnaceScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+        return new ZygrinFurnaceScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
 //begin custom
 private boolean isBurning() {

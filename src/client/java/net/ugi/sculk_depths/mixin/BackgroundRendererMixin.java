@@ -1,4 +1,4 @@
-package net.ugi.sculk_depths.mixin.client;
+package net.ugi.sculk_depths.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.fabric.impl.resource.loader.FabricLifecycledResourceManager;
@@ -56,10 +56,8 @@ public class BackgroundRendererMixin {
             if(entity.isSubmergedIn(ModTags.Fluids.KRYSLUM)){ //fluid fog
                 overrideWaterToKryslum(viewDistance, entity);
             }
-
         }  else if (cameraSubmersionType == CameraSubmersionType.NONE) {
-            if(entity.getEntityWorld().getDimensionEntry() == ModDimensions.SCULK_DEPTHS_TYPE) {
-
+            if(entity.getEntityWorld().getDimensionEntry().getKey().get() == ModDimensions.SCULK_DEPTHS_TYPE) {
                 BlockPos pos = entity.getBlockPos();
                 float y = pos.getY();
                 float mul = 1;
@@ -82,7 +80,6 @@ public class BackgroundRendererMixin {
                 mul = (   1f * remainder                                                         // default           mul = 1
                         + 2/3f * countInfectedColumns                                            //Infected Columns   mul = 2/3
                 ) / ((radius*2+1) * (radius*2+1));
-
 
                 if(y <= -200f) y = -200f;
                 float start = ((y+256) * (viewDistance/426) * ((float)1/10)) * mul;

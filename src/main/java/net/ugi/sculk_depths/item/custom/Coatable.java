@@ -70,8 +70,6 @@ public interface Coatable {
         Block coatedblock = getCoatedBlock(block);
 
         if (block == ModBlocks.VALTROX_DOOR){
-            world.setBlockState(pos,Blocks.AIR.getDefaultState());
-            world.setBlockState(pos.up(),Blocks.AIR.getDefaultState());
             world.setBlockState(pos, coatedblock.getStateWithProperties(state.with(HALF, DoubleBlockHalf.LOWER)));
             world.setBlockState(pos.up(), coatedblock.getStateWithProperties(state.with(HALF, DoubleBlockHalf.UPPER)));
         }

@@ -1,11 +1,11 @@
 {
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "sculk_depths:crux_ore"
-  },
-  "result": {
-    "id": "sculk_depths:crux"
-  },
-  "experience": 10,
-  "cookingtime": 100
+    "type": "minecraft:blasting",
+    "ingredient": {
+        "item": "sculk_depths:crux_ore"
+    },
+    "result": {
+        "id": "sculk_depths:crux"
+    },
+    "experience": 10,
+    "cookingtime": 100
 }

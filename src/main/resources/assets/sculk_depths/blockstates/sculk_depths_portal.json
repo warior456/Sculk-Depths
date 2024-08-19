@@ -3,6 +3,9 @@
     "axis=x": {
       "model": "sculk_depths:block/sculk_depths_portal_ns"
     },
+    "axis=y": {
+      "model": "sculk_depths:block/sculk_depths_portal_ns"
+    },
     "axis=z": {
       "model": "sculk_depths:block/sculk_depths_portal_ew"
     }

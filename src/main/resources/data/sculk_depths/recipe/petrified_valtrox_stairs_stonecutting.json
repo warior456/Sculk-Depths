@@ -1,8 +1,10 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "sculk_depths:petrified_valtrox_slates"
-  },
-  "result": "sculk_depths:petrified_valtrox_stairs",
-  "count": 1
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item": "sculk_depths:petrified_valtrox_slates"
+    },
+    "result": {
+        "id": "sculk_depths:petrified_valtrox_stairs",
+        "count": "1"
+    }
 }

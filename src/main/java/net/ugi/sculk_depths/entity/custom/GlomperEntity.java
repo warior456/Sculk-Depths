@@ -41,6 +41,7 @@ public class GlomperEntity extends PathAwareEntity {
     public GlomperEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
         this.moveControl = new FlightMoveControl(this, 0, true);
+        this.setNoGravity(true);
     }
 
 /*    @Override

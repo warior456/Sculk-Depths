@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "sculk_depths:quazarith_ingot"
+      "id": "sculk_depths:quazarith_ingot"
     },
     "title": {
       "translate": "advancements.sculk_depths.get_quazarith"
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "sculk_depths:quazarith"
+            "items": "#sculk_depths:quazarith"
           }
         ]
       }

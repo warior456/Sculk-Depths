@@ -1,9 +1,12 @@
 {
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "sculk_depths:quazarith_ore"
-  },
-  "result": "sculk_depths:quazarith_pieces",
-  "experience": 4,
-  "cookingtime": 300
+    "type": "minecraft:smelting",
+    "ingredient": {
+        "item": "sculk_depths:quazarith_ore"
+    },
+    "result": {
+        "id": "sculk_depths:quazarith_pieces",
+        "count": 1
+    },
+    "experience": 4,
+    "cookingtime": 300
 }

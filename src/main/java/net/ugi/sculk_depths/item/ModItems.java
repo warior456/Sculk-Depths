@@ -66,22 +66,22 @@ public class ModItems {
 
     public static final Item QUAZARITH_SHOVEL = registerItem("quazarith_shovel",
             new ShovelItem(ModToolMaterials.QUAZARITH, //2.5F, -3.0F,
-                    new Item.Settings().fireproof()));
+                    new Item.Settings().attributeModifiers(ShovelItem.createAttributeModifiers(ModToolMaterials.QUAZARITH, 2.5f, -3f)).fireproof()));
     public static final Item QUAZARITH_PICKAXE = registerItem("quazarith_pickaxe",
             new PickaxeItem(ModToolMaterials.QUAZARITH, //2, -2.0F,
-                    new Item.Settings().fireproof()));
+                    new Item.Settings().attributeModifiers(PickaxeItem.createAttributeModifiers(ModToolMaterials.QUAZARITH, 2f,-2f)).fireproof()));
 
     public static final Item QUAZARITH_AXE = registerItem("quazarith_axe",
             new AxeItem(ModToolMaterials.QUAZARITH, //7, -3.0F,
-                    new Item.Settings().fireproof()));
+                    new Item.Settings().attributeModifiers(AxeItem.createAttributeModifiers(ModToolMaterials.QUAZARITH, 7f,-3f)).fireproof()));
 
     public static final Item QUAZARITH_HOE = registerItem("quazarith_hoe",
             new HoeItem(ModToolMaterials.QUAZARITH, //-4, 1.0F,
-                    new Item.Settings().fireproof()));
+                    new Item.Settings().attributeModifiers(HoeItem.createAttributeModifiers(ModToolMaterials.QUAZARITH, -4f,1f)).fireproof()));
 
     public static final Item QUAZARITH_SWORD = registerItem("quazarith_sword",
             new SwordItem(ModToolMaterials.QUAZARITH, //6, -2.0F,
-                    new Item.Settings().fireproof()));
+                    new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.QUAZARITH, 6, -2f)).fireproof()));
 
 
     //quazarith armor

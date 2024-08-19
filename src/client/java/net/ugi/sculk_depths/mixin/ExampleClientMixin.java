@@ -1,4 +1,4 @@
-package net.ugi.sculk_depths.mixin.client;
+package net.ugi.sculk_depths.mixin;
 
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;
