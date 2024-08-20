@@ -15,6 +15,8 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.function.BooleanBiFunction;
@@ -30,15 +32,11 @@ public class PedestalBlock extends FacingBlock {
     public static final BooleanProperty HAS_ENERGY_ESSENCE = ModProperties.HAS_ENERGY_ESSENCE;
     public static final MapCodec<PedestalBlock> CODEC = createCodec(PedestalBlock::new);
     private static final VoxelShape RAYCAST_SHAPE = createCuboidShape(2.0, 4.0, 2.0, 14.0, 16.0, 14.0);
-
     protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(
-            VoxelShapes.fullCube(),
-            VoxelShapes.union(
-                    createCuboidShape(0.0, 0.0, 4.0, 16.0, 3.0, 12.0),
-                    createCuboidShape(4.0, 0.0, 0.0, 12.0, 3.0, 16.0),
-                    createCuboidShape(2.0, 0.0, 2.0, 14.0, 3.0, 14.0),
-                    RAYCAST_SHAPE
-            ),
+            VoxelShapes.union(createCuboidShape(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
+                    createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0),
+                    createCuboidShape(2.0, 2.0, 2.0, 14.0, 14.0, 14.0)
+                    ),VoxelShapes.empty(),
             BooleanBiFunction.ONLY_FIRST
     );
 
@@ -56,6 +54,17 @@ public class PedestalBlock extends FacingBlock {
     public PedestalBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(HAS_ENERGY_ESSENCE, false));
+    }
+
+    @Override
+    public BlockState rotate(BlockState blockState, BlockRotation rotation) {
+        return blockState.with(FACING, rotation.rotate(blockState.get(FACING)));
+
+    }
+
+    @Override
+    public BlockState mirror(BlockState blockState, BlockMirror mirror) {
+        return blockState.rotate(mirror.getRotation(blockState.get(FACING)));
     }
 
 

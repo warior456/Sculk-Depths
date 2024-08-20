@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "sculk_depths:block/sculk_pedestal",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "sculk_depths:block/sculk_pedestal"
+    },
+    "facing=south": {
+      "model": "sculk_depths:block/sculk_pedestal",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "sculk_depths:block/sculk_pedestal",
+      "y": 270
+    }
+  }
+}
