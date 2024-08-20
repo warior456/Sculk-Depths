@@ -355,8 +355,8 @@ public class ModBlocks {
             new SaplingBlock(WorldGenerator.VALTROX_SAPLING_GENERATOR, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     //potted stuff
-    public static final Block POTTED_VALTROX_SAPLING = registerBlockWithoutBlockItem("potted_valtrox_sapling", new FlowerPotBlock(ModBlocks.VALTROX_SAPLING, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-    public static final Block POTTED_PENEBRIUM_SHROOM = registerBlockWithoutBlockItem("potted_penebrium_shroom", new FlowerPotBlock(ModBlocks.PENEBRIUM_SHROOM, AbstractBlock.Settings.copy(Blocks.BROWN_MUSHROOM)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+    public static final Block POTTED_VALTROX_SAPLING = registerBlockWithoutBlockItem("potted_valtrox_sapling", new FlowerPotBlock(ModBlocks.VALTROX_SAPLING, AbstractBlock.Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+    public static final Block POTTED_PENEBRIUM_SHROOM = registerBlockWithoutBlockItem("potted_penebrium_shroom", new FlowerPotBlock(ModBlocks.PENEBRIUM_SHROOM, AbstractBlock.Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
     //public static final Block POTTED_AURIC_SPORE_SPROUTS = registerBlockWithoutBlockItem("potted_auric_spore_sprouts", new FlowerPotBlock(ModBlocks.AURIC_SPORE_SPROUTS, AbstractBlock.Settings.copy(Blocks.BROWN_MUSHROOM)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     //vegetation
