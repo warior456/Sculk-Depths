@@ -26,6 +26,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.state.property.ModProperties;
 
 public class PedestalBlock extends FacingBlock {
@@ -71,6 +72,13 @@ public class PedestalBlock extends FacingBlock {
 
     @Override
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (stack.getItem() == ModItems.ENERGY_ESSENCE){
+            stack.decrementUnlessCreative(1,player);
+
+            BlockState blockState1 = state.with(HAS_ENERGY_ESSENCE, true);
+            world.setBlockState(pos, blockState1);
+            return ItemActionResult.SUCCESS;
+        }
         return ItemActionResult.FAIL;
     }
 

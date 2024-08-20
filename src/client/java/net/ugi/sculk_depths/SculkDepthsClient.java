@@ -102,6 +102,8 @@ public class SculkDepthsClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PENEBRIUM_SHROOM_BLOCK, RenderLayer.getTranslucent());
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PENEBRIUM_SPORE_BLOCK, RenderLayer.getTranslucent());
 
+		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SCULK_PEDESTAL, RenderLayer.getCutout());
+
 
 		ParticleFactoryRegistry.getInstance().register(ModParticleTypes.PENEBRIUM_SPORES, PenebriumSporeParticle.Factory::new);
 		ParticleFactoryRegistry.getInstance().register(ModParticleTypes.AURIC_SPORES, AuricSporeParticle.Factory::new);
@@ -110,6 +112,8 @@ public class SculkDepthsClient implements ClientModInitializer {
 
 		DimensionRenderingRegistry.registerCloudRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY, new SculkDepthsCloudRendererClient());
 		DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY, new SculkDepthsSkyRendererClient());
+
+
 
 		HandledScreens.register(ModScreenHandlers.ZYGRIN_FURNACE_SCREEN_HANDLER, ZygrinFurnaceScreen::new); //if this doesn't work for some reason use the line below instead
 		//HandledScreens.register(ModScreenHandlerTypes.ZYGRIN_FURNACE_SCREEN_HANDLER, (HandledScreens.Provider<ZygrinFurnaceScreenHandler, ZygrinFurnaceScreen>) ZygrinFurnaceScreen::new);
