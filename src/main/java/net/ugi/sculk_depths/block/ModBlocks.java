@@ -409,7 +409,7 @@ public class ModBlocks {
 
     //misc
 
-    public static final SculkDepthsPortalBlock SCULK_DEPTHS_PORTAL = (SculkDepthsPortalBlock) registerBlockWithoutBlockItem("sculk_depths_portal",
+    public static final Block SCULK_DEPTHS_PORTAL = registerBlockWithoutBlockItem("sculk_depths_portal",
             new SculkDepthsPortalBlock(AbstractBlock.Settings.copy(Blocks.NETHER_PORTAL).luminance((state) -> 6).dropsNothing().noCollision().strength(-1.0f,3600000.0f)),ModItemGroup.SCULK_DEPTHS_BLOCKS );
 
     public static final Block SCULK_PEDESTAL = registerBlock("sculk_pedestal",

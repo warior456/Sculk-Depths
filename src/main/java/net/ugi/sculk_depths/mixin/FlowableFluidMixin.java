@@ -19,13 +19,13 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(FlowableFluid.class)
 public abstract class FlowableFluidMixin {
-    @Shadow public abstract FluidState getStill(boolean falling);
 
     @ModifyReturnValue(
             method = "canFill",
             at = @At("RETURN")
     )
     private boolean allowOnTopOfKryslumEnrichedSoil(boolean original, @Local(ordinal = 0) BlockState state) {
-        return original || state.isOf(ModBlocks.SCULK_DEPTHS_PORTAL);
+        if (state.isOf(ModBlocks.SCULK_DEPTHS_PORTAL)) return false;
+        else return original;
     }
 }

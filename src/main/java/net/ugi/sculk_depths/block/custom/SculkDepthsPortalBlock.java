@@ -1,10 +1,12 @@
 package net.ugi.sculk_depths.block.custom;
 
+import com.mojang.logging.LogUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.server.world.ServerWorld;
@@ -18,6 +20,8 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.*;
+import net.minecraft.world.dimension.NetherPortal;
+import net.ugi.sculk_depths.block.ModBlocks;
 import org.jetbrains.annotations.Nullable;
 
 public class SculkDepthsPortalBlock extends Block implements Portal {
@@ -39,17 +43,11 @@ public class SculkDepthsPortalBlock extends Block implements Portal {
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
-/*        Block block = getPortalBase((World) world, pos);
-        PortalLink link = CustomPortalApiRegistry.getPortalLinkFromBase(block);
-        if (link != null) {
-            PortalFrameTester portalFrameTester = link.getFrameTester().createInstanceOfPortalFrameTester().init(world, pos, CustomPortalHelper.getAxisFrom(state), block);
-            if (portalFrameTester.isAlreadyLitPortalFrame())
-                return super.getStateForNeighborUpdate(state, direction, newState, world, pos, posFrom);
-        }
-        //todo handle unknown portallink
-        */
-        return Blocks.AIR.getDefaultState();
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        Direction.Axis axis = direction.getAxis();
+        Direction.Axis axis2 = (Direction.Axis)state.get(AXIS);
+        boolean bl = axis2 != axis && axis.isHorizontal();
+        return !bl && !neighborState.isOf(this) && !(new NetherPortal(world, pos, axis2)).wasAlreadyValid() ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     @Override
@@ -122,5 +120,9 @@ public class SculkDepthsPortalBlock extends Block implements Portal {
     @Override
     public Effect getPortalEffect() {
         return Effect.CONFUSION;
+    }
+
+    protected boolean canBucketPlace(BlockState state, Fluid fluid) {
+        return false;
     }
 }
