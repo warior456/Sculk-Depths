@@ -2,8 +2,6 @@ package net.ugi.sculk_depths.portal;
 
 
 
-import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
-import net.kyrptonaught.customportalapi.portal.PortalIgnitionSource;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -12,7 +10,7 @@ import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
 
 public class Portals {
-    public final static PortalIgnitionSource SOUL_FIRE = PortalIgnitionSource.CustomSource(SculkDepths.identifier("soul_fire"));//todo portalapi
+/*    public final static PortalIgnitionSource SOUL_FIRE = PortalIgnitionSource.CustomSource(SculkDepths.identifier("soul_fire"));//todo portalapi
 
     public static void registerModPortals() {
         CustomPortalBuilder.beginPortal()
@@ -37,5 +35,5 @@ public class Portals {
 
                 .registerPortal();
 
-    }
+    }*/
 }

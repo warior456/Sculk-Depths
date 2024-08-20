@@ -2,7 +2,6 @@ package net.ugi.sculk_depths.block;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 //import net.kyrptonaught.customportalapi.CustomPortalBlock;
-import net.kyrptonaught.customportalapi.CustomPortalBlock;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
@@ -410,8 +409,8 @@ public class ModBlocks {
 
     //misc
 
-    public static final CustomPortalBlock SCULK_DEPTHS_PORTAL = (CustomPortalBlock) registerBlockWithoutBlockItem("sculk_depths_portal",
-            new CustomPortalBlock(AbstractBlock.Settings.copy(Blocks.NETHER_PORTAL).luminance((state) -> 6).dropsNothing().noCollision().strength(-1.0f,3600000.0f)),ModItemGroup.SCULK_DEPTHS_BLOCKS );
+    public static final SculkDepthsPortalBlock SCULK_DEPTHS_PORTAL = (SculkDepthsPortalBlock) registerBlockWithoutBlockItem("sculk_depths_portal",
+            new SculkDepthsPortalBlock(AbstractBlock.Settings.copy(Blocks.NETHER_PORTAL).luminance((state) -> 6).dropsNothing().noCollision().strength(-1.0f,3600000.0f)),ModItemGroup.SCULK_DEPTHS_BLOCKS );
 
     public static final Block SCULK_PEDESTAL = registerBlock("sculk_pedestal",
             new PedestalBlock(AbstractBlock.Settings.create().strength(-1f, 3600000.0f).pistonBehavior(PistonBehavior.BLOCK)), ModItemGroup.SCULK_DEPTHS_BLOCKS);

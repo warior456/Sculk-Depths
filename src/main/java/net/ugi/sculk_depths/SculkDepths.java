@@ -60,8 +60,8 @@ public class SculkDepths implements ModInitializer {
         ModItems.registerModItems();
         SculkDepths.LOGGER.info("Registering Blocks for " + SculkDepths.MOD_ID);
         ModBlocks.registerModBlocks();
-        SculkDepths.LOGGER.info("Registering Portals for " + SculkDepths.MOD_ID);
-        Portals.registerModPortals();
+/*        SculkDepths.LOGGER.info("Registering Portals for " + SculkDepths.MOD_ID);
+        Portals.registerModPortals();*/
         SculkDepths.LOGGER.info("Registering Sounds for " + SculkDepths.MOD_ID);
         ModSounds.registerModSounds();
         SculkDepths.LOGGER.info("Registering Effects for " + SculkDepths.MOD_ID);

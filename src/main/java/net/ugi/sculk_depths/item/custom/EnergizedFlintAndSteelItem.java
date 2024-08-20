@@ -1,7 +1,7 @@
 package net.ugi.sculk_depths.item.custom;
 
 
-import net.kyrptonaught.customportalapi.portal.PortalPlacer;
+
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
@@ -21,7 +21,6 @@ import net.minecraft.world.event.GameEvent;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 
-import static net.ugi.sculk_depths.portal.Portals.SOUL_FIRE;
 
 //import static net.ugi.sculk_depths.portal.Portals.SOUL_FIRE;
 
@@ -32,8 +31,10 @@ public class EnergizedFlintAndSteelItem extends Item {
     }
 
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) { //originally copied from mc
-        BlockPos blockPos;
+    public ActionResult useOnBlock(ItemUsageContext context) {//originally copied from mc
+
+        return ActionResult.FAIL;
+        /*BlockPos blockPos;
         PlayerEntity playerEntity = context.getPlayer();
         World world = context.getWorld();
         BlockState blockState = world.getBlockState(blockPos = context.getBlockPos());
@@ -70,7 +71,7 @@ public class EnergizedFlintAndSteelItem extends Item {
             return ActionResult.success(world.isClient());
         }
 
-        return ActionResult.FAIL;
+        return ActionResult.FAIL;*/
     }
 
 }
