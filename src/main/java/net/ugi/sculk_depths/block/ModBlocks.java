@@ -57,6 +57,9 @@ public class ModBlocks {
     public static final Block AMALGAMITE_BRICK_SLAB = registerBlock("amalgamite_brick_slab",
             new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
+    public static final Block ACTIVATED_AMALGAMITE = registerBlock("activated_amalgamite",
+            new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE).strength(-1.0f, 3600000.0f)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
     public static final Block AMALGAMITE_BRICK_WALL = registerBlock("amalgamite_brick_wall",
             new WallBlock(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
