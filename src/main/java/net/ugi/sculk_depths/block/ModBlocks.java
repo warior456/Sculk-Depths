@@ -410,6 +410,8 @@ public class ModBlocks {
     public static final CustomPortalBlock SCULK_DEPTHS_PORTAL = (CustomPortalBlock) registerBlockWithoutBlockItem("sculk_depths_portal",
             new CustomPortalBlock(AbstractBlock.Settings.copy(Blocks.NETHER_PORTAL).luminance((state) -> 6).dropsNothing().noCollision().strength(-1.0f,3600000.0f)),ModItemGroup.SCULK_DEPTHS_BLOCKS );
 
+    public static final Block SCULK_PEDESTAL = registerBlock("sculk_pedestal",
+            new PedestalBlock(AbstractBlock.Settings.create().strength(-1f, 3600000.0f).pistonBehavior(PistonBehavior.BLOCK)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     //auric //TODO check blocksettings
     public static final Block AURIC_SPORE_BLOCK = registerBlock("auric_spore_block",
@@ -426,7 +428,7 @@ public class ModBlocks {
             new ShroomBlock(AbstractBlock.Settings.copy(Blocks.MUSHROOM_STEM).nonOpaque()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block AURIC_SPORE_SPROUTS = registerBlock("auric_spore_sprouts",
-            new ShroomPlantBlock(AbstractBlock.Settings.copy(Blocks.BROWN_MUSHROOM).noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES), ModConfiguredFeatures.AURIC_SHROOM) , ModItemGroup.SCULK_DEPTHS_BLOCKS);//todo
+            new ShroomPlantBlock(AbstractBlock.Settings.copy(Blocks.BROWN_MUSHROOM).luminance((state)-> 0).noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES), ModConfiguredFeatures.AURIC_SHROOM) , ModItemGroup.SCULK_DEPTHS_BLOCKS);//todo
 
     //fluids
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new FluidBlock(ModFluids.KRYSLUM_STILL, AbstractBlock.Settings.copy(Blocks.WATER).replaceable().noCollision().strength(100.0f).pistonBehavior(PistonBehavior.DESTROY).dropsNothing().liquid().solid().sounds(BlockSoundGroup.SCULK)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
