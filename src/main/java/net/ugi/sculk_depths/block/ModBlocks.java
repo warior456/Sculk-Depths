@@ -51,6 +51,15 @@ public class ModBlocks {
     public static final Block AMALGAMITE_BRICKS = registerBlock("amalgamite_bricks",
             new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE).strength(2.9f, 6.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
+    public static final Block AMALGAMITE_BRICK_STAIRS = registerBlock("amalgamite_brick_stairs",
+            new StairsBlock(ModBlocks.AMALGAMITE_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block AMALGAMITE_BRICK_SLAB = registerBlock("amalgamite_brick_slab",
+            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block AMALGAMITE_BRICK_WALL = registerBlock("amalgamite_brick_wall",
+            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
     public static final Block LARGUTH = registerBlock("larguth",
             new Block(AbstractBlock.Settings.copy(Blocks.OBSIDIAN).strength(40.0f,1000f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
@@ -77,7 +86,7 @@ public class ModBlocks {
             new Block(AbstractBlock.Settings.copy(ModBlocks.UMBRUSK)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block UMBRUSK_BRICK_STAIRS = registerBlock("umbrusk_brick_stairs",
-            new StairsBlock(UMBRUSK.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.UMBRUSK_BRICKS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+            new StairsBlock(UMBRUSK_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.UMBRUSK_BRICKS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block UMBRUSK_BRICK_SLAB = registerBlock("umbrusk_brick_slab",
             new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.UMBRUSK_BRICKS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
