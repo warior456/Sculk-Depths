@@ -31,6 +31,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUX_BLOCK);
         //blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.AURIC_SPORE_BLOCK);
 
+
         amalgamiteBrickPool.stairs(ModBlocks.AMALGAMITE_BRICK_STAIRS);
         amalgamiteBrickPool.slab(ModBlocks.AMALGAMITE_BRICK_SLAB);
         amalgamiteBrickPool.wall(ModBlocks.AMALGAMITE_BRICK_WALL);
