@@ -129,44 +129,44 @@ public class ModItems {
 
     public static void addItemsToItemGroup() {
 
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, KRYSLUM_BUCKET);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, ENERGY_ESSENCE);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, ENERGISED_FLINT_AND_STEEL);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, KRYSLUM_BUCKET);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, ENERGY_ESSENCE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, ENERGISED_FLINT_AND_STEEL);
 
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, GLOMPER_GLUX);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, GLOMPER_SPAWN_EGG);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, LESTER_SPAWN_EGG);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, CHOMPER_COLOSSUS_SPAWN_EGG);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_GLUX);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_SPAWN_EGG);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, LESTER_SPAWN_EGG);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, CHOMPER_COLOSSUS_SPAWN_EGG);
 
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, CRUX);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, WHITE_CRYSTAL);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, BLUE_CRYSTAL);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, ORANGE_CRYSTAL);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, LIME_CRYSTAL);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, PENEBRIUM_SPORE_BUCKET);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, CRUX);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, WHITE_CRYSTAL);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, BLUE_CRYSTAL);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, ORANGE_CRYSTAL);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, LIME_CRYSTAL);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, PENEBRIUM_SPORE_BUCKET);
 
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_INGOT);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_PIECES);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_INGOT);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_PIECES);
 
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_SHOVEL);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_PICKAXE);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_AXE);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_HOE);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_SWORD);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_SHOVEL);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_PICKAXE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_AXE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_HOE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_SWORD);
 
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_HELMET);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_CHESTPLATE);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_LEGGINGS);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_BOOTS);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_HELMET);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_CHESTPLATE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_LEGGINGS);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_BOOTS);
 
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, VALTROX_SIGN);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, VALTROX_HANGING_SIGN);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, COATED_VALTROX_SIGN);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, COATED_VALTROX_HANGING_SIGN);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, DRIED_VALTROX_SIGN);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, DRIED_VALTROX_HANGING_SIGN);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, PETRIFIED_VALTROX_SIGN);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, PETRIFIED_VALTROX_HANGING_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_BLOCKS, VALTROX_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_BLOCKS, VALTROX_HANGING_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_BLOCKS, COATED_VALTROX_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_BLOCKS, COATED_VALTROX_HANGING_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_BLOCKS, DRIED_VALTROX_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_BLOCKS, DRIED_VALTROX_HANGING_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_BLOCKS, PETRIFIED_VALTROX_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_BLOCKS, PETRIFIED_VALTROX_HANGING_SIGN);
     }
 
     private static void addToItemGroup(RegistryKey<ItemGroup> group, Item item) {
