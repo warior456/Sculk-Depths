@@ -8,21 +8,36 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtIo;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.structure.AncientCityGenerator;
+import net.minecraft.structure.StructurePlacementData;
+import net.minecraft.structure.StructureTemplateManager;
 import net.minecraft.util.*;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.structure.Structure;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.portal.PortalFrame;
+import net.ugi.sculk_depths.portal.StructurePlacerAPI;
 import net.ugi.sculk_depths.state.property.ModProperties;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Random;
+import java.util.Scanner;
 
 public class PedestalBlock extends FacingBlock {
     public static final BooleanProperty HAS_ENERGY_ESSENCE = ModProperties.HAS_ENERGY_ESSENCE;
@@ -71,8 +86,15 @@ public class PedestalBlock extends FacingBlock {
             stack.decrementUnlessCreative(1,player);
             BlockState blockState1 = state.with(HAS_ENERGY_ESSENCE, true);
             world.setBlockState(pos, blockState1);
+/*            if(!world.isClient) {
+                StructurePlacerAPI structure = new StructurePlacerAPI((StructureWorldAccess) world, Identifier.of("sculk_depths:laboratory/centers/center_01"), pos);
+                structure.loadAndRestoreStructureAnimated(200, 100,true);
+                System.out.println("structuregenerating?");
+            }*/
             
             BlockPos portalFramePos = PortalFrame.getFramePos(state.get(FACING),pos, world);
+
+
             if (portalFramePos != null){
                 boolean fullFrame = PortalFrame.genFrame(portalFramePos,world);
 
