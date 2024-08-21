@@ -48,6 +48,12 @@ public class SculkDepthsPortalBlock extends Block implements Portal{
     }
 
     @Override
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+
+    }
+
+
+    @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         Direction.Axis axis = direction.getAxis();
         Direction.Axis axis2 = (Direction.Axis)state.get(AXIS);
