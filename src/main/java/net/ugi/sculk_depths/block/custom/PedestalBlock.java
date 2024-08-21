@@ -10,10 +10,7 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
+import net.minecraft.util.*;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -72,7 +69,6 @@ public class PedestalBlock extends FacingBlock {
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (stack.getItem() == ModItems.ENERGY_ESSENCE && !state.get(ModProperties.HAS_ENERGY_ESSENCE)){
             stack.decrementUnlessCreative(1,player);
-
             BlockState blockState1 = state.with(HAS_ENERGY_ESSENCE, true);
             world.setBlockState(pos, blockState1);
             
@@ -81,9 +77,9 @@ public class PedestalBlock extends FacingBlock {
                 PortalFrame.genFrame(portalFramePos,world);
 
                 if ( state.get(FACING) == Direction.SOUTH || state.get(FACING) == Direction.NORTH )
-                    PortalFrame.genPortalX(portalFramePos.up(3),world);
+                    PortalFrame.genPortalX(portalFramePos.up(3),world, 0);
                 if ( state.get(FACING) == Direction.WEST || state.get(FACING) == Direction.EAST )
-                    PortalFrame.genPortalZ(portalFramePos.up(3),world);
+                    PortalFrame.genPortalZ(portalFramePos.up(3),world, 0);
             }
             
             

@@ -88,42 +88,54 @@ public class PortalFrame {
         }
     }
 
-    public static void genPortalX(BlockPos pos, World world){
+    public static void genPortalX(BlockPos pos, World world, int depth){
+        if(world.isClient)return;
+        depth++;
+        if(depth > 500) {
+            System.out.println("ERROR: depth exceeded 500");
+            return;
+        }
         BlockState state = ModBlocks.SCULK_DEPTHS_PORTAL.getDefaultState();
         if (world.getBlockState(pos.east()).getBlock() != ModBlocks.ACTIVATED_AMALGAMITE && world.getBlockState(pos.east()).getBlock() != ModBlocks.SCULK_DEPTHS_PORTAL){
             world.setBlockState(pos.east(),ModBlocks.SCULK_DEPTHS_PORTAL.getStateWithProperties(state.with(AXIS, Direction.Axis.X)));
-            genPortalX(pos.east(), world);
+            genPortalX(pos.east(), world, depth);
         }
         if (world.getBlockState(pos.west()).getBlock() != ModBlocks.ACTIVATED_AMALGAMITE && world.getBlockState(pos.west()).getBlock() != ModBlocks.SCULK_DEPTHS_PORTAL){
             world.setBlockState(pos.west(),ModBlocks.SCULK_DEPTHS_PORTAL.getStateWithProperties(state.with(AXIS, Direction.Axis.X)));
-            genPortalX(pos.west(), world);
+            genPortalX(pos.west(), world, depth);
         }
         if (world.getBlockState(pos.up()).getBlock() != ModBlocks.ACTIVATED_AMALGAMITE && world.getBlockState(pos.up()).getBlock() != ModBlocks.SCULK_DEPTHS_PORTAL){
             world.setBlockState(pos.up(),ModBlocks.SCULK_DEPTHS_PORTAL.getStateWithProperties(state.with(AXIS, Direction.Axis.X)));
-            genPortalX(pos.up(), world);
+            genPortalX(pos.up(), world, depth);
         }
         if (world.getBlockState(pos.down()).getBlock() != ModBlocks.ACTIVATED_AMALGAMITE && world.getBlockState(pos.down()).getBlock() != ModBlocks.SCULK_DEPTHS_PORTAL){
             world.setBlockState(pos.down(),ModBlocks.SCULK_DEPTHS_PORTAL.getStateWithProperties(state.with(AXIS, Direction.Axis.X)));
-            genPortalX(pos.down(), world);
+            genPortalX(pos.down(), world,depth);
         }
     }
-    public static void genPortalZ(BlockPos pos, World world){
+    public static void genPortalZ(BlockPos pos, World world, int depth){
+        if(world.isClient)return;
+        depth++;
+        if(depth > 500) {
+            System.out.println("ERROR: depth exceeded 500");
+            return;
+        }
         BlockState state = ModBlocks.SCULK_DEPTHS_PORTAL.getDefaultState();
         if (world.getBlockState(pos.north()).getBlock() != ModBlocks.ACTIVATED_AMALGAMITE && world.getBlockState(pos.north()).getBlock() != ModBlocks.SCULK_DEPTHS_PORTAL){
             world.setBlockState(pos.north(),ModBlocks.SCULK_DEPTHS_PORTAL.getStateWithProperties(state.with(AXIS, Direction.Axis.Z)));
-            genPortalZ(pos.north(), world);
+            genPortalZ(pos.north(), world, depth);
         }
         if (world.getBlockState(pos.south()).getBlock() != ModBlocks.ACTIVATED_AMALGAMITE && world.getBlockState(pos.south()).getBlock() != ModBlocks.SCULK_DEPTHS_PORTAL){
             world.setBlockState(pos.south(),ModBlocks.SCULK_DEPTHS_PORTAL.getStateWithProperties(state.with(AXIS, Direction.Axis.Z)));
-            genPortalZ(pos.south(), world);
+            genPortalZ(pos.south(), world, depth);
         }
         if (world.getBlockState(pos.up()).getBlock() != ModBlocks.ACTIVATED_AMALGAMITE && world.getBlockState(pos.up()).getBlock() != ModBlocks.SCULK_DEPTHS_PORTAL){
             world.setBlockState(pos.up(),ModBlocks.SCULK_DEPTHS_PORTAL.getStateWithProperties(state.with(AXIS, Direction.Axis.Z)));
-            genPortalZ(pos.up(), world);
+            genPortalZ(pos.up(), world, depth);
         }
         if (world.getBlockState(pos.down()).getBlock() != ModBlocks.ACTIVATED_AMALGAMITE && world.getBlockState(pos.down()).getBlock() != ModBlocks.SCULK_DEPTHS_PORTAL){
             world.setBlockState(pos.down(),ModBlocks.SCULK_DEPTHS_PORTAL.getStateWithProperties(state.with(AXIS, Direction.Axis.Z)));
-            genPortalZ(pos.down(), world);
+            genPortalZ(pos.down(), world, depth);
         }
     }
 }
