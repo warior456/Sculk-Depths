@@ -104,7 +104,7 @@ public class SculkDepthsPortalBlock extends Block implements Portal{
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if(world.isClient())return;
+        //if(world.isClient())return;
         if(entity.canUsePortals(true)){
             entity.tryUsePortal(this, pos);
         }
