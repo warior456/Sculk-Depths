@@ -5,16 +5,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FacingBlock;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
@@ -22,13 +17,14 @@ import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
-import net.ugi.sculk_depths.portal.TestFrame;
+import net.ugi.sculk_depths.portal.PortalFrame;
 import net.ugi.sculk_depths.state.property.ModProperties;
 
 public class PedestalBlock extends FacingBlock {
@@ -80,9 +76,14 @@ public class PedestalBlock extends FacingBlock {
             BlockState blockState1 = state.with(HAS_ENERGY_ESSENCE, true);
             world.setBlockState(pos, blockState1);
             
-            BlockPos portalFramePos = TestFrame.getFramePos(state.get(FACING),pos, world);
+            BlockPos portalFramePos = PortalFrame.getFramePos(state.get(FACING),pos, world);
             if (portalFramePos != null)
-                world.setBlockState(portalFramePos, ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+                PortalFrame.genFrame(portalFramePos,world);
+
+                if ( state.get(FACING) == Direction.SOUTH || state.get(FACING) == Direction.NORTH )
+                    PortalFrame.genPortalX(portalFramePos.up(3),world);
+                if ( state.get(FACING) == Direction.WEST || state.get(FACING) == Direction.EAST )
+                    PortalFrame.genPortalZ(portalFramePos.up(3),world);
             
             
             return ItemActionResult.SUCCESS;
