@@ -1,5 +1,6 @@
 package net.ugi.sculk_depths.portal;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -50,29 +51,29 @@ public class PortalFrame {
         return null;
     }
 
-    private static BlockPos getNextFrameBlockPos(BlockPos pos, World world){
-        if (world.getBlockState(pos.north()).getBlock() == Blocks.REINFORCED_DEEPSLATE){
+    private static BlockPos getNextFrameBlockPos(BlockPos pos, World world, Block block){
+        if (world.getBlockState(pos.north()).getBlock() == block){
             return pos.north();
         }
-        if (world.getBlockState(pos.south()).getBlock() == Blocks.REINFORCED_DEEPSLATE){
+        if (world.getBlockState(pos.south()).getBlock() == block){
             return pos.south();
         }
-        if (world.getBlockState(pos.east()).getBlock() == Blocks.REINFORCED_DEEPSLATE){
+        if (world.getBlockState(pos.east()).getBlock() == block){
             return pos.east();
         }
-        if (world.getBlockState(pos.west()).getBlock() == Blocks.REINFORCED_DEEPSLATE){
+        if (world.getBlockState(pos.west()).getBlock() == block){
             return pos.west();
         }
-        if (world.getBlockState(pos.up()).getBlock() == Blocks.REINFORCED_DEEPSLATE){
+        if (world.getBlockState(pos.up()).getBlock() == block){
             return pos.up();
         }
-        if (world.getBlockState(pos.down()).getBlock() == Blocks.REINFORCED_DEEPSLATE){
+        if (world.getBlockState(pos.down()).getBlock() == block){
             return pos.down();
         }
         return null;
     }
 
-    private static Boolean chekcfullFrame(BlockPos pos1,BlockPos pos2, World world){
+    private static Boolean checkFullFrame(BlockPos pos1,BlockPos pos2, World world){
         int countActivatedAmalgamite = 0;
 
         if (pos1 != null) {
@@ -101,7 +102,7 @@ public class PortalFrame {
             return false;
         }
 
-        if (pos1 != null) {
+        if (pos2 != null) {
 
             if (world.getBlockState(pos2.north()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
                 countActivatedAmalgamite++;
@@ -132,24 +133,28 @@ public class PortalFrame {
     public static boolean genFrame(BlockPos pos, World world){
         BlockPos nextPos1 = pos;
         BlockPos nextPos2 = pos;
+        System.out.println("pos: " + pos);
 
-        world.setBlockState(pos,ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+        if (world.getBlockState(pos).getBlock() == Blocks.REINFORCED_DEEPSLATE)
+            world.setBlockState(pos,ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
 
         while (nextPos1 != null && nextPos2 != null){
 
-            nextPos1 = getNextFrameBlockPos(nextPos1,world);
-            if (nextPos1 != null){
-                world.setBlockState(nextPos1,ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+            nextPos1 = getNextFrameBlockPos(nextPos1,world, Blocks.REINFORCED_DEEPSLATE);
+            System.out.println("nextPos1: " + nextPos1);
+            if (nextPos1 == null){
                 break;
             }
+            world.setBlockState(nextPos1,ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
 
-            nextPos2 = getNextFrameBlockPos(nextPos2,world);
-            if (nextPos2 != null){
-                world.setBlockState(nextPos2,ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+            nextPos2 = getNextFrameBlockPos(nextPos2,world, Blocks.REINFORCED_DEEPSLATE);
+            System.out.println("nextPos2: " + nextPos2);
+            if (nextPos2 == null){
                 break;
             }
+            world.setBlockState(nextPos2,ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
         }
-        return chekcfullFrame(nextPos1, nextPos2, world);
+        return checkFullFrame(nextPos1, nextPos2, world);
     }
 
     public static void genPortalX(BlockPos pos, World world, int depth){
@@ -200,6 +205,31 @@ public class PortalFrame {
         if (world.getBlockState(pos.down()).getBlock() != ModBlocks.ACTIVATED_AMALGAMITE && world.getBlockState(pos.down()).getBlock() != ModBlocks.SCULK_DEPTHS_PORTAL){
             world.setBlockState(pos.down(),ModBlocks.SCULK_DEPTHS_PORTAL.getStateWithProperties(state.with(AXIS, Direction.Axis.Z)));
             genPortalZ(pos.down(), world, depth);
+        }
+    }
+
+
+
+    public static void undoFrame(BlockPos pos, World world){
+        BlockPos nextPos1 = pos;
+        BlockPos nextPos2 = pos;
+
+        if (world.getBlockState(pos).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE)
+            world.setBlockState(pos,Blocks.REINFORCED_DEEPSLATE.getDefaultState());
+
+        while (nextPos1 != null && nextPos2 != null){
+
+            nextPos1 = getNextFrameBlockPos(nextPos1,world, ModBlocks.ACTIVATED_AMALGAMITE);
+            if (nextPos1 == null){
+                break;
+            }
+            world.setBlockState(nextPos1,Blocks.REINFORCED_DEEPSLATE.getDefaultState());
+
+            nextPos2 = getNextFrameBlockPos(nextPos2,world , ModBlocks.ACTIVATED_AMALGAMITE);
+            if (nextPos2 == null){
+                break;
+            }
+            world.setBlockState(nextPos2,Blocks.REINFORCED_DEEPSLATE.getDefaultState());
         }
     }
 }
