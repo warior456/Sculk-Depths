@@ -5,6 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
@@ -22,6 +23,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.*;
 import net.minecraft.world.dimension.NetherPortal;
 import net.ugi.sculk_depths.block.ModBlocks;
+import net.ugi.sculk_depths.portal.PortalUtils;
 import org.jetbrains.annotations.Nullable;
 
 public class SculkDepthsPortalBlock extends Block implements Portal {
@@ -94,6 +96,7 @@ public class SculkDepthsPortalBlock extends Block implements Portal {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+        PortalUtils.attemptTeleport(world, entity, world.getBlockState(pos));
 /*        if (entity.canUsePortals(false)) {
             entity.tryUsePortal(this, pos);
         }*/
