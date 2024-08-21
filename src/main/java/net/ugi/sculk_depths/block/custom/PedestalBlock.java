@@ -74,12 +74,14 @@ public class PedestalBlock extends FacingBlock {
             
             BlockPos portalFramePos = PortalFrame.getFramePos(state.get(FACING),pos, world);
             if (portalFramePos != null){
-                PortalFrame.genFrame(portalFramePos,world);
+                boolean fullFrame = PortalFrame.genFrame(portalFramePos,world);
 
-                if ( state.get(FACING) == Direction.SOUTH || state.get(FACING) == Direction.NORTH )
-                    PortalFrame.genPortalX(portalFramePos.up(3),world, 0);
-                if ( state.get(FACING) == Direction.WEST || state.get(FACING) == Direction.EAST )
-                    PortalFrame.genPortalZ(portalFramePos.up(3),world, 0);
+                if (fullFrame) {
+                    if (state.get(FACING) == Direction.SOUTH || state.get(FACING) == Direction.NORTH)
+                        PortalFrame.genPortalX(portalFramePos.up(3), world, 0);
+                    if (state.get(FACING) == Direction.WEST || state.get(FACING) == Direction.EAST)
+                        PortalFrame.genPortalZ(portalFramePos.up(3), world, 0);
+                }
             }
             
             

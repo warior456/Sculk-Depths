@@ -1,16 +1,13 @@
 package net.ugi.sculk_depths.portal;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.state.property.ModProperties;
 
-import static net.minecraft.block.DoorBlock.HALF;
 import static net.ugi.sculk_depths.block.custom.SculkDepthsPortalBlock.AXIS;
 
 public class PortalFrame {
@@ -75,17 +72,84 @@ public class PortalFrame {
         return null;
     }
 
-    public static void genFrame(BlockPos pos, World world){
+    private static Boolean chekcfullFrame(BlockPos pos1,BlockPos pos2, World world){
+        int countActivatedAmalgamite = 0;
+
+        if (pos1 != null) {
+
+            if (world.getBlockState(pos1.north()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+                countActivatedAmalgamite++;
+            }
+            if (world.getBlockState(pos1.south()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+                countActivatedAmalgamite++;
+            }
+            if (world.getBlockState(pos1.east()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+                countActivatedAmalgamite++;
+            }
+            if (world.getBlockState(pos1.west()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+                countActivatedAmalgamite++;
+            }
+            if (world.getBlockState(pos1.up()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+                countActivatedAmalgamite++;
+            }
+            if (world.getBlockState(pos1.down()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+                countActivatedAmalgamite++;
+            }
+
+            if (countActivatedAmalgamite >= 2)
+                return true;
+            return false;
+        }
+
+        if (pos1 != null) {
+
+            if (world.getBlockState(pos2.north()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+                countActivatedAmalgamite++;
+            }
+            if (world.getBlockState(pos2.south()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+                countActivatedAmalgamite++;
+            }
+            if (world.getBlockState(pos2.east()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+                countActivatedAmalgamite++;
+            }
+            if (world.getBlockState(pos2.west()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+                countActivatedAmalgamite++;
+            }
+            if (world.getBlockState(pos2.up()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+                countActivatedAmalgamite++;
+            }
+            if (world.getBlockState(pos2.down()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+                countActivatedAmalgamite++;
+            }
+
+            if (countActivatedAmalgamite >= 2)
+                return true;
+            return false;
+        }
+        return false;
+    }
+
+    public static boolean genFrame(BlockPos pos, World world){
         BlockPos nextPos1 = pos;
         BlockPos nextPos2 = pos;
 
-        while (nextPos1 != null && nextPos2 != null){
-            world.setBlockState(nextPos1,ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
-            nextPos1 = getNextFrameBlockPos(nextPos1,world);
+        world.setBlockState(pos,ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
 
-            world.setBlockState(nextPos2,ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+        while (nextPos1 != null && nextPos2 != null){
+
+            nextPos1 = getNextFrameBlockPos(nextPos1,world);
+            if (nextPos1 != null){
+                world.setBlockState(nextPos1,ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+                break;
+            }
+
             nextPos2 = getNextFrameBlockPos(nextPos2,world);
+            if (nextPos2 != null){
+                world.setBlockState(nextPos2,ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+                break;
+            }
         }
+        return chekcfullFrame(nextPos1, nextPos2, world);
     }
 
     public static void genPortalX(BlockPos pos, World world, int depth){
