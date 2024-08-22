@@ -186,7 +186,7 @@ public class PortalFrame {
         BlockPos[] newPosArr = new BlockPos[0];
         for (BlockPos pos: blockposses) {
             BlockPos[] newPos = new BlockPos[0];
-            if (world.getBlockState(pos).getBlock() != Blocks.REINFORCED_DEEPSLATE) {
+            if (world.getBlockState(pos).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
                 world.setBlockState(pos,Blocks.REINFORCED_DEEPSLATE.getDefaultState());
                 newPos = getNextpos(pos, world, ModBlocks.ACTIVATED_AMALGAMITE);
                 if (newPos.length == 0){
