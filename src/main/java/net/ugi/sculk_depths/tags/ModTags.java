@@ -26,6 +26,9 @@ public class ModTags {
         public static final TagKey<Block> KRYSLUM_FLOWABLE_BLOCKS =
                 createTag("kryslum_flowable_blocks");
 
+        public static final TagKey<Block> PORTAL_AIR =
+                createTag("portal_air");
+
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, SculkDepths.identifier( name));

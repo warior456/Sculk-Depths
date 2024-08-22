@@ -27,10 +27,18 @@ import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.portal.PortalFrame;
 import net.ugi.sculk_depths.state.property.ModProperties;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class PedestalBlock extends FacingBlock {
     public static final BooleanProperty HAS_ENERGY_ESSENCE = ModProperties.HAS_ENERGY_ESSENCE;
     public static final MapCodec<PedestalBlock> CODEC = createCodec(PedestalBlock::new);
     private static final VoxelShape RAYCAST_SHAPE = createCuboidShape(2.0, 4.0, 2.0, 14.0, 16.0, 14.0);
+
+    private BlockPos[] portalFramePos = new BlockPos[0];
+    private String portalFase = "none";
+
+    private BlockPos[] posArray = new BlockPos[0];
     protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(
             VoxelShapes.union(createCuboidShape(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
                     createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0),
@@ -52,7 +60,43 @@ public class PedestalBlock extends FacingBlock {
 
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if (portalFase == "genFrame") {
+            posArray = PortalFrame.genFrameStep(world,posArray);
+            if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 1){
+                posArray = new BlockPos[0];
+                for (BlockPos pos1: portalFramePos) {
+                    posArray = PortalFrame.addElement(posArray,pos1.up(3));
+                    posArray = PortalFrame.addElement(posArray,pos1.up(4));
+                }
+                portalFase = "genPortal";
+            }
+            else if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
+                posArray = portalFramePos;
+                portalFase = "cancelFrame";
+            }
+            world.scheduleBlockTick(pos,state.getBlock(),2);
+        }
+        if (portalFase == "cancelFrame") {
+            posArray = PortalFrame.cancelFrameStep(world,posArray);
+            if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
+                posArray = new BlockPos[0];
+                portalFase = "none";
+            }
+            else {
+                world.scheduleBlockTick(pos,state.getBlock(),2);
+            }
+        }
 
+        if (portalFase == "genPortal") {
+            posArray = PortalFrame.genPortalStep(world,posArray,state.get(FACING));
+            if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
+                posArray = new BlockPos[0];
+                portalFase = "none";
+            }
+            else {
+                world.scheduleBlockTick(pos,state.getBlock(),2);
+            }
+        }
     }
 
     public PedestalBlock(Settings settings) {
@@ -78,16 +122,23 @@ public class PedestalBlock extends FacingBlock {
         if (world.isClient()){
             return ItemActionResult.FAIL;
         }
+
+
         if (stack.getItem() == ModItems.ENERGY_ESSENCE && !state.get(ModProperties.HAS_ENERGY_ESSENCE)){
             stack.decrementUnlessCreative(1,player);
-            world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, SoundCategory.BLOCKS, 1.0f, 1.0f);
+            world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE, SoundCategory.BLOCKS, 1.0f, 1.0f);
             BlockState blockState1 = state.with(HAS_ENERGY_ESSENCE, true);
             world.setBlockState(pos, blockState1);
             
-            BlockPos portalFramePos = PortalFrame.getFramePos(state.get(FACING),pos, world);
+            portalFramePos = PortalFrame.getFramePos(state.get(FACING),pos, world);
             if (portalFramePos != null){
-                boolean fullFrame = PortalFrame.genFrame(portalFramePos,world);
-                System.out.println(fullFrame);
+                if ( portalFramePos[0] != null){
+                    portalFase = "genFrame";
+                    posArray = portalFramePos;
+                    world.scheduleBlockTick(pos,state.getBlock(),20);
+                }
+
+                /*boolean fullFrame = PortalFrame.genFrame(portalFramePos,world);
 
                 if (fullFrame) {
                     if (state.get(FACING) == Direction.SOUTH || state.get(FACING) == Direction.NORTH)
@@ -99,7 +150,7 @@ public class PedestalBlock extends FacingBlock {
                 else{
                     world.playSound(null, pos, SoundEvents.BLOCK_VAULT_DEACTIVATE, SoundCategory.BLOCKS, 1.0f, 1.0f);
                     PortalFrame.undoFrame(portalFramePos,world);
-                }
+                }*/
 
             }
             
