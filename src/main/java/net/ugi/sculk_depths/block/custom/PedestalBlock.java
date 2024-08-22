@@ -144,10 +144,7 @@ public class PedestalBlock extends FacingBlock {
                     posArray = portalFramePos;
                     world.scheduleBlockTick(pos,state.getBlock(),20);
                 }
-
             }
-            
-            
             return ItemActionResult.SUCCESS;
         }
         return ItemActionResult.FAIL;
