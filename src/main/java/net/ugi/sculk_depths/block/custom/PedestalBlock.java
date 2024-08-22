@@ -35,10 +35,10 @@ public class PedestalBlock extends FacingBlock {
     public static final MapCodec<PedestalBlock> CODEC = createCodec(PedestalBlock::new);
     private static final VoxelShape RAYCAST_SHAPE = createCuboidShape(2.0, 4.0, 2.0, 14.0, 16.0, 14.0);
 
-    private BlockPos[] portalFramePos = new BlockPos[0];
-    private String portalFase = "none";
+    private static BlockPos[] portalFramePos = new BlockPos[0];
+    private static String portalFase = "none";
 
-    private BlockPos[] posArray = new BlockPos[0];
+    private static BlockPos[] posArray = new BlockPos[0];
     protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(
             VoxelShapes.union(createCuboidShape(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
                     createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0),
@@ -137,20 +137,6 @@ public class PedestalBlock extends FacingBlock {
                     posArray = portalFramePos;
                     world.scheduleBlockTick(pos,state.getBlock(),20);
                 }
-
-                /*boolean fullFrame = PortalFrame.genFrame(portalFramePos,world);
-
-                if (fullFrame) {
-                    if (state.get(FACING) == Direction.SOUTH || state.get(FACING) == Direction.NORTH)
-                        PortalFrame.genPortalX(portalFramePos.up(3), world, 0);
-                    if (state.get(FACING) == Direction.WEST || state.get(FACING) == Direction.EAST)
-                        PortalFrame.genPortalZ(portalFramePos.up(3), world, 0);
-
-                }
-                else{
-                    world.playSound(null, pos, SoundEvents.BLOCK_VAULT_DEACTIVATE, SoundCategory.BLOCKS, 1.0f, 1.0f);
-                    PortalFrame.undoFrame(portalFramePos,world);
-                }*/
 
             }
             
