@@ -155,11 +155,11 @@ private boolean isBurning() {
     private static int getCookTime(World world, ZygrinFurnaceBlockEntity furnace) {
         SingleStackRecipeInput singleStackRecipeInput = new SingleStackRecipeInput(furnace.getStack(0));
         return (Integer)furnace.matchGetter.getFirstMatch(singleStackRecipeInput, world).map((recipe) -> {
-            return (((AbstractCookingRecipe)recipe.value()).getCookingTime())/4;//furnace speed //todo test
+            return (((AbstractCookingRecipe)recipe.value()).getCookingTime())/4;//furnace speed
         }).orElse(50);
     }
 
-    public static void tick(World world, BlockPos pos, BlockState state, ZygrinFurnaceBlockEntity blockEntity) {//todo
+    public static void tick(World world, BlockPos pos, BlockState state, ZygrinFurnaceBlockEntity blockEntity) {
         boolean bl4 = false;
         boolean bl = blockEntity.isBurning();
         boolean bl2 = false;

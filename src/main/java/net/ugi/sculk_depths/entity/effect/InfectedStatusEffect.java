@@ -3,6 +3,7 @@ package net.ugi.sculk_depths.entity.effect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
+import net.ugi.sculk_depths.util.ModDamageTypes;
 
 public class InfectedStatusEffect extends StatusEffect {
     protected InfectedStatusEffect(StatusEffectCategory category, Integer color) {
@@ -22,7 +23,7 @@ public class InfectedStatusEffect extends StatusEffect {
         if(entity.getWorld().getTime()%40 != 0){
             return true;
         }
-        entity.damage(entity.getDamageSources().generic(), 0.75f);//TODO custom damagesource
+        entity.damage(ModDamageTypes.of(entity.getWorld(), ModDamageTypes.INFECTED_DAMAGE_TYPE), 0.75f);//TODO custom damagesource
         return true;
     }
 }
