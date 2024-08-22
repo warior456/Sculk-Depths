@@ -49,6 +49,8 @@ public class BackgroundRendererMixin {
         if(entity.isSpectator()){
             spectatorMultiplier = 2;
         }
+        else
+            spectatorMultiplier = 1;
 
         if(FabricLoader.getInstance().isModLoaded("distanthorizons")){ //dh compat
             if(RenderSystem.getShaderFogStart() == 4.20694194E14F) return;
