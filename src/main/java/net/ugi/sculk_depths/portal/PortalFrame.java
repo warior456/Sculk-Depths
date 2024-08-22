@@ -164,7 +164,7 @@ public class PortalFrame {
     }
 
     public static BlockPos[] genFrameStep(World world, BlockPos[] blockposses){
-        BlockPos[] newPosArr = new BlockPos[0];
+        BlockPos[] newPosArr = {new BlockPos(0,-4096,0)};
         for (BlockPos pos: blockposses) {
             BlockPos[] newPos = new BlockPos[0];
             if (world.getBlockState(pos).getBlock() != ModBlocks.ACTIVATED_AMALGAMITE) {
@@ -183,7 +183,7 @@ public class PortalFrame {
     }
 
     public static BlockPos[] cancelFrameStep(World world, BlockPos[] blockposses){
-        BlockPos[] newPosArr = new BlockPos[0];
+        BlockPos[] newPosArr = {new BlockPos(0,-4096,0)};
         for (BlockPos pos: blockposses) {
             BlockPos[] newPos = new BlockPos[0];
             if (world.getBlockState(pos).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
@@ -200,7 +200,7 @@ public class PortalFrame {
 
     public static BlockPos[] genPortalStep(World world, BlockPos blockposses[], Direction facing){
         BlockState state = ModBlocks.SCULK_DEPTHS_PORTAL.getDefaultState();
-        BlockPos[] newPosArr = new BlockPos[0];
+        BlockPos[] newPosArr = {new BlockPos(0,-4096,0)};
         for (BlockPos pos: blockposses) {
             BlockPos[] newPos = new BlockPos[0];
             if (world.getBlockState(pos).getBlock() != ModBlocks.SCULK_DEPTHS_PORTAL) {
