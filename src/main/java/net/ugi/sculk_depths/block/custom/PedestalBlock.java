@@ -134,15 +134,8 @@ public class PedestalBlock extends FacingBlock {
             return ItemActionResult.FAIL;
         }
 
-
-        world.getRegistryManager()// gets the dynamic registry manager
-                .getOptional(RegistryKeys.STRUCTURE)// gets an optional wrapped structure registry from it
-                .flatMap(registry-> // if it exists, map it to:
-                        registry.getEntry(SculkDepths.identifier("portal_structure")))// an optional registry entry reference. thats the end of the mapping function
-                .ifPresent(structure-> {// if the value is present at all, do something with the remapped value
-                    System.out.println("0");
-                    GenerateStructureAPI.generateStructure(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, structure, pos);
-        });
+        //todo check if this runs twice
+        System.out.println("checkthis^");
 
 
         if (stack.getItem() == ModItems.ENERGY_ESSENCE && !state.get(ModProperties.HAS_ENERGY_ESSENCE)){
@@ -150,13 +143,14 @@ public class PedestalBlock extends FacingBlock {
             world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE, SoundCategory.BLOCKS, 1.0f, 1.0f);
             BlockState blockState1 = state.with(HAS_ENERGY_ESSENCE, true);
             world.setBlockState(pos, blockState1);
-            
+            GenerateStructureAPI.generateStructure(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), pos);//todo move to correct location
             portalFramePos = PortalFrame.getFramePos(state.get(FACING),pos, world);
             if (portalFramePos != null){
                 if ( portalFramePos[0] != null){
                     portalFase = "genFrame";
                     posArray = portalFramePos;
-                    world.scheduleBlockTick(pos,state.getBlock(),20);
+
+                    world.scheduleBlockTick(pos,state.getBlock(),1);
                 }
             }
             return ItemActionResult.SUCCESS;

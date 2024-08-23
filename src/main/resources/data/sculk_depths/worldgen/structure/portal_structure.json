@@ -14,7 +14,7 @@
     "absolute": -51
   },
   "start_pool": "sculk_depths:portal_structure/portal",
-  "step": "surface_structures",
+  "step": "underground_structures",
   "terrain_adaptation": "beard_box",
   "use_expansion_hack": true
 }

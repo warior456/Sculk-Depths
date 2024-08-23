@@ -2,7 +2,7 @@
   "elements": [
     {
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
+        "element_type": "minecraft:single_pool_element",
         "location": "sculk_depths:portal_structure/city/dining_room",
         "processors": {
           "processors": []
@@ -13,7 +13,7 @@
     },
     {
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
+        "element_type": "minecraft:single_pool_element",
         "location": "sculk_depths:portal_structure/city/fortress",
         "processors": {
           "processors": []
@@ -24,7 +24,7 @@
     },
     {
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
+        "element_type": "minecraft:single_pool_element",
         "location": "sculk_depths:portal_structure/city/houses",
         "processors": {
           "processors": []
@@ -35,7 +35,7 @@
     },
     {
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
+        "element_type": "minecraft:single_pool_element",
         "location": "sculk_depths:portal_structure/city/kryslum_storage",
         "processors": {
           "processors": []
@@ -46,7 +46,7 @@
     },
     {
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
+        "element_type": "minecraft:single_pool_element",
         "location": "sculk_depths:portal_structure/city/pathway_cross",
         "processors": {
           "processors": []
@@ -57,7 +57,7 @@
     },
     {
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
+        "element_type": "minecraft:single_pool_element",
         "location": "sculk_depths:portal_structure/city/pathway_straight",
         "processors": {
           "processors": []
