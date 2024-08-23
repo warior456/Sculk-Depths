@@ -17,6 +17,8 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -50,6 +52,23 @@ public class SculkDepthsPortalBlock extends Block implements Portal{
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
 
+    }
+
+    protected BlockState rotate(BlockState state, BlockRotation rotation) {
+        switch (rotation) {
+            case COUNTERCLOCKWISE_90:
+            case CLOCKWISE_90:
+                switch ((Direction.Axis)state.get(AXIS)) {
+                    case Z:
+                        return (BlockState)state.with(AXIS, Direction.Axis.X);
+                    case X:
+                        return (BlockState)state.with(AXIS, Direction.Axis.Z);
+                    default:
+                        return state;
+                }
+            default:
+                return state;
+        }
     }
 
 

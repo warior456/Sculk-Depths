@@ -20,7 +20,7 @@
         },
         "projection": "rigid"
       },
-      "weight": 10
+      "weight": 1
     },
     {
       "element": {
@@ -53,7 +53,7 @@
         },
         "projection": "rigid"
       },
-      "weight": 10
+      "weight": 15
     },
     {
       "element": {
@@ -64,18 +64,7 @@
         },
         "projection": "rigid"
       },
-      "weight": 10
-    },
-    {
-      "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
-        "location": "sculk_depths:portal_structure/city/pathway_end",
-        "processors": {
-          "processors": []
-        },
-        "projection": "rigid"
-      },
-      "weight": 10
+      "weight": 20
     }
   ],
   "fallback": "sculk_depths:portal_structure/pathway_end"
