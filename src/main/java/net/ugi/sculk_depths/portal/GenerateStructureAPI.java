@@ -53,7 +53,7 @@ public class GenerateStructureAPI {
                 chunkGenerator.getBiomeSource(),
                 serverWorld.getChunkManager().getNoiseConfig(),
                 serverWorld.getStructureTemplateManager(),
-                serverWorld.getSeed(),
+                originalWorld.getServer().getWorld(World.OVERWORLD).getSeed(),//maybe fix rotation
                 new ChunkPos(pos),
                 0,
                 serverWorld,
