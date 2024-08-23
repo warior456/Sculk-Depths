@@ -31,6 +31,7 @@ import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.StructureKeys;
 import net.minecraft.world.gen.structure.Structures;
 import net.ugi.sculk_depths.SculkDepths;
+import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.portal.GenerateStructureAPI;
 import net.ugi.sculk_depths.portal.PortalFrame;
@@ -143,10 +144,11 @@ public class PedestalBlock extends FacingBlock {
             world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE, SoundCategory.BLOCKS, 1.0f, 1.0f);
             BlockState blockState1 = state.with(HAS_ENERGY_ESSENCE, true);
             world.setBlockState(pos, blockState1);
-            GenerateStructureAPI.generateStructure(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), pos);//todo move to correct location
             portalFramePos = PortalFrame.getFramePos(state.get(FACING),pos, world);
             if (portalFramePos != null){
                 if ( portalFramePos[0] != null){
+                    BlockPos anchor = PortalFrame.getFrameAnchorPos(state.get(FACING),pos, world);
+                    GenerateStructureAPI.generateStructure(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor);//todo move to correct location
                     portalFase = "genFrame";
                     posArray = portalFramePos;
 
