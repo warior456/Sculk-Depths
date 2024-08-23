@@ -11,8 +11,9 @@
   "size": 5,
   "spawn_overrides": {},
   "start_height": {
-    "absolute": -51
+    "absolute": -27
   },
+  "start_jigsaw_name": "sculk_depths:portal_structure_anchor",
   "start_pool": "sculk_depths:portal_structure/portal",
   "step": "underground_structures",
   "terrain_adaptation": "beard_box",
