@@ -15,6 +15,7 @@ import net.minecraft.world.gen.structure.Structure;
 public class GenerateStructureAPI {
     public static boolean generateStructure(World  originalWorld, RegistryKey<World> targetWorldKey, RegistryEntry.Reference<Structure> structure, BlockPos pos){
         if(originalWorld.isClient)return false;
+        System.out.println("1");
         ServerWorld serverWorld = originalWorld.getServer().getWorld(targetWorldKey);
         Structure structure2 = structure.value();
         ChunkGenerator chunkGenerator = serverWorld.getChunkManager().getChunkGenerator();
@@ -31,13 +32,17 @@ public class GenerateStructureAPI {
                 biome -> true
         );
         if(!structureStart.hasChildren()){
+            System.out.println("false1");
             return false;
         }else {
             BlockBox blockBox = structureStart.getBoundingBox();
             ChunkPos chunkPos = new ChunkPos(ChunkSectionPos.getSectionCoord(blockBox.getMinX()), ChunkSectionPos.getSectionCoord(blockBox.getMinZ()));
             ChunkPos chunkPos2 = new ChunkPos(ChunkSectionPos.getSectionCoord(blockBox.getMaxX()), ChunkSectionPos.getSectionCoord(blockBox.getMaxZ()));
             forceLoadNearbyChunks(blockBox, serverWorld);
-            if(FalseOnUnloadedPos(serverWorld, chunkPos, chunkPos2)) return false;
+/*            if(FalseOnUnloadedPos(serverWorld, chunkPos, chunkPos2)){
+                System.out.println("unloaded pos");
+                return false;
+            }*/
             ChunkPos.stream(chunkPos, chunkPos2)
                     .forEach(
                             chunkPosx -> structureStart.place(
@@ -50,7 +55,9 @@ public class GenerateStructureAPI {
                             )
                     );
             String string = structure.registryKey().getValue().toString();
+            System.out.println(string);
             unloadNearbyChunks(blockBox, serverWorld);
+            System.out.println("2");
             return true;
         }
     }
@@ -63,9 +70,11 @@ public class GenerateStructureAPI {
     }
 
     private static void forceLoadNearbyChunks(BlockBox box, ServerWorld world) {
+        System.out.println("loading chunks");
         box.streamChunkPos().forEach(chunkPos -> world.setChunkForced(chunkPos.x, chunkPos.z, true));
     }
     private static void unloadNearbyChunks(BlockBox box, ServerWorld world) {
+        System.out.println("unloading chunks");
         box.streamChunkPos().forEach(chunkPos -> world.setChunkForced(chunkPos.x, chunkPos.z, false));
     }
 }

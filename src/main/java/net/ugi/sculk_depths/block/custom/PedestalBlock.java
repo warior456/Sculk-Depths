@@ -1,5 +1,6 @@
 package net.ugi.sculk_depths.block.custom;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -8,6 +9,9 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.CustomPayload;
+import net.minecraft.registry.*;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.server.world.ServerWorld;
@@ -23,12 +27,19 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.structure.Structure;
+import net.minecraft.world.gen.structure.StructureKeys;
+import net.minecraft.world.gen.structure.Structures;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.item.ModItems;
+import net.ugi.sculk_depths.portal.GenerateStructureAPI;
 import net.ugi.sculk_depths.portal.PortalFrame;
 import net.ugi.sculk_depths.state.property.ModProperties;
+import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PedestalBlock extends FacingBlock {
     public static final BooleanProperty HAS_ENERGY_ESSENCE = ModProperties.HAS_ENERGY_ESSENCE;
@@ -124,12 +135,15 @@ public class PedestalBlock extends FacingBlock {
         }
 
 
+        world.getRegistryManager()// gets the dynamic registry manager
+                .getOptional(RegistryKeys.STRUCTURE)// gets an optional wrapped structure registry from it
+                .flatMap(registry-> // if it exists, map it to:
+                        registry.getEntry(SculkDepths.identifier("portal_structure")))// an optional registry entry reference. thats the end of the mapping function
+                .ifPresent(structure-> {// if the value is present at all, do something with the remapped value
+                    System.out.println("0");
+                    GenerateStructureAPI.generateStructure(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, structure, pos);
+        });
 
-
-
-/*        GenerateStructureAPI.generateStructure(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY,
-                 world.getRegistryManager().get
-                , pos);*/
 
         if (stack.getItem() == ModItems.ENERGY_ESSENCE && !state.get(ModProperties.HAS_ENERGY_ESSENCE)){
             stack.decrementUnlessCreative(1,player);
