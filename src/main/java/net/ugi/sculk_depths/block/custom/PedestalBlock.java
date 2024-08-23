@@ -148,7 +148,7 @@ public class PedestalBlock extends FacingBlock {
             if (portalFramePos != null){
                 if ( portalFramePos[0] != null){
                     BlockPos anchor = PortalFrame.getFrameAnchorPos(state.get(FACING),pos, world);
-                    GenerateStructureAPI.generateStructure(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor);//todo move to correct location
+                    GenerateStructureAPI.generateStructure(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor);
                     portalFase = "genFrame";
                     posArray = portalFramePos;
 
