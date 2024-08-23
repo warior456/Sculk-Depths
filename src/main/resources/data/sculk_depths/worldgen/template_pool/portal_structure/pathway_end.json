@@ -2,7 +2,7 @@
   "elements": [
     {
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
+        "element_type": "minecraft:single_pool_element",
         "location": "sculk_depths:portal_structure/city/pathway_end",
         "processors": {
           "processors": []
