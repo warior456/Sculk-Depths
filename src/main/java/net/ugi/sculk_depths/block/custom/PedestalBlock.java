@@ -72,6 +72,21 @@ public class PedestalBlock extends FacingBlock {
 
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if (portalFase == "checkFrame") {
+            portalFramePos = PortalFrame.getFramePos(state.get(FACING),pos, world);
+            if (portalFramePos != null){
+                if ( portalFramePos[0] != null){
+                    BlockPos anchor = PortalFrame.getFrameAnchorPos(state.get(FACING),pos, world);
+                    GenerateStructureAPI.generateStructure(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor);
+                    portalFase = "genFrame";
+                    posArray = portalFramePos;
+
+                    world.scheduleBlockTick(pos,state.getBlock(),1);
+                }
+                else portalFase = "none";
+            }
+            else portalFase = "none";
+        }
         if (portalFase == "genFrame") {
             posArray = PortalFrame.genFrameStep(world,posArray);
             if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 1){
@@ -142,19 +157,11 @@ public class PedestalBlock extends FacingBlock {
         if (stack.getItem() == ModItems.ENERGY_ESSENCE && !state.get(ModProperties.HAS_ENERGY_ESSENCE)){
             stack.decrementUnlessCreative(1,player);
             world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE, SoundCategory.BLOCKS, 1.0f, 1.0f);
+
             BlockState blockState1 = state.with(HAS_ENERGY_ESSENCE, true);
             world.setBlockState(pos, blockState1);
-            portalFramePos = PortalFrame.getFramePos(state.get(FACING),pos, world);
-            if (portalFramePos != null){
-                if ( portalFramePos[0] != null){
-                    BlockPos anchor = PortalFrame.getFrameAnchorPos(state.get(FACING),pos, world);
-                    GenerateStructureAPI.generateStructure(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor);
-                    portalFase = "genFrame";
-                    posArray = portalFramePos;
-
-                    world.scheduleBlockTick(pos,state.getBlock(),1);
-                }
-            }
+            portalFase = "checkFrame";
+            world.scheduleBlockTick(pos,state.getBlock(),1);
             return ItemActionResult.SUCCESS;
         }
         return ItemActionResult.FAIL;
