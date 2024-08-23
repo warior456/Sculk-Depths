@@ -38,7 +38,7 @@ public class GenerateStructureAPI {
             BlockBox blockBox = structureStart.getBoundingBox();
             ChunkPos chunkPos = new ChunkPos(ChunkSectionPos.getSectionCoord(blockBox.getMinX()), ChunkSectionPos.getSectionCoord(blockBox.getMinZ()));
             ChunkPos chunkPos2 = new ChunkPos(ChunkSectionPos.getSectionCoord(blockBox.getMaxX()), ChunkSectionPos.getSectionCoord(blockBox.getMaxZ()));
-            forceLoadNearbyChunks(blockBox, serverWorld);
+            forceLoadNearbyChunks(blockBox, serverWorld);//probably not needed
 /*            if(FalseOnUnloadedPos(serverWorld, chunkPos, chunkPos2)){
                 System.out.println("unloaded pos");
                 return false;
