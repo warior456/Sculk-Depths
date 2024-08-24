@@ -41,6 +41,7 @@ import net.ugi.sculk_depths.state.property.ModProperties;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -81,9 +82,28 @@ public class PedestalBlock extends FacingBlock {
                 if ( portalFramePos[0] != null){
                     BlockPos anchor = PortalFrame.getFrameAnchorPos(state.get(FACING),pos, world);
                     //maybe we can try a world.emitgameevent with a custom event to generate this???
+                    Date date = new Date();
+                    long timeMilli = date.getTime();
+                    System.out.println("start structure: " + timeMilli);
                     StructureStart structureStart = GenerateStructureAPI.structureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor);
+
                     chunkArray = structureStart.getBoundingBox().streamChunkPos().toArray(ChunkPos[]::new);
+                    date = new Date();
+                    timeMilli = date.getTime();
                     GenerateStructureAPI.generateStructurePartial(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), structureStart, chunkArray);
+                    date = new Date();
+                    long timeMilli2 = date.getTime();
+                    System.out.println("stop structure: " + timeMilli2);
+
+                    System.out.println((structureStart.getBoundingBox().getMaxX()-structureStart.getBoundingBox().getMinX()) + " x " + (structureStart.getBoundingBox().getMaxZ()-structureStart.getBoundingBox().getMinZ()) + " blocks");
+                    System.out.println(((int)(structureStart.getBoundingBox().getMaxX()-structureStart.getBoundingBox().getMinX())/16 + 1) + " x " + ((int)(structureStart.getBoundingBox().getMaxZ()-structureStart.getBoundingBox().getMinZ())/16 + 1) + " chunks");
+                    int chunks = ((int)(structureStart.getBoundingBox().getMaxX()-structureStart.getBoundingBox().getMinX())/16 + 1) * ((int)(structureStart.getBoundingBox().getMaxZ()-structureStart.getBoundingBox().getMinZ())/16 + 1);
+                    System.out.println( chunks + " chunks");
+                    float m = 1000;
+                    float delay = (timeMilli2-timeMilli)/m;
+                    System.out.println(delay+ " sec");
+                    float chunksL = chunks;
+                    System.out.println((delay/chunksL) + " s/chunk");
                     portalFase = "genFrame";
                     posArray = portalFramePos;
 

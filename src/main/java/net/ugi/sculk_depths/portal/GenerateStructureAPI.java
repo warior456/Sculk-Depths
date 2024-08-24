@@ -97,7 +97,7 @@ public class GenerateStructureAPI {
         return structureStart;
     }
     public static StructureStart structureStart (World  originalWorld, RegistryKey<World> targetWorldKey, RegistryKey<Structure> structureKey, BlockPos pos){
-        return structureStart (originalWorld,targetWorldKey,structureKey.getValue(),pos);;
+        return structureStart (originalWorld,targetWorldKey,structureKey.getValue(),pos);
     }
 
     private static boolean generate(ServerWorld serverWorld, StructureStart structureStart, ChunkPos[] chunkPosArray){
