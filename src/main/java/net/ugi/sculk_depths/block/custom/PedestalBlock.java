@@ -17,10 +17,12 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.structure.StructureStart;
 import net.minecraft.util.*;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
@@ -47,10 +49,11 @@ public class PedestalBlock extends FacingBlock {
     public static final MapCodec<PedestalBlock> CODEC = createCodec(PedestalBlock::new);
     private static final VoxelShape RAYCAST_SHAPE = createCuboidShape(2.0, 4.0, 2.0, 14.0, 16.0, 14.0);
 
-    private static BlockPos[] portalFramePos = new BlockPos[0];
-    private static String portalFase = "none";
+    private BlockPos[] portalFramePos = new BlockPos[0];
+    private String portalFase = "none";
+    private BlockPos[] posArray = new BlockPos[0];
+    private ChunkPos[] chunkArray = new ChunkPos[0];
 
-    private static BlockPos[] posArray = new BlockPos[0];
     protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(
             VoxelShapes.union(createCuboidShape(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
                     createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0),
@@ -77,7 +80,10 @@ public class PedestalBlock extends FacingBlock {
             if (portalFramePos != null){
                 if ( portalFramePos[0] != null){
                     BlockPos anchor = PortalFrame.getFrameAnchorPos(state.get(FACING),pos, world);
-                    GenerateStructureAPI.generateStructure(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor);
+                    //maybe we can try a world.emitgameevent with a custom event to generate this???
+                    StructureStart structureStart = GenerateStructureAPI.structureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor);
+                    chunkArray = structureStart.getBoundingBox().streamChunkPos().toArray(ChunkPos[]::new);
+                    GenerateStructureAPI.generateStructurePartial(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), structureStart, chunkArray);
                     portalFase = "genFrame";
                     posArray = portalFramePos;
 

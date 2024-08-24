@@ -6,6 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.block.ModBlocks;
@@ -41,6 +42,18 @@ public class PortalFrame {
 
         for (int i = 0; i < m; i++)
             newarr[i+n] = arr2[i];
+        return newarr;
+    }
+
+    public static ChunkPos[] addElement(ChunkPos[] arr, ChunkPos e) {
+        int n = arr.length;
+        ChunkPos[] newarr = new ChunkPos[n + 1];
+
+        for (int i = 0; i < n; i++){
+            newarr[i] = arr[i];
+        }
+
+        newarr[n] = e;
         return newarr;
     }
 
