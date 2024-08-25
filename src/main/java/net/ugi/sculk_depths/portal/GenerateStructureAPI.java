@@ -66,6 +66,7 @@ public class GenerateStructureAPI {
         ServerWorld serverWorld = originalWorld.getServer().getWorld(targetWorldKey);
         return  generate( serverWorld, structureStart, chunkPosArray);
     }
+
     public static boolean generateStructurePartial(World  originalWorld, RegistryKey<World> targetWorldKey, RegistryKey<Structure> structure, StructureStart structureStart, ChunkPos[] chunkPosArray){
         return generateStructurePartial(originalWorld, targetWorldKey, structure.getValue(), structureStart, chunkPosArray);
     }
