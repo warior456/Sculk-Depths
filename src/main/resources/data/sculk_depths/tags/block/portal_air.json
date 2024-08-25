@@ -1,6 +1,9 @@
 {
   "values": [
     "minecraft:air",
-    "minecraft:sculk_vein"
+    "minecraft:sculk_vein",
+    "minecraft:sculk_catalyst",
+    "minecraft:sculk_shrieker",
+    "minecraft:sculk_sensor"
   ]
 }
