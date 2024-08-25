@@ -21,9 +21,7 @@ import net.minecraft.structure.StructureStart;
 import net.minecraft.util.*;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.*;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
@@ -87,20 +85,47 @@ public class PedestalBlock extends FacingBlock {
                     System.out.println("start structure: " + timeMilli);
                     StructureStart structureStart = GenerateStructureAPI.structureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor);
 
-                    chunkArray = structureStart.getBoundingBox().streamChunkPos().toArray(ChunkPos[]::new);
-                    date = new Date();
-                    timeMilli = date.getTime();
-                    GenerateStructureAPI.generateStructurePartial(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), structureStart, chunkArray);
+
+                    BlockBox boundingBox = structureStart.getBoundingBox();
+
+                    chunkArray = GenerateStructureAPI.generateChunkArray(
+                            new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMinX()),ChunkSectionPos.getSectionCoord(boundingBox.getMinZ())),
+                                    new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMaxX()),ChunkSectionPos.getSectionCoord(boundingBox.getMaxZ())),
+                            2,5);
+                            /*ChunkPos.stream(
+                            new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMinX())+1,ChunkSectionPos.getSectionCoord(boundingBox.getMinZ())+1),
+                            new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMaxX())-1,ChunkSectionPos.getSectionCoord(boundingBox.getMaxZ())-1)).toArray(ChunkPos[]::new);*/
+                            //structureStart.getBoundingBox().streamChunkPos().toArray(ChunkPos[]::new);
                     date = new Date();
                     long timeMilli2 = date.getTime();
-                    System.out.println("stop structure: " + timeMilli2);
+                    System.out.println("delta: " + (float)(timeMilli2-timeMilli)/1000F);
+                    System.out.println("load: " + timeMilli2);
+                    ServerWorld serverWorld = world.getServer().getWorld(ModDimensions.SCULK_DEPTHS_LEVEL_KEY);
+                    GenerateStructureAPI.forceLoadNearbyChunks(chunkArray, serverWorld);
+                    date = new Date();
+                    long timeMilli3 = date.getTime();
+                    System.out.println("delta: " + (float)(timeMilli3-timeMilli2)/1000F);
+                    System.out.println("gen: " + timeMilli3);
+                    GenerateStructureAPI.generateStructurePartial(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), structureStart, boundingBox.streamChunkPos().toArray(ChunkPos[]::new));
+                    date = new Date();
+                    long timeMilli4 = date.getTime();
+                    System.out.println("delta: " + (float)(timeMilli4-timeMilli3)/1000F);
+                    System.out.println("unload: " + timeMilli4);
+                    GenerateStructureAPI.unloadNearbyChunks(chunkArray, world);
+                    date = new Date();
+                    long timeMilli5 = date.getTime();
+                    System.out.println("delta: " + (float)(timeMilli5-timeMilli4)/1000F);
+                    System.out.println("stop structure: " + timeMilli5);
 
                     System.out.println((structureStart.getBoundingBox().getMaxX()-structureStart.getBoundingBox().getMinX()) + " x " + (structureStart.getBoundingBox().getMaxZ()-structureStart.getBoundingBox().getMinZ()) + " blocks");
+                    System.out.println((structureStart.getBoundingBox().getMinX()) + " ~ " + (structureStart.getBoundingBox().getMinZ()) + " min");
+                    System.out.println((structureStart.getBoundingBox().getMaxX()) + " ~ " + (structureStart.getBoundingBox().getMaxZ()) + " max");
                     System.out.println(((int)(structureStart.getBoundingBox().getMaxX()-structureStart.getBoundingBox().getMinX())/16 + 1) + " x " + ((int)(structureStart.getBoundingBox().getMaxZ()-structureStart.getBoundingBox().getMinZ())/16 + 1) + " chunks");
-                    int chunks = ((int)(structureStart.getBoundingBox().getMaxX()-structureStart.getBoundingBox().getMinX())/16 + 1) * ((int)(structureStart.getBoundingBox().getMaxZ()-structureStart.getBoundingBox().getMinZ())/16 + 1);
+                    int chunks = structureStart.getBoundingBox().streamChunkPos().toArray(ChunkPos[]::new).length;
                     System.out.println( chunks + " chunks");
+                    System.out.println( chunkArray.length + " chunksArray chunks");
                     float m = 1000;
-                    float delay = (timeMilli2-timeMilli)/m;
+                    float delay = (timeMilli5-timeMilli)/m;
                     System.out.println(delay+ " sec");
                     float chunksL = chunks;
                     System.out.println((delay/chunksL) + " s/chunk");
@@ -129,6 +154,7 @@ public class PedestalBlock extends FacingBlock {
             }
             world.scheduleBlockTick(pos,state.getBlock(),2);
         }
+
         if (portalFase == "cancelFrame") {
             posArray = PortalFrame.cancelFrameStep(world,posArray);
             if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){

@@ -1,5 +1,6 @@
 package net.ugi.sculk_depths.portal;
 
+import com.sun.source.tree.WhileLoopTree;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -106,7 +107,7 @@ public class GenerateStructureAPI {
             System.out.println("false1");
             return false;
         }else {
-            forceLoadNearbyChunks(chunkPosArray, serverWorld);
+            //forceLoadNearbyChunks(chunkPosArray, serverWorld);
             /*            if(FalseOnUnloadedPos(serverWorld, chunkPos, chunkPos2)){
                 System.out.println("unloaded pos");
                 return false;
@@ -121,7 +122,7 @@ public class GenerateStructureAPI {
                         chunkPosx
                 );
             }
-            unloadNearbyChunks(chunkPosArray, serverWorld);
+            //unloadNearbyChunks(chunkPosArray, serverWorld);
             return true;
         }
     }
@@ -133,14 +134,52 @@ public class GenerateStructureAPI {
         return true;
     }
 
-    private static void forceLoadNearbyChunks(ChunkPos[] chunkPosArray, ServerWorld world) {
+    public static void forceLoadNearbyChunks(ChunkPos[] chunkPosArray, ServerWorld world) {
         for (ChunkPos chunkPos : chunkPosArray) {
             world.setChunkForced(chunkPos.x, chunkPos.z, true);
         }
     }
-    private static void unloadNearbyChunks(ChunkPos[] chunkPosArray, ServerWorld world) {
+    public static void unloadNearbyChunks(ChunkPos[] chunkPosArray, ServerWorld world) {
         for (ChunkPos chunkPos : chunkPosArray) {
-            world.setChunkForced(chunkPos.x, chunkPos.z, true);
+            world.setChunkForced(chunkPos.x, chunkPos.z, false);
         }
+    }
+
+    public static ChunkPos[] generateChunkArray(ChunkPos min, ChunkPos max, int offset, int delta){
+        int arrLengthX = (max.x-min.x+delta-1-offset*2)/delta +1;
+        int arrLengthZ = (max.z-min.z+delta-1-offset*2)/delta +1;
+        int arrLength = arrLengthX * arrLengthZ;
+        ChunkPos[] arr = new ChunkPos[arrLength];
+        int x = min.x + offset;
+        int z = min.z + offset;
+        int i = 0;
+        while(x <= max.x - offset){
+            while(z <= max.z - offset){
+                arr[i] = new ChunkPos(x,z);
+                if (max.z - offset == z){
+                    z++;
+                }
+                else if (max.z - offset - z < delta){
+                    z = max.z - offset;
+                }
+                else{
+                    z += delta;
+                }
+                i++;
+
+            }
+            if (max.x - offset == x){
+                break;
+            }
+            else if (max.x - offset - x < delta){
+                z = min.z + offset;
+                x = max.x - offset;
+            }
+            else{
+                z = min.z + offset;
+                x += delta;
+            }
+        }
+        return arr;
     }
 }
