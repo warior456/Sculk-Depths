@@ -191,10 +191,6 @@ public class PedestalBlock extends FacingBlock {
             return ItemActionResult.FAIL;
         }
 
-        //todo check if this runs twice
-        System.out.println("checkthis^");
-
-
         if (stack.getItem() == ModItems.ENERGY_ESSENCE && !state.get(ModProperties.HAS_ENERGY_ESSENCE)){
             stack.decrementUnlessCreative(1,player);
             world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE, SoundCategory.BLOCKS, 1.0f, 1.0f);
