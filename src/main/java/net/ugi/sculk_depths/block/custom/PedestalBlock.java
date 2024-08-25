@@ -108,9 +108,9 @@ public class PedestalBlock extends FacingBlock {
 
                     }, getAsyncExecutor()).thenRunAsync(() -> {
                         // This code runs back on the main server thread after the chunks are loaded
-                        //GenerateStructureAPI.forceLoadNearbyChunks(chunkArray, serverWorld);//probably not needed
+                        GenerateStructureAPI.forceLoadNearbyChunks(chunkArray, serverWorld);
                         GenerateStructureAPI.generateStructurePartial(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), finalStructureStart, boundingBox.streamChunkPos().toArray(ChunkPos[]::new));
-                        System.out.println("donestructure");
+                        portalFase = "genPortal";
                     }, world.getServer());
 
 
@@ -131,13 +131,17 @@ public class PedestalBlock extends FacingBlock {
                     posArray = PortalFrame.addElement(posArray,pos1.up(3));
                     posArray = PortalFrame.addElement(posArray,pos1.up(4));
                 }
-                portalFase = "genPortal";
+                portalFase = "waiting";
             }
             else if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
                 posArray = portalFramePos;
                 portalFase = "cancelFrame";
             }
             world.scheduleBlockTick(pos,state.getBlock(),2);
+        }
+
+        if(portalFase == "waiting"){
+            world.scheduleBlockTick(pos,state.getBlock(),1);
         }
 
         if (portalFase == "cancelFrame") {
