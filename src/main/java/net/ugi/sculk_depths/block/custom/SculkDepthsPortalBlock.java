@@ -162,7 +162,7 @@ public class SculkDepthsPortalBlock extends Block implements Portal{
                     serverWorld,
                     vec3d,
                     entity.getVelocity(),
-                    entity.getYaw() -180,
+                    entity.getYaw(),
                     entity.getPitch(),
                     TeleportTarget.SEND_TRAVEL_THROUGH_PORTAL_PACKET.then(TeleportTarget.ADD_PORTAL_CHUNK_TICKET)
             );
