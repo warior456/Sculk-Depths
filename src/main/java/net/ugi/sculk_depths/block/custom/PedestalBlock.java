@@ -88,7 +88,7 @@ public class PedestalBlock extends FacingBlock {
             if (portalFramePos[0] == null) {portalFase = "none";return;}
             BlockPos anchor = PortalFrame.getFrameAnchorPos(state.get(FACING),pos, world);
 
-            StructureStart structureStart = GenerateStructureAPI.structureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor);
+            structureStart = GenerateStructureAPI.structureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor);
             BlockBox boundingBox = structureStart.getBoundingBox();
 
             chunkArray = GenerateStructureAPI.generateChunkArray(
@@ -96,10 +96,9 @@ public class PedestalBlock extends FacingBlock {
                     new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMaxX()),ChunkSectionPos.getSectionCoord(boundingBox.getMaxZ())),
                     0,1);
 
-            structureStart = GenerateStructureAPI.structureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor);
             ServerWorld serverWorld = world.getServer().getWorld(ModDimensions.SCULK_DEPTHS_LEVEL_KEY);
 
-            StructureStart finalStructureStart = structureStart;
+
             CompletableFuture.runAsync(() -> {
                 for (ChunkPos chunkPos : chunkArray) {//load chunks
                     assert serverWorld != null;
@@ -109,7 +108,7 @@ public class PedestalBlock extends FacingBlock {
             }, getAsyncExecutor()).thenRunAsync(() -> {
                 // This code runs back on the main server thread after the chunks are loaded
                 GenerateStructureAPI.forceLoadNearbyChunks(chunkArray, serverWorld);
-                GenerateStructureAPI.generateStructurePartial(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), finalStructureStart, boundingBox.streamChunkPos().toArray(ChunkPos[]::new));
+                GenerateStructureAPI.generateStructurePartial(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), structureStart, boundingBox.streamChunkPos().toArray(ChunkPos[]::new));
                 portalFase = "genPortal";
             }, world.getServer());
 
