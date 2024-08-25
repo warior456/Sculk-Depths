@@ -249,7 +249,7 @@ public class PortalFrame {
         return newPosArr;
     }
 
-    public static BlockPos[] genPortalStep(World world, BlockPos blockposses[], Direction facing){
+    public static BlockPos[] genPortalStep(World world, BlockPos[] blockposses, Direction facing){
         BlockState state = ModBlocks.SCULK_DEPTHS_PORTAL.getDefaultState();
         BlockPos[] newPosArr = {new BlockPos(0,-4096,0)};
         for (BlockPos pos: blockposses) {
