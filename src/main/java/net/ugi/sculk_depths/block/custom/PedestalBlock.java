@@ -41,6 +41,9 @@ import net.ugi.sculk_depths.world.dimension.ModDimensions;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class PedestalBlock extends FacingBlock {
@@ -52,6 +55,7 @@ public class PedestalBlock extends FacingBlock {
     private String portalFase = "none";
     private BlockPos[] posArray = new BlockPos[0];
     private ChunkPos[] chunkArray = new ChunkPos[0];
+    private StructureStart structureStart;
 
     protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(
             VoxelShapes.union(createCuboidShape(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
@@ -72,6 +76,10 @@ public class PedestalBlock extends FacingBlock {
 
     }
 
+    private Executor getAsyncExecutor() {
+        return CompletableFuture.delayedExecutor(0, TimeUnit.MILLISECONDS);
+    }
+
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (portalFase == "checkFrame") {
@@ -79,56 +87,33 @@ public class PedestalBlock extends FacingBlock {
             if (portalFramePos != null){
                 if ( portalFramePos[0] != null){
                     BlockPos anchor = PortalFrame.getFrameAnchorPos(state.get(FACING),pos, world);
-                    //maybe we can try a world.emitgameevent with a custom event to generate this???
-                    Date date = new Date();
-                    long timeMilli = date.getTime();
-                    System.out.println("start structure: " + timeMilli);
+
                     StructureStart structureStart = GenerateStructureAPI.structureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor);
-
-
                     BlockBox boundingBox = structureStart.getBoundingBox();
 
                     chunkArray = GenerateStructureAPI.generateChunkArray(
                             new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMinX()),ChunkSectionPos.getSectionCoord(boundingBox.getMinZ())),
                                     new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMaxX()),ChunkSectionPos.getSectionCoord(boundingBox.getMaxZ())),
-                            2,5);
-                            /*ChunkPos.stream(
-                            new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMinX())+1,ChunkSectionPos.getSectionCoord(boundingBox.getMinZ())+1),
-                            new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMaxX())-1,ChunkSectionPos.getSectionCoord(boundingBox.getMaxZ())-1)).toArray(ChunkPos[]::new);*/
-                            //structureStart.getBoundingBox().streamChunkPos().toArray(ChunkPos[]::new);
-                    date = new Date();
-                    long timeMilli2 = date.getTime();
-                    System.out.println("delta: " + (float)(timeMilli2-timeMilli)/1000F);
-                    System.out.println("load: " + timeMilli2);
-                    ServerWorld serverWorld = world.getServer().getWorld(ModDimensions.SCULK_DEPTHS_LEVEL_KEY);
-                    GenerateStructureAPI.forceLoadNearbyChunks(chunkArray, serverWorld);
-                    date = new Date();
-                    long timeMilli3 = date.getTime();
-                    System.out.println("delta: " + (float)(timeMilli3-timeMilli2)/1000F);
-                    System.out.println("gen: " + timeMilli3);
-                    GenerateStructureAPI.generateStructurePartial(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), structureStart, boundingBox.streamChunkPos().toArray(ChunkPos[]::new));
-                    date = new Date();
-                    long timeMilli4 = date.getTime();
-                    System.out.println("delta: " + (float)(timeMilli4-timeMilli3)/1000F);
-                    System.out.println("unload: " + timeMilli4);
-                    GenerateStructureAPI.unloadNearbyChunks(chunkArray, world);
-                    date = new Date();
-                    long timeMilli5 = date.getTime();
-                    System.out.println("delta: " + (float)(timeMilli5-timeMilli4)/1000F);
-                    System.out.println("stop structure: " + timeMilli5);
+                            0,1);
 
-                    System.out.println((structureStart.getBoundingBox().getMaxX()-structureStart.getBoundingBox().getMinX()) + " x " + (structureStart.getBoundingBox().getMaxZ()-structureStart.getBoundingBox().getMinZ()) + " blocks");
-                    System.out.println((structureStart.getBoundingBox().getMinX()) + " ~ " + (structureStart.getBoundingBox().getMinZ()) + " min");
-                    System.out.println((structureStart.getBoundingBox().getMaxX()) + " ~ " + (structureStart.getBoundingBox().getMaxZ()) + " max");
-                    System.out.println(((int)(structureStart.getBoundingBox().getMaxX()-structureStart.getBoundingBox().getMinX())/16 + 1) + " x " + ((int)(structureStart.getBoundingBox().getMaxZ()-structureStart.getBoundingBox().getMinZ())/16 + 1) + " chunks");
-                    int chunks = structureStart.getBoundingBox().streamChunkPos().toArray(ChunkPos[]::new).length;
-                    System.out.println( chunks + " chunks");
-                    System.out.println( chunkArray.length + " chunksArray chunks");
-                    float m = 1000;
-                    float delay = (timeMilli5-timeMilli)/m;
-                    System.out.println(delay+ " sec");
-                    float chunksL = chunks;
-                    System.out.println((delay/chunksL) + " s/chunk");
+                    structureStart = GenerateStructureAPI.structureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor);
+                    ServerWorld serverWorld = world.getServer().getWorld(ModDimensions.SCULK_DEPTHS_LEVEL_KEY);
+
+                    StructureStart finalStructureStart = structureStart;
+                    CompletableFuture.runAsync(() -> {
+                        for (ChunkPos chunkPos : chunkArray) {//load chunks
+                            assert serverWorld != null;
+                            serverWorld.getChunk(chunkPos.x, chunkPos.z);
+                        }
+
+                    }, getAsyncExecutor()).thenRunAsync(() -> {
+                        // This code runs back on the main server thread after the chunks are loaded
+                        //GenerateStructureAPI.forceLoadNearbyChunks(chunkArray, serverWorld);//probably not needed
+                        GenerateStructureAPI.generateStructurePartial(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), finalStructureStart, boundingBox.streamChunkPos().toArray(ChunkPos[]::new));
+                        System.out.println("donestructure");
+                    }, world.getServer());
+
+
                     portalFase = "genFrame";
                     posArray = portalFramePos;
 

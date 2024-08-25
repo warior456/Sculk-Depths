@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.structure.Structure;
 
+import java.util.Date;
 import java.util.Optional;
 
 public class GenerateStructureAPI {
@@ -65,12 +66,21 @@ public class GenerateStructureAPI {
 
 
     public static boolean generateStructurePartial(World  originalWorld, RegistryKey<World> targetWorldKey, Identifier structure, StructureStart structureStart, ChunkPos[] chunkPosArray){
+        Date date = new Date();
+        long timeMilli1 = date.getTime();
+
         if(originalWorld.isClient)return false;
         if(structureStart == null)return false;
         Optional<RegistryEntry.Reference<Structure>> structureReference = originalWorld.getRegistryManager().get(RegistryKeys.STRUCTURE).getEntry(structure);
         if(structureReference.isEmpty()) return false;
         ServerWorld serverWorld = originalWorld.getServer().getWorld(targetWorldKey);
-        return  generate( serverWorld, structureStart, chunkPosArray);
+        boolean x = generate( serverWorld, structureStart, chunkPosArray);
+
+        date = new Date();
+        long timeMilli2 = date.getTime();
+        System.out.println("delta: " + (float)(timeMilli2-timeMilli1));
+        System.out.println("stop structure: " + timeMilli2);
+        return  x;
     }
     public static boolean generateStructurePartial(World  originalWorld, RegistryKey<World> targetWorldKey, RegistryKey<Structure> structure, StructureStart structureStart, ChunkPos[] chunkPosArray){
         return generateStructurePartial(originalWorld, targetWorldKey, structure.getValue(), structureStart, chunkPosArray);
@@ -122,7 +132,7 @@ public class GenerateStructureAPI {
                         chunkPosx
                 );
             }
-            //unloadNearbyChunks(chunkPosArray, serverWorld);
+            unloadNearbyChunks(chunkPosArray, serverWorld);
             return true;
         }
     }
