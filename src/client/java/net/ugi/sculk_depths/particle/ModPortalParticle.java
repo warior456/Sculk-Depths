@@ -2,22 +2,30 @@ package net.ugi.sculk_depths.particle;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.AscendingParticle;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleFactory;
+import net.minecraft.client.particle.SpriteProvider;
+import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 
-
-public class PenebriumSporeParticle
+public class ModPortalParticle
         extends AscendingParticle {
 
 
 
-    protected PenebriumSporeParticle(ClientWorld world, double x, double y, double z, float randomVelocityXMultiplier, float randomVelocityYMultiplier, float randomVelocityZMultiplier, double velocityX, double velocityY, double velocityZ, float scaleMultiplier, SpriteProvider spriteProvider, float colorMultiplier, int baseMaxAge, float gravityStrength, boolean collidesWithWorld) {
+    protected ModPortalParticle(ClientWorld world, double x, double y, double z, float randomVelocityXMultiplier, float randomVelocityYMultiplier, float randomVelocityZMultiplier, double velocityX, double velocityY, double velocityZ, float scaleMultiplier, SpriteProvider spriteProvider, float colorMultiplier, int baseMaxAge, float gravityStrength, boolean collidesWithWorld) {
         super(world, x, y, z, randomVelocityXMultiplier, randomVelocityYMultiplier, randomVelocityZMultiplier, velocityX, velocityY, velocityZ, scaleMultiplier, spriteProvider, colorMultiplier, baseMaxAge, gravityStrength, collidesWithWorld);
     }
 
+    @Override
+    protected int getBrightness(float tint) {
+        return 15728880; //look at original and it's methods to see why
+    }
 
     @Environment(value = EnvType.CLIENT)
     public static class Factory
@@ -32,10 +40,10 @@ public class PenebriumSporeParticle
         @Override
         public Particle createParticle(SimpleParticleType parameters, ClientWorld clientWorld, double x, double y, double z, double g, double h, double i) {
 
-            PenebriumSporeParticle particle = new PenebriumSporeParticle(clientWorld, x, y, z, 0.3f, 0.1f, 0.3f, 0f, -0.01f, 0f, 0.18f, this.spriteProvider, 1f, 500, 0.01f, true);
+            ModPortalParticle particle = new ModPortalParticle(clientWorld, x, y, z, 0.3f, 0.1f, 0.3f, 0f, -0.01f, 0f, 0.18f, this.spriteProvider, 1f, 40, -0.001f, false);
             particle.setColor(1,1,1);
-            particle.maxAge = MathHelper.nextBetween(clientWorld.random, 500, 1000);
-            //particle.gravityStrength = 0.01f;
+            particle.maxAge = MathHelper.nextBetween(clientWorld.random, 40, 200);
+            //particle.gravityStrength = -0.01f;//not needed?
             return particle;
         }
 

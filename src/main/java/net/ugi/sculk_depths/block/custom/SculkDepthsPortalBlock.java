@@ -8,8 +8,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.particle.SculkChargeParticleEffect;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -17,7 +15,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -123,7 +120,7 @@ public class SculkDepthsPortalBlock extends Block implements Portal{
                 j = (double)(random.nextFloat() * 2.0F * (float)k);
             }
 
-            world.addParticle((ParticleEffect) ModParticleTypes.PENEBRIUM_SPORES, d, e, f, g, h, j);
+            world.addParticle((ParticleEffect) ModParticleTypes.SCULK_DEPTHS_PORTAL_PARTICLE, d, e, f, g, h, j);
         }
     }
 
