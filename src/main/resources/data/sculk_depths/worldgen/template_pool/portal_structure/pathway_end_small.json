@@ -3,7 +3,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "sculk_depths:portal_structure/city/pathway_end",
+        "location": "sculk_depths:portal_structure/city/pathway_end_small",
         "processors": {
           "processors": []
         },
@@ -13,5 +13,5 @@
     }
 
   ],
-  "fallback": "sculk_depths:portal_structure/pathway_end_small"
+  "fallback": "minecraft:empty"
 }
