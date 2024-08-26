@@ -156,7 +156,7 @@ public class SculkDepthsPortalBlock extends Block implements Portal{
             Vec3d vec3d = Vec3d.of(blockPos);
             vec3d = vec3d.add(0.5f, 0, 0.5f);
             if(entity.isPlayer()){
-                vec3d.subtract(0, 1,0);
+                vec3d = vec3d.subtract(0, 1,0);
             }
             return new TeleportTarget(
                     serverWorld,
