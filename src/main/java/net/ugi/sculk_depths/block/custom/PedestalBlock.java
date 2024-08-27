@@ -1,6 +1,5 @@
 package net.ugi.sculk_depths.block.custom;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -9,9 +8,6 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.CustomPayload;
-import net.minecraft.registry.*;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.server.world.ServerWorld;
@@ -27,24 +23,16 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.structure.Structure;
-import net.minecraft.world.gen.structure.StructureKeys;
-import net.minecraft.world.gen.structure.Structures;
 import net.ugi.sculk_depths.SculkDepths;
-import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.portal.GenerateStructureAPI;
-import net.ugi.sculk_depths.portal.PortalFrame;
+import net.ugi.sculk_depths.portal.Portal;
 import net.ugi.sculk_depths.state.property.ModProperties;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 public class PedestalBlock extends FacingBlock {
     public static final BooleanProperty HAS_ENERGY_ESSENCE = ModProperties.HAS_ENERGY_ESSENCE;
@@ -83,10 +71,10 @@ public class PedestalBlock extends FacingBlock {
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (portalFase == "checkFrame") {
-            portalFramePos = PortalFrame.getFramePos(state.get(FACING),pos, world);
+            portalFramePos = Portal.getFramePos(state.get(FACING),pos, world);
             if (portalFramePos == null) {portalFase = "none";return;}
             if (portalFramePos[0] == null) {portalFase = "none";return;}
-            BlockPos anchor = PortalFrame.getFrameAnchorPos(state.get(FACING),pos, world);
+            BlockPos anchor = Portal.getFrameAnchorPos(state.get(FACING),pos, world);
 
             structureStart = GenerateStructureAPI.structureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor);
             BlockBox boundingBox = structureStart.getBoundingBox();
@@ -119,12 +107,12 @@ public class PedestalBlock extends FacingBlock {
             world.scheduleBlockTick(pos,state.getBlock(),1);
         }
         if (portalFase == "genFrame") {
-            posArray = PortalFrame.genFrameStep(world,posArray);
+            posArray = Portal.genFrameStep(world, posArray, random);
             if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 1){
                 posArray = new BlockPos[0];
                 for (BlockPos pos1: portalFramePos) {
-                    posArray = PortalFrame.addElement(posArray,pos1.up(3));
-                    posArray = PortalFrame.addElement(posArray,pos1.up(4));
+                    posArray = Portal.addElement(posArray,pos1.up(3));
+                    posArray = Portal.addElement(posArray,pos1.up(4));
                 }
                 portalFase = "waiting";
             }
@@ -140,7 +128,7 @@ public class PedestalBlock extends FacingBlock {
         }
 
         if (portalFase == "cancelFrame") {
-            posArray = PortalFrame.cancelFrameStep(world,posArray);
+            posArray = Portal.cancelFrameStep(world,posArray);
             if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
                 posArray = new BlockPos[0];
                 portalFase = "none";
@@ -151,7 +139,7 @@ public class PedestalBlock extends FacingBlock {
         }
 
         if (portalFase == "genPortal") {
-            posArray = PortalFrame.genPortalStep(world,posArray,state.get(FACING));
+            posArray = Portal.genPortalStep(world,posArray,state.get(FACING), random);
             if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
                 posArray = new BlockPos[0];
                 portalFase = "none";

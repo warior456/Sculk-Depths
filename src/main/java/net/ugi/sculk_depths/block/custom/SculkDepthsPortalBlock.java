@@ -108,19 +108,15 @@ public class SculkDepthsPortalBlock extends Block implements Portal{
             double d = (double)pos.getX() + random.nextDouble();
             double e = (double)pos.getY() + random.nextDouble();
             double f = (double)pos.getZ() + random.nextDouble();
-            double g = ((double)random.nextFloat() - 0.5) * 0.5;
-            double h = ((double)random.nextFloat() - 0.5) * 0.5;
-            double j = ((double)random.nextFloat() - 0.5) * 0.5;
+
             int k = random.nextInt(2) * 2 - 1;
             if (!world.getBlockState(pos.west()).isOf(this) && !world.getBlockState(pos.east()).isOf(this)) {
                 d = (double)pos.getX() + 0.5 + 0.25 * (double)k;
-                g = (double)(random.nextFloat() * 2.0F * (float)k);
             } else {
                 f = (double)pos.getZ() + 0.5 + 0.25 * (double)k;
-                j = (double)(random.nextFloat() * 2.0F * (float)k);
             }
 
-            world.addParticle((ParticleEffect) ModParticleTypes.SCULK_DEPTHS_PORTAL_PARTICLE, d, e, f, g, h, j);
+            world.addImportantParticle((ParticleEffect) ModParticleTypes.SCULK_DEPTHS_PORTAL_PARTICLE, false, d, e, f, 0, 0, 0);
         }
     }
 

@@ -3,21 +3,22 @@ package net.ugi.sculk_depths.portal;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.particle.ParticleEffect;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.block.ModBlocks;
+import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.state.property.ModProperties;
 import net.ugi.sculk_depths.tags.ModTags;
 
-import java.util.List;
-
 import static net.ugi.sculk_depths.block.custom.SculkDepthsPortalBlock.AXIS;
 
-public class PortalFrame {
+public class Portal {
 
 
     public static BlockPos[] addElement(BlockPos[] arr, BlockPos e) {
@@ -214,12 +215,15 @@ public class PortalFrame {
         return false;
     }
 
-    public static BlockPos[] genFrameStep(World world, BlockPos[] blockposses){
+    public static BlockPos[] genFrameStep(World world, BlockPos[] blockposses, Random random){
         BlockPos[] newPosArr = {new BlockPos(0,-4096,0)};
         for (BlockPos pos: blockposses) {
             BlockPos[] newPos = new BlockPos[0];
             if (world.getBlockState(pos).getBlock() != ModBlocks.ACTIVATED_AMALGAMITE) {
                 world.setBlockState(pos,ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+                System.out.println(pos);
+                Portal.addBlockPowerUpParticle(world, pos, random, 10);
+                System.out.println(pos);
                     newPos = getNextpos(pos, world, Blocks.REINFORCED_DEEPSLATE);
                 if (newPos.length == 0){
                     if (checkFullFrame(pos,world))
@@ -249,7 +253,7 @@ public class PortalFrame {
         return newPosArr;
     }
 
-    public static BlockPos[] genPortalStep(World world, BlockPos[] blockposses, Direction facing){
+    public static BlockPos[] genPortalStep(World world, BlockPos[] blockposses, Direction facing, Random random){
         BlockState state = ModBlocks.SCULK_DEPTHS_PORTAL.getDefaultState();
         BlockPos[] newPosArr = {new BlockPos(0,-4096,0)};
         for (BlockPos pos: blockposses) {
@@ -257,10 +261,12 @@ public class PortalFrame {
             if (world.getBlockState(pos).getBlock() != ModBlocks.SCULK_DEPTHS_PORTAL) {
                 if (facing == Direction.NORTH || facing == Direction.SOUTH){
                     world.setBlockState(pos,ModBlocks.SCULK_DEPTHS_PORTAL.getStateWithProperties(state.with(AXIS, Direction.Axis.X)));
+                    Portal.addBlockPowerUpParticle(world, pos, random, 10);
                     newPos = getNextpos(pos, world, ModTags.Blocks.PORTAL_AIR,facing);
                 }
                 if (facing == Direction.EAST || facing == Direction.WEST){
                     world.setBlockState(pos,ModBlocks.SCULK_DEPTHS_PORTAL.getStateWithProperties(state.with(AXIS, Direction.Axis.Z)));
+                    Portal.addBlockPowerUpParticle(world, pos, random, 10);
                     newPos = getNextpos(pos, world, ModTags.Blocks.PORTAL_AIR, facing);
                 }
                 if (newPos.length == 0){
@@ -270,5 +276,52 @@ public class PortalFrame {
             }
         }
         return newPosArr;
+    }
+
+    public static void addBlockPowerUpParticle(World world, BlockPos pos, Random random, int amount){
+        System.out.println("particle");
+        for (int i = 0; i < amount; i++) {
+            float x = pos.getX() + 0.5f;
+            float y = pos.getY() + 0.5f;
+            float z = pos.getZ() + 0.5f;
+            for (int j = 0; j < 6; j++) {
+                switch (j){
+                    case 0://positivex
+                        x = x + 0.5f + MathHelper.nextFloat(random, 0f, 0.2f);
+                        y = y + MathHelper.nextFloat(random, -0.5f, 0.5f);
+                        z = z + MathHelper.nextFloat(random, -0.5f, 0.5f);
+                        break;
+                    case 1://negativex
+                        x = x - 0.5f - MathHelper.nextFloat(random, 0f, 0.2f);
+                        y = y + MathHelper.nextFloat(random, -0.5f, 0.5f);
+                        z = z + MathHelper.nextFloat(random, -0.5f, 0.5f);
+                        break;
+                    case 2://positivivez
+                        x = x + MathHelper.nextFloat(random, -0.5f, 0.5f);
+                        y = y + MathHelper.nextFloat(random, -0.5f, 0.5f);
+                        z = z + 0.5f + MathHelper.nextFloat(random, 0f, 0.2f);
+                        break;
+                    case 3://negativez
+                        x = x + MathHelper.nextFloat(random, -0.5f, 0.5f);
+                        y = y + MathHelper.nextFloat(random, -0.5f, 0.5f);
+                        z = z - 0.5f - MathHelper.nextFloat(random, 0f, 0.2f);
+                        break;
+                    case 4://positivey
+                        x = x + MathHelper.nextFloat(random, -0.5f, 0.5f);
+                        y = y + 0.5f + MathHelper.nextFloat(random, 0f, 0.2f);
+                        z = z + MathHelper.nextFloat(random, -0.5f, 0.5f);
+                        break;
+                    case 5://negativey
+                        x = x + MathHelper.nextFloat(random, -0.5f, 0.5f);
+                        y = y - 0.5f - MathHelper.nextFloat(random, 0f, 0.2f);
+                        z = z + MathHelper.nextFloat(random, -0.5f, 0.5f);
+                        break;
+                }
+                //System.out.println(" " + x + " " + y + " "+z);
+                world.addImportantParticle((ParticleEffect) ModParticleTypes.ENERGY_PARTICLE, false, x, y, z, 0, 0, 0);
+            }
+
+        }
+
     }
 }

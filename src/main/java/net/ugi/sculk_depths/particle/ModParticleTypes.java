@@ -16,6 +16,7 @@ public class ModParticleTypes {
     public static final ParticleType<SimpleParticleType> AURIC_SPORES = FabricParticleTypes.simple();
     public static final ParticleType<SimpleParticleType> SURFACE_WIND = FabricParticleTypes.simple();
     public static final ParticleType<SimpleParticleType> CAVE_FALLING_PARTICLE = FabricParticleTypes.simple();
+    public static final ParticleType<SimpleParticleType> ENERGY_PARTICLE = FabricParticleTypes.simple();
 
     public static void registerModParticles() {
         Registry.register(Registries.PARTICLE_TYPE, SculkDepths.identifier( "penebrium_spores"), PENEBRIUM_SPORES);
@@ -23,5 +24,6 @@ public class ModParticleTypes {
         Registry.register(Registries.PARTICLE_TYPE, SculkDepths.identifier( "auric_spores"), AURIC_SPORES);
         Registry.register(Registries.PARTICLE_TYPE, SculkDepths.identifier( "surface_wind"), SURFACE_WIND);
         Registry.register(Registries.PARTICLE_TYPE, SculkDepths.identifier( "cave_falling_particle"), CAVE_FALLING_PARTICLE);
+        Registry.register(Registries.PARTICLE_TYPE, SculkDepths.identifier( "energy_particle"), ENERGY_PARTICLE);
     }
 }
