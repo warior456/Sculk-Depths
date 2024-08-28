@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
@@ -221,9 +222,7 @@ public class Portal {
             BlockPos[] newPos = new BlockPos[0];
             if (world.getBlockState(pos).getBlock() != ModBlocks.ACTIVATED_AMALGAMITE) {
                 world.setBlockState(pos,ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
-                System.out.println(pos);
-                Portal.addBlockPowerUpParticle(world, pos, random, 10);
-                System.out.println(pos);
+                Portal.addBlockPowerUpParticle((ServerWorld) world, pos, random, 10);
                     newPos = getNextpos(pos, world, Blocks.REINFORCED_DEEPSLATE);
                 if (newPos.length == 0){
                     if (checkFullFrame(pos,world))
@@ -261,12 +260,12 @@ public class Portal {
             if (world.getBlockState(pos).getBlock() != ModBlocks.SCULK_DEPTHS_PORTAL) {
                 if (facing == Direction.NORTH || facing == Direction.SOUTH){
                     world.setBlockState(pos,ModBlocks.SCULK_DEPTHS_PORTAL.getStateWithProperties(state.with(AXIS, Direction.Axis.X)));
-                    Portal.addBlockPowerUpParticle(world, pos, random, 10);
+                    Portal.addBlockPowerUpParticle((ServerWorld) world, pos, random, 10);
                     newPos = getNextpos(pos, world, ModTags.Blocks.PORTAL_AIR,facing);
                 }
                 if (facing == Direction.EAST || facing == Direction.WEST){
                     world.setBlockState(pos,ModBlocks.SCULK_DEPTHS_PORTAL.getStateWithProperties(state.with(AXIS, Direction.Axis.Z)));
-                    Portal.addBlockPowerUpParticle(world, pos, random, 10);
+                    Portal.addBlockPowerUpParticle((ServerWorld) world, pos, random, 10);
                     newPos = getNextpos(pos, world, ModTags.Blocks.PORTAL_AIR, facing);
                 }
                 if (newPos.length == 0){
@@ -278,8 +277,8 @@ public class Portal {
         return newPosArr;
     }
 
-    public static void addBlockPowerUpParticle(World world, BlockPos pos, Random random, int amount){
-        System.out.println("particle");
+    public static void addBlockPowerUpParticle(ServerWorld world, BlockPos pos, Random random, int amount){
+        //System.out.println("particle");
         for (int i = 0; i < amount; i++) {
             float x = pos.getX() + 0.5f;
             float y = pos.getY() + 0.5f;

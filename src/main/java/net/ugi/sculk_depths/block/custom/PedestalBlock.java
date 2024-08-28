@@ -23,6 +23,8 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.ChunkStatus;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.portal.GenerateStructureAPI;
@@ -30,9 +32,10 @@ import net.ugi.sculk_depths.portal.Portal;
 import net.ugi.sculk_depths.state.property.ModProperties;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
-import java.util.concurrent.TimeUnit;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.*;
 
 public class PedestalBlock extends FacingBlock {
     public static final BooleanProperty HAS_ENERGY_ESSENCE = ModProperties.HAS_ENERGY_ESSENCE;
@@ -71,21 +74,40 @@ public class PedestalBlock extends FacingBlock {
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (portalFase == "checkFrame") {
-            portalFramePos = Portal.getFramePos(state.get(FACING),pos, world);
+            portalFramePos = Portal.getFramePos(state.get(FACING),pos, world);//todo benchmark
             if (portalFramePos == null) {portalFase = "none";return;}
             if (portalFramePos[0] == null) {portalFase = "none";return;}
-            BlockPos anchor = Portal.getFrameAnchorPos(state.get(FACING),pos, world);
+            BlockPos anchor = Portal.getFrameAnchorPos(state.get(FACING),pos, world);//todo benchmark
 
-            structureStart = GenerateStructureAPI.structureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor);
+            structureStart = GenerateStructureAPI.structureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor); //50ms (matteo)
             BlockBox boundingBox = structureStart.getBoundingBox();
 
-            chunkArray = GenerateStructureAPI.generateChunkArray(
+            chunkArray = GenerateStructureAPI.generateChunkArray(//not laggy
                     new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMinX()),ChunkSectionPos.getSectionCoord(boundingBox.getMinZ())),
                     new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMaxX()),ChunkSectionPos.getSectionCoord(boundingBox.getMaxZ())),
                     0,1);
 
             ServerWorld serverWorld = world.getServer().getWorld(ModDimensions.SCULK_DEPTHS_LEVEL_KEY);
 
+
+
+/*            int threads = Runtime.getRuntime().availableProcessors()/3;
+            System.out.println("starting structure generation with " + threads + " threads");
+            final ExecutorService executorService = Executors.newFixedThreadPool(threads);//todo config? //not laggy
+            executorService.submit(() -> {
+                for (ChunkPos chunkPos : chunkArray) {
+                    // Load the chunk in the thread pool
+                    world.getChunk(chunkPos.x, chunkPos.z);
+                }
+                for (ChunkPos chunkPos : chunkArray) {
+                    world.getServer().execute(() -> {
+                        world.setChunkForced(chunkPos.x, chunkPos.z, true);
+                    });
+                }
+                GenerateStructureAPI.generateStructurePartial(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), structureStart, boundingBox.streamChunkPos().toArray(ChunkPos[]::new));
+                portalFase = "genPortal";
+                executorService.shutdown();
+            });*/
 
             CompletableFuture.runAsync(() -> {
                 for (ChunkPos chunkPos : chunkArray) {//load chunks
@@ -99,6 +121,9 @@ public class PedestalBlock extends FacingBlock {
                 GenerateStructureAPI.generateStructurePartial(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), structureStart, boundingBox.streamChunkPos().toArray(ChunkPos[]::new));
                 portalFase = "genPortal";
             }, world.getServer());
+
+
+
 
 
             portalFase = "genFrame";
@@ -173,7 +198,7 @@ public class PedestalBlock extends FacingBlock {
         if (world.isClient()){
             return ItemActionResult.FAIL;
         }
-
+        Portal.addBlockPowerUpParticle((ServerWorld) world, pos, Random.create(), 10);//todo remove if works
         if (stack.getItem() == ModItems.ENERGY_ESSENCE && !state.get(ModProperties.HAS_ENERGY_ESSENCE)){
             stack.decrementUnlessCreative(1,player);
             world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE, SoundCategory.BLOCKS, 1.0f, 1.0f);
