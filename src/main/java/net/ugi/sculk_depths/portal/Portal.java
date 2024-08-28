@@ -260,12 +260,10 @@ public class Portal {
             if (world.getBlockState(pos).getBlock() != ModBlocks.SCULK_DEPTHS_PORTAL) {
                 if (facing == Direction.NORTH || facing == Direction.SOUTH){
                     world.setBlockState(pos,ModBlocks.SCULK_DEPTHS_PORTAL.getStateWithProperties(state.with(AXIS, Direction.Axis.X)));
-                    Portal.addBlockPowerUpParticle((ServerWorld) world, pos, random, 10);
                     newPos = getNextpos(pos, world, ModTags.Blocks.PORTAL_AIR,facing);
                 }
                 if (facing == Direction.EAST || facing == Direction.WEST){
                     world.setBlockState(pos,ModBlocks.SCULK_DEPTHS_PORTAL.getStateWithProperties(state.with(AXIS, Direction.Axis.Z)));
-                    Portal.addBlockPowerUpParticle((ServerWorld) world, pos, random, 10);
                     newPos = getNextpos(pos, world, ModTags.Blocks.PORTAL_AIR, facing);
                 }
                 if (newPos.length == 0){
@@ -280,44 +278,45 @@ public class Portal {
     public static void addBlockPowerUpParticle(ServerWorld world, BlockPos pos, Random random, int amount){
         //System.out.println("particle");
         for (int i = 0; i < amount; i++) {
-            float x = pos.getX() + 0.5f;
-            float y = pos.getY() + 0.5f;
-            float z = pos.getZ() + 0.5f;
             for (int j = 0; j < 6; j++) {
+                float x = pos.getX() + 0.5f;
+                float y = pos.getY() + 0.5f;
+                float z = pos.getZ() + 0.5f;
                 switch (j){
                     case 0://positivex
-                        x = x + 0.5f + MathHelper.nextFloat(random, 0f, 0.2f);
-                        y = y + MathHelper.nextFloat(random, -0.5f, 0.5f);
-                        z = z + MathHelper.nextFloat(random, -0.5f, 0.5f);
+                        x = x + 0.6f + MathHelper.nextFloat(random, 0f, 0.2f);
+                        y = y + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                        z = z + MathHelper.nextFloat(random, -0.6f, 0.6f);
                         break;
                     case 1://negativex
-                        x = x - 0.5f - MathHelper.nextFloat(random, 0f, 0.2f);
-                        y = y + MathHelper.nextFloat(random, -0.5f, 0.5f);
-                        z = z + MathHelper.nextFloat(random, -0.5f, 0.5f);
+                        x = x - 0.6f - MathHelper.nextFloat(random, 0f, 0.2f);
+                        y = y + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                        z = z + MathHelper.nextFloat(random, -0.6f, 0.6f);
                         break;
                     case 2://positivivez
-                        x = x + MathHelper.nextFloat(random, -0.5f, 0.5f);
-                        y = y + MathHelper.nextFloat(random, -0.5f, 0.5f);
-                        z = z + 0.5f + MathHelper.nextFloat(random, 0f, 0.2f);
+                        x = x + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                        y = y + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                        z = z + 0.6f + MathHelper.nextFloat(random, 0f, 0.2f);
                         break;
                     case 3://negativez
-                        x = x + MathHelper.nextFloat(random, -0.5f, 0.5f);
-                        y = y + MathHelper.nextFloat(random, -0.5f, 0.5f);
-                        z = z - 0.5f - MathHelper.nextFloat(random, 0f, 0.2f);
+                        x = x + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                        y = y + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                        z = z - 0.6f - MathHelper.nextFloat(random, 0f, 0.2f);
                         break;
                     case 4://positivey
-                        x = x + MathHelper.nextFloat(random, -0.5f, 0.5f);
-                        y = y + 0.5f + MathHelper.nextFloat(random, 0f, 0.2f);
-                        z = z + MathHelper.nextFloat(random, -0.5f, 0.5f);
+                        x = x + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                        y = y + 0.6f + MathHelper.nextFloat(random, 0f, 0.2f);
+                        z = z + MathHelper.nextFloat(random, -0.6f, 0.6f);
                         break;
                     case 5://negativey
-                        x = x + MathHelper.nextFloat(random, -0.5f, 0.5f);
-                        y = y - 0.5f - MathHelper.nextFloat(random, 0f, 0.2f);
-                        z = z + MathHelper.nextFloat(random, -0.5f, 0.5f);
+                        x = x + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                        y = y - 0.6f - MathHelper.nextFloat(random, 0f, 0.2f);
+                        z = z + MathHelper.nextFloat(random, -0.6f, 0.6f);
                         break;
                 }
                 //System.out.println(" " + x + " " + y + " "+z);
-                world.addImportantParticle((ParticleEffect) ModParticleTypes.ENERGY_PARTICLE, false, x, y, z, 0, 0, 0);
+                world.spawnParticles((ParticleEffect) ModParticleTypes.ENERGY_PARTICLE, x, y, z, 4, 0.1, -0.1, 0.1, 0);
+                //world.addImportantParticle((ParticleEffect) ModParticleTypes.ENERGY_PARTICLE, false, x, y, z, 0, 0, 0);
             }
 
         }

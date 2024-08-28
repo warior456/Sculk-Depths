@@ -91,7 +91,7 @@ public class PedestalBlock extends FacingBlock {
 
 
 
-/*            int threads = Runtime.getRuntime().availableProcessors()/3;
+/*            int threads = Runtime.getRuntime().availableProcessors();
             System.out.println("starting structure generation with " + threads + " threads");
             final ExecutorService executorService = Executors.newFixedThreadPool(threads);//todo config? //not laggy
             executorService.submit(() -> {
