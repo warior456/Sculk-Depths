@@ -254,6 +254,26 @@ public class PedestalBlock extends FacingBlock {
     }
 
 
+
+    @Override
+    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (world.isClient()){
+            return ItemActionResult.FAIL;
+        }
+        if (stack.getItem() == ModItems.ENERGY_ESSENCE && !state.get(ModProperties.HAS_ENERGY_ESSENCE)){
+            Portal.addBlockPowerUpParticle((ServerWorld) world, pos, Random.create(), 10);
+            stack.decrementUnlessCreative(1,player);
+            world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE, SoundCategory.BLOCKS, 1.0f, 1.0f);
+
+            BlockState blockState1 = state.with(HAS_ENERGY_ESSENCE, true);
+            world.setBlockState(pos, blockState1);
+            portalFase = "checkFrame";
+            world.scheduleBlockTick(pos,state.getBlock(),1);
+            return ItemActionResult.SUCCESS;
+        }
+        return ItemActionResult.FAIL;
+    }
+
     @Override
     protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return OUTLINE_SHAPE;

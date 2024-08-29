@@ -24,6 +24,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.*;
 import net.minecraft.world.dimension.NetherPortal;
 
+import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
@@ -67,14 +68,68 @@ public class SculkDepthsPortalBlock extends Block implements Portal{
                 return state;
         }
     }
+    private boolean regeneratePortal(WorldAccess world, BlockPos pos, Direction.Axis facing){
+        int connectedPortalBlocks = 0;
+        if(world.getBlockState(pos.north()).getBlock() == ModBlocks.SCULK_DEPTHS_PORTAL){
+            connectedPortalBlocks++;
+        }
+        if(world.getBlockState(pos.south()).getBlock() == ModBlocks.SCULK_DEPTHS_PORTAL){
+            connectedPortalBlocks++;
+        }
+        if(world.getBlockState(pos.east()).getBlock() == ModBlocks.SCULK_DEPTHS_PORTAL){
+            connectedPortalBlocks++;
+        }
+        if(world.getBlockState(pos.west()).getBlock() == ModBlocks.SCULK_DEPTHS_PORTAL){
+            connectedPortalBlocks++;
+        }
+        if(world.getBlockState(pos.up()).getBlock() == ModBlocks.SCULK_DEPTHS_PORTAL){
+            connectedPortalBlocks++;
+        }
+        if(world.getBlockState(pos.down()).getBlock() == ModBlocks.SCULK_DEPTHS_PORTAL){
+            connectedPortalBlocks++;
+        }
 
+        if (connectedPortalBlocks > 1){
+            BlockState state = ModBlocks.SCULK_DEPTHS_PORTAL.getDefaultState();
+            world.setBlockState(pos,ModBlocks.SCULK_DEPTHS_PORTAL.getStateWithProperties(state.with(AXIS, facing)),0);
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         Direction.Axis axis = direction.getAxis();
         Direction.Axis axis2 = (Direction.Axis)state.get(AXIS);
         boolean bl = axis2 != axis && axis.isHorizontal();
-        return !bl && !neighborState.isOf(this) && !(new NetherPortal(world, pos, axis2)).wasAlreadyValid() ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        if (!bl && !neighborState.isOf(this) && !(new NetherPortal(world, pos, axis2)).wasAlreadyValid()){
+            if(world.getBlockState(pos.north()).getBlock() == Blocks.AIR){
+                if (regeneratePortal(world,pos.north(),state.get(AXIS)))
+                    return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+            }
+            if(world.getBlockState(pos.south()).getBlock() == Blocks.AIR){
+                if (regeneratePortal(world,pos.south(),state.get(AXIS)))
+                    return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+            }
+            if(world.getBlockState(pos.east()).getBlock() == Blocks.AIR){
+                if (regeneratePortal(world,pos.east(),state.get(AXIS)))
+                    return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+            }
+            if(world.getBlockState(pos.west()).getBlock() == Blocks.AIR){
+                if (regeneratePortal(world,pos.west(),state.get(AXIS)))
+                    return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+            }
+            if(world.getBlockState(pos.up()).getBlock() == Blocks.AIR){
+                if (regeneratePortal(world,pos.up(),state.get(AXIS)))
+                    return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+            }
+            if(world.getBlockState(pos.down()).getBlock() == Blocks.AIR){
+                if (regeneratePortal(world,pos.down(),state.get(AXIS)))
+                    return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+            }
+            return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        }
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     @Override
