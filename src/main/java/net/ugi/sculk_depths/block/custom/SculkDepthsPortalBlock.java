@@ -116,7 +116,7 @@ public class SculkDepthsPortalBlock extends Block implements Portal{
                 f = (double)pos.getZ() + 0.5 + 0.25 * (double)k;
             }
 
-            world.addImportantParticle((ParticleEffect) ModParticleTypes.SCULK_DEPTHS_PORTAL_PARTICLE, false, d, e, f, 0, 0, 0);
+            world.addImportantParticle((ParticleEffect) ModParticleTypes.SCULK_DEPTHS_PORTAL_PARTICLE, false, d, e, f, 0, -0.01f, 0);
         }
     }
 

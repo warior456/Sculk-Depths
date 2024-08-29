@@ -38,9 +38,9 @@ public class ModPortalParticle
 
         @Nullable
         @Override
-        public Particle createParticle(SimpleParticleType parameters, ClientWorld clientWorld, double x, double y, double z, double g, double h, double i) {
+        public Particle createParticle(SimpleParticleType parameters, ClientWorld clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
 
-            ModPortalParticle particle = new ModPortalParticle(clientWorld, x, y, z, 0.3f, 0.1f, 0.3f, 0f, -0.01f, 0f, 0.18f, this.spriteProvider, 1f, 40, -0.001f, false);
+            ModPortalParticle particle = new ModPortalParticle(clientWorld, x, y, z, 0.3f, 0.1f, 0.3f, velocityX, velocityY, velocityZ, 0.18f, this.spriteProvider, 1f, 40, -0.001f, false);
             particle.setColor(1,1,1);
             particle.maxAge = MathHelper.nextBetween(clientWorld.random, 40, 200);
             //particle.gravityStrength = -0.01f;//not needed?
