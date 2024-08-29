@@ -77,9 +77,44 @@ public class PedestalBlock extends FacingBlock {
             portalFramePos = Portal.getFramePos(state.get(FACING),pos, world);//todo benchmark
             if (portalFramePos == null) {portalFase = "none";return;}
             if (portalFramePos[0] == null) {portalFase = "none";return;}
-            BlockPos anchor = Portal.getFrameAnchorPos(state.get(FACING),pos, world);//todo benchmark
+
+            portalFase = "genFrame";
+            posArray = portalFramePos;
+
+            world.scheduleBlockTick(pos,state.getBlock(),1);
+        }
+        if (portalFase == "genFrame") {
+            posArray = Portal.genFrameStep(world, posArray, random);
+            if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 1){
+                posArray = new BlockPos[0];
+                for (BlockPos pos1: portalFramePos) {
+                    posArray = Portal.addElement(posArray,pos1.up(3));
+                    posArray = Portal.addElement(posArray,pos1.up(4));
+                }
+                portalFase = "genStructure";
+            }
+            else if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
+                posArray = portalFramePos;
+                portalFase = "cancelFrame";
+            }
+            world.scheduleBlockTick(pos,state.getBlock(),2);
+        }
+        if (portalFase == "cancelFrame") {
+            posArray = Portal.cancelFrameStep(world,posArray);
+            if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
+                posArray = new BlockPos[0];
+                portalFase = "none";
+            }
+            else {
+                world.scheduleBlockTick(pos,state.getBlock(),2);
+            }
+        }
+
+        if(portalFase == "genStructure"){
+            BlockPos anchor = Portal.getFrameAnchorPos(state.get(FACING),pos, world);
 
             structureStart = GenerateStructureAPI.structureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor); //50ms (matteo)
+
             BlockBox boundingBox = structureStart.getBoundingBox();
 
             chunkArray = GenerateStructureAPI.generateChunkArray(//not laggy
@@ -114,54 +149,21 @@ public class PedestalBlock extends FacingBlock {
                     assert serverWorld != null;
                     serverWorld.getChunk(chunkPos.x, chunkPos.z);
                 }
+                GenerateStructureAPI.forceLoadNearbyChunks(chunkArray, serverWorld);
 
             }, getAsyncExecutor()).thenRunAsync(() -> {
                 // This code runs back on the main server thread after the chunks are loaded
-                GenerateStructureAPI.forceLoadNearbyChunks(chunkArray, serverWorld);
                 GenerateStructureAPI.generateStructurePartial(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), structureStart, boundingBox.streamChunkPos().toArray(ChunkPos[]::new));
                 portalFase = "genPortal";
             }, world.getServer());
-
-
-
-
-
-            portalFase = "genFrame";
-            posArray = portalFramePos;
-
+            portalFase = "waitingParticles";
             world.scheduleBlockTick(pos,state.getBlock(),1);
         }
-        if (portalFase == "genFrame") {
-            posArray = Portal.genFrameStep(world, posArray, random);
-            if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 1){
-                posArray = new BlockPos[0];
-                for (BlockPos pos1: portalFramePos) {
-                    posArray = Portal.addElement(posArray,pos1.up(3));
-                    posArray = Portal.addElement(posArray,pos1.up(4));
-                }
-                portalFase = "waiting";
-            }
-            else if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
-                posArray = portalFramePos;
-                portalFase = "cancelFrame";
-            }
-            world.scheduleBlockTick(pos,state.getBlock(),2);
-        }
+        if (portalFase == "waitingParticles") {
 
-        if(portalFase == "waiting"){
-            world.scheduleBlockTick(pos,state.getBlock(),1);
             Portal.addPortalStartAttemptParticle(world, pos, random, 10);
-        }
+            world.scheduleBlockTick(pos,state.getBlock(),1);
 
-        if (portalFase == "cancelFrame") {
-            posArray = Portal.cancelFrameStep(world,posArray);
-            if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
-                posArray = new BlockPos[0];
-                portalFase = "none";
-            }
-            else {
-                world.scheduleBlockTick(pos,state.getBlock(),2);
-            }
         }
 
         if (portalFase == "genPortal") {
