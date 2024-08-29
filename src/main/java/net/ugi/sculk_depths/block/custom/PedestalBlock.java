@@ -201,8 +201,8 @@ public class PedestalBlock extends FacingBlock {
         if (world.isClient()){
             return ItemActionResult.FAIL;
         }
-        Portal.addBlockPowerUpParticle((ServerWorld) world, pos, Random.create(), 10);//todo remove if works
         if (stack.getItem() == ModItems.ENERGY_ESSENCE && !state.get(ModProperties.HAS_ENERGY_ESSENCE)){
+            Portal.addBlockPowerUpParticle((ServerWorld) world, pos, Random.create(), 10);
             stack.decrementUnlessCreative(1,player);
             world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE, SoundCategory.BLOCKS, 1.0f, 1.0f);
 
