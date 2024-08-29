@@ -8,6 +8,8 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.server.world.ServerWorld;
@@ -27,6 +29,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkStatus;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.item.ModItems;
+import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.portal.GenerateStructureAPI;
 import net.ugi.sculk_depths.portal.Portal;
 import net.ugi.sculk_depths.state.property.ModProperties;
@@ -34,6 +37,7 @@ import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.*;
 
@@ -61,14 +65,32 @@ public class PedestalBlock extends FacingBlock {
         return CODEC;
     }
 
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING).add(HAS_ENERGY_ESSENCE);
-
+    public PedestalBlock(Settings settings) {
+        super(settings);
+        this.setDefaultState(this.getDefaultState().with(HAS_ENERGY_ESSENCE, false));
     }
 
     private Executor getAsyncExecutor() {
         return CompletableFuture.delayedExecutor(0, TimeUnit.MILLISECONDS);
+    }
+
+    @Override
+    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (world.isClient()){
+            return ItemActionResult.FAIL;
+        }
+        Portal.addBlockPowerUpParticle((ServerWorld) world, pos, Random.create(), 10);//todo remove if works
+        if (stack.getItem() == ModItems.ENERGY_ESSENCE && !state.get(ModProperties.HAS_ENERGY_ESSENCE)){
+            stack.decrementUnlessCreative(1,player);
+            world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE, SoundCategory.BLOCKS, 1.0f, 1.0f);
+
+            BlockState blockState1 = state.with(HAS_ENERGY_ESSENCE, true);
+            world.setBlockState(pos, blockState1);
+            portalFase = "checkFrame";
+            world.scheduleBlockTick(pos,state.getBlock(),1);
+            return ItemActionResult.SUCCESS;
+        }
+        return ItemActionResult.FAIL;
     }
 
     @Override
@@ -178,9 +200,46 @@ public class PedestalBlock extends FacingBlock {
         }
     }
 
-    public PedestalBlock(Settings settings) {
-        super(settings);
-        this.setDefaultState(this.getDefaultState().with(HAS_ENERGY_ESSENCE, false));
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        if(state.get(ModProperties.HAS_ENERGY_ESSENCE)){
+            int randomNumber = random.nextBetween(0, 5);
+            float x = pos.getX() + 0.5f;
+            float y = pos.getY() + 0.5f;
+            float z = pos.getZ() + 0.5f;
+            switch (randomNumber) {
+                case 0://positivex
+                    x = x + 0.6f + MathHelper.nextFloat(random, 0f, 0.2f);
+                    y = y + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                    z = z + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                    break;
+                case 1://negativex
+                    x = x - 0.6f - MathHelper.nextFloat(random, 0f, 0.2f);
+                    y = y + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                    z = z + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                    break;
+                case 2://positivivez
+                    x = x + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                    y = y + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                    z = z + 0.6f + MathHelper.nextFloat(random, 0f, 0.2f);
+                    break;
+                case 3://negativez
+                    x = x + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                    y = y + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                    z = z - 0.6f - MathHelper.nextFloat(random, 0f, 0.2f);
+                    break;
+                case 4://positivey
+                    x = x + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                    y = y + 0.6f + MathHelper.nextFloat(random, 0f, 0.2f);
+                    z = z + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                    break;
+                case 5://negativey
+                    x = x + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                    y = y - 0.6f - MathHelper.nextFloat(random, 0f, 0.2f);
+                    z = z + MathHelper.nextFloat(random, -0.6f, 0.6f);
+                    break;
+            }
+            world.addImportantParticle((ParticleEffect) ModParticleTypes.ENERGY_PARTICLE, false, x, y, z, 0, 0.01, 0);
+        }
     }
 
     @Override
@@ -195,26 +254,6 @@ public class PedestalBlock extends FacingBlock {
     }
 
 
-
-    @Override
-    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (world.isClient()){
-            return ItemActionResult.FAIL;
-        }
-        Portal.addBlockPowerUpParticle((ServerWorld) world, pos, Random.create(), 10);//todo remove if works
-        if (stack.getItem() == ModItems.ENERGY_ESSENCE && !state.get(ModProperties.HAS_ENERGY_ESSENCE)){
-            stack.decrementUnlessCreative(1,player);
-            world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE, SoundCategory.BLOCKS, 1.0f, 1.0f);
-
-            BlockState blockState1 = state.with(HAS_ENERGY_ESSENCE, true);
-            world.setBlockState(pos, blockState1);
-            portalFase = "checkFrame";
-            world.scheduleBlockTick(pos,state.getBlock(),1);
-            return ItemActionResult.SUCCESS;
-        }
-        return ItemActionResult.FAIL;
-    }
-
     @Override
     protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return OUTLINE_SHAPE;
@@ -227,6 +266,11 @@ public class PedestalBlock extends FacingBlock {
 
     public static VoxelShape createCuboidShape(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return VoxelShapes.cuboid(minX / 16.0, minY / 16.0, minZ / 16.0, maxX / 16.0, maxY / 16.0, maxZ / 16.0);
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(FACING).add(HAS_ENERGY_ESSENCE);
     }
 
 }

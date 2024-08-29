@@ -321,7 +321,7 @@ public class Portal {
                 //System.out.println(" " + x + " " + y + " "+z);
                 List<ServerPlayerEntity> playerEntityList = world.getPlayers(serverPlayerEntity -> serverPlayerEntity.isInRange(serverPlayerEntity, 100, 50));//todo test range
                 for (ServerPlayerEntity serverPlayerEntity : playerEntityList) {
-                    world.spawnParticles(serverPlayerEntity, (ParticleEffect) ModParticleTypes.ENERGY_PARTICLE, true, x, y, z, 4, 0.1, -0.1, 0.1, 0);
+                    world.spawnParticles(serverPlayerEntity, (ParticleEffect) ModParticleTypes.ENERGY_PARTICLE, true, x, y, z, 4, 0.1, 0, 0.1, 0);
                 }
 
                 //world.addImportantParticle((ParticleEffect) ModParticleTypes.ENERGY_PARTICLE, false, x, y, z, 0, 0, 0);
