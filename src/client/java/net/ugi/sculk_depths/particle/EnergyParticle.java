@@ -38,8 +38,8 @@ public class EnergyParticle
 
         @Nullable
         @Override
-        public Particle createParticle(SimpleParticleType parameters, ClientWorld clientWorld, double x, double y, double z,double velocityX, double velocityY, double velocityZ) {
-            EnergyParticle particle = new EnergyParticle(clientWorld, x, y, z, 0.05f, 0.05f, 0.05f, velocityX, velocityY, velocityZ, 0.18f, this.spriteProvider, 1f, 200, 0f, false);
+        public Particle createParticle(SimpleParticleType parameters, ClientWorld clientWorld, double x, double y, double z,double velocityX, double gravityY, double velocityZ) {
+            EnergyParticle particle = new EnergyParticle(clientWorld, x, y, z, 0.05f, 0.05f, 0.05f, velocityX, 0, velocityZ, 0.18f, this.spriteProvider, 1f, 200, - (float)gravityY, false);
             particle.setColor(1,1,1);
             particle.maxAge = MathHelper.nextBetween(clientWorld.random, 200, 1000);
             return particle;
