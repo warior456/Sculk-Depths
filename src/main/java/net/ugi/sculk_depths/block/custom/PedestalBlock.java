@@ -150,6 +150,7 @@ public class PedestalBlock extends FacingBlock {
 
         if(portalFase == "waiting"){
             world.scheduleBlockTick(pos,state.getBlock(),1);
+            Portal.addPortalStartAttemptParticle(world, pos, random, 10);
         }
 
         if (portalFase == "cancelFrame") {

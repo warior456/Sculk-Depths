@@ -3,8 +3,10 @@ package net.ugi.sculk_depths.portal;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -16,6 +18,8 @@ import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.state.property.ModProperties;
 import net.ugi.sculk_depths.tags.ModTags;
+
+import java.util.List;
 
 import static net.ugi.sculk_depths.block.custom.SculkDepthsPortalBlock.AXIS;
 
@@ -315,11 +319,37 @@ public class Portal {
                         break;
                 }
                 //System.out.println(" " + x + " " + y + " "+z);
-                world.spawnParticles((ParticleEffect) ModParticleTypes.ENERGY_PARTICLE, x, y, z, 4, 0.1, -0.1, 0.1, 0);
+                List<ServerPlayerEntity> playerEntityList = world.getPlayers(serverPlayerEntity -> serverPlayerEntity.isInRange(serverPlayerEntity, 100, 50));//todo test range
+                for (ServerPlayerEntity serverPlayerEntity : playerEntityList) {
+                    world.spawnParticles(serverPlayerEntity, (ParticleEffect) ModParticleTypes.ENERGY_PARTICLE, true, x, y, z, 4, 0.1, -0.1, 0.1, 0);
+                }
+
                 //world.addImportantParticle((ParticleEffect) ModParticleTypes.ENERGY_PARTICLE, false, x, y, z, 0, 0, 0);
             }
 
         }
 
     }
+
+    public static void addPortalStartAttemptParticle(ServerWorld world, BlockPos pos, Random random, int amount){
+        //System.out.println("particle");
+        for (int i = 0; i < amount; i++) {
+            for (int j = 0; j < 6; j++) {
+                float x = pos.getX() + 0.5f;
+                float y = pos.getY() + 0.5f;
+                float z = pos.getZ() + 0.5f;
+
+                //System.out.println(" " + x + " " + y + " "+z);
+                List<ServerPlayerEntity> playerEntityList = world.getPlayers(serverPlayerEntity -> serverPlayerEntity.isInRange(serverPlayerEntity, 100, 50));//todo test range
+                for (ServerPlayerEntity serverPlayerEntity : playerEntityList) {
+                    world.spawnParticles(serverPlayerEntity, (ParticleEffect) ModParticleTypes.ENERGY_PARTICLE, true, x, y, z, 4, 0.1, 0.1, 0.1, 1);
+                }
+
+
+            }
+
+        }
+
+    }
+
 }
