@@ -5,12 +5,10 @@ import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.fluid.ModFluids;
-import net.ugi.sculk_depths.item.custom.EnergizedFlintAndSteelItem;
 import net.ugi.sculk_depths.item.custom.GlomperGlux;
 
 
@@ -46,8 +44,6 @@ public class ModItems {
 
     public static final Item ENERGY_ESSENCE = registerItem("energy_essence",
             new Item(new Item.Settings()));
-    public static final Item ENERGISED_FLINT_AND_STEEL = registerItem("energized_flint_and_steel",
-            new EnergizedFlintAndSteelItem(new Item.Settings().maxCount(1).maxDamage(128)));
 
     public static final Item GLOMPER_GLUX = registerItem("glomper_glux",
             new GlomperGlux(new Item.Settings()));
@@ -73,7 +69,7 @@ public class ModItems {
 
     public static final Item QUAZARITH_AXE = registerItem("quazarith_axe",
             new AxeItem(ModToolMaterials.QUAZARITH, //7, -3.0F,
-                    new Item.Settings().attributeModifiers(AxeItem.createAttributeModifiers(ModToolMaterials.QUAZARITH, 7f,-3f)).fireproof()));
+                    new Item.Settings().attributeModifiers(AxeItem.createAttributeModifiers(ModToolMaterials.QUAZARITH, 9f,-3f)).fireproof()));
 
     public static final Item QUAZARITH_HOE = registerItem("quazarith_hoe",
             new HoeItem(ModToolMaterials.QUAZARITH, //-4, 1.0F,
@@ -131,7 +127,6 @@ public class ModItems {
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, KRYSLUM_BUCKET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, ENERGY_ESSENCE);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, ENERGISED_FLINT_AND_STEEL);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_GLUX);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_SPAWN_EGG);

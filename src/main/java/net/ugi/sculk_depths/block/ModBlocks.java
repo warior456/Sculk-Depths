@@ -3,7 +3,6 @@ package net.ugi.sculk_depths.block;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 //import net.kyrptonaught.customportalapi.CustomPortalBlock;
 import net.minecraft.block.*;
-import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -13,7 +12,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
-import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.custom.*;
 import net.ugi.sculk_depths.block.custom.ModCauldron.FlumrockCauldronBlock;
@@ -22,13 +20,10 @@ import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
 import net.ugi.sculk_depths.world.WorldGenerator;
-import net.ugi.sculk_depths.block.custom.SoulFireBlock;
 import net.ugi.sculk_depths.block.custom.ModCauldron.SporeFlumrockCauldronBlock;
 import net.ugi.sculk_depths.block.dryable.*;
 import net.ugi.sculk_depths.util.ModStrippableBlocks;
 import net.ugi.sculk_depths.world.gen.feature.ModConfiguredFeatures;
-
-import java.util.function.ToIntFunction;
 
 
 public class ModBlocks {
@@ -41,8 +36,6 @@ public class ModBlocks {
 
     public static final Block KRYSLUM_ENRICHED_SOIL = registerBlock("kryslum_enriched_soil",
             new KryslumEnrichedSoilBLock(AbstractBlock.Settings.copy(Blocks.FARMLAND).ticksRandomly().strength(0.8f).sounds(BlockSoundGroup.MUDDY_MANGROVE_ROOTS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block SOUL_FIRE = registerBlockWithoutBlockItem("soul_fire", new SoulFireBlock(AbstractBlock.Settings.copy(Blocks.SOUL_FIRE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block AMALGAMITE = registerBlock("amalgamite",
             new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE).strength(3.0f, 6.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);

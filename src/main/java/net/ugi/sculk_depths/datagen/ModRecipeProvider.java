@@ -46,12 +46,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerReversibleCompactingRecipes(exporter, RecipeCategory.MISC, ModItems.QUAZARITH_INGOT, RecipeCategory.BUILDING_BLOCKS, ModBlocks.QUAZARITH_BLOCK);
 
         //tools
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.ENERGISED_FLINT_AND_STEEL)
-                .input(ModItems.ENERGY_ESSENCE)
-                .input(Items.FLINT_AND_STEEL)
-                .criterion(hasItem(ModItems.ENERGY_ESSENCE), conditionsFromItem(ModItems.ENERGY_ESSENCE))
-                //.group(group)
-                .offerTo(exporter, Identifier.of(getRecipeName(ModItems.ENERGISED_FLINT_AND_STEEL)));
 
         //crux
 /*

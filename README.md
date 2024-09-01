@@ -23,7 +23,6 @@ Download the mod and explore
 - many new blocks and blocksets
 - Many new items, including:
   - Energy Essence: drops when the warden kills a passive mob or when the warden is killed, this is used to craft an Energized Flint and Steel to open the portal.
-  - Energized Flint and Steel: can light most blocks with Soul Fire and lights the portal
 
 ## Screenshots
 
