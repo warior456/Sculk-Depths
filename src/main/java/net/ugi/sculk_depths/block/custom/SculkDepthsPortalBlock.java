@@ -24,6 +24,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.*;
 import net.minecraft.world.dimension.NetherPortal;
 
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
@@ -205,6 +206,26 @@ public class SculkDepthsPortalBlock extends Block implements Portal{
             vec3d = vec3d.add(0.5f, 0, 0.5f);
             if(entity.isPlayer()){
                 vec3d = vec3d.subtract(0, 1,0);
+            }
+            if(!serverWorld.getBlockState(blockPos).isOf(ModBlocks.SCULK_DEPTHS_PORTAL)){//backup tp
+
+                serverWorld.setBlockState(blockPos, ModBlocks.SCULK_DEPTHS_PORTAL.getDefaultState());
+                serverWorld.setBlockState(blockPos.up(), Blocks.AIR.getDefaultState());
+                serverWorld.setBlockState(blockPos.north(), Blocks.AIR.getDefaultState());
+                serverWorld.setBlockState(blockPos.east(), Blocks.AIR.getDefaultState());
+                serverWorld.setBlockState(blockPos.south(), Blocks.AIR.getDefaultState());
+                serverWorld.setBlockState(blockPos.west(), Blocks.AIR.getDefaultState());
+                serverWorld.setBlockState(blockPos.up().north(), Blocks.AIR.getDefaultState());
+                serverWorld.setBlockState(blockPos.up().east(), Blocks.AIR.getDefaultState());
+                serverWorld.setBlockState(blockPos.up().south(), Blocks.AIR.getDefaultState());
+                serverWorld.setBlockState(blockPos.up().west(), Blocks.AIR.getDefaultState());
+                serverWorld.setBlockState(blockPos.down(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+                serverWorld.setBlockState(blockPos.down().north(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+                serverWorld.setBlockState(blockPos.down().east(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+                serverWorld.setBlockState(blockPos.down().south(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+                serverWorld.setBlockState(blockPos.down().west(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+
+                SculkDepths.LOGGER.warn("A player went through an invalid portal at {} if you're a server admin or have access to permissions it is recommended to build a proper 2 way portal", blockPos);
             }
             return new TeleportTarget(
                     serverWorld,

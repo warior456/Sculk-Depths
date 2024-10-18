@@ -4,14 +4,15 @@
 #### Interested? join our discord: https://discord.gg/dxANwW23Ub
 
 # Important Notes
+- Upgrading from alpha to beta isn't recommended because of portal logic changes
 - versions 0.0.9_b and earlier require Geckolib
-- Quilt has been found to work with the right combination of fabric api and quilt loader but is not (yet) officialy supported
+- Quilt has been found to work with the right combination of fabric api and quilt loader but is not (yet) officially supported
 - This mod is in alpha, we keep ourselves the right to make breaking changes (we will try to minimize damage where possible)
 - Upgrading from 1.19 to 1.20 is unsupported and will break biomes!
 
 # ABOUT
 This mod adds a brand new dimension Sculk Depths, the name of this dimension was given by the player based on his first impressions.
-However the dimension contains so much more than just sculk, it has it's intire own ecosystem as if it's a whole new planet...
+However, the dimension contains so much more than just sculk, it has it's entire own ecosystem as if it's a whole new planet...
 
 Download the mod and explore
 
@@ -22,7 +23,7 @@ Download the mod and explore
 - 3 new mobs
 - many new blocks and blocksets
 - Many new items, including:
-  - Energy Essence: drops when the warden kills a passive mob or when the warden is killed, this is used to craft an Energized Flint and Steel to open the portal.
+  - Energy Essence: drops when the warden kills a passive mob or when the warden is killed, you can right-click this on the pedestals near the center of the city to activate the portal.
 
 ## Screenshots
 
