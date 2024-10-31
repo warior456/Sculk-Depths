@@ -8,11 +8,14 @@ import net.minecraft.block.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.block.ModBlockEntities;
@@ -71,5 +74,24 @@ public class ZygrinFurnaceBlock extends AbstractFurnaceBlock {
         world.addParticle(ParticleTypes.SMOKE, d + i, e + j, f + k, 0.0, 0.0, 0.0);
         world.addParticle(ParticleTypes.FLAME, d + i, e + j, f + k, 0.0, 0.0, 0.0);
     }
+
+    @Override
+    protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {//fixes items not being dropped
+        if (!state.isOf(newState.getBlock())) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof ZygrinFurnaceBlockEntity) {
+                if (world instanceof ServerWorld) {
+                    ItemScatterer.spawn(world, pos, (ZygrinFurnaceBlockEntity)blockEntity);
+                    ((ZygrinFurnaceBlockEntity)blockEntity).getRecipesUsedAndDropExperience((ServerWorld)world, Vec3d.ofCenter(pos));
+                }
+
+                super.onStateReplaced(state, world, pos, newState, moved);
+                world.updateComparators(pos, this);
+            } else {
+                super.onStateReplaced(state, world, pos, newState, moved);
+            }
+        }
+    }
+
 
 }

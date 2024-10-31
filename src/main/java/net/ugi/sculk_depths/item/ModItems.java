@@ -82,17 +82,17 @@ public class ModItems {
 
     //quazarith armor
     public static final Item QUAZARITH_HELMET = registerItem("quazarith_helmet",
-            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.HELMET,
-                    new Item.Settings().fireproof()));
+            new ArmorItem(ModArmorMaterials.QUAZARITH_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
+                    new Item.Settings().fireproof().maxDamage(ArmorItem.Type.HELMET.getMaxDamage(200))));
     public static final Item QUAZARITH_CHESTPLATE = registerItem("quazarith_chestplate",
-            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.CHESTPLATE,
-                    new Item.Settings().fireproof()));
+            new ArmorItem(ModArmorMaterials.QUAZARITH_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,
+                    new Item.Settings().fireproof().maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(200))));
     public static final Item QUAZARITH_LEGGINGS = registerItem("quazarith_leggings",
-            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.LEGGINGS,
-                    new Item.Settings().fireproof()));
+            new ArmorItem(ModArmorMaterials.QUAZARITH_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,
+                    new Item.Settings().fireproof().maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(200))));
     public static final Item QUAZARITH_BOOTS = registerItem("quazarith_boots",
-            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.BOOTS,
-                    new Item.Settings().fireproof()));
+            new ArmorItem(ModArmorMaterials.QUAZARITH_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
+                    new Item.Settings().fireproof().maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(200))));
 
     public static final Item VALTROX_SIGN = registerItem("valtrox_sign",
             new SignItem(new Item.Settings().maxCount(16), ModBlocks.VALTROX_SIGN, ModBlocks.VALTROX_WALL_SIGN));
