@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/cube",
+  
   "textures": {
     "down": "sculk_depths:block/chiseled_amalgamite_top",
     "east": "sculk_depths:block/chiseled_amalgamite",
