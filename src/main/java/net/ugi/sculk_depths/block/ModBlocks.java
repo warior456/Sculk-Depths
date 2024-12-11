@@ -28,15 +28,10 @@ import net.ugi.sculk_depths.world.gen.feature.ModConfiguredFeatures;
 
 public class ModBlocks {
 
-    public static final Block FLUMROCK = registerBlock("flumrock",
-            new Block(AbstractBlock.Settings.create().strength(4.0f,0.5f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    public static final Block CRUMBLING_DIRT = registerBlock("crumbling_dirt",
-            new Block(AbstractBlock.Settings.create().strength(0.3f).requiresTool().sounds(BlockSoundGroup.ROOTED_DIRT)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    public static final Block KRYSLUM_ENRICHED_SOIL = registerBlock("kryslum_enriched_soil",
-            new KryslumEnrichedSoilBLock(AbstractBlock.Settings.copy(Blocks.FARMLAND).ticksRandomly().strength(0.8f).sounds(BlockSoundGroup.MUDDY_MANGROVE_ROOTS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
+// amalgamite
+    
     public static final Block AMALGAMITE = registerBlock("amalgamite",
             new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE).strength(3.0f, 6.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
@@ -404,7 +399,15 @@ public class ModBlocks {
             new SporeBlock(AbstractBlock.Settings.copy(Blocks.MUSHROOM_STEM).luminance((state) -> 5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).nonOpaque()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     //misc
+    public static final Block FLUMROCK = registerBlock("flumrock",
+            new Block(AbstractBlock.Settings.create().strength(4.0f,0.5f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
+    public static final Block CRUMBLING_DIRT = registerBlock("crumbling_dirt",
+            new Block(AbstractBlock.Settings.create().strength(0.3f).requiresTool().sounds(BlockSoundGroup.ROOTED_DIRT)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block KRYSLUM_ENRICHED_SOIL = registerBlock("kryslum_enriched_soil",
+            new KryslumEnrichedSoilBLock(AbstractBlock.Settings.copy(Blocks.FARMLAND).ticksRandomly().strength(0.8f).sounds(BlockSoundGroup.MUDDY_MANGROVE_ROOTS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+    
     public static final Block SCULK_DEPTHS_PORTAL = registerBlockWithoutBlockItem("sculk_depths_portal",
             new SculkDepthsPortalBlock(AbstractBlock.Settings.copy(Blocks.NETHER_PORTAL).luminance((state) -> 6).dropsNothing().noCollision().strength(-1.0f,3600000.0f)),ModItemGroup.SCULK_DEPTHS_BLOCKS );
 
