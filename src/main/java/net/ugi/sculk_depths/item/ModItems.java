@@ -118,6 +118,9 @@ public class ModItems {
     public static final Item PETRIFIED_VALTROX_HANGING_SIGN = registerItem("petrified_valtrox_hanging_sign",
             new HangingSignItem(ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN, new Item.Settings().maxCount(16)));
 
+    public static final Item CRUX_COMPASS = registerItem("crux_compass",
+            (new CompassItem(new Item.Settings())));
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, SculkDepths.identifier( name), item);
     }
@@ -127,6 +130,7 @@ public class ModItems {
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, KRYSLUM_BUCKET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, ENERGY_ESSENCE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, CRUX_COMPASS);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_GLUX);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_SPAWN_EGG);
