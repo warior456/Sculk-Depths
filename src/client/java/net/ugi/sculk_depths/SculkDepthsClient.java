@@ -12,6 +12,7 @@ import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.item.CompassAnglePredicateProvider;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.LodestoneTrackerComponent;
 import net.minecraft.item.CompassItem;
@@ -24,6 +25,7 @@ import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.client.*;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItems;
+import net.ugi.sculk_depths.item.custom.CruxCompass;
 import net.ugi.sculk_depths.particle.*;
 import net.ugi.sculk_depths.render.SculkDepthsCloudRendererClient;
 import net.ugi.sculk_depths.render.SculkDepthsSkyRendererClient;
@@ -122,13 +124,26 @@ public class SculkDepthsClient implements ClientModInitializer {
 		DimensionRenderingRegistry.registerCloudRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY, new SculkDepthsCloudRendererClient());
 		DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY, new SculkDepthsSkyRendererClient());
 
-		ModelPredicateProviderRegistry.register(Items.COMPASS, SculkDepths.identifier("angle"),
-				(stack, world, entity, seed) -> {
-					LodestoneTrackerComponent lodestoneTrackerComponent = (LodestoneTrackerComponent)stack.get(DataComponentTypes.LODESTONE_TRACKER);
-					return lodestoneTrackerComponent != null ? lodestoneTrackerComponent.target() : CompassItem.createSpawnPos(world);
-		});
+		ModelPredicateProviderRegistry.register(ModItems.CRUX_COMPASS, Identifier.of("angle"),
+				(stack, world, entity, i) -> {
+					var pos = CruxCompass.getTrackedPos(stack);
+					if (pos == null && world != null) {
+						return getSpinningAngle(world);
+					}
+
+					return ANGLE_DELEGATE.unclampedCall(stack, world, entity, i);
+				});
 
 		HandledScreens.register(ModScreenHandlers.ZYGRIN_FURNACE_SCREEN_HANDLER, ZygrinFurnaceScreen::new); //if this doesn't work for some reason use the line below instead
 		//HandledScreens.register(ModScreenHandlerTypes.ZYGRIN_FURNACE_SCREEN_HANDLER, (HandledScreens.Provider<ZygrinFurnaceScreenHandler, ZygrinFurnaceScreen>) ZygrinFurnaceScreen::new);
+	}
+
+	CompassAnglePredicateProvider ANGLE_DELEGATE = new CompassAnglePredicateProvider((world, stack, entity) -> {
+		return CruxCompass.getTrackedPos(stack);
+	});
+
+	private static float getSpinningAngle(ClientWorld world) {
+		Long t = world.getTime() % 32L;
+		return t.floatValue() / 32.0f;
 	}
 }

@@ -48,6 +48,13 @@ public class CruxCompass extends Item {
         }
 
     }
+    public static GlobalPos getTrackedPos(ItemStack stack){
+        if (stack.get(DataComponentTypes.LODESTONE_TRACKER) != null){
+            return stack.get(DataComponentTypes.LODESTONE_TRACKER).target().get();
+        }
+        else return null;
+
+    }
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
