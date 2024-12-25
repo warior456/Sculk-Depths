@@ -1,6 +1,8 @@
 package net.ugi.sculk_depths.item.custom;
 
 import java.util.Optional;
+
+import net.minecraft.block.Blocks;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.LodestoneTrackerComponent;
 import net.minecraft.entity.Entity;
@@ -8,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -46,13 +49,14 @@ public class CruxCompass extends Item {
 
     }
 
+    @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         BlockPos blockPos = context.getBlockPos();
         World world = context.getWorld();
-        if (!world.getBlockState(blockPos).isOf(ModBlocks.QUAZARITH_LODESTONE)) {
+        if (!world.getBlockState(blockPos).isOf(Blocks.LODESTONE)) {
             return super.useOnBlock(context);
         } else {
-            world.playSound((PlayerEntity)null, blockPos, SoundEvents.ITEM_LODESTONE_COMPASS_LOCK, SoundCategory.PLAYERS, 1.0F, 1.0F);
+            world.playSound(null, blockPos, SoundEvents.ITEM_LODESTONE_COMPASS_LOCK, SoundCategory.PLAYERS, 1.0F, 1.0F);
             PlayerEntity playerEntity = context.getPlayer();
             ItemStack itemStack = context.getStack();
             boolean bl = !playerEntity.isInCreativeMode() && itemStack.getCount() == 1;
