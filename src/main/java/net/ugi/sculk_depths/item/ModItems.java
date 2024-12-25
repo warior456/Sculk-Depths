@@ -9,6 +9,7 @@ import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.fluid.ModFluids;
+import net.ugi.sculk_depths.item.custom.CruxCompass;
 import net.ugi.sculk_depths.item.custom.GlomperGlux;
 
 
@@ -119,7 +120,7 @@ public class ModItems {
             new HangingSignItem(ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN, new Item.Settings().maxCount(16)));
 
     public static final Item CRUX_COMPASS = registerItem("crux_compass",
-            (new CompassItem(new Item.Settings())));
+            (new CruxCompass(new Item.Settings())));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, SculkDepths.identifier( name), item);
