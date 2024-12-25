@@ -28,6 +28,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkStatus;
 import net.ugi.sculk_depths.SculkDepths;
+import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.portal.GenerateStructureAPI;
@@ -195,7 +196,17 @@ public class PedestalBlock extends FacingBlock {
 
             case "waitingParticles":
 
-                Portal.addPortalStartAttemptParticle(world, pos, random, 10);
+                BlockPos posMin = Portal.getFrameMinPos(state.get(FACING),pos, world);
+                if (state.get(FACING) == Direction.NORTH)
+                    posMin = posMin.east(random.nextInt(24)).up(random.nextInt(6));
+                if (state.get(FACING) == Direction.EAST)
+                    posMin = posMin.south(random.nextInt(24)).up(random.nextInt(6));
+                if (state.get(FACING) == Direction.SOUTH)
+                    posMin = posMin.east(random.nextInt(24)).up(random.nextInt(6));
+                if (state.get(FACING) == Direction.WEST)
+                    posMin = posMin.south(random.nextInt(24)).up(random.nextInt(6));
+
+                Portal.addPortalStartAttemptParticle(world, posMin, random, 20 + random.nextInt(50));
                 world.scheduleBlockTick(pos,state.getBlock(),1);
                 break;
 

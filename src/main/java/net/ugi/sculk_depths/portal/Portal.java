@@ -8,10 +8,7 @@ import net.minecraft.particle.ParticleEffect;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.*;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.block.ModBlocks;
@@ -331,19 +328,66 @@ public class Portal {
 
     }
 
+    public static BlockPos getFrameMinPos(Direction pedestalFacing, BlockPos pos, World world ) {
+        switch (pedestalFacing) {
+            case EAST -> {
+                if (world.getBlockState(pos.north(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
+                    if (world.getBlockState(pos.north(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
+                        return pos.north(15).up(7).west(5);
+                if (world.getBlockState(pos.south(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
+                    if (world.getBlockState(pos.south(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
+                        return pos.north(5).up(7).west(5);
+            }
+            case NORTH -> {
+                if (world.getBlockState(pos.east(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
+                    if (world.getBlockState(pos.east(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
+                        return pos.west(5).up(7).south(5);
+                if (world.getBlockState(pos.west(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
+                    if (world.getBlockState(pos.west(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
+                        return pos.west(15).up(7).south(5);
+            }
+            case WEST -> {
+                if (world.getBlockState(pos.north(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
+                    if (world.getBlockState(pos.north(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
+                        return pos.north(14).up(7).east(5);
+                if (world.getBlockState(pos.south(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
+                    if (world.getBlockState(pos.south(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
+                        return pos.north(4).up(7).east(5);
+            }
+            case SOUTH -> {
+                if (world.getBlockState(pos.east(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
+                    if (world.getBlockState(pos.east(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
+                        return pos.west(4).up(7).north(5);
+                if (world.getBlockState(pos.west(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
+                    if (world.getBlockState(pos.west(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
+                        return pos.west(14).up(7).north(5);
+            }
+        }
+        return null;
+    }
+
     public static void addPortalStartAttemptParticle(ServerWorld world, BlockPos pos, Random random, int amount){
         //System.out.println("particle");
-        for (int i = 0; i < amount; i++) {
-            for (int j = 0; j < 6; j++) {
-                float x = pos.getX() + 0.5f;
-                float y = pos.getY() + 0.5f;
-                float z = pos.getZ() + 0.5f;
+        int dx = random.nextInt(10)-5;
+        int dy = random.nextInt(10)-5;
+        int dz = random.nextInt(10)-5;
 
-                //System.out.println(" " + x + " " + y + " "+z);
-                List<ServerPlayerEntity> playerEntityList = world.getPlayers(serverPlayerEntity -> serverPlayerEntity.isInRange(serverPlayerEntity, 100, 50));//todo test range
-                for (ServerPlayerEntity serverPlayerEntity : playerEntityList) {
-                    world.spawnParticles(serverPlayerEntity, (ParticleEffect) ModParticleTypes.SCULK_DEPTHS_PORTAL_PARTICLE, true, x, y, z, 4, 0.1, 0.1, 0.1, 1);
-                }
+        double x = pos.getX() + 0.5f;
+        double y = pos.getY() + 0.5f;
+        double z = pos.getZ() + 0.5f;
+
+        Vec3d relativeVector = new Vec3d(dx, dy, dz);
+        Vec3d normalized3dVector = relativeVector.normalize();
+
+        for (int i = 0; i < amount; i++) {
+            x = x + normalized3dVector.getX()/10 + random.nextFloat()/10;
+            y = y + normalized3dVector.getY()/10 + random.nextFloat()/10;
+            z = z + normalized3dVector.getZ()/10 + random.nextFloat()/10;
+
+            //System.out.println(" " + x + " " + y + " "+z);
+            List<ServerPlayerEntity> playerEntityList = world.getPlayers(serverPlayerEntity -> serverPlayerEntity.isInRange(serverPlayerEntity, 100, 50));//todo test range
+            for (ServerPlayerEntity serverPlayerEntity : playerEntityList) {
+                world.spawnParticles(serverPlayerEntity, (ParticleEffect) ModParticleTypes.SCULK_DEPTHS_PORTAL_ANIMATION_PARTICLE, true, x, y, z, 4, 0.0, 0.0, 0.0, 0);
 
 
             }

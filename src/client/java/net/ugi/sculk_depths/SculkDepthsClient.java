@@ -103,6 +103,7 @@ public class SculkDepthsClient implements ClientModInitializer {
 
 		ParticleFactoryRegistry.getInstance().register(ModParticleTypes.PENEBRIUM_SPORES, PenebriumSporeParticle.Factory::new);
 		ParticleFactoryRegistry.getInstance().register(ModParticleTypes.SCULK_DEPTHS_PORTAL_PARTICLE, ModPortalParticle.Factory::new);
+		ParticleFactoryRegistry.getInstance().register(ModParticleTypes.SCULK_DEPTHS_PORTAL_ANIMATION_PARTICLE, ModPortalAnimationParticle.Factory::new);
 		ParticleFactoryRegistry.getInstance().register(ModParticleTypes.AURIC_SPORES, AuricSporeParticle.Factory::new);
 		ParticleFactoryRegistry.getInstance().register(ModParticleTypes.SURFACE_WIND, SurfaceWindParticle.Factory::new);
 		ParticleFactoryRegistry.getInstance().register(ModParticleTypes.CAVE_FALLING_PARTICLE, CaveFallingParticle.Factory::new);
