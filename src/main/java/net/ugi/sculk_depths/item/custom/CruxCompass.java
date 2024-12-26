@@ -5,14 +5,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
-import net.minecraft.block.BedBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.enums.BedPart;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.LodestoneTrackerComponent;
 import net.minecraft.entity.Entity;
@@ -34,6 +30,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.GlobalPos;
 import net.minecraft.world.World;
 import net.minecraft.world.poi.PointOfInterestType;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
 import org.jetbrains.annotations.Nullable;
@@ -63,7 +60,7 @@ public class CruxCompass extends Item {
     }
 
     private static RegistryKey<PointOfInterestType> of(String id) {
-        return RegistryKey.of(RegistryKeys.POINT_OF_INTEREST_TYPE, Identifier.ofVanilla(id));
+        return RegistryKey.of(RegistryKeys.POINT_OF_INTEREST_TYPE, SculkDepths.identifier(id));
     }
 
     private static PointOfInterestType register(
@@ -84,18 +81,11 @@ public class CruxCompass extends Item {
         });
     }
 
-    public static Optional<RegistryEntry<PointOfInterestType>> getTypeForState(BlockState state) {
-        return Optional.ofNullable((RegistryEntry)POI_STATES_TO_TYPE.get(state));
-    }
-
-    public static boolean isPointOfInterest(BlockState state) {
-        return POI_STATES_TO_TYPE.containsKey(state);
-    }
-
-    public static PointOfInterestType registerAndGetDefault(Registry<PointOfInterestType> registry) {
-    return register(registry, Q_LODESTONE, getStatesOfBlock(ModBlocks.QUAZARITH_LODESTONE), 0, 1);
+    public static void registerAndGetDefault(Registry<PointOfInterestType> registry) {
+        register(registry, Q_LODESTONE, getStatesOfBlock(ModBlocks.QUAZARITH_LODESTONE), 0, 1);
     }
     //-----
+
 
     public LodestoneTrackerComponent forWorld(ServerWorld world, LodestoneTrackerComponent component) {
         if (component.tracked() && !component.target().isEmpty()) {
@@ -103,6 +93,7 @@ public class CruxCompass extends Item {
                 return component;
             } else {
                 BlockPos blockPos = ((GlobalPos)component.target().get()).pos();
+                //return component;
                 return world.isInBuildLimit(blockPos) && world.getPointOfInterestStorage().hasTypeAt(Q_LODESTONE, blockPos)
                         ? component
                         : new LodestoneTrackerComponent(Optional.empty(), true);
