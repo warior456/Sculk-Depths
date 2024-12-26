@@ -1,15 +1,22 @@
 package net.ugi.sculk_depths;
 
+import com.google.common.collect.ImmutableSet;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.CauldronFluidContent;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.SpawnLocationTypes;
 import net.minecraft.entity.SpawnRestriction;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.poi.PointOfInterestType;
 import net.ugi.sculk_depths.block.ModBlockEntities;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
@@ -34,6 +41,8 @@ import net.ugi.sculk_depths.world.gen.ModFeatures;
 import net.ugi.sculk_depths.world.gen.ModPlacementModifierType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Set;
 
 public class SculkDepths implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
@@ -91,9 +100,38 @@ public class SculkDepths implements ModInitializer {
         ServerTickEvents.START_WORLD_TICK.register(new CheckInvForCrystalItems());
         ServerTickEvents.START_WORLD_TICK.register(new ModBiomeEffects());
 
+        //registerCustomPOI();
+
 
         CauldronFluidContent.registerCauldron(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON, ModFluids.KRYSLUM_STILL, FluidConstants.BUCKET, ModProperties.KRYSLUM_LEVEL); //support for mods to see how much fluid is in it (doesn't work for create pipes)
 
         LOGGER.info(SculkDepths.MOD_ID + " has loaded");
     }
+
+
+//    private static void registerStates(PointOfInterestType poiType, Set<BlockState> states) {
+//        states.forEach(state -> {
+//            if (PointOfInterestTypes.containsState(state)) {
+//                throw new IllegalStateException(state + " is already mapped to a POI!");
+//            }
+//            PointOfInterestTypes.registerState(poiType, state);
+//        });
+//    }
+//
+//    public static void registerCustomPOI() {
+//        PointOfInterestType customPOIType = new PointOfInterestType(
+//                CUSTOM_SMITH_BLOCK_STATES, // Block states associated with this POI
+//                1,                        // Ticket count
+//                1                         // Search distance
+//        );
+//
+//        Registry.register(
+//                LODESTONE_POI, // POI Registry
+//                CUSTOM_SMITH.getValue(),         // Identifier
+//                customPOIType                    // Your custom POI type
+//        );
+//
+//        registerStates(customPOIType, CUSTOM_SMITH_BLOCK_STATES); // Map custom states to the POI type
+//    }
 }
+
