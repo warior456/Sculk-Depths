@@ -9,6 +9,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.LodestoneTrackerComponent;
 import net.minecraft.entity.Entity;
@@ -82,7 +83,7 @@ public class CruxCompass extends Item {
     }
 
     public static void registerAndGetDefault(Registry<PointOfInterestType> registry) {
-        register(registry, Q_LODESTONE, getStatesOfBlock(ModBlocks.QUAZARITH_LODESTONE), 0, 1);
+        register(registry, Q_LODESTONE, getStatesOfBlock(Blocks.LODESTONE), 0, 1);
     }
     //-----
 
