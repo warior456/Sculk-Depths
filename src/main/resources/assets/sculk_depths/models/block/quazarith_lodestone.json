@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "sculk_depths:block/quazarith_oscillator_top",
+    "east": "sculk_depths:block/quazarith_oscillator_side",
+    "north": "sculk_depths:block/quazarith_oscillator_side",
+    "particle": "sculk_depths:block/quazarith_oscillator_side",
+    "south": "sculk_depths:block/quazarith_oscillator_side",
+    "up": "sculk_depths:block/quazarith_oscillator_top",
+    "west": "sculk_depths:block/quazarith_oscillator_side"
+  }
+}
