@@ -432,7 +432,7 @@ public class ModBlocks {
     public static final Block KRYSLUM_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("kryslum_flumrock_cauldron", new KryslumFlumrockCauldronBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_CAULDRON), ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
     public static final Block SPORE_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("spore_flumrock_cauldron", new SporeFlumrockCauldronBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_CAULDRON), ModCauldronBehavior.SPORE_FLUMROCK_CAULDRON_BEHAVIOR.map()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    public static final Block QUAZARITH_LODESTONE = registerBlock("quazarith_lodestone",
+    public static final Block QUAZARITH_OSCILLATOR = registerBlock("quazarith_oscillator",
             new Block(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     private static CrystalBlock createCrystalBlock(DyeColor color) {

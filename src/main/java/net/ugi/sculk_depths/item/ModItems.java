@@ -9,7 +9,7 @@ import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.fluid.ModFluids;
-import net.ugi.sculk_depths.item.custom.CruxCompass;
+import net.ugi.sculk_depths.item.custom.CruxResonator;
 import net.ugi.sculk_depths.item.custom.GlomperGlux;
 
 
@@ -119,8 +119,8 @@ public class ModItems {
     public static final Item PETRIFIED_VALTROX_HANGING_SIGN = registerItem("petrified_valtrox_hanging_sign",
             new HangingSignItem(ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN, new Item.Settings().maxCount(16)));
 
-    public static final Item CRUX_COMPASS = registerItem("crux_compass",
-            (new CruxCompass(new Item.Settings())));
+    public static final Item CRUX_RESONATOR = registerItem("crux_resonator",
+            (new CruxResonator(new Item.Settings())));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, SculkDepths.identifier( name), item);
@@ -131,7 +131,7 @@ public class ModItems {
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, KRYSLUM_BUCKET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, ENERGY_ESSENCE);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, CRUX_COMPASS);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, CRUX_RESONATOR);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_GLUX);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_SPAWN_EGG);

@@ -25,7 +25,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.GlobalPos;
@@ -36,8 +35,8 @@ import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 
-public class CruxCompass extends Item {
-    public CruxCompass(Item.Settings settings) {
+public class CruxResonator extends Item {
+    public CruxResonator(Item.Settings settings) {
         super(settings);
     }
 
@@ -127,7 +126,7 @@ public class CruxCompass extends Item {
     public ActionResult useOnBlock(ItemUsageContext context) {
         BlockPos blockPos = context.getBlockPos();
         World world = context.getWorld();
-        if (!world.getBlockState(blockPos).isOf(ModBlocks.QUAZARITH_LODESTONE)) {
+        if (!world.getBlockState(blockPos).isOf(ModBlocks.QUAZARITH_OSCILLATOR)) {
             return super.useOnBlock(context);
         } else {
             world.playSound(null, blockPos, SoundEvents.ITEM_LODESTONE_COMPASS_LOCK, SoundCategory.PLAYERS, 1.0F, 1.0F);
@@ -138,7 +137,7 @@ public class CruxCompass extends Item {
             if (bl) {
                 itemStack.set(DataComponentTypes.LODESTONE_TRACKER, lodestoneTrackerComponent);
             } else {
-                ItemStack itemStack2 = itemStack.copyComponentsToNewStack(ModItems.CRUX_COMPASS, 1);
+                ItemStack itemStack2 = itemStack.copyComponentsToNewStack(ModItems.CRUX_RESONATOR, 1);
                 itemStack.decrementUnlessCreative(1, playerEntity);
                 itemStack2.set(DataComponentTypes.LODESTONE_TRACKER, lodestoneTrackerComponent);
                 if (!playerEntity.getInventory().insertStack(itemStack2)) {

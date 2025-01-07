@@ -13,19 +13,13 @@ import net.minecraft.client.item.CompassAnglePredicateProvider;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.LodestoneTrackerComponent;
-import net.minecraft.item.CompassItem;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.GlobalPos;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.client.*;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItems;
-import net.ugi.sculk_depths.item.custom.CruxCompass;
+import net.ugi.sculk_depths.item.custom.CruxResonator;
 import net.ugi.sculk_depths.particle.*;
 import net.ugi.sculk_depths.render.SculkDepthsCloudRendererClient;
 import net.ugi.sculk_depths.render.SculkDepthsSkyRendererClient;
@@ -124,9 +118,9 @@ public class SculkDepthsClient implements ClientModInitializer {
 		DimensionRenderingRegistry.registerCloudRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY, new SculkDepthsCloudRendererClient());
 		DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY, new SculkDepthsSkyRendererClient());
 
-		ModelPredicateProviderRegistry.register(ModItems.CRUX_COMPASS, Identifier.of("angle"),
+		ModelPredicateProviderRegistry.register(ModItems.CRUX_RESONATOR, Identifier.of("angle"),
 				(stack, world, entity, i) -> {
-					var pos = CruxCompass.getTrackedPos(stack);
+					var pos = CruxResonator.getTrackedPos(stack);
 					if (pos == null && world != null) {
 						return getSpinningAngle(world);
 					}
@@ -139,7 +133,7 @@ public class SculkDepthsClient implements ClientModInitializer {
 	}
 
 	CompassAnglePredicateProvider ANGLE_DELEGATE = new CompassAnglePredicateProvider((world, stack, entity) -> {
-		return CruxCompass.getTrackedPos(stack);
+		return CruxResonator.getTrackedPos(stack);
 	});
 
 	private static float getSpinningAngle(ClientWorld world) {
