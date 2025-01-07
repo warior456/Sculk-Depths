@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "sculk_depths:amalgamite_bricks"
+        }
+    },
+    "result": {
+        "id": "sculk_depths:amalgamite_brick_wall",
+        "count": 6
+    }
+}
