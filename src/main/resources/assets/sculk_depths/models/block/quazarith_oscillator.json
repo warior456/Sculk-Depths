@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "sculk_depths:block/quazarith_oscillator_top",
+    "side": "sculk_depths:block/quazarith_oscillator_side"
+  }
+}

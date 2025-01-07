@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "sculk_depths:item/crux_compass_19"
+    "layer0": "sculk_depths:item/crux_resonator_19"
   }
 }
