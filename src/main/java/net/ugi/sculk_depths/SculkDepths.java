@@ -110,6 +110,7 @@ public class SculkDepths implements ModInitializer {
 
         ServerTickEvents.START_WORLD_TICK.register(new CheckInvForCrystalItems());
         ServerTickEvents.START_WORLD_TICK.register(new ModBiomeEffects());
+        //ServerTickEvents.START_WORLD_TICK.register(new ConditionalSoundPlayer());
 
         //registerCustomPOI();
         CruxCompass.registerAndGetDefault(Registries.POINT_OF_INTEREST_TYPE);
