@@ -91,7 +91,7 @@ public class SculkDepths implements ModInitializer {
 
         ServerTickEvents.START_WORLD_TICK.register(new CheckInvForCrystalItems());
         ServerTickEvents.START_WORLD_TICK.register(new ModBiomeEffects());
-
+        //ServerTickEvents.START_WORLD_TICK.register(new ConditionalSoundPlayer());
 
         CauldronFluidContent.registerCauldron(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON, ModFluids.KRYSLUM_STILL, FluidConstants.BUCKET, ModProperties.KRYSLUM_LEVEL); //support for mods to see how much fluid is in it (doesn't work for create pipes)
 

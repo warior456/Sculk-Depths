@@ -33,8 +33,8 @@ public class SculkDepthsClient implements ClientModInitializer {
 		//CrystalUpgrade.tooltipAdd();
 
 		SculkDepths.LOGGER.info("Registering clientSounds for " + SculkDepths.MOD_ID);
-/*		ClientTickEvents.START_WORLD_TICK.register(new ConditionalSoundPlayerClient());
-		ClientTickEvents.START_CLIENT_TICK.register(new SoundPlayerGetterClient());*/
+		ClientTickEvents.START_WORLD_TICK.register(new ConditionalSoundPlayerClient());
+		ClientTickEvents.START_CLIENT_TICK.register(new SoundPlayerGetterClient());
 
 		FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.KRYSLUM_STILL,
 				ModFluids.KRYSLUM_FLOWING,
