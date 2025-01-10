@@ -1,0 +1,10 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item": "sculk_depths:amalgamite"
+    },
+    "result": {
+        "id": "sculk_depths:amalgamite_brick_wall",
+        "count": 1
+    }
+}
