@@ -1,0 +1,55 @@
+{
+  "feature": {
+    "config": {
+      "state_provider": {
+        "fallback": {
+          "type": "minecraft:weighted_state_provider",
+          "entries": [
+            {
+              "weight": 1,
+              "data": {
+                "Name": "minecraft:coarse_dirt"
+              }
+            },
+            {
+              "weight": 2,
+              "data": {
+                "Name": "sculk_depths:crumbling_dirt"
+              }
+            }
+          ]
+        },
+        "rules": []
+      },
+      "radius": {
+        "type": "minecraft:uniform",
+        "min_inclusive": 4,
+        "max_inclusive": 6
+      },
+      "half_height": 1,
+      "target": {
+        "type": "minecraft:matching_blocks",
+        "blocks": [
+          "sculk_depths:crumbling_dirt"
+        ]
+      }
+    },
+    "type": "minecraft:disk"
+  },
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 4
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE_WG"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

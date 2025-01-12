@@ -40,7 +40,7 @@ public class ConfigurablePillars
         if (!context.getWorld().getBlockState(blockPos.down()).isOf(ModBlocks.AURIC_SPORE_BLOCK)) return false;
 
         //config
-        int topOffsetRange = 0; //xz coordinaterange
+        int topOffsetRange = random.nextInt(10); //xz coordinaterange
         int maxHeight = random.nextInt(50) + 70; //height of spike
 
         int xTopOffset = random.nextBetween(-topOffsetRange, topOffsetRange);//x pos of top
@@ -60,8 +60,8 @@ public class ConfigurablePillars
         if (!context.getWorld().getBlockState(new BlockPos((int)Math.round(x + relativeVector.x) ,(int)Math.round(y + relativeVector.y), (int)Math.round(z + relativeVector.z))).isOf(Blocks.AIR)) return false;
 
         int spawnCrux = random.nextInt(100);
-
-        while (length>0){
+        int j = 0;
+        while (length - j>0){
             int radius = radiusSetting;
             
             //non rounded tracking of coordinates
@@ -81,7 +81,32 @@ public class ConfigurablePillars
                     this.setBlockState(structureWorldAccess, blockPos1, ModBlocks.FLUMROCK.getDefaultState());
                 }
             });
-            length--;
+            if (j > 40){
+                if (random.nextInt(10) == 0){
+                    int angleTopOffset =  random.nextBetween(0, 360);
+                    int holeX = (int)Math.round(Math.cos(Math.toRadians(angleTopOffset))*radius);
+                    int holeZ = (int)Math.round(Math.sin(Math.toRadians(angleTopOffset))*radius);
+
+                    int holeRadius = random.nextInt((int)(radius/4))+2;
+
+                    int finalX2 = (int)Math.round(x+holeX);
+                    int finalY2 = (int)Math.round(y-5);
+                    int finalZ2 = (int)Math.round(z+holeZ);
+
+                    Iterable<BlockPos> blockPosIterable2 = BlockPos.iterateOutwards(new BlockPos( (int)Math.round(finalX2), (int)Math.round(finalY2), (int)Math.round(finalZ2)), (holeRadius*2) + 2, holeRadius+1, (holeRadius*2) + 2);
+
+                    blockPosIterable2.forEach(blockPos2 -> {
+                        int distance = (int) (((blockPos2.getX() - finalX2)/2)*((blockPos2.getX() - finalX2)/2) + ((blockPos2.getY() - finalY2)/1)*((blockPos2.getY() - finalY2)/1) + ((blockPos2.getZ() - finalZ2)/2)*((blockPos2.getZ() - finalZ2)/2));
+                        if (Math.round(distance) <= (holeRadius-1)*(holeRadius-1)) {//ball instead of rectangle
+                            this.setBlockState(structureWorldAccess, blockPos2, Blocks.AIR.getDefaultState());
+                        }
+                        else if (Math.round(distance) <= holeRadius*holeRadius && context.getWorld().getBlockState(blockPos2).isOf(ModBlocks.FLUMROCK) && random.nextInt(5) != 0) {//ball instead of rectangle
+                            this.setBlockState(structureWorldAccess, blockPos2, ModBlocks.LARGUTH.getDefaultState());
+                        }
+                    });
+                }
+            }
+            j++;
 
         }
         for(x = 0; x < totalLength/20; x++){

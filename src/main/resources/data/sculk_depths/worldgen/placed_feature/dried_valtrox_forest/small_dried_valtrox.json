@@ -1,0 +1,153 @@
+{
+  "feature": {
+    "type": "minecraft:tree",
+    "config": {
+      "ignore_vines": true,
+      "force_dirt": true,
+      "minimum_size": {
+        "type": "minecraft:three_layers_feature_size",
+        "min_clipped_height": 0,
+        "limit": 0,
+        "upper_limit": 0,
+        "lower_size": 0,
+        "middle_size": 0,
+        "upper_size": 0
+      },
+      "dirt_provider": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "sculk_depths:crumbling_dirt"
+        }
+      },
+      "trunk_provider": {
+        "type": "minecraft:weighted_state_provider",
+        "entries": [
+          {
+            "weight": 1,
+            "data": {
+              "Name": "sculk_depths:dried_valtrox_log"
+            }
+          },
+          {
+            "weight": 4,
+            "data": {
+              "Name": "sculk_depths:stripped_dried_valtrox_log"
+            }
+          }
+
+        ]
+      },
+      "foliage_provider": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "minecraft:air"
+        }
+      },
+      "root_placer": {
+        "type": "minecraft:mangrove_root_placer",
+        "root_provider": {
+          "type": "minecraft:weighted_state_provider",
+          "entries": [
+            {
+              "weight": 1,
+              "data": {
+                "Name": "sculk_depths:dried_valtrox_log"
+              }
+            },
+            {
+              "weight": 4,
+              "data": {
+                "Name": "sculk_depths:stripped_dried_valtrox_log"
+              }
+            },
+            {
+              "weight": 8,
+              "data": {
+                "Name": "minecraft:air"
+              }
+            }
+          ]
+        },
+        "trunk_offset_y": 0,
+        "mangrove_root_placement": {
+          "max_root_width": 1,
+          "max_root_length": 1,
+          "random_skew_chance": 0,
+          "can_grow_through": "#minecraft:beds",
+          "muddy_roots_in": "#minecraft:beds",
+          "muddy_roots_provider": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "weight": 1,
+                "data": {
+                  "Name": "sculk_depths:dried_valtrox_log"
+                }
+              },
+              {
+                "weight": 4,
+                "data": {
+                  "Name": "sculk_depths:stripped_dried_valtrox_log"
+                }
+              },
+              {
+                "weight": 8,
+                "data": {
+                  "Name": "minecraft:air"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "trunk_placer": {
+        "type": "minecraft:fancy_trunk_placer",
+        "base_height":1,
+        "height_rand_a": 2,
+        "height_rand_b": 1
+      },
+      "foliage_placer": {
+        "type": "minecraft:fancy_foliage_placer",
+        "radius": 0,
+        "offset": 0,
+        "height": 0
+      },
+      "decorators": []
+    }
+  },
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 1
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 5
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "offset": [
+          0,
+          -1,
+          0
+        ],
+        "blocks": [
+          "sculk_depths:crumbling_dirt",
+          "minecraft:deepslate"
+        ]
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

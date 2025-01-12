@@ -47,9 +47,22 @@
     [],
     [],
     [],
-    [],
     [
-      "sculk_depths:dried_valtrox"
+
+    ],
+    [
+      "sculk_depths:dried_valtrox_forest/coarse_dirt_patch",
+      "sculk_depths:dried_valtrox_forest/grass",
+      "sculk_depths:dried_valtrox_forest/berry_bush",
+      "sculk_depths:dried_valtrox_forest/dead_bush",
+      "sculk_depths:dried_valtrox_forest/stone",
+      "sculk_depths:dried_valtrox_forest/boulder",
+      "sculk_depths:dried_valtrox_forest/large_boulder",
+      "sculk_depths:dried_valtrox_forest/stone_pile",
+      "sculk_depths:dried_valtrox_forest/dried_valtrox",
+      "sculk_depths:dried_valtrox_forest/small_dried_valtrox",
+      "sculk_depths:dried_valtrox_forest/fallen_dried_valtrox",
+      "sculk_depths:dried_valtrox_forest/mud_patch"
     ]
   ]
 }
