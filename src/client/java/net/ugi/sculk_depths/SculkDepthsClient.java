@@ -2,6 +2,7 @@ package net.ugi.sculk_depths;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
@@ -25,6 +26,8 @@ import net.ugi.sculk_depths.render.SculkDepthsCloudRendererClient;
 import net.ugi.sculk_depths.render.SculkDepthsSkyRendererClient;
 import net.ugi.sculk_depths.screen.ModScreenHandlers;
 import net.ugi.sculk_depths.screen.ZygrinFurnaceScreen;
+import net.ugi.sculk_depths.sound.ConditionalSoundPlayerClient;
+import net.ugi.sculk_depths.sound.SoundPlayerGetterClient;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class SculkDepthsClient implements ClientModInitializer {
