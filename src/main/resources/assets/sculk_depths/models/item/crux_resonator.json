@@ -1,0 +1,41 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "sculk_depths:item/crux_resonator_16"
+    },
+    "overrides": [
+        { "predicate": { "angle": 0.000000 }, "model": "sculk_depths:item/crux_resonator" },
+        { "predicate": { "angle": 0.015625 }, "model": "sculk_depths:item/crux_resonator_17" },
+        { "predicate": { "angle": 0.046875 }, "model": "sculk_depths:item/crux_resonator_18" },
+        { "predicate": { "angle": 0.078125 }, "model": "sculk_depths:item/crux_resonator_19" },
+        { "predicate": { "angle": 0.109375 }, "model": "sculk_depths:item/crux_resonator_20" },
+        { "predicate": { "angle": 0.140625 }, "model": "sculk_depths:item/crux_resonator_21" },
+        { "predicate": { "angle": 0.171875 }, "model": "sculk_depths:item/crux_resonator_22" },
+        { "predicate": { "angle": 0.203125 }, "model": "sculk_depths:item/crux_resonator_23" },
+        { "predicate": { "angle": 0.234375 }, "model": "sculk_depths:item/crux_resonator_24" },
+        { "predicate": { "angle": 0.265625 }, "model": "sculk_depths:item/crux_resonator_25" },
+        { "predicate": { "angle": 0.296875 }, "model": "sculk_depths:item/crux_resonator_26" },
+        { "predicate": { "angle": 0.328125 }, "model": "sculk_depths:item/crux_resonator_27" },
+        { "predicate": { "angle": 0.359375 }, "model": "sculk_depths:item/crux_resonator_28" },
+        { "predicate": { "angle": 0.390625 }, "model": "sculk_depths:item/crux_resonator_29" },
+        { "predicate": { "angle": 0.421875 }, "model": "sculk_depths:item/crux_resonator_30" },
+        { "predicate": { "angle": 0.453125 }, "model": "sculk_depths:item/crux_resonator_31" },
+        { "predicate": { "angle": 0.484375 }, "model": "sculk_depths:item/crux_resonator_00" },
+        { "predicate": { "angle": 0.515625 }, "model": "sculk_depths:item/crux_resonator_01" },
+        { "predicate": { "angle": 0.546875 }, "model": "sculk_depths:item/crux_resonator_02" },
+        { "predicate": { "angle": 0.578125 }, "model": "sculk_depths:item/crux_resonator_03" },
+        { "predicate": { "angle": 0.609375 }, "model": "sculk_depths:item/crux_resonator_04" },
+        { "predicate": { "angle": 0.640625 }, "model": "sculk_depths:item/crux_resonator_05" },
+        { "predicate": { "angle": 0.671875 }, "model": "sculk_depths:item/crux_resonator_06" },
+        { "predicate": { "angle": 0.703125 }, "model": "sculk_depths:item/crux_resonator_07" },
+        { "predicate": { "angle": 0.734375 }, "model": "sculk_depths:item/crux_resonator_08" },
+        { "predicate": { "angle": 0.765625 }, "model": "sculk_depths:item/crux_resonator_09" },
+        { "predicate": { "angle": 0.796875 }, "model": "sculk_depths:item/crux_resonator_10" },
+        { "predicate": { "angle": 0.828125 }, "model": "sculk_depths:item/crux_resonator_11" },
+        { "predicate": { "angle": 0.859375 }, "model": "sculk_depths:item/crux_resonator_12" },
+        { "predicate": { "angle": 0.890625 }, "model": "sculk_depths:item/crux_resonator_13" },
+        { "predicate": { "angle": 0.921875 }, "model": "sculk_depths:item/crux_resonator_14" },
+        { "predicate": { "angle": 0.953125 }, "model": "sculk_depths:item/crux_resonator_15" },
+        { "predicate": { "angle": 0.984375 }, "model": "sculk_depths:item/crux_resonator" }
+    ]
+}

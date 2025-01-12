@@ -4,7 +4,6 @@
 
   "block.sculk_depths.crumbling_dirt" : "Crumbling Dirt",
   "item.sculk_depths.chomper_colossus_spawn_egg": "Chomper Colossus Spawn Egg",
-  "item.sculk_depths.energized_flint_and_steel" : "Energized Flint and Steel",
   "item.sculk_depths.energy_essence" : "Energy Essence",
   "item.sculk_depths.glomper_glux" : "Glomper Glux",
   "item.sculk_depths.glomper_spawn_egg": "Glomper Spawn Egg",
@@ -98,7 +97,8 @@
 
   "block.sculk_depths.flumrock": "Flumrock",
 
-  "itemgroup.sculk_depths" : "Sculk Depths",
+  "itemgroup.sculk_depths_blocks" : "Sculk Depths Blocks",
+  "itemgroup.sculk_depths_items" : "Sculk Depths Items",
   "block.sculk_depths.kryslum": "Kryslum",
   "biome.sculk_depths.sculk_caves": "Sculk Caves",
   "biome.sculk_depths.cephlera_caves": "Cephlera Caves",
@@ -125,7 +125,6 @@
   "block.sculk_depths.crux_block": "Crux Block",
   "item.sculk_depths.crux": "Crux",
 
-  "block.sculk_depths.soul_fire": "Soul Fire",
 
   "block.sculk_depths.zygrin_furnace": "Zygrin Furnace",
 

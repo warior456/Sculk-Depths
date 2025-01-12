@@ -25,10 +25,21 @@ public class ModModelProvider extends FabricModelProvider {
         BlockStateModelGenerator.BlockTexturePool valtroxPlankPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.VALTROX_PLANKS);
         BlockStateModelGenerator.BlockTexturePool driedValtroxPlankPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.DRIED_VALTROX_PLANKS);
         BlockStateModelGenerator.BlockTexturePool petrifiedValtroxPlankPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.PETRIFIED_VALTROX_SLATES);
+        BlockStateModelGenerator.BlockTexturePool amalgamiteBrickPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.AMALGAMITE_BRICKS);
 
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.QUAZARITH_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUX_BLOCK);
         //blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.AURIC_SPORE_BLOCK);
+
+
+        amalgamiteBrickPool.stairs(ModBlocks.AMALGAMITE_BRICK_STAIRS);
+        amalgamiteBrickPool.slab(ModBlocks.AMALGAMITE_BRICK_SLAB);
+        amalgamiteBrickPool.wall(ModBlocks.AMALGAMITE_BRICK_WALL);
+
+
+        blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.VALTROX_SAPLING, ModBlocks.POTTED_VALTROX_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.PENEBRIUM_SHROOM, ModBlocks.POTTED_PENEBRIUM_SHROOM, BlockStateModelGenerator.TintType.NOT_TINTED);
+        //iblockStateModelGenerator.registerFlowerPotPlant(ModBlocks.AURIC_SPORE_SPROUTS, ModBlocks.POTTED_AURIC_SPORE_SPROUTS, BlockStateModelGenerator.TintType.NOT_TINTED);
 
         valtroxPlankPool.fenceGate(ModBlocks.VALTROX_FENCE_GATE);
         valtroxPlankPool.family(BlockFamilies.register(ModBlocks.VALTROX_PLANKS).sign(ModBlocks.VALTROX_SIGN, ModBlocks.VALTROX_WALL_SIGN).build());

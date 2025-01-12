@@ -13,14 +13,21 @@ import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 
 public class ModItemGroup {
-    public static final RegistryKey<ItemGroup> SCULK_DEPTHS = RegistryKey.of(RegistryKeys.ITEM_GROUP, SculkDepths.identifier( "sculk_depths"));
+    public static final RegistryKey<ItemGroup> SCULK_DEPTHS_BLOCKS = RegistryKey.of(RegistryKeys.ITEM_GROUP, SculkDepths.identifier( "sculk_depths_blocks"));
+    public static final RegistryKey<ItemGroup> SCULK_DEPTHS_ITEMS = RegistryKey.of(RegistryKeys.ITEM_GROUP, SculkDepths.identifier( "sculk_depths_items"));
 
     public static void registerItemgroups() {
 
 
-        Registry.register(Registries.ITEM_GROUP, SCULK_DEPTHS, FabricItemGroup.builder()
+        Registry.register(Registries.ITEM_GROUP, SCULK_DEPTHS_BLOCKS, FabricItemGroup.builder()
                 .icon(() -> new ItemStack(ModBlocks.UMBRUSK))
-                .displayName(Text.translatable("itemgroup.sculk_depths"))
+                .displayName(Text.translatable("itemgroup.sculk_depths_blocks"))
+                .build());
+
+        Registry.register(Registries.ITEM_GROUP, SCULK_DEPTHS_ITEMS, FabricItemGroup.builder()
+                .icon(() -> new ItemStack(ModItems.QUAZARITH_PIECES))
+                .displayName(Text.translatable("itemgroup.sculk_depths_items"))
                 .build());
     }
 }
+

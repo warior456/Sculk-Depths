@@ -182,5 +182,14 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.DRIED_VALTROX_WALL_HANGING_SIGN)
 
                 .add(ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN);
+
+        getOrCreateTagBuilder(BlockTags.WALLS)
+                .add(ModBlocks.UMBRUSK_BRICK_WALL)
+                .add(ModBlocks.UMBRUSK_WALL)
+                .add(ModBlocks.ZYGRIN_WALL)
+                .add(ModBlocks.ZYGRIN_BRICK_WALL)
+                .add(ModBlocks.POLISHED_ZYGRIN_WALL)
+                .add(ModBlocks.PETRIFIED_VALTROX_WALL)
+                .add(ModBlocks.AMALGAMITE_BRICK_WALL);
     }
 }

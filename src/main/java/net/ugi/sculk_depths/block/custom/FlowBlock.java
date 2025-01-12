@@ -42,7 +42,7 @@ public class FlowBlock extends FacingBlock {
 
     @Override
     public BlockState rotate(BlockState blockState, BlockRotation rotation) {
-        return blockState.with(FACING, rotation.rotate(blockState.get(FACING)));//temporary fix for structures with flowblocks
+        return blockState.with(FACING, rotation.rotate(blockState.get(FACING)));
 
     }
 
