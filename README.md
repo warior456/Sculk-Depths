@@ -1,7 +1,7 @@
 # Sculk Depths
 
-#### looking for a third main dev with a similar vision as us to help keep the project alive and updated
-#### Interested? join our discord: https://discord.gg/dxANwW23Ub
+#### Want to play the latest test builds? Or want to help development and give ideas?
+#### -> join our discord: https://discord.gg/dxANwW23Ub
 
 # Important Notes
 - versions 0.0.9_b and earlier require Geckolib
