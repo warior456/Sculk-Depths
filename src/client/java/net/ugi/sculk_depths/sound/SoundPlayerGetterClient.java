@@ -12,8 +12,4 @@ public class SoundPlayerGetterClient implements ClientTickEvents.StartTick {
         player = client.player;
     }
 
-    public PlayerEntity getPlayer(){
-        return player;
-    }
-
 }

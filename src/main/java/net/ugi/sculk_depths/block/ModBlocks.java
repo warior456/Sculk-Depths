@@ -415,6 +415,13 @@ public class ModBlocks {
             new PedestalBlock(AbstractBlock.Settings.create().strength(-1f, 3600000.0f).pistonBehavior(PistonBehavior.BLOCK)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     //auric //TODO check blocksettings
+
+    
+    public static final Block AURIC_VINES = registerBlockWithoutBlockItem("auric_vines",
+            new AuricVinesBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES_LOW_PITCH)), ModItemGroup.SCULK_DEPTHS);
+    public static final Block AURIC_VINES_END = registerBlock("auric_vines_end",
+            new AuricVinesEndBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES_LOW_PITCH)), ModItemGroup.SCULK_DEPTHS);
+
     public static final Block AURIC_SPORE_BLOCK = registerBlock("auric_spore_block",
             new ShroomBlock(AbstractBlock.Settings.create().strength(0.3f).sounds(BlockSoundGroup.MOSS_BLOCK)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 

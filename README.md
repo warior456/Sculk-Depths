@@ -1,7 +1,7 @@
 # Sculk Depths
 
-#### looking for a third main dev with a similar vision as us to help keep the project alive and updated
-#### Interested? join our discord: https://discord.gg/dxANwW23Ub
+#### Want to play the latest test builds? Or want to help development and give ideas?
+#### -> join our discord: https://discord.gg/dxANwW23Ub
 
 # Important Notes
 - Upgrading from alpha to beta isn't recommended because of portal logic changes
