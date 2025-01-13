@@ -1,7 +1,15 @@
 {
   "variants": {
-    "": {
-      "model": "sculk_depths:block/auric_vines"
-    }
+    "": [
+      {
+        "model": "sculk_depths:block/auric_vines1"
+      },
+      {
+        "model": "sculk_depths:block/auric_vines2"
+      },
+      {
+        "model": "sculk_depths:block/auric_vines2"
+      }
+    ]
   }
 }
