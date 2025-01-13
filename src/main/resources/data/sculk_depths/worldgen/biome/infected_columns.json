@@ -51,7 +51,7 @@
     ["sculk_depths:infected_columns/auric_shroom",
       "sculk_depths:infected_columns/auric_spore_sprouts"],
     ["sculk_depths:infected_columns/auric_spore_layer"],
-    [],
+    ["sculk_depths:infected_columns/auric_vines"],
     []
   ]
 }
