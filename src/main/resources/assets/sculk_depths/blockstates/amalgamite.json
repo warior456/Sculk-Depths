@@ -3,6 +3,15 @@
     "": [
       {
         "model": "sculk_depths:block/amalgamite"
+      },
+      {
+        "model": "sculk_depths:block/amalgamite2"
+      },
+      {
+        "model": "sculk_depths:block/amalgamite3"
+      },
+      {
+        "model": "sculk_depths:block/amalgamite4"
       }
     ]
   }
