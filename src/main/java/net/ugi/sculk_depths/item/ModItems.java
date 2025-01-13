@@ -1,6 +1,8 @@
 package net.ugi.sculk_depths.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.block.Blocks;
+import net.minecraft.component.type.FoodComponents;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -122,6 +124,10 @@ public class ModItems {
     public static final Item CRUX_RESONATOR = registerItem("crux_resonator",
             (new CruxResonator(new Item.Settings())));
 
+    public static final Item QELDRY_BERRY = registerItem("qeldry_berry",
+            (new AliasedBlockItem(ModBlocks.QELDRY_BERRY_BUSH, (new Item.Settings()).food(FoodComponents.SWEET_BERRIES))));
+
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, SculkDepths.identifier( name), item);
     }
@@ -132,6 +138,7 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, KRYSLUM_BUCKET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, ENERGY_ESSENCE);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, CRUX_RESONATOR);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QELDRY_BERRY);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_GLUX);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_SPAWN_EGG);

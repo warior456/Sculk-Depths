@@ -414,6 +414,9 @@ public class ModBlocks {
     public static final Block SCULK_PEDESTAL = registerBlock("sculk_pedestal",
             new PedestalBlock(AbstractBlock.Settings.create().strength(-1f, 3600000.0f).pistonBehavior(PistonBehavior.BLOCK)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
+    public static final Block QELDRY_BERRY_BUSH = registerBlock("qeldry_berry_bush",
+        new QeldryBerryBush(AbstractBlock.Settings.copy(Blocks.SWEET_BERRY_BUSH)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
     //auric //TODO check blocksettings
 
     
