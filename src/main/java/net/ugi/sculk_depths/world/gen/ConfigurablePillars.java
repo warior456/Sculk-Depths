@@ -97,7 +97,7 @@ public class ConfigurablePillars
 
                     blockPosIterable2.forEach(blockPos2 -> {
                         int distance = (int) (((blockPos2.getX() - finalX2)/2)*((blockPos2.getX() - finalX2)/2) + ((blockPos2.getY() - finalY2)/1)*((blockPos2.getY() - finalY2)/1) + ((blockPos2.getZ() - finalZ2)/2)*((blockPos2.getZ() - finalZ2)/2));
-                        if (Math.round(distance) <= (holeRadius-1)*(holeRadius-1)) {//ball instead of rectangle
+                        if (Math.round(distance) <= (holeRadius-1)*(holeRadius-1) && context.getWorld().getBlockState(blockPos2).isOf(ModBlocks.FLUMROCK)) {//ball instead of rectangle
                             this.setBlockState(structureWorldAccess, blockPos2, Blocks.AIR.getDefaultState());
                         }
                         else if (Math.round(distance) <= holeRadius*holeRadius && context.getWorld().getBlockState(blockPos2).isOf(ModBlocks.FLUMROCK) && random.nextInt(5) != 0) {//ball instead of rectangle
