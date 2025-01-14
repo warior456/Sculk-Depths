@@ -124,8 +124,8 @@ public class ModItems {
     public static final Item CRUX_RESONATOR = registerItem("crux_resonator",
             (new CruxResonator(new Item.Settings())));
 
-    public static final Item QELDRY_BERRY = registerItem("qeldry_berry",
-            (new AliasedBlockItem(ModBlocks.QELDRY_BERRY_BUSH, (new Item.Settings()).food(FoodComponents.SWEET_BERRIES))));
+    public static final Item QELBERRY = registerItem("qelberry",
+            (new AliasedBlockItem(ModBlocks.QELBERRY_BUSH, (new Item.Settings()).food(FoodComponents.SWEET_BERRIES))));
 
 
     private static Item registerItem(String name, Item item) {
@@ -138,7 +138,7 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, KRYSLUM_BUCKET);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, ENERGY_ESSENCE);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, CRUX_RESONATOR);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QELDRY_BERRY);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QELBERRY);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_GLUX);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_SPAWN_EGG);

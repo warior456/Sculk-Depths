@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "sculk_depths:block/qelberry_bush_stage0"
+    },
+    "age=1": {
+      "model": "sculk_depths:block/qelberry_bush_stage1"
+    },
+    "age=2": {
+      "model": "sculk_depths:block/qelberry_bush_stage2"
+    }
+  }
+}

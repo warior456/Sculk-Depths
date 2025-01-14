@@ -9,7 +9,7 @@
                        "to_place": {
                          "type": "minecraft:simple_state_provider",
                          "state": {
-                           "Name": "sculk_depths:qeldry_berry_bush",
+                           "Name": "sculk_depths:qelberry_bush",
                            "Properties": {
                              "age": "2"
                            }

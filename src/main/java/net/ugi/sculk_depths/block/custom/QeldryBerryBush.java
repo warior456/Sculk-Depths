@@ -48,7 +48,7 @@ public class QeldryBerryBush extends PlantBlock implements Fertilizable {
     }
 
     public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
-        return new ItemStack(ModItems.QELDRY_BERRY);
+        return new ItemStack(ModItems.QELBERRY);
     }
 
     protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -86,7 +86,7 @@ public class QeldryBerryBush extends PlantBlock implements Fertilizable {
         int i = (Integer)state.get(AGE);
         boolean bl = i == 2;
         if (i > 1) {
-            dropStack(world, pos, new ItemStack(ModItems.QELDRY_BERRY, 1));
+            dropStack(world, pos, new ItemStack(ModItems.QELBERRY, 1));
             world.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
             BlockState blockState = (BlockState)state.with(AGE, 1);
             world.setBlockState(pos, blockState, 2);
