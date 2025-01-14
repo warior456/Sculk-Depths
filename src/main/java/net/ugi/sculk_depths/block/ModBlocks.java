@@ -417,6 +417,10 @@ public class ModBlocks {
     public static final Block QELDRY_BERRY_BUSH = registerBlock("qeldry_berry_bush",
         new QeldryBerryBush(AbstractBlock.Settings.copy(Blocks.SWEET_BERRY_BUSH)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
+    public static final Block DRIED_GRASS = registerBlock("dried_grass",
+            new ShortPlantBlock(AbstractBlock.Settings.copy(Blocks.SHORT_GRASS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+
     //auric //TODO check blocksettings
 
     

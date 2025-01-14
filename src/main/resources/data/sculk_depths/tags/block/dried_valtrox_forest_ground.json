@@ -1,5 +1,7 @@
 {
   "values": [
-    "sculk_depths:crumbling_dirt"
+    "sculk_depths:crumbling_dirt",
+    "minecraft:coarse_dirt",
+    "minecraft:packed_mud"
   ]
 }

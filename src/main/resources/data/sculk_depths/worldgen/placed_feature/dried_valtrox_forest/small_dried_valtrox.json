@@ -140,10 +140,7 @@
           -1,
           0
         ],
-        "blocks": [
-          "sculk_depths:crumbling_dirt",
-          "minecraft:deepslate"
-        ]
+        "blocks": "#sculk_depths:dried_valtrox_forest_ground"
       }
     },
     {
