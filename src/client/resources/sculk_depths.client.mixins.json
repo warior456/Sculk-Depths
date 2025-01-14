@@ -5,6 +5,7 @@
   "client": [
     "BackgroundRendererMixin",
     "ExampleClientMixin",
+    "InGameHudMixin",
     "LivingEntityRendererMixin"
   ],
   "injectors": {
