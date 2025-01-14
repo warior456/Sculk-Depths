@@ -19,6 +19,7 @@ import net.ugi.sculk_depths.block.custom.ModCauldron.KryslumFlumrockCauldronBloc
 import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
+import net.ugi.sculk_depths.sound.ModBlockSoundGroups;
 import net.ugi.sculk_depths.world.WorldGenerator;
 import net.ugi.sculk_depths.block.custom.ModCauldron.SporeFlumrockCauldronBlock;
 import net.ugi.sculk_depths.block.dryable.*;
@@ -33,25 +34,25 @@ public class ModBlocks {
 // amalgamite
     
     public static final Block AMALGAMITE = registerBlock("amalgamite",
-            new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE).strength(3.0f, 6.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+            new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE).strength(3.0f, 6.0f).requiresTool().sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block AMALGAMITE_BRICKS = registerBlock("amalgamite_bricks",
-            new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_BRICKS).strength(2.9f, 6.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+            new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_BRICKS).strength(2.9f, 6.0f).requiresTool().sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block CHISELED_AMALGAMITE = registerBlock("chiseled_amalgamite",
-            new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_BRICKS).strength(2.9f, 6.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+            new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_BRICKS).strength(2.9f, 6.0f).requiresTool().sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block AMALGAMITE_BRICK_STAIRS = registerBlock("amalgamite_brick_stairs",
-            new StairsBlock(ModBlocks.AMALGAMITE_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+            new StairsBlock(ModBlocks.AMALGAMITE_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block AMALGAMITE_BRICK_SLAB = registerBlock("amalgamite_brick_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block ACTIVATED_AMALGAMITE = registerBlock("activated_amalgamite",
-            new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE).strength(-1.0f, 3600000.0f)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+            new Block(AbstractBlock.Settings.copy(Blocks.REINFORCED_DEEPSLATE).strength(-1.0f, 3600000.0f).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block AMALGAMITE_BRICK_WALL = registerBlock("amalgamite_brick_wall",
-            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block LARGUTH = registerBlock("larguth",
             new Block(AbstractBlock.Settings.copy(Blocks.OBSIDIAN).strength(40.0f,1000f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
