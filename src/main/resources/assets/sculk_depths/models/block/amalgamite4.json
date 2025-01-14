@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "sculk_depths:block/amalgamite_top4",
+    "east": "sculk_depths:block/amalgamite",
+    "north": "sculk_depths:block/amalgamite4",
+    "particle": "sculk_depths:block/amalgamite",
+    "south": "sculk_depths:block/amalgamite4",
+    "up": "sculk_depths:block/amalgamite_top4",
+    "west": "sculk_depths:block/amalgamite4"
+  }
+}
