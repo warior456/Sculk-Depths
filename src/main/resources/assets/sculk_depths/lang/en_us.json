@@ -16,6 +16,16 @@
 
   "block.sculk_depths.larguth": "Larguth",
   "block.sculk_depths.amalgamite" : "Amalgamite",
+  "block.sculk_depths.amalgamite_bricks" : "Amalgamite Bricks",
+  "block.sculk_depths.amalgamite_brick_stairs" : "Amalgamite Brick Stair",
+  "block.sculk_depths.amalgamite_brick_slab" : "Amalgamite Brick Slab",
+  "block.sculk_depths.amalgamite_brick_wall" : "Amalgamite Brick Wall",
+  "block.sculk_depths.activated_amalgamite" : "Activated Amalgamite",
+  "block.sculk_depths.chiseled_amalgamite" : "Chiseled Amalgamite",
+
+  "block.sculk_depths.quazarith_oscillator" : "Quazarith Oscillator",
+  "item.sculk_depths.crux_resonator" : "Crux Resonator",
+
 
   "block.sculk_depths.umbrusk": "Umbrusk",
   "block.sculk_depths.umbrusk_stairs": "Umbrusk Stairs",
@@ -29,6 +39,8 @@
 
   "block.sculk_depths.valtrox_leaves": "Valtrox Leaves",
   "block.sculk_depths.valtrox_sapling": "Valtrox Sapling",
+  "block.sculk_depths.qelberry_bush": "Qelberry Bush",
+  "item.sculk_depths.qelberries": "Qelberries",
 
   "block.sculk_depths.coated_stripped_valtrox_log": "Coated Stripped Valtrox Log",
   "block.sculk_depths.coated_stripped_valtrox_wood": "Coated Stripped Valtrox Wood",
