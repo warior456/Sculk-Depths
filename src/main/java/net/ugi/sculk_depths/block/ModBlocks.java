@@ -60,6 +60,10 @@ public class ModBlocks {
     public static final Block ZYGRIN_FURNACE = registerBlock("zygrin_furnace",
             new ZygrinFurnaceBlock(AbstractBlock.Settings.copy(Blocks.FURNACE).strength(10.0f,10f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
+    public static final Block QUAZARITH_OSCILLATOR = registerBlock("quazarith_oscillator",
+            new Block(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+
 
     //umbrusk blockset
     public static final Block UMBRUSK = registerBlock("umbrusk",
@@ -357,11 +361,6 @@ public class ModBlocks {
     public static final Block VALTROX_SAPLING = registerBlock("valtrox_sapling",
             new SaplingBlock(WorldGenerator.VALTROX_SAPLING_GENERATOR, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    //potted stuff
-    public static final Block POTTED_VALTROX_SAPLING = registerBlockWithoutBlockItem("potted_valtrox_sapling", new FlowerPotBlock(ModBlocks.VALTROX_SAPLING, AbstractBlock.Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-    public static final Block POTTED_PENEBRIUM_SHROOM = registerBlockWithoutBlockItem("potted_penebrium_shroom", new FlowerPotBlock(ModBlocks.PENEBRIUM_SHROOM, AbstractBlock.Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-    //public static final Block POTTED_AURIC_SPORE_SPROUTS = registerBlockWithoutBlockItem("potted_auric_spore_sprouts", new FlowerPotBlock(ModBlocks.AURIC_SPORE_SPROUTS, AbstractBlock.Settings.copy(Blocks.BROWN_MUSHROOM)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
     //vegetation
     public static final Block CEPHLERA = registerBlockWithoutBlockItem("cephlera",
             new CephleraBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
@@ -453,8 +452,12 @@ public class ModBlocks {
     public static final Block KRYSLUM_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("kryslum_flumrock_cauldron", new KryslumFlumrockCauldronBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_CAULDRON), ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
     public static final Block SPORE_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("spore_flumrock_cauldron", new SporeFlumrockCauldronBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_CAULDRON), ModCauldronBehavior.SPORE_FLUMROCK_CAULDRON_BEHAVIOR.map()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    public static final Block QUAZARITH_OSCILLATOR = registerBlock("quazarith_oscillator",
-            new Block(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    //potted stuff
+    public static final Block POTTED_VALTROX_SAPLING = registerBlockWithoutBlockItem("potted_valtrox_sapling", new FlowerPotBlock(ModBlocks.VALTROX_SAPLING, AbstractBlock.Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+    public static final Block POTTED_PENEBRIUM_SHROOM = registerBlockWithoutBlockItem("potted_penebrium_shroom", new FlowerPotBlock(ModBlocks.PENEBRIUM_SHROOM, AbstractBlock.Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+    public static final Block POTTED_AURIC_SPORE_SPROUTS = registerBlockWithoutBlockItem("potted_auric_spore_sprouts", new FlowerPotBlock(ModBlocks.AURIC_SPORE_SPROUTS, AbstractBlock.Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
 
     private static CrystalBlock createCrystalBlock(DyeColor color) {
         return new CrystalBlock(color, AbstractBlock.Settings.copy(Blocks.GLASS).luminance((state) -> 10));
