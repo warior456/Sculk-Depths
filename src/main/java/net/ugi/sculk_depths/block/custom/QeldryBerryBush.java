@@ -33,7 +33,7 @@ import net.ugi.sculk_depths.item.ModItems;
 
 public class QeldryBerryBush extends PlantBlock implements Fertilizable {
     public static final MapCodec<QeldryBerryBush> CODEC = createCodec(QeldryBerryBush::new);
-    public static final int MAX_AGE = 3;
+    public static final int MAX_AGE = 2;
     public static final IntProperty AGE;
     private static final VoxelShape SMALL_SHAPE;
     private static final VoxelShape LARGE_SHAPE;
@@ -55,17 +55,17 @@ public class QeldryBerryBush extends PlantBlock implements Fertilizable {
         if ((Integer)state.get(AGE) == 0) {
             return SMALL_SHAPE;
         } else {
-            return (Integer)state.get(AGE) < 3 ? LARGE_SHAPE : super.getOutlineShape(state, world, pos, context);
+            return LARGE_SHAPE;
         }
     }
 
     protected boolean hasRandomTicks(BlockState state) {
-        return (Integer)state.get(AGE) < 3;
+        return (Integer)state.get(AGE) < 2;
     }
 
     protected void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         int i = (Integer)state.get(AGE);
-        if (i < 3 && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
+        if (i < 2 && random.nextInt(5) == 0 /*&& world.getBaseLightLevel(pos.up(), 0) >= 9*/) {
             BlockState blockState = (BlockState)state.with(AGE, i + 1);
             world.setBlockState(pos, blockState, 2);
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(blockState));
@@ -78,13 +78,13 @@ public class QeldryBerryBush extends PlantBlock implements Fertilizable {
 
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         int i = (Integer)state.get(AGE);
-        boolean bl = i == 3;
+        boolean bl = i == 2;
         return !bl && stack.isOf(Items.BONE_MEAL) ? ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION : super.onUseWithItem(stack, state, world, pos, player, hand, hit);
     }
 
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         int i = (Integer)state.get(AGE);
-        boolean bl = i == 3;
+        boolean bl = i == 2;
         if (i > 1) {
             dropStack(world, pos, new ItemStack(ModItems.QELDRY_BERRY, 1));
             world.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
@@ -102,7 +102,7 @@ public class QeldryBerryBush extends PlantBlock implements Fertilizable {
     }
 
     public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
-        return (Integer)state.get(AGE) < 3;
+        return (Integer)state.get(AGE) < 2;
     }
 
     public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
@@ -110,14 +110,14 @@ public class QeldryBerryBush extends PlantBlock implements Fertilizable {
     }
 
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        int i = Math.min(3, (Integer)state.get(AGE) + 1);
+        int i = Math.min(2, (Integer)state.get(AGE) + 1);
         world.setBlockState(pos, (BlockState)state.with(AGE, i), 2);
     }
 
     static {
-        AGE = Properties.AGE_3;
-        SMALL_SHAPE = Block.createCuboidShape((double)3.0F, (double)0.0F, (double)3.0F, (double)13.0F, (double)8.0F, (double)13.0F);
-        LARGE_SHAPE = Block.createCuboidShape((double)1.0F, (double)0.0F, (double)1.0F, (double)15.0F, (double)16.0F, (double)15.0F);
+        AGE = Properties.AGE_2;
+        SMALL_SHAPE = Block.createCuboidShape((double)5.0F, (double)0.0F, (double)5.0F, (double)11.0F, (double)6.0F, (double)11.0F);
+        LARGE_SHAPE = Block.createCuboidShape((double)3.0F, (double)0.0F, (double)3.0F, (double)13.0F, (double)8.0F, (double)13.0F);
     }
 
     @Override

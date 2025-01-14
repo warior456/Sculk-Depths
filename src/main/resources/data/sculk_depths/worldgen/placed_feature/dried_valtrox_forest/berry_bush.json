@@ -9,7 +9,10 @@
                        "to_place": {
                          "type": "minecraft:simple_state_provider",
                          "state": {
-                           "Name": "minecraft:sweet_berry_bush"
+                           "Name": "sculk_depths:qeldry_berry_bush",
+                           "Properties": {
+                             "age": "2"
+                           }
                          }
                        }
                      }
@@ -24,7 +27,7 @@
                      }
                    ]
                  },
-                 "tries": 32,
+                 "tries": 8,
                  "xz_spread": 7,
                  "y_spread": 3
                }
@@ -32,7 +35,7 @@
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 3
+      "count": 2
     },
     {
       "type": "minecraft:in_square"
