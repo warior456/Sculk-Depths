@@ -45,8 +45,8 @@
   },
   "features": [
     [
-      "sculk_depths:dried_valtrox_forest/coarse_dirt_patch",
-      "sculk_depths:dried_valtrox_forest/mud_patch"
+      "sculk_depths:dried_valtrox_forest/coarse_dirt_patch"//,
+      //"sculk_depths:dried_valtrox_forest/mud_patch"
     ],
     [],
     [],
