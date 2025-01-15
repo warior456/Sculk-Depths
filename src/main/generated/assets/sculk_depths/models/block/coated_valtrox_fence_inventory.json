@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_inventory",
+  "textures": {
+    "texture": "sculk_depths:block/coated_valtrox_planks"
+  }
+}

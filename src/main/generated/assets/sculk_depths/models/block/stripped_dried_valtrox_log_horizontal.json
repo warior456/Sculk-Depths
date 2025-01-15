@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "sculk_depths:block/stripped_dried_valtrox_log_top",
+    "side": "sculk_depths:block/stripped_dried_valtrox_log"
+  }
+}
