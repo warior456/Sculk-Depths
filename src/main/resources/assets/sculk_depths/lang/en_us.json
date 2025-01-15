@@ -214,5 +214,8 @@
   "tooltip.sculk_depths.crystal_upgrade.crystal.\"white\"": " White Crystal",
   "tooltip.sculk_depths.crystal_upgrade.crystal.\"orange\"": " Orange Crystal",
   "tooltip.sculk_depths.crystal_upgrade.crystal.\"blue\"": " Blue Crystal",
-  "tooltip.sculk_depths.crystal_upgrade.crystal.\"lime\"": " Lime Crystal"
+  "tooltip.sculk_depths.crystal_upgrade.crystal.\"lime\"": " Lime Crystal",
+
+  "death.attack.infected": "%1$s inhaled too much spores",
+  "death.attack.infected.player": "%1$s inhaled too much spores while fighting %2$s"
 }
