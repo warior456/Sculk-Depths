@@ -31,15 +31,15 @@ import java.util.List;
 public class ModBiomeEffects implements ServerTickEvents.StartWorldTick{
 
     @Override
-    public void onStartTick(ServerWorld world) {//todo should be replaced with an actual effect
-        if(world.getTime()%10 != 0){
-            return;
-        }
-        List<ServerPlayerEntity> players = world.getPlayers(LivingEntity::isAlive);
-        for (ServerPlayerEntity player : players) {
-            if (world.getBiome(player.getBlockPos()).getKey().get() == ModBiomes.INFECTED_COLUMNS) {
-                player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.INFECTED, 115, 0, true, true, true));
+    public void onStartTick(ServerWorld world) {
+            if(world.getTime()%10 != 0){
+                return;
             }
-        }
+            List<ServerPlayerEntity> players = world.getPlayers(LivingEntity::isAlive);
+            for (ServerPlayerEntity player : players) {
+                if (world.getBiome(player.getBlockPos()).getKey().get() == ModBiomes.INFECTED_COLUMNS) {
+                    player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.INFECTED, 115, 0, true, true, true));
+                }
+            }
         }
 }

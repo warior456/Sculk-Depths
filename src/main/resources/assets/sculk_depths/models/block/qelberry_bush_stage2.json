@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "sculk_depths:block/qelberry_bush_stage2"
+  }
+}

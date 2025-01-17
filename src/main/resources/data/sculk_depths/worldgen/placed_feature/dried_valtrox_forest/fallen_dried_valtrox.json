@@ -1,0 +1,160 @@
+{
+  "feature": {
+    "type": "minecraft:vegetation_patch",
+    "config": {
+      "surface": "floor",
+      "depth": 1,
+      "vertical_range": 1,
+      "extra_bottom_block_chance": 0,
+      "extra_edge_column_chance": 0,
+      "vegetation_chance": 1,
+      "xz_radius": 0,
+      "replaceable": "#sculk_depths:dried_valtrox_forest_ground",
+      "ground_state": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "sculk_depths:crumbling_dirt",
+          "Properties": {
+            "snowy": "false"
+          }
+        }
+      },
+      "vegetation_feature": {
+        "feature": {
+          "type": "minecraft:random_boolean_selector",
+          "config": {
+            "feature_false": {
+              "feature": {
+                "type": "minecraft:block_column",
+                "config": {
+                  "direction": "north",
+                  "allowed_placement": {
+                    "type": "minecraft:matching_blocks",
+                    "offset": [
+                      0,
+                      -1,
+                      0
+                    ],
+                    "blocks": "#sculk_depths:dried_valtrox_forest_ground"
+                  },
+                  "prioritize_tip": false,
+                  "layers": [
+                    {
+                      "height": {
+                        "type": "minecraft:uniform",
+                        "min_inclusive": 2,
+                        "max_inclusive": 5
+                      },
+                      "provider": {
+                        "type": "minecraft:weighted_state_provider",
+                        "entries": [
+                          {
+                            "weight": 1,
+                            "data": {
+                              "Name": "sculk_depths:dried_valtrox_log",
+                              "Properties": {
+                                "axis": "z"
+                              }
+                            }
+                          },
+                          {
+                            "weight": 4,
+                            "data": {
+                              "Name": "sculk_depths:stripped_dried_valtrox_log",
+                              "Properties": {
+                                "axis": "z"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "placement": []
+            },
+            "feature_true": {
+              "feature": {
+                "type": "minecraft:block_column",
+                "config": {
+                  "direction": "east",
+                  "allowed_placement": {
+                    "type": "minecraft:true"
+                  },
+                  "prioritize_tip": false,
+                  "layers": [
+                    {
+                      "height": {
+                        "type": "minecraft:uniform",
+                        "min_inclusive": 2,
+                        "max_inclusive": 5
+                      },
+                      "provider": {
+                        "type": "minecraft:weighted_state_provider",
+                        "entries": [
+                          {
+                            "weight": 1,
+                            "data": {
+                              "Name": "sculk_depths:dried_valtrox_log",
+                              "Properties": {
+                                "axis": "x"
+                              }
+                            }
+                          },
+                          {
+                            "weight": 4,
+                            "data": {
+                              "Name": "sculk_depths:stripped_dried_valtrox_log",
+                              "Properties": {
+                                "axis": "x"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "placement": []
+            }
+          }
+        },
+        "placement": []
+      }
+    }
+  },
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 1
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 5
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "offset": [
+          0,
+          -1,
+          0
+        ],
+        "blocks": "#sculk_depths:dried_valtrox_forest_ground"
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

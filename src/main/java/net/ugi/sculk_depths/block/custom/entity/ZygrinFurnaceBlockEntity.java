@@ -52,6 +52,7 @@ import net.ugi.sculk_depths.block.ModBlockEntities;
 
 
 import net.ugi.sculk_depths.block.ModBlocks;
+import net.ugi.sculk_depths.screen.ZygrinFurnaceScreenHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -89,7 +90,7 @@ public class ZygrinFurnaceBlockEntity extends LockableContainerBlockEntity imple
     }
 
     protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-        return new FurnaceScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+        return new ZygrinFurnaceScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
 //begin custom
 private boolean isBurning() {
@@ -154,11 +155,11 @@ private boolean isBurning() {
     private static int getCookTime(World world, ZygrinFurnaceBlockEntity furnace) {
         SingleStackRecipeInput singleStackRecipeInput = new SingleStackRecipeInput(furnace.getStack(0));
         return (Integer)furnace.matchGetter.getFirstMatch(singleStackRecipeInput, world).map((recipe) -> {
-            return (((AbstractCookingRecipe)recipe.value()).getCookingTime())/4;//furnace speed //todo test
+            return (((AbstractCookingRecipe)recipe.value()).getCookingTime())/4;//furnace speed
         }).orElse(50);
     }
 
-    public static void tick(World world, BlockPos pos, BlockState state, ZygrinFurnaceBlockEntity blockEntity) {//todo
+    public static void tick(World world, BlockPos pos, BlockState state, ZygrinFurnaceBlockEntity blockEntity) {
         boolean bl4 = false;
         boolean bl = blockEntity.isBurning();
         boolean bl2 = false;

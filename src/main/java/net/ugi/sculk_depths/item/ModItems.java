@@ -1,16 +1,17 @@
 package net.ugi.sculk_depths.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.block.Blocks;
+import net.minecraft.component.type.FoodComponents;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.fluid.ModFluids;
-import net.ugi.sculk_depths.item.custom.EnergizedFlintAndSteelItem;
+import net.ugi.sculk_depths.item.custom.CruxResonator;
 import net.ugi.sculk_depths.item.custom.GlomperGlux;
 
 
@@ -46,8 +47,6 @@ public class ModItems {
 
     public static final Item ENERGY_ESSENCE = registerItem("energy_essence",
             new Item(new Item.Settings()));
-    public static final Item ENERGISED_FLINT_AND_STEEL = registerItem("energized_flint_and_steel",
-            new EnergizedFlintAndSteelItem(new Item.Settings().maxCount(1).maxDamage(128)));
 
     public static final Item GLOMPER_GLUX = registerItem("glomper_glux",
             new GlomperGlux(new Item.Settings()));
@@ -73,7 +72,7 @@ public class ModItems {
 
     public static final Item QUAZARITH_AXE = registerItem("quazarith_axe",
             new AxeItem(ModToolMaterials.QUAZARITH, //7, -3.0F,
-                    new Item.Settings().attributeModifiers(AxeItem.createAttributeModifiers(ModToolMaterials.QUAZARITH, 7f,-3f)).fireproof()));
+                    new Item.Settings().attributeModifiers(AxeItem.createAttributeModifiers(ModToolMaterials.QUAZARITH, 9f,-3f)).fireproof()));
 
     public static final Item QUAZARITH_HOE = registerItem("quazarith_hoe",
             new HoeItem(ModToolMaterials.QUAZARITH, //-4, 1.0F,
@@ -86,17 +85,17 @@ public class ModItems {
 
     //quazarith armor
     public static final Item QUAZARITH_HELMET = registerItem("quazarith_helmet",
-            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.HELMET,
-                    new Item.Settings().fireproof()));
+            new ArmorItem(ModArmorMaterials.QUAZARITH_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
+                    new Item.Settings().fireproof().maxDamage(ArmorItem.Type.HELMET.getMaxDamage(200))));
     public static final Item QUAZARITH_CHESTPLATE = registerItem("quazarith_chestplate",
-            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.CHESTPLATE,
-                    new Item.Settings().fireproof()));
+            new ArmorItem(ModArmorMaterials.QUAZARITH_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,
+                    new Item.Settings().fireproof().maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(200))));
     public static final Item QUAZARITH_LEGGINGS = registerItem("quazarith_leggings",
-            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.LEGGINGS,
-                    new Item.Settings().fireproof()));
+            new ArmorItem(ModArmorMaterials.QUAZARITH_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,
+                    new Item.Settings().fireproof().maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(200))));
     public static final Item QUAZARITH_BOOTS = registerItem("quazarith_boots",
-            new ArmorItem(ModArmorMaterials.QUAZARITH, ArmorItem.Type.BOOTS,
-                    new Item.Settings().fireproof()));
+            new ArmorItem(ModArmorMaterials.QUAZARITH_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
+                    new Item.Settings().fireproof().maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(200))));
 
     public static final Item VALTROX_SIGN = registerItem("valtrox_sign",
             new SignItem(new Item.Settings().maxCount(16), ModBlocks.VALTROX_SIGN, ModBlocks.VALTROX_WALL_SIGN));
@@ -122,6 +121,13 @@ public class ModItems {
     public static final Item PETRIFIED_VALTROX_HANGING_SIGN = registerItem("petrified_valtrox_hanging_sign",
             new HangingSignItem(ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN, new Item.Settings().maxCount(16)));
 
+    public static final Item CRUX_RESONATOR = registerItem("crux_resonator",
+            (new CruxResonator(new Item.Settings())));
+
+    public static final Item QELBERRIES = registerItem("qelberries",
+            (new AliasedBlockItem(ModBlocks.QELBERRY_BUSH, (new Item.Settings()).food(FoodComponents.SWEET_BERRIES))));
+
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, SculkDepths.identifier( name), item);
     }
@@ -129,44 +135,45 @@ public class ModItems {
 
     public static void addItemsToItemGroup() {
 
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, KRYSLUM_BUCKET);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, ENERGY_ESSENCE);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, ENERGISED_FLINT_AND_STEEL);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, KRYSLUM_BUCKET);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, ENERGY_ESSENCE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, CRUX_RESONATOR);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QELBERRIES);
 
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, GLOMPER_GLUX);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, GLOMPER_SPAWN_EGG);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, LESTER_SPAWN_EGG);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, CHOMPER_COLOSSUS_SPAWN_EGG);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_GLUX);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_SPAWN_EGG);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, LESTER_SPAWN_EGG);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, CHOMPER_COLOSSUS_SPAWN_EGG);
 
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, CRUX);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, WHITE_CRYSTAL);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, BLUE_CRYSTAL);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, ORANGE_CRYSTAL);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, LIME_CRYSTAL);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, PENEBRIUM_SPORE_BUCKET);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, CRUX);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, WHITE_CRYSTAL);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, BLUE_CRYSTAL);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, ORANGE_CRYSTAL);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, LIME_CRYSTAL);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, PENEBRIUM_SPORE_BUCKET);
 
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_INGOT);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_PIECES);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_INGOT);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_PIECES);
 
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_SHOVEL);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_PICKAXE);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_AXE);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_HOE);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_SWORD);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_SHOVEL);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_PICKAXE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_AXE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_HOE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_SWORD);
 
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_HELMET);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_CHESTPLATE);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_LEGGINGS);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, QUAZARITH_BOOTS);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_HELMET);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_CHESTPLATE);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_LEGGINGS);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QUAZARITH_BOOTS);
 
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, VALTROX_SIGN);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, VALTROX_HANGING_SIGN);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, COATED_VALTROX_SIGN);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, COATED_VALTROX_HANGING_SIGN);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, DRIED_VALTROX_SIGN);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, DRIED_VALTROX_HANGING_SIGN);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, PETRIFIED_VALTROX_SIGN);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS, PETRIFIED_VALTROX_HANGING_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_BLOCKS, VALTROX_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_BLOCKS, VALTROX_HANGING_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_BLOCKS, COATED_VALTROX_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_BLOCKS, COATED_VALTROX_HANGING_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_BLOCKS, DRIED_VALTROX_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_BLOCKS, DRIED_VALTROX_HANGING_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_BLOCKS, PETRIFIED_VALTROX_SIGN);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_BLOCKS, PETRIFIED_VALTROX_HANGING_SIGN);
     }
 
     private static void addToItemGroup(RegistryKey<ItemGroup> group, Item item) {

@@ -1,0 +1,17 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "sculk_depths:item/energy_essence",
+		"particle": "sculk_depths:item/energy_essence"
+	},
+	"elements": [
+		{
+			"from": [4, 16, 8],
+			"to": [12, 24, 8],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#0"}
+			}
+		}
+	]
+}

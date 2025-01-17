@@ -1,0 +1,48 @@
+{
+  "feature": {
+    "type": "minecraft:ore",
+    "config": {
+      "targets": [
+        {
+          "target": {
+            "predicate_type": "minecraft:block_match",
+            "block": "air"
+          },
+          "state": {
+            "Name": "minecraft:tuff"
+          }
+        }
+      ],
+      "size": 9,
+      "discard_chance_on_air_exposure": 0.07
+    }
+  },
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 1
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE_WG"
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "offset": [
+          0,
+          -1,
+          0
+        ],
+        "blocks": "#sculk_depths:dried_valtrox_forest_ground"
+      }
+    }
+  ]
+}

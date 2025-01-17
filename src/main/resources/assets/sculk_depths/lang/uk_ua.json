@@ -2,7 +2,6 @@
   "item.sculk_depths.kryslum_bucket": "Відро крислуму",
   "item.sculk_depths.soul_heart": "Серце душ",
   "item.sculk_depths.energy_essence" : "Енергетична есенція",
-  "item.sculk_depths.energized_flint_and_steel" : "Заряджене кресало",
   "item.sculk_depths.glomper_spawn_egg": "Яйце виклику ґлумпера",
   "block.sculk_depths.crumbling_dirt" : "Розсипчастий ґрунт",
 
@@ -82,7 +81,6 @@
   "item.sculk_depths.quazarith_leggings": "Квазаритові наголінники",
   "item.sculk_depths.quazarith_boots": "Квазаритові чоботи",
 
-  "block.sculk_depths.soul_fire": "Вогонь душ",
 
   "block.sculk_depths.zygrin": "Зиґрин",
   "block.sculk_depths.zygrin_stairs": "Зиґринові сходи",

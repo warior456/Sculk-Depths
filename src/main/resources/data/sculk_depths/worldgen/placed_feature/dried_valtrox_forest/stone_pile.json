@@ -1,0 +1,50 @@
+{
+  "feature": {
+    "type": "minecraft:block_pile",
+    "config": {
+      "state_provider": {
+        "type": "minecraft:weighted_state_provider",
+        "entries": [
+          {
+            "weight": 1,
+            "data": {
+              "Name": "minecraft:tuff"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 1
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 20
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE_WG"
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "offset": [
+          0,
+          -1,
+          0
+        ],
+        "blocks": "#sculk_depths:dried_valtrox_forest_ground"
+      }
+    }
+  ]
+}

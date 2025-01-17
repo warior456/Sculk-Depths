@@ -9,6 +9,7 @@
     "CropBlockMixin",
     "ExampleMixin",
     "FarmLandBlockMixin",
+    "FlowableFluidMixin",
     "LivingEntityMixin",
     "NoiseChunkGeneratorMixin",
     "StemBlockMixin",

@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "sculk_depths:block/activated_amalgamite"
+      }
+    ]
+  }
+}

@@ -24,7 +24,7 @@ repositories {
 
 loom {
 	splitEnvironmentSourceSets()
-
+	accessWidenerPath = file("src/main/resources/sculk_depths.accesswidener")
 	mods {
 		"sculk_depths" {
 			sourceSet sourceSets.main
@@ -47,8 +47,8 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modImplementation include ("net.kyrptonaught:customportalapi:${project.customportalapi_version}"){
-		exclude group: "net.fabricmc.fabric-api", module: "fabric-gametest-api-v1"}
+/*	modImplementation include ("net.kyrptonaught:customportalapi:${project.customportalapi_version}"){
+		exclude group: "net.fabricmc.fabric-api", module: "fabric-gametest-api-v1"}*/
 
 	include(modImplementation("maven.modrinth:fstats:${project.fstats_version}"))
 }

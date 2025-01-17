@@ -3,15 +3,19 @@ package net.ugi.sculk_depths.block.custom;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.block.ModBlockEntities;
@@ -34,13 +38,11 @@ public class ZygrinFurnaceBlock extends AbstractFurnaceBlock {
     }
 
 
-/*    @Override
     @Nullable
+    @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkTypeF(world, type, ModBlockEntities.ZYGRIN_FURNACE_BLOCK_ENTITY);
-    }*/
-
-
+        return BlockWithEntity.validateTicker(type, ModBlockEntities.ZYGRIN_FURNACE_BLOCK_ENTITY, ZygrinFurnaceBlockEntity::tick);
+    }
 
     @Override
     protected void openScreen(World world, BlockPos pos, PlayerEntity player) {
@@ -73,9 +75,23 @@ public class ZygrinFurnaceBlock extends AbstractFurnaceBlock {
         world.addParticle(ParticleTypes.FLAME, d + i, e + j, f + k, 0.0, 0.0, 0.0);
     }
 
+    @Override
+    protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {//fixes items not being dropped
+        if (!state.isOf(newState.getBlock())) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof ZygrinFurnaceBlockEntity) {
+                if (world instanceof ServerWorld) {
+                    ItemScatterer.spawn(world, pos, (ZygrinFurnaceBlockEntity)blockEntity);
+                    ((ZygrinFurnaceBlockEntity)blockEntity).getRecipesUsedAndDropExperience((ServerWorld)world, Vec3d.ofCenter(pos));
+                }
 
-/*    @Nullable
-    protected static <T extends BlockEntity> BlockEntityTicker<T> checkTypeF(World world, BlockEntityType givenType, BlockEntityType<ZygrinFurnaceBlockEntity> expectedType) {
-        return world.isClient ? null : AbstractFurnaceBlock.checkType(givenType, expectedType, ZygrinFurnaceBlockEntity::tick);
-    }*/
+                super.onStateReplaced(state, world, pos, newState, moved);
+                world.updateComparators(pos, this);
+            } else {
+                super.onStateReplaced(state, world, pos, newState, moved);
+            }
+        }
+    }
+
+
 }

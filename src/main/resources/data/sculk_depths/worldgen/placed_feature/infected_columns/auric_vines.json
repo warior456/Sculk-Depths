@@ -1,0 +1,120 @@
+{
+  "feature": {
+    "type": "minecraft:block_column",
+    "config": {
+      "allowed_placement": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:air"
+      },
+      "direction": "down",
+      "layers": [
+        {
+          "height": {
+            "type": "minecraft:weighted_list",
+            "distribution": [
+              {
+                "data": {
+                  "type": "minecraft:uniform",
+                  "max_inclusive": 7,
+                  "min_inclusive": 0
+                },
+                "weight": 3
+              },
+              {
+                "data": {
+                  "type": "minecraft:uniform",
+                  "max_inclusive": 16,
+                  "min_inclusive": 1
+                },
+                "weight": 2
+              }
+            ]
+          },
+          "provider": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "sculk_depths:auric_vines",
+                  "Properties": {}
+                },
+                "weight": 4
+              }
+            ]
+          }
+        },
+        {
+          "height": 1,
+          "provider": {
+            "type": "minecraft:randomized_int_state_provider",
+            "property": "age",
+            "source": {
+              "type": "minecraft:weighted_state_provider",
+              "entries": [
+                {
+                  "data": {
+                    "Name": "sculk_depths:auric_vines_end",
+                    "Properties": {}
+                  },
+                  "weight": 4
+                }
+              ]
+            },
+            "values": {
+              "type": "minecraft:uniform",
+              "max_inclusive": 25,
+              "min_inclusive": 23
+            }
+          }
+        }
+      ],
+      "prioritize_tip": true
+    }
+  },
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 256
+    },
+    {
+      "type": "minecraft:count",
+      "count":10
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "absolute": 230
+        },
+        "min_inclusive": {
+          "absolute": 0
+        }
+      }
+    },
+    {
+      "type": "minecraft:environment_scan",
+      "allowed_search_condition": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:air"
+      },
+      "direction_of_search": "up",
+      "max_steps": 12,
+      "target_condition": {
+        "type": "minecraft:has_sturdy_face",
+        "direction": "down"
+      }
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": 0,
+      "y_spread": -1
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

@@ -20,9 +20,10 @@ import java.util.function.Supplier;
 
 import static net.minecraft.item.ArmorMaterials.LEATHER;
 
-public class ModArmorMaterials {
+/*public class ModArmorMaterials {
 
     public static final RegistryEntry<ArmorMaterial> QUAZARITH;
+
 
 
     public void ArmorMaterials() {
@@ -60,6 +61,20 @@ public class ModArmorMaterials {
         }), 30, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 5.0F, 0.2F, () -> {
             return Ingredient.ofItems(ModItems.QUAZARITH_INGOT);
         });
+    }
+}*/
+public class ModArmorMaterials {
+    public static final RegistryEntry<ArmorMaterial> QUAZARITH_ARMOR_MATERIAL = registerArmorMaterial("quazarith",
+            () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                map.put(ArmorItem.Type.BOOTS, 5);
+                map.put(ArmorItem.Type.LEGGINGS, 8);
+                map.put(ArmorItem.Type.CHESTPLATE, 11);
+                map.put(ArmorItem.Type.HELMET, 5);
+                map.put(ArmorItem.Type.BODY, 16);
+            }), 60, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> Ingredient.ofItems(ModItems.QUAZARITH_INGOT),
+                    List.of(new ArmorMaterial.Layer(Identifier.of(SculkDepths.MOD_ID, "quazarith"))), 5.0f,0.2f));
+    public static RegistryEntry<ArmorMaterial> registerArmorMaterial(String name, Supplier<ArmorMaterial> material) {
+        return Registry.registerReference(Registries.ARMOR_MATERIAL, Identifier.of(SculkDepths.MOD_ID, name), material.get());
     }
 }
 

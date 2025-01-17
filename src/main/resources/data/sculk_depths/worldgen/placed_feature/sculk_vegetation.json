@@ -7,12 +7,8 @@
       "vertical_range": 5,
       "extra_bottom_block_chance": 0,
       "extra_edge_column_chance": 0.3,
-      "vegetation_chance": 0.1,
-      "xz_radius": {
-        "type": "minecraft:uniform",
-        "min_inclusive": 4,
-        "max_inclusive": 8
-      },
+      "vegetation_chance": 0.025,
+      "xz_radius": 8,
       "replaceable": "#sculk_depths:sculk",
       "ground_state": {
         "type": "minecraft:simple_state_provider",
@@ -39,7 +35,7 @@
                   }
                 },
                 {
-                  "weight": 10,
+                  "weight": 15,
                   "data": {
                     "Name": "minecraft:sculk_shrieker",
                     "Properties": {
@@ -86,22 +82,24 @@
   },
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 32
+      "type": "sculk_depths:count_on_every_layer_constant",
+      "count": 1,
+      "layers": 28,
+      "separation": 10,
+      "start_y": 30
     },
     {
-      "type": "minecraft:in_square"
-    },
-    {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "minecraft:uniform",
-        "min_inclusive": {
-          "absolute": -256
-        },
-        "max_inclusive": {
-          "absolute": 16
-        }
+      "type": "minecraft:environment_scan",
+      "direction_of_search": "down",
+      "max_steps": 11,
+      "target_condition": {
+        "type": "minecraft:matching_blocks",
+        "offset": [
+          0,
+          -1,
+          0
+        ],
+        "blocks": ["minecraft:sculk","sculk_depths:amalgamite","sculk_depths:umbrusk"]
       }
     },
     {

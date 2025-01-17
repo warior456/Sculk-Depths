@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "sculk_depths:block/dried_grass"
+  }
+}

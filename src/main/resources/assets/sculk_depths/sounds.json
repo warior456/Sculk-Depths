@@ -96,6 +96,31 @@
 				"name":"minecraft:ambient/nether/basalt_deltas/long_debris2"
 			}
 		]
+	},
+	"block.amalgamite.break": {
+		"category": "block",
+		"sounds": [
+			{
+				"name":"sculk_depths:block/amalgamite_break",
+				"volume": 0.4,
+				"pitch": 1.05
+			},
+			{
+				"name":"sculk_depths:block/amalgamite_break",
+				"volume": 0.4,
+				"pitch": 1
+			},
+			{
+				"name":"sculk_depths:block/amalgamite_break",
+				"volume": 0.4,
+				"pitch": 0.95
+			},
+			{
+				"name":"sculk_depths:block/amalgamite_break",
+				"volume": 0.4,
+				"pitch": 0.9
+			}
+		]
 	}
 
 }

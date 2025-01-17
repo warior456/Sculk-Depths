@@ -27,6 +27,7 @@
 			"net.ugi.sculk_depths.SculkDepthsDataGenerator"
 		]
 	},
+	"accessWidener": "sculk_depths.accesswidener",
 	"mixins": [
 		"sculk_depths.mixins.json",
 		{

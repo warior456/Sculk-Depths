@@ -1,0 +1,1 @@
+emmisive ores resource pack is copied from https://github.com/BluebirdYT/emissive-library and modified to 110 instead of 254

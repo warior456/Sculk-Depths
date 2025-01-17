@@ -36,6 +36,7 @@ import java.util.EventListenerProxy;
 
 @Mixin(BackgroundRenderer.class)
 public class BackgroundRendererMixin {
+    private static int spectatorMultiplier = 1;
     @Inject(at = @At("TAIL"), method = "applyFog")
     private static void afterSetupFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, float tickDelta, CallbackInfo ci) {
         CameraSubmersionType cameraSubmersionType = camera.getSubmersionType();
@@ -45,10 +46,12 @@ public class BackgroundRendererMixin {
                 || ((LivingEntity)entity).hasStatusEffect(StatusEffects.DARKNESS)
         )
         );
-
         if(entity.isSpectator()){
-            return;
+            spectatorMultiplier = 2;
         }
+        else
+            spectatorMultiplier = 1;
+
         if(FabricLoader.getInstance().isModLoaded("distanthorizons")){ //dh compat
             if(RenderSystem.getShaderFogStart() == 4.20694194E14F) return;
         }
@@ -82,8 +85,8 @@ public class BackgroundRendererMixin {
                 ) / ((radius*2+1) * (radius*2+1));
 
                 if(y <= -200f) y = -200f;
-                float start = ((y+256) * (viewDistance/426) * ((float)1/10)) * mul;
-                float end = (start * 10f ) * mul;
+                float start = ((y+256) * (viewDistance/426) * ((float)1/10)) * mul * spectatorMultiplier;
+                float end = (start * 10f ) * mul * spectatorMultiplier;
 
 
                 overrideFog(viewDistance, start, end);
@@ -93,8 +96,8 @@ public class BackgroundRendererMixin {
 
     private static void overrideWaterToKryslum(float viewDistance, Entity entity) {
         float fogStart, fogEnd;
-        fogStart = viewDistance * -20.0f * 0.01f;//waterstart
-        fogEnd = viewDistance *  40.0f * 0.01f;//waterend
+        fogStart = viewDistance * -20.0f * 0.01f * spectatorMultiplier;//waterstart
+        fogEnd = viewDistance *  40.0f * 0.01f * spectatorMultiplier;//waterend
         if (entity instanceof ClientPlayerEntity) {
             ClientPlayerEntity clientPlayerEntity = (ClientPlayerEntity) entity;
             RegistryEntry<Biome> biomeHolder = clientPlayerEntity.getWorld().getBiome(clientPlayerEntity.getBlockPos());
