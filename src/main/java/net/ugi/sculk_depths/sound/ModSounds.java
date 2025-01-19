@@ -18,6 +18,8 @@ public class ModSounds {
     public static final Identifier AMBIENT_WIND_ADDITIONS = SculkDepths.identifier("ambient.wind.additions");
     public static final Identifier AMBIENT_CAVE_ADDITIONS = SculkDepths.identifier("ambient.cave.additions");
     public static final Identifier BLOCK_AMALGAMITE_BREAK = SculkDepths.identifier("block.amalgamite.break");
+    public static final Identifier BLOCK_AMALGAMITE_STEP = SculkDepths.identifier("block.amalgamite.step");
+    public static final Identifier BLOCK_AMALGAMITE_PLACE = SculkDepths.identifier("block.amalgamite.place");
     public static SoundEvent SCULK_DEPTHS_MAIN_SOUNDTRACK_EVENT = SoundEvent.of(SCULK_DEPTHS_MAIN_SOUNDTRACK);
     public static SoundEvent SCULK_DEPTHS_CEPHLERA_SOUNDTRACK_EVENT = SoundEvent.of(SCULK_DEPTHS_CEPHLERA_SOUNDTRACK);
     public static SoundEvent SCULK_DEPTHS_MAIN_THEME_EVENT = SoundEvent.of(SCULK_DEPTHS_MAIN_THEME);
@@ -26,6 +28,8 @@ public class ModSounds {
     public static SoundEvent AMBIENT_WIND_ADDITIONS_EVENT = SoundEvent.of(AMBIENT_WIND_ADDITIONS);
     public static SoundEvent AMBIENT_CAVE_ADDITIONS_EVENT = SoundEvent.of(AMBIENT_CAVE_ADDITIONS);
     public static SoundEvent BLOCK_AMALGAMITE_BREAK_EVENT = SoundEvent.of(BLOCK_AMALGAMITE_BREAK);
+    public static SoundEvent BLOCK_AMALGAMITE_STEP_EVENT = SoundEvent.of(BLOCK_AMALGAMITE_BREAK);
+    public static SoundEvent BLOCK_AMALGAMITE_PLACE_EVENT = SoundEvent.of(BLOCK_AMALGAMITE_BREAK);
 
 
     public static void registerModSounds() {
@@ -37,6 +41,9 @@ public class ModSounds {
         Registry.register(Registries.SOUND_EVENT, ModSounds.AMBIENT_WIND_ADDITIONS, AMBIENT_WIND_ADDITIONS_EVENT);
         Registry.register(Registries.SOUND_EVENT, ModSounds.AMBIENT_CAVE_ADDITIONS, AMBIENT_CAVE_ADDITIONS_EVENT);
         Registry.register(Registries.SOUND_EVENT, ModSounds.BLOCK_AMALGAMITE_BREAK, BLOCK_AMALGAMITE_BREAK_EVENT);
+        Registry.register(Registries.SOUND_EVENT, ModSounds.BLOCK_AMALGAMITE_STEP, BLOCK_AMALGAMITE_STEP_EVENT);
+        Registry.register(Registries.SOUND_EVENT, ModSounds.BLOCK_AMALGAMITE_PLACE, BLOCK_AMALGAMITE_PLACE_EVENT);
+
     }
 
 }
