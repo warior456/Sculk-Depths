@@ -7,13 +7,36 @@
                      "type": "minecraft:simple_block",
                      "config": {
                        "to_place": {
-                         "type": "minecraft:simple_state_provider",
-                         "state": {
-                           "Name": "sculk_depths:qelberry_bush",
-                           "Properties": {
-                             "age": "2"
+                         "type": "minecraft:weighted_state_provider",
+                         "entries": [
+                           {
+                             "weight": 2,
+                             "data": {
+                               "Name": "sculk_depths:qelberry_bush",
+                               "Properties": {
+                                 "age": "2"
+                               }
+                             }
+                           },
+                           {
+                             "weight": 5,
+                             "data": {
+                               "Name": "sculk_depths:qelberry_bush",
+                               "Properties": {
+                                 "age": "1"
+                               }
+                             }
+                           },
+                           {
+                             "weight": 4,
+                             "data": {
+                               "Name": "sculk_depths:qelberry_bush",
+                               "Properties": {
+                                 "age": "0"
+                               }
+                             }
                            }
-                         }
+                         ]
                        }
                      }
                    },

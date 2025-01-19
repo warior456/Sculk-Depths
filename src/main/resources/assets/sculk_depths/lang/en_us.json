@@ -177,6 +177,8 @@
   "block.sculk_depths.kryslum_enriched_soil": "Kryslum Enriched Soil",
 
   "entity.sculk_depths.glomper": "Glomper",
+  "entity.sculk_depths.lester": "Lester",
+  "entity.sculk_depths.chomper_colossus": "Chomper Colossus",
 
   "advancements.sculk_depths.root": "Exploring the Depths",
   "advancements.sculk_depths.root.description": "Exploration and Ancient Civilization",
@@ -218,4 +220,5 @@
 
   "death.attack.infected": "%1$s inhaled too many spores",
   "death.attack.infected.player": "%1$s inhaled too many spores while fighting %2$s"
+
 }
