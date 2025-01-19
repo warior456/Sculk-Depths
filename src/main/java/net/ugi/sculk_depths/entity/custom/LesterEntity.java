@@ -1,5 +1,6 @@
 package net.ugi.sculk_depths.entity.custom;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -13,10 +14,15 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.function.BooleanBiFunction;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.item.ModItems;
+import net.ugi.sculk_depths.tags.ModTags;
 import org.jetbrains.annotations.Nullable;
 
 public class LesterEntity extends PathAwareEntity {
@@ -38,9 +44,25 @@ public class LesterEntity extends PathAwareEntity {
         return true;
     }
 
+    @Override
     public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
-        return false;
+        return true;
     }
+
+    @Override
+    public boolean isInsideWall() {
+        if (this.noClip) {
+            return false;
+        } else {
+            float f = 0.8F * 0.8F;
+            Box box = Box.of(this.getEyePos(), (double)f, 1.0E-6, (double)f);
+            return BlockPos.stream(box).anyMatch((pos) -> {
+                BlockState blockState = this.getWorld().getBlockState(pos);
+                return !(blockState.isAir() || blockState.isIn(ModTags.Blocks.LESTER_SPAWN_BLOCKS)) && blockState.shouldSuffocate(this.getWorld(), pos) && VoxelShapes.matchesAnywhere(blockState.getCollisionShape(this.getWorld(), pos).offset((double)pos.getX(), (double)pos.getY(), (double)pos.getZ()), VoxelShapes.cuboid(box), BooleanBiFunction.AND);
+            });
+        }
+    }
+
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {

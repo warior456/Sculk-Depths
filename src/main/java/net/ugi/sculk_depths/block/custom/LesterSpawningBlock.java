@@ -51,7 +51,7 @@ public class LesterSpawningBlock extends Block {
             if(pos2 == null){ continue;}
 
 
-            entity.setPosition(pos2.getX()+ 0.5,pos2.getY(),pos2.getZ() + 0.5);
+            entity.setPosition(pos2.getX()+ 0.5,pos2.getY()+1.5,pos2.getZ() + 0.5);
             world.spawnEntity(entity);
 
 
