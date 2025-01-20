@@ -4,7 +4,6 @@ package net.ugi.sculk_depths.world.gen;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 import net.ugi.sculk_depths.SculkDepths;

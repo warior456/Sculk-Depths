@@ -29,6 +29,9 @@ public class ModTags {
         public static final TagKey<Block> PORTAL_AIR =
                 createTag("portal_air");
 
+        public static final TagKey<Block> SCULK_VEINS_REPLACABLE =
+                createTag("sculk_veins_replaceable");
+
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, SculkDepths.identifier( name));

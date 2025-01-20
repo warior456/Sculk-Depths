@@ -62,6 +62,7 @@ public class SculkDepthsClient implements ClientModInitializer {
 		CustomItemModels.QuazarithBootsModels();
 
 
+
 		EntityRendererRegistry.register(ModEntities.GLOMPER, GlomperRenderer::new);
 		EntityRendererRegistry.register(ModEntities.LESTER, LesterRenderer::new);
 		EntityRendererRegistry.register(ModEntities.CHOMPER_COLOSSUS, ChomperColossusRenderer::new);
