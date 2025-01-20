@@ -29,7 +29,7 @@ public class ModSounds {
     public static SoundEvent AMBIENT_CAVE_ADDITIONS_EVENT = SoundEvent.of(AMBIENT_CAVE_ADDITIONS);
     public static SoundEvent BLOCK_AMALGAMITE_BREAK_EVENT = SoundEvent.of(BLOCK_AMALGAMITE_BREAK);
     public static SoundEvent BLOCK_AMALGAMITE_STEP_EVENT = SoundEvent.of(BLOCK_AMALGAMITE_BREAK);
-    public static SoundEvent BLOCK_AMALGAMITE_PLACE_EVENT = SoundEvent.of(BLOCK_AMALGAMITE_BREAK);
+    public static SoundEvent BLOCK_AMALGAMITE_PLACE_EVENT = SoundEvent.of(BLOCK_AMALGAMITE_PLACE);
 
 
     public static void registerModSounds() {
