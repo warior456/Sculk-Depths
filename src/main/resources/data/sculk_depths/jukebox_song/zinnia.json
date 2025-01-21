@@ -1,0 +1,8 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "item.sculk_depths.music_disc_zinnia.desc"
+  },
+  "length_in_seconds": 288,
+  "sound_event": "sculk_depths:music.sculk_depths.zinnia"
+}

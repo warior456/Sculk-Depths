@@ -104,5 +104,6 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.RUBY, Models.GENERATED);
          */
         itemModelGenerator.register(ModItems.CRUX, Models.GENERATED);
+        itemModelGenerator.register(ModItems.MUSIC_DISC_ZINNIA, Models.GENERATED);
     }
 }

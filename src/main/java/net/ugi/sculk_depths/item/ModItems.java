@@ -2,18 +2,20 @@ package net.ugi.sculk_depths.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.jukebox.JukeboxSongs;
 import net.minecraft.component.type.FoodComponents;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.util.Rarity;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.custom.CruxResonator;
 import net.ugi.sculk_depths.item.custom.GlomperGlux;
-
+import net.ugi.sculk_depths.sound.ModSounds;
 
 
 public class ModItems {
@@ -50,6 +52,10 @@ public class ModItems {
 
     public static final Item GLOMPER_GLUX = registerItem("glomper_glux",
             new GlomperGlux(new Item.Settings()));
+
+    public static final Item MUSIC_DISC_ZINNIA = registerItem("music_disc_zinnia",
+            new Item((new Item.Settings()).maxCount(1).rarity(Rarity.RARE).jukeboxPlayable(ModSounds.ZINNIA_KEY)));
+
 
 
     public static final Item GLOMPER_SPAWN_EGG = registerItem("glomper_spawn_egg",
@@ -141,6 +147,7 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, QELBERRIES);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_GLUX);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, MUSIC_DISC_ZINNIA);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_SPAWN_EGG);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, LESTER_SPAWN_EGG);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, CHOMPER_COLOSSUS_SPAWN_EGG);
