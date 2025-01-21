@@ -403,7 +403,7 @@ public class ModBlocks {
             new Block(AbstractBlock.Settings.create().strength(4.0f,0.5f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block CRUMBLING_DIRT = registerBlock("crumbling_dirt",
-            new Block(AbstractBlock.Settings.create().strength(0.3f).requiresTool().sounds(BlockSoundGroup.ROOTED_DIRT)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+            new Block(AbstractBlock.Settings.create().strength(0.3f).sounds(BlockSoundGroup.ROOTED_DIRT)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block KRYSLUM_ENRICHED_SOIL = registerBlock("kryslum_enriched_soil",
             new KryslumEnrichedSoilBLock(AbstractBlock.Settings.copy(Blocks.FARMLAND).ticksRandomly().strength(0.8f).sounds(BlockSoundGroup.MUDDY_MANGROVE_ROOTS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);

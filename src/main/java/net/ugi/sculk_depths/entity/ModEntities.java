@@ -16,16 +16,16 @@ import net.ugi.sculk_depths.entity.custom.LesterEntity;
 public class ModEntities {
     public static final EntityType<GlomperEntity> GLOMPER = Registry.register(Registries.ENTITY_TYPE,
             SculkDepths.identifier( "glomper"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, GlomperEntity::new)
-                    .dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build());
+            EntityType.Builder.create(GlomperEntity::new, SpawnGroup.MONSTER)
+                    .dimensions(1.0f, 1.0f).build());
 
     public static final EntityType<LesterEntity> LESTER = Registry.register(Registries.ENTITY_TYPE,
             SculkDepths.identifier( "lester"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LesterEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.7f, 1.6f)).build());
+            EntityType.Builder.create(LesterEntity::new, SpawnGroup.MONSTER)
+                    .dimensions(0.7f, 1.6f).build());
 
     public static final EntityType<ChomperColossusEntity> CHOMPER_COLOSSUS = Registry.register(Registries.ENTITY_TYPE,
             SculkDepths.identifier( "chomper_colossus"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ChomperColossusEntity::new)
-                    .dimensions(EntityDimensions.fixed(8,11)).build());
+            EntityType.Builder.create(ChomperColossusEntity::new, SpawnGroup.MONSTER)
+                    .dimensions(8,10).build());
 }
