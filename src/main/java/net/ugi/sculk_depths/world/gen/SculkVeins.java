@@ -14,6 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
@@ -51,7 +52,7 @@ public class SculkVeins extends Feature<DefaultFeatureConfig> {
     }
 
 
-    RegistryEntry<DoublePerlinNoiseSampler.NoiseParameters> t = new RegistryEntry<DoublePerlinNoiseSampler.NoiseParameters>() {
+    RegistryEntry<DoublePerlinNoiseSampler.NoiseParameters> noiseParam = new RegistryEntry<DoublePerlinNoiseSampler.NoiseParameters>() {
         @Override
         public DoublePerlinNoiseSampler.NoiseParameters value() {
             return null;
@@ -119,15 +120,18 @@ public class SculkVeins extends Feature<DefaultFeatureConfig> {
     }
 
 
-
+    //boolean[][][] IsAirArray = new boolean[20][304][20]; todo : this better?
+    //boolean[][][] CaveBorders = new boolean[18][302][18];
+    //double[][][] sculkVeinNoiseSamples = new double[18][302][18];
     @Override
     public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
+        BlockPos blockPos = context.getOrigin();
         Random random = context.getRandom();
         StructureWorldAccess structureWorldAccess = context.getWorld();
-        
+        Chunk chunk = structureWorldAccess.getChunk(blockPos);
+
         random.setSeed(structureWorldAccess.getSeed());
-        BlockPos blockPos = context.getOrigin();
-        DensityFunction.Noise test = new DensityFunction.Noise(t, DoublePerlinNoiseSampler.create(random, new DoublePerlinNoiseSampler.NoiseParameters(-7, 1,0.5,1.1,1.5,0,1)));
+        DensityFunction.Noise sculkVeinNoise = new DensityFunction.Noise(noiseParam, DoublePerlinNoiseSampler.create(random, new DoublePerlinNoiseSampler.NoiseParameters(-7, 1,0.5,1.1,1.5,0,1)));
         
 
         int x = blockPos.getX();
@@ -136,85 +140,75 @@ public class SculkVeins extends Feature<DefaultFeatureConfig> {
 
         BlockState block = Blocks.SCULK_VEIN.getDefaultState();
 
-        /*ServerChunkManager serverChunkManager = structureWorldAccess.getServer().getWorld(ModDimensions.SCULK_DEPTHS_LEVEL_KEY).getChunkManager();
-        NoiseConfig noiseConfig = serverChunkManager.getNoiseConfig();
-        DensityFunction noiseRouter = noiseConfig.getNoiseRouter().finalDensity();
-
-        DensityFunction.Noise test2 = new DensityFunction.Noise(t, DoublePerlinNoiseSampler.create(random, noiseConfig.getOrCreateSampler(NoiseParametersKeys.CAVE_CHEESE).copy()));*/
-        boolean[][][] IsAirArray = new boolean[18][302][18];
-        for (int xx = 0;xx< 18;xx++){
-            for (int yy = 0;yy< 302;yy++){
-                for (int zz = 0;zz< 18;zz++){
-                    IsAirArray[xx][yy][zz] = structureWorldAccess.getBlockState(new BlockPos(x + xx-1,y+yy-1,z + zz-1)).isOf(Blocks.AIR);
+        boolean[][][] IsAirArray = new boolean[20][304][20];
+        for (int i = 0;i< 20;i++){
+            for (int j = 0;j< 304;j++){
+                for (int k = 0;k< 20;k++){
+                    IsAirArray[i][j][k] = structureWorldAccess.getBlockState(new BlockPos(x + i-2,y+j-2,z + k-2)).isOf(Blocks.AIR);
                 }
             }
         }
 
-        boolean[][][] onlyValues = new boolean[16][300][16];
-        for (int xx = 0;xx< 16;xx++){
-            for (int yy = 0;yy< 300;yy++){
-                for (int zz = 0;zz< 16;zz++){
-                    if (!(IsAirArray[xx+2][yy+1][zz+1] && IsAirArray[xx+1][yy+2][zz+1]  && IsAirArray[xx+1][yy+1][zz+2]  && IsAirArray[xx][yy+1][zz+1]  && IsAirArray[xx+1][yy][zz+1]  && IsAirArray[xx+1][yy+1][zz])){
+        boolean[][][] CaveBorders = new boolean[18][302][18];
+        for (int i = 0;i< 18;i++){
+            for (int j = 0;j< 302;j++){
+                for (int k = 0;k< 18;k++){
 
+                    if (!(IsAirArray[i+2][j+1][k+1] && IsAirArray[i+1][j+2][k+1]  && IsAirArray[i+1][j+1][k+2]  && IsAirArray[i][j+1][k+1]  && IsAirArray[i+1][j][k+1]  && IsAirArray[i+1][j+1][k])){
+                        if (IsAirArray[i+2][j+1][k+1] || IsAirArray[i+1][j+2][k+1]  || IsAirArray[i+1][j+1][k+2]  || IsAirArray[i][j+1][k+1]  || IsAirArray[i+1][j][k+1]  || IsAirArray[i+1][j+1][k]){
 
-                        if (IsAirArray[xx+2][yy+1][zz+1] || IsAirArray[xx+1][yy+2][zz+1]  || IsAirArray[xx+1][yy+1][zz+2]  || IsAirArray[xx][yy+1][zz+1]  || IsAirArray[xx+1][yy][zz+1]  || IsAirArray[xx+1][yy+1][zz]){
-                            onlyValues[xx][yy][zz] = true;
+                            CaveBorders[i][j][k] = true;
                             continue;
                         }
                     }
-                    onlyValues[xx][yy][zz] = false;
+                    CaveBorders[i][j][k] = false;
+                }
+            }
+        }
+
+        double[][][] sculkVeinNoiseSamples = new double[18][302][18];
+        for (int i = 0;i< 18;i++){
+            for (int j = 0;j< 302;j++){
+                for (int k = 0;k< 18;k++){
+
+                    if (!CaveBorders[i][j][k]) continue;
+                    sculkVeinNoiseSamples[i][j][k] = sculkVeinNoise.sample(x + i,y+j,z + k);
                 }
             }
         }
 
 
 
-        for (int xx = 0;xx< 16;xx++){
-            for (int yy = 0;yy< 300;yy++){
-                for (int zz = 0;zz< 16;zz++){
+        for (int i = 0;i< 16;i++){
+            for (int j = 0;j< 300;j++){
+                for (int k = 0;k< 16;k++){
 
-                    if (!onlyValues[xx][yy][zz]) continue;
-                    BlockPos blockPos1 = new BlockPos(x + xx,y+yy,z + zz);
+                    if (!CaveBorders[i+1][j+1][k+1]) continue;
+                    if(!check(sculkVeinNoiseSamples[i+1][j+1][k+1],0.02))continue;
+                    BlockPos blockPos1 = new BlockPos(x + i,y+j,z + k);
 
-                    BlockPos blockPosUp = new BlockPos(x+xx,y+yy+1,z+zz); //todo faster than .up()????
-                    BlockPos blockPosDown = new BlockPos(x+xx,y+yy-1,z+zz);
-                    BlockPos blockPosNorth = new BlockPos(x+xx,y+yy,z+zz-1);
-                    BlockPos blockPosWest = new BlockPos(x+xx-1,y+yy,z+zz);
-                    BlockPos blockPosEast = new BlockPos(x+xx+1,y+yy,z+zz);
-                    BlockPos blockPosSouth = new BlockPos(x+xx,y+yy,z+zz+1);
-
-//                    if (((structureWorldAccess.getBlockState(blockPosUp).isOf(Blocks.AIR) /*|| structureWorldAccess.getBlockState(blockPosUp).isOf(Blocks.SCULK_VEIN)*/) &&
-//                            (structureWorldAccess.getBlockState(blockPosNorth).isOf(Blocks.AIR) /*|| structureWorldAccess.getBlockState(blockPosNorth).isOf(Blocks.SCULK_VEIN)*/) &&
-//                            (structureWorldAccess.getBlockState(blockPosEast).isOf(Blocks.AIR) /*|| structureWorldAccess.getBlockState(blockPosEast).isOf(Blocks.SCULK_VEIN)*/) &&
-//                            (structureWorldAccess.getBlockState(blockPosSouth).isOf(Blocks.AIR) /*|| structureWorldAccess.getBlockState(blockPosSouth).isOf(Blocks.SCULK_VEIN)*/) &&
-//                            (structureWorldAccess.getBlockState(blockPosWest).isOf(Blocks.AIR) /*|| structureWorldAccess.getBlockState(blockPosWest).isOf(Blocks.SCULK_VEIN)*/) &&
-//                            (structureWorldAccess.getBlockState(blockPosDown).isOf(Blocks.AIR) /*|| structureWorldAccess.getBlockState(blockPosDown).isOf(Blocks.SCULK_VEIN)*/))) continue;
-//
-//                    if (!(structureWorldAccess.getBlockState(blockPosUp).isOf(Blocks.AIR) ||
-//                            structureWorldAccess.getBlockState(blockPosNorth).isOf(Blocks.AIR) ||
-//                            structureWorldAccess.getBlockState(blockPosEast).isOf(Blocks.AIR) ||
-//                            structureWorldAccess.getBlockState(blockPosSouth).isOf(Blocks.AIR) ||
-//                            structureWorldAccess.getBlockState(blockPosWest).isOf(Blocks.AIR) ||
-//                            structureWorldAccess.getBlockState(blockPosDown).isOf(Blocks.AIR))) continue;
-
-                    if (structureWorldAccess.getBlockState(blockPos1).isOf(Blocks.AIR)){
+                    BlockPos blockPosUp = new BlockPos(x+i,y+j+1,z+k); //todo faster than .up()????
+                    BlockPos blockPosDown = new BlockPos(x+i,y+j-1,z+k);
+                    BlockPos blockPosNorth = new BlockPos(x+i,y+j,z+k-1);
+                    BlockPos blockPosWest = new BlockPos(x+i-1,y+j,z+k);
+                    BlockPos blockPosEast = new BlockPos(x+i+1,y+j,z+k);
+                    BlockPos blockPosSouth = new BlockPos(x+i,y+j,z+k+1);
 
 
-                        double n = test.sample(blockPos1.getX(),blockPos1.getY(),blockPos1.getZ());
-                        if(!check(n,0.02))continue;
+
+                    if (chunk.getBlockState(blockPos1).isOf(Blocks.AIR)){
 
 
                         block = block
-                                .with(Properties.UP,       /*!(structureWorldAccess.getBlockState(blockPosUp).isOf(Blocks.AIR) || structureWorldAccess.getBlockState(blockPosUp).isOf(Blocks.SCULK_VEIN)) &&*/ (!check(test.sample(blockPosUp.getX(),blockPosUp.getY(),blockPosUp.getZ()),0) /*&& !structureWorldAccess.getBlockState(blockPosUp).isOf(Blocks.AIR)*/) && structureWorldAccess.getBlockState(blockPosUp).isIn(SCULK_VEINS_REPLACABLE))
-                                .with(Properties.NORTH,    /*!(structureWorldAccess.getBlockState(blockPosNorth).isOf(Blocks.AIR) || structureWorldAccess.getBlockState(blockPosNorth).isOf(Blocks.SCULK_VEIN)) &&*/ (!check(test.sample(blockPosNorth.getX(),blockPosNorth.getY(),blockPosNorth.getZ()),0) /*&& !structureWorldAccess.getBlockState(blockPosNorth).isOf(Blocks.AIR)*/) && structureWorldAccess.getBlockState(blockPosNorth).isIn(SCULK_VEINS_REPLACABLE))
-                                .with(Properties.EAST,     /*!(structureWorldAccess.getBlockState(blockPosEast).isOf(Blocks.AIR) || structureWorldAccess.getBlockState(blockPosEast).isOf(Blocks.SCULK_VEIN)) &&*/ (!check(test.sample(blockPosEast.getX(),blockPosEast.getY(),blockPosEast.getZ()),0) /*&& !structureWorldAccess.getBlockState(blockPosEast).isOf(Blocks.AIR)*/) && structureWorldAccess.getBlockState(blockPosEast).isIn(SCULK_VEINS_REPLACABLE))
-                                .with(Properties.SOUTH,    /*!(structureWorldAccess.getBlockState(blockPosSouth).isOf(Blocks.AIR) || structureWorldAccess.getBlockState(blockPosSouth).isOf(Blocks.SCULK_VEIN)) &&*/ (!check(test.sample(blockPosSouth.getX(),blockPosSouth.getY(),blockPosSouth.getZ()),0) /*&& !structureWorldAccess.getBlockState(blockPosSouth).isOf(Blocks.AIR)*/) && structureWorldAccess.getBlockState(blockPosSouth).isIn(SCULK_VEINS_REPLACABLE))
-                                .with(Properties.WEST,     /*!(structureWorldAccess.getBlockState(blockPosWest).isOf(Blocks.AIR) || structureWorldAccess.getBlockState(blockPosWest).isOf(Blocks.SCULK_VEIN)) &&*/ (!check(test.sample(blockPosWest.getX(),blockPosWest.getY(),blockPosWest.getZ()),0) /*&& !structureWorldAccess.getBlockState(blockPosWest).isOf(Blocks.AIR)*/) && structureWorldAccess.getBlockState(blockPosWest).isIn(SCULK_VEINS_REPLACABLE))
-                                .with(Properties.DOWN,     /*!(structureWorldAccess.getBlockState(blockPosDown).isOf(Blocks.AIR) || structureWorldAccess.getBlockState(blockPosDown).isOf(Blocks.SCULK_VEIN)) &&*/ (!check(test.sample(blockPosDown.getX(),blockPosDown.getY(),blockPosDown.getZ()),0) /*&& !structureWorldAccess.getBlockState(blockPosDown).isOf(Blocks.AIR)*/) && structureWorldAccess.getBlockState(blockPosDown).isIn(SCULK_VEINS_REPLACABLE));
+                                .with(Properties.UP,        !check(sculkVeinNoiseSamples[i+1][j+2][k+1],0) && structureWorldAccess.getBlockState(blockPosUp).isIn(SCULK_VEINS_REPLACABLE))
+                                .with(Properties.NORTH,     !check(sculkVeinNoiseSamples[i+1][j+1][k],0) && structureWorldAccess.getBlockState(blockPosNorth).isIn(SCULK_VEINS_REPLACABLE))
+                                .with(Properties.EAST,      !check(sculkVeinNoiseSamples[i+2][j+1][k+1],0)  && structureWorldAccess.getBlockState(blockPosEast).isIn(SCULK_VEINS_REPLACABLE))
+                                .with(Properties.SOUTH,     !check(sculkVeinNoiseSamples[i+1][j+1][k+2],0)  && structureWorldAccess.getBlockState(blockPosSouth).isIn(SCULK_VEINS_REPLACABLE))
+                                .with(Properties.WEST,      !check(sculkVeinNoiseSamples[i][j+1][k+1],0)  && structureWorldAccess.getBlockState(blockPosWest).isIn(SCULK_VEINS_REPLACABLE))
+                                .with(Properties.DOWN,      !check(sculkVeinNoiseSamples[i+1][j][k+1],0)  && structureWorldAccess.getBlockState(blockPosDown).isIn(SCULK_VEINS_REPLACABLE));
 
 
                         if (!hasAnyDirection(block)) continue;
-
 
                         this.setBlockState(structureWorldAccess, blockPos1, block);
                         continue;
@@ -222,10 +216,10 @@ public class SculkVeins extends Feature<DefaultFeatureConfig> {
                     }
 
 
-                    if (!structureWorldAccess.getBlockState(blockPos1).isIn(SCULK_VEINS_REPLACABLE)) continue;
+                    if (!chunk.getBlockState(blockPos1).isIn(SCULK_VEINS_REPLACABLE)) continue;
 
-                    double n = test.sample(blockPos1.getX(),blockPos1.getY(),blockPos1.getZ());
-                    if(!check(n,0))continue;
+
+                    if(!check(sculkVeinNoiseSamples[i+1][j+1][k+1],0))continue;
 
 
 
@@ -234,26 +228,6 @@ public class SculkVeins extends Feature<DefaultFeatureConfig> {
                 }
             }
         }
-
-//        Iterable<BlockPos> blockPosIterable = BlockPos.iterateOutwards(blockPos,8, 208,8);
-//
-//        blockPosIterable.forEach(blockPos1 -> {
-//            if (!structureWorldAccess.getBlockState(blockPos1).isOf(Blocks.AIR)){
-//                if (structureWorldAccess.getBlockState(blockPos1.up()).isOf(Blocks.AIR) ||
-//                    structureWorldAccess.getBlockState(blockPos1.north()).isOf(Blocks.AIR) ||
-//                    structureWorldAccess.getBlockState(blockPos1.east()).isOf(Blocks.AIR) ||
-//                    structureWorldAccess.getBlockState(blockPos1.south()).isOf(Blocks.AIR) ||
-//                    structureWorldAccess.getBlockState(blockPos1.west()).isOf(Blocks.AIR) ||
-//                    structureWorldAccess.getBlockState(blockPos1.down()).isOf(Blocks.AIR)){
-//                    double n = test.sample(blockPos1.getX(),blockPos1.getY(),blockPos1.getZ());
-//                    if(check(n)){
-//                    this.setBlockState(structureWorldAccess, blockPos1, Blocks.SCULK.getDefaultState());
-//
-//                    }
-//                }
-//            }
-//
-//        });
         return true;
     }
 }
