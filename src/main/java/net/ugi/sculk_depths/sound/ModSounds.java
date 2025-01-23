@@ -23,6 +23,7 @@ public class ModSounds {
     public static final Identifier BLOCK_AMALGAMITE_BREAK = SculkDepths.identifier("block.amalgamite.break");
     public static final Identifier BLOCK_AMALGAMITE_STEP = SculkDepths.identifier("block.amalgamite.step");
     public static final Identifier BLOCK_AMALGAMITE_PLACE = SculkDepths.identifier("block.amalgamite.place");
+    public static final Identifier ZINNIA_MUSIC_DISC = SculkDepths.identifier("disc.zinnia");
     public static SoundEvent SCULK_DEPTHS_MAIN_SOUNDTRACK_EVENT = SoundEvent.of(SCULK_DEPTHS_MAIN_SOUNDTRACK);
     public static SoundEvent SCULK_DEPTHS_CEPHLERA_SOUNDTRACK_EVENT = SoundEvent.of(SCULK_DEPTHS_CEPHLERA_SOUNDTRACK);
     public static SoundEvent SCULK_DEPTHS_MAIN_THEME_EVENT = SoundEvent.of(SCULK_DEPTHS_MAIN_THEME);
@@ -33,6 +34,7 @@ public class ModSounds {
     public static SoundEvent BLOCK_AMALGAMITE_BREAK_EVENT = SoundEvent.of(BLOCK_AMALGAMITE_BREAK);
     public static SoundEvent BLOCK_AMALGAMITE_STEP_EVENT = SoundEvent.of(BLOCK_AMALGAMITE_STEP);
     public static SoundEvent BLOCK_AMALGAMITE_PLACE_EVENT = SoundEvent.of(BLOCK_AMALGAMITE_PLACE);
+    public static SoundEvent ZINNIA_MUSIC_DISC_EVENT = SoundEvent.of(ZINNIA_MUSIC_DISC);
 
 
     public static final RegistryKey<JukeboxSong> ZINNIA_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, SculkDepths.identifier( "zinnia"));
@@ -49,6 +51,6 @@ public class ModSounds {
         Registry.register(Registries.SOUND_EVENT, ModSounds.BLOCK_AMALGAMITE_BREAK, BLOCK_AMALGAMITE_BREAK_EVENT);
         Registry.register(Registries.SOUND_EVENT, ModSounds.BLOCK_AMALGAMITE_STEP, BLOCK_AMALGAMITE_STEP_EVENT);
         Registry.register(Registries.SOUND_EVENT, ModSounds.BLOCK_AMALGAMITE_PLACE, BLOCK_AMALGAMITE_PLACE_EVENT);
-        Registry.register(Registries.SOUND_EVENT, ModSounds.SCULK_DEPTHS_ZINNIA, SCULK_DEPTHS_ZINNIA_EVENT);
+        Registry.register(Registries.SOUND_EVENT, ModSounds.ZINNIA_MUSIC_DISC, ZINNIA_MUSIC_DISC_EVENT);
     }
 }

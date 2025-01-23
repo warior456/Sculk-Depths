@@ -61,10 +61,6 @@
   },
   "features": [
     [
-      //"sculk_depths:sculk_veins_roof_umbrusk",
-      //"sculk_depths:sculk_veins_floor_umbrusk",
-      //"sculk_depths:sculk_veins_roof_deepslate",
-      //"sculk_depths:sculk_veins_floor_deepslate"
       "sculk_depths:sculk_veins"
 
     ],
