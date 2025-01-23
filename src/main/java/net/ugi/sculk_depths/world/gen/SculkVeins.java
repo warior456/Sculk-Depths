@@ -131,6 +131,8 @@ public class SculkVeins extends Feature<DefaultFeatureConfig> {
         StructureWorldAccess structureWorldAccess = context.getWorld();
         Chunk chunk = structureWorldAccess.getChunk(blockPos);
 
+        int h = 250+50;
+
         random.setSeed(structureWorldAccess.getSeed());
         DensityFunction.Noise sculkVeinNoise = new DensityFunction.Noise(noiseParam, DoublePerlinNoiseSampler.create(random, new DoublePerlinNoiseSampler.NoiseParameters(-7, 1,0.5,1.1,1.5,0,1)));
         
@@ -141,12 +143,22 @@ public class SculkVeins extends Feature<DefaultFeatureConfig> {
 
         BlockState block = Blocks.SCULK_VEIN.getDefaultState();
 
-
-        boolean[][][] IsAirArray = new boolean[20][304][20];
+        int chunkMaxHeight = y;
         for (int i = 0;i< 20;i++){
             for (int k = 0;k< 20;k++){
                 int height = structureWorldAccess.getChunk(new BlockPos(x + i-2,y,z + k-2)).getHeightmap(Heightmap.Type.WORLD_SURFACE_WG).get((i+14)%16, (k+14)%16);
-                for (int j = 0;j< 304;j++){
+                if (height > chunkMaxHeight) chunkMaxHeight = height;
+            }
+        }
+        chunkMaxHeight -= y;
+        if (chunkMaxHeight > h) chunkMaxHeight = h;
+
+
+        boolean[][][] IsAirArray = new boolean[20][chunkMaxHeight+4][20];
+        for (int i = 0;i< 20;i++){
+            for (int k = 0;k< 20;k++){
+                int height = structureWorldAccess.getChunk(new BlockPos(x + i-2,y,z + k-2)).getHeightmap(Heightmap.Type.WORLD_SURFACE_WG).get((i+14)%16, (k+14)%16);
+                for (int j = 0;j< chunkMaxHeight+4;j++){
 
                     if (y+j > height+2) {IsAirArray[i][j][k] = false; continue;};
 
@@ -155,11 +167,11 @@ public class SculkVeins extends Feature<DefaultFeatureConfig> {
             }
         }
 
-        boolean[][][] CaveBorders = new boolean[18][302][18];
+        boolean[][][] CaveBorders = new boolean[18][chunkMaxHeight+2][18];
         for (int i = 0;i< 18;i++){
             for (int k = 0;k< 18;k++){
                 int height = structureWorldAccess.getChunk(new BlockPos(x + i-1,y,z + k-1)).getHeightmap(Heightmap.Type.WORLD_SURFACE_WG).get((i+15)%16, (k+15)%16);
-                for (int j = 0;j< 302;j++){
+                for (int j = 0;j< chunkMaxHeight+2;j++){
 
                     if (y+j > height+1) {CaveBorders[i][j][k] = false; continue;};
 
@@ -175,11 +187,11 @@ public class SculkVeins extends Feature<DefaultFeatureConfig> {
             }
         }
 
-        double[][][] sculkVeinNoiseSamples = new double[18][302][18];
+        double[][][] sculkVeinNoiseSamples = new double[18][chunkMaxHeight+2][18];
         for (int i = 0;i< 18;i++){
             for (int k = 0;k< 18;k++){
                 int height = structureWorldAccess.getChunk(new BlockPos(x + i-1,y,z + k-1)).getHeightmap(Heightmap.Type.WORLD_SURFACE_WG).get((i+15)%16, (k+15)%16);
-                for (int j = 0;j< 302;j++){
+                for (int j = 0;j< chunkMaxHeight+2;j++){
 
                     if (y+j > height+1) break;
 
@@ -195,7 +207,7 @@ public class SculkVeins extends Feature<DefaultFeatureConfig> {
             for (int k = 0;k< 16;k++){
                 int height = structureWorldAccess.getChunk(blockPos).getHeightmap(Heightmap.Type.WORLD_SURFACE_WG).get(i, k);
 
-                for (int j = 0;j< 300;j++){
+                for (int j = 0;j< chunkMaxHeight;j++){
 
                     if (y+j > height) break;
 
