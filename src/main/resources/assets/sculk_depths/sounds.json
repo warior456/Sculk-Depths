@@ -176,6 +176,15 @@
 				"volume": 1
 			}
 		]
+	},
+	"disc.zinnia": {
+		"sounds": [
+			{
+				"name":"sculk_depths:zinnia_music_disc",
+				"stream": true,
+				"volume": 1
+			}
+		]
 	}
 
 }
