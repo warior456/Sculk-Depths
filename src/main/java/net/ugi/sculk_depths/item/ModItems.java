@@ -1,8 +1,6 @@
 package net.ugi.sculk_depths.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.jukebox.JukeboxSongs;
 import net.minecraft.component.type.FoodComponents;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
@@ -13,7 +11,7 @@ import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.fluid.ModFluids;
-import net.ugi.sculk_depths.item.custom.CruxResonator;
+import net.ugi.sculk_depths.item.custom.crux_resonator.CruxResonator;
 import net.ugi.sculk_depths.item.custom.GlomperGlux;
 import net.ugi.sculk_depths.sound.ModSounds;
 

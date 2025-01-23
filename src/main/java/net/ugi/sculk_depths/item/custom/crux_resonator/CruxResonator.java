@@ -1,47 +1,24 @@
-package net.ugi.sculk_depths.item.custom;
+package net.ugi.sculk_depths.item.custom.crux_resonator;
 
-import java.util.Locale;
-import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
-
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Maps;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.component.ComponentType;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.LodestoneTrackerComponent;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.GlobalPos;
 import net.minecraft.world.World;
-import net.minecraft.world.poi.PointOfInterestType;
-import net.ugi.sculk_depths.SculkDepths;
-import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModComponentTypes;
 import net.ugi.sculk_depths.item.ModItems;
-import net.ugi.sculk_depths.item.custom.crux_resonator.OscillatorTrackerComponent;
 import org.jetbrains.annotations.Nullable;
 
 import static net.ugi.sculk_depths.block.ModBlocks.QUAZARITH_OSCILLATOR;
-import static net.ugi.sculk_depths.util.POIs.QUAZARITH_OSCILLATOR_POI;
 
 public class CruxResonator extends Item {
     public CruxResonator(Item.Settings settings) {

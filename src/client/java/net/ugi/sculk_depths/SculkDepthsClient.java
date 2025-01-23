@@ -20,7 +20,7 @@ import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.client.*;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItems;
-import net.ugi.sculk_depths.item.custom.CruxResonator;
+import net.ugi.sculk_depths.item.custom.crux_resonator.CruxResonator;
 import net.ugi.sculk_depths.particle.*;
 import net.ugi.sculk_depths.render.SculkDepthsCloudRendererClient;
 import net.ugi.sculk_depths.render.SculkDepthsSkyRendererClient;
