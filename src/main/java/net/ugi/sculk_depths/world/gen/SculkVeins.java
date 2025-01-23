@@ -131,8 +131,6 @@ public class SculkVeins extends Feature<DefaultFeatureConfig> {
         StructureWorldAccess structureWorldAccess = context.getWorld();
         Chunk chunk = structureWorldAccess.getChunk(blockPos);
 
-        int h = 250+50;
-
         random.setSeed(structureWorldAccess.getSeed());
         DensityFunction.Noise sculkVeinNoise = new DensityFunction.Noise(noiseParam, DoublePerlinNoiseSampler.create(random, new DoublePerlinNoiseSampler.NoiseParameters(-7, 1,0.5,1.1,1.5,0,1)));
         
@@ -140,6 +138,8 @@ public class SculkVeins extends Feature<DefaultFeatureConfig> {
         int x = blockPos.getX();
         int y = blockPos.getY();
         int z = blockPos.getZ();
+
+        int h = -y+50;
 
         BlockState block = Blocks.SCULK_VEIN.getDefaultState();
 
