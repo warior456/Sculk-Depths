@@ -13,6 +13,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
@@ -140,10 +141,15 @@ public class SculkVeins extends Feature<DefaultFeatureConfig> {
 
         BlockState block = Blocks.SCULK_VEIN.getDefaultState();
 
+
         boolean[][][] IsAirArray = new boolean[20][304][20];
         for (int i = 0;i< 20;i++){
-            for (int j = 0;j< 304;j++){
-                for (int k = 0;k< 20;k++){
+            for (int k = 0;k< 20;k++){
+                int height = structureWorldAccess.getChunk(new BlockPos(x + i-2,y,z + k-2)).getHeightmap(Heightmap.Type.WORLD_SURFACE_WG).get((i+14)%16, (k+14)%16);
+                for (int j = 0;j< 304;j++){
+
+                    if (y+j > height+2) {IsAirArray[i][j][k] = false; continue;};
+
                     IsAirArray[i][j][k] = structureWorldAccess.getBlockState(new BlockPos(x + i-2,y+j-2,z + k-2)).isOf(Blocks.AIR);
                 }
             }
@@ -151,8 +157,11 @@ public class SculkVeins extends Feature<DefaultFeatureConfig> {
 
         boolean[][][] CaveBorders = new boolean[18][302][18];
         for (int i = 0;i< 18;i++){
-            for (int j = 0;j< 302;j++){
-                for (int k = 0;k< 18;k++){
+            for (int k = 0;k< 18;k++){
+                int height = structureWorldAccess.getChunk(new BlockPos(x + i-1,y,z + k-1)).getHeightmap(Heightmap.Type.WORLD_SURFACE_WG).get((i+15)%16, (k+15)%16);
+                for (int j = 0;j< 302;j++){
+
+                    if (y+j > height+1) {CaveBorders[i][j][k] = false; continue;};
 
                     if (!(IsAirArray[i+2][j+1][k+1] && IsAirArray[i+1][j+2][k+1]  && IsAirArray[i+1][j+1][k+2]  && IsAirArray[i][j+1][k+1]  && IsAirArray[i+1][j][k+1]  && IsAirArray[i+1][j+1][k])){
                         if (IsAirArray[i+2][j+1][k+1] || IsAirArray[i+1][j+2][k+1]  || IsAirArray[i+1][j+1][k+2]  || IsAirArray[i][j+1][k+1]  || IsAirArray[i+1][j][k+1]  || IsAirArray[i+1][j+1][k]){
@@ -168,8 +177,11 @@ public class SculkVeins extends Feature<DefaultFeatureConfig> {
 
         double[][][] sculkVeinNoiseSamples = new double[18][302][18];
         for (int i = 0;i< 18;i++){
-            for (int j = 0;j< 302;j++){
-                for (int k = 0;k< 18;k++){
+            for (int k = 0;k< 18;k++){
+                int height = structureWorldAccess.getChunk(new BlockPos(x + i-1,y,z + k-1)).getHeightmap(Heightmap.Type.WORLD_SURFACE_WG).get((i+15)%16, (k+15)%16);
+                for (int j = 0;j< 302;j++){
+
+                    if (y+j > height+1) break;
 
                     if (!CaveBorders[i][j][k]) continue;
                     sculkVeinNoiseSamples[i][j][k] = sculkVeinNoise.sample(x + i,y+j,z + k);
@@ -180,8 +192,13 @@ public class SculkVeins extends Feature<DefaultFeatureConfig> {
 
 
         for (int i = 0;i< 16;i++){
-            for (int j = 0;j< 300;j++){
-                for (int k = 0;k< 16;k++){
+            for (int k = 0;k< 16;k++){
+                int height = structureWorldAccess.getChunk(blockPos).getHeightmap(Heightmap.Type.WORLD_SURFACE_WG).get(i, k);
+
+                for (int j = 0;j< 300;j++){
+
+                    if (y+j > height) break;
+
 
                     if (!CaveBorders[i+1][j+1][k+1]) continue;
                     if(!check(sculkVeinNoiseSamples[i+1][j+1][k+1],0.02))continue;
