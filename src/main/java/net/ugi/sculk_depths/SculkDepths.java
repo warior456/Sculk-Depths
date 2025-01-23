@@ -22,6 +22,7 @@ import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import net.ugi.sculk_depths.entity.custom.LesterEntity;
 import net.ugi.sculk_depths.entity.effect.ModStatusEffects;
 import net.ugi.sculk_depths.fluid.ModFluids;
+import net.ugi.sculk_depths.item.ModComponentTypes;
 import net.ugi.sculk_depths.item.ModItemGroup;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.item.crystal.CheckInvForCrystalItems;
@@ -31,6 +32,7 @@ import net.ugi.sculk_depths.screen.ModScreenHandlers;
 import net.ugi.sculk_depths.sound.ConditionalSoundPlayer;
 import net.ugi.sculk_depths.sound.ModSounds;
 import net.ugi.sculk_depths.state.property.ModProperties;
+import net.ugi.sculk_depths.util.POIs;
 import net.ugi.sculk_depths.world.WorldGenerator;
 import net.ugi.sculk_depths.world.gen.ModFeatures;
 import net.ugi.sculk_depths.world.gen.ModPlacementModifierType;
@@ -94,9 +96,8 @@ public class SculkDepths implements ModInitializer {
         ServerTickEvents.START_WORLD_TICK.register(new CheckInvForCrystalItems());
         ServerTickEvents.START_WORLD_TICK.register(new ModBiomeEffects());
 
-
-        //registerCustomPOI();
-        CruxResonator.registerAndGetDefault(Registries.POINT_OF_INTEREST_TYPE);
+        ModComponentTypes.register();
+        POIs.register();
         //register(Registries.POINT_OF_INTEREST_TYPE, Q_LODESTONE, getStatesOfBlock(ModBlocks.QUAZARITH_LODESTONE), 0, 1);
         //ServerTickEvents.START_WORLD_TICK.register(new ConditionalSoundPlayer());
 
@@ -107,73 +108,7 @@ public class SculkDepths implements ModInitializer {
     }
 
 
-//    private static void registerStates(PointOfInterestType poiType, Set<BlockState> states) {
-//        states.forEach(state -> {
-//            if (PointOfInterestTypes.containsState(state)) {
-//                throw new IllegalStateException(state + " is already mapped to a POI!");
-//            }
-//            PointOfInterestTypes.registerState(poiType, state);
-//        });
-//    }
-//
-//    public static void registerCustomPOI() {
-//        PointOfInterestType customPOIType = new PointOfInterestType(
-//                getStatesOfBlock(ModBlocks.QUAZARITH_LODESTONE), // Block states associated with this POI
-//                1,                        // Ticket count
-//                1                         // Search distance
-//        );
-//
-//        Registry.register(
-//                Q_LODESTONE, // POI Registry
-//                Q_LODESTONE.getValue(),         // Identifier
-//                customPOIType                    // Your custom POI type
-//        );
-//
-//        registerStates(customPOIType, getStatesOfBlock(ModBlocks.QUAZARITH_LODESTONE)); // Map custom states to the POI type
-//    }
 
-
-//    //-----
-//    public static final RegistryKey<PointOfInterestType> Q_LODESTONE = of("q_lodestone");
-//
-//    private static final Map<BlockState, RegistryEntry<PointOfInterestType>> POI_STATES_TO_TYPE = Maps.<BlockState, RegistryEntry<PointOfInterestType>>newHashMap();
-//
-//    private static Set<BlockState> getStatesOfBlock(Block block) {
-//        return ImmutableSet.copyOf(block.getStateManager().getStates());
-//    }
-//
-//    private static RegistryKey<PointOfInterestType> of(String id) {
-//        return RegistryKey.of(RegistryKeys.POINT_OF_INTEREST_TYPE, Identifier.ofVanilla(id));
-//    }
-//
-//    private static PointOfInterestType register(
-//            Registry<PointOfInterestType> registry, RegistryKey<PointOfInterestType> key, Set<BlockState> states, int ticketCount, int searchDistance
-//    ) {
-//        PointOfInterestType pointOfInterestType = new PointOfInterestType(states, ticketCount, searchDistance);
-//        Registry.register(registry, key, pointOfInterestType);
-//        registerStates(registry.entryOf(key), states);
-//        return pointOfInterestType;
-//    }
-//
-//    private static void registerStates(RegistryEntry<PointOfInterestType> poiTypeEntry, Set<BlockState> states) {
-//        states.forEach(state -> {
-//            RegistryEntry<PointOfInterestType> registryEntry2 = (RegistryEntry<PointOfInterestType>)POI_STATES_TO_TYPE.put(state, poiTypeEntry);
-//            if (registryEntry2 != null) {
-//                throw (IllegalStateException) Util.throwOrPause(new IllegalStateException(String.format(Locale.ROOT, "%s is defined in more than one PoI type", state)));
-//            }
-//        });
-//    }
-//
-//    public static Optional<RegistryEntry<PointOfInterestType>> getTypeForState(BlockState state) {
-//        return Optional.ofNullable((RegistryEntry)POI_STATES_TO_TYPE.get(state));
-//    }
-//
-//    public static boolean isPointOfInterest(BlockState state) {
-//        return POI_STATES_TO_TYPE.containsKey(state);
-//    }
-//
-//
-//    //-----
 
 
 }
