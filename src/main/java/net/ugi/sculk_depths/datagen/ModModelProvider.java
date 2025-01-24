@@ -28,6 +28,7 @@ public class ModModelProvider extends FabricModelProvider {
         BlockStateModelGenerator.BlockTexturePool petrifiedValtroxPlankPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.PETRIFIED_VALTROX_SLATES);
         BlockStateModelGenerator.BlockTexturePool polishedAmalgamitekPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.POLISHED_AMALGAMITE);
         BlockStateModelGenerator.BlockTexturePool amalgamiteBrickPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.AMALGAMITE_BRICKS);
+        BlockStateModelGenerator.BlockTexturePool flumrockTilesPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.FLUMROCK_TILES);
 
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.QUAZARITH_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUX_BLOCK);
@@ -40,6 +41,10 @@ public class ModModelProvider extends FabricModelProvider {
         amalgamiteBrickPool.stairs(ModBlocks.AMALGAMITE_BRICK_STAIRS);
         amalgamiteBrickPool.slab(ModBlocks.AMALGAMITE_BRICK_SLAB);
         amalgamiteBrickPool.wall(ModBlocks.AMALGAMITE_BRICK_WALL);
+
+        flumrockTilesPool.stairs(ModBlocks.FLUMROCK_TILE_STAIRS);
+        flumrockTilesPool.slab(ModBlocks.FLUMROCK_TILE_SLAB);
+        flumrockTilesPool.wall(ModBlocks.FLUMROCK_TILE_WALL);
 
 
         blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.VALTROX_SAPLING, ModBlocks.POTTED_VALTROX_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
