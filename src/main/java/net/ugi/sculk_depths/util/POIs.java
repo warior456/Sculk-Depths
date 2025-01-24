@@ -1,6 +1,7 @@
 package net.ugi.sculk_depths.util;
 
 import com.google.common.collect.ImmutableSet;
+import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.registry.Registries;
@@ -17,19 +18,13 @@ import java.util.Set;
 public class POIs{
 
 
-    public static PointOfInterestType oscillatorPointOfInterestType = new PointOfInterestType(getStatesOfBlock(ModBlocks.QUAZARITH_OSCILLATOR), 0, 1);
     public static void register(){
-        Registry.register(Registries.POINT_OF_INTEREST_TYPE, "quazarith_oscillator", oscillatorPointOfInterestType);
+        PointOfInterestHelper.register(SculkDepths.identifier("quazarith_oscillator"),0,1, getStatesOfBlock(ModBlocks.QUAZARITH_OSCILLATOR));
     }
-
-
 
     public static Set<BlockState> getStatesOfBlock(Block block) {
         return ImmutableSet.copyOf(block.getStateManager().getStates());
     }
-    private static RegistryKey<PointOfInterestType> of(String id) {
-        return RegistryKey.of(RegistryKeys.POINT_OF_INTEREST_TYPE, SculkDepths.identifier(id));
-    }
 
-    public static final RegistryKey<PointOfInterestType> QUAZARITH_OSCILLATOR_POI = of("quazarith_oscillator");
+    public static final RegistryKey<PointOfInterestType> QUAZARITH_OSCILLATOR_POI = RegistryKey.of(RegistryKeys.POINT_OF_INTEREST_TYPE, SculkDepths.identifier("quazarith_oscillator"));
 }

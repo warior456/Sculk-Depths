@@ -37,7 +37,7 @@ public record OscillatorTrackerComponent(Optional<GlobalPos> target, boolean tra
                 return this;
             } else {
                 BlockPos blockPos = ((GlobalPos)this.target.get()).pos();
-                return world.isInBuildLimit(blockPos) && world.getBlockState(blockPos).isOf(ModBlocks.QUAZARITH_OSCILLATOR)/*&& world.getPointOfInterestStorage().hasTypeAt(POIs.QUAZARITH_OSCILLATOR_POI, blockPos)*/
+                return world.isInBuildLimit(blockPos) && world.getPointOfInterestStorage().hasTypeAt(POIs.QUAZARITH_OSCILLATOR_POI, blockPos)
                         ? this
                         : new OscillatorTrackerComponent(Optional.empty(), true);
             }
