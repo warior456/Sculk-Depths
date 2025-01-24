@@ -100,6 +100,88 @@ public class ModBlocks {
             new WallBlock(AbstractBlock.Settings.copy(ModBlocks.UMBRUSK_BRICKS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
 
+    // ------------------- zygrin  -------------------
+
+    //zygrin blockset
+    public static final Block ZYGRIN = registerBlock("zygrin",
+            new Block(AbstractBlock.Settings.copy(Blocks.STONE).strength(6.0f,9.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_STAIRS = registerBlock("zygrin_stairs",
+            new StairsBlock(ZYGRIN.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_SLAB = registerBlock("zygrin_slab",
+            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_WALL = registerBlock("zygrin_wall",
+            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    //polished zygrin blockset
+    public static final Block POLISHED_ZYGRIN = registerBlock("polished_zygrin",
+            new Block(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block POLISHED_ZYGRIN_STAIRS = registerBlock("polished_zygrin_stairs",
+            new StairsBlock(POLISHED_ZYGRIN.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block POLISHED_ZYGRIN_SLAB = registerBlock("polished_zygrin_slab",
+            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block POLISHED_ZYGRIN_WALL = registerBlock("polished_zygrin_wall",
+            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    //zygrin bricks blockset
+    public static final Block ZYGRIN_BRICKS = registerBlock("zygrin_bricks",
+            new Block(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_BRICK_STAIRS = registerBlock("zygrin_brick_stairs",
+            new StairsBlock(ZYGRIN_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_BRICK_SLAB = registerBlock("zygrin_brick_slab",
+            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_BRICK_WALL = registerBlock("zygrin_brick_wall",
+            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    //rest
+    public static final Block ZYGRIN_PILLAR = registerBlock("zygrin_pillar",
+            new PillarBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block CHISELED_ZYGRIN = registerBlock("chiseled_zygrin",
+            new PillarBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_LIGHT = registerBlock("zygrin_light",
+            new Block(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool().luminance((state) -> 15)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_FLOWBLOCK = registerBlock("zygrin_flowblock",
+            new FlowBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_FURNACE = registerBlock("zygrin_furnace",
+            new ZygrinFurnaceBlock(AbstractBlock.Settings.copy(Blocks.FURNACE).strength(10.0f,10f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+
+    // ------------------- flumrock -------------------
+    public static final Block FLUMROCK = registerBlock("flumrock",
+            new Block(AbstractBlock.Settings.create().strength(4.0f,0.5f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    //flumrock tiles
+    public static final Block FLUMROCK_TILES = registerBlock("flumrock_tiles",
+            new Block(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block FLUMROCK_TILE_STAIRS = registerBlock("flumrock_tile_stairs",
+            new StairsBlock(FLUMROCK_TILES.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_TILES).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block FLUMROCK_TILE_SLAB = registerBlock("flumrock_tile_slab",
+            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_TILES).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block FLUMROCK_TILE_WALL = registerBlock("flumrock_tile_wall",
+            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_TILES).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    //cauldron
+    public static final Block FLUMROCK_CAULDRON = registerBlock("flumrock_cauldron", new FlumrockCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+    public static final Block KRYSLUM_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("kryslum_flumrock_cauldron", new KryslumFlumrockCauldronBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_CAULDRON), ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+    public static final Block SPORE_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("spore_flumrock_cauldron", new SporeFlumrockCauldronBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_CAULDRON), ModCauldronBehavior.SPORE_FLUMROCK_CAULDRON_BEHAVIOR.map()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+
+
     // ------------------- valtrox  -------------------
 
     //valtrox blockset
@@ -312,63 +394,6 @@ public class ModBlocks {
             new WallHangingSignBlock(ModWoodType.PETRIFIED_VALTROX, AbstractBlock.Settings.copy(Blocks.OAK_WALL_HANGING_SIGN).strength(1.5f).requiresTool().dropsLike(ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN).solid()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
 
-    // ------------------- zygrin  -------------------
-
-    //zygrin blockset
-    public static final Block ZYGRIN = registerBlock("zygrin",
-            new Block(AbstractBlock.Settings.copy(Blocks.STONE).strength(6.0f,9.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block ZYGRIN_STAIRS = registerBlock("zygrin_stairs",
-            new StairsBlock(ZYGRIN.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block ZYGRIN_SLAB = registerBlock("zygrin_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block ZYGRIN_WALL = registerBlock("zygrin_wall",
-            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    //polished zygrin blockset
-    public static final Block POLISHED_ZYGRIN = registerBlock("polished_zygrin",
-            new Block(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block POLISHED_ZYGRIN_STAIRS = registerBlock("polished_zygrin_stairs",
-            new StairsBlock(POLISHED_ZYGRIN.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block POLISHED_ZYGRIN_SLAB = registerBlock("polished_zygrin_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block POLISHED_ZYGRIN_WALL = registerBlock("polished_zygrin_wall",
-            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    //zygrin bricks blockset
-    public static final Block ZYGRIN_BRICKS = registerBlock("zygrin_bricks",
-            new Block(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block ZYGRIN_BRICK_STAIRS = registerBlock("zygrin_brick_stairs",
-            new StairsBlock(ZYGRIN_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block ZYGRIN_BRICK_SLAB = registerBlock("zygrin_brick_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block ZYGRIN_BRICK_WALL = registerBlock("zygrin_brick_wall",
-            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    //rest
-    public static final Block ZYGRIN_PILLAR = registerBlock("zygrin_pillar",
-            new PillarBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block CHISELED_ZYGRIN = registerBlock("chiseled_zygrin",
-            new PillarBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block ZYGRIN_LIGHT = registerBlock("zygrin_light",
-            new Block(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool().luminance((state) -> 15)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block ZYGRIN_FLOWBLOCK = registerBlock("zygrin_flowblock",
-            new FlowBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block ZYGRIN_FURNACE = registerBlock("zygrin_furnace",
-            new ZygrinFurnaceBlock(AbstractBlock.Settings.copy(Blocks.FURNACE).strength(10.0f,10f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
 
     // ------------------- leaves -------------------
     public static final Block VALTROX_LEAVES = registerBlock("valtrox_leaves",
@@ -417,28 +442,6 @@ public class ModBlocks {
 
     public static final Block PENEBRIUM_SPORE_BLOCK = registerBlock("penebrium_spore_block",
             new SporeBlock(AbstractBlock.Settings.copy(Blocks.MUSHROOM_STEM).luminance((state) -> 5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).nonOpaque()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    // ------------------- flumrock -------------------
-    public static final Block FLUMROCK = registerBlock("flumrock",
-            new Block(AbstractBlock.Settings.create().strength(4.0f,0.5f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    //flumrock tiles
-    public static final Block FLUMROCK_TILES = registerBlock("flumrock_tiles",
-            new Block(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block FLUMROCK_TILE_STAIRS = registerBlock("flumrock_tile_stairs",
-            new StairsBlock(FLUMROCK_TILES.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_TILES).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block FLUMROCK_TILE_SLAB = registerBlock("flumrock_tile_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_TILES).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block FLUMROCK_TILE_WALL = registerBlock("flumrock_tile_wall",
-            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_TILES).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    //cauldron
-    public static final Block FLUMROCK_CAULDRON = registerBlock("flumrock_cauldron", new FlumrockCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-    public static final Block KRYSLUM_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("kryslum_flumrock_cauldron", new KryslumFlumrockCauldronBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_CAULDRON), ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-    public static final Block SPORE_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("spore_flumrock_cauldron", new SporeFlumrockCauldronBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_CAULDRON), ModCauldronBehavior.SPORE_FLUMROCK_CAULDRON_BEHAVIOR.map()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
 
 
