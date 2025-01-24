@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "sculk_depths:block/polished_amalgamite_slab"
+    },
+    "type=double": {
+      "model": "sculk_depths:block/polished_amalgamite"
+    },
+    "type=top": {
+      "model": "sculk_depths:block/polished_amalgamite_slab_top"
+    }
+  }
+}

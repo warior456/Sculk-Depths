@@ -42,6 +42,18 @@ public class ModBlocks {
     public static final Block CHISELED_AMALGAMITE = registerBlock("chiseled_amalgamite",
             new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_BRICKS).strength(2.9f, 6.0f).requiresTool().sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
+    public static final Block POLISHED_AMALGAMITE = registerBlock("polished_amalgamite",
+            new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_BRICKS).strength(2.9f, 6.0f).requiresTool().sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block POLISHED_AMALGAMITE_STAIRS = registerBlock("polished_amalgamite_stairs",
+            new StairsBlock(ModBlocks.AMALGAMITE_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block POLISHED_AMALGAMITE_SLAB = registerBlock("polished_amalgamite_slab",
+            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block POLISHED_AMALGAMITE_WALL = registerBlock("polished_amalgamite_wall",
+            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
     public static final Block AMALGAMITE_BRICK_STAIRS = registerBlock("amalgamite_brick_stairs",
             new StairsBlock(ModBlocks.AMALGAMITE_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 

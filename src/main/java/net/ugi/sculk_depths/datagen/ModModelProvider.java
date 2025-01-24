@@ -26,12 +26,16 @@ public class ModModelProvider extends FabricModelProvider {
         BlockStateModelGenerator.BlockTexturePool coatedValtroxPlankPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.COATED_VALTROX_PLANKS);
         BlockStateModelGenerator.BlockTexturePool driedValtroxPlankPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.DRIED_VALTROX_PLANKS);
         BlockStateModelGenerator.BlockTexturePool petrifiedValtroxPlankPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.PETRIFIED_VALTROX_SLATES);
+        BlockStateModelGenerator.BlockTexturePool polishedAmalgamitekPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.POLISHED_AMALGAMITE);
         BlockStateModelGenerator.BlockTexturePool amalgamiteBrickPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.AMALGAMITE_BRICKS);
 
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.QUAZARITH_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUX_BLOCK);
         //blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.AURIC_SPORE_BLOCK);
 
+        polishedAmalgamitekPool.stairs(ModBlocks.POLISHED_AMALGAMITE_STAIRS);
+        polishedAmalgamitekPool.slab(ModBlocks.POLISHED_AMALGAMITE_SLAB);
+        polishedAmalgamitekPool.wall(ModBlocks.POLISHED_AMALGAMITE_WALL);
 
         amalgamiteBrickPool.stairs(ModBlocks.AMALGAMITE_BRICK_STAIRS);
         amalgamiteBrickPool.slab(ModBlocks.AMALGAMITE_BRICK_SLAB);
