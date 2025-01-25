@@ -9,6 +9,7 @@ public class ModFlammableBlocks {
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.VALTROX_LOG, 5, 20);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.STRIPPED_VALTROX_LOG, 5, 20);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.VALTROX_WOOD, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.STRIPPED_VALTROX_WOOD, 5, 20);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.VALTROX_PLANKS, 5, 20);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.VALTROX_STAIRS, 5, 20);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.VALTROX_SLAB, 5, 20);
@@ -24,6 +25,7 @@ public class ModFlammableBlocks {
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.DRIED_VALTROX_LOG, 5, 40);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.STRIPPED_DRIED_VALTROX_LOG, 5, 40);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.DRIED_VALTROX_WOOD, 5, 40);
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.STRIPPED_DRIED_VALTROX_WOOD, 5, 40);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.DRIED_VALTROX_PLANKS, 5, 40);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.DRIED_VALTROX_STAIRS, 5, 40);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.DRIED_VALTROX_SLAB, 5, 40);
