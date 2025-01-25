@@ -2,6 +2,8 @@ package net.ugi.sculk_depths.block;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 //import net.kyrptonaught.customportalapi.CustomPortalBlock;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.impl.content.registry.FlammableBlockRegistryImpl;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
@@ -20,6 +22,7 @@ import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
 import net.ugi.sculk_depths.sound.ModBlockSoundGroups;
+import net.ugi.sculk_depths.util.ModFlammableBlocks;
 import net.ugi.sculk_depths.world.WorldGenerator;
 import net.ugi.sculk_depths.block.custom.ModCauldron.SporeFlumrockCauldronBlock;
 import net.ugi.sculk_depths.block.dryable.*;
@@ -529,6 +532,7 @@ public class ModBlocks {
     }
 
     public static void registerModBlocks() {
+        ModFlammableBlocks.registerFlammables();
         ModStrippableBlocks.registerStrippables();
     }
 }
