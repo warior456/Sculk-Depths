@@ -62,7 +62,8 @@ public class ModItems {
             new SpawnEggItem(ModEntities.CHOMPER_COLOSSUS, 5860206, 9800821, new Item.Settings()));
 
     public static final Item AURIC_CENTIPEDE_SPAWN_EGG = registerItem("auric_centipede_spawn_egg",
-            new SpawnEggItem(ModEntities.AURIC_CENTIPEDE, 5860206, 9800821, new Item.Settings()));
+            new SpawnEggItem(ModEntities.AURIC_CENTIPEDE, 11054450, 15132390, new Item.Settings()));
+
 
     //quazarith tools
 
