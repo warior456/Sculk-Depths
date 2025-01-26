@@ -14,9 +14,11 @@ public class AuricCentipedeHeadModel<T extends AuricCentipedeEntity> extends Sin
 
 
 	private final ModelPart auric_centipede_head;
+	private final ModelPart head;
 
 	public AuricCentipedeHeadModel(ModelPart root) {
 		this.auric_centipede_head = root.getChild("auric_centipede_head");
+		this.head = root.getChild("auric_centipede_head").getChild("head");
 	}
 
 	public static TexturedModelData getTexturedModelData() {
@@ -49,8 +51,8 @@ public class AuricCentipedeHeadModel<T extends AuricCentipedeEntity> extends Sin
 		headYaw = MathHelper.clamp(headYaw, -30.0F, 30.0F);
 		headPitch = MathHelper.clamp(headPitch, -45.0F, 45.0F);
 
-		this.auric_centipede_head.yaw = headYaw * 0.017453292F;
-		this.auric_centipede_head.pitch = headPitch * 0.027453292F;
+		this.head.yaw = headYaw * 0.017453292F;
+		this.head.pitch = headPitch * 0.027453292F;
 	}
 
 

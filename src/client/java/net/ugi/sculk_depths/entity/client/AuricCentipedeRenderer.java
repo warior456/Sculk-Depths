@@ -25,25 +25,32 @@ public class AuricCentipedeRenderer extends EntityRenderer<AuricCentipedeEntity>
     }
 
     @Override
-    public void render(AuricCentipedeEntity entity, float entityYaw, float partialTicks, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+    public void render(AuricCentipedeEntity entity, float f, float g, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+        //the head is the parent entity
+        this.headRenderer.render(entity, f, g, matrices, vertexConsumers, light);
 
-        // Render each part of the centipede
-        for (EntityPart<AuricCentipedeEntity> part : entity.getParts()) {
-            if (part == entity.getHead()) {
-                matrices.push();
-                this.headRenderer.render(entity, entityYaw, partialTicks, matrices, vertexConsumers, light);
-                matrices.pop();
-            } else if (part == entity.getBody()) {
-                matrices.push();
-                this.bodyRenderer.render(entity, entityYaw, partialTicks, matrices, vertexConsumers, light);
-                matrices.pop();
-            } else if (part == entity.getEnd()) {
-                matrices.push();
-                this.endRenderer.render(entity, entityYaw, partialTicks, matrices, vertexConsumers, light);
-                matrices.pop();
+        for (int i = 0; i < entity.getParts().size(); i++) {
+            EntityPart<AuricCentipedeEntity> part = entity.getParts().get(i);
+
+            matrices.push();
+
+            matrices.translate(part.getX() - entity.getX(), part.getY() - entity.getY(), part.getZ() - entity.getZ());
+
+            // Apply any rotation or other transformations here if needed
+            // For example, you could rotate parts around the entity's yaw angle
+//            matrixStack.multiply(Ve.POSITIVE_Y.getRotationQuaternion(entity.getYaw()));
+
+            // Differentiate the last segment (end segment)
+            if (i < entity.getParts().size() - 1) {
+                this.bodyRenderer.render(entity, f, g, matrices, vertexConsumers, light); // Custom renderer for the end
+            } else {
+                this.endRenderer.render(entity, f, g, matrices, vertexConsumers, light); // Normal body renderer
             }
+
+            matrices.pop();
         }
     }
+
 
     @Override
     public Identifier getTexture(AuricCentipedeEntity entity) {
