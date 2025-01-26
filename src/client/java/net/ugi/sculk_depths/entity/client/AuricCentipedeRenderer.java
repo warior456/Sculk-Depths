@@ -27,7 +27,9 @@ public class AuricCentipedeRenderer extends EntityRenderer<AuricCentipedeEntity>
     @Override
     public void render(AuricCentipedeEntity entity, float f, float g, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         //the head is the parent entity
+        matrices.push();
         this.headRenderer.render(entity, f, g, matrices, vertexConsumers, light);
+        matrices.pop();
 
         for (int i = 0; i < entity.getParts().size(); i++) {
             EntityPart<AuricCentipedeEntity> part = entity.getParts().get(i);
