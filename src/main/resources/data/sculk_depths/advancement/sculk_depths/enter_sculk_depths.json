@@ -28,5 +28,8 @@
       "entered_sculk_depths"
     ]
   ],
+  "rewards": {
+    "function": "sculk_depths:playzinnia"
+  },
   "sends_telemetry_event": false
 }
