@@ -61,6 +61,9 @@ public class ModItems {
     public static final Item CHOMPER_COLOSSUS_SPAWN_EGG = registerItem("chomper_colossus_spawn_egg",
             new SpawnEggItem(ModEntities.CHOMPER_COLOSSUS, 5860206, 9800821, new Item.Settings()));
 
+    public static final Item AURIC_CENTIPEDE_SPAWN_EGG = registerItem("auric_centipede_spawn_egg",
+            new SpawnEggItem(ModEntities.AURIC_CENTIPEDE, 5860206, 9800821, new Item.Settings()));
+
     //quazarith tools
 
     public static final Item QUAZARITH_SHOVEL = registerItem("quazarith_shovel",
@@ -144,6 +147,7 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_SPAWN_EGG);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, LESTER_SPAWN_EGG);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, CHOMPER_COLOSSUS_SPAWN_EGG);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, AURIC_CENTIPEDE_SPAWN_EGG);
 
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, CRUX);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, WHITE_CRYSTAL);

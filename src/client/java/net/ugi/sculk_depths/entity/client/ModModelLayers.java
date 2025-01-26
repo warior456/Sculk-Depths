@@ -14,4 +14,7 @@ public class ModModelLayers {
 
     public static final EntityModelLayer CHOMPER_COLOSSUS =
             new EntityModelLayer(SculkDepths.identifier( "chomper_colossus"), "main");
+
+    public static final EntityModelLayer AURIC_CENTIPEDE =
+            new EntityModelLayer(SculkDepths.identifier( "auric_centipede"), "main");
 }
