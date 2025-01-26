@@ -1,52 +1,52 @@
 package net.ugi.sculk_depths.entity.client;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.ugi.sculk_depths.SculkDepths;
+import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipedeBodyRenderer;
+import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipedeEndRenderer;
+import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipedeHeadRenderer;
 import net.ugi.sculk_depths.entity.custom.AuricCentipedeEntity;
-import net.ugi.sculk_depths.entity.custom.GlomperEntity;
+import net.ugi.sculk_depths.entity.util.EntityPart;
 
-public class AuricCentipedeRenderer extends MobEntityRenderer<AuricCentipedeEntity, AuricCentipedeModel<AuricCentipedeEntity>> {
-    public static final Identifier AURIC_CENTIPEDE_TEXTURE = SculkDepths.identifier( "textures/entity/auric_centipede/auric_centipede_head.png");
+public class AuricCentipedeRenderer extends EntityRenderer<AuricCentipedeEntity> {
+
+    private final AuricCentipedeHeadRenderer headRenderer;
+    private final AuricCentipedeBodyRenderer bodyRenderer;
+    private final AuricCentipedeEndRenderer endRenderer;
 
     public AuricCentipedeRenderer(EntityRendererFactory.Context context) {
-        super(context, new AuricCentipedeModel<>(context.getPart(ModModelLayers.AURIC_CENTIPEDE)), 0.25f);
-        //this.addFeature(new GlomperOverlayFeatureRenderer<GlomperEntity>(this, context.getModelLoader()));
+        super(context);
+        this.headRenderer = new AuricCentipedeHeadRenderer(context);
+        this.bodyRenderer = new AuricCentipedeBodyRenderer(context);
+        this.endRenderer = new AuricCentipedeEndRenderer(context);
+    }
+
+    @Override
+    public void render(AuricCentipedeEntity entity, float entityYaw, float partialTicks, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+
+        // Render each part of the centipede
+        for (EntityPart<AuricCentipedeEntity> part : entity.getParts()) {
+            if (part == entity.getHead()) {
+                matrices.push();
+                this.headRenderer.render(entity, entityYaw, partialTicks, matrices, vertexConsumers, light);
+                matrices.pop();
+            } else if (part == entity.getBody()) {
+                matrices.push();
+                this.bodyRenderer.render(entity, entityYaw, partialTicks, matrices, vertexConsumers, light);
+                matrices.pop();
+            } else if (part == entity.getEnd()) {
+                matrices.push();
+                this.endRenderer.render(entity, entityYaw, partialTicks, matrices, vertexConsumers, light);
+                matrices.pop();
+            }
+        }
     }
 
     @Override
     public Identifier getTexture(AuricCentipedeEntity entity) {
-        return AURIC_CENTIPEDE_TEXTURE;
-    }
-
-
-    @Override
-    public void render(AuricCentipedeEntity mobEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
-        boolean bl;
-
-        if(mobEntity.isBaby()) {
-            matrixStack.scale(0.5f, 0.5f, 0.5f);
-        } else {
-            matrixStack.scale(1f, 1f, 1f);
-        }
-
-        MinecraftClient minecraftClient = MinecraftClient.getInstance();
-        boolean bl2 = bl = minecraftClient.hasOutline(mobEntity) && mobEntity.isInvisible();
-        if (mobEntity.isInvisible() && !bl) {
-            return;
-        }
-        VertexConsumer vertexConsumer = bl ? vertexConsumerProvider.getBuffer(RenderLayer.getOutline(this.getTexture(mobEntity))) : vertexConsumerProvider.getBuffer(RenderLayer.getEntityTranslucent(this.getTexture(mobEntity)));
-
-        //this.model.render(matrixStack, vertexConsumer, i, LivingEntityRenderer.getOverlay(mobEntity, 0.0f), 1.0f, 1.0f, 1.0f, 1.0f); //transparent but broken
-
-
-        super.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, i); //works except transparent
+        return null;
     }
 }

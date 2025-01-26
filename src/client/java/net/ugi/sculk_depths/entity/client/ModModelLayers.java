@@ -15,6 +15,10 @@ public class ModModelLayers {
     public static final EntityModelLayer CHOMPER_COLOSSUS =
             new EntityModelLayer(SculkDepths.identifier( "chomper_colossus"), "main");
 
-    public static final EntityModelLayer AURIC_CENTIPEDE =
-            new EntityModelLayer(SculkDepths.identifier( "auric_centipede"), "main");
+    public static final EntityModelLayer AURIC_CENTIPEDE_HEAD =
+            new EntityModelLayer(SculkDepths.identifier( "auric_centipede_head"), "main");
+    public static final EntityModelLayer AURIC_CENTIPEDE_BODY =
+            new EntityModelLayer(SculkDepths.identifier( "auric_centipede_body"), "main");
+    public static final EntityModelLayer AURIC_CENTIPEDE_END =
+            new EntityModelLayer(SculkDepths.identifier( "auric_centipede_end"), "main");
 }

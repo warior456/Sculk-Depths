@@ -18,6 +18,10 @@ import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.client.*;
+import net.ugi.sculk_depths.entity.client.auric_centipede_models.AuricCentipedeBodyModel;
+import net.ugi.sculk_depths.entity.client.auric_centipede_models.AuricCentipedeEndModel;
+import net.ugi.sculk_depths.entity.client.auric_centipede_models.AuricCentipedeHeadModel;
+import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipedeHeadRenderer;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.item.custom.CruxResonator;
@@ -69,7 +73,9 @@ public class SculkDepthsClient implements ClientModInitializer {
 		EntityModelLayerRegistry.registerModelLayer(ModModelLayers.GLOMPER, GlomperModel::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(ModModelLayers.LESTER, LesterModel::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CHOMPER_COLOSSUS, ChomperColossusModel::getTexturedModelData);
-		EntityModelLayerRegistry.registerModelLayer(ModModelLayers.AURIC_CENTIPEDE, AuricCentipedeModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(ModModelLayers.AURIC_CENTIPEDE_HEAD, AuricCentipedeHeadModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(ModModelLayers.AURIC_CENTIPEDE_BODY, AuricCentipedeBodyModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(ModModelLayers.AURIC_CENTIPEDE_END, AuricCentipedeEndModel::getTexturedModelData);
 		RenderLayer.getEntityTranslucent(GlomperRenderer.GLOMPER_TEXTURE,false);
 
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.VALTROX_SAPLING, RenderLayer.getCutout());

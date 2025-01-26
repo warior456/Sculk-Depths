@@ -1,24 +1,22 @@
-package net.ugi.sculk_depths.entity.client;
+package net.ugi.sculk_depths.entity.client.auric_centipede_models;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
-import net.ugi.sculk_depths.entity.animations.ModAnimations;
 import net.ugi.sculk_depths.entity.custom.AuricCentipedeEntity;
-import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 
 // Made with Blockbench 4.6.5
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
-public class AuricCentipedeModel<T extends AuricCentipedeEntity> extends SinglePartEntityModel<T> {
+public class AuricCentipedeHeadModel<T extends AuricCentipedeEntity> extends SinglePartEntityModel<T> {
 
 
-	private final ModelPart auric_centipede;
+	private final ModelPart auric_centipede_head;
 
-	public AuricCentipedeModel(ModelPart root) {
-		this.auric_centipede = root.getChild("auric_centipede_head");
+	public AuricCentipedeHeadModel(ModelPart root) {
+		this.auric_centipede_head = root.getChild("auric_centipede_head");
 	}
 
 	public static TexturedModelData getTexturedModelData() {
@@ -45,27 +43,24 @@ public class AuricCentipedeModel<T extends AuricCentipedeEntity> extends SingleP
 	public void setAngles(AuricCentipedeEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.getPart().traverse().forEach(ModelPart::resetTransform);
 		this.setHeadAngles(netHeadYaw, headPitch);
-
-//		this.animateMovement(ModAnimations.AURIC_CENTIPEDE_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
-//		this.updateAnimation(entity.idleAnimationState, ModAnimations.GLOMPER_IDLE, ageInTicks, 1f);
 	}
 
 	private void setHeadAngles(float headYaw, float headPitch) {
 		headYaw = MathHelper.clamp(headYaw, -30.0F, 30.0F);
 		headPitch = MathHelper.clamp(headPitch, -45.0F, 45.0F);
 
-		this.auric_centipede.yaw = headYaw * 0.017453292F;
-		this.auric_centipede.pitch = headPitch * 0.027453292F;
+		this.auric_centipede_head.yaw = headYaw * 0.017453292F;
+		this.auric_centipede_head.pitch = headPitch * 0.027453292F;
 	}
 
 
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
-		auric_centipede.render(matrices, vertexConsumer, light, overlay, color);
+		auric_centipede_head.render(matrices, vertexConsumer, light, overlay, color);
 	}
 
 	@Override
 	public ModelPart getPart() {
-		return auric_centipede;
+		return auric_centipede_head;
 	}
 }
