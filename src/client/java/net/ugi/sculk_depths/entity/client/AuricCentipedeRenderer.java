@@ -14,7 +14,7 @@ import net.ugi.sculk_depths.entity.custom.AuricCentipedeEntity;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 
 public class AuricCentipedeRenderer extends MobEntityRenderer<AuricCentipedeEntity, AuricCentipedeModel<AuricCentipedeEntity>> {
-    public static final Identifier AURIC_CENTIPEDE_TEXTURE = SculkDepths.identifier( "textures/entity/auric_centipede/auric_centipede_body.png");
+    public static final Identifier AURIC_CENTIPEDE_TEXTURE = SculkDepths.identifier( "textures/entity/auric_centipede/auric_centipede_head.png");
 
     public AuricCentipedeRenderer(EntityRendererFactory.Context context) {
         super(context, new AuricCentipedeModel<>(context.getPart(ModModelLayers.AURIC_CENTIPEDE)), 0.25f);
@@ -31,11 +31,11 @@ public class AuricCentipedeRenderer extends MobEntityRenderer<AuricCentipedeEnti
     public void render(AuricCentipedeEntity mobEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         boolean bl;
 
-//        if(mobEntity.isBaby()) {
-//            matrixStack.scale(0.5f, 0.5f, 0.5f);
-//        } else {
-//            matrixStack.scale(1f, 1f, 1f);
-//        }
+        if(mobEntity.isBaby()) {
+            matrixStack.scale(0.5f, 0.5f, 0.5f);
+        } else {
+            matrixStack.scale(1f, 1f, 1f);
+        }
 
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
         boolean bl2 = bl = minecraftClient.hasOutline(mobEntity) && mobEntity.isInvisible();
