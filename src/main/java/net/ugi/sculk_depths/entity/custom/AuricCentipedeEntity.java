@@ -45,12 +45,12 @@ public class AuricCentipedeEntity extends PathAwareEntity {
 
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.add(1, new LookAroundGoal(this));
-        this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0D)); // Consider adding a condition here
-        this.goalSelector.add(4, new MeleeAttackGoal(this, 1.5D, false));
-        this.targetSelector.add(5, new RevengeGoal(this, new Class[0]));
-        this.targetSelector.add(6, new ActiveTargetGoal(this, PlayerEntity.class, false));
+        this.goalSelector.add(1, new MeleeAttackGoal(this, 1.5D, false));
+        this.targetSelector.add(2, new ActiveTargetGoal(this, PlayerEntity.class, false));
+        this.targetSelector.add(3, new RevengeGoal(this, new Class[0]));
+        this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(5, new LookAroundGoal(this));
+        this.goalSelector.add(6, new WanderAroundFarGoal(this, 1.0D)); // Consider adding a condition here
     }
 
     public static DefaultAttributeContainer.Builder createAuricCentipedeAttributes() {
