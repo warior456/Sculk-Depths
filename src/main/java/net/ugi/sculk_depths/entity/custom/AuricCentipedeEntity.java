@@ -139,9 +139,7 @@ public class AuricCentipedeEntity extends PathAwareEntity {
             //this is kind of like a train track if you will
             double[] targetPosition = positionHistory.get(Math.min((i + 1) * HISTORY_STEP, positionHistory.size() - 1)); // Offset by 2 steps per segment
             EntityPart<AuricCentipedeEntity> segment = segments.get(i);
-            if(true){
-                segment.updatePosition(targetPosition[0], targetPosition[1], targetPosition[2]);
-            }
+            segment.updatePosition(targetPosition[0], targetPosition[1], targetPosition[2]);
             segment.setYaw((float) targetPosition[3]);
             prevXPos = segment.getX();
             prevYPos = segment.getY();
