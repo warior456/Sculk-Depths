@@ -38,6 +38,7 @@ public class ModModelProvider extends FabricModelProvider {
         polishedAmalgamitekPool.slab(ModBlocks.POLISHED_AMALGAMITE_SLAB);
         polishedAmalgamitekPool.wall(ModBlocks.POLISHED_AMALGAMITE_WALL);
 
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRACKED_AMALGAMITE_BRICKS);
         amalgamiteBrickPool.stairs(ModBlocks.AMALGAMITE_BRICK_STAIRS);
         amalgamiteBrickPool.slab(ModBlocks.AMALGAMITE_BRICK_SLAB);
         amalgamiteBrickPool.wall(ModBlocks.AMALGAMITE_BRICK_WALL);

@@ -57,6 +57,9 @@ public class ModBlocks {
     public static final Block AMALGAMITE_BRICKS = registerBlock("amalgamite_bricks",
             new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_BRICKS).strength(2.9f, 6.0f).requiresTool().sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
+    public static final Block CRACKED_AMALGAMITE_BRICKS = registerBlock("cracked_amalgamite_bricks",
+            new Block(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
     public static final Block AMALGAMITE_BRICK_STAIRS = registerBlock("amalgamite_brick_stairs",
             new StairsBlock(ModBlocks.AMALGAMITE_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
