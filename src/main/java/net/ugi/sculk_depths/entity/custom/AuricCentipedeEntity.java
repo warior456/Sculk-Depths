@@ -1,9 +1,7 @@
 package net.ugi.sculk_depths.entity.custom;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -13,8 +11,10 @@ import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.Registry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.shape.VoxelShape;
@@ -34,10 +34,12 @@ import java.util.stream.StreamSupport;
 public class AuricCentipedeEntity extends PathAwareEntity {
     private static final int SEGMENT_COUNT = 25;
     private static final int HISTORY_LIMIT = 1000;
+    private static final int DELAY_FOR_SPACING_MULTIPLIER = 2;
 
     private final List<EntityPart<AuricCentipedeEntity>> segments;
 
     private final List<double[]> positionHistory = new ArrayList<>();
+
 
     boolean hasBeenInitialized = false;
 
@@ -73,7 +75,7 @@ public class AuricCentipedeEntity extends PathAwareEntity {
     public static DefaultAttributeContainer.Builder createAuricCentipedeAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 200f)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2f)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25f)
                 .add(EntityAttributes.GENERIC_ARMOR, 5f)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 10000f)
                 .add(EntityAttributes.GENERIC_EXPLOSION_KNOCKBACK_RESISTANCE, 10000f)
@@ -97,7 +99,9 @@ public class AuricCentipedeEntity extends PathAwareEntity {
         if (positionHistory.size() > HISTORY_LIMIT) {
             positionHistory.remove(positionHistory.size() - 1);
         }
+
         updateSegments();
+
 //        handleTerrainInteraction();
     }
 
@@ -117,7 +121,7 @@ public class AuricCentipedeEntity extends PathAwareEntity {
         }
         positionHistory.clear();
         double movementSpeed = this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED);
-        int HISTORY_STEP = (int) Math.ceil((1.0 / movementSpeed)*2.4);
+        int HISTORY_STEP = (int) Math.ceil(DELAY_FOR_SPACING_MULTIPLIER / movementSpeed);
         //add to position history from the end to the head
         for (int j = segments.size()-1; j >=0; j--) {
             EntityPart<AuricCentipedeEntity> segment = segments.get(j);
@@ -134,7 +138,9 @@ public class AuricCentipedeEntity extends PathAwareEntity {
         double prevZPos = this.getZ();
         // Ensure we have enough history for each segment
         double movementSpeed = this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED);
-        int HISTORY_STEP = (int) Math.ceil((1.0 / movementSpeed)*2.4);
+        //if the movement speed is higher it will take fewer ticks to change by the same distance
+        //each entry in positionHistory is a tick
+        int HISTORY_STEP = (int) Math.ceil(DELAY_FOR_SPACING_MULTIPLIER / movementSpeed);
         for (int i = 0; i < segments.size(); i++) {
             //this is kind of like a train track if you will
             double[] targetPosition = positionHistory.get(Math.min((i + 1) * HISTORY_STEP, positionHistory.size() - 1)); // Offset by 2 steps per segment
