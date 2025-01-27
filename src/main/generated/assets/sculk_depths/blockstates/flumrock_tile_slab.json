@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "sculk_depths:block/flumrock_tile_slab"
+    },
+    "type=double": {
+      "model": "sculk_depths:block/flumrock_tiles"
+    },
+    "type=top": {
+      "model": "sculk_depths:block/flumrock_tile_slab_top"
+    }
+  }
+}

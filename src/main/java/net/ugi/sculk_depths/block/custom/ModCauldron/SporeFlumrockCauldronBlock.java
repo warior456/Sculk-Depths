@@ -31,6 +31,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
@@ -79,7 +80,8 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
         this.setDefaultState(this.stateManager.getDefaultState().with(LEVEL, 1));
     }
 
-    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+    @Override
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
         return new ItemStack(ModBlocks.FLUMROCK_CAULDRON);
     }
 

@@ -79,6 +79,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.VALTROX_BUTTON, drops(ModBlocks.VALTROX_BUTTON.asItem()));
 
         addDrop(ModBlocks.AMALGAMITE, ModBlocks.AMALGAMITE.asItem());
+        addDrop(ModBlocks.CRACKED_AMALGAMITE_BRICKS, ModBlocks.AMALGAMITE.asItem());
 
         addDrop(ModBlocks.PENEBRIUM_SHROOM);
         addDropWithSilkTouch(ModBlocks.PENEBRIUM_SHROOM_STEM);

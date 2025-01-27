@@ -210,20 +210,20 @@ public class SculkDepthsPortalBlock extends Block implements Portal{
             if(!serverWorld.getBlockState(blockPos).isOf(ModBlocks.SCULK_DEPTHS_PORTAL)){//backup tp
 
                 serverWorld.setBlockState(blockPos, ModBlocks.SCULK_DEPTHS_PORTAL.getDefaultState());
-                serverWorld.setBlockState(blockPos.up(), Blocks.AIR.getDefaultState());
+                serverWorld.setBlockState(blockPos.down(), ModBlocks.SCULK_DEPTHS_PORTAL.getDefaultState());
                 serverWorld.setBlockState(blockPos.north(), Blocks.AIR.getDefaultState());
                 serverWorld.setBlockState(blockPos.east(), Blocks.AIR.getDefaultState());
                 serverWorld.setBlockState(blockPos.south(), Blocks.AIR.getDefaultState());
                 serverWorld.setBlockState(blockPos.west(), Blocks.AIR.getDefaultState());
-                serverWorld.setBlockState(blockPos.up().north(), Blocks.AIR.getDefaultState());
-                serverWorld.setBlockState(blockPos.up().east(), Blocks.AIR.getDefaultState());
-                serverWorld.setBlockState(blockPos.up().south(), Blocks.AIR.getDefaultState());
-                serverWorld.setBlockState(blockPos.up().west(), Blocks.AIR.getDefaultState());
-                serverWorld.setBlockState(blockPos.down(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
-                serverWorld.setBlockState(blockPos.down().north(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
-                serverWorld.setBlockState(blockPos.down().east(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
-                serverWorld.setBlockState(blockPos.down().south(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
-                serverWorld.setBlockState(blockPos.down().west(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+                serverWorld.setBlockState(blockPos.down().north(), Blocks.AIR.getDefaultState());
+                serverWorld.setBlockState(blockPos.down().east(), Blocks.AIR.getDefaultState());
+                serverWorld.setBlockState(blockPos.down().south(), Blocks.AIR.getDefaultState());
+                serverWorld.setBlockState(blockPos.down().west(), Blocks.AIR.getDefaultState());
+                serverWorld.setBlockState(blockPos.down(2), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+                serverWorld.setBlockState(blockPos.down(2).north(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+                serverWorld.setBlockState(blockPos.down(2).east(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+                serverWorld.setBlockState(blockPos.down(2).south(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+                serverWorld.setBlockState(blockPos.down(2).west(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
 
                 SculkDepths.LOGGER.warn("A player went through an invalid portal at {} if you're a server admin or have access to permissions it is recommended to build a proper 2 way portal", blockPos);
             }

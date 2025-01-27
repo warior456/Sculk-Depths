@@ -31,6 +31,7 @@ public class LesterEntity extends PathAwareEntity {
     private int idleAnimationTimeout = 0;
     public LesterEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
+        this.experiencePoints = 5;
     }
 
 /*    @Override

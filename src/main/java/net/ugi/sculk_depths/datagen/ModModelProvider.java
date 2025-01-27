@@ -26,16 +26,26 @@ public class ModModelProvider extends FabricModelProvider {
         BlockStateModelGenerator.BlockTexturePool coatedValtroxPlankPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.COATED_VALTROX_PLANKS);
         BlockStateModelGenerator.BlockTexturePool driedValtroxPlankPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.DRIED_VALTROX_PLANKS);
         BlockStateModelGenerator.BlockTexturePool petrifiedValtroxPlankPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.PETRIFIED_VALTROX_SLATES);
+        BlockStateModelGenerator.BlockTexturePool polishedAmalgamitekPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.POLISHED_AMALGAMITE);
         BlockStateModelGenerator.BlockTexturePool amalgamiteBrickPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.AMALGAMITE_BRICKS);
+        BlockStateModelGenerator.BlockTexturePool flumrockTilesPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.FLUMROCK_TILES);
 
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.QUAZARITH_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUX_BLOCK);
         //blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.AURIC_SPORE_BLOCK);
 
+        polishedAmalgamitekPool.stairs(ModBlocks.POLISHED_AMALGAMITE_STAIRS);
+        polishedAmalgamitekPool.slab(ModBlocks.POLISHED_AMALGAMITE_SLAB);
+        polishedAmalgamitekPool.wall(ModBlocks.POLISHED_AMALGAMITE_WALL);
 
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRACKED_AMALGAMITE_BRICKS);
         amalgamiteBrickPool.stairs(ModBlocks.AMALGAMITE_BRICK_STAIRS);
         amalgamiteBrickPool.slab(ModBlocks.AMALGAMITE_BRICK_SLAB);
         amalgamiteBrickPool.wall(ModBlocks.AMALGAMITE_BRICK_WALL);
+
+        flumrockTilesPool.stairs(ModBlocks.FLUMROCK_TILE_STAIRS);
+        flumrockTilesPool.slab(ModBlocks.FLUMROCK_TILE_SLAB);
+        flumrockTilesPool.wall(ModBlocks.FLUMROCK_TILE_WALL);
 
 
         blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.VALTROX_SAPLING, ModBlocks.POTTED_VALTROX_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
@@ -104,5 +114,6 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.RUBY, Models.GENERATED);
          */
         itemModelGenerator.register(ModItems.CRUX, Models.GENERATED);
+        itemModelGenerator.register(ModItems.MUSIC_DISC_ZINNIA, Models.GENERATED);
     }
 }

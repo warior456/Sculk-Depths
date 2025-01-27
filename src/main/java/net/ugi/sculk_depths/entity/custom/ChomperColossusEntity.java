@@ -26,6 +26,7 @@ public class ChomperColossusEntity extends PathAwareEntity {
     private int idleAnimationTimeout = 0;
     public ChomperColossusEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
+        this.experiencePoints = 50;
     }
 
 /*    @Override

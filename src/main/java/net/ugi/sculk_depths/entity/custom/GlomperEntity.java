@@ -44,6 +44,11 @@ public class GlomperEntity extends PathAwareEntity {
         this.setNoGravity(true);
     }
 
+    @Override
+    protected int getXpToDrop() {
+        return 1 + this.getWorld().random.nextInt(3);
+    }
+
 /*    @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
 
