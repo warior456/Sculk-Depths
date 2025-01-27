@@ -61,12 +61,12 @@ public class AuricCentipedeEntity extends PathAwareEntity {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this)); // Swimming should have the highest priority
         this.goalSelector.add(1, new MeleeAttackGoal(this, 1.0f, false)); // Attack goal
-        this.targetSelector.add(2, new ActiveTargetGoal(this, VillagerEntity.class, false)); // Prioritize attacking villagers too
-        this.targetSelector.add(3, new ActiveTargetGoal(this, PlayerEntity.class, false)); // Prioritize attacking players
+        this.targetSelector.add(2, new ActiveTargetGoal(this, PlayerEntity.class, false)); // Prioritize attacking players
         this.targetSelector.add(3, new RevengeGoal(this, new Class[0])); // Revenge at priority 3
-        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F)); // Look at players
-        this.goalSelector.add(4, new LookAroundGoal(this)); // Look around randomly
-        this.goalSelector.add(4, new WanderAroundFarGoal(this, 1.0f)); // Wander around (you can add a condition to make this more dynamic)
+        this.targetSelector.add(4, new ActiveTargetGoal(this, VillagerEntity.class, false)); // Prioritize attacking villagers too
+//        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F)); // Look at players
+//        this.goalSelector.add(4, new LookAroundGoal(this)); // Look around randomly
+        this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0f)); // Wander around (you can add a condition to make this more dynamic)
     }
 
 
@@ -75,6 +75,8 @@ public class AuricCentipedeEntity extends PathAwareEntity {
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 200f)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2f)
                 .add(EntityAttributes.GENERIC_ARMOR, 5f)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 10000f)
+                .add(EntityAttributes.GENERIC_EXPLOSION_KNOCKBACK_RESISTANCE, 10000f)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2);
     }
 
@@ -86,7 +88,7 @@ public class AuricCentipedeEntity extends PathAwareEntity {
             resetSegments();  // Ensure the segments are properly initialized after the spawn
             hasBeenInitialized = true;
         }
-        // Add the current position of the head to the history
+        // Add the current position of the head to the history, this line is what causes sections to move
         positionHistory.add(0, new double[]{this.getX(), this.getY(), this.getZ(), this.getYaw()});
 
         // Limit the size of the history to avoid memory overflow
@@ -178,18 +180,27 @@ public class AuricCentipedeEntity extends PathAwareEntity {
 
     @Override
     public boolean shouldRender(double cameraX, double cameraY, double cameraZ) {
+        // Check the distance to the head first
         double distanceSq = this.squaredDistanceTo(cameraX, cameraY, cameraZ);
         if (distanceSq < 256.0) { // Adjust this value based on how far you want the entity to render
             return true;
         }
 
+        // Check all segments as well
         for (EntityPart<AuricCentipedeEntity> segment : segments) {
             distanceSq = segment.squaredDistanceTo(cameraX, cameraY, cameraZ);
             if (distanceSq < 256.0) { // Adjust this value based on how far you want the entity to render
                 return true;
             }
         }
-        return super.shouldRender(cameraX, cameraY, cameraZ);
+
+        // If none of the segments or the head are within range, return false
+        return false;
+    }
+
+    @Override
+    public boolean hasInvertedHealingAndHarm() {
+        return true;
     }
 
     public List<EntityPart<AuricCentipedeEntity>> getSegments() {
