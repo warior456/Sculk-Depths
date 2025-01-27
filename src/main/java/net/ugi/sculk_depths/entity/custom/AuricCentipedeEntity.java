@@ -88,8 +88,10 @@ public class AuricCentipedeEntity extends PathAwareEntity {
             resetSegments();  // Ensure the segments are properly initialized after the spawn
             hasBeenInitialized = true;
         }
-        // Add the current position of the head to the history, this line is what causes sections to move
-        positionHistory.add(0, new double[]{this.getX(), this.getY(), this.getZ(), this.getYaw()});
+        if(!(positionHistory.get(0)[0] == this.getX() && positionHistory.get(0)[1] == this.getY() && positionHistory.get(0)[2] == this.getZ())){
+            // Add the current position of the head to the history, this line is what causes sections to move
+            positionHistory.add(0, new double[]{this.getX(), this.getY(), this.getZ(), this.getYaw()});
+        }
 
         // Limit the size of the history to avoid memory overflow
         if (positionHistory.size() > HISTORY_LIMIT) {
@@ -114,10 +116,14 @@ public class AuricCentipedeEntity extends PathAwareEntity {
             prevZPos = segment.getZ();
         }
         positionHistory.clear();
+        double movementSpeed = this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+        int HISTORY_STEP = (int) Math.ceil((1.0 / movementSpeed)*2.4);
         //add to position history from the end to the head
         for (int j = segments.size()-1; j >=0; j--) {
             EntityPart<AuricCentipedeEntity> segment = segments.get(j);
-            positionHistory.add(0, new double[]{segment.getX(), segment.getY(), segment.getZ(), segment.getYaw()});
+            for (int k = 0; k <= HISTORY_STEP; k++) {
+                positionHistory.add(0, new double[]{segment.getX(), segment.getY(), segment.getZ(), segment.getYaw()});
+            }
         }
     }
 
@@ -133,7 +139,7 @@ public class AuricCentipedeEntity extends PathAwareEntity {
             //this is kind of like a train track if you will
             double[] targetPosition = positionHistory.get(Math.min((i + 1) * HISTORY_STEP, positionHistory.size() - 1)); // Offset by 2 steps per segment
             EntityPart<AuricCentipedeEntity> segment = segments.get(i);
-            if(segment.squaredDistanceTo(prevXPos,prevYPos,prevZPos)>spacing){
+            if(true){
                 segment.updatePosition(targetPosition[0], targetPosition[1], targetPosition[2]);
             }
             segment.setYaw((float) targetPosition[3]);
@@ -177,30 +183,32 @@ public class AuricCentipedeEntity extends PathAwareEntity {
         }
     }
 
-
-    @Override
-    public boolean shouldRender(double cameraX, double cameraY, double cameraZ) {
-        // Check the distance to the head first
-        double distanceSq = this.squaredDistanceTo(cameraX, cameraY, cameraZ);
-        if (distanceSq < 256.0) { // Adjust this value based on how far you want the entity to render
-            return true;
-        }
-
-        // Check all segments as well
-        for (EntityPart<AuricCentipedeEntity> segment : segments) {
-            distanceSq = segment.squaredDistanceTo(cameraX, cameraY, cameraZ);
-            if (distanceSq < 256.0) { // Adjust this value based on how far you want the entity to render
-                return true;
-            }
-        }
-
-        // If none of the segments or the head are within range, return false
-        return false;
-    }
-
     @Override
     public boolean hasInvertedHealingAndHarm() {
         return true;
+    }
+
+    @Override
+    public Box getVisibilityBoundingBox() {
+        // Create a bounding box that encompasses all parts of the centipede
+        double minX = this.getX();
+        double minY = this.getY();
+        double minZ = this.getZ();
+        double maxX = this.getX();
+        double maxY = this.getY();
+        double maxZ = this.getZ();
+
+        // Iterate through each segment and adjust the bounding box to include each segment
+        for (EntityPart<AuricCentipedeEntity> part : segments) {
+            minX = Math.min(minX, part.getX());
+            minY = Math.min(minY, part.getY());
+            minZ = Math.min(minZ, part.getZ());
+            maxX = Math.max(maxX, part.getX());
+            maxY = Math.max(maxY, part.getY());
+            maxZ = Math.max(maxZ, part.getZ());
+        }
+
+        return new Box(minX, minY, minZ, maxX, maxY, maxZ);  // Return a box that encompasses the entire entity
     }
 
     public List<EntityPart<AuricCentipedeEntity>> getSegments() {

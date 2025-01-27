@@ -5,6 +5,7 @@ import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.RotationAxis;
 import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipedeBodyRenderer;
 import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipedeEndRenderer;
 import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipedeHeadRenderer;
@@ -37,6 +38,14 @@ public class AuricCentipedeRenderer extends EntityRenderer<AuricCentipedeEntity>
             matrices.push();
 
             matrices.translate(part.getX() - entity.getX(), part.getY() - entity.getY(), part.getZ() - entity.getZ());
+
+            // Undo the parent's rotation
+            float entityYaw = entity.getYaw();
+            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-entityYaw));
+
+            // Optionally apply the segment's specific yaw if needed
+            float partYaw = part.getYaw();
+            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(partYaw));
 
             if (i < entity.getSegments().size() - 1) {
                 this.bodyRenderer.render(entity, f, g, matrices, vertexConsumers, light); // Custom renderer for the end
