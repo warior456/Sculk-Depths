@@ -31,14 +31,14 @@ public class AuricCentipedeRenderer extends EntityRenderer<AuricCentipedeEntity>
         this.headRenderer.render(entity, f, g, matrices, vertexConsumers, light);
         matrices.pop();
 
-        for (int i = 0; i < entity.getParts().size(); i++) {
-            EntityPart<AuricCentipedeEntity> part = entity.getParts().get(i);
+        for (int i = 0; i < entity.getSegments().size(); i++) {
+            EntityPart<AuricCentipedeEntity> part = entity.getSegments().get(i);
 
             matrices.push();
 
             matrices.translate(part.getX() - entity.getX(), part.getY() - entity.getY(), part.getZ() - entity.getZ());
 
-            if (i < entity.getParts().size() - 1) {
+            if (i < entity.getSegments().size() - 1) {
                 this.bodyRenderer.render(entity, f, g, matrices, vertexConsumers, light); // Custom renderer for the end
             } else {
                 this.endRenderer.render(entity, f, g, matrices, vertexConsumers, light); // Normal body renderer
