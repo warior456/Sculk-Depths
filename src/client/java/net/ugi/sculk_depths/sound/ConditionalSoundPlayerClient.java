@@ -83,8 +83,30 @@ public class ConditionalSoundPlayerClient implements ClientTickEvents.StartWorld
         PlayerEntity player = SoundPlayerGetterClient.player;
         BlockPos pos = player.getBlockPos();
 
-        if(Math.random() > 0.01) return;
+        if(!(world.getTime()%20==0)) return;
+        CalculateWindAngle(world, player, pos);
+        if(Math.random() > 0.2) return;
 
+        if (ModBiomes.DRIED_FOREST == world.getBiome(pos).getKey().get()) {
+            if(Math.random() > 0.2 ) return;
+            playSound(world, player, pos);
+        }
+
+        if (ModBiomes.PETRIFIED_FOREST == world.getBiome(pos).getKey().get()) {
+            if(Math.random() > 0.6 ) return;
+            playSound(world, player, pos);
+        }
+
+    }
+
+    private void playSound(ClientWorld world, PlayerEntity player, BlockPos pos) {
+        if(pos.getY() >= world.getTopY(Heightmap.Type.MOTION_BLOCKING, pos.getX(), pos.getZ())){
+            player.playSound(ModSounds.AMBIENT_WIND_ADDITIONS_EVENT, 1,1);
+        }else {
+            player.playSound(ModSounds.AMBIENT_WIND_ADDITIONS_EVENT, 0.4f,0.6f);
+        }
+    }
+    private void CalculateWindAngle(ClientWorld world, PlayerEntity player, BlockPos pos) {
         //todo maybe check for dimension (only if it's faster!!)
         RegistryEntry<DoublePerlinNoiseSampler.NoiseParameters> noiseParam = new RegistryEntry<DoublePerlinNoiseSampler.NoiseParameters>() {
             @Override
@@ -155,44 +177,14 @@ public class ConditionalSoundPlayerClient implements ClientTickEvents.StartWorld
         speedRandom.setSeed(2);
 
 
-        DensityFunction.Noise radNoise = new DensityFunction.Noise(noiseParam, DoublePerlinNoiseSampler.create(radRandom, new DoublePerlinNoiseSampler.NoiseParameters(-7, 3,3,4,2,4,2.4,9)));
-        DensityFunction.Noise speedNoise = new DensityFunction.Noise(noiseParam, DoublePerlinNoiseSampler.create(speedRandom, new DoublePerlinNoiseSampler.NoiseParameters(-7, 3,3,4,2,4,2.4,9)));
+        DensityFunction.Noise radNoise = new DensityFunction.Noise(noiseParam, DoublePerlinNoiseSampler.create(radRandom, new DoublePerlinNoiseSampler.NoiseParameters(-7, 1,2,3,2,4,2.4,9)));
+        DensityFunction.Noise speedNoise = new DensityFunction.Noise(noiseParam, DoublePerlinNoiseSampler.create(speedRandom, new DoublePerlinNoiseSampler.NoiseParameters(-7, 1,2,3,2,4,2.4,9)));
 
-        double rad = radNoise.sample(player.getX(), world.getTime(), player.getZ());
-        double speed = speedNoise.sample(player.getX(), world.getTime(), player.getZ());
+        double rad = radNoise.sample(player.getX()/75, world.getTime()/6000f, player.getZ()/75)*Math.PI;
+        double speed = speedNoise.sample(player.getX()/75, world.getTime()/3000f, player.getZ()/75);
 
-        windAngleRad=CalculateWindAngle(world);
         windX = speed*Math.sin(rad);
         windZ = speed*Math.cos(rad);
-
-        if (ModBiomes.DRIED_FOREST == world.getBiome(pos).getKey().get()) {
-            if(Math.random() > 0.2 ) return;
-            playSound(world, player, pos);
-        }
-
-        if (ModBiomes.PETRIFIED_FOREST == world.getBiome(pos).getKey().get()) {
-            if(Math.random() > 0.6 ) return;
-            playSound(world, player, pos);
-        }
-        System.out.println(windAngleRad);
-    }
-
-    private void playSound(ClientWorld world, PlayerEntity player, BlockPos pos) {
-        if(pos.getY() >= world.getTopY(Heightmap.Type.MOTION_BLOCKING, pos.getX(), pos.getZ())){
-            player.playSound(ModSounds.AMBIENT_WIND_ADDITIONS_EVENT, 1,1);
-        }else {
-            player.playSound(ModSounds.AMBIENT_WIND_ADDITIONS_EVENT, 0.4f,0.6f);
-        }
-    }
-    private double CalculateWindAngle(ClientWorld world){
-        world.getLunarTime();
-        //or
-        world.getMoonPhase();
-
-        world.getTime();
-        float timeOfDay = world.getTimeOfDay();
-        return timeOfDay/2000;
-        //return Math.PI/4;
     }
     public static float getWindX(){
         return (float) windX;
