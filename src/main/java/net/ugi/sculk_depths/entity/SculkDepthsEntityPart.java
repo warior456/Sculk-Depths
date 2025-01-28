@@ -6,7 +6,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.nbt.NbtCompound;
 
-public class SculkDepthsPart<T extends Entity> extends PartEntity<T> {
+public class SculkDepthsEntityPart<T extends Entity> extends PartEntity<T> {
     protected EntityDimensions realSize;
 
     protected int newPosRotationIncrements;
@@ -21,7 +21,7 @@ public class SculkDepthsPart<T extends Entity> extends PartEntity<T> {
     public int deathTime;
     public int hurtTime;
 
-    public SculkDepthsPart(T parent) {
+    public SculkDepthsEntityPart(T parent) {
         super(parent);
     }
 

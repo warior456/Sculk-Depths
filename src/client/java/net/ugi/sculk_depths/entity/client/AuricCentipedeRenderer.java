@@ -33,27 +33,29 @@ public class AuricCentipedeRenderer extends EntityRenderer<AuricCentipedeEntity>
         matrices.pop();
 
         for (int i = 0; i < entity.getParts().length; i++) {
+
             AuricCentipedeSegmentEntity part = (AuricCentipedeSegmentEntity) entity.getParts()[i];
+            if(!(part.isInvisible())){
+                matrices.push();
 
-            matrices.push();
+                matrices.translate(part.getX() - entity.getX(), part.getY() - entity.getY(), part.getZ() - entity.getZ());
 
-            matrices.translate(part.getX() - entity.getX(), part.getY() - entity.getY(), part.getZ() - entity.getZ());
+                // Undo the parent's rotation
+                float entityYaw = entity.getYaw();
+                matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-entityYaw));
 
-            // Undo the parent's rotation
-            float entityYaw = entity.getYaw();
-            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-entityYaw));
+                // Optionally apply the segment's specific yaw if needed
+                float partYaw = part.getYaw();
+                matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(partYaw));
 
-            // Optionally apply the segment's specific yaw if needed
-            float partYaw = part.getYaw();
-            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(partYaw));
+                if (i < entity.getParts().length - 1) {
+                    this.bodyRenderer.render(entity, f, g, matrices, vertexConsumers, light); // Custom renderer for the end
+                } else {
+                    this.endRenderer.render(entity, f, g, matrices, vertexConsumers, light); // Normal body renderer
+                }
 
-            if (i < entity.getParts().length - 1) {
-                this.bodyRenderer.render(entity, f, g, matrices, vertexConsumers, light); // Custom renderer for the end
-            } else {
-                this.endRenderer.render(entity, f, g, matrices, vertexConsumers, light); // Normal body renderer
+                matrices.pop();
             }
-
-            matrices.pop();
         }
     }
 
