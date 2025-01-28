@@ -1,33 +1,28 @@
-package net.ugi.sculk_depths.entity.util;
+package net.ugi.sculk_depths.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.world.World;
 
-public class EntityPart<T extends Entity> extends Entity {
-    private final T owner; // The parent entity this part belongs to
-    private final float width;
-    private final float height;
+public class SculkDepthsPart<T extends Entity> extends PartEntity<T> {
+    protected EntityDimensions realSize;
 
-    public EntityPart(EntityType<? extends Entity> type, T owner, float width, float height, World world) {
-        super(type, world);
-        this.owner = owner;
-        this.width = width;
-        this.height = height;
-    }
+    protected int newPosRotationIncrements;
+    protected double interpTargetX;
+    protected double interpTargetY;
+    protected double interpTargetZ;
+    protected double interpTargetYaw;
+    protected double interpTargetPitch;
+    public float renderYawOffset;
+    public float prevRenderYawOffset;
 
-    public T getOwner() {
-        return owner;
-    }
+    public int deathTime;
+    public int hurtTime;
 
-    @Override
-    public boolean isPartOf(Entity entity) {
-        return entity == owner;
+    public SculkDepthsPart(T parent) {
+        super(parent);
     }
 
     @Override
@@ -45,15 +40,15 @@ public class EntityPart<T extends Entity> extends Entity {
         // No custom NBT logic needed for the parts
     }
 
-    @Override
-    public EntityDimensions getDimensions(EntityPose pose) {
-        return EntityDimensions.fixed(this.width, this.height);
-    }
+//    @Override
+//    public EntityDimensions getDimensions(EntityPose pose) {
+//        return EntityDimensions.fixed(this.width, this.height);
+//    }
 
     @Override
     public boolean damage(DamageSource source, float amount) {
-        if (this.owner != null) { // Ensure it has a parent entity
-            return this.owner.damage(source, amount); // Delegate damage to the main entity
+        if (this.getParent() != null) { // Ensure it has a parent entity
+            return this.getParent().damage(source, amount); // Delegate damage to the main entity
         }
         return false; // If the owner is null, the segment takes no damage
     }

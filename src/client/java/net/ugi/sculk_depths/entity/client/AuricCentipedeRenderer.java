@@ -10,7 +10,7 @@ import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipe
 import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipedeEndRenderer;
 import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipedeHeadRenderer;
 import net.ugi.sculk_depths.entity.custom.AuricCentipedeEntity;
-import net.ugi.sculk_depths.entity.util.EntityPart;
+import net.ugi.sculk_depths.entity.custom.AuricCentipedeSegmentEntity;
 
 public class AuricCentipedeRenderer extends EntityRenderer<AuricCentipedeEntity> {
 
@@ -32,8 +32,8 @@ public class AuricCentipedeRenderer extends EntityRenderer<AuricCentipedeEntity>
         this.headRenderer.render(entity, f, g, matrices, vertexConsumers, light);
         matrices.pop();
 
-        for (int i = 0; i < entity.getSegments().size(); i++) {
-            EntityPart<AuricCentipedeEntity> part = entity.getSegments().get(i);
+        for (int i = 0; i < entity.getParts().length; i++) {
+            AuricCentipedeSegmentEntity part = (AuricCentipedeSegmentEntity) entity.getParts()[i];
 
             matrices.push();
 
@@ -47,7 +47,7 @@ public class AuricCentipedeRenderer extends EntityRenderer<AuricCentipedeEntity>
             float partYaw = part.getYaw();
             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(partYaw));
 
-            if (i < entity.getSegments().size() - 1) {
+            if (i < entity.getParts().length - 1) {
                 this.bodyRenderer.render(entity, f, g, matrices, vertexConsumers, light); // Custom renderer for the end
             } else {
                 this.endRenderer.render(entity, f, g, matrices, vertexConsumers, light); // Normal body renderer

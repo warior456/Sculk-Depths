@@ -1,62 +1,40 @@
 package net.ugi.sculk_depths.entity.custom;
 
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.Registry;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
-import net.ugi.sculk_depths.entity.ModEntities;
-import net.ugi.sculk_depths.entity.util.EntityPart;
-import org.jetbrains.annotations.Nullable;
+import net.ugi.sculk_depths.entity.interfaces.MultiPartEntity;
+import net.ugi.sculk_depths.entity.PartEntity;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-public class AuricCentipedeEntity extends PathAwareEntity {
-    private static final int SEGMENT_COUNT = 25;
-    private static final int HISTORY_LIMIT = 1000;
+public class AuricCentipedeEntity extends PathAwareEntity implements MultiPartEntity {
+    private static final int SEGMENT_COUNT = 15;
     private static final int DELAY_FOR_SPACING_MULTIPLIER = 2;
+    private static final int HISTORY_LIMIT = 1000;
 
-    private final List<EntityPart<AuricCentipedeEntity>> segments;
+    private final AuricCentipedeSegmentEntity[] segments = new AuricCentipedeSegmentEntity[SEGMENT_COUNT];
 
     private final List<double[]> positionHistory = new ArrayList<>();
 
 
     boolean hasBeenInitialized = false;
 
-    public AuricCentipedeEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
+    public AuricCentipedeEntity(EntityType<? extends AuricCentipedeEntity> entityType, World world) {
         super(entityType, world);
 
-        this.segments = new ArrayList<>();
-
-        // Initialize body segments
         for (int i = 0; i < SEGMENT_COUNT; i++) {
-            if (i < SEGMENT_COUNT-1) {
-                EntityPart<AuricCentipedeEntity> bodySegment = new EntityPart<>(ModEntities.AURIC_CENTIPEDE, this, 1.0f, 1.0f, world);
-                this.segments.add(bodySegment);
-            } else {
-                EntityPart<AuricCentipedeEntity> endSegment = new EntityPart<>(ModEntities.AURIC_CENTIPEDE, this, 1.0f, 1.0f, world);
-                this.segments.add(endSegment);
-            }
+            this.segments[i] = new AuricCentipedeSegmentEntity(this);
         }
     }
 
@@ -110,8 +88,8 @@ public class AuricCentipedeEntity extends PathAwareEntity {
         double prevXPos = this.getX();
         double prevYPos = this.getY();
         double prevZPos = this.getZ();
-        for (int i = 0; i < segments.size(); i++) {
-            EntityPart<AuricCentipedeEntity> segment = segments.get(i);
+        for (int i = 0; i < segments.length; i++) {
+            AuricCentipedeSegmentEntity segment = segments[i];
             double segmentOffsetX = Math.cos(Math.toRadians(this.getYaw()+90))*(spacing);
             double segmentOffsetZ = Math.sin(Math.toRadians(this.getYaw()+90))*(spacing);
             segment.updatePosition(prevXPos - segmentOffsetX, prevYPos, prevZPos - segmentOffsetZ);
@@ -123,8 +101,8 @@ public class AuricCentipedeEntity extends PathAwareEntity {
         double movementSpeed = this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED);
         int HISTORY_STEP = (int) Math.ceil(DELAY_FOR_SPACING_MULTIPLIER / movementSpeed);
         //add to position history from the end to the head
-        for (int j = segments.size()-1; j >=0; j--) {
-            EntityPart<AuricCentipedeEntity> segment = segments.get(j);
+        for (int j = segments.length-1; j >=0; j--) {
+            AuricCentipedeSegmentEntity segment = segments[j];
             for (int k = 0; k <= HISTORY_STEP; k++) {
                 positionHistory.add(0, new double[]{segment.getX(), segment.getY(), segment.getZ(), segment.getYaw()});
             }
@@ -141,10 +119,10 @@ public class AuricCentipedeEntity extends PathAwareEntity {
         //if the movement speed is higher it will take fewer ticks to change by the same distance
         //each entry in positionHistory is a tick
         int HISTORY_STEP = (int) Math.ceil(DELAY_FOR_SPACING_MULTIPLIER / movementSpeed);
-        for (int i = 0; i < segments.size(); i++) {
+        for (int i = 0; i < segments.length; i++) {
             //this is kind of like a train track if you will
             double[] targetPosition = positionHistory.get(Math.min((i + 1) * HISTORY_STEP, positionHistory.size() - 1)); // Offset by 2 steps per segment
-            EntityPart<AuricCentipedeEntity> segment = segments.get(i);
+            AuricCentipedeSegmentEntity segment = segments[i];
             segment.updatePosition(targetPosition[0], targetPosition[1], targetPosition[2]);
             segment.setYaw((float) targetPosition[3]);
             prevXPos = segment.getX();
@@ -154,7 +132,7 @@ public class AuricCentipedeEntity extends PathAwareEntity {
     }
 
     private void handleTerrainInteraction() {
-        for (EntityPart<AuricCentipedeEntity> segment : segments) {
+        for (AuricCentipedeSegmentEntity segment : segments) {
             // Get the segment's bounding box
             Box segmentBox = segment.getBoundingBox();
 
@@ -173,7 +151,7 @@ public class AuricCentipedeEntity extends PathAwareEntity {
         }
     }
 
-    private void handleWallCollisions(EntityPart<AuricCentipedeEntity> segment) {
+    private void handleWallCollisions(AuricCentipedeSegmentEntity segment) {
         Box segmentBox = segment.getBoundingBox();
         boolean colliding = StreamSupport.stream(segment.getWorld().getBlockCollisions(null, segmentBox).spliterator(), false)
                 .findAny()
@@ -203,7 +181,7 @@ public class AuricCentipedeEntity extends PathAwareEntity {
         double maxZ = this.getZ();
 
         // Iterate through each segment and adjust the bounding box to include each segment
-        for (EntityPart<AuricCentipedeEntity> part : segments) {
+        for (AuricCentipedeSegmentEntity part : segments) {
             minX = Math.min(minX, part.getX());
             minY = Math.min(minY, part.getY());
             minZ = Math.min(minZ, part.getZ());
@@ -215,7 +193,8 @@ public class AuricCentipedeEntity extends PathAwareEntity {
         return new Box(minX, minY, minZ, maxX, maxY, maxZ);  // Return a box that encompasses the entire entity
     }
 
-    public List<EntityPart<AuricCentipedeEntity>> getSegments() {
-        return segments;
+    @Override
+    public PartEntity<?>[] getParts() {
+        return this.segments;
     }
 }
