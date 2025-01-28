@@ -20,7 +20,7 @@ public record OscillatorTrackerComponentList(int selectedLocation, List<Oscillat
     public static final int MAX_EXPLOSIONS = 256;
     public static final Codec<OscillatorTrackerComponentList> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
-                            Codecs.UNSIGNED_BYTE.optionalFieldOf("selected_location", 0).forGetter(OscillatorTrackerComponentList::selectedLocation),
+                            Codecs.POSITIVE_INT.optionalFieldOf("selected_location", 0).forGetter(OscillatorTrackerComponentList::selectedLocation),
                             OscillatorTrackerComponent.CODEC.sizeLimitedListOf(256).optionalFieldOf("trackers", List.of()).forGetter(OscillatorTrackerComponentList::trackers)
                     )
                     .apply(instance, OscillatorTrackerComponentList::new)
@@ -28,7 +28,7 @@ public record OscillatorTrackerComponentList(int selectedLocation, List<Oscillat
     public static final PacketCodec<ByteBuf, OscillatorTrackerComponentList> PACKET_CODEC = PacketCodec.tuple(
             PacketCodecs.VAR_INT,
             OscillatorTrackerComponentList::selectedLocation,
-            OscillatorTrackerComponent.PACKET_CODEC.collect(PacketCodecs.toList(256)), //todo eeee
+            OscillatorTrackerComponent.PACKET_CODEC.collect(PacketCodecs.toList(256)), //todo set lower limit
             OscillatorTrackerComponentList::trackers,
             OscillatorTrackerComponentList::new
     );

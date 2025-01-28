@@ -73,86 +73,76 @@ public class CruxResonator extends Item {
             if(oscillatorTrackerComponentList == null) return;
 
             List<OscillatorTrackerComponent> trackers = oscillatorTrackerComponentList.trackers();
+            if(trackers.isEmpty()) return;
+            List<OscillatorTrackerComponent> trackers1 = new ArrayList<OscillatorTrackerComponent>(trackers);//DO NOT DELETE AT ANY COST
+
             int selectedLocation = oscillatorTrackerComponentList.selectedLocation();
 
-            if(selectedLocation >= trackers.size()) {//outofbounds check
+            if(selectedLocation >= trackers.size() || selectedLocation<0) {//outofbounds check
                 selectedLocation = 0;
             }
-/*            System.out.println("trackers size: "+trackers.size());
-            System.out.println("selected: "+ selectedLocation);*/
-            if (trackers.get(selectedLocation) != null) {
-                OscillatorTrackerComponent oscillatorTrackerComponent1 = trackers.get(selectedLocation);
-                OscillatorTrackerComponent oscillatorTrackerComponent2 = oscillatorTrackerComponent1.forWorld(serverWorld);
-                if(oscillatorTrackerComponent != oscillatorTrackerComponent1) {
-                    stack.set(ModComponentTypes.OSCILLATOR_TRACKER, oscillatorTrackerComponent1);
-                    stack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(selectedLocation, trackers));
-                }
-                if(oscillatorTrackerComponent1 != oscillatorTrackerComponent2) {
-                    //System.out.println();
-                    stack.set(ModComponentTypes.OSCILLATOR_TRACKER, oscillatorTrackerComponent2);
-                    trackers.remove(selectedLocation);
-                    stack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(selectedLocation-1, trackers));
-                }
+
+            if(trackers.get(selectedLocation) == null) return;
+
+            OscillatorTrackerComponent oscillatorTrackerComponent1 = trackers.get(selectedLocation);
+            OscillatorTrackerComponent oscillatorTrackerComponent2 = oscillatorTrackerComponent1.forWorld(serverWorld);
+            if(oscillatorTrackerComponent != oscillatorTrackerComponent1) {
+                stack.set(ModComponentTypes.OSCILLATOR_TRACKER, oscillatorTrackerComponent1);
+                stack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(selectedLocation, trackers));
             }
+            if(oscillatorTrackerComponent1 != oscillatorTrackerComponent2) {
+                //System.out.println();
+                stack.set(ModComponentTypes.OSCILLATOR_TRACKER, oscillatorTrackerComponent2);
+                System.out.println(trackers);
+                System.out.println(selectedLocation);
+                trackers1.remove(selectedLocation);
+                if(selectedLocation == 0) {
+                    stack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(selectedLocation, trackers1));
+                    return;
+                }
+                stack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(selectedLocation-1, trackers1));
+            }
+
         }
     }
 
+
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
+        List<OscillatorTrackerComponent> trackers = new ArrayList<OscillatorTrackerComponent>();
+        System.out.println("START USE ON BLOCK");
+
         BlockPos blockPos = context.getBlockPos();
         World world = context.getWorld();
-        if (!world.getBlockState(blockPos).isOf(QUAZARITH_OSCILLATOR)) {
-            return super.useOnBlock(context);
-        } else {
-            if(context.getWorld().isClient) return ActionResult.PASS;//maybe error spam fix?
-            world.playSound(null, blockPos, SoundEvents.ITEM_LODESTONE_COMPASS_LOCK, SoundCategory.PLAYERS, 1.0F, 1.0F);
-            PlayerEntity playerEntity = context.getPlayer();
-            ItemStack itemStack = context.getStack();
-            boolean bl = !playerEntity.isInCreativeMode() && itemStack.getCount() == 1;
 
-            List<OscillatorTrackerComponent> trackers = new ArrayList<OscillatorTrackerComponent>();
-            int selectedLocation = 0;
-            if(itemStack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST) != null) {
-                trackers = itemStack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST).trackers();
-                selectedLocation = itemStack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST).selectedLocation();
-            };
+        if (!world.getBlockState(blockPos).isOf(QUAZARITH_OSCILLATOR)) return super.useOnBlock(context);
+        //if (context.getWorld().isClient) return ActionResult.PASS;//maybe error spam fix?
+        world.playSound(null, blockPos, SoundEvents.ITEM_LODESTONE_COMPASS_LOCK, SoundCategory.PLAYERS, 1.0F, 1.0F);
 
+        PlayerEntity playerEntity = context.getPlayer();
+        ItemStack itemStack = context.getStack();
 
-            OscillatorTrackerComponent oscillatorTrackerComponent = new OscillatorTrackerComponent(Optional.of(GlobalPos.create(world.getRegistryKey(), blockPos)), true);
-            if (bl) {
+        if(itemStack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST) != null) {
+            trackers = itemStack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST).trackers();
+            System.out.println("trackers:" + trackers);
+        };
 
-                trackers.add(oscillatorTrackerComponent);
-                System.out.println(trackers);
-                OscillatorTrackerComponentList oscillatorTrackerComponentList = new OscillatorTrackerComponentList(selectedLocation, trackers);
-                System.out.println(oscillatorTrackerComponentList);
-                itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER , oscillatorTrackerComponentList.trackers().get(oscillatorTrackerComponentList.trackers().size() - 1));
-                itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST , oscillatorTrackerComponentList);
+        OscillatorTrackerComponent oscillatorTrackerComponent = new OscillatorTrackerComponent(Optional.of(GlobalPos.create(world.getRegistryKey(), blockPos)), true, "");
 
 
-                //itemStack.apply(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(0, trackers), new OscillatorTrackerComponentList(0,));
+        List<OscillatorTrackerComponent> trackers1 = new ArrayList<OscillatorTrackerComponent>(trackers);//DO NOT TOUCH AT ANY COST
+        trackers1.addFirst(oscillatorTrackerComponent);
+
+        OscillatorTrackerComponentList oscillatorTrackerComponentList = new OscillatorTrackerComponentList(0, trackers1);
+
+        itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER , oscillatorTrackerComponent);
+        itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST , oscillatorTrackerComponentList);
 
 
+        System.out.println("END USE ON BLOCK");
 
-            } else {
-                ItemStack itemStack2 = itemStack.copyComponentsToNewStack(ModItems.CRUX_RESONATOR, 1);
-                itemStack.decrementUnlessCreative(1, playerEntity);
+        return ActionResult.success(world.isClient);
 
-                trackers.add(oscillatorTrackerComponent);
-                System.out.println("2");
-                System.out.println(trackers);
-                OscillatorTrackerComponentList oscillatorTrackerComponentList = new OscillatorTrackerComponentList(selectedLocation, trackers);
-                System.out.println(oscillatorTrackerComponentList);
-                itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER , oscillatorTrackerComponentList.trackers().get(oscillatorTrackerComponentList.trackers().size() - 1));
-                itemStack2.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, oscillatorTrackerComponentList);
-
-
-                if (!playerEntity.getInventory().insertStack(itemStack2)) {
-                    playerEntity.dropItem(itemStack2, false);
-                }
-            }
-
-            return ActionResult.success(world.isClient);
-        }
     }
 
     @Override

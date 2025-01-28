@@ -21,11 +21,12 @@ import net.ugi.sculk_depths.util.POIs;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-public record OscillatorTrackerComponent(Optional<GlobalPos> target, boolean tracked) implements TooltipAppender {
+public record OscillatorTrackerComponent(Optional<GlobalPos> target, boolean tracked, String name) implements TooltipAppender {
     public static final Codec<OscillatorTrackerComponent> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
                             GlobalPos.CODEC.optionalFieldOf("target").forGetter(OscillatorTrackerComponent::target),
-                            Codec.BOOL.optionalFieldOf("tracked", Boolean.valueOf(true)).forGetter(OscillatorTrackerComponent::tracked)
+                            Codec.BOOL.optionalFieldOf("tracked", Boolean.valueOf(true)).forGetter(OscillatorTrackerComponent::tracked),
+                            Codec.STRING.optionalFieldOf("name","").forGetter(OscillatorTrackerComponent::name)
                     )
                     .apply(instance, OscillatorTrackerComponent::new)
     );
@@ -34,6 +35,8 @@ public record OscillatorTrackerComponent(Optional<GlobalPos> target, boolean tra
             OscillatorTrackerComponent::target,
             PacketCodecs.BOOL,
             OscillatorTrackerComponent::tracked,
+            PacketCodecs.STRING,
+            OscillatorTrackerComponent::name,
             OscillatorTrackerComponent::new
     );
 
@@ -45,7 +48,7 @@ public record OscillatorTrackerComponent(Optional<GlobalPos> target, boolean tra
                 BlockPos blockPos = ((GlobalPos)this.target.get()).pos();
                 return world.isInBuildLimit(blockPos) && world.getPointOfInterestStorage().hasTypeAt(POIs.QUAZARITH_OSCILLATOR_POI, blockPos)
                         ? this
-                        : new OscillatorTrackerComponent(Optional.empty(), true);
+                        : new OscillatorTrackerComponent(Optional.empty(), true, "");
             }
         } else {
             return this;
