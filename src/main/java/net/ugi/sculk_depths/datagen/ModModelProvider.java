@@ -43,6 +43,7 @@ public class ModModelProvider extends FabricModelProvider {
         amalgamiteBrickPool.slab(ModBlocks.AMALGAMITE_BRICK_SLAB);
         amalgamiteBrickPool.wall(ModBlocks.AMALGAMITE_BRICK_WALL);
 
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUMBLING_FLUMROCK_TILES);
         flumrockTilesPool.stairs(ModBlocks.FLUMROCK_TILE_STAIRS);
         flumrockTilesPool.slab(ModBlocks.FLUMROCK_TILE_SLAB);
         flumrockTilesPool.wall(ModBlocks.FLUMROCK_TILE_WALL);

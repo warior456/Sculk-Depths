@@ -172,6 +172,10 @@ public class ModBlocks {
     public static final Block FLUMROCK_TILES = registerBlock("flumrock_tiles",
             new Block(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
+    public static final Block CRUMBLING_FLUMROCK_TILES = registerBlock("crumbling_flumrock_tiles",
+            new Block(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+
     public static final Block FLUMROCK_TILE_STAIRS = registerBlock("flumrock_tile_stairs",
             new StairsBlock(FLUMROCK_TILES.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_TILES).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 

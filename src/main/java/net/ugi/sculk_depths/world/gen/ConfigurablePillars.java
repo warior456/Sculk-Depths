@@ -77,7 +77,7 @@ public class ConfigurablePillars
             blockPosIterable.forEach(blockPos1 -> {
                 int distance = (int) ((blockPos1.getX() - finalX)*(blockPos1.getX() - finalX) + ((blockPos1.getY() - finalY)/1)*((blockPos1.getY() - finalY)/1) + (blockPos1.getZ() - finalZ)*(blockPos1.getZ() - finalZ));
                 if (distance <= radiusSquared) {//ball instead of rectangle
-                    this.setBlockState(structureWorldAccess, blockPos1, ModBlocks.FLUMROCK.getDefaultState());
+                    this.setBlockState(structureWorldAccess, blockPos1, ModBlocks.CRUMBLING_FLUMROCK_TILES.getDefaultState());
                 }
             });
             if (j > 40){
@@ -96,10 +96,10 @@ public class ConfigurablePillars
 
                     blockPosIterable2.forEach(blockPos2 -> {
                         int distance = (int) (((blockPos2.getX() - finalX2)/2)*((blockPos2.getX() - finalX2)/2) + ((blockPos2.getY() - finalY2)/1)*((blockPos2.getY() - finalY2)/1) + ((blockPos2.getZ() - finalZ2)/2)*((blockPos2.getZ() - finalZ2)/2));
-                        if (Math.round(distance) <= (holeRadius-1)*(holeRadius-1) && context.getWorld().getBlockState(blockPos2).isOf(ModBlocks.FLUMROCK)) {//ball instead of rectangle
+                        if (Math.round(distance) <= (holeRadius-1)*(holeRadius-1) && context.getWorld().getBlockState(blockPos2).isOf(ModBlocks.CRUMBLING_FLUMROCK_TILES)) {//ball instead of rectangle
                             this.setBlockState(structureWorldAccess, blockPos2, Blocks.AIR.getDefaultState());
                         }
-                        else if (Math.round(distance) <= holeRadius*holeRadius && context.getWorld().getBlockState(blockPos2).isOf(ModBlocks.FLUMROCK) && random.nextInt(5) != 0) {//ball instead of rectangle
+                        else if (Math.round(distance) <= holeRadius*holeRadius && context.getWorld().getBlockState(blockPos2).isOf(ModBlocks.CRUMBLING_FLUMROCK_TILES) && random.nextInt(5) != 0) {//ball instead of rectangle
                             this.setBlockState(structureWorldAccess, blockPos2, ModBlocks.LARGUTH.getDefaultState());
                         }
                     });
@@ -111,7 +111,7 @@ public class ConfigurablePillars
         for(x = 0; x < totalLength/20; x++){
             int randomY = random.nextInt(maxHeight-40);
             BlockPos blockPos2 = blockPos.up(randomY);
-            Block[] canSpawnOn = {ModBlocks.FLUMROCK};
+            Block[] canSpawnOn = {ModBlocks.CRUMBLING_FLUMROCK_TILES};
             ConfigurableSpikes.genSpike(context,blockPos2,16, radiusSetting+2,random.nextInt(20) + 15,5,canSpawnOn);
         }
         return true;
