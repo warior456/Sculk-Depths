@@ -31,7 +31,6 @@ public record OscillatorTrackerComponent(Optional<GlobalPos> target, boolean tra
     );
 
     public OscillatorTrackerComponent forWorld(ServerWorld world) {
-        //todo fix this
         if (this.tracked && !this.target.isEmpty()) {
             if (((GlobalPos)this.target.get()).dimension() != world.getRegistryKey()) {
                 return this;

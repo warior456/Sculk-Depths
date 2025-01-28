@@ -1,7 +1,10 @@
 package net.ugi.sculk_depths.item.custom.crux_resonator;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.function.UnaryOperator;
 
+import net.minecraft.component.type.LoreComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -65,9 +68,20 @@ public class CruxResonator extends Item {
             PlayerEntity playerEntity = context.getPlayer();
             ItemStack itemStack = context.getStack();
             boolean bl = !playerEntity.isInCreativeMode() && itemStack.getCount() == 1;
+            List<OscillatorTrackerComponent> trackers = null;
+            if(itemStack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST) != null) {
+                trackers = itemStack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST).trackers().stream().toList();
+            };
+
             OscillatorTrackerComponent oscillatorTrackerComponent = new OscillatorTrackerComponent(Optional.of(GlobalPos.create(world.getRegistryKey(), blockPos)), true);
             if (bl) {
                 itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER , oscillatorTrackerComponent);
+                if(trackers != null){
+                    trackers.add(oscillatorTrackerComponent);
+                    //itemStack.apply(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(0, trackers), new OscillatorTrackerComponentList(0,));
+                    //itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST , new OscillatorTrackerComponentList(0, trackers));
+                }
+
             } else {
                 ItemStack itemStack2 = itemStack.copyComponentsToNewStack(ModItems.CRUX_RESONATOR, 1);
                 itemStack.decrementUnlessCreative(1, playerEntity);
