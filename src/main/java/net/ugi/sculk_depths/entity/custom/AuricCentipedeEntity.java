@@ -4,6 +4,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.VillagerEntity;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
-public class AuricCentipedeEntity extends PathAwareEntity implements MultiPartEntity {
+public class AuricCentipedeEntity extends HostileEntity implements MultiPartEntity {
     private static final int SEGMENT_COUNT = 15;
     private static final int DELAY_FOR_SPACING_MULTIPLIER = 2;
     private static final int HISTORY_LIMIT = 1000;
@@ -44,8 +45,8 @@ public class AuricCentipedeEntity extends PathAwareEntity implements MultiPartEn
         this.targetSelector.add(2, new ActiveTargetGoal(this, PlayerEntity.class, false)); // Prioritize attacking players
         this.targetSelector.add(3, new RevengeGoal(this, new Class[0])); // Revenge at priority 3
         this.targetSelector.add(4, new ActiveTargetGoal(this, VillagerEntity.class, false)); // Prioritize attacking villagers too
-//        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F)); // Look at players
-//        this.goalSelector.add(4, new LookAroundGoal(this)); // Look around randomly
+        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F)); // Look at players
+        this.goalSelector.add(4, new LookAroundGoal(this)); // Look around randomly
         this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0f)); // Wander around (you can add a condition to make this more dynamic)
     }
 
@@ -79,7 +80,6 @@ public class AuricCentipedeEntity extends PathAwareEntity implements MultiPartEn
         }
 
         updateSegments();
-
 //        handleTerrainInteraction();
     }
 

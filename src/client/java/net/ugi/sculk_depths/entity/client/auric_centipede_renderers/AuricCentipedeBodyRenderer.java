@@ -8,6 +8,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.RotationAxis;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.entity.client.ModModelLayers;
 import net.ugi.sculk_depths.entity.client.auric_centipede_models.AuricCentipedeBodyModel;
@@ -27,22 +28,37 @@ public class AuricCentipedeBodyRenderer extends MobEntityRenderer<AuricCentipede
 
 
     @Override
-    public void render(AuricCentipedeEntity mobEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+    public void render(AuricCentipedeEntity entity, float f, float g, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+        matrices.push();
+
         boolean bl;
 
-        if(mobEntity.isBaby()) {
-            matrixStack.scale(0.5f, 0.5f, 0.5f);
+        if(entity.isBaby()) {
+            matrices.scale(0.5f, 0.5f, 0.5f);
         } else {
-            matrixStack.scale(1f, 1f, 1f);
+            matrices.scale(1f, 1f, 1f);
         }
 
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
-        boolean bl2 = bl = minecraftClient.hasOutline(mobEntity) && mobEntity.isInvisible();
-        if (mobEntity.isInvisible() && !bl) {
+        boolean bl2 = bl = minecraftClient.hasOutline(entity) && entity.isInvisible();
+        if (entity.isInvisible() && !bl) {
             return;
         }
-        VertexConsumer vertexConsumer = bl ? vertexConsumerProvider.getBuffer(RenderLayer.getOutline(this.getTexture(mobEntity))) : vertexConsumerProvider.getBuffer(RenderLayer.getEntityTranslucent(this.getTexture(mobEntity)));
+        VertexConsumer vertexConsumer = bl ? vertexConsumers.getBuffer(RenderLayer.getOutline(this.getTexture(entity))) : vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(this.getTexture(entity)));
 
-        super.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, i); //works except transparent
+        float yawDiff = entity.getYaw() - entity.prevYaw;
+        if (yawDiff > 180) {
+            yawDiff -= 360;
+        } else if (yawDiff < -180) {
+            yawDiff += 360;
+        }
+        float interpolatedYaw = entity.prevYaw + yawDiff * g;
+
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(interpolatedYaw));
+//        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(entity.getPitch()));
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(entity.getYaw()));
+
+        super.render(entity, f, g, matrices, vertexConsumers, light); //works except transparent
+        matrices.pop();
     }
 }

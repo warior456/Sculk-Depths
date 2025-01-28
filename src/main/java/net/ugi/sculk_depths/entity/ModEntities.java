@@ -33,5 +33,5 @@ public class ModEntities {
     public static final EntityType<AuricCentipedeEntity> AURIC_CENTIPEDE = Registry.register(Registries.ENTITY_TYPE,
             SculkDepths.identifier( "auric_centipede"),
             EntityType.Builder.create(AuricCentipedeEntity::new, SpawnGroup.MONSTER)
-                    .dimensions(8,10).build());
+                    .dimensions(1,1).build());
 }

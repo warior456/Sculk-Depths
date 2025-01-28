@@ -21,7 +21,10 @@ import net.ugi.sculk_depths.entity.client.*;
 import net.ugi.sculk_depths.entity.client.auric_centipede_models.AuricCentipedeBodyModel;
 import net.ugi.sculk_depths.entity.client.auric_centipede_models.AuricCentipedeEndModel;
 import net.ugi.sculk_depths.entity.client.auric_centipede_models.AuricCentipedeHeadModel;
-import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipedeHeadRenderer;
+import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipedeBodyRenderer;
+import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipedeEndRenderer;
+import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipedeRenderer;
+import net.ugi.sculk_depths.entity.custom.AuricCentipedeSegmentEntity;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.item.custom.crux_resonator.CruxResonator;
@@ -64,8 +67,6 @@ public class SculkDepthsClient implements ClientModInitializer {
 		CustomItemModels.QuazarithChestplateModels();
 		CustomItemModels.QuazarithLeggingsModels();
 		CustomItemModels.QuazarithBootsModels();
-
-
 
 		EntityRendererRegistry.register(ModEntities.GLOMPER, GlomperRenderer::new);
 		EntityRendererRegistry.register(ModEntities.LESTER, LesterRenderer::new);
