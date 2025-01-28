@@ -56,7 +56,6 @@ public class AuricCentipedeEndRenderer extends MobEntityRenderer<AuricCentipedeE
 
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(interpolatedYaw));
 //        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(entity.getPitch()));
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(entity.getYaw()));
 
 
         super.render(entity, f, g, matrices, vertexConsumers, light); //works except transparent
