@@ -1,17 +1,82 @@
 package net.ugi.sculk_depths.sound;
 
+import com.mojang.datafixers.util.Either;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.entry.RegistryEntryOwner;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.util.math.random.RandomSplitter;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 import net.ugi.sculk_depths.world.biome.ModBiomes;
+
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class ConditionalSoundPlayerClient implements ClientTickEvents.StartWorldTick {
     public static double windAngleRad = Math.PI/4;
     public static double windX = 0.57f*Math.sin(windAngleRad);
     public static double windZ = 0.57f*Math.cos(windAngleRad);
+
+    Random r = new Random() {
+        @Override
+        public Random split() {
+            return null;
+        }
+
+        @Override
+        public RandomSplitter nextSplitter() {
+            return null;
+        }
+
+        @Override
+        public void setSeed(long seed) {
+
+        }
+
+        @Override
+        public int nextInt() {
+            return 0;
+        }
+
+        @Override
+        public int nextInt(int bound) {
+            return 0;
+        }
+
+        @Override
+        public long nextLong() {
+            return 0;
+        }
+
+        @Override
+        public boolean nextBoolean() {
+            return false;
+        }
+
+        @Override
+        public float nextFloat() {
+            return 0;
+        }
+
+        @Override
+        public double nextDouble() {
+            return 0;
+        }
+
+        @Override
+        public double nextGaussian() {
+            return 0;
+        }
+    };
 
     @Override
     public void onStartTick(ClientWorld world) {
@@ -21,9 +86,84 @@ public class ConditionalSoundPlayerClient implements ClientTickEvents.StartWorld
         if(Math.random() > 0.01) return;
 
         //todo maybe check for dimension (only if it's faster!!)
+        RegistryEntry<DoublePerlinNoiseSampler.NoiseParameters> noiseParam = new RegistryEntry<DoublePerlinNoiseSampler.NoiseParameters>() {
+            @Override
+            public DoublePerlinNoiseSampler.NoiseParameters value() {
+                return null;
+            }
+
+            @Override
+            public boolean hasKeyAndValue() {
+                return false;
+            }
+
+            @Override
+            public boolean matchesId(Identifier id) {
+                return false;
+            }
+
+            @Override
+            public boolean matchesKey(RegistryKey<DoublePerlinNoiseSampler.NoiseParameters> key) {
+                return false;
+            }
+
+            @Override
+            public boolean matches(Predicate<RegistryKey<DoublePerlinNoiseSampler.NoiseParameters>> predicate) {
+                return false;
+            }
+
+            @Override
+            public boolean isIn(TagKey<DoublePerlinNoiseSampler.NoiseParameters> tag) {
+                return false;
+            }
+
+            @Override
+            public boolean matches(RegistryEntry<DoublePerlinNoiseSampler.NoiseParameters> entry) {
+                return false;
+            }
+
+            @Override
+            public Stream<TagKey<DoublePerlinNoiseSampler.NoiseParameters>> streamTags() {
+                return Stream.empty();
+            }
+
+            @Override
+            public Either<RegistryKey<DoublePerlinNoiseSampler.NoiseParameters>, DoublePerlinNoiseSampler.NoiseParameters> getKeyOrValue() {
+                return null;
+            }
+
+            @Override
+            public Optional<RegistryKey<DoublePerlinNoiseSampler.NoiseParameters>> getKey() {
+                return Optional.empty();
+            }
+
+            @Override
+            public Type getType() {
+                return null;
+            }
+
+            @Override
+            public boolean ownerEquals(RegistryEntryOwner<DoublePerlinNoiseSampler.NoiseParameters> owner) {
+                return false;
+            }
+        };
+
+        Random radRandom = world.getRandom();
+        Random speedRandom = world.getRandom();
+
+        radRandom.setSeed(1);
+        speedRandom.setSeed(2);
+
+
+        DensityFunction.Noise radNoise = new DensityFunction.Noise(noiseParam, DoublePerlinNoiseSampler.create(radRandom, new DoublePerlinNoiseSampler.NoiseParameters(-7, 3,3,4,2,4,2.4,9)));
+        DensityFunction.Noise speedNoise = new DensityFunction.Noise(noiseParam, DoublePerlinNoiseSampler.create(speedRandom, new DoublePerlinNoiseSampler.NoiseParameters(-7, 3,3,4,2,4,2.4,9)));
+
+        double rad = radNoise.sample(player.getX(), world.getTime(), player.getZ());
+        double speed = speedNoise.sample(player.getX(), world.getTime(), player.getZ());
+
         windAngleRad=CalculateWindAngle(world);
-        windX = 0.57f*Math.sin(windAngleRad);
-        windZ = 0.57f*Math.cos(windAngleRad);
+        windX = speed*Math.sin(rad);
+        windZ = speed*Math.cos(rad);
 
         if (ModBiomes.DRIED_FOREST == world.getBiome(pos).getKey().get()) {
             if(Math.random() > 0.2 ) return;
