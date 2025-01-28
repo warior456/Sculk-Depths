@@ -2,6 +2,8 @@ package net.ugi.sculk_depths.block;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 //import net.kyrptonaught.customportalapi.CustomPortalBlock;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.impl.content.registry.FlammableBlockRegistryImpl;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
@@ -20,6 +22,7 @@ import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItemGroup;
 import net.ugi.sculk_depths.sound.ModBlockSoundGroups;
+import net.ugi.sculk_depths.util.ModFlammableBlocks;
 import net.ugi.sculk_depths.world.WorldGenerator;
 import net.ugi.sculk_depths.block.custom.ModCauldron.SporeFlumrockCauldronBlock;
 import net.ugi.sculk_depths.block.dryable.*;
@@ -31,16 +34,31 @@ public class ModBlocks {
 
 
 
-// amalgamite
-    
+    // ------------------- amalgamite  -------------------
+
+
     public static final Block AMALGAMITE = registerBlock("amalgamite",
             new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE).strength(3.0f, 6.0f).requiresTool().sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
+    //polished amalgamite blockset
+    public static final Block POLISHED_AMALGAMITE = registerBlock("polished_amalgamite",
+            new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_BRICKS).strength(2.9f, 6.0f).requiresTool().sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block POLISHED_AMALGAMITE_STAIRS = registerBlock("polished_amalgamite_stairs",
+            new StairsBlock(ModBlocks.POLISHED_AMALGAMITE.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.POLISHED_AMALGAMITE).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block POLISHED_AMALGAMITE_SLAB = registerBlock("polished_amalgamite_slab",
+            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.POLISHED_AMALGAMITE).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block POLISHED_AMALGAMITE_WALL = registerBlock("polished_amalgamite_wall",
+            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.POLISHED_AMALGAMITE).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    //amalgamite bricks blockset
     public static final Block AMALGAMITE_BRICKS = registerBlock("amalgamite_bricks",
             new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_BRICKS).strength(2.9f, 6.0f).requiresTool().sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    public static final Block CHISELED_AMALGAMITE = registerBlock("chiseled_amalgamite",
-            new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_BRICKS).strength(2.9f, 6.0f).requiresTool().sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+    public static final Block CRACKED_AMALGAMITE_BRICKS = registerBlock("cracked_amalgamite_bricks",
+            new Block(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block AMALGAMITE_BRICK_STAIRS = registerBlock("amalgamite_brick_stairs",
             new StairsBlock(ModBlocks.AMALGAMITE_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
@@ -48,22 +66,18 @@ public class ModBlocks {
     public static final Block AMALGAMITE_BRICK_SLAB = registerBlock("amalgamite_brick_slab",
             new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    public static final Block ACTIVATED_AMALGAMITE = registerBlock("activated_amalgamite",
-            new Block(AbstractBlock.Settings.copy(Blocks.REINFORCED_DEEPSLATE).strength(-1.0f, 3600000.0f).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
     public static final Block AMALGAMITE_BRICK_WALL = registerBlock("amalgamite_brick_wall",
             new WallBlock(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    public static final Block LARGUTH = registerBlock("larguth",
-            new Block(AbstractBlock.Settings.copy(Blocks.OBSIDIAN).strength(40.0f,1000f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+    //rest
+    public static final Block CHISELED_AMALGAMITE = registerBlock("chiseled_amalgamite",
+            new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_BRICKS).strength(2.9f, 6.0f).requiresTool().sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    public static final Block ZYGRIN_FURNACE = registerBlock("zygrin_furnace",
-            new ZygrinFurnaceBlock(AbstractBlock.Settings.copy(Blocks.FURNACE).strength(10.0f,10f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block QUAZARITH_OSCILLATOR = registerBlock("quazarith_oscillator",
-            new Block(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+    public static final Block ACTIVATED_AMALGAMITE = registerBlock("activated_amalgamite",
+            new Block(AbstractBlock.Settings.copy(Blocks.REINFORCED_DEEPSLATE).strength(-1.0f, 3600000.0f).sounds(ModBlockSoundGroups.AMALGAMITE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
 
+    // ------------------- umbrusk -------------------
 
     //umbrusk blockset
     public static final Block UMBRUSK = registerBlock("umbrusk",
@@ -78,8 +92,7 @@ public class ModBlocks {
     public static final Block UMBRUSK_WALL = registerBlock("umbrusk_wall",
             new WallBlock(AbstractBlock.Settings.copy(ModBlocks.UMBRUSK)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-
-    //umbrusk brick blockset
+    //umbrusk bricks blockset
     public static final Block UMBRUSK_BRICKS = registerBlock("umbrusk_bricks",
             new Block(AbstractBlock.Settings.copy(ModBlocks.UMBRUSK)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
@@ -92,6 +105,90 @@ public class ModBlocks {
     public static final Block UMBRUSK_BRICK_WALL = registerBlock("umbrusk_brick_wall",
             new WallBlock(AbstractBlock.Settings.copy(ModBlocks.UMBRUSK_BRICKS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
+
+    // ------------------- zygrin  -------------------
+
+    //zygrin blockset
+    public static final Block ZYGRIN = registerBlock("zygrin",
+            new Block(AbstractBlock.Settings.copy(Blocks.STONE).strength(6.0f,9.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_STAIRS = registerBlock("zygrin_stairs",
+            new StairsBlock(ZYGRIN.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_SLAB = registerBlock("zygrin_slab",
+            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_WALL = registerBlock("zygrin_wall",
+            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    //polished zygrin blockset
+    public static final Block POLISHED_ZYGRIN = registerBlock("polished_zygrin",
+            new Block(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block POLISHED_ZYGRIN_STAIRS = registerBlock("polished_zygrin_stairs",
+            new StairsBlock(POLISHED_ZYGRIN.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block POLISHED_ZYGRIN_SLAB = registerBlock("polished_zygrin_slab",
+            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block POLISHED_ZYGRIN_WALL = registerBlock("polished_zygrin_wall",
+            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    //zygrin bricks blockset
+    public static final Block ZYGRIN_BRICKS = registerBlock("zygrin_bricks",
+            new Block(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_BRICK_STAIRS = registerBlock("zygrin_brick_stairs",
+            new StairsBlock(ZYGRIN_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_BRICK_SLAB = registerBlock("zygrin_brick_slab",
+            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_BRICK_WALL = registerBlock("zygrin_brick_wall",
+            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    //rest
+    public static final Block ZYGRIN_PILLAR = registerBlock("zygrin_pillar",
+            new PillarBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block CHISELED_ZYGRIN = registerBlock("chiseled_zygrin",
+            new PillarBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_LIGHT = registerBlock("zygrin_light",
+            new Block(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool().luminance((state) -> 15)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_FLOWBLOCK = registerBlock("zygrin_flowblock",
+            new FlowBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block ZYGRIN_FURNACE = registerBlock("zygrin_furnace",
+            new ZygrinFurnaceBlock(AbstractBlock.Settings.copy(Blocks.FURNACE).strength(10.0f,10f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+
+    // ------------------- flumrock -------------------
+    public static final Block FLUMROCK = registerBlock("flumrock",
+            new Block(AbstractBlock.Settings.create().strength(4.0f,0.5f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    //flumrock tiles
+    public static final Block FLUMROCK_TILES = registerBlock("flumrock_tiles",
+            new Block(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block FLUMROCK_TILE_STAIRS = registerBlock("flumrock_tile_stairs",
+            new StairsBlock(FLUMROCK_TILES.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_TILES).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block FLUMROCK_TILE_SLAB = registerBlock("flumrock_tile_slab",
+            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_TILES).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block FLUMROCK_TILE_WALL = registerBlock("flumrock_tile_wall",
+            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_TILES).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    //cauldron
+    public static final Block FLUMROCK_CAULDRON = registerBlock("flumrock_cauldron", new FlumrockCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+    public static final Block KRYSLUM_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("kryslum_flumrock_cauldron", new KryslumFlumrockCauldronBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_CAULDRON), ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+    public static final Block SPORE_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("spore_flumrock_cauldron", new SporeFlumrockCauldronBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_CAULDRON), ModCauldronBehavior.SPORE_FLUMROCK_CAULDRON_BEHAVIOR.map()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+
+
+    // ------------------- valtrox  -------------------
 
     //valtrox blockset
     public static final Block VALTROX_LOG = registerBlock("valtrox_log",
@@ -143,8 +240,6 @@ public class ModBlocks {
 
     public static final Block VALTROX_WALL_HANGING_SIGN = registerBlockWithoutBlockItem("valtrox_wall_hanging_sign",
             new DryableWallHangingSignBlock(ModWoodType.VALTROX, AbstractBlock.Settings.copy(Blocks.OAK_WALL_HANGING_SIGN).strength(1.0f).dropsLike(VALTROX_HANGING_SIGN).solid()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-
 
     //coated valtrox blockset
     public static final Block COATED_VALTROX_LOG = registerBlock("coated_valtrox_log",
@@ -304,88 +399,44 @@ public class ModBlocks {
     public static final Block PETRIFIED_VALTROX_WALL_HANGING_SIGN = registerBlockWithoutBlockItem("petrified_valtrox_wall_hanging_sign",
             new WallHangingSignBlock(ModWoodType.PETRIFIED_VALTROX, AbstractBlock.Settings.copy(Blocks.OAK_WALL_HANGING_SIGN).strength(1.5f).requiresTool().dropsLike(ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN).solid()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    //zygrin set
-    public static final Block ZYGRIN = registerBlock("zygrin",
-            new Block(AbstractBlock.Settings.copy(Blocks.STONE).strength(6.0f,9.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    public static final Block ZYGRIN_STAIRS = registerBlock("zygrin_stairs",
-            new StairsBlock(ZYGRIN.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    public static final Block ZYGRIN_SLAB = registerBlock("zygrin_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block ZYGRIN_WALL = registerBlock("zygrin_wall",
-            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block ZYGRIN_PILLAR = registerBlock("zygrin_pillar",
-            new PillarBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block CHISELED_ZYGRIN = registerBlock("chiseled_zygrin",
-            new PillarBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block POLISHED_ZYGRIN = registerBlock("polished_zygrin",
-            new Block(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block POLISHED_ZYGRIN_STAIRS = registerBlock("polished_zygrin_stairs",
-            new StairsBlock(POLISHED_ZYGRIN.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block POLISHED_ZYGRIN_SLAB = registerBlock("polished_zygrin_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block POLISHED_ZYGRIN_WALL = registerBlock("polished_zygrin_wall",
-            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block ZYGRIN_BRICKS = registerBlock("zygrin_bricks",
-            new Block(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block ZYGRIN_BRICK_STAIRS = registerBlock("zygrin_brick_stairs",
-            new StairsBlock(ZYGRIN_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block ZYGRIN_BRICK_SLAB = registerBlock("zygrin_brick_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block ZYGRIN_BRICK_WALL = registerBlock("zygrin_brick_wall",
-            new WallBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block ZYGRIN_LIGHT = registerBlock("zygrin_light",
-            new Block(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool().luminance((state) -> 15)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    public static final Block ZYGRIN_FLOWBLOCK = registerBlock("zygrin_flowblock",
-            new FlowBlock(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
-    //leaves
+    // ------------------- leaves -------------------
     public static final Block VALTROX_LEAVES = registerBlock("valtrox_leaves",
             new LeavesBlock(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    //saplings
+    // ------------------- saplings -------------------
     public static final Block VALTROX_SAPLING = registerBlock("valtrox_sapling",
             new SaplingBlock(WorldGenerator.VALTROX_SAPLING_GENERATOR, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    //vegetation
+    // ------------------- cephlera -------------------
     public static final Block CEPHLERA = registerBlockWithoutBlockItem("cephlera",
             new CephleraBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
     public static final Block CEPHLERA_LIGHT = registerBlock("cephlera_light",
             new CephleraLightBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).noCollision().breakInstantly().emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).luminance(blockState -> 15).sounds(BlockSoundGroup.WEEPING_VINES)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
+    // ------------------- resource blocks  -------------------
     public static final Block QUAZARITH_BLOCK = registerBlock("quazarith_block",
             new Block(AbstractBlock.Settings.copy(Blocks.NETHERITE_BLOCK).strength(60.0f,1400.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
     public static final Block CRUX_BLOCK = registerBlock("crux_block",
             new Block(AbstractBlock.Settings.copy(Blocks.DIAMOND_BLOCK).strength(5.0F, 6.0F).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    //ores
+    // ------------------- ores -------------------
     public static final Block QUAZARITH_ORE = registerBlock("quazarith_ore",
             new LesterSpawningBlock(AbstractBlock.Settings.copy(ModBlocks.UMBRUSK).strength(5.5f,9.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
     public static final Block CRUX_ORE = registerBlock("crux_ore",
             new Block(AbstractBlock.Settings.copy(ModBlocks.ZYGRIN).strength(4.5f,8.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    //crystals
-
+    // ------------------- crystals -------------------
     public static final Block WHITE_CRYSTAL_BLOCK = registerBlock("white_crystal_block", ModBlocks.createCrystalBlock(DyeColor.WHITE), ModItemGroup.SCULK_DEPTHS_BLOCKS);
     public static final Block BLUE_CRYSTAL_BLOCK = registerBlock("blue_crystal_block", ModBlocks.createCrystalBlock(DyeColor.BLUE), ModItemGroup.SCULK_DEPTHS_BLOCKS);
     public static final Block ORANGE_CRYSTAL_BLOCK = registerBlock("orange_crystal_block", ModBlocks.createCrystalBlock(DyeColor.ORANGE), ModItemGroup.SCULK_DEPTHS_BLOCKS);
     public static final Block LIME_CRYSTAL_BLOCK = registerBlock("lime_crystal_block", ModBlocks.createCrystalBlock(DyeColor.LIME), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    //penebrium
+    // ------------------- penebrium -------------------
     public static final Block PENEBRIUM_SHROOM = registerBlock("penebrium_shroom",
             new MushroomPlantBlock(ModConfiguredFeatures.PENEBRIUM_SHROOM, AbstractBlock.Settings.copy(Blocks.BROWN_MUSHROOM)), ModItemGroup.SCULK_DEPTHS_BLOCKS);//.luminance((state) -> 5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube))
 
@@ -398,12 +449,17 @@ public class ModBlocks {
     public static final Block PENEBRIUM_SPORE_BLOCK = registerBlock("penebrium_spore_block",
             new SporeBlock(AbstractBlock.Settings.copy(Blocks.MUSHROOM_STEM).luminance((state) -> 5).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).nonOpaque()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    //misc
-    public static final Block FLUMROCK = registerBlock("flumrock",
-            new Block(AbstractBlock.Settings.create().strength(4.0f,0.5f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
+
+    // ------------------- misc -------------------
     public static final Block CRUMBLING_DIRT = registerBlock("crumbling_dirt",
-            new Block(AbstractBlock.Settings.create().strength(0.3f).requiresTool().sounds(BlockSoundGroup.ROOTED_DIRT)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+            new Block(AbstractBlock.Settings.create().strength(0.3f).sounds(BlockSoundGroup.ROOTED_DIRT)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block LARGUTH = registerBlock("larguth",
+            new Block(AbstractBlock.Settings.copy(Blocks.OBSIDIAN).strength(40.0f,1000f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block DRIED_GRASS = registerBlock("dried_grass",
+            new CustomPlantBlock(AbstractBlock.Settings.copy(Blocks.SHORT_GRASS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block KRYSLUM_ENRICHED_SOIL = registerBlock("kryslum_enriched_soil",
             new KryslumEnrichedSoilBLock(AbstractBlock.Settings.copy(Blocks.FARMLAND).ticksRandomly().strength(0.8f).sounds(BlockSoundGroup.MUDDY_MANGROVE_ROOTS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
@@ -417,43 +473,40 @@ public class ModBlocks {
     public static final Block QELBERRY_BUSH = registerBlockWithoutBlockItem("qelberry_bush",
         new QeldryBerryBush(AbstractBlock.Settings.copy(Blocks.SWEET_BERRY_BUSH)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    public static final Block DRIED_GRASS = registerBlock("dried_grass",
-            new CustomPlantBlock(AbstractBlock.Settings.copy(Blocks.SHORT_GRASS)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+    public static final Block QUAZARITH_OSCILLATOR = registerBlock("quazarith_oscillator",
+            new Block(AbstractBlock.Settings.copy(ModBlocks.AMALGAMITE_BRICKS).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
 
-    //auric //TODO check blocksettings
 
-    
-    public static final Block AURIC_VINES = registerBlockWithoutBlockItem("auric_vines",
-            new AuricVinesBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES_LOW_PITCH)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-    public static final Block AURIC_VINES_END = registerBlock("auric_vines_end",
-            new AuricVinesEndBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES_LOW_PITCH)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-
+    // ------------------- auric -------------------
     public static final Block AURIC_SPORE_BLOCK = registerBlock("auric_spore_block",
             new ShroomBlock(AbstractBlock.Settings.create().strength(0.3f).sounds(BlockSoundGroup.MOSS_BLOCK)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    public static final Block AURIC_SPORE_LAYER = registerBlock("auric_spore_layer",
-            new LayeredAuricSporeBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND).notSolid().ticksRandomly()
-                    .blockVision((state, world, pos) -> {return (Integer)state.get(SnowBlock.LAYERS) >= 8;})
-                    .pistonBehavior(PistonBehavior.DESTROY)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
     public static final Block AURIC_SHROOM_BLOCK = registerBlock("auric_shroom_block",
             new ShroomBlock(AbstractBlock.Settings.create().strength(0.3f).sounds(BlockSoundGroup.MOSS_BLOCK)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block AURIC_SHROOM_STEM = registerBlock("auric_shroom_stem",
             new ShroomBlock(AbstractBlock.Settings.copy(Blocks.MUSHROOM_STEM).nonOpaque()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
+    public static final Block AURIC_VINES = registerBlockWithoutBlockItem("auric_vines",
+            new AuricVinesBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES_LOW_PITCH)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block AURIC_VINES_END = registerBlock("auric_vines_end",
+            new AuricVinesEndBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES_LOW_PITCH)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
+    public static final Block AURIC_SPORE_LAYER = registerBlock("auric_spore_layer",
+            new LayeredAuricSporeBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND).notSolid().ticksRandomly()
+                    .blockVision((state, world, pos) -> {return (Integer)state.get(SnowBlock.LAYERS) >= 8;})
+                    .pistonBehavior(PistonBehavior.DESTROY)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
     public static final Block AURIC_SPORE_SPROUTS = registerBlock("auric_spore_sprouts",
             new ShroomPlantBlock(AbstractBlock.Settings.copy(Blocks.BROWN_MUSHROOM).luminance((state)-> 0).noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES), ModConfiguredFeatures.AURIC_SHROOM) , ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    //fluids
+    // ------------------- fluids -------------------
     public static final Block KRYSLUM = registerBlockWithoutBlockItem("kryslum", new FluidBlock(ModFluids.KRYSLUM_STILL, AbstractBlock.Settings.copy(Blocks.WATER).replaceable().noCollision().strength(100.0f).pistonBehavior(PistonBehavior.DESTROY).dropsNothing().liquid().solid().sounds(BlockSoundGroup.SCULK)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    public static final Block FLUMROCK_CAULDRON = registerBlock("flumrock_cauldron", new FlumrockCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON).strength(4.0f).requiresTool()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-    public static final Block KRYSLUM_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("kryslum_flumrock_cauldron", new KryslumFlumrockCauldronBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_CAULDRON), ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
-    public static final Block SPORE_FLUMROCK_CAULDRON = registerBlockWithoutBlockItem("spore_flumrock_cauldron", new SporeFlumrockCauldronBlock(AbstractBlock.Settings.copy(ModBlocks.FLUMROCK_CAULDRON), ModCauldronBehavior.SPORE_FLUMROCK_CAULDRON_BEHAVIOR.map()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-
-    //potted stuff
+    // ------------------- potted stuff -------------------
     public static final Block POTTED_VALTROX_SAPLING = registerBlockWithoutBlockItem("potted_valtrox_sapling", new FlowerPotBlock(ModBlocks.VALTROX_SAPLING, AbstractBlock.Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
     public static final Block POTTED_PENEBRIUM_SHROOM = registerBlockWithoutBlockItem("potted_penebrium_shroom", new FlowerPotBlock(ModBlocks.PENEBRIUM_SHROOM, AbstractBlock.Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
     public static final Block POTTED_AURIC_SPORE_SPROUTS = registerBlockWithoutBlockItem("potted_auric_spore_sprouts", new FlowerPotBlock(ModBlocks.AURIC_SPORE_SPROUTS, AbstractBlock.Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
@@ -482,6 +535,7 @@ public class ModBlocks {
     }
 
     public static void registerModBlocks() {
+        ModFlammableBlocks.registerFlammables();
         ModStrippableBlocks.registerStrippables();
     }
 }

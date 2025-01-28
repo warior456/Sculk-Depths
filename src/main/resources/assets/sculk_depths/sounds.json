@@ -101,16 +101,24 @@
 		"category": "block",
 		"sounds": [
 			{
-				"name":"sculk_depths:block/amalgamite/amalgamite_break1"
+				"name":"sculk_depths:block/amalgamite/amalgamite_break1",
+				"pitch": 1,
+				"volume": 1
 			},
 			{
-				"name":"sculk_depths:block/amalgamite/amalgamite_break2"
+				"name":"sculk_depths:block/amalgamite/amalgamite_break2",
+				"pitch": 1,
+				"volume": 1
 			},
 			{
-				"name":"sculk_depths:block/amalgamite/amalgamite_break3"
+				"name":"sculk_depths:block/amalgamite/amalgamite_break3",
+				"pitch": 1,
+				"volume": 1
 			},
 			{
-				"name":"sculk_depths:block/amalgamite/amalgamite_break4"
+				"name":"sculk_depths:block/amalgamite/amalgamite_break4",
+				"pitch": 1,
+				"volume": 1
 			}
 		]
 	},
@@ -118,16 +126,29 @@
 		"category": "block",
 		"sounds": [
 			{
-				"name":"sculk_depths:block/amalgamite/amalgamite_step1"
+				"name":"sculk_depths:block/amalgamite/amalgamite_step1",
+				"pitch": 1,
+				"volume": 1
 			},
 			{
-				"name":"sculk_depths:block/amalgamite/amalgamite_step2"
+				"name":"sculk_depths:block/amalgamite/amalgamite_step2",
+				"pitch": 1,
+				"volume": 1
 			},
 			{
-				"name":"sculk_depths:block/amalgamite/amalgamite_step3"
+				"name":"sculk_depths:block/amalgamite/amalgamite_step3",
+				"pitch": 1,
+				"volume": 1
 			},
 			{
-				"name":"sculk_depths:block/amalgamite/amalgamite_step4"
+				"name":"sculk_depths:block/amalgamite/amalgamite_step4",
+				"pitch": 1,
+				"volume": 1
+			},
+			{
+				"name":"sculk_depths:block/amalgamite/amalgamite_step5",
+				"pitch": 1,
+				"volume": 1
 			}
 		]
 	},
@@ -135,16 +156,33 @@
 		"category": "block",
 		"sounds": [
 			{
-				"name":"sculk_depths:block/amalgamite/amalgamite_place"
+				"name":"sculk_depths:block/amalgamite/amalgamite_place1",
+				"pitch": 1,
+				"volume": 1
 			},
 			{
-				"name":"sculk_depths:block/amalgamite/amalgamite_place2"
+				"name":"sculk_depths:block/amalgamite/amalgamite_place2",
+				"pitch": 1,
+				"volume": 1
 			},
 			{
-				"name":"sculk_depths:block/amalgamite/amalgamite_place3"
+				"name":"sculk_depths:block/amalgamite/amalgamite_place3",
+				"pitch": 1,
+				"volume": 1
 			},
 			{
-				"name":"sculk_depths:block/amalgamite/amalgamite_place4"
+				"name":"sculk_depths:block/amalgamite/amalgamite_place4",
+				"pitch": 1,
+				"volume": 1
+			}
+		]
+	},
+	"disc.zinnia": {
+		"sounds": [
+			{
+				"name":"sculk_depths:zinnia_music_disc",
+				"stream": true,
+				"volume": 1
 			}
 		]
 	}

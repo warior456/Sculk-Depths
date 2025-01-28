@@ -1,0 +1,241 @@
+{
+  "feature": {
+    "type": "minecraft:vegetation_patch",
+    "config": {
+      "surface": "floor",
+      "depth": 3,
+      "vertical_range": 10,
+      "extra_bottom_block_chance": 0,
+      "extra_edge_column_chance": 0,
+      "vegetation_chance": 1,
+      "xz_radius": 9,
+      "replaceable": "#sculk_depths:sculk_veins_deepslate",
+      "ground_state": {
+        "type": "minecraft:noise_provider",
+        "seed": 0,
+        "noise": {
+          "firstOctave": -7,
+          "amplitudes": [
+            1.0,
+            0.5,
+            1.1,
+            1.5,
+            0,
+            1.0
+          ]
+        },
+        "scale": 1,
+        "states": [
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "minecraft:sculk"
+          },
+          {
+            "Name": "sculk_depths:amalgamite"
+          }
+        ]
+      },
+      "vegetation_feature": {
+        "feature": {
+          "type": "minecraft:multiface_growth",
+          "config": {
+            "block": "minecraft:sculk_vein",
+            "search_range": 1,
+            "chance_of_spreading": 1,
+            "can_place_on_floor": true,
+            "can_place_on_ceiling": true,
+            "can_place_on_wall": true,
+            "can_be_placed_on": [
+              "sculk_depths:amalgamite"
+            ]
+          }
+        },
+        "placement": [
+          {
+            "type": "minecraft:environment_scan",
+            "direction_of_search": "down",
+            "max_steps": 1,
+            "target_condition": {
+              "type": "minecraft:true"
+            },
+            "allowed_search_condition": {
+              "type": "minecraft:matching_blocks",
+              "offset": [
+                0,
+                -1,
+                0
+              ],
+              "blocks": "minecraft:sculk"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "placement": [
+    {
+      "type": "sculk_depths:count_on_every_layer_constant",
+      "count": 1,
+      "layers": 7,
+      "separation": 10,
+      "start_y": 70
+    },
+    {
+      "type": "minecraft:environment_scan",
+      "direction_of_search": "down",
+      "max_steps": 11,
+      "target_condition": {
+        "type": "minecraft:matching_blocks",
+        "offset": [
+          0,
+          -1,
+          0
+        ],
+        "blocks": "sculk_depths:amalgamite"
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

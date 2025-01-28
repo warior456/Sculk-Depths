@@ -25,8 +25,9 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(ModTags.Blocks.INCORRECT_FOR_QUAZARITH_TOOL);
 
 
-        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE) //TODO check for more missing blocks
                 .add(ModBlocks.AMALGAMITE)
+                .add(ModBlocks.CRACKED_AMALGAMITE_BRICKS)
 
                 .add(ModBlocks.UMBRUSK)
                 .add(ModBlocks.UMBRUSK_STAIRS)
@@ -190,6 +191,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.ZYGRIN_BRICK_WALL)
                 .add(ModBlocks.POLISHED_ZYGRIN_WALL)
                 .add(ModBlocks.PETRIFIED_VALTROX_WALL)
-                .add(ModBlocks.AMALGAMITE_BRICK_WALL);
+                .add(ModBlocks.AMALGAMITE_BRICK_WALL)
+                .add(ModBlocks.POLISHED_AMALGAMITE_WALL)
+                .add(ModBlocks.FLUMROCK_TILE_WALL);
     }
 }

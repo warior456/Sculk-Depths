@@ -24,7 +24,7 @@ import net.ugi.sculk_depths.entity.client.auric_centipede_models.AuricCentipedeH
 import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipedeHeadRenderer;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItems;
-import net.ugi.sculk_depths.item.custom.CruxResonator;
+import net.ugi.sculk_depths.item.custom.crux_resonator.CruxResonator;
 import net.ugi.sculk_depths.particle.*;
 import net.ugi.sculk_depths.render.SculkDepthsCloudRendererClient;
 import net.ugi.sculk_depths.render.SculkDepthsSkyRendererClient;
@@ -64,6 +64,7 @@ public class SculkDepthsClient implements ClientModInitializer {
 		CustomItemModels.QuazarithChestplateModels();
 		CustomItemModels.QuazarithLeggingsModels();
 		CustomItemModels.QuazarithBootsModels();
+
 
 
 		EntityRendererRegistry.register(ModEntities.GLOMPER, GlomperRenderer::new);
