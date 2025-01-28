@@ -194,6 +194,21 @@ public class AuricCentipedeEntity extends HostileEntity implements MultiPartEnti
     }
 
     @Override
+    public void tickMovement() {
+        super.tickMovement();
+        double movementSpeed = this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+        if (this.horizontalCollision) {
+            this.setVelocity(this.getVelocity().x, movementSpeed*0.75, this.getVelocity().z);
+        }
+    }
+
+    @Override
+    public void jump() {
+        // Do nothing
+    }
+
+
+    @Override
     public PartEntity<?>[] getParts() {
         return this.segments;
     }
