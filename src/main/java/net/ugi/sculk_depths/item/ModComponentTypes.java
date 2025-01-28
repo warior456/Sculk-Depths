@@ -9,7 +9,7 @@ import net.ugi.sculk_depths.item.custom.crux_resonator.OscillatorTrackerComponen
 public class ModComponentTypes {
     public static void register(){
         Registry.register(Registries.DATA_COMPONENT_TYPE, "quazarith_oscillator_tracker", OSCILLATOR_TRACKER);
-        Registry.register(Registries.DATA_COMPONENT_TYPE, "oscillator_tracker_list", OSCILLATOR_TRACKER);
+        Registry.register(Registries.DATA_COMPONENT_TYPE, "oscillator_tracker_list", OSCILLATOR_TRACKER_LIST);
     }
 
     public static final ComponentType<OscillatorTrackerComponent> OSCILLATOR_TRACKER = ComponentType.<OscillatorTrackerComponent>builder().codec(OscillatorTrackerComponent.CODEC).packetCodec(OscillatorTrackerComponent.PACKET_CODEC).build();
