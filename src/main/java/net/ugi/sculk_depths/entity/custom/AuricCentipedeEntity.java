@@ -10,6 +10,8 @@ import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.entity.interfaces.MultiPartEntity;
@@ -22,7 +24,6 @@ import java.util.stream.StreamSupport;
 public class AuricCentipedeEntity extends HostileEntity implements MultiPartEntity {
     private static final int SEGMENT_COUNT = 15;
     private static final int DELAY_FOR_SPACING_MULTIPLIER = 2;
-    private static final int HISTORY_LIMIT = 1000;
 
     private final AuricCentipedeSegmentEntity[] segments = new AuricCentipedeSegmentEntity[SEGMENT_COUNT];
 
@@ -64,23 +65,21 @@ public class AuricCentipedeEntity extends HostileEntity implements MultiPartEnti
     @Override
     public void tick() {
         super.tick();
+        boolean isMoving;
         //this can't go in the constructor, it doesn't work as things aren't ready yet
         if(!(hasBeenInitialized)){
             resetSegments();  // Ensure the segments are properly initialized after the spawn
             hasBeenInitialized = true;
         }
-        if(!(positionHistory.get(0)[0] == this.getX() && positionHistory.get(0)[1] == this.getY() && positionHistory.get(0)[2] == this.getZ())){
-            // Add the current position of the head to the history, this line is what causes sections to move
-            positionHistory.add(0, new double[]{this.getX(), this.getY(), this.getZ(), this.getYaw()});
+        isMoving = !(positionHistory.get(0)[0] == this.getX() && positionHistory.get(0)[1] == this.getY() && positionHistory.get(0)[2] == this.getZ());
+        if(isMoving){
+            positionHistory.add(0, new double[]{this.getX(), this.getY(), this.getZ(), getMovementDirectionAsNumber()});
         }
-
-        // Limit the size of the history to avoid memory overflow
-        if (positionHistory.size() > HISTORY_LIMIT) {
+        updateSegments();
+        if(isMoving) {
+            //we don't need the history that has just been used by the last segment
             positionHistory.remove(positionHistory.size() - 1);
         }
-
-        updateSegments();
-//        handleTerrainInteraction();
     }
 
     private void resetSegments() {
@@ -90,9 +89,10 @@ public class AuricCentipedeEntity extends HostileEntity implements MultiPartEnti
         double prevZPos = this.getZ();
         for (int i = 0; i < segments.length; i++) {
             AuricCentipedeSegmentEntity segment = segments[i];
-            double segmentOffsetX = Math.cos(Math.toRadians(this.getYaw()+90))*(spacing);
-            double segmentOffsetZ = Math.sin(Math.toRadians(this.getYaw()+90))*(spacing);
+            double segmentOffsetX = Math.cos(Math.toRadians(this.getBodyYaw()+90))*(spacing);
+            double segmentOffsetZ = Math.sin(Math.toRadians(this.getBodyYaw()+90))*(spacing);
             segment.updatePosition(prevXPos - segmentOffsetX, prevYPos, prevZPos - segmentOffsetZ);
+            segment.setYaw(this.getBodyYaw());
             prevXPos = segment.getX();
             prevYPos = segment.getY();
             prevZPos = segment.getZ();
@@ -103,65 +103,53 @@ public class AuricCentipedeEntity extends HostileEntity implements MultiPartEnti
         //add to position history from the end to the head
         for (int j = segments.length-1; j >=0; j--) {
             AuricCentipedeSegmentEntity segment = segments[j];
-            for (int k = 0; k <= HISTORY_STEP; k++) {
-                positionHistory.add(0, new double[]{segment.getX(), segment.getY(), segment.getZ(), segment.getYaw()});
+            for (int k = 0; k < HISTORY_STEP; k++) {//this gives it enough ticks to move to the next block as the history is empty
+                positionHistory.add(0, new double[]{segment.getX(), segment.getY(), segment.getZ(), this.getBodyYaw()});
             }
         }
     }
 
     private void updateSegments() {
-        double spacing = 1.0;
-        double prevXPos = this.getX();
-        double prevYPos = this.getY();
-        double prevZPos = this.getZ();
         // Ensure we have enough history for each segment
         double movementSpeed = this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED);
         //if the movement speed is higher it will take fewer ticks to change by the same distance
         //each entry in positionHistory is a tick
         int HISTORY_STEP = (int) Math.ceil(DELAY_FOR_SPACING_MULTIPLIER / movementSpeed);
         for (int i = 0; i < segments.length; i++) {
-            //this is kind of like a train track if you will
+            //this is kind of like a train track if you will.
             double[] targetPosition = positionHistory.get(Math.min((i + 1) * HISTORY_STEP, positionHistory.size() - 1)); // Offset by 2 steps per segment
             AuricCentipedeSegmentEntity segment = segments[i];
             segment.updatePosition(targetPosition[0], targetPosition[1], targetPosition[2]);
             segment.setYaw((float) targetPosition[3]);
-            prevXPos = segment.getX();
-            prevYPos = segment.getY();
-            prevZPos = segment.getZ();
         }
+//        handleTerrainInteraction();
     }
 
     private void handleTerrainInteraction() {
-        for (AuricCentipedeSegmentEntity segment : segments) {
-            // Get the segment's bounding box
-            Box segmentBox = segment.getBoundingBox();
-
-            // Check for collision with blocks
-            List<VoxelShape> collisions = StreamSupport.stream(segment.getWorld().getBlockCollisions(null, segmentBox).spliterator(), false)
-                    .toList();
-
-            // Resolve collisions (example: prevent the segment from sinking into the ground)
-            for (VoxelShape collision : collisions) {
-                double maxY = collision.getBoundingBox().maxY;
-                if (segment.getY() < maxY) {
-                    segment.updatePosition(segment.getX(), maxY, segment.getZ());
+        // Ensure we have enough history for each segment
+        double movementSpeed = this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+        //if the movement speed is higher it will take fewer ticks to change by the same distance
+        //each entry in positionHistory is a tick
+        int HISTORY_STEP = (int) Math.ceil(DELAY_FOR_SPACING_MULTIPLIER / movementSpeed);
+        for(int i = segments.length-1; i>=0; i--) {
+            double[] targetPosition = positionHistory.get(Math.min((i + 1) * HISTORY_STEP, positionHistory.size() - 1)); // Offset by 2 steps per segment
+            if (i - 1 >= 0) {
+                if (segments[i].getY() < segments[i - 1].getY()) {
+                    //
+                    targetPosition[1] = segments[i - 1].getY() - 0.25;
+                }
+            } else {
+                if (segments[i].getY() < this.getY()) {
+                    targetPosition[1] = this.getY() - 0.25;
                 }
             }
-            handleWallCollisions(segment);
-        }
-    }
-
-    private void handleWallCollisions(AuricCentipedeSegmentEntity segment) {
-        Box segmentBox = segment.getBoundingBox();
-        boolean colliding = StreamSupport.stream(segment.getWorld().getBlockCollisions(null, segmentBox).spliterator(), false)
-                .findAny()
-                .isPresent();
-
-        if (colliding) {
-            // Push the segment back slightly to avoid the collision
-            double offsetX = Math.cos(Math.toRadians(this.getYaw())) * -0.1;
-            double offsetZ = Math.sin(Math.toRadians(this.getYaw())) * -0.1;
-            segment.updatePosition(segment.getX() + offsetX, segment.getY(), segment.getZ() + offsetZ);
+            if(i+1 <=segments.length-1){
+                if (segments[i].getY() < segments[i + 1].getY()) {
+                    //
+                    targetPosition[1] = segments[i + 1].getY() - 0.25;
+                }
+            }
+            positionHistory.set(Math.min((i + 1) * HISTORY_STEP, positionHistory.size() - 1), targetPosition);
         }
     }
 
@@ -198,15 +186,19 @@ public class AuricCentipedeEntity extends HostileEntity implements MultiPartEnti
         super.tickMovement();
         double movementSpeed = this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED);
         if (this.horizontalCollision) {
-            this.setVelocity(this.getVelocity().x, movementSpeed*0.75, this.getVelocity().z);
+            this.setVelocity(this.getVelocity().x, movementSpeed*0.5, this.getVelocity().z);
         }
+    }
+
+    public float getMovementDirectionAsNumber() {
+        Vec3d velocity = this.getVelocity();
+        return (float) (MathHelper.atan2(-velocity.x, velocity.z) * (180F / Math.PI));
     }
 
     @Override
     public void jump() {
         // Do nothing
     }
-
 
     @Override
     public PartEntity<?>[] getParts() {

@@ -29,6 +29,9 @@ public class AuricCentipedeHeadModel<T extends AuricCentipedeEntity> extends Sin
 		ModelPartData head = auric_centipede_head.addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid(-8.0F, -6.0F, -14.0F, 16.0F, 11.0F, 14.0F, new Dilation(0.0F))
 				.uv(0, 26).cuboid(-7.0F, -5.0F, -13.0F, 14.0F, 7.0F, 13.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
+//		ModelPartData headTesting = auric_centipede_head.addChild("head_testing", ModelPartBuilder.create().uv(0, 0).cuboid(-8.0F, -6.0F, -14.0F, 16.0F, 11.0F, 14.0F, new Dilation(0.0F))
+//				.uv(0, 26).cuboid(-8F, 8F, -16F, 16.0F, 16F, 16.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+
 		ModelPartData jaw = head.addChild("jaw", ModelPartBuilder.create().uv(0, 47).cuboid(-7.0F, 0.0F, -13.0F, 14.0F, 4.0F, 13.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 1.0F, 0.0F));
 
 		ModelPartData tendrilLeft = head.addChild("tendrilLeft", ModelPartBuilder.create(), ModelTransform.pivot(7.0F, -2.0F, -9.0F));

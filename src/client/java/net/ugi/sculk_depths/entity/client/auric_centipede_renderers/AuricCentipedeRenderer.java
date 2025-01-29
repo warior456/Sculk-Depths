@@ -33,6 +33,7 @@ public class AuricCentipedeRenderer extends MobEntityRenderer<AuricCentipedeEnti
 
     @Override
     public void render(AuricCentipedeEntity mobEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light) {
+        matrixStack.push();
         boolean bl;
         if(mobEntity.isBaby()) {
             matrixStack.scale(0.5f, 0.5f, 0.5f);
@@ -47,7 +48,6 @@ public class AuricCentipedeRenderer extends MobEntityRenderer<AuricCentipedeEnti
         }
         VertexConsumer vertexConsumer = bl ? vertexConsumerProvider.getBuffer(RenderLayer.getOutline(this.getTexture(mobEntity))) : vertexConsumerProvider.getBuffer(RenderLayer.getEntityTranslucent(this.getTexture(mobEntity)));
 
-        matrixStack.push();
         super.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, light); //works except transparent
         matrixStack.pop();
 
@@ -55,8 +55,10 @@ public class AuricCentipedeRenderer extends MobEntityRenderer<AuricCentipedeEnti
             matrixStack.push();
             matrixStack.translate(mobEntity.getParts()[i].getX() - mobEntity.getX(), mobEntity.getParts()[i].getY() - mobEntity.getY(), mobEntity.getParts()[i].getZ() - mobEntity.getZ());
             if (i < mobEntity.getParts().length - 1) {
+                this.bodyRenderer.setIndex(i);
                 this.bodyRenderer.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, light); // Custom renderer for the end
             } else {
+                this.endRenderer.setIndex(i);
                 this.endRenderer.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, light); // Normal body renderer
             }
             matrixStack.pop();

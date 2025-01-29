@@ -10,12 +10,15 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import net.ugi.sculk_depths.SculkDepths;
+//import net.ugi.sculk_depths.entity.client.AuricCentipedeSegmentRenderer;
 import net.ugi.sculk_depths.entity.client.ModModelLayers;
 import net.ugi.sculk_depths.entity.client.auric_centipede_models.AuricCentipedeBodyModel;
 import net.ugi.sculk_depths.entity.custom.AuricCentipedeEntity;
 
 public class AuricCentipedeBodyRenderer extends MobEntityRenderer<AuricCentipedeEntity, AuricCentipedeBodyModel<AuricCentipedeEntity>> {
     public static final Identifier AURIC_CENTIPEDE_TEXTURE = SculkDepths.identifier( "textures/entity/auric_centipede/auric_centipede_body.png");
+
+    int index;
 
     public AuricCentipedeBodyRenderer(EntityRendererFactory.Context context) {
         super(context, new AuricCentipedeBodyModel<>(context.getPart(ModModelLayers.AURIC_CENTIPEDE_BODY)), 0.25f);
@@ -24,6 +27,9 @@ public class AuricCentipedeBodyRenderer extends MobEntityRenderer<AuricCentipede
     @Override
     public Identifier getTexture(AuricCentipedeEntity entity) {
         return AURIC_CENTIPEDE_TEXTURE;
+    }
+    public void setIndex(int pIndex){
+        this.index = pIndex;
     }
 
 
@@ -46,16 +52,15 @@ public class AuricCentipedeBodyRenderer extends MobEntityRenderer<AuricCentipede
         }
         VertexConsumer vertexConsumer = bl ? vertexConsumers.getBuffer(RenderLayer.getOutline(this.getTexture(entity))) : vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(this.getTexture(entity)));
 
-        float yawDiff = entity.getYaw() - entity.prevYaw;
-        if (yawDiff > 180) {
-            yawDiff -= 360;
-        } else if (yawDiff < -180) {
-            yawDiff += 360;
-        }
-        float interpolatedYaw = entity.prevYaw + yawDiff * g;
+//        float bodyYawDiff = entity.getParts()[this.index].getbodyYaw() - entity.getParts()[this.index].prevbodyYaw;
+//        if (bodyYawDiff > 180) {
+//            bodyYawDiff -= 360;
+//        } else if (bodyYawDiff < -180) {
+//            bodyYawDiff += 360;
+//        }
+//        float interpolatedbodyYaw = entity.getParts()[this.index].prevbodyYaw + bodyYawDiff * g;
 
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(interpolatedYaw));
-//        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(entity.getPitch()));
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(entity.getParts()[this.index].getYaw()));
 
         super.render(entity, f, g, matrices, vertexConsumers, light); //works except transparent
         matrices.pop();

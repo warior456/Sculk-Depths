@@ -17,8 +17,14 @@ import net.ugi.sculk_depths.entity.custom.AuricCentipedeEntity;
 public class AuricCentipedeEndRenderer extends MobEntityRenderer<AuricCentipedeEntity, AuricCentipedeEndModel<AuricCentipedeEntity>> {
     public static final Identifier AURIC_CENTIPEDE_TEXTURE = SculkDepths.identifier( "textures/entity/auric_centipede/auric_centipede_end.png");
 
+    int index;
+
     public AuricCentipedeEndRenderer(EntityRendererFactory.Context context) {
         super(context, new AuricCentipedeEndModel<>(context.getPart(ModModelLayers.AURIC_CENTIPEDE_END)), 0.25f);
+    }
+
+    public void setIndex(int pIndex){
+        this.index = pIndex;
     }
 
     @Override
@@ -46,15 +52,15 @@ public class AuricCentipedeEndRenderer extends MobEntityRenderer<AuricCentipedeE
         }
         VertexConsumer vertexConsumer = bl ? vertexConsumers.getBuffer(RenderLayer.getOutline(this.getTexture(entity))) : vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(this.getTexture(entity)));
 
-        float yawDiff = entity.getYaw() - entity.prevYaw;
-        if (yawDiff > 180) {
-            yawDiff -= 360;
-        } else if (yawDiff < -180) {
-            yawDiff += 360;
-        }
-        float interpolatedYaw = entity.prevYaw + yawDiff * g;
+//        float yawDiff = entity.getParts()[this.index].getYaw() - entity.getParts()[this.index].prevYaw;
+//        if (yawDiff > 180) {
+//            yawDiff -= 360;
+//        } else if (yawDiff < -180) {
+//            yawDiff += 360;
+//        }
+//        float interpolatedYaw = entity.getParts()[this.index].prevYaw + yawDiff * g;
 
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(interpolatedYaw));
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(entity.getParts()[this.index].getYaw()));
 //        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(entity.getPitch()));
 
 
