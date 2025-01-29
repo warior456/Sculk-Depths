@@ -3,7 +3,7 @@ package net.ugi.sculk_depths.state.property;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.IntProperty;
-import net.ugi.sculk_depths.block.enums.CrystalType;
+import net.ugi.sculk_depths.util.enums.CrystalType;
 
 public class ModProperties {
 
