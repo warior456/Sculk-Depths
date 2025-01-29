@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "sculk_depths:crumbling_dirt",
-
     "sculk_depths:petrified_valtrox_log",
     "sculk_depths:petrified_valtrox_slates",
     "sculk_depths:petrified_valtrox_wood",

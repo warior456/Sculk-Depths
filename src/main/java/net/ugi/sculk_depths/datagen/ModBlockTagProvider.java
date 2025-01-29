@@ -25,6 +25,64 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(ModTags.Blocks.INCORRECT_FOR_QUAZARITH_TOOL);
 
 
+
+
+        getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
+                .add(ModBlocks.VALTROX_LOG)
+                .add(ModBlocks.VALTROX_WOOD)
+                .add(ModBlocks.STRIPPED_VALTROX_LOG)
+                .add(ModBlocks.STRIPPED_VALTROX_WOOD)
+                .add(ModBlocks.VALTROX_PLANKS)
+                .add(ModBlocks.VALTROX_STAIRS)
+                .add(ModBlocks.VALTROX_SLAB)
+                .add(ModBlocks.VALTROX_FENCE)
+                .add(ModBlocks.VALTROX_FENCE_GATE)
+                .add(ModBlocks.VALTROX_DOOR)
+                .add(ModBlocks.VALTROX_TRAPDOOR)
+                .add(ModBlocks.VALTROX_PRESSURE_PLATE)
+                .add(ModBlocks.VALTROX_BUTTON)
+
+
+                .add(ModBlocks.COATED_VALTROX_LOG)
+                .add(ModBlocks.COATED_VALTROX_WOOD)
+                .add(ModBlocks.COATED_STRIPPED_VALTROX_LOG)
+                .add(ModBlocks.COATED_STRIPPED_VALTROX_WOOD)
+                .add(ModBlocks.COATED_VALTROX_PLANKS)
+                .add(ModBlocks.COATED_VALTROX_STAIRS)
+                .add(ModBlocks.COATED_VALTROX_SLAB)
+                .add(ModBlocks.COATED_VALTROX_FENCE)
+                .add(ModBlocks.COATED_VALTROX_FENCE_GATE)
+                .add(ModBlocks.COATED_VALTROX_DOOR)
+                .add(ModBlocks.COATED_VALTROX_TRAPDOOR)
+                .add(ModBlocks.COATED_VALTROX_PRESSURE_PLATE)
+                .add(ModBlocks.COATED_VALTROX_BUTTON)
+
+                .add(ModBlocks.DRIED_VALTROX_LOG)
+                .add(ModBlocks.DRIED_VALTROX_WOOD)
+                .add(ModBlocks.STRIPPED_DRIED_VALTROX_LOG)
+                .add(ModBlocks.STRIPPED_DRIED_VALTROX_WOOD)
+                .add(ModBlocks.DRIED_VALTROX_PLANKS)
+                .add(ModBlocks.DRIED_VALTROX_STAIRS)
+                .add(ModBlocks.DRIED_VALTROX_SLAB)
+                .add(ModBlocks.DRIED_VALTROX_FENCE)
+                .add(ModBlocks.DRIED_VALTROX_FENCE_GATE)
+                .add(ModBlocks.DRIED_VALTROX_DOOR)
+                .add(ModBlocks.DRIED_VALTROX_TRAPDOOR)
+                .add(ModBlocks.DRIED_VALTROX_PRESSURE_PLATE)
+                .add(ModBlocks.DRIED_VALTROX_BUTTON)
+
+                .add(ModBlocks.PENEBRIUM_SHROOM_BLOCK)
+                .add(ModBlocks.PENEBRIUM_SHROOM_STEM)
+                .add(ModBlocks.PENEBRIUM_SPORE_BLOCK)
+
+                .add(ModBlocks.AURIC_SHROOM_STEM)
+                .add(ModBlocks.AURIC_SHROOM_BLOCK);
+
+
+        getOrCreateTagBuilder(BlockTags.HOE_MINEABLE)
+                .add(ModBlocks.VALTROX_LEAVES);
+
+
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE) //TODO check for more missing blocks
                 .add(ModBlocks.AMALGAMITE)
                 .add(ModBlocks.CRACKED_AMALGAMITE_BRICKS)
@@ -85,61 +143,14 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
                 .add(ModBlocks.LARGUTH);
 
-        getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
-                .add(ModBlocks.VALTROX_LOG)
-                .add(ModBlocks.VALTROX_WOOD)
-                .add(ModBlocks.STRIPPED_VALTROX_LOG)
-                .add(ModBlocks.STRIPPED_VALTROX_WOOD)
-                .add(ModBlocks.VALTROX_PLANKS)
-                .add(ModBlocks.VALTROX_STAIRS)
-                .add(ModBlocks.VALTROX_SLAB)
-                .add(ModBlocks.VALTROX_FENCE)
-                .add(ModBlocks.VALTROX_FENCE_GATE)
-                .add(ModBlocks.VALTROX_DOOR)
-                .add(ModBlocks.VALTROX_TRAPDOOR)
-                .add(ModBlocks.VALTROX_PRESSURE_PLATE)
-                .add(ModBlocks.VALTROX_BUTTON)
 
-
-                .add(ModBlocks.COATED_VALTROX_LOG)
-                .add(ModBlocks.COATED_VALTROX_WOOD)
-                .add(ModBlocks.COATED_STRIPPED_VALTROX_LOG)
-                .add(ModBlocks.COATED_STRIPPED_VALTROX_WOOD)
-                .add(ModBlocks.COATED_VALTROX_PLANKS)
-                .add(ModBlocks.COATED_VALTROX_STAIRS)
-                .add(ModBlocks.COATED_VALTROX_SLAB)
-                .add(ModBlocks.COATED_VALTROX_FENCE)
-                .add(ModBlocks.COATED_VALTROX_FENCE_GATE)
-                .add(ModBlocks.COATED_VALTROX_DOOR)
-                .add(ModBlocks.COATED_VALTROX_TRAPDOOR)
-                .add(ModBlocks.COATED_VALTROX_PRESSURE_PLATE)
-                .add(ModBlocks.COATED_VALTROX_BUTTON)
-
-                .add(ModBlocks.DRIED_VALTROX_LOG)
-                .add(ModBlocks.DRIED_VALTROX_WOOD)
-                .add(ModBlocks.STRIPPED_DRIED_VALTROX_LOG)
-                .add(ModBlocks.STRIPPED_DRIED_VALTROX_WOOD)
-                .add(ModBlocks.DRIED_VALTROX_PLANKS)
-                .add(ModBlocks.DRIED_VALTROX_STAIRS)
-                .add(ModBlocks.DRIED_VALTROX_SLAB)
-                .add(ModBlocks.DRIED_VALTROX_FENCE)
-                .add(ModBlocks.DRIED_VALTROX_FENCE_GATE)
-                .add(ModBlocks.DRIED_VALTROX_DOOR)
-                .add(ModBlocks.DRIED_VALTROX_TRAPDOOR)
-                .add(ModBlocks.DRIED_VALTROX_PRESSURE_PLATE)
-                .add(ModBlocks.DRIED_VALTROX_BUTTON)
-
-                .add(ModBlocks.PENEBRIUM_SHROOM_BLOCK)
-                .add(ModBlocks.PENEBRIUM_SHROOM_STEM)
-                .add(ModBlocks.PENEBRIUM_SPORE_BLOCK)
-
-                .add(ModBlocks.AURIC_SHROOM_STEM)
-                .add(ModBlocks.AURIC_SHROOM_BLOCK);
-
+        getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE)
+                .add(ModBlocks.CRUMBLING_DIRT)
+                .add(ModBlocks.KRYSLUM_ENRICHED_SOIL)
+                .add(ModBlocks.AURIC_SPORE_BLOCK)
+                .add(ModBlocks.AURIC_SPORE_LAYER);
 
 /*
-
-
 
         getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.DEEPSLATE_RUBY_ORE);
