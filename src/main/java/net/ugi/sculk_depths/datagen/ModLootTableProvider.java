@@ -54,11 +54,11 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
         addDrop(ModBlocks.LARGUTH);
         addDrop(ModBlocks.ZYGRIN_FURNACE, this::nameableContainerDrops);
-        addDrop(ModBlocks.CEPHLERA_LIGHT);
+        addDrop(ModBlocks.CEPHLERA,ModBlocks.CEPHLERA_LIGHT.asItem());
         addDrop(ModBlocks.CRUMBLING_DIRT);
         addDrop(ModBlocks.KRYSLUM_ENRICHED_SOIL);
         addDrop(ModBlocks.VALTROX_SAPLING);
-        addDrop(ModBlocks.AURIC_VINES_END);
+        addDrop(ModBlocks.AURIC_VINES,ModBlocks.AURIC_VINES_END.asItem());
         addDrop(ModBlocks.VALTROX_LEAVES, leavesDrops(ModBlocks.VALTROX_LEAVES,ModBlocks.VALTROX_SAPLING, 0.1F));
         addDrop(ModBlocks.DRIED_GRASS, dropsWithSilkTouch(ModBlocks.DRIED_GRASS));
         addDrop(ModBlocks.QUAZARITH_OSCILLATOR);

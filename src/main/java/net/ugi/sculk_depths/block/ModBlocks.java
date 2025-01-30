@@ -418,11 +418,13 @@ public class ModBlocks {
             new SaplingBlock(WorldGenerator.VALTROX_SAPLING_GENERATOR, AbstractBlock.Settings.copy(Blocks.OAK_SAPLING).mapColor(MapColor.PURPLE)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     // ------------------- cephlera -------------------
+
     public static final Block CEPHLERA = registerBlockWithoutBlockItem("cephlera",
-            new CephleraBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES).dropsLike(ModBlocks.CEPHLERA_LIGHT)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+            new CephleraBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block CEPHLERA_LIGHT = registerBlock("cephlera_light",
-            new CephleraLightBlock(AbstractBlock.Settings.copy(ModBlocks.CEPHLERA).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).luminance(blockState -> 15)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+            new CephleraLightBlock(AbstractBlock.Settings.copy(ModBlocks.CEPHLERA).emissiveLighting(AbstractBlock.AbstractBlockState::isFullCube).luminance(blockState -> 15).dropsLike(ModBlocks.CEPHLERA)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+
 
     // ------------------- resource blocks  -------------------
     public static final Block QUAZARITH_BLOCK = registerBlock("quazarith_block",
@@ -497,10 +499,10 @@ public class ModBlocks {
             new ShroomBlock(AbstractBlock.Settings.copy(Blocks.MUSHROOM_STEM).mapColor(MapColor.PALE_YELLOW).nonOpaque()), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block AURIC_VINES = registerBlockWithoutBlockItem("auric_vines",
-            new AuricVinesBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES_LOW_PITCH).dropsLike(ModBlocks.AURIC_VINES_END)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+            new AuricVinesBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).ticksRandomly().noCollision().breakInstantly().sounds(BlockSoundGroup.WEEPING_VINES_LOW_PITCH)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block AURIC_VINES_END = registerBlock("auric_vines_end",
-            new AuricVinesEndBlock(AbstractBlock.Settings.copy(ModBlocks.AURIC_VINES)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
+            new AuricVinesEndBlock(AbstractBlock.Settings.copy(ModBlocks.AURIC_VINES).dropsLike(ModBlocks.AURIC_VINES)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block AURIC_SPORE_LAYER = registerBlock("auric_spore_layer",
             new LayeredAuricSporeBlock(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.5F).sounds(BlockSoundGroup.SAND).notSolid().ticksRandomly()
