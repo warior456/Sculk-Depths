@@ -2,6 +2,7 @@ package net.ugi.sculk_depths.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.block.MossBlock;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
@@ -85,7 +86,16 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE) //TODO check for more missing blocks
                 .add(ModBlocks.AMALGAMITE)
+                .add(ModBlocks.POLISHED_AMALGAMITE)
+                .add(ModBlocks.POLISHED_AMALGAMITE_STAIRS)
+                .add(ModBlocks.POLISHED_AMALGAMITE_SLAB)
+                .add(ModBlocks.POLISHED_AMALGAMITE_WALL)
+                .add(ModBlocks.AMALGAMITE_BRICKS)
                 .add(ModBlocks.CRACKED_AMALGAMITE_BRICKS)
+                .add(ModBlocks.AMALGAMITE_BRICK_STAIRS)
+                .add(ModBlocks.AMALGAMITE_BRICK_SLAB)
+                .add(ModBlocks.AMALGAMITE_BRICK_WALL)
+                .add(ModBlocks.CHISELED_AMALGAMITE)
 
                 .add(ModBlocks.UMBRUSK)
                 .add(ModBlocks.UMBRUSK_STAIRS)
@@ -98,7 +108,14 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.UMBRUSK_BRICK_WALL)
 
                 .add(ModBlocks.FLUMROCK)
+                .add(ModBlocks.FLUMROCK_TILES)
+                .add(ModBlocks.CRUMBLING_FLUMROCK_TILES)
+                .add(ModBlocks.FLUMROCK_TILE_STAIRS)
+                .add(ModBlocks.FLUMROCK_TILE_SLAB)
+                .add(ModBlocks.FLUMROCK_TILE_WALL)
                 .add(ModBlocks.FLUMROCK_CAULDRON)
+                .add(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON)
+                .add(ModBlocks.SPORE_FLUMROCK_CAULDRON)
 
                 .add(ModBlocks.QUAZARITH_BLOCK)
                 .add(ModBlocks.QUAZARITH_ORE)
@@ -119,6 +136,10 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.PETRIFIED_VALTROX_TRAPDOOR)
                 .add(ModBlocks.PETRIFIED_VALTROX_PRESSURE_PLATE)
                 .add(ModBlocks.PETRIFIED_VALTROX_BUTTON)
+                .add(ModBlocks.PETRIFIED_VALTROX_SIGN)
+                .add(ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN)
+                .add(ModBlocks.PETRIFIED_VALTROX_WALL_SIGN)
+                .add(ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN)
 
                 .add(ModBlocks.ZYGRIN)
                 .add(ModBlocks.ZYGRIN_FURNACE)
@@ -141,6 +162,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.ZYGRIN_PILLAR)
                 .add(ModBlocks.CHISELED_ZYGRIN)
 
+                .add(ModBlocks.QUAZARITH_OSCILLATOR)
                 .add(ModBlocks.LARGUTH);
 
 

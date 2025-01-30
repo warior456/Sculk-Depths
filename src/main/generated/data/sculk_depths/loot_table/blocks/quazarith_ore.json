@@ -26,16 +26,21 @@
                   }
                 }
               ],
-              "name": "sculk_depths:auric_spore_block"
+              "name": "sculk_depths:crux_ore"
             },
             {
               "type": "minecraft:item",
               "functions": [
                 {
+                  "enchantment": "minecraft:fortune",
+                  "formula": "minecraft:ore_drops",
+                  "function": "minecraft:apply_bonus"
+                },
+                {
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "sculk_depths:auric_spore_sprouts"
+              "name": "sculk_depths:crux"
             }
           ]
         }

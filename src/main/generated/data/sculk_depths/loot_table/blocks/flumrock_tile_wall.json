@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "sculk_depths:zygrin_furnace"
+          "name": "sculk_depths:flumrock_tile_wall"
         }
       ],
       "rolls": 1.0
