@@ -85,14 +85,17 @@ public class ConditionalSoundPlayerClient implements ClientTickEvents.StartWorld
         PlayerEntity player = SoundPlayerGetterClient.player;
         BlockPos pos = player.getBlockPos();
 
-
         if (start == 0) start = world.getTime();
+
 
         if(world.getTime() < start + 20) {
             return;
         };
+        if (start < world.getTime() - 40) start = world.getTime();
         start += 20;
-        //if (!(world.getTime() % 20 == 0)) return;
+
+        if (!(ModBiomes.DRIED_FOREST == world.getBiome(pos).getKey().get()) && !(ModBiomes.PETRIFIED_FOREST == world.getBiome(pos).getKey().get())) return;
+
 
         CalculateWindAngle(world, player, pos);
         if(Math.random() > 0.2) return;
