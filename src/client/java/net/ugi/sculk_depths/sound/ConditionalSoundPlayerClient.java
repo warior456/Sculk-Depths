@@ -78,12 +78,22 @@ public class ConditionalSoundPlayerClient implements ClientTickEvents.StartWorld
         }
     };
 
+    long start = 0;
+
     @Override
     public void onStartTick(ClientWorld world) {
         PlayerEntity player = SoundPlayerGetterClient.player;
         BlockPos pos = player.getBlockPos();
 
-        if(!(world.getTime()%20==0)) return;
+
+        if (start == 0) start = world.getTime();
+
+        if(world.getTime() < start + 20) {
+            return;
+        };
+        start += 20;
+        //if (!(world.getTime() % 20 == 0)) return;
+
         CalculateWindAngle(world, player, pos);
         if(Math.random() > 0.2) return;
 
@@ -179,9 +189,9 @@ public class ConditionalSoundPlayerClient implements ClientTickEvents.StartWorld
 
         DensityFunction.Noise radNoise = new DensityFunction.Noise(noiseParam, DoublePerlinNoiseSampler.create(radRandom, new DoublePerlinNoiseSampler.NoiseParameters(-7, 1,2,3,2,4,2.4,9)));
         DensityFunction.Noise speedNoise = new DensityFunction.Noise(noiseParam, DoublePerlinNoiseSampler.create(speedRandom, new DoublePerlinNoiseSampler.NoiseParameters(-7, 1,2,3,2,4,2.4,9)));
-
-        double rad = radNoise.sample(player.getX()/75, world.getTime()/6000f, player.getZ()/75)*Math.PI;
-        double speed = speedNoise.sample(player.getX()/75, world.getTime()/3000f, player.getZ()/75);
+        System.out.println(world.getTime());
+        double rad = radNoise.sample(player.getX()/75d, world.getTime()/600d, player.getZ()/75d)*Math.PI;
+        double speed = speedNoise.sample(player.getX()/75d, world.getTime()/300d, player.getZ()/75d);
 
         windX = speed*Math.sin(rad);
         windZ = speed*Math.cos(rad);
