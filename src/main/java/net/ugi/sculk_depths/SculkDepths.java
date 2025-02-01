@@ -50,54 +50,64 @@ public class SculkDepths implements ModInitializer {
 	}
 	@Override
 	public void onInitialize() {
-        SpawnRestriction.register(ModEntities.LESTER, SpawnLocationTypes.ON_GROUND, null, (type, world, reason, pos, random) -> true);
-        SpawnRestriction.register(ModEntities.CHOMPER_COLOSSUS, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (type, world, reason, pos, random) -> true);
 
         SculkDepths.LOGGER.info("Loading Config for " + SculkDepths.MOD_ID);
         Config.loadConfig();
-        SculkDepths.LOGGER.info("Registering Itemgroups for " + SculkDepths.MOD_ID);
+
+        SculkDepths.LOGGER.info("Registering ItemGroups for " + SculkDepths.MOD_ID);
         ModItemGroup.registerItemgroups();
+
         SculkDepths.LOGGER.info("Registering items for " + SculkDepths.MOD_ID);
         ModItems.registerModItems();
+
         SculkDepths.LOGGER.info("Registering Blocks for " + SculkDepths.MOD_ID);
         ModBlocks.registerModBlocks();
-/*        SculkDepths.LOGGER.info("Registering Portals for " + SculkDepths.MOD_ID);
-        Portals.registerModPortals();*/
+
         SculkDepths.LOGGER.info("Registering Sounds for " + SculkDepths.MOD_ID);
         ModSounds.registerModSounds();
+
         SculkDepths.LOGGER.info("Registering Effects for " + SculkDepths.MOD_ID);
         ModStatusEffects.init();
+
+        SculkDepths.LOGGER.info("Registering ServerTickEvents for " + SculkDepths.MOD_ID);
         ServerTickEvents.START_WORLD_TICK.register(new ConditionalSoundPlayer());
+        ServerTickEvents.START_WORLD_TICK.register(new CheckInvForCrystalItems());
+        ServerTickEvents.START_WORLD_TICK.register(new ModBiomeEffects());
+
         //SculkDepths.LOGGER.info("Registering LootTables for " + SculkDepths.MOD_ID);
         //ModLootTableModifiers.modifyLootTables();
+
         SculkDepths.LOGGER.info("Registering ModCauldronBehavior for " + SculkDepths.MOD_ID);
         ModCauldronBehavior.registerBehavior();
+
         //SculkDepths.LOGGER.info("Registering Recipes for " + SculkDepths.MOD_ID);
         //ModRecipes.register();
         SculkDepths.LOGGER.info("Registering BlockEntities for " + SculkDepths.MOD_ID);
         ModBlockEntities.registerBlockEntities();
+
         SculkDepths.LOGGER.info("Registering Entities for " + SculkDepths.MOD_ID);
+        SpawnRestriction.register(ModEntities.LESTER, SpawnLocationTypes.ON_GROUND, null, (type, world, reason, pos, random) -> true);
+        SpawnRestriction.register(ModEntities.CHOMPER_COLOSSUS, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (type, world, reason, pos, random) -> true);
         FabricDefaultAttributeRegistry.register(ModEntities.GLOMPER, GlomperEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.LESTER, LesterEntity.createLesterAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.CHOMPER_COLOSSUS, ChomperColossusEntity.createChomperColossusAttributes());
+
         SculkDepths.LOGGER.info("Registering Particles for " + SculkDepths.MOD_ID);
         ModParticleTypes.registerModParticles();
+
         SculkDepths.LOGGER.info("Registering ScreenHandlers for " + SculkDepths.MOD_ID);
         ModScreenHandlers.registerModScreenHandlers();
+
+        SculkDepths.LOGGER.info("Registering WorldGen for " + SculkDepths.MOD_ID);
         ModPlacementModifierType.init();
         ModFeatures.init();
-
-
         WorldGenerator.initWorldGen();
 
-
-        ServerTickEvents.START_WORLD_TICK.register(new CheckInvForCrystalItems());
-        ServerTickEvents.START_WORLD_TICK.register(new ModBiomeEffects());
-
+        SculkDepths.LOGGER.info("Registering Components for " + SculkDepths.MOD_ID);
         ModComponentTypes.register();
+
+        SculkDepths.LOGGER.info("Registering POI's for " + SculkDepths.MOD_ID);
         POIs.register();
-        //register(Registries.POINT_OF_INTEREST_TYPE, Q_LODESTONE, getStatesOfBlock(ModBlocks.QUAZARITH_LODESTONE), 0, 1);
-        //ServerTickEvents.START_WORLD_TICK.register(new ConditionalSoundPlayer());
 
 
         CauldronFluidContent.registerCauldron(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON, ModFluids.KRYSLUM_STILL, FluidConstants.BUCKET, ModProperties.KRYSLUM_LEVEL); //support for mods to see how much fluid is in it (doesn't work for create pipes)

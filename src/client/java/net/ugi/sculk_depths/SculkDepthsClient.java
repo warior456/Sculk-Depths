@@ -35,8 +35,8 @@ public class SculkDepthsClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		// This entrypoint is suitable for setting up client-specific logic, such as rendering.
 
-		SculkDepths.LOGGER.info("Registering tooltips for " + SculkDepths.MOD_ID);
-		//CrystalUpgrade.tooltipAdd();
+/*		SculkDepths.LOGGER.info("Registering tooltips for " + SculkDepths.MOD_ID);
+		CrystalUpgrade.tooltipAdd();*/
 
 		SculkDepths.LOGGER.info("Registering clientSounds for " + SculkDepths.MOD_ID);
 		ClientTickEvents.START_WORLD_TICK.register(new ConditionalSoundPlayerClient());
@@ -62,7 +62,7 @@ public class SculkDepthsClient implements ClientModInitializer {
 		CustomItemModels.QuazarithBootsModels();
 
 
-
+		SculkDepths.LOGGER.info("Registering EntityRenderers for " + SculkDepths.MOD_ID);
 		EntityRendererRegistry.register(ModEntities.GLOMPER, GlomperRenderer::new);
 		EntityRendererRegistry.register(ModEntities.LESTER, LesterRenderer::new);
 		EntityRendererRegistry.register(ModEntities.CHOMPER_COLOSSUS, ChomperColossusRenderer::new);
@@ -71,6 +71,7 @@ public class SculkDepthsClient implements ClientModInitializer {
 		EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CHOMPER_COLOSSUS, ChomperColossusModel::getTexturedModelData);
 		RenderLayer.getEntityTranslucent(GlomperRenderer.GLOMPER_TEXTURE,false);
 
+		SculkDepths.LOGGER.info("Cutting RenderLayers for " + SculkDepths.MOD_ID);
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.VALTROX_SAPLING, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.POTTED_VALTROX_SAPLING, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.POTTED_PENEBRIUM_SHROOM, RenderLayer.getCutout());
