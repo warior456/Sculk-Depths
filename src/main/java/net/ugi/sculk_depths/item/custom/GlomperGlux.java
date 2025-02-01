@@ -6,6 +6,8 @@ import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -37,6 +39,9 @@ public class GlomperGlux extends Item implements Coatable{
                 Coatable.CoatBlock(blockState, world, blockPos);
             }
             context.getStack().decrement(1);
+            if(playerEntity != null){
+                playerEntity.playSound(SoundEvents.ITEM_HONEYCOMB_WAX_ON, 1.0F, 2.0F);
+            }
             return ActionResult.SUCCESS;
 
         }
