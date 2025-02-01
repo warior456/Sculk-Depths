@@ -9,6 +9,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.SculkDepths;
+import net.ugi.sculk_depths.entity.custom.AuricCentipedeEntity;
 import net.ugi.sculk_depths.entity.custom.ChomperColossusEntity;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import net.ugi.sculk_depths.entity.custom.LesterEntity;
@@ -28,4 +29,9 @@ public class ModEntities {
             SculkDepths.identifier( "chomper_colossus"),
             EntityType.Builder.create(ChomperColossusEntity::new, SpawnGroup.MONSTER)
                     .dimensions(8,10).build());
+
+    public static final EntityType<AuricCentipedeEntity> AURIC_CENTIPEDE = Registry.register(Registries.ENTITY_TYPE,
+            SculkDepths.identifier( "auric_centipede"),
+            EntityType.Builder.create(AuricCentipedeEntity::new, SpawnGroup.MONSTER)
+                    .dimensions(1,1).build());
 }
