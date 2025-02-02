@@ -1,0 +1,19 @@
+{
+  "values": [
+    "sculk_depths:petrified_valtrox_log",
+    "sculk_depths:petrified_valtrox_wood",
+    "sculk_depths:stripped_petrified_valtrox_log",
+    "sculk_depths:stripped_petrified_valtrox_wood",
+    "sculk_depths:petrified_valtrox_slates",
+    "sculk_depths:petrified_valtrox_stairs",
+    "sculk_depths:petrified_valtrox_slab",
+    "sculk_depths:petrified_valtrox_wall",
+    "sculk_depths:petrified_valtrox_wall_gate",
+    "sculk_depths:petrified_valtrox_door",
+    "sculk_depths:petrified_valtrox_trapdoor",
+    "sculk_depths:petrified_valtrox_pressure_plate",
+    "sculk_depths:petrified_valtrox_button",
+    "sculk_depths:petrified_valtrox_sign",
+    "sculk_depths:petrified_valtrox_hanging_sign"
+  ]
+}
