@@ -3,14 +3,14 @@ package net.ugi.sculk_depths.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.data.client.*;
 import net.minecraft.data.family.BlockFamilies;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
-import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
@@ -43,10 +43,15 @@ public class ModModelProvider extends FabricModelProvider {
         amalgamiteBrickPool.slab(ModBlocks.AMALGAMITE_BRICK_SLAB);
         amalgamiteBrickPool.wall(ModBlocks.AMALGAMITE_BRICK_WALL);
 
+        blockStateModelGenerator.registerSingleton(ModBlocks.ACTIVATED_AMALGAMITE, TexturedModel.CUBE_COLUMN);
+
+
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUMBLING_FLUMROCK_TILES);
         flumrockTilesPool.stairs(ModBlocks.FLUMROCK_TILE_STAIRS);
         flumrockTilesPool.slab(ModBlocks.FLUMROCK_TILE_SLAB);
         flumrockTilesPool.wall(ModBlocks.FLUMROCK_TILE_WALL);
+
+        blockStateModelGenerator.registerTintableCross(ModBlocks.DEAD_GRASS, BlockStateModelGenerator.TintType.NOT_TINTED);
 
 
         blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.VALTROX_SAPLING, ModBlocks.POTTED_VALTROX_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
@@ -106,7 +111,44 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerDoor(ModBlocks.PETRIFIED_VALTROX_DOOR);
         blockStateModelGenerator.registerOrientableTrapdoor(ModBlocks.PETRIFIED_VALTROX_TRAPDOOR);
 
+        List<String> suffixList = new ArrayList<>();
+        suffixList.add("");
+        suffixList.add("2");
+        suffixList.add("3");
+        suffixList.add("4");
 
+        registerBlockWithVariants(blockStateModelGenerator,ModBlocks.AMALGAMITE,suffixList);
+
+    }
+
+    private void registerBlockWithVariants(BlockStateModelGenerator blockStateModelGenerator, Block block, List<String> suffixList) {
+
+        List<Identifier> identifierList = new ArrayList<>();
+        suffixList.forEach(suffix -> {
+
+            VariantsBlockStateSupplier.create(block, BlockStateVariant.create().put(VariantSettings.MODEL, TexturedModel.CUBE_COLUMN.upload(block, suffix, blockStateModelGenerator.modelCollector)));
+
+            identifierList.add(ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, suffix));
+            //xtureMap textureMap = TextureMap.texture(TextureMap.getSubId(ModBlocks.AMALGAMITE, suffix));
+            //Models.CUBE.upload(ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, suffix), textureMap, blockStateModelGenerator.modelCollector);
+        });
+
+        blockStateModelGenerator.blockStateCollector.accept(createBlockStateWithVariants(block,identifierList));
+
+    }
+
+
+
+    public static VariantsBlockStateSupplier createBlockStateWithVariants(Block block, List<Identifier> modelIdList) {
+
+
+        BlockStateVariant[] blockStateVariants = new BlockStateVariant[modelIdList.size()];
+        final int[] i = {0};
+        modelIdList.forEach(modelId -> {
+            blockStateVariants[i[0]] = BlockStateVariant.create().put(VariantSettings.MODEL, modelId);
+            i[0]++;
+        });
+        return VariantsBlockStateSupplier.create(block, blockStateVariants);
     }
 
     @Override

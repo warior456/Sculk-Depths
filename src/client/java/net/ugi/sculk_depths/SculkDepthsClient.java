@@ -115,7 +115,7 @@ public class SculkDepthsClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.AURIC_VINES_END, RenderLayer.getCutout());
 
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.QELBERRY_BUSH, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DRIED_GRASS, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DEAD_GRASS, RenderLayer.getCutout());
 
 
 		ParticleFactoryRegistry.getInstance().register(ModParticleTypes.PENEBRIUM_SPORES, PenebriumSporeParticle.Factory::new);
