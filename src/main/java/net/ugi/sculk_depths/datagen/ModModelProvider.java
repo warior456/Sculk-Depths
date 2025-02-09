@@ -11,6 +11,7 @@ import net.ugi.sculk_depths.item.ModItems;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
@@ -117,20 +118,21 @@ public class ModModelProvider extends FabricModelProvider {
         suffixList.add("3");
         suffixList.add("4");
 
-        registerBlockWithVariants(blockStateModelGenerator,ModBlocks.AMALGAMITE,suffixList);
+        registerBlockWithVariants(blockStateModelGenerator,ModBlocks.AMALGAMITE,suffixList, Models.CUBE_COLUMN);
 
     }
 
-    private void registerBlockWithVariants(BlockStateModelGenerator blockStateModelGenerator, Block block, List<String> suffixList) {
+    private void registerBlockWithVariants(BlockStateModelGenerator blockStateModelGenerator, Block block, List<String> suffixList, Model model) {
 
         List<Identifier> identifierList = new ArrayList<>();
         suffixList.forEach(suffix -> {
 
-            VariantsBlockStateSupplier.create(block, BlockStateVariant.create().put(VariantSettings.MODEL, TexturedModel.CUBE_COLUMN.upload(block, suffix, blockStateModelGenerator.modelCollector)));
+           //VariantsBlockStateSupplier.create(block, BlockStateVariant.create().put(VariantSettings.MODEL, TexturedModel.CUBE_COLUMN.upload(block, suffix, blockStateModelGenerator.modelCollector)));
 
             identifierList.add(ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, suffix));
-            //xtureMap textureMap = TextureMap.texture(TextureMap.getSubId(ModBlocks.AMALGAMITE, suffix));
-            //Models.CUBE.upload(ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, suffix), textureMap, blockStateModelGenerator.modelCollector);
+            TextureMap textureMap = (new TextureMap()).put(TextureKey.END,ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, "_end" + suffix)).put(TextureKey.SIDE,ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, "_side" + suffix));
+            TextureMap textureMap1 = TextureMap.of(TextureKey.TEXTURE, ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE,  suffix));
+            model.upload(ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, suffix), textureMap1, blockStateModelGenerator.modelCollector);
         });
 
         blockStateModelGenerator.blockStateCollector.accept(createBlockStateWithVariants(block,identifierList));
