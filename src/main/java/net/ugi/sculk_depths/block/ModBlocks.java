@@ -468,7 +468,7 @@ public class ModBlocks {
     public static final Block LARGUTH = registerBlock("larguth",
             new Block(AbstractBlock.Settings.copy(Blocks.OBSIDIAN).strength(40.0f,1000f).requiresTool().mapColor(MapColor.DARK_RED)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
-    public static final Block DRIED_GRASS = registerBlock("dried_grass",
+    public static final Block DEAD_GRASS = registerBlock("dead_grass",
             new CustomPlantBlock(AbstractBlock.Settings.copy(Blocks.SHORT_GRASS).mapColor(MapColor.LIGHT_GRAY)), ModItemGroup.SCULK_DEPTHS_BLOCKS);
 
     public static final Block KRYSLUM_ENRICHED_SOIL = registerBlock("kryslum_enriched_soil",

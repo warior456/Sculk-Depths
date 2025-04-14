@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "sculk_depths:block/activated_amalgamite_top",
+    "side": "sculk_depths:block/activated_amalgamite_side"
+  }
+}

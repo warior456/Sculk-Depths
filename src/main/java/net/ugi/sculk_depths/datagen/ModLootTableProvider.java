@@ -15,6 +15,7 @@ import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
 import net.minecraft.loot.condition.EntityPropertiesLootCondition;
+import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.entry.AlternativeEntry;
 import net.minecraft.loot.entry.ItemEntry;
@@ -26,6 +27,7 @@ import net.minecraft.loot.function.LimitCountLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.operator.BoundedIntUnaryOperator;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
+import net.minecraft.loot.provider.number.LootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.predicate.StatePredicate;
 import net.minecraft.registry.RegistryKeys;
@@ -60,7 +62,10 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.VALTROX_SAPLING);
         addDrop(ModBlocks.AURIC_VINES,ModBlocks.AURIC_VINES_END.asItem());
         addDrop(ModBlocks.VALTROX_LEAVES, leavesDrops(ModBlocks.VALTROX_LEAVES,ModBlocks.VALTROX_SAPLING, 0.1F));
-        addDrop(ModBlocks.DRIED_GRASS, dropsWithSilkTouch(ModBlocks.DRIED_GRASS));
+        addDrop(ModBlocks.DEAD_GRASS, // drops with silktouch or shears ( and no loottable if not)
+                LootTable.builder().pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F)).with(((LeafEntry.Builder)ItemEntry.builder(ModBlocks.DEAD_GRASS).conditionally(this.createWithShearsOrSilkTouchCondition())))));
+
+
         addDrop(ModBlocks.QUAZARITH_OSCILLATOR);
 
         addPottedPlantDrops(ModBlocks.POTTED_AURIC_SPORE_SPROUTS);
