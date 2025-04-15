@@ -18,6 +18,13 @@ import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.client.*;
+import net.ugi.sculk_depths.entity.client.auric_centipede_models.AuricCentipedeBodyModel;
+import net.ugi.sculk_depths.entity.client.auric_centipede_models.AuricCentipedeEndModel;
+import net.ugi.sculk_depths.entity.client.auric_centipede_models.AuricCentipedeHeadModel;
+import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipedeBodyRenderer;
+import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipedeEndRenderer;
+import net.ugi.sculk_depths.entity.client.auric_centipede_renderers.AuricCentipedeRenderer;
+import net.ugi.sculk_depths.entity.custom.AuricCentipedeSegmentEntity;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.item.custom.crux_resonator.CruxResonator;
@@ -66,9 +73,13 @@ public class SculkDepthsClient implements ClientModInitializer {
 		EntityRendererRegistry.register(ModEntities.GLOMPER, GlomperRenderer::new);
 		EntityRendererRegistry.register(ModEntities.LESTER, LesterRenderer::new);
 		EntityRendererRegistry.register(ModEntities.CHOMPER_COLOSSUS, ChomperColossusRenderer::new);
+		EntityRendererRegistry.register(ModEntities.AURIC_CENTIPEDE, AuricCentipedeRenderer::new);
 		EntityModelLayerRegistry.registerModelLayer(ModModelLayers.GLOMPER, GlomperModel::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(ModModelLayers.LESTER, LesterModel::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CHOMPER_COLOSSUS, ChomperColossusModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(ModModelLayers.AURIC_CENTIPEDE_HEAD, AuricCentipedeHeadModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(ModModelLayers.AURIC_CENTIPEDE_BODY, AuricCentipedeBodyModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(ModModelLayers.AURIC_CENTIPEDE_END, AuricCentipedeEndModel::getTexturedModelData);
 		RenderLayer.getEntityTranslucent(GlomperRenderer.GLOMPER_TEXTURE,false);
 
 		SculkDepths.LOGGER.info("Cutting RenderLayers for " + SculkDepths.MOD_ID);

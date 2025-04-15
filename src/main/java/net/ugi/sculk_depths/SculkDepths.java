@@ -16,6 +16,7 @@ import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
 import net.ugi.sculk_depths.config.Config;
 import net.ugi.sculk_depths.config.ConfigHandler;
 import net.ugi.sculk_depths.entity.ModEntities;
+import net.ugi.sculk_depths.entity.custom.AuricCentipedeEntity;
 import net.ugi.sculk_depths.entity.custom.ChomperColossusEntity;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import net.ugi.sculk_depths.entity.custom.LesterEntity;
@@ -91,7 +92,8 @@ public class SculkDepths implements ModInitializer {
         FabricDefaultAttributeRegistry.register(ModEntities.GLOMPER, GlomperEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.LESTER, LesterEntity.createLesterAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.CHOMPER_COLOSSUS, ChomperColossusEntity.createChomperColossusAttributes());
-
+        FabricDefaultAttributeRegistry.register(ModEntities.AURIC_CENTIPEDE, AuricCentipedeEntity.createAuricCentipedeAttributes());
+        
         SculkDepths.LOGGER.info("Registering Particles for " + SculkDepths.MOD_ID);
         ModParticleTypes.registerModParticles();
 

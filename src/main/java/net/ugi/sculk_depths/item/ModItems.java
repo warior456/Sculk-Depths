@@ -32,6 +32,10 @@ public class ModItems {
 
     // ------------------- quazarith -------------------
 
+    public static final Item AURIC_CENTIPEDE_SPAWN_EGG = registerItem("auric_centipede_spawn_egg",
+            new SpawnEggItem(ModEntities.AURIC_CENTIPEDE, 11054450, 15132390, new Item.Settings()));
+
+
     //quazarith tools
     public static final Item QUAZARITH_SHOVEL = registerItem("quazarith_shovel",
             new ShovelItem(ModToolMaterials.QUAZARITH, //2.5F, -3.0F,
@@ -178,6 +182,7 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_SPAWN_EGG);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, LESTER_SPAWN_EGG);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, CHOMPER_COLOSSUS_SPAWN_EGG);
+        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, AURIC_CENTIPEDE_SPAWN_EGG);
 
         // ------------------- crystals -------------------
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, WHITE_CRYSTAL);
