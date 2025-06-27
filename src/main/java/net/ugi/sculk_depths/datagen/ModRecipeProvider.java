@@ -152,7 +152,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
 
 
-
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, Items.CANDLE)
+                .input('S', Items.STRING)
+                .input('H', ModItems.GLOMPER_GLUX)
+                .pattern("S")
+                .pattern("H")
+                .criterion("has_string", conditionsFromItem(Items.STRING))
+                .criterion("has_glomper_glux", conditionsFromItem(ModItems.GLOMPER_GLUX))
+                .offerTo(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.AURIC_SPORE_LAYER.asItem(), 6)
             .pattern("###")
