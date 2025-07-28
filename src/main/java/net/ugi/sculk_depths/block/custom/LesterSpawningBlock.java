@@ -32,26 +32,26 @@ public class LesterSpawningBlock extends Block {
     public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
         if(world.isClient())return;
         pos = checkForRoof(world,pos, "Up",0,300);
+        if(pos == null)return;
         int count = MathHelper.nextInt(Random.create(), 4, 9);
 
         for(;count > 0; count--){
-            BlockPos pos2 = pos;
             Entity entity = new LesterEntity(ModEntities.LESTER, (World) world);
 
             int XOffset = MathHelper.nextInt(Random.create(), -5, 5);
-            pos2 = pos2.east(XOffset);
+            pos = pos.east(XOffset);
             int ZOffset = MathHelper.nextInt(Random.create(), -5, 5);
-            pos2 = pos2.south(ZOffset);
-            if(!world.getBlockState(pos2).isIn(ModTags.Blocks.LESTER_SPAWN_BLOCKS)){
-                pos2 = checkForRoof(world,pos2, "Up",0,300);
+            pos = pos.south(ZOffset);
+            if(!world.getBlockState(pos).isIn(ModTags.Blocks.LESTER_SPAWN_BLOCKS)){
+                pos = checkForRoof(world,pos, "Up",0,300);
             }
-            else pos2 = checkForRoof(world,pos2, "Down",0,10);
+            else pos = checkForRoof(world,pos, "Down",0,10);
 
 
-            if(pos2 == null){ continue;}
+            if(pos == null){ continue;}
 
 
-            entity.setPosition(pos2.getX()+ 0.5,pos2.getY()+0.99,pos2.getZ() + 0.5);
+            entity.setPosition(pos.getX()+ 0.5,pos.getY()+0.99,pos.getZ() + 0.5);
             world.spawnEntity(entity);
 
 
