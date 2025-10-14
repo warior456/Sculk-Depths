@@ -7,7 +7,7 @@ import net.minecraft.screen.ScreenHandlerType;
 import net.ugi.sculk_depths.SculkDepths;
 
 public class ModScreenHandlers {
-    public static ScreenHandlerType<ZygrinFurnaceScreenHandler> ZYGRIN_FURNACE_SCREEN_HANDLER = Registry.register(
+    public static ScreenHandlerType<ZygrinFurnaceScreenHandler> ZYGRIN_FURNACE = Registry.register(
             Registries.SCREEN_HANDLER,
             SculkDepths.identifier( "zygrin_furnace"),
             new ScreenHandlerType<>(ZygrinFurnaceScreenHandler::new, FeatureFlags.VANILLA_FEATURES));

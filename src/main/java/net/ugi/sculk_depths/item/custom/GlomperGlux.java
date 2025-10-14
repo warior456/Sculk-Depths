@@ -6,7 +6,6 @@ import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
@@ -33,10 +32,10 @@ public class GlomperGlux extends Item implements Coatable{
         if (blockState.isIn(ModTags.Blocks.COATABLE_BLOCKS)) {
             if (block == ModBlocks.VALTROX_DOOR){
                 BlockPos blockPos1 = blockState.get(HALF).equals(DoubleBlockHalf.UPPER) ? blockPos.down() : blockPos;
-                Coatable.CoatBlock(blockState, world, blockPos1);
+                Coatable.coatBlock(blockState, world, blockPos1);
             }
             else {
-                Coatable.CoatBlock(blockState, world, blockPos);
+                Coatable.coatBlock(blockState, world, blockPos);
             }
             context.getStack().decrement(1);
             if(playerEntity != null){

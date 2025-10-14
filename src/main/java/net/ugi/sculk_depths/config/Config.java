@@ -10,23 +10,21 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import static net.ugi.sculk_depths.SculkDepths.CONFIG;
+import static net.ugi.sculk_depths.SculkDepths.config;
 
 public class Config {
     public static void loadConfig() {
         File configFile = new File(FabricLoader.getInstance().getConfigDir().toFile(), SculkDepths.MOD_ID + "_config.json");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         if (configFile.exists()) {
-            try {
-                FileReader fileReader = new FileReader(configFile);
-                CONFIG = gson.fromJson(fileReader, ConfigHandler.class);
-                fileReader.close();
+            try (FileReader fileReader = new FileReader(configFile)) {
+                config = gson.fromJson(fileReader, ConfigHandler.class);
                 saveConfig(); //update config
             } catch (IOException e) {
                 SculkDepths.LOGGER.warn("the config was not loaded: " + e.getLocalizedMessage());
             }
         } else {
-            CONFIG = new ConfigHandler();
+            config = new ConfigHandler();
             saveConfig();
         }
     }
@@ -37,10 +35,8 @@ public class Config {
         if (!configFile.getParentFile().exists()) {
             configFile.getParentFile().mkdir();
         }
-        try {
-            FileWriter fileWriter = new FileWriter(configFile);
-            fileWriter.write(gson.toJson(CONFIG));
-            fileWriter.close();
+        try (FileWriter fileWriter = new FileWriter(configFile)) {
+            fileWriter.write(gson.toJson(config));
         } catch (IOException e) {
             SculkDepths.LOGGER.warn("the config was not saved: " + e.getLocalizedMessage());
         }

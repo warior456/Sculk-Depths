@@ -10,7 +10,6 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -25,8 +24,7 @@ import java.util.Map;
 import static net.ugi.sculk_depths.state.property.ModProperties.CRUX_LEVEL;
 import static net.ugi.sculk_depths.state.property.ModProperties.QUAZARITH_LEVEL;
 
-
-public interface ModCauldronBehavior {
+public class ModCauldronBehavior {
 
     public static final IntProperty KRYSLUM_LEVEL = ModProperties.KRYSLUM_LEVEL;
     public static final IntProperty SPORE_LEVEL = ModProperties.SPORE_LEVEL;
@@ -121,8 +119,8 @@ public interface ModCauldronBehavior {
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
 
-                int i = state.get(QUAZARITH_LEVEL) + SculkDepths.CONFIG.quazarith_ingot_quazarith_pieces_cost;
-                int j = state.get(CRUX_LEVEL) + SculkDepths.CONFIG.quazarith_ingot_crux_cost;
+                int i = state.get(QUAZARITH_LEVEL) + SculkDepths.config.quazarith_ingot_quazarith_pieces_cost;
+                int j = state.get(CRUX_LEVEL) + SculkDepths.config.quazarith_ingot_crux_cost;
                 BlockState blockState = state.with(QUAZARITH_LEVEL, i).with(CRUX_LEVEL, j);
                 world.setBlockState(pos, blockState);
 

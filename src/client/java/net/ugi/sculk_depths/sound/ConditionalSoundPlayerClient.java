@@ -113,15 +113,15 @@ public class ConditionalSoundPlayerClient implements ClientTickEvents.StartWorld
     }
 
     private void playSound(ClientWorld world, PlayerEntity player, BlockPos pos) {
-        if(pos.getY() >= world.getTopY(Heightmap.Type.MOTION_BLOCKING, pos.getX(), pos.getZ())){
+        if (pos.getY() >= world.getTopY(Heightmap.Type.MOTION_BLOCKING, pos.getX(), pos.getZ())) {
             player.playSound(ModSounds.AMBIENT_WIND_ADDITIONS_EVENT, 1,1);
-        }else {
+        } else {
             player.playSound(ModSounds.AMBIENT_WIND_ADDITIONS_EVENT, 0.4f,0.6f);
         }
     }
     private void CalculateWindAngle(ClientWorld world, PlayerEntity player, BlockPos pos) {
         //todo maybe check for dimension (only if it's faster!!)
-        RegistryEntry<DoublePerlinNoiseSampler.NoiseParameters> noiseParam = new RegistryEntry<DoublePerlinNoiseSampler.NoiseParameters>() {
+        RegistryEntry<DoublePerlinNoiseSampler.NoiseParameters> noiseParam = new RegistryEntry<>() {
             @Override
             public DoublePerlinNoiseSampler.NoiseParameters value() {
                 return null;
@@ -193,16 +193,18 @@ public class ConditionalSoundPlayerClient implements ClientTickEvents.StartWorld
         DensityFunction.Noise radNoise = new DensityFunction.Noise(noiseParam, DoublePerlinNoiseSampler.create(radRandom, new DoublePerlinNoiseSampler.NoiseParameters(-7, 1,2,3,2,4,2.4,9)));
         DensityFunction.Noise speedNoise = new DensityFunction.Noise(noiseParam, DoublePerlinNoiseSampler.create(speedRandom, new DoublePerlinNoiseSampler.NoiseParameters(-7, 1,2,3,2,4,2.4,9)));
         System.out.println(world.getTime());
-        double rad = radNoise.sample(player.getX()/75d, world.getTime()/600d, player.getZ()/75d)*Math.PI;
-        double speed = speedNoise.sample(player.getX()/75d, world.getTime()/300d, player.getZ()/75d);
+        double rad = radNoise.sample(player.getX() / 75d, world.getTime() / 600d, player.getZ() / 75d) * Math.PI;
+        double speed = speedNoise.sample(player.getX() / 75d, world.getTime() / 300d, player.getZ() / 75d);
 
-        windX = speed*Math.sin(rad);
-        windZ = speed*Math.cos(rad);
+        windX = speed * Math.sin(rad);
+        windZ = speed * Math.cos(rad);
     }
-    public static float getWindX(){
+
+    public static float getWindX() {
         return (float) windX;
     }
-    public static float getWindZ(){
+
+    public static float getWindZ() {
         return (float) windZ;
     }
 }

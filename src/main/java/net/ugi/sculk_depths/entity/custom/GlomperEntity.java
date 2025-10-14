@@ -7,23 +7,14 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.BirdNavigation;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.SculkDepths;
-import net.ugi.sculk_depths.entity.ModEntities;
 import org.jetbrains.annotations.Nullable;
 
 
@@ -64,8 +55,8 @@ public class GlomperEntity extends PathAwareEntity {
 
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, SculkDepths.CONFIG.glomper_health)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, SculkDepths.CONFIG.glomper_damage)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, SculkDepths.config.glomper_health)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, SculkDepths.config.glomper_damage)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.5f) // doubt this does anything
                 .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.2f) //needed to not crash for some frigging reason

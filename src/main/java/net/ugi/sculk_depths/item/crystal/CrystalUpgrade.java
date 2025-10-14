@@ -1,4 +1,3 @@
-/*
 package net.ugi.sculk_depths.item.crystal;
 
 import com.google.common.collect.HashMultimap;
@@ -10,20 +9,19 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.ItemActionResult;
 import net.ugi.sculk_depths.SculkDepths;
-import net.ugi.sculk_depths.block.enums.CrystalType;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.tags.ModTags;
+import net.ugi.sculk_depths.util.enums.CrystalType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,33 +30,15 @@ import java.util.UUID;
 
 public class CrystalUpgrade extends Item {
 
-
     static EquipmentSlot getEquipmentSlot(Item item) {
-        if(item == ModItems.QUAZARITH_SHOVEL || item == ModItems.QUAZARITH_AXE || item == ModItems.QUAZARITH_PICKAXE || item == ModItems.QUAZARITH_HOE || item == ModItems.QUAZARITH_SWORD){
-            return EquipmentSlot.MAINHAND;
+        if (item instanceof ArmorItem armorItem) {
+            return armorItem.getSlotType();
         }
-        if(item == ModItems.QUAZARITH_HELMET){
-            return EquipmentSlot.HEAD;
-
-        }
-        if(item == ModItems.QUAZARITH_CHESTPLATE){
-            return EquipmentSlot.CHEST;
-
-        }
-        if(item == ModItems.QUAZARITH_LEGGINGS){
-            return EquipmentSlot.LEGS;
-
-        }
-        if(item == ModItems.QUAZARITH_BOOTS){
-            return EquipmentSlot.FEET;
-
-        }
-        return null;
+        return EquipmentSlot.MAINHAND;
     }
 
-    static int[] crystalUpgradeColorArray = {16777215, 65526, 16742144, 1703680};
+    private static final int[] CRYSTAL_UPGRADE_COLOR_ARRAY = {0xFFFFFF, 0x00FFF6, 0xFF7700, 0x19FF00};
     static List<String> crystalItemNbtList = Arrays.asList("\"white\"", "\"blue\"", "\"orange\"", "\"lime\"");
-
 
     public CrystalUpgrade(Settings settings) {
         super(settings);
@@ -69,78 +49,79 @@ public class CrystalUpgrade extends Item {
         addAttributeToCrystalUpgrade(stack, player, crystal);
         return ItemActionResult.SUCCESS;
     }
+
     public static void addAttributeToCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal) {
         EquipmentSlot slot = EquipmentSlot.MAINHAND;
-        Multimap<EntityAttribute, EntityAttributeModifier> modifiers = (Multimap<EntityAttribute, EntityAttributeModifier>) stack.get(DataComponentTypes.ATTRIBUTE_MODIFIERS).modifiers();
+        Multimap<EntityAttribute, EntityAttributeModifier> modifiers = stack.get(DataComponentTypes.ATTRIBUTE_MODIFIERS).modifiers();
         SculkDepths.LOGGER.info(modifiers.toString());
         Multimap<EntityAttribute, EntityAttributeModifier> modifiers2 = HashMultimap.create();
 
-        if(stack.getItem() == ModItems.QUAZARITH_SHOVEL){
-            if (crystal == CrystalType.WHITE){
+        if (stack.getItem() == ModItems.QUAZARITH_SHOVEL) {
+            if (crystal == CrystalType.WHITE) {
                 modifiers.put((EntityAttribute) EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier(UUID.randomUUID(), "Attack Damage", 2, EntityAttributeModifier.Operation.ADD_VALUE));
             }
         }
 
-        if(stack.getItem() == ModItems.QUAZARITH_AXE){
+        if (stack.getItem() == ModItems.QUAZARITH_AXE) {
 
-            if (crystal == CrystalType.WHITE){
-                modifiers.put((EntityAttribute) EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADD_VALUE));
+            if (crystal == CrystalType.WHITE) {
+                modifiers.put((EntityAttribute) EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 2, EntityAttributeModifier.Operation.ADD_VALUE));
             }
         }
 
-        if(stack.getItem() == ModItems.QUAZARITH_PICKAXE){
+        if (stack.getItem() == ModItems.QUAZARITH_PICKAXE) {
 
-            if (crystal == CrystalType.WHITE){
-                modifiers.put((EntityAttribute) EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADD_VALUE));
+            if (crystal == CrystalType.WHITE) {
+                modifiers.put((EntityAttribute) EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 2, EntityAttributeModifier.Operation.ADD_VALUE));
             }
         }
 
 
-        if(stack.getItem() == ModItems.QUAZARITH_HOE){
+        if (stack.getItem() == ModItems.QUAZARITH_HOE) {
 
-            if (crystal == CrystalType.WHITE){
-                modifiers.put((EntityAttribute) EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADD_VALUE));
+            if (crystal == CrystalType.WHITE) {
+                modifiers.put((EntityAttribute) EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 2, EntityAttributeModifier.Operation.ADD_VALUE));
             }
         }
 
-        if(stack.getItem() == ModItems.QUAZARITH_SWORD){
+        if (stack.getItem() == ModItems.QUAZARITH_SWORD) {
 
-            if (crystal == CrystalType.WHITE){
-                modifiers2 = addAttribute(modifiers,modifiers2, EntityAttributes.GENERIC_ATTACK_DAMAGE, Item.ATTACK_DAMAGE_MODIFIER_ID,"Attack Damage", 20,EntityAttributeModifier.Operation.ADDITION);
-                modifiers2 = addAttribute(modifiers,modifiers2, EntityAttributes.GENERIC_ATTACK_SPEED, Item.ATTACK_SPEED_MODIFIER_ID,"Attack Speed", 2,EntityAttributeModifier.Operation.ADDITION);
-                modifiers2 = addAttribute(modifiers,modifiers2, EntityAttributes.GENERIC_MOVEMENT_SPEED, UUID.randomUUID(),"Movement Speed", 20,EntityAttributeModifier.Operation.ADDITION);
+            if (crystal == CrystalType.WHITE) {
+                modifiers2 = addAttribute(modifiers, modifiers2, EntityAttributes.GENERIC_ATTACK_DAMAGE, Item.ATTACK_DAMAGE_MODIFIER_ID, "Attack Damage", 20, EntityAttributeModifier.Operation.ADDITION);
+                modifiers2 = addAttribute(modifiers, modifiers2, EntityAttributes.GENERIC_ATTACK_SPEED, Item.ATTACK_SPEED_MODIFIER_ID, "Attack Speed", 2, EntityAttributeModifier.Operation.ADDITION);
+                modifiers2 = addAttribute(modifiers, modifiers2, EntityAttributes.GENERIC_MOVEMENT_SPEED, UUID.randomUUID(), "Movement Speed", 20, EntityAttributeModifier.Operation.ADDITION);
             }
-            if (crystal == CrystalType.ORANGE){
+            if (crystal == CrystalType.ORANGE) {
 
-                modifiers2 = addAttribute(modifiers,modifiers2, EntityAttributes.GENERIC_MOVEMENT_SPEED, UUID.randomUUID(),"Movement Speed", 20,EntityAttributeModifier.Operation.ADDITION);
-            }
-        }
-
-        if(stack.getItem() == ModItems.QUAZARITH_HELMET){
-
-            if (crystal == CrystalType.WHITE){
-                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
+                modifiers2 = addAttribute(modifiers, modifiers2, EntityAttributes.GENERIC_MOVEMENT_SPEED, UUID.randomUUID(), "Movement Speed", 20, EntityAttributeModifier.Operation.ADDITION);
             }
         }
 
-        if(stack.getItem() == ModItems.QUAZARITH_CHESTPLATE){
+        if (stack.getItem() == ModItems.QUAZARITH_HELMET) {
 
-            if (crystal == CrystalType.WHITE){
-                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
+            if (crystal == CrystalType.WHITE) {
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 2, EntityAttributeModifier.Operation.ADDITION));
             }
         }
 
-        if(stack.getItem() == ModItems.QUAZARITH_LEGGINGS){
+        if (stack.getItem() == ModItems.QUAZARITH_CHESTPLATE) {
 
-            if (crystal == CrystalType.WHITE){
-                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2,EntityAttributeModifier.Operation.ADDITION));
+            if (crystal == CrystalType.WHITE) {
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 2, EntityAttributeModifier.Operation.ADDITION));
             }
         }
 
-        if(stack.getItem() == ModItems.QUAZARITH_BOOTS){
+        if (stack.getItem() == ModItems.QUAZARITH_LEGGINGS) {
 
-            if (crystal == CrystalType.WHITE){
-                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier( "Attack Damage", 2, EntityAttributeModifier.Operation.ADDITION));
+            if (crystal == CrystalType.WHITE) {
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 2, EntityAttributeModifier.Operation.ADDITION));
+            }
+        }
+
+        if (stack.getItem() == ModItems.QUAZARITH_BOOTS) {
+
+            if (crystal == CrystalType.WHITE) {
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 2, EntityAttributeModifier.Operation.ADDITION));
             }
         }
 
@@ -210,7 +191,7 @@ public class CrystalUpgrade extends Item {
 
                 if (nbtData != null) {
                     int i = crystalItemNbtList.indexOf(nbtData.toString());
-                    int crystalUpgradeColor = crystalUpgradeColorArray[i];
+                    int crystalUpgradeColor = CRYSTAL_UPGRADE_COLOR_ARRAY[i];
 
 
                     tooltip.add(1, Text.translatable("tooltip.sculk_depths.crystal_upgrade.tooltip").formatted(Formatting.GRAY));
