@@ -29,11 +29,10 @@ import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
-
-public class SculkDepthsPortalBlock extends Block implements Portal{
+public class SculkDepthsPortalBlock extends Block implements Portal {
     public static final EnumProperty<Direction.Axis> AXIS = Properties.HORIZONTAL_AXIS;
-    protected static final VoxelShape X_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 6.0D, 16.0D, 16.0D, 10.0D);
-    protected static final VoxelShape Z_SHAPE = Block.createCuboidShape(6.0D, 0.0D, 0.0D, 10.0D, 16.0D, 16.0D);
+    protected static final VoxelShape X_SHAPE = Block.createCuboidShape(0, 0, 6, 16, 16, 10);
+    protected static final VoxelShape Z_SHAPE = Block.createCuboidShape(6, 0, 0, 10, 16, 16);
 
     public SculkDepthsPortalBlock(Settings settings) {
         super(settings);
@@ -53,44 +52,27 @@ public class SculkDepthsPortalBlock extends Block implements Portal{
 
     }
 
+    @Override
     protected BlockState rotate(BlockState state, BlockRotation rotation) {
-        switch (rotation) {
-            case COUNTERCLOCKWISE_90:
-            case CLOCKWISE_90:
-                switch ((Direction.Axis)state.get(AXIS)) {
-                    case Z:
-                        return (BlockState)state.with(AXIS, Direction.Axis.X);
-                    case X:
-                        return (BlockState)state.with(AXIS, Direction.Axis.Z);
-                    default:
-                        return state;
-                }
-            default:
-                return state;
-        }
+        return switch (rotation) {
+            case COUNTERCLOCKWISE_90, CLOCKWISE_90 -> switch (state.get(AXIS)) {
+                case Z -> state.with(AXIS, Direction.Axis.X);
+                case X -> state.with(AXIS, Direction.Axis.Z);
+                default -> state;
+            };
+            default -> state;
+        };
     }
+
     private boolean regeneratePortal(WorldAccess world, BlockPos pos, Direction.Axis facing){
         int connectedPortalBlocks = 0;
-        if(world.getBlockState(pos.north()).getBlock() == ModBlocks.SCULK_DEPTHS_PORTAL){
-            connectedPortalBlocks++;
-        }
-        if(world.getBlockState(pos.south()).getBlock() == ModBlocks.SCULK_DEPTHS_PORTAL){
-            connectedPortalBlocks++;
-        }
-        if(world.getBlockState(pos.east()).getBlock() == ModBlocks.SCULK_DEPTHS_PORTAL){
-            connectedPortalBlocks++;
-        }
-        if(world.getBlockState(pos.west()).getBlock() == ModBlocks.SCULK_DEPTHS_PORTAL){
-            connectedPortalBlocks++;
-        }
-        if(world.getBlockState(pos.up()).getBlock() == ModBlocks.SCULK_DEPTHS_PORTAL){
-            connectedPortalBlocks++;
-        }
-        if(world.getBlockState(pos.down()).getBlock() == ModBlocks.SCULK_DEPTHS_PORTAL){
-            connectedPortalBlocks++;
+        for (Direction direction : Direction.values()) {
+            if (world.getBlockState(pos.offset(direction)).getBlock() == ModBlocks.SCULK_DEPTHS_PORTAL) {
+                connectedPortalBlocks++;
+            }
         }
 
-        if (connectedPortalBlocks > 1){
+        if (connectedPortalBlocks > 1) {
             BlockState state = ModBlocks.SCULK_DEPTHS_PORTAL.getDefaultState();
             world.setBlockState(pos,ModBlocks.SCULK_DEPTHS_PORTAL.getStateWithProperties(state.with(AXIS, facing)),0);
             return true;
@@ -101,33 +83,16 @@ public class SculkDepthsPortalBlock extends Block implements Portal{
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         Direction.Axis axis = direction.getAxis();
-        Direction.Axis axis2 = (Direction.Axis)state.get(AXIS);
+        Direction.Axis axis2 = state.get(AXIS);
         boolean bl = axis2 != axis && axis.isHorizontal();
-        if (!bl && !neighborState.isOf(this) && !(new NetherPortal(world, pos, axis2)).wasAlreadyValid()){
-            if(world.getBlockState(pos.north()).getBlock() == Blocks.AIR){
-                if (regeneratePortal(world,pos.north(),state.get(AXIS)))
-                    return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        if (!bl && !neighborState.isOf(this) && !(new NetherPortal(world, pos, axis2)).wasAlreadyValid()) {
+
+            for (Direction directionToCheck : Direction.values()) {
+                if (regeneratePortal(world, pos.offset(direction), state.get(AXIS))) {
+                    break;
+                }
             }
-            if(world.getBlockState(pos.south()).getBlock() == Blocks.AIR){
-                if (regeneratePortal(world,pos.south(),state.get(AXIS)))
-                    return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
-            }
-            if(world.getBlockState(pos.east()).getBlock() == Blocks.AIR){
-                if (regeneratePortal(world,pos.east(),state.get(AXIS)))
-                    return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
-            }
-            if(world.getBlockState(pos.west()).getBlock() == Blocks.AIR){
-                if (regeneratePortal(world,pos.west(),state.get(AXIS)))
-                    return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
-            }
-            if(world.getBlockState(pos.up()).getBlock() == Blocks.AIR){
-                if (regeneratePortal(world,pos.up(),state.get(AXIS)))
-                    return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
-            }
-            if(world.getBlockState(pos.down()).getBlock() == Blocks.AIR){
-                if (regeneratePortal(world,pos.down(),state.get(AXIS)))
-                    return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
-            }
+
             return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
@@ -184,16 +149,16 @@ public class SculkDepthsPortalBlock extends Block implements Portal{
         }
     }
 
-
     @Override
     public int getPortalDelay(ServerWorld world, Entity entity) {
         if (entity instanceof PlayerEntity playerEntity) {
-            return Math.max(1, world.getGameRules().getInt(playerEntity.getAbilities().invulnerable ? GameRules.PLAYERS_NETHER_PORTAL_CREATIVE_DELAY : GameRules.PLAYERS_NETHER_PORTAL_DEFAULT_DELAY));
-        } else {
-            return 0;
+            return Math.max(1, world.getGameRules()
+                    .getInt(playerEntity.getAbilities().invulnerable ?
+                            GameRules.PLAYERS_NETHER_PORTAL_CREATIVE_DELAY :
+                            GameRules.PLAYERS_NETHER_PORTAL_DEFAULT_DELAY));
         }
+        return 0;
     }
-
 
     @Override
     public TeleportTarget createTeleportTarget(ServerWorld world, Entity entity, BlockPos blockPos) {
@@ -201,49 +166,48 @@ public class SculkDepthsPortalBlock extends Block implements Portal{
         ServerWorld serverWorld = world.getServer().getWorld(registryKey);
         if (serverWorld == null) {
             return null;
-        } else {
-            Vec3d vec3d = Vec3d.of(blockPos);
-            vec3d = vec3d.add(0.5f, 0, 0.5f);
-            if(entity.isPlayer()){
-                vec3d = vec3d.subtract(0, 1,0);
-            }
-            if(!serverWorld.getBlockState(blockPos).isOf(ModBlocks.SCULK_DEPTHS_PORTAL)){//backup tp
-
-                serverWorld.setBlockState(blockPos, ModBlocks.SCULK_DEPTHS_PORTAL.getDefaultState());
-                serverWorld.setBlockState(blockPos.down(), ModBlocks.SCULK_DEPTHS_PORTAL.getDefaultState());
-                serverWorld.setBlockState(blockPos.north(), Blocks.AIR.getDefaultState());
-                serverWorld.setBlockState(blockPos.east(), Blocks.AIR.getDefaultState());
-                serverWorld.setBlockState(blockPos.south(), Blocks.AIR.getDefaultState());
-                serverWorld.setBlockState(blockPos.west(), Blocks.AIR.getDefaultState());
-                serverWorld.setBlockState(blockPos.down().north(), Blocks.AIR.getDefaultState());
-                serverWorld.setBlockState(blockPos.down().east(), Blocks.AIR.getDefaultState());
-                serverWorld.setBlockState(blockPos.down().south(), Blocks.AIR.getDefaultState());
-                serverWorld.setBlockState(blockPos.down().west(), Blocks.AIR.getDefaultState());
-                serverWorld.setBlockState(blockPos.down(2), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
-                serverWorld.setBlockState(blockPos.down(2).north(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
-                serverWorld.setBlockState(blockPos.down(2).east(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
-                serverWorld.setBlockState(blockPos.down(2).south(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
-                serverWorld.setBlockState(blockPos.down(2).west(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
-
-                SculkDepths.LOGGER.warn("A player went through an invalid portal at {} if you're a server admin or have access to permissions it is recommended to build a proper 2 way portal", blockPos);
-            }
-            return new TeleportTarget(
-                    serverWorld,
-                    vec3d,
-                    entity.getVelocity(),
-                    entity.getYaw(),
-                    entity.getPitch(),
-                    TeleportTarget.SEND_TRAVEL_THROUGH_PORTAL_PACKET.then(TeleportTarget.ADD_PORTAL_CHUNK_TICKET)
-            );
         }
-    }
+        Vec3d vec3d = Vec3d.of(blockPos);
+        vec3d = vec3d.add(0.5f, 0, 0.5f);
+        if (entity.isPlayer()) {
+            vec3d = vec3d.subtract(0, 1,0);
+        }
+        if (!serverWorld.getBlockState(blockPos).isOf(ModBlocks.SCULK_DEPTHS_PORTAL)) {//backup tp
 
+            serverWorld.setBlockState(blockPos, ModBlocks.SCULK_DEPTHS_PORTAL.getDefaultState());
+            serverWorld.setBlockState(blockPos.down(), ModBlocks.SCULK_DEPTHS_PORTAL.getDefaultState());
+            serverWorld.setBlockState(blockPos.north(), Blocks.AIR.getDefaultState());
+            serverWorld.setBlockState(blockPos.east(), Blocks.AIR.getDefaultState());
+            serverWorld.setBlockState(blockPos.south(), Blocks.AIR.getDefaultState());
+            serverWorld.setBlockState(blockPos.west(), Blocks.AIR.getDefaultState());
+            serverWorld.setBlockState(blockPos.down().north(), Blocks.AIR.getDefaultState());
+            serverWorld.setBlockState(blockPos.down().east(), Blocks.AIR.getDefaultState());
+            serverWorld.setBlockState(blockPos.down().south(), Blocks.AIR.getDefaultState());
+            serverWorld.setBlockState(blockPos.down().west(), Blocks.AIR.getDefaultState());
+            serverWorld.setBlockState(blockPos.down(2), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+            serverWorld.setBlockState(blockPos.down(2).north(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+            serverWorld.setBlockState(blockPos.down(2).east(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+            serverWorld.setBlockState(blockPos.down(2).south(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+            serverWorld.setBlockState(blockPos.down(2).west(), ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
+
+            SculkDepths.LOGGER.warn("A player went through an invalid portal at {} if you're a server admin or have access to permissions it is recommended to build a proper 2 way portal", blockPos);
+        }
+        return new TeleportTarget(
+                serverWorld,
+                vec3d,
+                entity.getVelocity(),
+                entity.getYaw(),
+                entity.getPitch(),
+                TeleportTarget.SEND_TRAVEL_THROUGH_PORTAL_PACKET.then(TeleportTarget.ADD_PORTAL_CHUNK_TICKET)
+        );
+    }
 
     @Override
     public Effect getPortalEffect() {
         return Effect.CONFUSION;
     }
 
+    @Override
     protected boolean canBucketPlace(BlockState state, Fluid fluid) {
         return false;
     }

@@ -1,8 +1,7 @@
-package net.ugi.sculk_depths.item.crystal;
+/*package net.ugi.sculk_depths.item.crystal;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -12,36 +11,25 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.ItemActionResult;
 import net.ugi.sculk_depths.SculkDepths;
+import net.ugi.sculk_depths.item.ModComponentTypes;
 import net.ugi.sculk_depths.item.ModItems;
-import net.ugi.sculk_depths.tags.ModTags;
 import net.ugi.sculk_depths.util.enums.CrystalType;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
-
 public class CrystalUpgrade extends Item {
+
+    public CrystalUpgrade(Settings settings) {
+        super(settings);
+    }
 
     static EquipmentSlot getEquipmentSlot(Item item) {
         if (item instanceof ArmorItem armorItem) {
             return armorItem.getSlotType();
         }
         return EquipmentSlot.MAINHAND;
-    }
-
-    private static final int[] CRYSTAL_UPGRADE_COLOR_ARRAY = {0xFFFFFF, 0x00FFF6, 0xFF7700, 0x19FF00};
-    static List<String> crystalItemNbtList = Arrays.asList("\"white\"", "\"blue\"", "\"orange\"", "\"lime\"");
-
-    public CrystalUpgrade(Settings settings) {
-        super(settings);
     }
 
     public static ItemActionResult createCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal) {
@@ -65,14 +53,14 @@ public class CrystalUpgrade extends Item {
         if (stack.getItem() == ModItems.QUAZARITH_AXE) {
 
             if (crystal == CrystalType.WHITE) {
-                modifiers.put((EntityAttribute) EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 2, EntityAttributeModifier.Operation.ADD_VALUE));
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE.value(), new EntityAttributeModifier(SculkDepths.identifier("attack_damage"), 2, EntityAttributeModifier.Operation.ADD_VALUE));
             }
         }
 
         if (stack.getItem() == ModItems.QUAZARITH_PICKAXE) {
 
             if (crystal == CrystalType.WHITE) {
-                modifiers.put((EntityAttribute) EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 2, EntityAttributeModifier.Operation.ADD_VALUE));
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE.value(), new EntityAttributeModifier(SculkDepths.identifier("attack_damage"), 2, EntityAttributeModifier.Operation.ADD_VALUE));
             }
         }
 
@@ -80,7 +68,7 @@ public class CrystalUpgrade extends Item {
         if (stack.getItem() == ModItems.QUAZARITH_HOE) {
 
             if (crystal == CrystalType.WHITE) {
-                modifiers.put((EntityAttribute) EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 2, EntityAttributeModifier.Operation.ADD_VALUE));
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE.value(), new EntityAttributeModifier(SculkDepths.identifier("attack_damage"), 2, EntityAttributeModifier.Operation.ADD_VALUE));
             }
         }
 
@@ -100,35 +88,35 @@ public class CrystalUpgrade extends Item {
         if (stack.getItem() == ModItems.QUAZARITH_HELMET) {
 
             if (crystal == CrystalType.WHITE) {
-                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 2, EntityAttributeModifier.Operation.ADDITION));
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE.value(), new EntityAttributeModifier(SculkDepths.identifier("attack_damage"), 2, EntityAttributeModifier.Operation.ADD_VALUE));
             }
         }
 
         if (stack.getItem() == ModItems.QUAZARITH_CHESTPLATE) {
 
             if (crystal == CrystalType.WHITE) {
-                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 2, EntityAttributeModifier.Operation.ADDITION));
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE.value(), new EntityAttributeModifier(SculkDepths.identifier("attack_damage"), 2, EntityAttributeModifier.Operation.ADD_VALUE));
             }
         }
 
         if (stack.getItem() == ModItems.QUAZARITH_LEGGINGS) {
 
             if (crystal == CrystalType.WHITE) {
-                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 2, EntityAttributeModifier.Operation.ADDITION));
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE.value(), new EntityAttributeModifier(SculkDepths.identifier("attack_damage"), 2, EntityAttributeModifier.Operation.ADD_VALUE));
             }
         }
 
         if (stack.getItem() == ModItems.QUAZARITH_BOOTS) {
 
             if (crystal == CrystalType.WHITE) {
-                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Attack Damage", 2, EntityAttributeModifier.Operation.ADDITION));
+                modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE.value(), new EntityAttributeModifier(SculkDepths.identifier("attack_damage"), 2, EntityAttributeModifier.Operation.ADD_VALUE));
             }
         }
 
         // to add attributes that haven't been modified with the addAttribute function
         Multimap<EntityAttribute, EntityAttributeModifier> finalModifiers = modifiers2;
         modifiers.forEach((entityAttribute, entityAttributeModifier) -> {
-            int check[] = {0};
+            int[] check = {0};
             finalModifiers.forEach((entityAttribute2, entityAttributeModifier2) -> {
                 SculkDepths.LOGGER.info(entityAttribute.toString() + ", " + entityAttributeModifier.toString());
                 if (entityAttributeModifier2.getId().equals(entityAttributeModifier.getId())) {
@@ -136,74 +124,47 @@ public class CrystalUpgrade extends Item {
                 }
 
             });
-            if (check[0] == 0){
-                finalModifiers.put(entityAttribute,entityAttributeModifier);
+            if (check[0] == 0) {
+                finalModifiers.put(entityAttribute, entityAttributeModifier);
             }
-
-
         });
 
 
         EquipmentSlot slot2 = getEquipmentSlot(stack.getItem());
 
         finalModifiers.forEach((entityAttribute, entityAttributeModifier) -> {                                        //used to be getname() might be broken
-            stack.addAttributeModifier(entityAttribute, new EntityAttributeModifier(entityAttributeModifier.getId(), entityAttributeModifier.getOperation().name(), entityAttributeModifier.getValue(), entityAttributeModifier.getOperation()) , slot2);
+            stack.addAttributeModifier(entityAttribute, new EntityAttributeModifier(
+                    entityAttributeModifier.getId(),
+                    entityAttributeModifier.getOperation().name(),
+                    entityAttributeModifier.getValue(),
+                    entityAttributeModifier.getOperation()
+            ), slot2);
         });
     }
 
-    public static Multimap<EntityAttribute, EntityAttributeModifier> addAttribute(Multimap<EntityAttribute, EntityAttributeModifier> modifiers,Multimap<EntityAttribute, EntityAttributeModifier> modifiers2, EntityAttribute attribute, UUID uuid, String name, double value, EntityAttributeModifier.Operation operation){
+    public static Multimap<EntityAttribute, EntityAttributeModifier> addAttribute(Multimap<EntityAttribute, EntityAttributeModifier> modifiers,Multimap<EntityAttribute, EntityAttributeModifier> modifiers2, EntityAttribute attribute, UUID uuid, String name, double value, EntityAttributeModifier.Operation operation) {
         final int[] check = {0};
         modifiers.forEach((entityAttribute, entityAttributeModifier) -> {
             if (entityAttributeModifier.getId().equals(uuid)) {
                 check[0] = 1;
-                if (operation == EntityAttributeModifier.Operation.ADDITION){
+                if (operation == EntityAttributeModifier.Operation.ADDITION) {
                     double originalValue = entityAttributeModifier.getValue();
                     modifiers2.put(attribute, new EntityAttributeModifier(uuid,name, originalValue + value, operation));
                 }
-                if (operation == EntityAttributeModifier.Operation.MULTIPLY_TOTAL){
+                if (operation == EntityAttributeModifier.Operation.MULTIPLY_TOTAL) {
                     double originalValue = entityAttributeModifier.getValue();
-                    modifiers2.put(attribute, new EntityAttributeModifier(uuid,name, originalValue * value, operation));
+                    modifiers2.put(attribute, new EntityAttributeModifier(uuid, name, originalValue * value, operation));
                 }
             }
 
         });
-        if (check[0] == 0){
-            modifiers2.put(attribute, new EntityAttributeModifier( uuid,name, value, operation));
+        if (check[0] == 0) {
+            modifiers2.put(attribute, new EntityAttributeModifier(uuid, name, value, operation));
         }
         return modifiers2;
     }
 
     public static void addNbtToCrystalUpgrade(ItemStack stack, PlayerEntity player, CrystalType crystal) {
-
-        NbtCompound nbtData = stack.getNbt();
-
-        nbtData.putString("sculk_depths.crystal", crystal.toString());
-
-        stack.setNbt(nbtData);
-
+        stack.set(ModComponentTypes.CRYSTAL, crystal);
     }
-
-    public static void tooltipAdd() {
-
-        ItemTooltipCallback.EVENT.register((stack, context, tooltip) -> {
-            if (stack.isIn(ModTags.Items.CRYSTAL_UPGRADE_ITEMS)) {
-                NbtElement nbtData = stack.getNbt().get("sculk_depths.crystal");
-
-                if (nbtData != null) {
-                    int i = crystalItemNbtList.indexOf(nbtData.toString());
-                    int crystalUpgradeColor = CRYSTAL_UPGRADE_COLOR_ARRAY[i];
-
-
-                    tooltip.add(1, Text.translatable("tooltip.sculk_depths.crystal_upgrade.tooltip").formatted(Formatting.GRAY));
-
-                    MutableText crystalTooltipText = Text.translatable("tooltip.sculk_depths.crystal_upgrade.crystal." + nbtData);
-                    crystalTooltipText.setStyle(crystalTooltipText.getStyle().withColor(crystalUpgradeColor));
-                    tooltip.add(2, crystalTooltipText);
-
-                }
-            }
-
-        });
-    }
-
 }*/

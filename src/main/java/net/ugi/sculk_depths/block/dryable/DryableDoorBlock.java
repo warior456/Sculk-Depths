@@ -21,11 +21,10 @@ public class DryableDoorBlock extends DoorBlock implements Dryable {
     }
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (state.get(HALF) == DoubleBlockHalf.LOWER){
+        if (state.get(HALF) == DoubleBlockHalf.LOWER) {
             if (MathHelper.nextInt(random, 0, 100) == 0) {
-                if(world.getDimensionEntry().getKey().get() == ModDimensions.SCULK_DEPTHS_TYPE) {
-
-                    Dryable.DryBlock(state, world, pos);
+                if(world.getDimensionEntry().matchesKey(ModDimensions.SCULK_DEPTHS_TYPE)) {
+                    Dryable.dryBlock(state, world, pos);
                 }
             }
         }

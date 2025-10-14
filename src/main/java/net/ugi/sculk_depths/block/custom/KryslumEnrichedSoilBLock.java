@@ -24,9 +24,8 @@ public class KryslumEnrichedSoilBLock extends FarmlandBlock {
 
     public KryslumEnrichedSoilBLock(AbstractBlock.Settings settings) {
         super(settings);
-        this.setDefaultState((this.stateManager.getDefaultState()).with(MOISTURE, MAX_MOISTURE));
+        this.setDefaultState(this.stateManager.getDefaultState().with(MOISTURE, MAX_MOISTURE));
     }
-
 
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
@@ -41,12 +40,10 @@ public class KryslumEnrichedSoilBLock extends FarmlandBlock {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         return this.getDefaultState();
     }
-
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -64,7 +61,6 @@ public class KryslumEnrichedSoilBLock extends FarmlandBlock {
     @Override
     public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
     }
-
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {

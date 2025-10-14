@@ -17,7 +17,8 @@ public class AuricVinesBlock extends AbstractPlantBlock {
         super(settings, Direction.DOWN, SHAPE, false);
     }
 
+    @Override
     protected AbstractPlantStemBlock getStem() {
-        return (AbstractPlantStemBlock) ModBlocks.AURIC_VINES_END;
+        return ModBlocks.AURIC_VINES_END;
     }
 }

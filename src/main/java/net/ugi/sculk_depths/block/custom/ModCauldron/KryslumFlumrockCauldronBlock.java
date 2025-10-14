@@ -136,7 +136,7 @@ public class KryslumFlumrockCauldronBlock extends AbstractCauldronBlock {
         return super.onUseWithItem(stack, state, world, pos, player, hand, hit);
     }
 
-    public ItemActionResult upgradeItem(ItemStack outputItem, PlayerEntity player){
+    public ItemActionResult upgradeItem(ItemStack outputItem, PlayerEntity player) {
         ComponentMap componentMap = player.getMainHandStack().getComponents();
         if (componentMap != null) {
             outputItem.applyComponentsFrom(componentMap);

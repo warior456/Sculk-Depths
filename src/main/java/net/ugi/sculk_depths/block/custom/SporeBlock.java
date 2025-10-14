@@ -1,10 +1,7 @@
 package net.ugi.sculk_depths.block.custom;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.particle.ParticleEffect;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
@@ -19,8 +16,6 @@ import net.minecraft.world.WorldAccess;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.custom.ModCauldron.FlumrockCauldronBlock;
 import net.ugi.sculk_depths.block.custom.ModCauldron.SporeFlumrockCauldronBlock;
-
-
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.state.property.ModProperties;
 import org.jetbrains.annotations.Nullable;
@@ -28,16 +23,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 import java.util.function.BiPredicate;
 
-
 public class SporeBlock extends ShroomBlock {
 
     private static final VoxelShape DRIP_COLLISION_SHAPE = Block.createCuboidShape(6.0, 0.0, 6.0, 10.0, 16.0, 10.0);
 
-
     public SporeBlock(Settings settings) {
         super(settings);
     }
-
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
@@ -47,11 +39,23 @@ public class SporeBlock extends ShroomBlock {
 
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         for (int l = 0; l < 14; ++l) {
-            mutable.set(i + MathHelper.nextInt(random, -10, 10), j - random.nextInt(10), k + MathHelper.nextInt(random, -10, 10));
+            mutable.set(
+                    i + MathHelper.nextInt(random, -10, 10),
+                    j - random.nextInt(10),
+                    k + MathHelper.nextInt(random, -10, 10)
+            );
             BlockState blockState = world.getBlockState(mutable);
             if (blockState.isFullCube(world, mutable)) continue;
             //ParticleTypes.ASH
-            world.addParticle((ParticleEffect) ModParticleTypes.PENEBRIUM_SPORES, (double) mutable.getX() + random.nextDouble(), (double) mutable.getY() + random.nextDouble(), (double) mutable.getZ() + random.nextDouble(), 0.0, 0.0, 0.0);
+            world.addParticle(
+                    ModParticleTypes.PENEBRIUM_SPORES,
+                    (double) mutable.getX() + random.nextDouble(),
+                    (double) mutable.getY() + random.nextDouble(),
+                    (double) mutable.getZ() + random.nextDouble(),
+                    0.0,
+                    0.0,
+                    0.0
+            );
         }
     }
 
@@ -66,23 +70,23 @@ public class SporeBlock extends ShroomBlock {
         if (pos2 == null) {
             return;
         }
-        BlockState CauldronBlockstate = world.getBlockState(pos2);
-        if (CauldronBlockstate == null) {
+        BlockState cauldronBlockstate = world.getBlockState(pos2);
+        if (cauldronBlockstate == null) {
             return;
         }
         if (MathHelper.nextInt(random, 0, Math.abs(pos.getY() - pos2.getY()) + 1) >= 2) {
             return;
         }
-        if (CauldronBlockstate.getBlock() instanceof FlumrockCauldronBlock) {
+        if (cauldronBlockstate.getBlock() instanceof FlumrockCauldronBlock) {
             BlockState newCauldronBlockState = ModBlocks.SPORE_FLUMROCK_CAULDRON.getDefaultState();
             world.setBlockState(pos2, newCauldronBlockState);
             return;
         }
-        if (CauldronBlockstate.getBlock() instanceof SporeFlumrockCauldronBlock) {
-            if (CauldronBlockstate.get(SporeFlumrockCauldronBlock.LEVEL) >= (ModProperties.SPORE_LEVEL.getValues().size())) {
+        if (cauldronBlockstate.getBlock() instanceof SporeFlumrockCauldronBlock) {
+            if (cauldronBlockstate.get(SporeFlumrockCauldronBlock.LEVEL) >= (ModProperties.SPORE_LEVEL.getValues().size())) {
                 return;
             }
-            BlockState newCauldronBlockState = CauldronBlockstate.with(SporeFlumrockCauldronBlock.LEVEL, CauldronBlockstate.get(SporeFlumrockCauldronBlock.LEVEL) + 1);
+            BlockState newCauldronBlockState = cauldronBlockstate.with(SporeFlumrockCauldronBlock.LEVEL, cauldronBlockstate.get(SporeFlumrockCauldronBlock.LEVEL) + 1);
             world.setBlockState(pos2, newCauldronBlockState);
         }
     }

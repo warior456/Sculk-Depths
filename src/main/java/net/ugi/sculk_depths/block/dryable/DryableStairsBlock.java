@@ -21,7 +21,7 @@ public class DryableStairsBlock extends StairsBlock implements Dryable {
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (MathHelper.nextInt(random, 0, 100) == 0) {
             if(world.getDimensionEntry().getKey().get() == ModDimensions.SCULK_DEPTHS_TYPE) {
-                Dryable.DryBlock(state, world, pos);
+                Dryable.dryBlock(state, world, pos);
             }
         }
     }

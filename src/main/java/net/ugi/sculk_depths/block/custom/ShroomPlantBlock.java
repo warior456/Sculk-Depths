@@ -57,11 +57,6 @@ public class ShroomPlantBlock
     }
 
     @Override
-    protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return floor.isOpaqueFullCube(world, pos);
-    }
-
-    @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockPos blockPos = pos.down();
         BlockState blockState = world.getBlockState(blockPos);
@@ -71,19 +66,19 @@ public class ShroomPlantBlock
         return world.getBaseLightLevel(pos, 0) < 13 && this.canPlantOnTop(blockState, world, blockPos);
     }
 
+    @Override
     public boolean trySpawningBigMushroom(ServerWorld world, BlockPos pos, BlockState state, Random random) {
         Optional<RegistryEntry.Reference<ConfiguredFeature<?, ?>>> optional = world.getRegistryManager().get(RegistryKeys.CONFIGURED_FEATURE).getEntry(this.featureKey);
         if (optional.isEmpty()) {
             return false;
         }
         world.removeBlock(pos, false);
-        if (((ConfiguredFeature)((RegistryEntry)optional.get()).value()).generate(world, world.getChunkManager().getChunkGenerator(), random, pos)) {
+        if (optional.get().value().generate(world, world.getChunkManager().getChunkGenerator(), random, pos)) {
             return true;
         }
         world.setBlockState(pos, state, Block.NOTIFY_ALL);
         return false;
     }
-
 
     @Override
     public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {

@@ -6,11 +6,11 @@ import net.ugi.sculk_depths.item.QuazarithCrystalUpgrade;
 import net.ugi.sculk_depths.item.QuazarithRecipe;
 
 public class ConfigHandler {
-    public int config_version = 3;
-    public double glomper_health = 20;
-    public float glomper_damage = 20;
+    public int configVersion = 3;
+    public double glomperHealth = 20;
+    public float glomperDamage = 20;
 
-    public int activate_portal_durability_usage = 15;
+    public int activatePortalDurabilityUsage = 15;
 
     public QuazarithRecipe[] quazarithRecipes = {
             new QuazarithRecipe(ModItems.QUAZARITH_HELMET, Items.NETHERITE_HELMET, 5, 5, 5),

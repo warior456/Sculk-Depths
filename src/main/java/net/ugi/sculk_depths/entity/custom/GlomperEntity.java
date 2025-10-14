@@ -1,6 +1,5 @@
 package net.ugi.sculk_depths.entity.custom;
 
-
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.goal.*;
@@ -17,22 +16,22 @@ import net.minecraft.world.World;
 import net.ugi.sculk_depths.SculkDepths;
 import org.jetbrains.annotations.Nullable;
 
-
 import java.util.function.Predicate;
 
 public class GlomperEntity extends PathAwareEntity {
+    private static final Predicate<LivingEntity> CAN_ATTACK_PREDICATE = entity -> entity.isPlayer() && entity.isFallFlying();
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
-    private static final Predicate<LivingEntity> CAN_ATTACK_PREDICATE = entity -> entity.isPlayer() && entity.isFallFlying();
-    protected float getOffGroundSpeed() {
-        return this.getMovementSpeed() * 0.1f;//fix movement speed
-    }
-
 
     public GlomperEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
         this.moveControl = new FlightMoveControl(this, 0, true);
         this.setNoGravity(true);
+    }
+
+    @Override
+    protected float getOffGroundSpeed() {
+        return this.getMovementSpeed() * 0.1f;//fix movement speed
     }
 
     @Override
@@ -55,8 +54,8 @@ public class GlomperEntity extends PathAwareEntity {
 
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, SculkDepths.config.glomper_health)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, SculkDepths.config.glomper_damage)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, SculkDepths.config.glomperHealth)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, SculkDepths.config.glomperDamage)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.5f) // doubt this does anything
                 .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.2f) //needed to not crash for some frigging reason
@@ -86,6 +85,7 @@ public class GlomperEntity extends PathAwareEntity {
         }
     }
 
+    @Override
     protected EntityNavigation createNavigation(World world) {
         BirdNavigation birdNavigation = new BirdNavigation(this, world);
         birdNavigation.setCanPathThroughDoors(false);
@@ -94,26 +94,28 @@ public class GlomperEntity extends PathAwareEntity {
         return birdNavigation;
     }
 
+    @Override
     public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
         return false;
     }
 
+    @Override
     protected void initGoals() {
         this.goalSelector.add(4, new FlyGoal(this, 1.0));
         //this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(5, new LookAroundGoal(this));
         //this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
-        this.targetSelector.add(1, new GlomperEntity.GlomperTargetGoal(this, LivingEntity.class, 0, false, false, CAN_ATTACK_PREDICATE));
+        this.targetSelector.add(1, new GlomperEntity.GlomperTargetGoal<>(this, LivingEntity.class, 0, false, false, CAN_ATTACK_PREDICATE));
         this.goalSelector.add(2, new MeleeAttackGoal(this, 9.0D, false));
 
     }
 
-    public static class GlomperTargetGoal
-            extends ActiveTargetGoal {
+    public static class GlomperTargetGoal<T extends LivingEntity>
+            extends ActiveTargetGoal<T> {
 
         private boolean pauseWhenMobIdle;
 
-        public GlomperTargetGoal(MobEntity mob, Class targetClass, int reciprocalChance, boolean checkVisibility, boolean checkCanNavigate, @Nullable Predicate targetPredicate) {
+        public GlomperTargetGoal(MobEntity mob, Class<T> targetClass, int reciprocalChance, boolean checkVisibility, boolean checkCanNavigate, @Nullable Predicate<LivingEntity> targetPredicate) {
             super(mob, targetClass, reciprocalChance, checkVisibility, checkCanNavigate, targetPredicate);
         }
 

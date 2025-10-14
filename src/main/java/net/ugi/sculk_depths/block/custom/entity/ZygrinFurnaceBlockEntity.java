@@ -87,7 +87,7 @@ public class ZygrinFurnaceBlockEntity extends LockableContainerBlockEntity imple
         return false;
     }
 
-    private int checkBurning(BlockPos pos){
+    private int checkBurning(BlockPos pos) {
         if (this.burnTime > 1) return 0;
         if (this.burnTime <= 1 && this.burnTime >= -1) {
             if (findKryslumFurnace(pos)) return 1;
@@ -451,7 +451,7 @@ public class ZygrinFurnaceBlockEntity extends LockableContainerBlockEntity imple
         List<RecipeEntry<?>> list = Lists.newArrayList();
 
         for (Object2IntMap.Entry<Identifier> identifierEntry : this.recipesUsed.object2IntEntrySet()) {
-            world.getRecipeManager().get(identifierEntry.getKey()).ifPresent((recipe) -> {
+            world.getRecipeManager().get(identifierEntry.getKey()).ifPresent(recipe -> {
                 list.add(recipe);
                 dropExperience(world, pos, identifierEntry.getIntValue(), ((AbstractCookingRecipe) recipe.value()).getExperience());
             });

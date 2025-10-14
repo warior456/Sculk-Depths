@@ -18,7 +18,8 @@ public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick 
         for (ServerPlayerEntity serverPlayer : serverPlayers) {
             for (ItemStack equippedStack : serverPlayer.getEquippedItems()) {
                 if (equippedStack.get(ModComponentTypes.CRYSTAL) == CrystalType.WHITE) {
-                    // TODO: stop it from adding the effect instead of removing it every tick
+                    // TODO: stop it from adding the effects instead of removing them every tick
+                    //  or just prevent the effects from doing anything
                     serverPlayer.removeStatusEffect(StatusEffects.BLINDNESS);
                     serverPlayer.removeStatusEffect(StatusEffects.DARKNESS);
                     break;
