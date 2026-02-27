@@ -29,23 +29,20 @@ public class GlomperRenderer extends MobEntityRenderer<GlomperEntity, GlomperMod
         return GLOMPER_TEXTURE;
     }
 
-
     @Override
     public void render(GlomperEntity mobEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
-        boolean bl;
 
-        if(mobEntity.isBaby()) {
+        if (mobEntity.isBaby()) {
             matrixStack.scale(0.5f, 0.5f, 0.5f);
-        } else {
-            matrixStack.scale(1f, 1f, 1f);
         }
 
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
-        boolean bl2 = bl = minecraftClient.hasOutline(mobEntity) && mobEntity.isInvisible();
+        boolean bl = minecraftClient.hasOutline(mobEntity) && mobEntity.isInvisible();
         if (mobEntity.isInvisible() && !bl) {
             return;
         }
-        VertexConsumer vertexConsumer = bl ? vertexConsumerProvider.getBuffer(RenderLayer.getOutline(this.getTexture(mobEntity))) : vertexConsumerProvider.getBuffer(RenderLayer.getEntityTranslucent(this.getTexture(mobEntity)));
+        VertexConsumer vertexConsumer = bl ? vertexConsumerProvider.getBuffer(RenderLayer.getOutline(this.getTexture(mobEntity))) :
+                vertexConsumerProvider.getBuffer(RenderLayer.getEntityTranslucent(this.getTexture(mobEntity)));
 
         //this.model.render(matrixStack, vertexConsumer, i, LivingEntityRenderer.getOverlay(mobEntity, 0.0f), 1.0f, 1.0f, 1.0f, 1.0f); //transparent but broken
 

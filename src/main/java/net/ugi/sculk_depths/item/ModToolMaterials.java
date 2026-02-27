@@ -1,15 +1,10 @@
 package net.ugi.sculk_depths.item;
 
-import com.google.common.base.Suppliers;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import net.ugi.sculk_depths.tags.ModTags;
-
-import java.util.function.Supplier;
 
 public enum ModToolMaterials implements ToolMaterial {
     QUAZARITH(
@@ -19,7 +14,6 @@ public enum ModToolMaterials implements ToolMaterial {
             ModTags.Blocks.INCORRECT_FOR_QUAZARITH_TOOL,
             30,
             Ingredient.ofItems(ModItems.QUAZARITH_INGOT)
-
     );
 
     private final int durability;
@@ -28,15 +22,14 @@ public enum ModToolMaterials implements ToolMaterial {
     private final int enchantability;
     private final Ingredient repairIngredient;
 
-    ModToolMaterials(int durability, float miningspeedMultiplier, float attackDamage, TagKey<Block> inverseTag, int enchantability, Ingredient repairIngredient) {
+    ModToolMaterials(int durability, float miningSpeedMultiplier, float attackDamage, TagKey<Block> inverseTag, int enchantability, Ingredient repairIngredient) {
         this.durability = durability;
-        this.miningspeedMultiplier = miningspeedMultiplier;
+        this.miningspeedMultiplier = miningSpeedMultiplier;
         this.attackDamage = attackDamage;
         this.inverseTag = inverseTag;
         this.enchantability = enchantability;
         this.repairIngredient = repairIngredient;
     }
-
 
     @Override
     public int getDurability() {
@@ -67,8 +60,6 @@ public enum ModToolMaterials implements ToolMaterial {
     public Ingredient getRepairIngredient() {
         return this.repairIngredient;
     }
-
-
 
 /*
     //GOLD(MiningLevels.WOOD, 32, 12.0f, 0.0f, 22, () -> Ingredient.ofItems(Items.GOLD_INGOT)),

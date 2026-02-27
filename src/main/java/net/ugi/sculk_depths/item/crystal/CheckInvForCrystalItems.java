@@ -1,77 +1,31 @@
 package net.ugi.sculk_depths.item.crystal;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.ugi.sculk_depths.item.ModItems;
+import net.ugi.sculk_depths.item.ModComponentTypes;
+import net.ugi.sculk_depths.util.enums.CrystalType;
 
-import java.util.ArrayList;
 import java.util.List;
 
-
-public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick{
+public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick {
 
     @Override
     public void onStartTick(ServerWorld world) {
-        /*List<ServerPlayerEntity> serverPlayers = world.getPlayers(); //Todo: reenable if game loads
+        List<ServerPlayerEntity> serverPlayers = world.getPlayers();
         for (ServerPlayerEntity serverPlayer : serverPlayers) {
-            PlayerEntity player = world.getClosestPlayer(serverPlayer.getX(),serverPlayer.getY(),serverPlayer.getZ(),0.1,false);
-
-            Iterable<ItemStack> armor = serverPlayer.getArmorItems();
-            ArrayList<ItemStack> armorItems = new ArrayList<ItemStack>();
-            armor.forEach(ItemStack -> {
-                armorItems.add(ItemStack);
-            });
-
-            if(armorItems.get(3).getItem() == ModItems.QUAZARITH_HELMET) {
-                ItemStack helmet = armorItems.get(3);
-                if (helmet.get(DataComponentTypes.CUSTOM_DATA).getNbt().get("sculk_depths.crystal") != null) {
-                    if (helmet.get(DataComponentTypes.CUSTOM_DATA).getNbt().get("sculk_depths.crystal").toString().equals("\"white\"")) {
-                        player.removeStatusEffect(StatusEffects.BLINDNESS);
-                        player.removeStatusEffect(StatusEffects.DARKNESS);
-                    }
+            for (ItemStack equippedStack : serverPlayer.getEquippedItems()) {
+                if (equippedStack.get(ModComponentTypes.CRYSTAL) == CrystalType.WHITE) {
+                    // TODO: stop it from adding the effects instead of removing them every tick
+                    //  or just prevent the effects from doing anything
+                    serverPlayer.removeStatusEffect(StatusEffects.BLINDNESS);
+                    serverPlayer.removeStatusEffect(StatusEffects.DARKNESS);
+                    break;
                 }
             }
-            if(armorItems.get(2).getItem() == ModItems.QUAZARITH_CHESTPLATE){
-                ItemStack chestplate = armorItems.get(2);
-            }
-            if(armorItems.get(1).getItem() == ModItems.QUAZARITH_LEGGINGS){
-
-            }
-            if(armorItems.get(1).getItem() == ModItems.QUAZARITH_BOOTS){
-
-            }
-
-            //mainHand
-            ItemStack mainHandStack = serverPlayer.getMainHandStack();
-            if (mainHandStack.getItem() == ModItems.QUAZARITH_AXE){
-                if (mainHandStack.get(DataComponentTypes.CUSTOM_DATA).getNbt() != null) {
-                    if (mainHandStack.get(DataComponentTypes.CUSTOM_DATA).getNbt().get("sculk_depths.crystal") != null) {
-                        //white crystal
-                        if (mainHandStack.get(DataComponentTypes.CUSTOM_DATA).getNbt().get("sculk_depths.crystal").toString().equals("\"white\"")) {
-
-                        }
-                    }
-                }
-            }
-
-            //offHand
-            ItemStack offHandStack = serverPlayer.getOffHandStack();
-            if (offHandStack.getItem() == ModItems.QUAZARITH_AXE){
-                if (offHandStack.get(DataComponentTypes.CUSTOM_DATA).getNbt() != null) {
-                    if (offHandStack.get(DataComponentTypes.CUSTOM_DATA).getNbt().get("sculk_depths.crystal") != null) {
-                        //white crystal
-                        if (offHandStack.get(DataComponentTypes.CUSTOM_DATA).getNbt().get("sculk_depths.crystal").toString().equals("\"white\"")) {
-
-                        }
-                    }
-                }
-            }
-        }*/
+        }
     }
 
     /*private static int executeModifierAdd(ServerCommandSource source, Entity

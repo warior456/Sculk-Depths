@@ -9,25 +9,28 @@ import net.minecraft.util.shape.VoxelShape;
 import net.ugi.sculk_depths.block.ModBlocks;
 
 public class CephleraLightBlock extends AbstractPlantStemBlock {
-    @Override
-    protected MapCodec<? extends AbstractPlantStemBlock> getCodec() {
-        return null;
-    }
-
     protected static final VoxelShape SHAPE = Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
 
     public CephleraLightBlock(AbstractBlock.Settings settings) {
         super(settings, Direction.DOWN, SHAPE, false, 0.1);
     }
 
+    @Override
+    protected MapCodec<? extends AbstractPlantStemBlock> getCodec() {
+        return null;
+    }
+
+    @Override
     protected int getGrowthLength(Random random) {
         return VineLogic.getGrowthLength(random);
     }
 
+    @Override
     protected Block getPlant() {
         return ModBlocks.CEPHLERA;
     }
 
+    @Override
     protected boolean chooseStemState(BlockState state) {
         return VineLogic.isValidForWeepingStem(state);
     }

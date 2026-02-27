@@ -15,30 +15,35 @@ import net.ugi.sculk_depths.block.ModBlocks;
 public class CustomPlantBlock extends PlantBlock implements Fertilizable {
     public static final MapCodec<ShortPlantBlock> CODEC = createCodec(ShortPlantBlock::new);
     protected static final float field_31261 = 6.0F;
-    protected static final VoxelShape SHAPE = Block.createCuboidShape((double)2.0F, (double)0.0F, (double)2.0F, (double)14.0F, (double)13.0F, (double)14.0F);
-
-    public MapCodec<ShortPlantBlock> getCodec() {
-        return CODEC;
-    }
+    protected static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 13, 14);
 
     public CustomPlantBlock(AbstractBlock.Settings settings) {
         super(settings);
     }
 
+    @Override
+    public MapCodec<ShortPlantBlock> getCodec() {
+        return CODEC;
+    }
+
+    @Override
     protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
 
+    @Override
     public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
         return true;
     }
 
+    @Override
     public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
         return true;
     }
 
+    @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        TallPlantBlock tallPlantBlock = (TallPlantBlock)(state.isOf(Blocks.FERN) ? Blocks.LARGE_FERN : Blocks.TALL_GRASS);
+        TallPlantBlock tallPlantBlock = (TallPlantBlock) (state.isOf(Blocks.FERN) ? Blocks.LARGE_FERN : Blocks.TALL_GRASS);
         if (tallPlantBlock.getDefaultState().canPlaceAt(world, pos) && world.isAir(pos.up())) {
             TallPlantBlock.placeAt(world, tallPlantBlock.getDefaultState(), pos, 2);
         }

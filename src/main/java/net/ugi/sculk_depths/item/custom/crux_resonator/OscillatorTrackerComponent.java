@@ -8,14 +8,10 @@ import net.minecraft.item.tooltip.TooltipAppender;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.screen.ScreenTexts;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.GlobalPos;
-import net.minecraft.world.poi.PointOfInterestTypes;
-import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.util.POIs;
 
 import java.util.Optional;
@@ -25,7 +21,7 @@ public record OscillatorTrackerComponent(Optional<GlobalPos> target, boolean tra
     public static final Codec<OscillatorTrackerComponent> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
                             GlobalPos.CODEC.optionalFieldOf("target").forGetter(OscillatorTrackerComponent::target),
-                            Codec.BOOL.optionalFieldOf("tracked", Boolean.valueOf(true)).forGetter(OscillatorTrackerComponent::tracked),
+                            Codec.BOOL.optionalFieldOf("tracked", true).forGetter(OscillatorTrackerComponent::tracked),
                             Codec.STRING.optionalFieldOf("name","").forGetter(OscillatorTrackerComponent::name)
                     )
                     .apply(instance, OscillatorTrackerComponent::new)
@@ -41,18 +37,16 @@ public record OscillatorTrackerComponent(Optional<GlobalPos> target, boolean tra
     );
 
     public OscillatorTrackerComponent forWorld(ServerWorld world) {
-        if (this.tracked && !this.target.isEmpty()) {
-            if (((GlobalPos)this.target.get()).dimension() != world.getRegistryKey()) {
-                return this;
-            } else {
-                BlockPos blockPos = ((GlobalPos)this.target.get()).pos();
-                return world.isInBuildLimit(blockPos) && world.getPointOfInterestStorage().hasTypeAt(POIs.QUAZARITH_OSCILLATOR_POI, blockPos)
-                        ? this
-                        : new OscillatorTrackerComponent(Optional.empty(), true, "");
-            }
-        } else {
+        if (!this.tracked || this.target.isEmpty()) {
             return this;
         }
+        if (this.target.get().dimension() != world.getRegistryKey()) {
+            return this;
+        }
+        BlockPos blockPos = this.target.get().pos();
+        return world.isInBuildLimit(blockPos) && world.getPointOfInterestStorage().hasTypeAt(POIs.QUAZARITH_OSCILLATOR_POI, blockPos)
+                ? this
+                : new OscillatorTrackerComponent(Optional.empty(), true, "");
     }
 
     @Override

@@ -57,13 +57,12 @@ public class LesterEntity extends PathAwareEntity {
         } else {
             float f = 0.8F * 0.8F;
             Box box = Box.of(this.getEyePos(), (double)f, 1.0E-6, (double)f);
-            return BlockPos.stream(box).anyMatch((pos) -> {
+            return BlockPos.stream(box).anyMatch(pos -> {
                 BlockState blockState = this.getWorld().getBlockState(pos);
                 return !(blockState.isAir() || blockState.isIn(ModTags.Blocks.LESTER_SPAWN_BLOCKS)) && blockState.shouldSuffocate(this.getWorld(), pos) && VoxelShapes.matchesAnywhere(blockState.getCollisionShape(this.getWorld(), pos).offset((double)pos.getX(), (double)pos.getY(), (double)pos.getZ()), VoxelShapes.cuboid(box), BooleanBiFunction.AND);
             });
         }
     }
-
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
