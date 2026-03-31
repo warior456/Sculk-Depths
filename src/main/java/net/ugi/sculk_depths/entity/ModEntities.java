@@ -10,6 +10,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.entity.custom.ChomperColossusEntity;
+import net.ugi.sculk_depths.entity.custom.ChomperColossusPartEntity;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import net.ugi.sculk_depths.entity.custom.LesterEntity;
 
@@ -27,5 +28,13 @@ public class ModEntities {
     public static final EntityType<ChomperColossusEntity> CHOMPER_COLOSSUS = Registry.register(Registries.ENTITY_TYPE,
             SculkDepths.identifier( "chomper_colossus"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ChomperColossusEntity::new)
-                    .dimensions(EntityDimensions.fixed(8,11)).build());
+                    .dimensions(EntityDimensions.fixed(0.2f, 0.2f)).build());
+
+    public static final EntityType<ChomperColossusPartEntity> CHOMPER_COLOSSUS_PART = Registry.register(Registries.ENTITY_TYPE,
+            SculkDepths.identifier("chomper_colossus_part"),
+            FabricEntityTypeBuilder.<ChomperColossusPartEntity>create(SpawnGroup.MISC, ChomperColossusPartEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 1.0f))
+                    .trackRangeBlocks(96)
+                    .trackedUpdateRate(1)
+                    .build());
 }

@@ -65,6 +65,7 @@ public class SculkDepthsClient implements ClientModInitializer {
 		EntityRendererRegistry.register(ModEntities.GLOMPER, GlomperRenderer::new);
 		EntityRendererRegistry.register(ModEntities.LESTER, LesterRenderer::new);
 		EntityRendererRegistry.register(ModEntities.CHOMPER_COLOSSUS, ChomperColossusRenderer::new);
+		EntityRendererRegistry.register(ModEntities.CHOMPER_COLOSSUS_PART, ChomperColossusPartRenderer::new);
 		EntityModelLayerRegistry.registerModelLayer(ModModelLayers.GLOMPER, GlomperModel::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(ModModelLayers.LESTER, LesterModel::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CHOMPER_COLOSSUS, ChomperColossusModel::getTexturedModelData);
