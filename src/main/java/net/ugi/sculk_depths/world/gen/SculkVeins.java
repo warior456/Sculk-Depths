@@ -49,7 +49,7 @@ public class SculkVeins extends Feature<DefaultFeatureConfig> {
     }
 
     protected static boolean hasAnyDirection(BlockState state) {
-        return Arrays.stream(DIRECTIONS).anyMatch((direction) -> hasDirection(state, direction));
+        return Arrays.stream(DIRECTIONS).anyMatch(direction -> hasDirection(state, direction));
     }
 
 

@@ -9,7 +9,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleEffect;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.server.world.ServerWorld;
@@ -25,10 +24,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.ChunkStatus;
 import net.ugi.sculk_depths.SculkDepths;
-import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.portal.GenerateStructureAPI;
@@ -36,10 +32,6 @@ import net.ugi.sculk_depths.portal.Portal;
 import net.ugi.sculk_depths.state.property.ModProperties;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.*;
 
 public class PedestalBlock extends FacingBlock {
@@ -48,17 +40,17 @@ public class PedestalBlock extends FacingBlock {
     private static final VoxelShape RAYCAST_SHAPE = createCuboidShape(2.0, 4.0, 2.0, 14.0, 16.0, 14.0);
 
     private BlockPos[] portalFramePos = new BlockPos[0];
-    private String portalFase = "none";
+    private String portalPhase = "none";
     private BlockPos[] posArray = new BlockPos[0];
     private ChunkPos[] chunkArray = new ChunkPos[0];
     private StructureStart structureStart;
 
     protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(
-            VoxelShapes.union(createCuboidShape(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
+            VoxelShapes.union(
+                    createCuboidShape(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
                     createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0),
                     createCuboidShape(2.0, 2.0, 2.0, 14.0, 14.0, 14.0)
-                    ),VoxelShapes.empty(),
-            BooleanBiFunction.ONLY_FIRST
+            ), VoxelShapes.empty(), BooleanBiFunction.ONLY_FIRST
     );
 
     @Override
@@ -77,17 +69,17 @@ public class PedestalBlock extends FacingBlock {
 
     @Override
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (world.isClient()){
+        if (world.isClient()) {
             return ItemActionResult.FAIL;
         }
-        if (stack.getItem() == ModItems.ENERGY_ESSENCE && !state.get(ModProperties.HAS_ENERGY_ESSENCE)){
+        if (stack.getItem() == ModItems.ENERGY_ESSENCE && !state.get(ModProperties.HAS_ENERGY_ESSENCE)) {
             Portal.addBlockPowerUpParticle((ServerWorld) world, pos, Random.create(), 10);
             stack.decrementUnlessCreative(1,player);
             world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE, SoundCategory.BLOCKS, 1.0f, 1.0f);
 
             BlockState blockState1 = state.with(HAS_ENERGY_ESSENCE, true);
             world.setBlockState(pos, blockState1);
-            portalFase = "checkFrame";
+            portalPhase = "checkFrame";
             world.scheduleBlockTick(pos,state.getBlock(),1);
             return ItemActionResult.SUCCESS;
         }
@@ -96,55 +88,53 @@ public class PedestalBlock extends FacingBlock {
 
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        switch (portalFase){
-            case "checkFrame":
+        switch (portalPhase) {
+            case "checkFrame" -> {
 
-                portalFramePos = Portal.getFramePos(state.get(FACING),pos, world);//todo benchmark
-                if (portalFramePos == null) {portalFase = "none";return;}
-                if (portalFramePos[0] == null) {portalFase = "none";return;}
+                portalFramePos = Portal.getFramePos(state.get(FACING), pos, world);//todo benchmark
+                if (portalFramePos == null) {
+                    portalPhase = "none";
+                    return;
+                }
+                if (portalFramePos[0] == null) {
+                    portalPhase = "none";
+                    return;
+                }
 
-                portalFase = "genFrame";
+                portalPhase = "genFrame";
                 posArray = portalFramePos;
 
-                world.scheduleBlockTick(pos,state.getBlock(),1);
-                break;
-
-
-            case "genFrame":
+                world.scheduleBlockTick(pos, state.getBlock(), 1);
+            }
+            case "genFrame" -> {
 
                 posArray = Portal.genFrameStep(world, posArray, random);
-                if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 1){
+                if (posArray[posArray.length - 1].getY() == -4096 && posArray[posArray.length - 1].getZ() == 1) {
                     posArray = new BlockPos[0];
-                    for (BlockPos pos1: portalFramePos) {
-                        posArray = Portal.addElement(posArray,pos1.up(3));
-                        posArray = Portal.addElement(posArray,pos1.up(4));
+                    for (BlockPos pos1 : portalFramePos) {
+                        posArray = Portal.addElement(posArray, pos1.up(3));
+                        posArray = Portal.addElement(posArray, pos1.up(4));
                     }
-                    portalFase = "genStructure";
-                }
-                else if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
+                    portalPhase = "genStructure";
+                } else if (posArray[posArray.length - 1].getY() == -4096 && posArray[posArray.length - 1].getZ() == 0) {
                     posArray = portalFramePos;
-                    portalFase = "cancelFrame";
+                    portalPhase = "cancelFrame";
                 }
-                world.scheduleBlockTick(pos,state.getBlock(),2);
-                break;
+                world.scheduleBlockTick(pos, state.getBlock(), 2);
+            }
+            case "cancelFrame" -> {
 
-
-            case "cancelFrame":
-
-                posArray = Portal.cancelFrameStep(world,posArray);
-                if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
+                posArray = Portal.cancelFrameStep(world, posArray);
+                if (posArray[posArray.length - 1].getY() == -4096 && posArray[posArray.length - 1].getZ() == 0) {
                     posArray = new BlockPos[0];
-                    portalFase = "none";
+                    portalPhase = "none";
+                } else {
+                    world.scheduleBlockTick(pos, state.getBlock(), 2);
                 }
-                else {
-                    world.scheduleBlockTick(pos,state.getBlock(),2);
-                }
-                break;
+            }
+            case "genStructure" -> {
 
-
-            case "genStructure":
-
-                BlockPos anchor = Portal.getFrameAnchorPos(state.get(FACING),pos, world);
+                BlockPos anchor = Portal.getFrameAnchorPos(state.get(FACING), pos, world);
 
                 structureStart = GenerateStructureAPI.structureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor); //50ms (matteo)
 
@@ -154,9 +144,9 @@ public class PedestalBlock extends FacingBlock {
                 });
 
                 chunkArray = GenerateStructureAPI.generateChunkArray(//not laggy
-                        new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMinX()),ChunkSectionPos.getSectionCoord(boundingBox.getMinZ())),
-                        new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMaxX()),ChunkSectionPos.getSectionCoord(boundingBox.getMaxZ())),
-                        0,1);
+                        new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMinX()), ChunkSectionPos.getSectionCoord(boundingBox.getMinZ())),
+                        new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMaxX()), ChunkSectionPos.getSectionCoord(boundingBox.getMaxZ())),
+                        0, 1);
 
                 ServerWorld serverWorld = world.getServer().getWorld(ModDimensions.SCULK_DEPTHS_LEVEL_KEY);
 
@@ -189,17 +179,21 @@ public class PedestalBlock extends FacingBlock {
 
                 }, getAsyncExecutor()).thenRunAsync(() -> {
                     // This code runs back on the main server thread after the chunks are loaded
-                    GenerateStructureAPI.generateStructurePartial(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), structureStart, boundingBox.streamChunkPos().toArray(ChunkPos[]::new));
-                    portalFase = "genPortal";
+                    GenerateStructureAPI.generateStructurePartial(
+                            world,
+                            ModDimensions.SCULK_DEPTHS_LEVEL_KEY,
+                            SculkDepths.identifier("portal_structure"),
+                            structureStart,
+                            boundingBox.streamChunkPos().toArray(ChunkPos[]::new)
+                    );
+                    portalPhase = "genPortal";
                 }, world.getServer());
-                portalFase = "waitingParticles";
-                world.scheduleBlockTick(pos,state.getBlock(),1);
-                break;
+                portalPhase = "waitingParticles";
+                world.scheduleBlockTick(pos, state.getBlock(), 1);
+            }
+            case "waitingParticles" -> {
 
-
-            case "waitingParticles":
-
-                BlockPos posMin = Portal.getFrameMinPos(state.get(FACING),pos, world);
+                BlockPos posMin = Portal.getFrameMinPos(state.get(FACING), pos, world);
                 if (state.get(FACING) == Direction.NORTH)
                     posMin = posMin.east(random.nextInt(24)).up(random.nextInt(6));
                 if (state.get(FACING) == Direction.EAST)
@@ -210,61 +204,59 @@ public class PedestalBlock extends FacingBlock {
                     posMin = posMin.south(random.nextInt(24)).up(random.nextInt(6));
 
                 Portal.addPortalStartAttemptParticle(world, posMin, random, 20 + random.nextInt(50));
-                world.scheduleBlockTick(pos,state.getBlock(),1);
-                break;
+                world.scheduleBlockTick(pos, state.getBlock(), 1);
+            }
+            case "genPortal" -> {
 
-
-            case "genPortal":
-
-                posArray = Portal.genPortalStep(world,posArray,state.get(FACING), random);
-                if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
+                posArray = Portal.genPortalStep(world, posArray, state.get(FACING), random);
+                if (posArray[posArray.length - 1].getY() == -4096 && posArray[posArray.length - 1].getZ() == 0) {
                     posArray = new BlockPos[0];
-                    portalFase = "none";
+                    portalPhase = "none";
+                } else {
+                    world.scheduleBlockTick(pos, state.getBlock(), 2);
                 }
-                else {
-                    world.scheduleBlockTick(pos,state.getBlock(),2);
-                }
-                break;
+            }
         }
     }
 
+    @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if(state.get(ModProperties.HAS_ENERGY_ESSENCE)){
+        if (state.get(ModProperties.HAS_ENERGY_ESSENCE)) {
             int randomNumber = random.nextBetween(0, 5);
             float x = pos.getX() + 0.5f;
             float y = pos.getY() + 0.5f;
             float z = pos.getZ() + 0.5f;
             switch (randomNumber) {
-                case 0://positivex
+                case 0 -> {
                     x = x + 0.6f + MathHelper.nextFloat(random, 0f, 0.2f);
                     y = y + MathHelper.nextFloat(random, -0.6f, 0.6f);
                     z = z + MathHelper.nextFloat(random, -0.6f, 0.6f);
-                    break;
-                case 1://negativex
+                }
+                case 1 -> {
                     x = x - 0.6f - MathHelper.nextFloat(random, 0f, 0.2f);
                     y = y + MathHelper.nextFloat(random, -0.6f, 0.6f);
                     z = z + MathHelper.nextFloat(random, -0.6f, 0.6f);
-                    break;
-                case 2://positivivez
+                }
+                case 2 -> {
                     x = x + MathHelper.nextFloat(random, -0.6f, 0.6f);
                     y = y + MathHelper.nextFloat(random, -0.6f, 0.6f);
                     z = z + 0.6f + MathHelper.nextFloat(random, 0f, 0.2f);
-                    break;
-                case 3://negativez
+                }
+                case 3 -> {
                     x = x + MathHelper.nextFloat(random, -0.6f, 0.6f);
                     y = y + MathHelper.nextFloat(random, -0.6f, 0.6f);
                     z = z - 0.6f - MathHelper.nextFloat(random, 0f, 0.2f);
-                    break;
-                case 4://positivey
+                }
+                case 4 -> {
                     x = x + MathHelper.nextFloat(random, -0.6f, 0.6f);
                     y = y + 0.6f + MathHelper.nextFloat(random, 0f, 0.2f);
                     z = z + MathHelper.nextFloat(random, -0.6f, 0.6f);
-                    break;
-                case 5://negativey
+                }
+                case 5 -> {
                     x = x + MathHelper.nextFloat(random, -0.6f, 0.6f);
                     y = y - 0.6f - MathHelper.nextFloat(random, 0f, 0.2f);
                     z = z + MathHelper.nextFloat(random, -0.6f, 0.6f);
-                    break;
+                }
             }
             world.addImportantParticle((ParticleEffect) ModParticleTypes.ENERGY_PARTICLE, false, x, y, z, 0, 0.01, 0);
         }
@@ -273,14 +265,12 @@ public class PedestalBlock extends FacingBlock {
     @Override
     public BlockState rotate(BlockState blockState, BlockRotation rotation) {
         return blockState.with(FACING, rotation.rotate(blockState.get(FACING)));
-
     }
 
     @Override
     public BlockState mirror(BlockState blockState, BlockMirror mirror) {
         return blockState.rotate(mirror.getRotation(blockState.get(FACING)));
     }
-
 
     @Override
     protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -290,10 +280,6 @@ public class PedestalBlock extends FacingBlock {
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()).with(HAS_ENERGY_ESSENCE, false);
-    }
-
-    public static VoxelShape createCuboidShape(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
-        return VoxelShapes.cuboid(minX / 16.0, minY / 16.0, minZ / 16.0, maxX / 16.0, maxY / 16.0, maxZ / 16.0);
     }
 
     @Override

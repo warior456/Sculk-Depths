@@ -8,17 +8,14 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 
-public class ModItemGroup {
-    public static final RegistryKey<ItemGroup> SCULK_DEPTHS_BLOCKS = RegistryKey.of(RegistryKeys.ITEM_GROUP, SculkDepths.identifier( "sculk_depths_blocks"));
-    public static final RegistryKey<ItemGroup> SCULK_DEPTHS_ITEMS = RegistryKey.of(RegistryKeys.ITEM_GROUP, SculkDepths.identifier( "sculk_depths_items"));
+public class ModItemGroups {
+    public static final RegistryKey<ItemGroup> SCULK_DEPTHS_BLOCKS = RegistryKey.of(RegistryKeys.ITEM_GROUP, SculkDepths.identifier("sculk_depths_blocks"));
+    public static final RegistryKey<ItemGroup> SCULK_DEPTHS_ITEMS = RegistryKey.of(RegistryKeys.ITEM_GROUP, SculkDepths.identifier("sculk_depths_items"));
 
-    public static void registerItemgroups() {
-
-
+    public static void registerItemGroups() {
         Registry.register(Registries.ITEM_GROUP, SCULK_DEPTHS_BLOCKS, FabricItemGroup.builder()
                 .icon(() -> new ItemStack(ModBlocks.UMBRUSK))
                 .displayName(Text.translatable("itemgroup.sculk_depths_blocks"))

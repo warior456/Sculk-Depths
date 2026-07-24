@@ -20,10 +20,10 @@ public class ZygrinFurnaceScreenHandler extends AbstractZygrinFurnaceScreenHandl
         super(ModScreenHandlerTypes.ZYGRIN_FURNACE_SCREEN_HANDLER, RecipeType.SMELTING, RecipeBookCategory.FURNACE, syncId, playerInventory);
     }*/
     public ZygrinFurnaceScreenHandler(int syncId, PlayerInventory playerInventory) {
-    super(ModScreenHandlers.ZYGRIN_FURNACE_SCREEN_HANDLER, RecipeType.SMELTING, RecipeBookCategory.FURNACE, syncId, playerInventory);
+        super(ModScreenHandlers.ZYGRIN_FURNACE, RecipeType.SMELTING, RecipeBookCategory.FURNACE, syncId, playerInventory);
     }
 
     public ZygrinFurnaceScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
-        super(ModScreenHandlers.ZYGRIN_FURNACE_SCREEN_HANDLER, RecipeType.SMELTING, RecipeBookCategory.FURNACE, syncId, playerInventory, inventory, propertyDelegate);
+        super(ModScreenHandlers.ZYGRIN_FURNACE, RecipeType.SMELTING, RecipeBookCategory.FURNACE, syncId, playerInventory, inventory, propertyDelegate);
     }
 }

@@ -10,17 +10,19 @@ import net.ugi.sculk_depths.block.ModBlocks;
 import org.jetbrains.annotations.Nullable;
 
 public class CephleraBlock extends AbstractPlantBlock {
-    @Override
-    protected MapCodec<? extends AbstractPlantBlock> getCodec() {
-        return null;
-    }
     public static final VoxelShape SHAPE = Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
 
     public CephleraBlock(AbstractBlock.Settings settings) {
         super(settings, Direction.DOWN, SHAPE, false);
     }
 
+    @Override
+    protected MapCodec<? extends AbstractPlantBlock> getCodec() {
+        return null;
+    }
+
+    @Override
     protected AbstractPlantStemBlock getStem() {
-        return (AbstractPlantStemBlock) ModBlocks.CEPHLERA_LIGHT;
+        return ModBlocks.CEPHLERA_LIGHT;
     }
 }

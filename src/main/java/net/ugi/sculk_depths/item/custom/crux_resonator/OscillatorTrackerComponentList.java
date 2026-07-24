@@ -20,7 +20,7 @@ public record OscillatorTrackerComponentList(int selectedLocation, List<Oscillat
     public static final int MAX_EXPLOSIONS = 256;
     public static final Codec<OscillatorTrackerComponentList> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
-                            Codecs.POSITIVE_INT.optionalFieldOf("selected_location", 0).forGetter(OscillatorTrackerComponentList::selectedLocation),
+                            Codecs.NONNEGATIVE_INT.optionalFieldOf("selected_location", 0).forGetter(OscillatorTrackerComponentList::selectedLocation),
                             OscillatorTrackerComponent.CODEC.sizeLimitedListOf(256).optionalFieldOf("trackers", List.of()).forGetter(OscillatorTrackerComponentList::trackers)
                     )
                     .apply(instance, OscillatorTrackerComponentList::new)

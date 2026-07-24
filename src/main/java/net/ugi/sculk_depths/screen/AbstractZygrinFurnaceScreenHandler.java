@@ -12,8 +12,10 @@ import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.screen.*;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.ugi.sculk_depths.block.custom.entity.ZygrinFurnaceBlockEntity;
 
 public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHandler<SingleStackRecipeInput, AbstractCookingRecipe> {
     public static final int field_30738 = 0;
@@ -46,7 +48,16 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
         this.propertyDelegate = propertyDelegate;
         this.world = playerInventory.player.getWorld();
         this.addSlot(new Slot(inventory, 0, 56, 17));
-        this.addSlot(new FurnaceOutputSlot(playerInventory.player, inventory, 2, 116, 35));
+        this.addSlot(new FurnaceOutputSlot(playerInventory.player, inventory, 2, 116, 35) {
+            @Override
+            protected void onCrafted(ItemStack stack) {
+                super.onCrafted(stack);
+                if (playerInventory.player instanceof ServerPlayerEntity serverPlayerEntity &&
+                        this.inventory instanceof ZygrinFurnaceBlockEntity zygrinFurnaceBlockEntity) {
+                    zygrinFurnaceBlockEntity.dropExperienceForRecipesUsed(serverPlayerEntity);
+                }
+            }
+        });
         for (i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
                 this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
@@ -60,8 +71,8 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
 
     @Override
     public void populateRecipeFinder(RecipeMatcher finder) {
-        if (this.inventory instanceof RecipeInputProvider) {
-            ((RecipeInputProvider)((Object)this.inventory)).provideRecipeInputs(finder);
+        if (this.inventory instanceof RecipeInputProvider recipeInputProvider) {
+            recipeInputProvider.provideRecipeInputs(finder);
         }
     }
 
@@ -71,10 +82,11 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
         this.getSlot(2).setStackNoCallbacks(ItemStack.EMPTY);
     }
 
-
+    @Override
     public boolean matches(RecipeEntry<AbstractCookingRecipe> recipe) {
-        return ((AbstractCookingRecipe)recipe.value()).matches(new SingleStackRecipeInput(this.inventory.getStack(0)), this.world);
+        return recipe.value().matches(new SingleStackRecipeInput(this.inventory.getStack(0)), this.world);
     }
+
     @Override
     public int getCraftingResultSlotIndex() {
         return 2;
@@ -103,28 +115,33 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
     @Override
     public ItemStack quickMove(PlayerEntity player, int slot) {
         ItemStack itemStack = ItemStack.EMPTY;
-        Slot slot2 = (Slot)this.slots.get(slot);
-        if (slot2 != null && slot2.hasStack()) {
-            ItemStack itemStack2 = slot2.getStack();
-            itemStack = itemStack2.copy();
-            if (slot == 2) {
-                if (!this.insertItem(itemStack2, 3, 38, true)) {
-                    return ItemStack.EMPTY;
-                }
-                slot2.onQuickTransfer(itemStack2, itemStack);
-            } else if (slot == 1 || slot == 0 ? !this.insertItem(itemStack2, 3, 38, false) : (this.isSmeltable(itemStack2) ? !this.insertItem(itemStack2, 0, 1, false) : (this.isFuel(itemStack2) ? !this.insertItem(itemStack2, 1, 2, false) : (slot >= 3 && slot < 30 ? !this.insertItem(itemStack2, 30, 38, false) : slot >= 30 && slot < 39 && !this.insertItem(itemStack2, 3, 30, false))))) {
-                return ItemStack.EMPTY;
-            }
-            if (itemStack2.isEmpty()) {
-                slot2.setStack(ItemStack.EMPTY);
-            } else {
-                slot2.markDirty();
-            }
-            if (itemStack2.getCount() == itemStack.getCount()) {
-                return ItemStack.EMPTY;
-            }
-            slot2.onTakeItem(player, itemStack2);
+        Slot slot2 = this.slots.get(slot);
+        if (!slot2.hasStack()) {
+            return itemStack;
         }
+        ItemStack itemStack2 = slot2.getStack();
+        itemStack = itemStack2.copy();
+        if (slot == 2) {
+            if (!this.insertItem(itemStack2, 3, 38, true)) {
+                return ItemStack.EMPTY;
+            }
+            slot2.onQuickTransfer(itemStack2, itemStack);
+        } else if (slot == 1 || slot == 0 ? !this.insertItem(itemStack2, 3, 38, false) :
+                (this.isSmeltable(itemStack2) ? !this.insertItem(itemStack2, 0, 1, false) :
+                        (this.isFuel(itemStack2) ? !this.insertItem(itemStack2, 1, 2, false) :
+                                (slot >= 3 && slot < 30 ? !this.insertItem(itemStack2, 30, 38, false) :
+                                        slot >= 30 && slot < 39 && !this.insertItem(itemStack2, 3, 30, false))))) {
+            return ItemStack.EMPTY;
+        }
+        if (itemStack2.isEmpty()) {
+            slot2.setStack(ItemStack.EMPTY);
+        } else {
+            slot2.markDirty();
+        }
+        if (itemStack2.getCount() == itemStack.getCount()) {
+            return ItemStack.EMPTY;
+        }
+        slot2.onTakeItem(player, itemStack2);
         return itemStack;
     }
 
@@ -148,7 +165,7 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
             i = 200;
         }
 //return 12 for full fire
-        if(this.propertyDelegate.get(0) > 0) { // checks if burntime is greater than 0
+        if (this.propertyDelegate.get(0) > 0) { // checks if burntime is greater than 0
             return 1f;
         } else {
             return 0;

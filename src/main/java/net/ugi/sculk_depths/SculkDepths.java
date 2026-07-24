@@ -22,7 +22,7 @@ import net.ugi.sculk_depths.entity.custom.LesterEntity;
 import net.ugi.sculk_depths.entity.effect.ModStatusEffects;
 import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModComponentTypes;
-import net.ugi.sculk_depths.item.ModItemGroup;
+import net.ugi.sculk_depths.item.ModItemGroups;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.item.crystal.CheckInvForCrystalItems;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
@@ -38,16 +38,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SculkDepths implements ModInitializer {
-	// This logger is used to write text to the console and the log file.
-	// It is considered best practice to use your mod id as the logger's name.
-	// That way, it's clear which mod wrote info, warnings, and errors.
+	public static ConfigHandler config;
 	public static final String MOD_ID = "sculk_depths";
-	public static ConfigHandler CONFIG;
-	public static final Logger LOGGER = LoggerFactory.getLogger("sculk_depths");
+	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	public static Identifier identifier(String path) {
 		return Identifier.of(SculkDepths.MOD_ID, path);
 	}
+
 	@Override
 	public void onInitialize() {
 
@@ -55,7 +53,7 @@ public class SculkDepths implements ModInitializer {
         Config.loadConfig();
 
         SculkDepths.LOGGER.info("Registering ItemGroups for " + SculkDepths.MOD_ID);
-        ModItemGroup.registerItemgroups();
+        ModItemGroups.registerItemGroups();
 
         SculkDepths.LOGGER.info("Registering items for " + SculkDepths.MOD_ID);
         ModItems.registerModItems();
@@ -86,8 +84,10 @@ public class SculkDepths implements ModInitializer {
         ModBlockEntities.registerBlockEntities();
 
         SculkDepths.LOGGER.info("Registering Entities for " + SculkDepths.MOD_ID);
-        SpawnRestriction.register(ModEntities.LESTER, SpawnLocationTypes.ON_GROUND, null, (type, world, reason, pos, random) -> true);
-        SpawnRestriction.register(ModEntities.CHOMPER_COLOSSUS, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (type, world, reason, pos, random) -> true);
+        SpawnRestriction.register(ModEntities.LESTER, SpawnLocationTypes.ON_GROUND, null,
+                (type, world, reason, pos, random) -> true);
+        SpawnRestriction.register(ModEntities.CHOMPER_COLOSSUS, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                (type, world, reason, pos, random) -> true);
         FabricDefaultAttributeRegistry.register(ModEntities.GLOMPER, GlomperEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.LESTER, LesterEntity.createLesterAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.CHOMPER_COLOSSUS, ChomperColossusEntity.createChomperColossusAttributes());
@@ -110,7 +110,8 @@ public class SculkDepths implements ModInitializer {
         POIs.register();
 
 
-        CauldronFluidContent.registerCauldron(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON, ModFluids.KRYSLUM_STILL, FluidConstants.BUCKET, ModProperties.KRYSLUM_LEVEL); //support for mods to see how much fluid is in it (doesn't work for create pipes)
+        //support for mods to see how much fluid is in it (doesn't work for create pipes)
+        CauldronFluidContent.registerCauldron(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON, ModFluids.KRYSLUM_STILL, FluidConstants.BUCKET, ModProperties.KRYSLUM_LEVEL);
 
         LOGGER.info(SculkDepths.MOD_ID + " has loaded");
     }

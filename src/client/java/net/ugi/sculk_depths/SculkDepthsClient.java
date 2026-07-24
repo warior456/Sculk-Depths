@@ -14,7 +14,6 @@ import net.minecraft.client.item.CompassAnglePredicateProvider;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.client.*;
@@ -51,18 +50,19 @@ public class SculkDepthsClient implements ClientModInitializer {
 		);
 
 
-		CustomItemModels.QuazarithSwordModels();
-		CustomItemModels.QuazarithAxeModels();
-		CustomItemModels.QuazarithPickaxeModels();
-		CustomItemModels.QuazarithHoeModels();
-		CustomItemModels.QuazarithSwordModels();
-		CustomItemModels.QuazarithHelmetModels();
-		CustomItemModels.QuazarithChestplateModels();
-		CustomItemModels.QuazarithLeggingsModels();
-		CustomItemModels.QuazarithBootsModels();
+//        CustomItemModels.quazarithModels(ModItems.QUAZARITH_SHOVEL);
+        CustomItemModels.quazarithModels(ModItems.QUAZARITH_SWORD);
+        CustomItemModels.quazarithModels(ModItems.QUAZARITH_AXE);
+        CustomItemModels.quazarithModels(ModItems.QUAZARITH_PICKAXE);
+        CustomItemModels.quazarithModels(ModItems.QUAZARITH_HOE);
+        CustomItemModels.quazarithModels(ModItems.QUAZARITH_SWORD);
+        CustomItemModels.quazarithModels(ModItems.QUAZARITH_HELMET);
+        CustomItemModels.quazarithModels(ModItems.QUAZARITH_CHESTPLATE);
+        CustomItemModels.quazarithModels(ModItems.QUAZARITH_LEGGINGS);
+        CustomItemModels.quazarithModels(ModItems.QUAZARITH_BOOTS);
 
 
-		SculkDepths.LOGGER.info("Registering EntityRenderers for " + SculkDepths.MOD_ID);
+        SculkDepths.LOGGER.info("Registering EntityRenderers for " + SculkDepths.MOD_ID);
 		EntityRendererRegistry.register(ModEntities.GLOMPER, GlomperRenderer::new);
 		EntityRendererRegistry.register(ModEntities.LESTER, LesterRenderer::new);
 		EntityRendererRegistry.register(ModEntities.CHOMPER_COLOSSUS, ChomperColossusRenderer::new);
@@ -129,26 +129,28 @@ public class SculkDepthsClient implements ClientModInitializer {
 		DimensionRenderingRegistry.registerCloudRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY, new SculkDepthsCloudRendererClient());
 		DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.SCULK_DEPTHS_LEVEL_KEY, new SculkDepthsSkyRendererClient());
 
-		ModelPredicateProviderRegistry.register(ModItems.CRUX_RESONATOR, Identifier.of("angle"),
-				(stack, world, entity, i) -> {
-					var pos = CruxResonator.getTrackedPos(stack);
-					if (pos == null && world != null) {
+		ModelPredicateProviderRegistry.register(
+                ModItems.CRUX_RESONATOR,
+                SculkDepths.identifier("angle"),
+                (stack, world, entity, i) -> {
+                    var pos = CruxResonator.getTrackedPos(stack);
+                    if (pos == null && world != null) {
 						return getSpinningAngle(world);
 					}
 
 					return ANGLE_DELEGATE.unclampedCall(stack, world, entity, i);
-				});
+                }
+        );
 
-		HandledScreens.register(ModScreenHandlers.ZYGRIN_FURNACE_SCREEN_HANDLER, ZygrinFurnaceScreen::new); //if this doesn't work for some reason use the line below instead
+		HandledScreens.register(ModScreenHandlers.ZYGRIN_FURNACE, ZygrinFurnaceScreen::new); //if this doesn't work for some reason use the line below instead
 		//HandledScreens.register(ModScreenHandlerTypes.ZYGRIN_FURNACE_SCREEN_HANDLER, (HandledScreens.Provider<ZygrinFurnaceScreenHandler, ZygrinFurnaceScreen>) ZygrinFurnaceScreen::new);
 	}
 
-	CompassAnglePredicateProvider ANGLE_DELEGATE = new CompassAnglePredicateProvider((world, stack, entity) -> {
-		return CruxResonator.getTrackedPos(stack);
-	});
+	CompassAnglePredicateProvider ANGLE_DELEGATE = new CompassAnglePredicateProvider(
+            (world, stack, entity) -> CruxResonator.getTrackedPos(stack));
 
 	private static float getSpinningAngle(ClientWorld world) {
-		Long t = world.getTime() % 32L;
-		return t.floatValue() / 32.0f;
+		long t = world.getTime() % 32L;
+		return (float) t / 32.0f;
 	}
 }

@@ -45,10 +45,13 @@ public class CruxResonator extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        if(world.isClient) {return TypedActionResult.pass(itemStack);}//maybe fix some bugs?
+        if (world.isClient) { //maybe fix some bugs?
+            return TypedActionResult.pass(itemStack);
+        }
         OscillatorTrackerComponentList oscillatorTrackerComponentList = itemStack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST);
         System.out.println(oscillatorTrackerComponentList.selectedLocation());
-        itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(oscillatorTrackerComponentList.selectedLocation() +1, oscillatorTrackerComponentList.trackers()));
+        itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(
+                oscillatorTrackerComponentList.selectedLocation() + 1, oscillatorTrackerComponentList.trackers()));
         return TypedActionResult.success(itemStack,false);
     }
 
@@ -61,7 +64,7 @@ public class CruxResonator extends Item {
 
     @Override
     public boolean hasGlint(ItemStack stack) {
-        return stack.contains(ModComponentTypes.OSCILLATOR_TRACKER) || super.hasGlint(stack);
+        return super.hasGlint(stack) || stack.contains(ModComponentTypes.OSCILLATOR_TRACKER);
     }
 
     @Override
@@ -156,10 +159,6 @@ public class CruxResonator extends Item {
             oscillatorTrackerComponentList.appendTooltip(context, tooltip::add, type);
         }
     }
-    
-    
-    
-    
 }
 
 

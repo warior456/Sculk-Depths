@@ -22,7 +22,7 @@ public class DryableSlabBlock extends SlabBlock implements Dryable {
         if (MathHelper.nextInt(random, 0, 100) == 0) {
             if(world.getDimensionEntry().getKey().get() == ModDimensions.SCULK_DEPTHS_TYPE) {
 
-                Dryable.DryBlock(state, world, pos);
+                Dryable.dryBlock(state, world, pos);
             }
         }
     }
