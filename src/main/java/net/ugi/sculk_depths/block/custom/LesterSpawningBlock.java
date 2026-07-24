@@ -42,13 +42,15 @@ public class LesterSpawningBlock extends Block {
             pos = pos.east(XOffset);
             int ZOffset = MathHelper.nextInt(Random.create(), -5, 5);
             pos = pos.south(ZOffset);
+            BlockPos candidate;
             if(!world.getBlockState(pos).isIn(ModTags.Blocks.LESTER_SPAWN_BLOCKS)){
-                pos = checkForRoof(world,pos, "Up",0,300);
+                candidate = checkForRoof(world,pos, "Up",0,300);
             }
-            else pos = checkForRoof(world,pos, "Down",0,10);
+            else candidate = checkForRoof(world,pos, "Down",0,10);
 
 
-            if(pos == null){ continue;}
+            if(candidate == null){ continue;}
+            pos = candidate;
 
 
             entity.setPosition(pos.getX()+ 0.5,pos.getY()+0.99,pos.getZ() + 0.5);
