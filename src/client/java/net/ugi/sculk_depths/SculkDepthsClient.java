@@ -55,7 +55,7 @@ public class SculkDepthsClient implements ClientModInitializer {
 		CustomItemModels.QuazarithAxeModels();
 		CustomItemModels.QuazarithPickaxeModels();
 		CustomItemModels.QuazarithHoeModels();
-		CustomItemModels.QuazarithSwordModels();
+		CustomItemModels.QuazarithShovelModels();
 		CustomItemModels.QuazarithHelmetModels();
 		CustomItemModels.QuazarithChestplateModels();
 		CustomItemModels.QuazarithLeggingsModels();
