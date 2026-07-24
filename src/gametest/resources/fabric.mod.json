@@ -1,0 +1,19 @@
+{
+	"schemaVersion": 1,
+	"id": "sculk_depths_gametest",
+	"version": "1.0.0",
+	"name": "Sculk Depths GameTests",
+	"description": "In-world Fabric GameTests for Sculk Depths.",
+	"environment": "*",
+	"license": "MIT",
+	"entrypoints": {
+		"fabric-gametest": [
+			"net.ugi.sculk_depths.gametest.SculkDepthsGameTests"
+		]
+	},
+	"depends": {
+		"fabric-gametest-api-v1": "*",
+		"sculk_depths": "*",
+		"minecraft": "~1.21.1"
+	}
+}
