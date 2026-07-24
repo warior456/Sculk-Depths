@@ -1,5 +1,6 @@
 {
     "credit": "Made with Blockbench",
+    "parent": "block/block",
     "texture_size": [32, 32],
     "textures": {
         "0": "sculk_depths:block/flumrock_cauldron/side",
@@ -200,34 +201,5 @@
                 "down": {"uv": [4, 6, 6, 8], "texture": "#3"}
             }
         }
-    ],
-    "display": {
-        "thirdperson_righthand": {
-            "rotation": [75, 45, 0],
-            "scale": [0.5, 0.5, 0.5]
-        },
-        "thirdperson_lefthand": {
-            "rotation": [75, 45, 0],
-            "scale": [0.5, 0.5, 0.5]
-        },
-        "firstperson_righthand": {
-            "rotation": [0, 45, 0],
-            "scale": [0.5, 0.5, 0.5]
-        },
-        "firstperson_lefthand": {
-            "rotation": [0, 45, 0],
-            "scale": [0.5, 0.5, 0.5]
-        },
-        "ground": {
-            "scale": [0.5, 0.5, 0.5]
-        },
-        "gui": {
-            "rotation": [22.5, 45, 0],
-            "translation": [-0.5, 0, 0],
-            "scale": [0.5, 0.5, 0.5]
-        },
-        "fixed": {
-            "scale": [0.5, 0.5, 0.5]
-        }
-    }
+    ]
 }

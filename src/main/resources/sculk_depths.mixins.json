@@ -7,7 +7,6 @@
     "BlockEntityTypeMixin",
     "BlockMixin",
     "CropBlockMixin",
-    "ExampleMixin",
     "FarmLandBlockMixin",
     "FlowableFluidMixin",
     "LivingEntityMixin",

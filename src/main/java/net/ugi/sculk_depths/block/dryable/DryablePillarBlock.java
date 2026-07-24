@@ -37,18 +37,18 @@ public class DryablePillarBlock extends PillarBlock implements Dryable {
 
                     }
                     if (livingBlocks <= 1 ) {
-                        Dryable.DryBlock(state, world, pos);
+                        Dryable.dryBlock(state, world, pos);
                     }
                     if(driedBlocks >= 1 && livingBlocks > 1) {
                         for (int l = driedBlocks; l >= 0; --l) {
                             if (MathHelper.nextInt(random, 0, 10) == 0) {
-                                Dryable.DryBlock(state, world, pos);
+                                Dryable.dryBlock(state, world, pos);
                                 return;
                             }
                         }
                     }
                 }
-                else Dryable.DryBlock(state, world, pos);
+                else Dryable.dryBlock(state, world, pos);
             }
         }
     }

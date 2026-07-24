@@ -37,7 +37,6 @@ public class ZygrinFurnaceBlock extends AbstractFurnaceBlock {
         return new ZygrinFurnaceBlockEntity(pos, state);
     }
 
-
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
@@ -55,7 +54,7 @@ public class ZygrinFurnaceBlock extends AbstractFurnaceBlock {
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (!state.get(LIT).booleanValue()) {
+        if (!state.get(LIT)) {
             return;
         }
         double d = (double)pos.getX() + 0.5;
@@ -79,10 +78,10 @@ public class ZygrinFurnaceBlock extends AbstractFurnaceBlock {
     protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {//fixes items not being dropped
         if (!state.isOf(newState.getBlock())) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof ZygrinFurnaceBlockEntity) {
-                if (world instanceof ServerWorld) {
-                    ItemScatterer.spawn(world, pos, (ZygrinFurnaceBlockEntity)blockEntity);
-                    ((ZygrinFurnaceBlockEntity)blockEntity).getRecipesUsedAndDropExperience((ServerWorld)world, Vec3d.ofCenter(pos));
+            if (blockEntity instanceof ZygrinFurnaceBlockEntity zygrinFurnaceBlockEntity) {
+                if (world instanceof ServerWorld serverWorld) {
+                    ItemScatterer.spawn(world, pos, zygrinFurnaceBlockEntity);
+                    zygrinFurnaceBlockEntity.getRecipesUsedAndDropExperience(serverWorld, Vec3d.ofCenter(pos));
                 }
 
                 super.onStateReplaced(state, world, pos, newState, moved);
@@ -92,6 +91,4 @@ public class ZygrinFurnaceBlock extends AbstractFurnaceBlock {
             }
         }
     }
-
-
 }

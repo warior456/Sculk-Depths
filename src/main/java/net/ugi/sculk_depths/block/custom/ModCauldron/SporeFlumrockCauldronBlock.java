@@ -5,13 +5,9 @@ import net.minecraft.block.AbstractCauldronBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -32,6 +28,8 @@ import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
+import net.ugi.sculk_depths.item.ModComponentTypes;
+import net.ugi.sculk_depths.item.QuazarithCrystalUpgrade;
 import net.ugi.sculk_depths.util.enums.CrystalType;
 import net.ugi.sculk_depths.item.ModItems;
 //import net.ugi.sculk_depths.item.crystal.CrystalUpgrade;
@@ -40,47 +38,11 @@ import net.ugi.sculk_depths.tags.ModTags;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
-import static net.ugi.sculk_depths.state.property.ModProperties.CRUX_LEVEL;
-
-
-public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
-    @Override
-    protected MapCodec<? extends AbstractCauldronBlock> getCodec() {
-        return null;
-    }
-
-    Item[] crystalItemArray = {ModItems.WHITE_CRYSTAL, ModItems.BLUE_CRYSTAL, ModItems.ORANGE_CRYSTAL, ModItems.LIME_CRYSTAL};
-    CrystalType[] crystalStateArray = {CrystalType.WHITE, CrystalType.BLUE, CrystalType.ORANGE, CrystalType.LIME};
-
-
-    List<String> crystalItemNbt = Arrays.asList("\"white\"", "\"blue\"", "\"orange\"", "\"lime\"");
-
-    List<Item> crystalItemList = Arrays.asList(crystalItemArray);
-    List<CrystalType> crystalStateList = Arrays.asList(crystalStateArray);
-
-
+public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock {
     public static final IntProperty LEVEL = ModProperties.SPORE_LEVEL;
-
     public static final EnumProperty<CrystalType> CRYSTAL = ModProperties.CRYSTAL_TYPE;
-
     public static final IntProperty CRUX = ModProperties.CRUX_LEVEL;
-
-
-    private final Map<Item, CauldronBehavior> behaviorMap;
-
-    public SporeFlumrockCauldronBlock(Settings settings, Map<Item, CauldronBehavior> behaviorMap) {
-        super(settings, ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR);
-        this.behaviorMap = behaviorMap;
-        this.setDefaultState(this.stateManager.getDefaultState().with(LEVEL, 1));
-    }
-
-    @Override
-    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
-        return new ItemStack(ModBlocks.FLUMROCK_CAULDRON);
-    }
-
     private static final VoxelShape RAYCAST_SHAPE = AbstractCauldronBlock.createCuboidShape(1.5, 2.0, 1.5, 14.5, 16.0, 14.5);
     protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(VoxelShapes.fullCube(),
             VoxelShapes.union(
@@ -101,6 +63,26 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
                     AbstractCauldronBlock.createCuboidShape(15.0, 13.0, 0.0, 16.0, 15.0, 16.0),
                     AbstractCauldronBlock.createCuboidShape(1.0, 15.0, 1.0, 15.0, 16.0, 15.0),
                     RAYCAST_SHAPE), BooleanBiFunction.ONLY_FIRST);
+    // TODO: refactor this class
+    Item[] crystalItemArray = {ModItems.WHITE_CRYSTAL, ModItems.BLUE_CRYSTAL, ModItems.ORANGE_CRYSTAL, ModItems.LIME_CRYSTAL};
+    CrystalType[] crystalStateArray = {CrystalType.WHITE, CrystalType.BLUE, CrystalType.ORANGE, CrystalType.LIME};
+    List<Item> crystalItemList = Arrays.asList(crystalItemArray);
+    List<CrystalType> crystalStateList = Arrays.asList(crystalStateArray);
+
+    public SporeFlumrockCauldronBlock(Settings settings) {
+        super(settings, ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR);
+        this.setDefaultState(this.stateManager.getDefaultState().with(LEVEL, 1));
+    }
+
+    @Override
+    protected MapCodec<? extends AbstractCauldronBlock> getCodec() {
+        return null;
+    }
+
+    @Override
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
+        return new ItemStack(ModBlocks.FLUMROCK_CAULDRON);
+    }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -130,24 +112,13 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(LEVEL).add(CRYSTAL).add(CRUX);
-
     }
-
 
     @Override
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getMainHandStack();
-        CauldronBehavior cauldronBehavior = this.behaviorMap.get(itemStack.getItem());
-        if (itemStack.getItem() == ModItems.PENEBRIUM_SPORE_BUCKET
-                || itemStack.getItem() == ModItems.CRUX
-                || itemStack.getItem() == Items.BUCKET
-        ) {
-            return cauldronBehavior.interact(state, world, pos, player, hand, itemStack);
-        }
         if (itemStack.isIn(ModTags.Items.CRYSTALS)) {
             if (!world.isClient()) {
-
-
                 int k = crystalItemList.indexOf(player.getMainHandStack().getItem());
                 CrystalType l = crystalStateArray[k];
 
@@ -172,157 +143,37 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
 
             return ItemActionResult.success(world.isClient);
         }
-
-        NbtComponent nbtComponent = itemStack.get(DataComponentTypes.CUSTOM_DATA);
-
-        if (nbtComponent != null) {
-            if(nbtComponent.getNbt().get("sculk_depths.crystal") != null){ //TODO replace getNbt since it's deprecated
-                    return ItemActionResult.FAIL;
+        if (itemStack.get(ModComponentTypes.CRYSTAL) == null) {
+            for (QuazarithCrystalUpgrade quazarithCrystalUpgrade : SculkDepths.config.quazarithCrystalUpgrades) {
+                if (itemStack.isOf(quazarithCrystalUpgrade.item())
+                        && state.get(LEVEL) >= quazarithCrystalUpgrade.sporeCost()
+                        && state.get(CRUX) >= quazarithCrystalUpgrade.cruxCost()
+                        && state.get(CRYSTAL) != CrystalType.NONE) {
+                    world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                    removeUsedResources(state, world, pos,
+                            quazarithCrystalUpgrade.cruxCost(),
+                            quazarithCrystalUpgrade.sporeCost());
+                    return ItemActionResult.FAIL;//CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL));
+                }
             }
+
+            return ItemActionResult.FAIL;
         }
 
-        if ((itemStack.getItem() == ModItems.QUAZARITH_HELMET
-                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_spore_cost
-                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == ModItems.QUAZARITH_HELMET//========================================
-                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_spore_cost
-                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)) {
-            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
-            RemoveUsedResources(state, world, pos,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_crux_cost,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_helmet_spore_cost);
-            return ItemActionResult.FAIL;//CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL));
-        }
-        if ((itemStack.getItem() == ModItems.QUAZARITH_CHESTPLATE
-                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_spore_cost
-                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == ModItems.QUAZARITH_CHESTPLATE//========================================
-                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_spore_cost
-                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)) {
-            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
-            RemoveUsedResources(state, world, pos,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_crux_cost,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_chestplate_spore_cost);
-            return ItemActionResult.FAIL;//CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL));
-        }
-        if ((itemStack.getItem() == ModItems.QUAZARITH_LEGGINGS
-                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_spore_cost
-                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == ModItems.QUAZARITH_LEGGINGS//========================================
-                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_spore_cost
-                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)) {
-            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
-            RemoveUsedResources(state, world, pos,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_crux_cost,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_leggings_spore_cost);
-            return ItemActionResult.FAIL;//CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL));
-        }
-        if ((itemStack.getItem() == ModItems.QUAZARITH_BOOTS
-                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_spore_cost
-                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == ModItems.QUAZARITH_BOOTS//========================================
-                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_spore_cost
-                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)) {
-            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
-            RemoveUsedResources(state, world, pos,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_crux_cost,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_boots_spore_cost);
-            return ItemActionResult.FAIL;//CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL));
-        }
-        if ((itemStack.getItem() == ModItems.QUAZARITH_SHOVEL
-                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_spore_cost
-                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == ModItems.QUAZARITH_SHOVEL//========================================
-                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_spore_cost
-                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)) {
-            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
-            RemoveUsedResources(state, world, pos,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_crux_cost,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_shovel_spore_cost);
-            return ItemActionResult.FAIL;//CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL));
-        }
-        if ((itemStack.getItem() == ModItems.QUAZARITH_PICKAXE
-                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_spore_cost
-                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == ModItems.QUAZARITH_PICKAXE//========================================
-                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_spore_cost
-                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)) {
-            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
-            RemoveUsedResources(state, world, pos,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_crux_cost,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_pickaxe_spore_cost);
-            return ItemActionResult.FAIL;//CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL));
-        }
-        if ((itemStack.getItem() == ModItems.QUAZARITH_AXE
-                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_spore_cost
-                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == ModItems.QUAZARITH_AXE//========================================
-                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_spore_cost
-                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)) {
-            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
-            RemoveUsedResources(state, world, pos,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_crux_cost,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_axe_spore_cost);
-            return ItemActionResult.FAIL;//CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL));
-        }
-        if ((itemStack.getItem() == ModItems.QUAZARITH_HOE
-                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_spore_cost
-                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == ModItems.QUAZARITH_HOE//========================================
-                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_spore_cost
-                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)) {
-            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
-            RemoveUsedResources(state, world, pos,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_crux_cost,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_hoe_spore_cost);
-            return ItemActionResult.FAIL;//CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL));
-        }
-        if ((itemStack.getItem() == ModItems.QUAZARITH_SWORD
-                && state.get(LEVEL) > SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_spore_cost
-                && state.get(CRUX) >= SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)
-                || (itemStack.getItem() == ModItems.QUAZARITH_SWORD//========================================
-                && state.get(LEVEL) == SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_spore_cost
-                && state.get(CRUX) == SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_crux_cost
-                && state.get(CRYSTAL) != CrystalType.NONE)) {
-            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
-            RemoveUsedResources(state, world, pos,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_crux_cost,
-                    SculkDepths.CONFIG.crystal_upgrade_quazarith_sword_spore_cost);
-            return ItemActionResult.FAIL;//CrystalUpgrade.createCrystalUpgrade(itemStack, player, state.get(CRYSTAL));
-        }
-
-        return ItemActionResult.FAIL;
-
+        return super.onUseWithItem(stack, state, world, pos, player, hand, hit);
     }
 
-    public void RemoveUsedResources(BlockState state, World world, BlockPos pos, int crux, int spore) {
-        int j = state.get(CRUX_LEVEL) - crux;
-        int k = state.get(LEVEL) - spore;
+    public void removeUsedResources(BlockState state, World world, BlockPos pos, int crux, int spore) {
+        int cruxLeft = state.get(ModProperties.CRUX_LEVEL) - crux;
+        int sporeLeft = state.get(LEVEL) - spore;
 
-        if (k == 0) {
-            BlockState newBlockState = state.with(CRUX_LEVEL, j).with(CRYSTAL, CrystalType.NONE);
+        if (sporeLeft == 0) {
+            BlockState newBlockState = state.with(ModProperties.CRUX_LEVEL, cruxLeft).with(CRYSTAL, CrystalType.NONE);
             world.setBlockState(pos, newBlockState);
             world.setBlockState(pos, ModBlocks.FLUMROCK_CAULDRON.getDefaultState());
             return;
         }
-        BlockState newBlockState = state.with(CRUX_LEVEL, j).with(LEVEL, k).with(CRYSTAL, CrystalType.NONE);
+        BlockState newBlockState = state.with(ModProperties.CRUX_LEVEL, cruxLeft).with(LEVEL, sporeLeft).with(CRYSTAL, CrystalType.NONE);
         world.setBlockState(pos, newBlockState);
     }
 
@@ -346,5 +197,4 @@ public class SporeFlumrockCauldronBlock extends AbstractCauldronBlock{
         }
         super.onStateReplaced(state, world, pos, newState, moved);
     }
-
 }
