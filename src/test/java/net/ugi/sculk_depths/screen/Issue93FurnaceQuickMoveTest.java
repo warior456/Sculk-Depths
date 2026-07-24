@@ -1,4 +1,4 @@
-package net.ugi.sculk_depths.regression;
+package net.ugi.sculk_depths.screen;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -32,8 +32,9 @@ import static org.mockito.Mockito.*;
  * which is actually the output slot and refuses insertion — and the fuel never
  * reaches the fuel slot.
  *
- * Asserts the CORRECT behavior (fuel lands in furnace inventory slot 1), so it
- * FAILS on the current buggy code. That failure is the expected proof.
+ * Asserts the CORRECT behavior (fuel lands in furnace inventory slot 1).
+ * Fixed in the production code; this test is kept as a permanent regression
+ * guard in the main suite.
  */
 class Issue93FurnaceQuickMoveTest {
 

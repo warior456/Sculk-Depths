@@ -107,12 +107,32 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
         if (slot2 != null && slot2.hasStack()) {
             ItemStack itemStack2 = slot2.getStack();
             itemStack = itemStack2.copy();
-            if (slot == 2) {
-                if (!this.insertItem(itemStack2, 3, 38, true)) {
+            if (slot == 1) {
+                //output slot -> player inventory (handler slots 2-37)
+                if (!this.insertItem(itemStack2, 2, 38, true)) {
                     return ItemStack.EMPTY;
                 }
                 slot2.onQuickTransfer(itemStack2, itemStack);
-            } else if (slot == 1 || slot == 0 ? !this.insertItem(itemStack2, 3, 38, false) : (this.isSmeltable(itemStack2) ? !this.insertItem(itemStack2, 0, 1, false) : (this.isFuel(itemStack2) ? !this.insertItem(itemStack2, 1, 2, false) : (slot >= 3 && slot < 30 ? !this.insertItem(itemStack2, 30, 38, false) : slot >= 30 && slot < 39 && !this.insertItem(itemStack2, 3, 30, false))))) {
+            } else if (slot == 0) {
+                //input slot -> player inventory
+                if (!this.insertItem(itemStack2, 2, 38, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (this.isSmeltable(itemStack2)) {
+                if (!this.insertItem(itemStack2, 0, 1, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (this.isFuel(itemStack2)) {
+                //the fuel slot (furnace inventory index 1) has no handler slot,
+                //so insertItem cannot reach it; insert the fuel directly
+                if (!this.insertIntoFuelSlot(itemStack2)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (slot >= 2 && slot < 29) {
+                if (!this.insertItem(itemStack2, 29, 38, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (slot >= 29 && slot < 38 && !this.insertItem(itemStack2, 2, 29, false)) {
                 return ItemStack.EMPTY;
             }
             if (itemStack2.isEmpty()) {
@@ -126,6 +146,26 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
             slot2.onTakeItem(player, itemStack2);
         }
         return itemStack;
+    }
+
+    private boolean insertIntoFuelSlot(ItemStack stack) {
+        ItemStack fuelStack = this.inventory.getStack(1);
+        if (fuelStack.isEmpty()) {
+            this.inventory.setStack(1, stack.copy());
+            this.inventory.markDirty();
+            stack.setCount(0);
+            return true;
+        }
+        if (ItemStack.areItemsAndComponentsEqual(fuelStack, stack)) {
+            int i = Math.min(stack.getCount(), Math.min(fuelStack.getMaxCount(), this.inventory.getMaxCount(fuelStack)) - fuelStack.getCount());
+            if (i > 0) {
+                fuelStack.increment(i);
+                stack.decrement(i);
+                this.inventory.markDirty();
+                return true;
+            }
+        }
+        return false;
     }
 
     protected boolean isSmeltable(ItemStack itemStack) {
