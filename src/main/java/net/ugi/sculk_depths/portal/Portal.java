@@ -316,7 +316,8 @@ public class Portal {
                         break;
                 }
                 //System.out.println(" " + x + " " + y + " "+z);
-                List<ServerPlayerEntity> playerEntityList = world.getPlayers(serverPlayerEntity -> serverPlayerEntity.isInRange(serverPlayerEntity, 100, 50));//todo test range
+                List<ServerPlayerEntity> playerEntityList = world.getPlayers(serverPlayerEntity ->
+                        Vec3d.ofCenter(pos).isInRange(serverPlayerEntity.getPos(), 128.0));
                 for (ServerPlayerEntity serverPlayerEntity : playerEntityList) {
                     world.spawnParticles(serverPlayerEntity, (ParticleEffect) ModParticleTypes.ENERGY_PARTICLE, true, x, y, z, 4, 0.1, 0, 0.1, 0);
                 }
@@ -385,7 +386,8 @@ public class Portal {
             z = z + normalized3dVector.getZ()/10 + random.nextFloat()/10;
 
             //System.out.println(" " + x + " " + y + " "+z);
-            List<ServerPlayerEntity> playerEntityList = world.getPlayers(serverPlayerEntity -> serverPlayerEntity.isInRange(serverPlayerEntity, 100, 50));//todo test range
+            List<ServerPlayerEntity> playerEntityList = world.getPlayers(serverPlayerEntity ->
+                    Vec3d.ofCenter(pos).isInRange(serverPlayerEntity.getPos(), 128.0));
             for (ServerPlayerEntity serverPlayerEntity : playerEntityList) {
                 world.spawnParticles(serverPlayerEntity, (ParticleEffect) ModParticleTypes.SCULK_DEPTHS_PORTAL_ANIMATION_PARTICLE, true, x, y, z, 4, 0.0, 0.0, 0.0, 0);
 
