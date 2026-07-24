@@ -52,7 +52,6 @@ public class CruxResonator extends Item {
             itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(0, List.of()));
             return TypedActionResult.success(itemStack,false);
         }
-        System.out.println(oscillatorTrackerComponentList.selectedLocation());
         itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(oscillatorTrackerComponentList.selectedLocation() +1, oscillatorTrackerComponentList.trackers()));
         return TypedActionResult.success(itemStack,false);
     }
@@ -98,8 +97,6 @@ public class CruxResonator extends Item {
             if(oscillatorTrackerComponent1 != oscillatorTrackerComponent2) {
                 //System.out.println();
                 stack.set(ModComponentTypes.OSCILLATOR_TRACKER, oscillatorTrackerComponent2);
-                System.out.println(trackers);
-                System.out.println(selectedLocation);
                 trackers1.remove(selectedLocation);
                 if(selectedLocation == 0) {
                     stack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(selectedLocation, trackers1));
@@ -115,7 +112,6 @@ public class CruxResonator extends Item {
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         List<OscillatorTrackerComponent> trackers = new ArrayList<OscillatorTrackerComponent>();
-        System.out.println("START USE ON BLOCK");
 
         BlockPos blockPos = context.getBlockPos();
         World world = context.getWorld();
@@ -129,7 +125,6 @@ public class CruxResonator extends Item {
 
         if(itemStack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST) != null) {
             trackers = itemStack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST).trackers();
-            System.out.println("trackers:" + trackers);
         };
 
         OscillatorTrackerComponent oscillatorTrackerComponent = new OscillatorTrackerComponent(Optional.of(GlobalPos.create(world.getRegistryKey(), blockPos)), true, "");
@@ -143,8 +138,6 @@ public class CruxResonator extends Item {
         itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER , oscillatorTrackerComponent);
         itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST , oscillatorTrackerComponentList);
 
-
-        System.out.println("END USE ON BLOCK");
 
         return ActionResult.success(world.isClient);
 
