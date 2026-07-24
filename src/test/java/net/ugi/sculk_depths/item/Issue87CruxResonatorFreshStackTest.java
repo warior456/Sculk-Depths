@@ -1,4 +1,4 @@
-package net.ugi.sculk_depths.regression;
+package net.ugi.sculk_depths.item;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -23,8 +23,9 @@ import static org.mockito.Mockito.when;
  * Crux Resonator has no such component, so get() returns null and the call
  * throws a NullPointerException.
  *
- * Asserts the CORRECT behavior (using a fresh resonator succeeds), so it FAILS
- * on the current buggy code with an NPE. That failure is the expected proof.
+ * Asserts the CORRECT behavior (using a fresh resonator succeeds and leaves an
+ * initialized tracker list on the stack). Fixed in the production code; this test
+ * is kept as a permanent regression guard in the main suite.
  */
 class Issue87CruxResonatorFreshStackTest {
 

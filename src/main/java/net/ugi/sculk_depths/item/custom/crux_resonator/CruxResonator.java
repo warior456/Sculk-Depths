@@ -47,6 +47,11 @@ public class CruxResonator extends Item {
         ItemStack itemStack = user.getStackInHand(hand);
         if(world.isClient) {return TypedActionResult.pass(itemStack);}//maybe fix some bugs?
         OscillatorTrackerComponentList oscillatorTrackerComponentList = itemStack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST);
+        if (oscillatorTrackerComponentList == null) {
+            //fresh resonator: no tracked locations yet, initialize an empty tracker list
+            itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(0, List.of()));
+            return TypedActionResult.success(itemStack,false);
+        }
         System.out.println(oscillatorTrackerComponentList.selectedLocation());
         itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(oscillatorTrackerComponentList.selectedLocation() +1, oscillatorTrackerComponentList.trackers()));
         return TypedActionResult.success(itemStack,false);
