@@ -148,6 +148,8 @@ public class PedestalBlock extends FacingBlock {
 
                 structureStart = GenerateStructureAPI.structureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor); //50ms (matteo)
 
+                if (structureStart == null || !structureStart.hasChildren()) {portalFase = "none";return;}
+
                 BlockBox boundingBox = structureStart.getBoundingBox();
                 structureStart.getChildren().stream().forEach(child -> {
                     System.out.println(child.getBoundingBox());
