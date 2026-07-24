@@ -1,4 +1,4 @@
-package net.ugi.sculk_depths.regression;
+package net.ugi.sculk_depths.config;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.ugi.sculk_depths.SculkDepths;
@@ -21,8 +21,9 @@ import static org.junit.jupiter.api.Assertions.*;
  * whitespace), gson.fromJson returns null and SculkDepths.CONFIG stays null,
  * causing NPEs downstream (e.g. GlomperEntity.java:67 reads CONFIG.glomper_health).
  *
- * These assert the CORRECT behavior (a usable default config), so they FAIL on the
- * current buggy code. That failure is the expected proof of the bug.
+ * These assert the CORRECT behavior (a usable default config). Fixed in the
+ * production code; these tests are kept as permanent regression guards in the
+ * main suite.
  */
 class Issue94EmptyConfigNpeTest {
 
