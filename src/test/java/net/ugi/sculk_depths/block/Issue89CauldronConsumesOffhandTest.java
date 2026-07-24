@@ -1,4 +1,4 @@
-package net.ugi.sculk_depths.regression;
+package net.ugi.sculk_depths.block;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.cauldron.CauldronBehavior;
@@ -31,8 +31,9 @@ import static org.mockito.Mockito.when;
  * stack to decrement, so using an ingot from the main hand consumes the OFFHAND
  * stack instead of the ingot.
  *
- * Asserts the CORRECT behavior (the ingot stack is consumed, offhand untouched),
- * so it FAILS on the current buggy code. That failure is the expected proof.
+ * Asserts the CORRECT behavior (the ingot stack is consumed, offhand untouched).
+ * Fixed in the production code; this test is kept as a permanent regression
+ * guard in the main suite.
  */
 class Issue89CauldronConsumesOffhandTest {
 

@@ -114,9 +114,7 @@ public interface ModCauldronBehavior {
             }
             if (!world.isClient) {
                 if (!player.isCreative()) {
-                    ItemStack heldItem = player.getMainHandStack().getItem() == ModItems.CRUX ?
-                            player.getMainHandStack() : player.getOffHandStack();
-                    heldItem.decrement(1);
+                    stack.decrement(1);
                 }
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
