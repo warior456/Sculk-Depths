@@ -73,7 +73,9 @@ public class GenerateStructureAPI {
 
     public static StructureStart structureStart (World  originalWorld, RegistryKey<World> targetWorldKey, Identifier structureKey, BlockPos pos){
         if(originalWorld.isClient)return null;
-        RegistryEntry.Reference<Structure> structure = originalWorld.getRegistryManager().get(RegistryKeys.STRUCTURE).getEntry(structureKey).get();
+        Optional<RegistryEntry.Reference<Structure>> structureReference = originalWorld.getRegistryManager().get(RegistryKeys.STRUCTURE).getEntry(structureKey);
+        if(structureReference.isEmpty())return null;
+        RegistryEntry.Reference<Structure> structure = structureReference.get();
         ServerWorld serverWorld = originalWorld.getServer().getWorld(targetWorldKey);
         ChunkGenerator chunkGenerator = serverWorld.getChunkManager().getChunkGenerator();
         Structure structure2 = structure.value();
