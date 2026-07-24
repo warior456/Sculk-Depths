@@ -151,10 +151,6 @@ public class PedestalBlock extends FacingBlock {
                 if (structureStart == null || !structureStart.hasChildren()) {portalFase = "none";return;}
 
                 BlockBox boundingBox = structureStart.getBoundingBox();
-                structureStart.getChildren().stream().forEach(child -> {
-                    System.out.println(child.getBoundingBox());
-                });
-
                 chunkArray = GenerateStructureAPI.generateChunkArray(//not laggy
                         new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMinX()),ChunkSectionPos.getSectionCoord(boundingBox.getMinZ())),
                         new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMaxX()),ChunkSectionPos.getSectionCoord(boundingBox.getMaxZ())),
