@@ -35,9 +35,6 @@ public class SculkDepthsClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		// This entrypoint is suitable for setting up client-specific logic, such as rendering.
 
-/*		SculkDepths.LOGGER.info("Registering tooltips for " + SculkDepths.MOD_ID);
-		CrystalUpgrade.tooltipAdd();*/
-
 		SculkDepths.LOGGER.info("Registering clientSounds for " + SculkDepths.MOD_ID);
 		ClientTickEvents.START_WORLD_TICK.register(new ConditionalSoundPlayerClient());
 		ClientTickEvents.START_CLIENT_TICK.register(new SoundPlayerGetterClient());
