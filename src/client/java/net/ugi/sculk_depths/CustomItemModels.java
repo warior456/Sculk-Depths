@@ -9,7 +9,6 @@ import net.ugi.sculk_depths.item.ModItems;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class CustomItemModels {
 

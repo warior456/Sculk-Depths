@@ -2,14 +2,8 @@ package net.ugi.sculk_depths.item.custom.crux_resonator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.function.UnaryOperator;
 
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.FireworksComponent;
-import net.minecraft.component.type.FoodComponent;
-import net.minecraft.component.type.LoreComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -27,7 +21,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.GlobalPos;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.item.ModComponentTypes;
-import net.ugi.sculk_depths.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 
 import static net.ugi.sculk_depths.block.ModBlocks.QUAZARITH_OSCILLATOR;

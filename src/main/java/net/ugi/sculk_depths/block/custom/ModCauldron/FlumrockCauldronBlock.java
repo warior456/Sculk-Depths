@@ -2,7 +2,6 @@ package net.ugi.sculk_depths.block.custom.ModCauldron;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.AbstractCauldronBlock;
-import net.minecraft.block.AbstractPlantStemBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.util.function.BooleanBiFunction;

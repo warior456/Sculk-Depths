@@ -1,29 +1,19 @@
 package net.ugi.sculk_depths.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.fabricmc.fabric.impl.resource.loader.FabricLifecycledResourceManager;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.enums.CameraSubmersionType;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.FogShape;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BiomeTags;
-import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeKeys;
-import net.minecraft.world.event.listener.GameEventListener;
-import net.ugi.sculk_depths.SculkDepths;
-import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.tags.ModTags;
 import net.ugi.sculk_depths.world.biome.ModBiomes;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
@@ -32,7 +22,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.EventListenerProxy;
 
 @Mixin(BackgroundRenderer.class)
 public class BackgroundRendererMixin {

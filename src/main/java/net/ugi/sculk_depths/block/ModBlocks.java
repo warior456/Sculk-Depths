@@ -2,8 +2,6 @@ package net.ugi.sculk_depths.block;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 //import net.kyrptonaught.customportalapi.CustomPortalBlock;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.fabricmc.fabric.impl.content.registry.FlammableBlockRegistryImpl;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
