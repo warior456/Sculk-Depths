@@ -1,8 +1,6 @@
 package net.ugi.sculk_depths.world;
 
 import net.minecraft.block.SaplingGenerator;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
 import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.world.gen.feature.ModConfiguredFeatures;
 

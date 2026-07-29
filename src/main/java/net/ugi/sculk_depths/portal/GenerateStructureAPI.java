@@ -1,6 +1,5 @@
 package net.ugi.sculk_depths.portal;
 
-import com.sun.source.tree.WhileLoopTree;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -11,12 +10,10 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.ChunkSectionPos;
-import net.minecraft.world.StructureSpawns;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.structure.Structure;
 
-import java.util.Date;
 import java.util.Optional;
 
 public class GenerateStructureAPI {

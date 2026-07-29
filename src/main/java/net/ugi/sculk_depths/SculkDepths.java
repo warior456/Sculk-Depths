@@ -24,7 +24,6 @@ import net.ugi.sculk_depths.fluid.ModFluids;
 import net.ugi.sculk_depths.item.ModComponentTypes;
 import net.ugi.sculk_depths.item.ModItemGroup;
 import net.ugi.sculk_depths.item.ModItems;
-import net.ugi.sculk_depths.item.crystal.CheckInvForCrystalItems;
 import net.ugi.sculk_depths.particle.ModParticleTypes;
 import net.ugi.sculk_depths.screen.ModScreenHandlers;
 import net.ugi.sculk_depths.sound.ConditionalSoundPlayer;
@@ -71,7 +70,6 @@ public class SculkDepths implements ModInitializer {
 
         SculkDepths.LOGGER.info("Registering ServerTickEvents for " + SculkDepths.MOD_ID);
         ServerTickEvents.START_WORLD_TICK.register(new ConditionalSoundPlayer());
-        ServerTickEvents.START_WORLD_TICK.register(new CheckInvForCrystalItems());
         ServerTickEvents.START_WORLD_TICK.register(new ModBiomeEffects());
 
         //SculkDepths.LOGGER.info("Registering LootTables for " + SculkDepths.MOD_ID);
@@ -80,8 +78,6 @@ public class SculkDepths implements ModInitializer {
         SculkDepths.LOGGER.info("Registering ModCauldronBehavior for " + SculkDepths.MOD_ID);
         ModCauldronBehavior.registerBehavior();
 
-        //SculkDepths.LOGGER.info("Registering Recipes for " + SculkDepths.MOD_ID);
-        //ModRecipes.register();
         SculkDepths.LOGGER.info("Registering BlockEntities for " + SculkDepths.MOD_ID);
         ModBlockEntities.registerBlockEntities();
 
