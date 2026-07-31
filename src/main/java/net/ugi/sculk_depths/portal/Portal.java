@@ -44,80 +44,56 @@ public class Portal {
         return list.toArray(new ChunkPos[0]);
     }
 
+    private static boolean hasPoweredPedestal(World world, BlockPos pos, Direction direction) {
+        BlockState state = world.getBlockState(pos.offset(direction, 10));
+        return state.getBlock() == ModBlocks.SCULK_PEDESTAL && state.get(ModProperties.HAS_ENERGY_ESSENCE);
+    }
+
     public static List<BlockPos> getFramePos(Direction pedestalFacing, BlockPos pos, World world ) {
-        switch (pedestalFacing) {
-            case EAST -> {
-                if (world.getBlockState(pos.north(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.north(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
-                        return List.of(pos.north(6).up(6).west(5),pos.north(5).up(6).west(5));
-                if (world.getBlockState(pos.south(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.south(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
-                        return List.of(pos.south(4).up(6).west(5),pos.south(5).up(6).west(5));
-            }
-            case NORTH -> {
-                if (world.getBlockState(pos.east(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.east(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
-                        return List.of(pos.east(5).up(6).south(5),pos.east(4).up(6).south(5));
-                if (world.getBlockState(pos.west(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.west(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
-                        return List.of(pos.west(5).up(6).south(5),pos.west(6).up(6).south(5));
-            }
-            case WEST -> {
-                if (world.getBlockState(pos.north(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.north(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
-                        return List.of(pos.north(5).up(6).east(5),pos.north(4).up(6).east(5));
-                if (world.getBlockState(pos.south(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.south(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
-                        return List.of(pos.south(5).up(6).east(5),pos.south(6).up(6).east(5));
-            }
-            case SOUTH -> {
-                if (world.getBlockState(pos.east(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.east(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
-                        return List.of(pos.east(6).up(6).north(5),pos.east(5).up(6).north(5));
-                if (world.getBlockState(pos.west(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.west(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
-                        return List.of(pos.west(4).up(6).north(5),pos.west(5).up(6).north(5));
-            }
+        Direction right = pedestalFacing.rotateYClockwise();
+        Direction left = pedestalFacing.rotateYCounterclockwise();
+        if (hasPoweredPedestal(world, pos, right)) {
+            return getFramePositionsForSide(pos, pedestalFacing, right);
+        }
+        if (hasPoweredPedestal(world, pos, left)) {
+            return getFramePositionsForSide(pos, pedestalFacing, left);
         }
         return null;
     }
 
+    private static List<BlockPos> getFramePositionsForSide(BlockPos pos, Direction facing, Direction side) {
+        Direction depth = facing.getOpposite();
+        boolean isClockwise = side == facing.rotateYClockwise();
+        boolean facingPositiveAxis = facing == Direction.EAST || facing == Direction.SOUTH;
+        int a;
+        int b;
+        if (isClockwise) {
+            a = facingPositiveAxis ? 4 : 5;
+            b = facingPositiveAxis ? 5 : 4;
+        } else {
+            a = facingPositiveAxis ? 6 : 5;
+            b = 5;
+        }
+        return List.of(
+                pos.offset(depth, 5).up(6).offset(side, a),
+                pos.offset(depth, 5).up(6).offset(side, b)
+        );
+    }
+
     public static BlockPos getFrameAnchorPos(Direction pedestalFacing, BlockPos pos, World world ) {
-        switch (pedestalFacing) {
-            case EAST -> {
-                if (world.getBlockState(pos.north(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.north(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
-                        return pos.north(5).up(13).west(5);
-                if (world.getBlockState(pos.south(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.south(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
-                        return pos.south(5).up(13).west(5);
-            }
-            case NORTH -> {
-                if (world.getBlockState(pos.east(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.east(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
-                        return pos.east(5).up(13).south(5);
-                if (world.getBlockState(pos.west(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.west(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
-                        return pos.west(5).up(13).south(5);
-            }
-            case WEST -> {
-                if (world.getBlockState(pos.north(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.north(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
-                        return pos.north(5).up(13).east(5);
-                if (world.getBlockState(pos.south(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.south(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
-                        return pos.south(5).up(13).east(5);
-            }
-            case SOUTH -> {
-                if (world.getBlockState(pos.east(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.east(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
-                        return pos.east(5).up(13).north(5);
-                if (world.getBlockState(pos.west(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.west(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
-                        return pos.west(5).up(13).north(5);
-            }
+        Direction right = pedestalFacing.rotateYClockwise();
+        Direction left = pedestalFacing.rotateYCounterclockwise();
+        if (hasPoweredPedestal(world, pos, right)) {
+            return getAnchorPosForSide(pos, pedestalFacing, right);
+        }
+        if (hasPoweredPedestal(world, pos, left)) {
+            return getAnchorPosForSide(pos, pedestalFacing, left);
         }
         return null;
+    }
+
+    private static BlockPos getAnchorPosForSide(BlockPos pos, Direction facing, Direction side) {
+        return pos.offset(side, 5).up(13).offset(facing.getOpposite(), 5);
     }
 
     public static List<BlockPos> getNextpos(BlockPos pos, World world, Block block){
