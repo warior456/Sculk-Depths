@@ -36,6 +36,7 @@ import net.ugi.sculk_depths.portal.Portal;
 import net.ugi.sculk_depths.state.property.ModProperties;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,9 +48,9 @@ public class PedestalBlock extends FacingBlock {
     public static final MapCodec<PedestalBlock> CODEC = createCodec(PedestalBlock::new);
     private static final VoxelShape RAYCAST_SHAPE = createCuboidShape(2.0, 4.0, 2.0, 14.0, 16.0, 14.0);
 
-    private BlockPos[] portalFramePos = new BlockPos[0];
+    private List<BlockPos> portalFramePos = new ArrayList<>();
     private PortalPhase portalPhase = PortalPhase.NONE;
-    private BlockPos[] posArray = new BlockPos[0];
+    private List<BlockPos> posArray = new ArrayList<>();
     private ChunkPos[] chunkArray = new ChunkPos[0];
     private StructureStart structureStart;
 
@@ -111,7 +112,7 @@ public class PedestalBlock extends FacingBlock {
 
                 portalFramePos = Portal.getFramePos(state.get(FACING),pos, world);//todo benchmark
                 if (portalFramePos == null) {portalPhase = PortalPhase.NONE;return;}
-                if (portalFramePos[0] == null) {portalPhase = PortalPhase.NONE;return;}
+                if (portalFramePos.get(0) == null) {portalPhase = PortalPhase.NONE;return;}
 
                 portalPhase = PortalPhase.GEN_FRAME;
                 posArray = portalFramePos;
@@ -123,15 +124,15 @@ public class PedestalBlock extends FacingBlock {
             case GEN_FRAME:
 
                 posArray = Portal.genFrameStep(world, posArray, random);
-                if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 1){
-                    posArray = new BlockPos[0];
+                if (posArray.get(posArray.size() - 1).getY() == -4096 && posArray.get(posArray.size() - 1).getZ() == 1){
+                    posArray = new ArrayList<>();
                     for (BlockPos pos1: portalFramePos) {
-                        posArray = Portal.addElement(posArray,pos1.up(3));
-                        posArray = Portal.addElement(posArray,pos1.up(4));
+                        posArray.add(pos1.up(3));
+                        posArray.add(pos1.up(4));
                     }
                     portalPhase = PortalPhase.GEN_STRUCTURE;
                 }
-                else if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
+                else if (posArray.get(posArray.size() - 1).getY() == -4096 && posArray.get(posArray.size() - 1).getZ() == 0){
                     posArray = portalFramePos;
                     portalPhase = PortalPhase.CANCEL_FRAME;
                 }
@@ -142,8 +143,8 @@ public class PedestalBlock extends FacingBlock {
             case CANCEL_FRAME:
 
                 posArray = Portal.cancelFrameStep(world,posArray);
-                if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
-                    posArray = new BlockPos[0];
+                if (posArray.get(posArray.size() - 1).getY() == -4096 && posArray.get(posArray.size() - 1).getZ() == 0){
+                    posArray = new ArrayList<>();
                     portalPhase = PortalPhase.NONE;
                 }
                 else {
@@ -225,8 +226,8 @@ public class PedestalBlock extends FacingBlock {
             case GEN_PORTAL:
 
                 posArray = Portal.genPortalStep(world,posArray,state.get(FACING), random);
-                if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
-                    posArray = new BlockPos[0];
+                if (posArray.get(posArray.size() - 1).getY() == -4096 && posArray.get(posArray.size() - 1).getZ() == 0){
+                    posArray = new ArrayList<>();
                     portalPhase = PortalPhase.NONE;
                 }
                 else {
