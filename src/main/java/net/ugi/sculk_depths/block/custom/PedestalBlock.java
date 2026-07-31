@@ -48,10 +48,20 @@ public class PedestalBlock extends FacingBlock {
     private static final VoxelShape RAYCAST_SHAPE = createCuboidShape(2.0, 4.0, 2.0, 14.0, 16.0, 14.0);
 
     private BlockPos[] portalFramePos = new BlockPos[0];
-    private String portalFase = "none";
+    private PortalPhase portalPhase = PortalPhase.NONE;
     private BlockPos[] posArray = new BlockPos[0];
     private ChunkPos[] chunkArray = new ChunkPos[0];
     private StructureStart structureStart;
+
+    public enum PortalPhase {
+        NONE,
+        CHECK_FRAME,
+        GEN_FRAME,
+        CANCEL_FRAME,
+        GEN_STRUCTURE,
+        WAITING_PARTICLES,
+        GEN_PORTAL
+    }
 
     protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(
             VoxelShapes.union(createCuboidShape(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
@@ -87,7 +97,7 @@ public class PedestalBlock extends FacingBlock {
 
             BlockState blockState1 = state.with(HAS_ENERGY_ESSENCE, true);
             world.setBlockState(pos, blockState1);
-            portalFase = "checkFrame";
+            portalPhase = PortalPhase.CHECK_FRAME;
             world.scheduleBlockTick(pos,state.getBlock(),1);
             return ItemActionResult.SUCCESS;
         }
@@ -96,21 +106,21 @@ public class PedestalBlock extends FacingBlock {
 
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        switch (portalFase){
-            case "checkFrame":
+        switch (portalPhase){
+            case CHECK_FRAME:
 
                 portalFramePos = Portal.getFramePos(state.get(FACING),pos, world);//todo benchmark
-                if (portalFramePos == null) {portalFase = "none";return;}
-                if (portalFramePos[0] == null) {portalFase = "none";return;}
+                if (portalFramePos == null) {portalPhase = PortalPhase.NONE;return;}
+                if (portalFramePos[0] == null) {portalPhase = PortalPhase.NONE;return;}
 
-                portalFase = "genFrame";
+                portalPhase = PortalPhase.GEN_FRAME;
                 posArray = portalFramePos;
 
                 world.scheduleBlockTick(pos,state.getBlock(),1);
                 break;
 
 
-            case "genFrame":
+            case GEN_FRAME:
 
                 posArray = Portal.genFrameStep(world, posArray, random);
                 if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 1){
@@ -119,22 +129,22 @@ public class PedestalBlock extends FacingBlock {
                         posArray = Portal.addElement(posArray,pos1.up(3));
                         posArray = Portal.addElement(posArray,pos1.up(4));
                     }
-                    portalFase = "genStructure";
+                    portalPhase = PortalPhase.GEN_STRUCTURE;
                 }
                 else if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
                     posArray = portalFramePos;
-                    portalFase = "cancelFrame";
+                    portalPhase = PortalPhase.CANCEL_FRAME;
                 }
                 world.scheduleBlockTick(pos,state.getBlock(),2);
                 break;
 
 
-            case "cancelFrame":
+            case CANCEL_FRAME:
 
                 posArray = Portal.cancelFrameStep(world,posArray);
                 if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
                     posArray = new BlockPos[0];
-                    portalFase = "none";
+                    portalPhase = PortalPhase.NONE;
                 }
                 else {
                     world.scheduleBlockTick(pos,state.getBlock(),2);
@@ -142,13 +152,13 @@ public class PedestalBlock extends FacingBlock {
                 break;
 
 
-            case "genStructure":
+            case GEN_STRUCTURE:
 
                 BlockPos anchor = Portal.getFrameAnchorPos(state.get(FACING),pos, world);
 
                 structureStart = GenerateStructureAPI.structureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor); //50ms (matteo)
 
-                if (structureStart == null || !structureStart.hasChildren()) {portalFase = "none";return;}
+                if (structureStart == null || !structureStart.hasChildren()) {portalPhase = PortalPhase.NONE;return;}
 
                 BlockBox boundingBox = structureStart.getBoundingBox();
                 chunkArray = GenerateStructureAPI.generateChunkArray(//not laggy
@@ -174,7 +184,7 @@ public class PedestalBlock extends FacingBlock {
                     });
                 }
                 GenerateStructureAPI.generateStructurePartial(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), structureStart, boundingBox.streamChunkPos().toArray(ChunkPos[]::new));
-                portalFase = "genPortal";
+                portalPhase = PortalPhase.GEN_PORTAL;
                 executorService.shutdown();
             });*/
 
@@ -188,14 +198,14 @@ public class PedestalBlock extends FacingBlock {
                 }, getAsyncExecutor()).thenRunAsync(() -> {
                     // This code runs back on the main server thread after the chunks are loaded
                     GenerateStructureAPI.generateStructurePartial(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), structureStart, boundingBox.streamChunkPos().toArray(ChunkPos[]::new));
-                    portalFase = "genPortal";
+                    portalPhase = PortalPhase.GEN_PORTAL;
                 }, world.getServer());
-                portalFase = "waitingParticles";
+                portalPhase = PortalPhase.WAITING_PARTICLES;
                 world.scheduleBlockTick(pos,state.getBlock(),1);
                 break;
 
 
-            case "waitingParticles":
+            case WAITING_PARTICLES:
 
                 BlockPos posMin = Portal.getFrameMinPos(state.get(FACING),pos, world);
                 if (state.get(FACING) == Direction.NORTH)
@@ -212,16 +222,20 @@ public class PedestalBlock extends FacingBlock {
                 break;
 
 
-            case "genPortal":
+            case GEN_PORTAL:
 
                 posArray = Portal.genPortalStep(world,posArray,state.get(FACING), random);
                 if (posArray[posArray.length -1].getY() == -4096 && posArray[posArray.length -1].getZ() == 0){
                     posArray = new BlockPos[0];
-                    portalFase = "none";
+                    portalPhase = PortalPhase.NONE;
                 }
                 else {
                     world.scheduleBlockTick(pos,state.getBlock(),2);
                 }
+                break;
+
+
+            default:
                 break;
         }
     }
