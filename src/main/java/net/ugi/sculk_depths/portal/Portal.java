@@ -72,7 +72,7 @@ public class Portal {
             b = facingPositiveAxis ? 5 : 4;
         } else {
             a = facingPositiveAxis ? 6 : 5;
-            b = 5;
+            b = facingPositiveAxis ? 5 : 6;
         }
         return List.of(
                 pos.offset(depth, 5).up(6).offset(side, a),
