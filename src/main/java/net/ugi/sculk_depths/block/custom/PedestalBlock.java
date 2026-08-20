@@ -146,21 +146,13 @@ public class PedestalBlock extends FacingBlock {
 
                 BlockPos anchor = Portal.getFrameAnchorPos(state.get(FACING),pos, world);
 
-                structureStart = GenerateStructureAPI.structureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor); //50ms (matteo)
+                // Register a stub start so the structure will generate when chunks are actually generated/loaded.
+                // If the target chunk is already loaded, the method will place the center piece only.
+                GenerateStructureAPI.registerStructureStartStub(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor);
 
-                BlockBox boundingBox = structureStart.getBoundingBox();
-                structureStart.getChildren().stream().forEach(child -> {
-                    System.out.println(child.getBoundingBox());
-                });
-
-                chunkArray = GenerateStructureAPI.generateChunkArray(//not laggy
-                        new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMinX()),ChunkSectionPos.getSectionCoord(boundingBox.getMinZ())),
-                        new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMaxX()),ChunkSectionPos.getSectionCoord(boundingBox.getMaxZ())),
-                        0,1);
-
-                ServerWorld serverWorld = world.getServer().getWorld(ModDimensions.SCULK_DEPTHS_LEVEL_KEY);
-
-
+                portalFase = "waitingParticles";
+                world.scheduleBlockTick(pos,state.getBlock(),1);
+                break;
 
 /*            int threads = Runtime.getRuntime().availableProcessors();
             System.out.println("starting structure generation with " + threads + " threads");
@@ -180,21 +172,7 @@ public class PedestalBlock extends FacingBlock {
                 executorService.shutdown();
             });*/
 
-                CompletableFuture.runAsync(() -> {
-                    for (ChunkPos chunkPos : chunkArray) {//load chunks
-                        assert serverWorld != null;
-                        serverWorld.getChunk(chunkPos.x, chunkPos.z);
-                    }
-                    GenerateStructureAPI.forceLoadNearbyChunks(chunkArray, serverWorld);
 
-                }, getAsyncExecutor()).thenRunAsync(() -> {
-                    // This code runs back on the main server thread after the chunks are loaded
-                    GenerateStructureAPI.generateStructurePartial(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), structureStart, boundingBox.streamChunkPos().toArray(ChunkPos[]::new));
-                    portalFase = "genPortal";
-                }, world.getServer());
-                portalFase = "waitingParticles";
-                world.scheduleBlockTick(pos,state.getBlock(),1);
-                break;
 
 
             case "waitingParticles":
