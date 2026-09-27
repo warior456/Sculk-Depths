@@ -6,7 +6,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
-import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class DryableBlock extends Block implements Dryable {
