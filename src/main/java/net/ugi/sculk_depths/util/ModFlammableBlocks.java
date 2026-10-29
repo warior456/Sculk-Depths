@@ -1,7 +1,6 @@
 package net.ugi.sculk_depths.util;
 
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.ugi.sculk_depths.block.ModBlocks;
 
 public class ModFlammableBlocks {

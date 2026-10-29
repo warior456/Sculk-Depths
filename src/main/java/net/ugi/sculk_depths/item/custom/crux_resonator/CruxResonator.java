@@ -2,14 +2,8 @@ package net.ugi.sculk_depths.item.custom.crux_resonator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.function.UnaryOperator;
 
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.FireworksComponent;
-import net.minecraft.component.type.FoodComponent;
-import net.minecraft.component.type.LoreComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -27,7 +21,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.GlobalPos;
 import net.minecraft.world.World;
 import net.ugi.sculk_depths.item.ModComponentTypes;
-import net.ugi.sculk_depths.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 
 import static net.ugi.sculk_depths.block.ModBlocks.QUAZARITH_OSCILLATOR;
@@ -47,7 +40,11 @@ public class CruxResonator extends Item {
         ItemStack itemStack = user.getStackInHand(hand);
         if(world.isClient) {return TypedActionResult.pass(itemStack);}//maybe fix some bugs?
         OscillatorTrackerComponentList oscillatorTrackerComponentList = itemStack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST);
-        System.out.println(oscillatorTrackerComponentList.selectedLocation());
+        if (oscillatorTrackerComponentList == null) {
+            //fresh resonator: no tracked locations yet, initialize an empty tracker list
+            itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(0, List.of()));
+            return TypedActionResult.success(itemStack,false);
+        }
         itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(oscillatorTrackerComponentList.selectedLocation() +1, oscillatorTrackerComponentList.trackers()));
         return TypedActionResult.success(itemStack,false);
     }
@@ -93,8 +90,6 @@ public class CruxResonator extends Item {
             if(oscillatorTrackerComponent1 != oscillatorTrackerComponent2) {
                 //System.out.println();
                 stack.set(ModComponentTypes.OSCILLATOR_TRACKER, oscillatorTrackerComponent2);
-                System.out.println(trackers);
-                System.out.println(selectedLocation);
                 trackers1.remove(selectedLocation);
                 if(selectedLocation == 0) {
                     stack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(selectedLocation, trackers1));
@@ -110,7 +105,6 @@ public class CruxResonator extends Item {
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         List<OscillatorTrackerComponent> trackers = new ArrayList<OscillatorTrackerComponent>();
-        System.out.println("START USE ON BLOCK");
 
         BlockPos blockPos = context.getBlockPos();
         World world = context.getWorld();
@@ -124,7 +118,6 @@ public class CruxResonator extends Item {
 
         if(itemStack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST) != null) {
             trackers = itemStack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST).trackers();
-            System.out.println("trackers:" + trackers);
         };
 
         OscillatorTrackerComponent oscillatorTrackerComponent = new OscillatorTrackerComponent(Optional.of(GlobalPos.create(world.getRegistryKey(), blockPos)), true, "");
@@ -138,8 +131,6 @@ public class CruxResonator extends Item {
         itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER , oscillatorTrackerComponent);
         itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST , oscillatorTrackerComponentList);
 
-
-        System.out.println("END USE ON BLOCK");
 
         return ActionResult.success(world.isClient);
 

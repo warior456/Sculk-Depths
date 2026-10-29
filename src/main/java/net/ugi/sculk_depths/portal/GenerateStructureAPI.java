@@ -1,6 +1,5 @@
 package net.ugi.sculk_depths.portal;
 
-import com.sun.source.tree.WhileLoopTree;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -11,12 +10,10 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.ChunkSectionPos;
-import net.minecraft.world.StructureSpawns;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.structure.Structure;
 
-import java.util.Date;
 import java.util.Optional;
 
 public class GenerateStructureAPI {
@@ -73,7 +70,9 @@ public class GenerateStructureAPI {
 
     public static StructureStart structureStart (World  originalWorld, RegistryKey<World> targetWorldKey, Identifier structureKey, BlockPos pos){
         if(originalWorld.isClient)return null;
-        RegistryEntry.Reference<Structure> structure = originalWorld.getRegistryManager().get(RegistryKeys.STRUCTURE).getEntry(structureKey).get();
+        Optional<RegistryEntry.Reference<Structure>> structureReference = originalWorld.getRegistryManager().get(RegistryKeys.STRUCTURE).getEntry(structureKey);
+        if(structureReference.isEmpty())return null;
+        RegistryEntry.Reference<Structure> structure = structureReference.get();
         ServerWorld serverWorld = originalWorld.getServer().getWorld(targetWorldKey);
         ChunkGenerator chunkGenerator = serverWorld.getChunkManager().getChunkGenerator();
         Structure structure2 = structure.value();
@@ -134,7 +133,7 @@ public class GenerateStructureAPI {
             try{
                 java.lang.reflect.Method m = accessor.getClass().getMethod("setStartForStructure", ChunkPos.class, RegistryKey.class, StructureStart.class);
                 // build RegistryKey<Structure>
-                RegistryKey<Structure> structKey = RegistryKey.of(RegistryKeys.STRUCTURE.getRegistryKey(), structureKey);
+                RegistryKey<Structure> structKey = RegistryKey.of(RegistryKeys.STRUCTURE, structureKey);
                 m.invoke(accessor, startChunk, structKey, start);
                 registered = true;
             }catch(NoSuchMethodException e){
@@ -200,7 +199,7 @@ public class GenerateStructureAPI {
                 for (java.lang.reflect.Method m3 : chunk.getClass().getMethods()){
                     Class<?>[] pts = m3.getParameterTypes();
                     if (pts.length == 2 && RegistryKey.class.isAssignableFrom(pts[0]) && StructureStart.class.isAssignableFrom(pts[1])){
-                        RegistryKey<Structure> structKey = RegistryKey.of(RegistryKeys.STRUCTURE.getRegistryKey(), structureKey);
+                        RegistryKey<Structure> structKey = RegistryKey.of(RegistryKeys.STRUCTURE, structureKey);
                         m3.invoke(chunk, structKey, start);
                         setOnChunk = true;
                         break;

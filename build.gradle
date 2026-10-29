@@ -22,6 +22,13 @@ repositories {
 	maven { url "https://api.modrinth.com/maven"}
 }
 
+sourceSets {
+	gametest {
+		compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+		runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+	}
+}
+
 loom {
 	splitEnvironmentSourceSets()
 	accessWidenerPath = file("src/main/resources/sculk_depths.accesswidener")
@@ -30,8 +37,28 @@ loom {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
 		}
+		"sculk_depths_gametest" {
+			sourceSet sourceSets.gametest
+		}
 	}
 
+	runs {
+		// Headless dedicated server that runs the Fabric GameTests and exits.
+		gameTestServer {
+			inherit server
+			name "Game Test Server"
+			vmArg "-Dfabric-api.gametest"
+			vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/reports/gametest/junit.xml"
+		}
+	}
+
+}
+
+// Loom's split-env run classpath only picks up the main source set; make sure the
+// gametest mod (classes + its fabric.mod.json) is on the game test server classpath.
+tasks.named('runGameTestServer') {
+	dependsOn 'gametestClasses'
+	classpath += sourceSets.gametest.output
 }
 
 fabricApi {
@@ -51,6 +78,45 @@ dependencies {
 		exclude group: "net.fabricmc.fabric-api", module: "fabric-gametest-api-v1"}*/
 
 	include(modImplementation("maven.modrinth:fstats:${project.fstats_version}"))
+
+	// Test harness: fabric-loader-junit bootstraps the loader + registries headlessly
+	testImplementation "net.fabricmc:fabric-loader-junit:${project.loader_version}"
+	testImplementation "org.mockito:mockito-core:5.14.2"
+}
+
+test {
+	useJUnitPlatform()
+	// Regression tests for confirmed bugs (assert CORRECT behavior, so they FAIL on
+	// the current buggy code by design) live in the regression package and run via
+	// the separate regressionTest task, keeping the main suite green.
+	exclude 'net/ugi/sculk_depths/regression/**'
+	testLogging {
+		events "PASSED", "FAILED", "SKIPPED"
+	}
+}
+
+// Runs only the issue-mapped regression tests. Each failure is an expected proof
+// of a known bug (see comments in the test classes), so failures do not fail the build.
+tasks.register('regressionTest', Test) {
+	useJUnitPlatform()
+	include 'net/ugi/sculk_depths/regression/**'
+	testClassesDirs = sourceSets.test.output.classesDirs
+	classpath = sourceSets.test.runtimeClasspath
+	ignoreFailures = true
+	testLogging {
+		events "PASSED", "FAILED", "SKIPPED"
+	}
+}
+
+// With splitEnvironmentSourceSets() loom does not wire Minecraft into the test
+// source set automatically; inherit the main (common) classpath instead.
+// The client classpath is also needed: fabric-loader-junit's Knot game provider
+// locates the game via the client entrypoint, which lives in the client-only jar.
+sourceSets {
+	test {
+		compileClasspath += sourceSets.main.compileClasspath + sourceSets.client.compileClasspath
+		runtimeClasspath += sourceSets.main.runtimeClasspath + sourceSets.client.runtimeClasspath
+	}
 }
 
 processResources {

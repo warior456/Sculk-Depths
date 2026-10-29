@@ -21,6 +21,10 @@ public class Config {
                 FileReader fileReader = new FileReader(configFile);
                 CONFIG = gson.fromJson(fileReader, ConfigHandler.class);
                 fileReader.close();
+                if (CONFIG == null) {
+                    //empty/whitespace-only file parses to null; fall back to defaults
+                    CONFIG = new ConfigHandler();
+                }
                 saveConfig(); //update config
             } catch (IOException e) {
                 SculkDepths.LOGGER.warn("the config was not loaded: " + e.getLocalizedMessage());

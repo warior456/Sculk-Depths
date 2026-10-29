@@ -2,7 +2,6 @@ package net.ugi.sculk_depths.entity.custom;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
-import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -10,13 +9,11 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
-import net.ugi.sculk_depths.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 
 public class ChomperColossusEntity extends PathAwareEntity {

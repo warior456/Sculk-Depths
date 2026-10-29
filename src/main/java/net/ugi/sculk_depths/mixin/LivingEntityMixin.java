@@ -29,6 +29,7 @@ public abstract class LivingEntityMixin extends Entity {
         if (adversary instanceof WardenEntity && this.getType().isIn(ModEntityTags.DROPS_ENERGY_ESSENCE)) {
             ItemEntity itemEntity = new ItemEntity(this.getWorld(), this.getX(), this.getY(), this.getZ(), new ItemStack(ModItems.ENERGY_ESSENCE));
             this.getWorld().spawnEntity(itemEntity);
+            this.getWorld().spawnEntity(itemEntity);
         }
     }
 }

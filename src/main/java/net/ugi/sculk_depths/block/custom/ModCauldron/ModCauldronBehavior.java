@@ -10,7 +10,6 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -114,9 +113,7 @@ public interface ModCauldronBehavior {
             }
             if (!world.isClient) {
                 if (!player.isCreative()) {
-                    ItemStack heldItem = player.getMainHandStack().getItem() == ModItems.CRUX ?
-                            player.getMainHandStack() : player.getOffHandStack();
-                    heldItem.decrement(1);
+                    stack.decrement(1);
                 }
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));

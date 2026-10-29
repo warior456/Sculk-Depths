@@ -2,15 +2,12 @@ package net.ugi.sculk_depths.block.custom;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
 import net.minecraft.block.SnowBlock;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 

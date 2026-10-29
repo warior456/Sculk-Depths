@@ -4,7 +4,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.recipebook.FurnaceRecipeBookScreen;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.screen.FurnaceScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.SculkDepths;

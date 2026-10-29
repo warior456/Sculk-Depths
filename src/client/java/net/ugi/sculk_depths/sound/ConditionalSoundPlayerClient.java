@@ -192,7 +192,6 @@ public class ConditionalSoundPlayerClient implements ClientTickEvents.StartWorld
 
         DensityFunction.Noise radNoise = new DensityFunction.Noise(noiseParam, DoublePerlinNoiseSampler.create(radRandom, new DoublePerlinNoiseSampler.NoiseParameters(-7, 1,2,3,2,4,2.4,9)));
         DensityFunction.Noise speedNoise = new DensityFunction.Noise(noiseParam, DoublePerlinNoiseSampler.create(speedRandom, new DoublePerlinNoiseSampler.NoiseParameters(-7, 1,2,3,2,4,2.4,9)));
-        System.out.println(world.getTime());
         double rad = radNoise.sample(player.getX()/75d, world.getTime()/600d, player.getZ()/75d)*Math.PI;
         double speed = speedNoise.sample(player.getX()/75d, world.getTime()/300d, player.getZ()/75d);
 

@@ -4,24 +4,15 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
-import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.entity.ModEntities;
 import net.ugi.sculk_depths.entity.custom.LesterEntity;
 import net.ugi.sculk_depths.tags.ModTags;
 
-import java.util.Objects;
 
 public class LesterSpawningBlock extends Block {
     public LesterSpawningBlock(Settings settings) {
@@ -42,13 +33,15 @@ public class LesterSpawningBlock extends Block {
             pos = pos.east(XOffset);
             int ZOffset = MathHelper.nextInt(Random.create(), -5, 5);
             pos = pos.south(ZOffset);
+            BlockPos candidate;
             if(!world.getBlockState(pos).isIn(ModTags.Blocks.LESTER_SPAWN_BLOCKS)){
-                pos = checkForRoof(world,pos, "Up",0,300);
+                candidate = checkForRoof(world,pos, "Up",0,300);
             }
-            else pos = checkForRoof(world,pos, "Down",0,10);
+            else candidate = checkForRoof(world,pos, "Down",0,10);
 
 
-            if(pos == null){ continue;}
+            if(candidate == null){ continue;}
+            pos = candidate;
 
 
             entity.setPosition(pos.getX()+ 0.5,pos.getY()+0.99,pos.getZ() + 0.5);

@@ -11,7 +11,6 @@ import net.ugi.sculk_depths.item.ModItems;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiConsumer;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
@@ -131,8 +130,7 @@ public class ModModelProvider extends FabricModelProvider {
 
             identifierList.add(ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, suffix));
             TextureMap textureMap = (new TextureMap()).put(TextureKey.END,ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, "_end" + suffix)).put(TextureKey.SIDE,ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, "_side" + suffix));
-            TextureMap textureMap1 = TextureMap.of(TextureKey.TEXTURE, ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE,  suffix));
-            model.upload(ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, suffix), textureMap1, blockStateModelGenerator.modelCollector);
+            model.upload(ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, suffix), textureMap, blockStateModelGenerator.modelCollector);
         });
 
         blockStateModelGenerator.blockStateCollector.accept(createBlockStateWithVariants(block,identifierList));

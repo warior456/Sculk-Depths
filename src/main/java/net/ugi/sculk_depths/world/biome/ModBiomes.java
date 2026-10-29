@@ -2,7 +2,6 @@ package net.ugi.sculk_depths.world.biome;
 
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import net.ugi.sculk_depths.SculkDepths;
 

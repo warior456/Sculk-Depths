@@ -2,11 +2,9 @@ package net.ugi.sculk_depths.block.custom;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
-import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
@@ -15,13 +13,11 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
 import net.ugi.sculk_depths.state.property.ModProperties;
 import net.ugi.sculk_depths.tags.ModTags;
 
 import java.util.ArrayList;
 
-import static net.minecraft.util.BlockRotation.CLOCKWISE_180;
 
 public class FlowBlock extends FacingBlock {
     @Override

@@ -2,7 +2,6 @@ package net.ugi.sculk_depths.block;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;
 import net.minecraft.block.BlockSetType;
-import net.minecraft.util.Identifier;
 import net.ugi.sculk_depths.SculkDepths;
 
 public class ModBlockSetType {
