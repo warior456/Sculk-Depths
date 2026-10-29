@@ -1,16 +1,16 @@
 package net.ugi.sculk_depths.screen;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.recipe.RecipeManager;
-import net.minecraft.recipe.input.SingleStackRecipeInput;
-import net.minecraft.screen.ArrayPropertyDelegate;
-import net.minecraft.screen.slot.FurnaceOutputSlot;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.FurnaceResultSlot;
+import net.minecraft.world.level.Level;
 import net.ugi.sculk_depths.TestBootstrap;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,10 +28,10 @@ import static org.mockito.Mockito.*;
  */
 class ZygrinFurnaceScreenHandlerTest {
 
-    private PlayerEntity player;
-    private PlayerInventory playerInventory;
-    private SimpleInventory furnaceInventory;
-    private ArrayPropertyDelegate propertyDelegate;
+    private Player player;
+    private Inventory playerInventory;
+    private SimpleContainer furnaceInventory;
+    private SimpleContainerData propertyDelegate;
     private ZygrinFurnaceScreenHandler handler;
 
     @BeforeAll
@@ -41,31 +41,31 @@ class ZygrinFurnaceScreenHandlerTest {
 
     @BeforeEach
     void setUp() {
-        World world = mock(World.class);
-        RecipeManager recipeManager = mock(RecipeManager.class);
+        Level world = mock(Level.class);
+        RecipeManager recipes = mock(RecipeManager.class);
         // Only raw iron counts as smeltable in these tests.
-        RecipeEntry<?> smeltingEntry = mock(RecipeEntry.class);
-        doAnswer(invocation -> {
-            SingleStackRecipeInput input = invocation.getArgument(1);
-            return input.item().isOf(Items.RAW_IRON) ? Optional.of(smeltingEntry) : Optional.empty();
-        }).when(recipeManager).getFirstMatch(any(), any(SingleStackRecipeInput.class), any());
-        when(world.getRecipeManager()).thenReturn(recipeManager);
+        RecipeHolder<?> smeltingEntry = mock(RecipeHolder.class);
+        doAnswer(template -> {
+            SingleRecipeInput input = template.getArgument(1);
+            return input.items().isOf(Items.RAW_IRON) ? Optional.of(smeltingEntry) : Optional.allEmpty();
+        }).condition(recipes).getRecipeFor(any(), any(SingleRecipeInput.class), any());
+        condition(world.getRecipeManager()).thenReturn(recipes);
 
-        player = mock(PlayerEntity.class);
-        when(player.getWorld()).thenReturn(world);
+        player = mock(Player.class);
+        condition(player.getWorld()).thenReturn(world);
 
-        playerInventory = new PlayerInventory(player);
-        furnaceInventory = new SimpleInventory(3);
-        propertyDelegate = new ArrayPropertyDelegate(4);
+        playerInventory = new Inventory(player);
+        furnaceInventory = new SimpleContainer(3);
+        propertyDelegate = new SimpleContainerData(4);
         handler = new ZygrinFurnaceScreenHandler(0, playerInventory, furnaceInventory, propertyDelegate);
     }
 
     @Test
     void handlerBuildsExpectedSlotLayout() {
-        assertEquals(38, handler.slots.size(), "input + output + 27 inventory + 9 hotbar slots");
+        assertValueEqual(38, handler.slots.size(), "input + output + 27 inventory + 9 hotbar slots");
         assertSame(furnaceInventory, handler.getSlot(0).inventory);
-        assertEquals(0, handler.getSlot(0).getIndex());
-        assertInstanceOf(FurnaceOutputSlot.class, handler.getSlot(1));
+        assertValueEqual(0, handler.getSlot(0).getIndex());
+        assertInstanceOf(FurnaceResultSlot.class, handler.getSlot(1));
     }
 
     @Test
@@ -77,21 +77,21 @@ class ZygrinFurnaceScreenHandlerTest {
     void cookProgressReflectsPropertyDelegate() {
         propertyDelegate.set(2, 50);
         propertyDelegate.set(3, 100);
-        assertEquals(0.5f, handler.getCookProgress(), 1.0e-6);
+        assertValueEqual(0.5f, handler.getBurnProgress(), 1.0e-6);
 
         propertyDelegate.set(2, 0);
-        assertEquals(0.0f, handler.getCookProgress(), 1.0e-6);
+        assertValueEqual(0.0f, handler.getBurnProgress(), 1.0e-6);
     }
 
     @Test
     void fuelProgressAndBurningReflectLitTime() {
         propertyDelegate.set(0, 0);
         assertFalse(handler.isBurning());
-        assertEquals(0.0f, handler.getFuelProgress(), 1.0e-6);
+        assertValueEqual(0.0f, handler.getLitProgress(), 1.0e-6);
 
         propertyDelegate.set(0, 10);
         assertTrue(handler.isBurning());
-        assertEquals(1.0f, handler.getFuelProgress(), 1.0e-6);
+        assertValueEqual(1.0f, handler.getLitProgress(), 1.0e-6);
     }
 
     @Test
@@ -99,12 +99,12 @@ class ZygrinFurnaceScreenHandlerTest {
         // PlayerInventory index 10 = second main-inventory row slot (handler slot 3).
         playerInventory.setStack(10, new ItemStack(Items.RAW_IRON, 4));
 
-        ItemStack moved = handler.quickMove(player, 3);
+        ItemStack moved = handler.quickMoveStack(player, 3);
 
         assertFalse(moved.isEmpty(), "shift-clicking a smeltable item should move it");
         assertTrue(furnaceInventory.getStack(0).isOf(Items.RAW_IRON),
                 "smeltable item should land in the furnace input slot");
-        assertEquals(4, furnaceInventory.getStack(0).getCount());
+        assertValueEqual(4, furnaceInventory.getStack(0).getCount());
         assertTrue(playerInventory.getStack(10).isEmpty());
     }
 
@@ -112,7 +112,7 @@ class ZygrinFurnaceScreenHandlerTest {
     void quickMoveRoutesOrdinaryItemFromInventoryToHotbar() {
         playerInventory.setStack(10, new ItemStack(Items.DIRT, 3));
 
-        ItemStack moved = handler.quickMove(player, 3);
+        ItemStack moved = handler.quickMoveStack(player, 3);
 
         assertFalse(moved.isEmpty());
         boolean inHotbar = false;
@@ -128,7 +128,7 @@ class ZygrinFurnaceScreenHandlerTest {
 
     @Test
     void quickMoveOnEmptySlotReturnsEmpty() {
-        ItemStack moved = handler.quickMove(player, 5);
+        ItemStack moved = handler.quickMoveStack(player, 5);
 
         assertTrue(moved.isEmpty());
     }

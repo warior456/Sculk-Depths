@@ -2,9 +2,9 @@ package net.ugi.sculk_depths.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.entity.LivingEntityRenderer;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.world.entity.LivingEntity;
 import net.ugi.sculk_depths.entity.client.GlomperRenderer;
 import net.ugi.sculk_depths.entity.custom.GlomperEntity;
 import org.jetbrains.annotations.Nullable;
@@ -15,12 +15,12 @@ import org.spongepowered.asm.mixin.injection.At;
 public class LivingEntityRendererMixin {
     @ModifyReturnValue(
             method = "getRenderLayer",
-            at = @At("RETURN")
+            forIndex = @At("RETURN")
     )
-    private RenderLayer AllowGlomperTranslucency(@Nullable RenderLayer original, @Local(ordinal = 0) LivingEntity livingEntity) {
+    private RenderType AllowGlomperTranslucency(@Nullable RenderType source, @Local(ordinal = 0) LivingEntity livingEntity) {
         if(livingEntity.getClass() == GlomperEntity.class){
-            return RenderLayer.getEntityTranslucent(GlomperRenderer.GLOMPER_TEXTURE); //TODO unhardcode this
+            return RenderType.entityTranslucent(GlomperRenderer.GLOMPER_TEXTURE); //TODO unhardcode this
         }
-        return original;
+        return source;
     }
 }

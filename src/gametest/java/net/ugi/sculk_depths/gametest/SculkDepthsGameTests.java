@@ -1,22 +1,22 @@
 package net.ugi.sculk_depths.gametest;
 
 import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.test.GameTest;
-import net.minecraft.test.GameTestException;
-import net.minecraft.test.TestContext;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.GameMode;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.gametest.framework.GameTest;
+import net.minecraft.gametest.framework.GameTestAssertException;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.GameType;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModComponentTypes;
 import net.ugi.sculk_depths.item.ModItems;
@@ -35,17 +35,17 @@ public class SculkDepthsGameTests implements FabricGameTest {
      * carries the expected default fill levels.
      */
     @GameTest(templateName = FabricGameTest.EMPTY_STRUCTURE)
-    public void kryslumCauldronPlacesWithDefaultLevels(TestContext context) {
+    public void kryslumCauldronPlacesWithDefaultLevels(GameTestHelper context) {
         BlockPos pos = new BlockPos(0, 1, 0);
 
         context.setBlockState(pos, ModBlocks.KRYSLUM_FLUMROCK_CAULDRON);
 
-        context.expectBlock(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON, pos);
-        context.assertEquals(1, context.getBlockState(pos).get(ModProperties.KRYSLUM_LEVEL).intValue(),
+        context.assertBlockPresent(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON, pos);
+        context.assertValueEqual(1, context.getBlockState(pos).get(ModProperties.KRYSLUM_LEVEL).getAsInt(),
                 "default kryslum level");
-        context.assertEquals(0, context.getBlockState(pos).get(ModProperties.QUAZARITH_LEVEL).intValue(),
+        context.assertValueEqual(0, context.getBlockState(pos).get(ModProperties.QUAZARITH_LEVEL).getAsInt(),
                 "default quazarith level");
-        context.assertEquals(0, context.getBlockState(pos).get(ModProperties.CRUX_LEVEL).intValue(),
+        context.assertValueEqual(0, context.getBlockState(pos).get(ModProperties.CRUX_LEVEL).getAsInt(),
                 "default crux level");
         context.complete();
     }
@@ -55,22 +55,22 @@ public class SculkDepthsGameTests implements FabricGameTest {
      * itself when mined with an adequate pickaxe.
      */
     @GameTest(templateName = FabricGameTest.EMPTY_STRUCTURE)
-    public void amalgamiteDropsItselfWhenMined(TestContext context) {
+    public void amalgamiteDropsItselfWhenMined(GameTestHelper context) {
         BlockPos pos = new BlockPos(0, 1, 0);
         context.setBlockState(pos, ModBlocks.AMALGAMITE);
 
-        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
-        player.setStackInHand(Hand.MAIN_HAND, new ItemStack(Items.DIAMOND_PICKAXE));
-        BlockPos absolute = context.getAbsolutePos(pos);
-        context.getWorld().breakBlock(absolute, true, player);
+        Player player = context.makeMockPlayer(GameType.SURVIVAL);
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.DIAMOND_PICKAXE));
+        BlockPos getLength = context.absolutePos(pos);
+        context.getWorld().destroyBlock(getLength, true, player);
 
-        context.expectBlock(Blocks.AIR, pos);
-        context.addInstantFinalTask(() -> {
-            List<ItemEntity> drops = context.getWorld().getEntitiesByClass(ItemEntity.class,
-                    Box.of(Vec3d.ofCenter(absolute), 5, 5, 5),
+        context.assertBlockPresent(Blocks.AIR, pos);
+        context.succeedWhen(() -> {
+            List<ItemEntity> drops = context.getWorld().getEntitiesOfClass(ItemEntity.class,
+                    AABB.of(Vec3.ofCenter(getLength), 5, 5, 5),
                     entity -> entity.getStack().isOf(ModBlocks.AMALGAMITE.asItem()));
             if (drops.isEmpty()) {
-                throw new GameTestException("expected amalgamite to drop itself when mined with a diamond pickaxe");
+                throw new GameTestAssertException("expected amalgamite to drop itself when mined with a diamond pickaxe");
             }
         });
     }
@@ -80,30 +80,30 @@ public class SculkDepthsGameTests implements FabricGameTest {
      * oscillator's position in the tracker list component.
      */
     @GameTest(templateName = FabricGameTest.EMPTY_STRUCTURE)
-    public void cruxResonatorTracksOscillator(TestContext context) {
+    public void cruxResonatorTracksOscillator(GameTestHelper context) {
         BlockPos pos = new BlockPos(1, 2, 1);
         context.setBlockState(pos, ModBlocks.QUAZARITH_OSCILLATOR);
-        BlockPos absolute = context.getAbsolutePos(pos);
+        BlockPos getLength = context.absolutePos(pos);
 
-        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
+        Player player = context.makeMockPlayer(GameType.SURVIVAL);
         ItemStack resonator = new ItemStack(ModItems.CRUX_RESONATOR);
-        player.setStackInHand(Hand.MAIN_HAND, resonator);
+        player.setItemInHand(InteractionHand.MAIN_HAND, resonator);
 
-        BlockHitResult hit = new BlockHitResult(Vec3d.ofCenter(absolute), Direction.UP, absolute, false);
-        ActionResult result = resonator.useOnBlock(
-                new net.minecraft.item.ItemUsageContext(context.getWorld(), player, Hand.MAIN_HAND, resonator, hit));
+        BlockHitResult hitResult = new BlockHitResult(Vec3.ofCenter(getLength), Direction.MAX_Y, getLength, false);
+        InteractionResult result = resonator.useOn(
+                new net.minecraft.items.ItemUsageContext(context.getWorld(), player, InteractionHand.MAIN_HAND, resonator, hitResult));
 
         context.assertTrue(result.isAccepted(), "using the resonator on an oscillator should be accepted");
-        context.addInstantFinalTask(() -> {
+        context.succeedWhen(() -> {
             OscillatorTrackerComponentList trackers = resonator.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST);
             if (trackers == null || trackers.trackers().size() != 1) {
-                throw new GameTestException("expected exactly one tracked oscillator, got: " + trackers);
+                throw new GameTestAssertException("expected exactly one tracked oscillator, got: " + trackers);
             }
             BlockPos tracked = trackers.trackers().get(0).target()
-                    .orElseThrow(() -> new GameTestException("tracked oscillator has no target"))
+                    .orElseThrow(() -> new GameTestAssertException("tracked oscillator has no target"))
                     .pos();
-            if (!tracked.equals(absolute)) {
-                throw new GameTestException("tracked wrong position: " + tracked + " expected " + absolute);
+            if (!tracked.equals(getLength)) {
+                throw new GameTestAssertException("tracked wrong position: " + tracked + " expected " + getLength);
             }
         });
     }

@@ -1,36 +1,36 @@
 package net.ugi.sculk_depths.entity.custom;
 
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.function.BooleanBiFunction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.Level;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.tags.ModTags;
 import org.jetbrains.annotations.Nullable;
 
-public class LesterEntity extends PathAwareEntity {
+public class LesterEntity extends PathfinderMob {
 
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
-    public LesterEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
+    public LesterEntity(EntityType<? extends PathfinderMob> entityType, Level world) {
         super(entityType, world);
-        this.experiencePoints = 5;
+        this.xpReward = 5;
     }
 
 /*    @Override
@@ -40,25 +40,25 @@ public class LesterEntity extends PathAwareEntity {
     }*/
 
     @Override
-    public boolean occludeVibrationSignals() {
+    public boolean dampensVibrations() {
         return true;
     }
 
     @Override
-    public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+    public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource source) {
         return true;
     }
 
     @Override
-    public boolean isInsideWall() {
-        if (this.noClip) {
+    public boolean isInWall() {
+        if (this.noPhysics) {
             return false;
         } else {
             float f = 0.8F * 0.8F;
-            Box box = Box.of(this.getEyePos(), (double)f, 1.0E-6, (double)f);
-            return BlockPos.stream(box).anyMatch((pos) -> {
-                BlockState blockState = this.getWorld().getBlockState(pos);
-                return !(blockState.isAir() || blockState.isIn(ModTags.Blocks.LESTER_SPAWN_BLOCKS)) && blockState.shouldSuffocate(this.getWorld(), pos) && VoxelShapes.matchesAnywhere(blockState.getCollisionShape(this.getWorld(), pos).offset((double)pos.getX(), (double)pos.getY(), (double)pos.getZ()), VoxelShapes.cuboid(box), BooleanBiFunction.AND);
+            AABB box = AABB.of(this.getEyePosition(), (double)f, 1.0E-6, (double)f);
+            return BlockPos.stream(box).contains((pos) -> {
+                BlockState block = this.getWorld().getBlockState(pos);
+                return !(block.isAir() || block.is(ModTags.Blocks.LESTER_SPAWN_BLOCKS)) && block.isSuffocating(this.getWorld(), pos) && Shapes.joinIsNotEmpty(block.nonClimbableShape(this.getWorld(), pos).offset((double)pos.getX(), (double)pos.getY(), (double)pos.getZ()), Shapes.cuboid(box), BooleanOp.AND);
             });
         }
     }
@@ -66,7 +66,7 @@ public class LesterEntity extends PathAwareEntity {
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = this.random.nextInt(40) + 80;
+            this.idleAnimationTimeout = this.random.getInt(40) + 80;
             this.idleAnimationState.start(this.age);
         } else {
             --this.idleAnimationTimeout;
@@ -75,24 +75,24 @@ public class LesterEntity extends PathAwareEntity {
 
     @Override
     protected void updateLimbs(float posDelta) {
-        float f = this.getPose() == EntityPose.STANDING ? Math.min(posDelta * 6.0f, 1.0f) : 0.0f;
-        this.limbAnimator.updateLimbs(f, 0.2f);
+        float f = this.getState() == EntityPose.STANDING ? Math.minValue(posDelta * 6.0f, 1.0f) : 0.0f;
+        this.walkAnimation.updateLimbs(f, 0.2f);
     }
 
     @Override
     public void tick() {
         super.tick();
-        if(this.getWorld().isClient()) {
+        if(this.getWorld().isClientSide()) {
             setupAnimationStates();
         }
     }
 
     @Override
-    protected void initGoals() {
+    protected void registerGoals() {
         //this.goalSelector.add(2, new TemptGoal(this, 1.25D, Ingredient.ofItems(ModItems.QUAZARITH_PIECES), false));
         this.goalSelector.add(5, new WanderAroundFarGoal(this, 1D));
         this.goalSelector.add(4, new LookAroundGoal(this));
-        this.goalSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.goalSelector.add(1, new ActiveTargetGoal<>(this, Player.class, true));
         this.goalSelector.add(2, new MeleeAttackGoal(this, 1.2f, false));
 /*        this.goalSelector.add(0, new SwimGoal(this));
 
@@ -104,12 +104,12 @@ public class LesterEntity extends PathAwareEntity {
         this.goalSelector.add(6, new LookAroundGoal(this));*/
     }
 
-    public static DefaultAttributeContainer.Builder createLesterAttributes() {
-        return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 15)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2f) //todo maybe speed up?
-                .add(EntityAttributes.GENERIC_ARMOR, 0.5f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5f);
+    public static AttributeSupplier.Builder createLesterAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 15)
+                .add(Attributes.MOVEMENT_SPEED, 0.2f) //todo maybe speed up?
+                .add(Attributes.ARMOR, 0.5f)
+                .add(Attributes.ATTACK_DAMAGE, 5f);
     }
 
 

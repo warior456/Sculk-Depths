@@ -1,28 +1,28 @@
 package net.ugi.sculk_depths.block.dryable;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.PillarBlock;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
-public class DryablePillarBlock extends PillarBlock implements Dryable {
+public class DryablePillarBlock extends RotatedPillarBlock implements Dryable {
     public DryablePillarBlock(Settings settings) {
         super(settings);
     }
 
     @Override
-    public boolean hasRandomTicks(BlockState state) {
+    public boolean isRandomlyTicking(BlockState state) {
         return true;
     }
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 
-        if (MathHelper.nextInt(random, 0, 100) == 0) {
-            if(world.getDimensionEntry().getKey().get() == ModDimensions.SCULK_DEPTHS_TYPE) {
+        if (Mth.getInt(random, 0, 100) == 0) {
+            if(world.dimensionTypeRegistration().getKey().get() == ModDimensions.SCULK_DEPTHS_TYPE) {
 
                 if (state.getBlock() == ModBlocks.VALTROX_LOG || state.getBlock() == ModBlocks.VALTROX_WOOD) {
                     int livingBlocks = -1;
@@ -41,7 +41,7 @@ public class DryablePillarBlock extends PillarBlock implements Dryable {
                     }
                     if(driedBlocks >= 1 && livingBlocks > 1) {
                         for (int l = driedBlocks; l >= 0; --l) {
-                            if (MathHelper.nextInt(random, 0, 10) == 0) {
+                            if (Mth.getInt(random, 0, 10) == 0) {
                                 Dryable.DryBlock(state, world, pos);
                                 return;
                             }

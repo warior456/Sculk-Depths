@@ -1,20 +1,20 @@
 package net.ugi.sculk_depths.world.biome;
 
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.biome.Biome;
 import net.ugi.sculk_depths.SculkDepths;
 
 public class ModBiomes {
-    public static final RegistryKey<Biome> PETRIFIED_FOREST = register("petrified_valtrox_forest");
-    public static final RegistryKey<Biome> DRIED_FOREST = register("dried_valtrox_forest");
+    public static final ResourceKey<Biome> PETRIFIED_FOREST = register("petrified_valtrox_forest");
+    public static final ResourceKey<Biome> DRIED_FOREST = register("dried_valtrox_forest");
 
-    public static final RegistryKey<Biome> INFECTED_COLUMNS = register("infected_columns");
+    public static final ResourceKey<Biome> INFECTED_COLUMNS = register("infected_columns");
 
-    public static final RegistryKey<Biome> CEPHLERA_CAVES = register("cephlera_caves");
-    public static final RegistryKey<Biome> SCULK_CAVES = register("sculk_caves");
+    public static final ResourceKey<Biome> CEPHLERA_CAVES = register("cephlera_caves");
+    public static final ResourceKey<Biome> SCULK_CAVES = register("sculk_caves");
 
-    private static RegistryKey<Biome> register(String name) {
-        return RegistryKey.of(RegistryKeys.BIOME, SculkDepths.identifier( name));
+    private static ResourceKey<Biome> register(String name) {
+        return ResourceKey.of(Registries.BIOME, SculkDepths.id( name));
     }
 }

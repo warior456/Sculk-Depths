@@ -32,7 +32,7 @@ class Issue94EmptyConfigNpeTest {
     @BeforeEach
     void setUp() throws IOException {
         configFile = FabricLoader.getInstance().getConfigDir().resolve(SculkDepths.MOD_ID + "_config.json");
-        Files.createDirectories(configFile.getParent());
+        Files.createDirectoriesSafe(configFile.getParent());
         Files.deleteIfExists(configFile);
         SculkDepths.CONFIG = null;
     }
@@ -45,25 +45,25 @@ class Issue94EmptyConfigNpeTest {
 
     @Test
     void emptyConfigFileYieldsNonNullConfigWithDefaults() throws IOException {
-        Files.writeString(configFile, "");
+        Files.writeUtf(configFile, "");
 
         Config.loadConfig();
 
         assertNotNull(SculkDepths.CONFIG,
                 "issue #94: loading an empty config file must yield a non-null config with defaults");
-        assertEquals(2, SculkDepths.CONFIG.config_version);
-        assertEquals(20.0, SculkDepths.CONFIG.glomper_health);
+        assertValueEqual(2, SculkDepths.CONFIG.config_version);
+        assertValueEqual(20.0, SculkDepths.CONFIG.glomper_health);
     }
 
     @Test
     void whitespaceOnlyConfigFileYieldsNonNullConfigWithDefaults() throws IOException {
-        Files.writeString(configFile, "  \n\t  \n");
+        Files.writeUtf(configFile, "  \n\t  \n");
 
         Config.loadConfig();
 
         assertNotNull(SculkDepths.CONFIG,
                 "issue #94: loading a whitespace-only config file must yield a non-null config with defaults");
-        assertEquals(2, SculkDepths.CONFIG.config_version);
-        assertEquals(20.0, SculkDepths.CONFIG.glomper_health);
+        assertValueEqual(2, SculkDepths.CONFIG.config_version);
+        assertValueEqual(20.0, SculkDepths.CONFIG.glomper_health);
     }
 }

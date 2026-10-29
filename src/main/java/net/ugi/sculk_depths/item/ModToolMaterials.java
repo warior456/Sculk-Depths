@@ -2,43 +2,43 @@ package net.ugi.sculk_depths.item;
 
 import com.google.common.base.Suppliers;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ToolMaterial;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.tags.TagKey;
 import net.ugi.sculk_depths.tags.ModTags;
 
 import java.util.function.Supplier;
 
-public enum ModToolMaterials implements ToolMaterial {
+public enum ModToolMaterials implements Tier {
     QUAZARITH(
             3000,
             38.29f,
             4f,
             ModTags.Blocks.INCORRECT_FOR_QUAZARITH_TOOL,
             30,
-            Ingredient.ofItems(ModItems.QUAZARITH_INGOT)
+            Ingredient.of(ModItems.QUAZARITH_INGOT)
 
     );
 
     private final int durability;
-    private final float miningspeedMultiplier, attackDamage;
-    private final TagKey<Block> inverseTag;
-    private final int enchantability;
+    private final float miningspeedMultiplier, damage;
+    private final TagKey<Block> incorrectBlocksForDrops;
+    private final int enchantmentValue;
     private final Ingredient repairIngredient;
 
-    ModToolMaterials(int durability, float miningspeedMultiplier, float attackDamage, TagKey<Block> inverseTag, int enchantability, Ingredient repairIngredient) {
+    ModToolMaterials(int durability, float miningspeedMultiplier, float damage, TagKey<Block> incorrectBlocksForDrops, int enchantmentValue, Ingredient repairIngredient) {
         this.durability = durability;
         this.miningspeedMultiplier = miningspeedMultiplier;
-        this.attackDamage = attackDamage;
-        this.inverseTag = inverseTag;
-        this.enchantability = enchantability;
+        this.damage = damage;
+        this.incorrectBlocksForDrops = incorrectBlocksForDrops;
+        this.enchantmentValue = enchantmentValue;
         this.repairIngredient = repairIngredient;
     }
 
 
     @Override
-    public int getDurability() {
+    public int getUses() {
         return this.durability;
     }
 
@@ -48,18 +48,18 @@ public enum ModToolMaterials implements ToolMaterial {
     }
 
     @Override
-    public float getAttackDamage() {
-        return this.attackDamage;
+    public float getAttackDamageBonus() {
+        return this.damage;
     }
 
     @Override
-    public TagKey<Block> getInverseTag() {
-        return this.inverseTag;
+    public TagKey<Block> getIncorrectBlocksForDrops() {
+        return this.incorrectBlocksForDrops;
     }
 
     @Override
-    public int getEnchantability() {
-        return this.enchantability;
+    public int getEnchantmentValue() {
+        return this.enchantmentValue;
     }
 
     @Override

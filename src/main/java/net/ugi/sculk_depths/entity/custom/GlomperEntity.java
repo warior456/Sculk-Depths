@@ -2,47 +2,47 @@ package net.ugi.sculk_depths.entity.custom;
 
 
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.control.FlightMoveControl;
+import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.ai.pathing.BirdNavigation;
-import net.minecraft.entity.ai.pathing.EntityNavigation;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.Level;
 import net.ugi.sculk_depths.SculkDepths;
 import org.jetbrains.annotations.Nullable;
 
 
 import java.util.function.Predicate;
 
-public class GlomperEntity extends PathAwareEntity {
+public class GlomperEntity extends PathfinderMob {
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
-    private static final Predicate<LivingEntity> CAN_ATTACK_PREDICATE = entity -> entity.isPlayer() && entity.isFallFlying();
-    protected float getOffGroundSpeed() {
+    private static final Predicate<LivingEntity> LIVING_ENTITY_SELECTOR = entity -> entity.isAlwaysTicking() && entity.isFallFlying();
+    protected float getFlyingSpeed() {
         return this.getMovementSpeed() * 0.1f;//fix movement speed
     }
 
 
-    public GlomperEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
+    public GlomperEntity(EntityType<? extends PathfinderMob> entityType, Level world) {
         super(entityType, world);
-        this.moveControl = new FlightMoveControl(this, 0, true);
+        this.moveControl = new FlyingMoveControl(this, 0, true);
         this.setNoGravity(true);
     }
 
     @Override
     protected int getXpToDrop() {
-        return 1 + this.getWorld().random.nextInt(3);
+        return 1 + this.getWorld().random.getInt(3);
     }
 
 /*    @Override
@@ -54,23 +54,23 @@ public class GlomperEntity extends PathAwareEntity {
     }*/
 
     @Override
-    public boolean occludeVibrationSignals() {
+    public boolean dampensVibrations() {
         return true;
     }
 
-    public static DefaultAttributeContainer.Builder setAttributes() {
-        return AnimalEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, SculkDepths.CONFIG.glomper_health)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, SculkDepths.CONFIG.glomper_damage)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100)
-                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.5f) // doubt this does anything
-                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.2f) //needed to not crash for some frigging reason
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2f);
+    public static AttributeSupplier.Builder setAttributes() {
+        return Animal.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, SculkDepths.CONFIG.glomper_health)
+                .add(Attributes.ATTACK_DAMAGE, SculkDepths.CONFIG.glomper_damage)
+                .add(Attributes.FOLLOW_RANGE, 100)
+                .add(Attributes.ATTACK_SPEED, 0.5f) // doubt this does anything
+                .add(Attributes.FLYING_SPEED, 0.2f) //needed to not crash for some frigging reason
+                .add(Attributes.MOVEMENT_SPEED, 0.2f);
     }
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = this.random.nextInt(40) + 80;
+            this.idleAnimationTimeout = this.random.getInt(40) + 80;
             this.idleAnimationState.start(this.age);
         } else {
             --this.idleAnimationTimeout;
@@ -79,36 +79,36 @@ public class GlomperEntity extends PathAwareEntity {
 
     @Override
     protected void updateLimbs(float posDelta) {
-        float f = this.getPose() == EntityPose.STANDING ? Math.min(posDelta * 6.0f, 1.0f) : 0.0f;
-        this.limbAnimator.updateLimbs(f, 0.2f);
+        float f = this.getState() == EntityPose.STANDING ? Math.minValue(posDelta * 6.0f, 1.0f) : 0.0f;
+        this.walkAnimation.updateLimbs(f, 0.2f);
     }
 
     @Override
     public void tick() {
         super.tick();
-        if(this.getWorld().isClient()) {
+        if(this.getWorld().isClientSide()) {
             setupAnimationStates();
         }
     }
 
-    protected EntityNavigation createNavigation(World world) {
-        BirdNavigation birdNavigation = new BirdNavigation(this, world);
+    protected PathNavigation createNavigation(Level world) {
+        FlyingPathNavigation birdNavigation = new FlyingPathNavigation(this, world);
         birdNavigation.setCanPathThroughDoors(false);
-        birdNavigation.setCanSwim(true);
-        birdNavigation.setCanEnterOpenDoors(true);
+        birdNavigation.setCanFloat(true);
+        birdNavigation.setCanPassDoors(true);
         return birdNavigation;
     }
 
-    public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+    public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource source) {
         return false;
     }
 
-    protected void initGoals() {
+    protected void registerGoals() {
         this.goalSelector.add(4, new FlyGoal(this, 1.0));
         //this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(5, new LookAroundGoal(this));
         //this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
-        this.targetSelector.add(1, new GlomperEntity.GlomperTargetGoal(this, LivingEntity.class, 0, false, false, CAN_ATTACK_PREDICATE));
+        this.targetSelector.add(1, new GlomperEntity.GlomperTargetGoal(this, LivingEntity.class, 0, false, false, LIVING_ENTITY_SELECTOR));
         this.goalSelector.add(2, new MeleeAttackGoal(this, 9.0D, false));
 
     }
@@ -116,14 +116,14 @@ public class GlomperEntity extends PathAwareEntity {
     public static class GlomperTargetGoal
             extends ActiveTargetGoal {
 
-        private boolean pauseWhenMobIdle;
+        private boolean followingTargetEvenIfNotSeen;
 
-        public GlomperTargetGoal(MobEntity mob, Class targetClass, int reciprocalChance, boolean checkVisibility, boolean checkCanNavigate, @Nullable Predicate targetPredicate) {
-            super(mob, targetClass, reciprocalChance, checkVisibility, checkCanNavigate, targetPredicate);
+        public GlomperTargetGoal(Mob mob, Class targetType, int randomInterval, boolean mustSee, boolean mustReach, @Nullable Predicate targetPredicate) {
+            super(mob, targetType, randomInterval, mustSee, mustReach, targetPredicate);
         }
 
         @Override
-        public boolean shouldContinue() {
+        public boolean canContinueToUse() {
             LivingEntity livingEntity = this.mob.getTarget();
             if (livingEntity == null) {
                 return false;
@@ -131,14 +131,14 @@ public class GlomperEntity extends PathAwareEntity {
             if (!livingEntity.isAlive()) {
                 return false;
             }
-            if (!this.pauseWhenMobIdle) {
+            if (!this.followingTargetEvenIfNotSeen) {
                 return !this.mob.getNavigation().isIdle();
             }
             assert this.target != null;
             if (!this.target.isFallFlying()) {
                 return false;
             }
-            return !(livingEntity instanceof PlayerEntity) || !livingEntity.isSpectator() && !((PlayerEntity) livingEntity).isCreative();
+            return !(livingEntity instanceof Player) || !livingEntity.isSpectator() && !((Player) livingEntity).isCreative();
 
         }
 

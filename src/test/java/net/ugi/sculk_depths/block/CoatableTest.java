@@ -19,20 +19,20 @@ class CoatableTest {
 
     @Test
     void valtroxLogMapsToCoatedVariant() {
-        assertEquals(ModBlocks.COATED_VALTROX_LOG, Coatable.getCoatedBlock(ModBlocks.VALTROX_LOG));
+        assertValueEqual(ModBlocks.COATED_VALTROX_LOG, Coatable.getCoatedBlock(ModBlocks.VALTROX_LOG));
     }
 
     @Test
     void coatingMappingIsInvertible() {
-        assertEquals(ModBlocks.VALTROX_PLANKS, Coatable.getNonCoatedBlock(ModBlocks.COATED_VALTROX_PLANKS));
-        assertEquals(ModBlocks.VALTROX_DOOR, Coatable.getNonCoatedBlock(ModBlocks.COATED_VALTROX_DOOR));
+        assertValueEqual(ModBlocks.VALTROX_PLANKS, Coatable.getNonCoatedBlock(ModBlocks.COATED_VALTROX_PLANKS));
+        assertValueEqual(ModBlocks.VALTROX_DOOR, Coatable.getNonCoatedBlock(ModBlocks.COATED_VALTROX_DOOR));
     }
 
     @Test
     void everyCoatableEntryRoundTrips() {
-        Coatable.COAT_LEVEL_INCREASES.get().forEach((base, coated) ->
-                assertEquals(base, Coatable.getNonCoatedBlock(coated),
-                        "coated variant of " + base + " must map back"));
+        Coatable.COAT_LEVEL_INCREASES.get().forEach((fullBlock, coated) ->
+                assertValueEqual(fullBlock, Coatable.getNonCoatedBlock(coated),
+                        "coated variant of " + fullBlock + " must map back"));
     }
 
     @Test
@@ -40,7 +40,7 @@ class CoatableTest {
         // log, wood, stripped log, stripped wood, planks, stairs, slab, fence,
         // fence gate, door, trapdoor, pressure plate, button, sign, wall sign,
         // hanging sign, wall hanging sign
-        assertEquals(17, Coatable.COAT_LEVEL_INCREASES.get().size());
+        assertValueEqual(17, Coatable.COAT_LEVEL_INCREASES.get().size());
     }
 
     @Test

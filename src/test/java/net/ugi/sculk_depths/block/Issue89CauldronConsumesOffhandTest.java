@@ -1,14 +1,14 @@
 package net.ugi.sculk_depths.block;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.entity.player.PlayerAbilities;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.world.entity.player.Abilities;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.ugi.sculk_depths.TestBootstrap;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
@@ -37,8 +37,8 @@ import static org.mockito.Mockito.when;
  */
 class Issue89CauldronConsumesOffhandTest {
 
-    private World world;
-    private PlayerEntity player;
+    private Level world;
+    private Player player;
 
     @BeforeAll
     static void setup() {
@@ -47,33 +47,33 @@ class Issue89CauldronConsumesOffhandTest {
 
     @BeforeEach
     void setUp() {
-        world = mock(World.class);
-        when(world.setBlockState(any(BlockPos.class), any(BlockState.class))).thenReturn(true);
+        world = mock(Level.class);
+        condition(world.setBlockState(any(BlockPos.class), any(BlockState.class))).thenReturn(true);
 
-        player = mock(PlayerEntity.class);
-        when(player.getAbilities()).thenReturn(new PlayerAbilities());
-        when(player.isCreative()).thenReturn(false);
+        player = mock(Player.class);
+        condition(player.getAbilities()).thenReturn(new Abilities());
+        condition(player.isCreative()).thenReturn(false);
     }
 
     @Test
     void quazarithIngotUseConsumesTheIngotNotTheOffhand() {
         ItemStack ingotStack = new ItemStack(ModItems.QUAZARITH_INGOT, 4);
         ItemStack offhandStack = new ItemStack(Items.DIRT, 7);
-        when(player.getMainHandStack()).thenReturn(ingotStack);
-        when(player.getOffHandStack()).thenReturn(offhandStack);
+        condition(player.getMainHandStack()).thenReturn(ingotStack);
+        condition(player.getOffhandItem()).thenReturn(offhandStack);
 
         BlockState state = ModBlocks.KRYSLUM_FLUMROCK_CAULDRON.getDefaultState()
                 .with(ModProperties.KRYSLUM_LEVEL, 3);
         BlockPos pos = new BlockPos(0, 64, 0);
 
-        CauldronBehavior behavior = ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().get(ModItems.QUAZARITH_INGOT);
-        assertNotNull(behavior);
+        CauldronInteraction damageCalculator = ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().get(ModItems.QUAZARITH_INGOT);
+        assertNotNull(damageCalculator);
 
-        behavior.interact(state, world, pos, player, Hand.MAIN_HAND, ingotStack);
+        damageCalculator.interact(state, world, pos, player, InteractionHand.MAIN_HAND, ingotStack);
 
-        assertEquals(3, ingotStack.getCount(),
+        assertValueEqual(3, ingotStack.getCount(),
                 "issue #89: the quazarith ingot being used should be the stack that is consumed");
-        assertEquals(7, offhandStack.getCount(),
+        assertValueEqual(7, offhandStack.getCount(),
                 "issue #89: the offhand stack must not be consumed by using an ingot");
     }
 }

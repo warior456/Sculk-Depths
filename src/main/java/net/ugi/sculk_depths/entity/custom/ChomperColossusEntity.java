@@ -1,29 +1,29 @@
 package net.ugi.sculk_depths.entity.custom;
 
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.LookAroundGoal;
-import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-public class ChomperColossusEntity extends PathAwareEntity {
+public class ChomperColossusEntity extends PathfinderMob {
 
-    private static double renderDistanceMultiplier = 1.0;
+    private static double viewScale = 1.0;
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
-    public ChomperColossusEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
+    public ChomperColossusEntity(EntityType<? extends PathfinderMob> entityType, Level world) {
         super(entityType, world);
-        this.experiencePoints = 50;
+        this.xpReward = 50;
     }
 
 /*    @Override
@@ -34,7 +34,7 @@ public class ChomperColossusEntity extends PathAwareEntity {
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = this.random.nextInt(40) + 80;
+            this.idleAnimationTimeout = this.random.getInt(40) + 80;
             this.idleAnimationState.start(this.age);
         } else {
             --this.idleAnimationTimeout;
@@ -42,30 +42,30 @@ public class ChomperColossusEntity extends PathAwareEntity {
     }
 
     @Override
-    public boolean shouldRender(double distance) {
+    public boolean shouldRender(double distanceToPlayer) {
         double d = 30;
-        return distance < (d *= 64.0 * renderDistanceMultiplier) * d;
+        return distanceToPlayer < (d *= 64.0 * viewScale) * d;
     }
 
 
     @Override
     protected void updateLimbs(float posDelta) {
-        float f = this.getPose() == EntityPose.STANDING ? Math.min(posDelta * 6.0f, 1.0f) : 0.0f;
-        this.limbAnimator.updateLimbs(f, 0.2f);
+        float f = this.getState() == EntityPose.STANDING ? Math.minValue(posDelta * 6.0f, 1.0f) : 0.0f;
+        this.walkAnimation.updateLimbs(f, 0.2f);
     }
 
     @Override
     public void tick() {
         super.tick();
-        if(this.getWorld().isClient()) {
+        if(this.getWorld().isClientSide()) {
             setupAnimationStates();
         }
     }
 
     @Override
-    protected void initGoals() {
-        this.goalSelector.add(1, new WanderAroundFarGoal(this, 1D));
-        this.goalSelector.add(2, new LookAroundGoal(this));
+    protected void registerGoals() {
+        this.goalSelector.add(1, new WaterAvoidingRandomStrollGoal(this, 1D));
+        this.goalSelector.add(2, new RandomLookAroundGoal(this));
 /*        this.goalSelector.add(0, new SwimGoal(this));
 
 
@@ -76,12 +76,12 @@ public class ChomperColossusEntity extends PathAwareEntity {
         this.goalSelector.add(6, new LookAroundGoal(this));*/
     }
 
-    public static DefaultAttributeContainer.Builder createChomperColossusAttributes() {
-        return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 200f)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2f)
-                .add(EntityAttributes.GENERIC_ARMOR, 5f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2);
+    public static AttributeSupplier.Builder createChomperColossusAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 200f)
+                .add(Attributes.MOVEMENT_SPEED, 0.2f)
+                .add(Attributes.ARMOR, 5f)
+                .add(Attributes.ATTACK_DAMAGE, 2);
     }
 
 

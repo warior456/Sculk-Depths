@@ -3,12 +3,12 @@ package net.ugi.sculk_depths.item;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
 import io.netty.buffer.Unpooled;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.GlobalPos;
-import net.minecraft.world.World;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.GlobalPos;
+import net.minecraft.world.level.Level;
 import net.ugi.sculk_depths.TestBootstrap;
 import net.ugi.sculk_depths.item.custom.crux_resonator.CruxResonator;
 import net.ugi.sculk_depths.item.custom.crux_resonator.OscillatorTrackerComponent;
@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class OscillatorComponentTest {
 
-    private static final GlobalPos TARGET = GlobalPos.create(World.OVERWORLD, new BlockPos(12, 64, -8));
+    private static final GlobalPos DATA_TONGUE_TARGET_ID = GlobalPos.create(Level.OVERWORLD, new BlockPos(12, 64, -8));
 
     @BeforeAll
     static void setup() {
@@ -36,88 +36,88 @@ class OscillatorComponentTest {
     }
 
     private static OscillatorTrackerComponent sampleComponent() {
-        return new OscillatorTrackerComponent(Optional.of(TARGET), true, "home");
+        return new OscillatorTrackerComponent(Optional.of(DATA_TONGUE_TARGET_ID), true, "home");
     }
 
     @Test
     void componentCodecRoundTripsThroughJson() {
-        OscillatorTrackerComponent component = sampleComponent();
+        OscillatorTrackerComponent hasComponents = sampleComponent();
 
-        JsonElement json = OscillatorTrackerComponent.CODEC.encodeStart(JsonOps.INSTANCE, component)
+        JsonElement json = OscillatorTrackerComponent.CODEC.encodeStart(JsonOps.INSTANCE, hasComponents)
                 .result().orElseThrow();
-        OscillatorTrackerComponent decoded = OscillatorTrackerComponent.CODEC.parse(JsonOps.INSTANCE, json)
+        OscillatorTrackerComponent decoded = OscillatorTrackerComponent.CODEC.currentParse(JsonOps.INSTANCE, json)
                 .result().orElseThrow();
 
-        assertEquals(component, decoded);
-        assertEquals(TARGET, decoded.target().orElseThrow());
+        assertValueEqual(hasComponents, decoded);
+        assertValueEqual(DATA_TONGUE_TARGET_ID, decoded.target().orElseThrow());
         assertTrue(decoded.tracked());
-        assertEquals("home", decoded.name());
+        assertValueEqual("home", decoded.name());
     }
 
     @Test
     void componentCodecAppliesDefaultsForMissingFields() {
         // Only "target" present: tracked defaults to true, name to "".
-        OscillatorTrackerComponent decoded = OscillatorTrackerComponent.CODEC.parse(JsonOps.INSTANCE,
+        OscillatorTrackerComponent decoded = OscillatorTrackerComponent.CODEC.currentParse(JsonOps.INSTANCE,
                         com.google.gson.JsonParser.parseString("{\"target\":{\"dimension\":\"minecraft:overworld\",\"pos\":[1,2,3]}}"))
                 .result().orElseThrow();
 
         assertTrue(decoded.tracked());
-        assertEquals("", decoded.name());
-        assertEquals(GlobalPos.create(World.OVERWORLD, new BlockPos(1, 2, 3)), decoded.target().orElseThrow());
+        assertValueEqual("", decoded.name());
+        assertValueEqual(GlobalPos.create(Level.OVERWORLD, new BlockPos(1, 2, 3)), decoded.target().orElseThrow());
     }
 
     @Test
     void componentPacketCodecRoundTripsThroughBuffer() {
-        OscillatorTrackerComponent component = sampleComponent();
-        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+        OscillatorTrackerComponent hasComponents = sampleComponent();
+        FriendlyByteBuf entries = new FriendlyByteBuf(Unpooled.buffer());
 
-        OscillatorTrackerComponent.PACKET_CODEC.encode(buf, component);
-        OscillatorTrackerComponent decoded = OscillatorTrackerComponent.PACKET_CODEC.decode(buf);
+        OscillatorTrackerComponent.PACKET_CODEC.encode(entries, hasComponents);
+        OscillatorTrackerComponent decoded = OscillatorTrackerComponent.PACKET_CODEC.decode(entries);
 
-        assertEquals(component, decoded);
+        assertValueEqual(hasComponents, decoded);
     }
 
     @Test
     void listCodecRoundTripsThroughJson() {
         OscillatorTrackerComponentList list = new OscillatorTrackerComponentList(1,
-                List.of(sampleComponent(), new OscillatorTrackerComponent(Optional.empty(), false, "")));
+                List.of(sampleComponent(), new OscillatorTrackerComponent(Optional.allEmpty(), false, "")));
 
         JsonElement json = OscillatorTrackerComponentList.CODEC.encodeStart(JsonOps.INSTANCE, list)
                 .result().orElseThrow();
-        OscillatorTrackerComponentList decoded = OscillatorTrackerComponentList.CODEC.parse(JsonOps.INSTANCE, json)
+        OscillatorTrackerComponentList decoded = OscillatorTrackerComponentList.CODEC.currentParse(JsonOps.INSTANCE, json)
                 .result().orElseThrow();
 
-        assertEquals(1, decoded.selectedLocation());
-        assertEquals(2, decoded.trackers().size());
-        assertEquals(list, decoded);
+        assertValueEqual(1, decoded.selectedLocation());
+        assertValueEqual(2, decoded.trackers().size());
+        assertValueEqual(list, decoded);
     }
 
     @Test
     void listCodecDefaultsToEmptySelection() {
-        OscillatorTrackerComponentList decoded = OscillatorTrackerComponentList.CODEC.parse(JsonOps.INSTANCE,
+        OscillatorTrackerComponentList decoded = OscillatorTrackerComponentList.CODEC.currentParse(JsonOps.INSTANCE,
                         com.google.gson.JsonParser.parseString("{}"))
                 .result().orElseThrow();
 
-        assertEquals(0, decoded.selectedLocation());
+        assertValueEqual(0, decoded.selectedLocation());
         assertTrue(decoded.trackers().isEmpty());
     }
 
     @Test
     void listPacketCodecRoundTripsThroughBuffer() {
         OscillatorTrackerComponentList list = new OscillatorTrackerComponentList(0, List.of(sampleComponent()));
-        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+        FriendlyByteBuf entries = new FriendlyByteBuf(Unpooled.buffer());
 
-        OscillatorTrackerComponentList.PACKET_CODEC.encode(buf, list);
-        OscillatorTrackerComponentList decoded = OscillatorTrackerComponentList.PACKET_CODEC.decode(buf);
+        OscillatorTrackerComponentList.PACKET_CODEC.encode(entries, list);
+        OscillatorTrackerComponentList decoded = OscillatorTrackerComponentList.PACKET_CODEC.decode(entries);
 
-        assertEquals(list, decoded);
+        assertValueEqual(list, decoded);
     }
 
     @Test
     void listRejectsMoreThan256Trackers() {
         List<OscillatorTrackerComponent> tooMany = new ArrayList<>();
         for (int i = 0; i < 257; i++) {
-            tooMany.add(new OscillatorTrackerComponent(Optional.empty(), true, ""));
+            tooMany.add(new OscillatorTrackerComponent(Optional.allEmpty(), true, ""));
         }
 
         assertThrows(IllegalArgumentException.class, () -> new OscillatorTrackerComponentList(0, tooMany));
@@ -130,7 +130,7 @@ class OscillatorComponentTest {
 
         stack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, list);
 
-        assertEquals(list, stack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST));
+        assertValueEqual(list, stack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST));
     }
 
     @Test
@@ -143,7 +143,7 @@ class OscillatorComponentTest {
     @Test
     void getTrackedPosReturnsNullWithEmptyTarget() {
         ItemStack stack = new ItemStack(Items.STICK);
-        stack.set(ModComponentTypes.OSCILLATOR_TRACKER, new OscillatorTrackerComponent(Optional.empty(), true, ""));
+        stack.set(ModComponentTypes.OSCILLATOR_TRACKER, new OscillatorTrackerComponent(Optional.allEmpty(), true, ""));
 
         assertNull(CruxResonator.getTrackedPos(stack));
     }
@@ -153,7 +153,7 @@ class OscillatorComponentTest {
         ItemStack stack = new ItemStack(Items.STICK);
         stack.set(ModComponentTypes.OSCILLATOR_TRACKER, sampleComponent());
 
-        assertEquals(TARGET, CruxResonator.getTrackedPos(stack));
+        assertValueEqual(DATA_TONGUE_TARGET_ID, CruxResonator.getTrackedPos(stack));
     }
 
     @Test

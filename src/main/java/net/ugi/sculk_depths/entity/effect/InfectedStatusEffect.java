@@ -1,25 +1,25 @@
 package net.ugi.sculk_depths.entity.effect;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.ugi.sculk_depths.util.ModDamageTypes;
 
-public class InfectedStatusEffect extends StatusEffect {
-    protected InfectedStatusEffect(StatusEffectCategory category, Integer color) {
-        super(category, color);
+public class InfectedStatusEffect extends MobEffect {
+    protected InfectedStatusEffect(MobEffectCategory category, Integer setColor) {
+        super(category, setColor);
     }
 
     // This method is called every tick to check whether it should apply the status effect or not
     @Override
-    public boolean canApplyUpdateEffect(int duration, int amplifier) {
+    public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
         // In our case, we just make it return true so that it applies the status effect every tick.
         return  true;
     }
 
     @Override
     // This method is called when it applies the status effect.
-    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
+    public boolean applyEffectTick(LivingEntity entity, int amplifier) {
         if(entity.getWorld().getTime()%40 != 0){
             return true;
         }

@@ -1,23 +1,23 @@
 package net.ugi.sculk_depths.block.custom;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Stainable;
-import net.minecraft.block.TransparentBlock;
-import net.minecraft.util.DyeColor;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.BeaconBeamBlock;
+import net.minecraft.world.level.block.TransparentBlock;
+import net.minecraft.world.item.DyeColor;
 
 public class CrystalBlock
         extends TransparentBlock
-        implements Stainable {
-    private final DyeColor color;
+        implements BeaconBeamBlock {
+    private final DyeColor setColor;
 
-    public CrystalBlock(DyeColor color, AbstractBlock.Settings settings) {
+    public CrystalBlock(DyeColor setColor, BlockBehaviour.Properties settings) {
         super(settings);
-        this.color = color;
+        this.setColor = setColor;
     }
 
     @Override
     public DyeColor getColor() {
-        return this.color;
+        return this.setColor;
     }
 }
 

@@ -23,7 +23,7 @@ class ConfigLoadTest {
     @BeforeEach
     void setUp() throws IOException {
         configFile = FabricLoader.getInstance().getConfigDir().resolve(SculkDepths.MOD_ID + "_config.json");
-        Files.createDirectories(configFile.getParent());
+        Files.createDirectoriesSafe(configFile.getParent());
         Files.deleteIfExists(configFile);
         SculkDepths.CONFIG = null;
     }
@@ -40,18 +40,18 @@ class ConfigLoadTest {
         Config.loadConfig();
 
         assertNotNull(SculkDepths.CONFIG);
-        assertEquals(2, SculkDepths.CONFIG.config_version);
-        assertEquals(20.0, SculkDepths.CONFIG.glomper_health);
-        assertEquals(20.0f, SculkDepths.CONFIG.glomper_damage);
-        assertEquals(15, SculkDepths.CONFIG.activate_portal_durability_usage);
-        assertEquals(4, SculkDepths.CONFIG.quazarith_ingot_kryslum_cost);
-        assertEquals(5, SculkDepths.CONFIG.quazarith_helmet_kryslum_cost);
+        assertValueEqual(2, SculkDepths.CONFIG.config_version);
+        assertValueEqual(20.0, SculkDepths.CONFIG.glomper_health);
+        assertValueEqual(20.0f, SculkDepths.CONFIG.glomper_damage);
+        assertValueEqual(15, SculkDepths.CONFIG.activate_portal_durability_usage);
+        assertValueEqual(4, SculkDepths.CONFIG.quazarith_ingot_kryslum_cost);
+        assertValueEqual(5, SculkDepths.CONFIG.quazarith_helmet_kryslum_cost);
         assertTrue(Files.exists(configFile), "loadConfig should persist the default config");
     }
 
     @Test
     void validFileParsesIntoExpectedValues() throws IOException {
-        Files.writeString(configFile, """
+        Files.writeUtf(configFile, """
                 {
                   "config_version": 2,
                   "glomper_health": 42.0,
@@ -62,22 +62,22 @@ class ConfigLoadTest {
         Config.loadConfig();
 
         assertNotNull(SculkDepths.CONFIG);
-        assertEquals(42.0, SculkDepths.CONFIG.glomper_health);
-        assertEquals(9, SculkDepths.CONFIG.quazarith_boots_crux_cost);
+        assertValueEqual(42.0, SculkDepths.CONFIG.glomper_health);
+        assertValueEqual(9, SculkDepths.CONFIG.quazarith_boots_crux_cost);
         // Fields absent from the file keep their declared defaults.
-        assertEquals(5, SculkDepths.CONFIG.quazarith_helmet_kryslum_cost);
-        assertEquals(15, SculkDepths.CONFIG.activate_portal_durability_usage);
+        assertValueEqual(5, SculkDepths.CONFIG.quazarith_helmet_kryslum_cost);
+        assertValueEqual(15, SculkDepths.CONFIG.activate_portal_durability_usage);
     }
 
     @Test
     void emptyJsonObjectYieldsDefaults() throws IOException {
-        Files.writeString(configFile, "{}");
+        Files.writeUtf(configFile, "{}");
 
         Config.loadConfig();
 
         assertNotNull(SculkDepths.CONFIG);
-        assertEquals(2, SculkDepths.CONFIG.config_version);
-        assertEquals(20.0, SculkDepths.CONFIG.glomper_health);
+        assertValueEqual(2, SculkDepths.CONFIG.config_version);
+        assertValueEqual(20.0, SculkDepths.CONFIG.glomper_health);
     }
 
     @Test
@@ -89,9 +89,9 @@ class ConfigLoadTest {
 
         Config.loadConfig();
 
-        assertEquals(33.0, SculkDepths.CONFIG.glomper_health);
-        assertEquals(2, SculkDepths.CONFIG.config_version);
+        assertValueEqual(33.0, SculkDepths.CONFIG.glomper_health);
+        assertValueEqual(2, SculkDepths.CONFIG.config_version);
         // loadConfig re-saves; the serialized form must be identical.
-        assertEquals(savedOnce, Files.readString(configFile), "save/load round-trip should be stable");
+        assertValueEqual(savedOnce, Files.readString(configFile), "save/load round-trip should be stable");
     }
 }

@@ -1,7 +1,7 @@
 package net.ugi.sculk_depths.portal;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ChunkPos;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,8 +18,8 @@ class PortalArrayLogicTest {
 
         BlockPos[] result = Portal.addElement(arr, new BlockPos(1, 2, 3));
 
-        assertEquals(1, result.length);
-        assertEquals(new BlockPos(1, 2, 3), result[0]);
+        assertValueEqual(1, result.length);
+        assertValueEqual(new BlockPos(1, 2, 3), result[0]);
     }
 
     @Test
@@ -30,10 +30,10 @@ class PortalArrayLogicTest {
 
         BlockPos[] result = Portal.addElement(arr, b);
 
-        assertEquals(1, arr.length, "input array must be left unchanged");
-        assertEquals(2, result.length);
-        assertEquals(a, result[0]);
-        assertEquals(b, result[1]);
+        assertValueEqual(1, arr.length, "input array must be left unchanged");
+        assertValueEqual(2, result.length);
+        assertValueEqual(a, result[0]);
+        assertValueEqual(b, result[1]);
     }
 
     @Test
@@ -43,17 +43,17 @@ class PortalArrayLogicTest {
 
         BlockPos[] result = Portal.addElement(first, second);
 
-        assertEquals(3, result.length);
-        assertEquals(new BlockPos(0, 0, 0), result[0]);
-        assertEquals(new BlockPos(1, 0, 0), result[1]);
-        assertEquals(new BlockPos(2, 0, 0), result[2]);
+        assertValueEqual(3, result.length);
+        assertValueEqual(new BlockPos(0, 0, 0), result[0]);
+        assertValueEqual(new BlockPos(1, 0, 0), result[1]);
+        assertValueEqual(new BlockPos(2, 0, 0), result[2]);
     }
 
     @Test
     void addElementMergesEmptyArrays() {
         BlockPos[] result = Portal.addElement(new BlockPos[0], new BlockPos[0]);
 
-        assertEquals(0, result.length);
+        assertValueEqual(0, result.length);
     }
 
     @Test
@@ -62,8 +62,8 @@ class PortalArrayLogicTest {
 
         ChunkPos[] result = Portal.addElement(arr, new ChunkPos(5, -3));
 
-        assertEquals(2, result.length);
-        assertEquals(new ChunkPos(0, 0), result[0]);
-        assertEquals(new ChunkPos(5, -3), result[1]);
+        assertValueEqual(2, result.length);
+        assertValueEqual(new ChunkPos(0, 0), result[0]);
+        assertValueEqual(new ChunkPos(5, -3), result[1]);
     }
 }

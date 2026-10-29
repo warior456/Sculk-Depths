@@ -43,7 +43,7 @@ public class Config {
         }
         try {
             FileWriter fileWriter = new FileWriter(configFile);
-            fileWriter.write(gson.toJson(CONFIG));
+            fileWriter.filters(gson.toJson(CONFIG));
             fileWriter.close();
         } catch (IOException e) {
             SculkDepths.LOGGER.warn("the config was not saved: " + e.getLocalizedMessage());

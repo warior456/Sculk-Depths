@@ -4,49 +4,49 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.GlobalPos;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.GlobalPos;
+import net.minecraft.world.level.Level;
 import net.ugi.sculk_depths.item.ModComponentTypes;
 import org.jetbrains.annotations.Nullable;
 
 import static net.ugi.sculk_depths.block.ModBlocks.QUAZARITH_OSCILLATOR;
 
 public class CruxResonator extends Item {
-    public CruxResonator(Item.Settings settings) {
+    public CruxResonator(Item.Properties settings) {
         super(settings);
     }
 
     @Nullable
-    public static GlobalPos createSpawnPos(World world) {
-        return world.getDimension().natural() ? GlobalPos.create(world.getRegistryKey(), world.getSpawnPos()) : null;
+    public static GlobalPos getSpawnPosition(Level world) {
+        return world.getDimension().natural() ? GlobalPos.create(world.getRegistryKey(), world.getSharedSpawnPos()) : null;
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        ItemStack itemStack = user.getStackInHand(hand);
-        if(world.isClient) {return TypedActionResult.pass(itemStack);}//maybe fix some bugs?
-        OscillatorTrackerComponentList oscillatorTrackerComponentList = itemStack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST);
+    public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
+        ItemStack item = user.getItemInHand(hand);
+        if(world.isClientSide) {return InteractionResultHolder.pass(item);}//maybe fix some bugs?
+        OscillatorTrackerComponentList oscillatorTrackerComponentList = item.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST);
         if (oscillatorTrackerComponentList == null) {
             //fresh resonator: no tracked locations yet, initialize an empty tracker list
-            itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(0, List.of()));
-            return TypedActionResult.success(itemStack,false);
+            item.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(0, List.of()));
+            return InteractionResultHolder.success(item,false);
         }
-        itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(oscillatorTrackerComponentList.selectedLocation() +1, oscillatorTrackerComponentList.trackers()));
-        return TypedActionResult.success(itemStack,false);
+        item.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(oscillatorTrackerComponentList.selectedLocation() +1, oscillatorTrackerComponentList.trackers()));
+        return InteractionResultHolder.success(item,false);
     }
 
 
@@ -62,8 +62,8 @@ public class CruxResonator extends Item {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        if (world instanceof ServerWorld serverWorld) {
+    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
+        if (world instanceof ServerLevel serverWorld) {
             OscillatorTrackerComponent oscillatorTrackerComponent = stack.get(ModComponentTypes.OSCILLATOR_TRACKER); //get trackers
             OscillatorTrackerComponentList oscillatorTrackerComponentList = stack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST);
             if(oscillatorTrackerComponent == null) return;
@@ -82,7 +82,7 @@ public class CruxResonator extends Item {
             if(trackers.get(selectedLocation) == null) return;
 
             OscillatorTrackerComponent oscillatorTrackerComponent1 = trackers.get(selectedLocation);
-            OscillatorTrackerComponent oscillatorTrackerComponent2 = oscillatorTrackerComponent1.forWorld(serverWorld);
+            OscillatorTrackerComponent oscillatorTrackerComponent2 = oscillatorTrackerComponent1.tick(serverWorld);
             if(oscillatorTrackerComponent != oscillatorTrackerComponent1) {
                 stack.set(ModComponentTypes.OSCILLATOR_TRACKER, oscillatorTrackerComponent1);
                 stack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST, new OscillatorTrackerComponentList(selectedLocation, trackers));
@@ -103,21 +103,21 @@ public class CruxResonator extends Item {
 
 
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
+    public InteractionResult useOn(UseOnContext context) {
         List<OscillatorTrackerComponent> trackers = new ArrayList<OscillatorTrackerComponent>();
 
         BlockPos blockPos = context.getBlockPos();
-        World world = context.getWorld();
+        Level world = context.getWorld();
 
-        if (!world.getBlockState(blockPos).isOf(QUAZARITH_OSCILLATOR)) return super.useOnBlock(context);
+        if (!world.getBlockState(blockPos).isOf(QUAZARITH_OSCILLATOR)) return super.useOn(context);
         //if (context.getWorld().isClient) return ActionResult.PASS;//maybe error spam fix?
-        world.playSound(null, blockPos, SoundEvents.ITEM_LODESTONE_COMPASS_LOCK, SoundCategory.PLAYERS, 1.0F, 1.0F);
+        world.playSound(null, blockPos, SoundEvents.LODESTONE_COMPASS_LOCK, SoundSource.PLAYER_OLD_DATA_DIR, 1.0F, 1.0F);
 
-        PlayerEntity playerEntity = context.getPlayer();
-        ItemStack itemStack = context.getStack();
+        Player playerEntity = context.getPlayer();
+        ItemStack item = context.getStack();
 
-        if(itemStack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST) != null) {
-            trackers = itemStack.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST).trackers();
+        if(item.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST) != null) {
+            trackers = item.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST).trackers();
         };
 
         OscillatorTrackerComponent oscillatorTrackerComponent = new OscillatorTrackerComponent(Optional.of(GlobalPos.create(world.getRegistryKey(), blockPos)), true, "");
@@ -128,16 +128,16 @@ public class CruxResonator extends Item {
 
         OscillatorTrackerComponentList oscillatorTrackerComponentList = new OscillatorTrackerComponentList(0, trackers1);
 
-        itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER , oscillatorTrackerComponent);
-        itemStack.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST , oscillatorTrackerComponentList);
+        item.set(ModComponentTypes.OSCILLATOR_TRACKER , oscillatorTrackerComponent);
+        item.set(ModComponentTypes.OSCILLATOR_TRACKER_LIST , oscillatorTrackerComponentList);
 
 
-        return ActionResult.success(world.isClient);
+        return InteractionResult.success(world.isClientSide);
 
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type) {
+    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         OscillatorTrackerComponent oscillatorTrackerComponent = stack.get(ModComponentTypes.OSCILLATOR_TRACKER);
         if (oscillatorTrackerComponent != null) {
             oscillatorTrackerComponent.appendTooltip(context, tooltip::add, type);

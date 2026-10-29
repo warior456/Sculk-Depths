@@ -2,32 +2,32 @@ package net.ugi.sculk_depths.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.resources.ResourceLocation;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.tags.ModTags;
 
 import java.util.concurrent.CompletableFuture;
 
 public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
-    public ModBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-        super(output, registriesFuture);
+    public ModBlockTagProvider(FabricDataOutput withResultSlot, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        super(withResultSlot, registriesFuture);
     }
 
     @Override
-    protected void configure(RegistryWrapper.WrapperLookup arg) {
-        getOrCreateTagBuilder(ModTags.Blocks.KRYSLUM_FLOWABLE_BLOCKS)
+    protected void configure(HolderLookup.Provider arg) {
+        tag(ModTags.Blocks.KRYSLUM_FLOWABLE_BLOCKS)
                 .add(ModBlocks.ZYGRIN_FLOWBLOCK);
 
-        getOrCreateTagBuilder(ModTags.Blocks.INCORRECT_FOR_QUAZARITH_TOOL);
+        tag(ModTags.Blocks.INCORRECT_FOR_QUAZARITH_TOOL);
 
 
 
 
-        getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
+        tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(ModBlocks.VALTROX_LOG)
                 .add(ModBlocks.VALTROX_WOOD)
                 .add(ModBlocks.STRIPPED_VALTROX_LOG)
@@ -79,11 +79,11 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.AURIC_SHROOM_BLOCK);
 
 
-        getOrCreateTagBuilder(BlockTags.HOE_MINEABLE)
+        tag(BlockTags.MINEABLE_WITH_HOE)
                 .add(ModBlocks.VALTROX_LEAVES);
 
 
-        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE) //TODO check for more missing blocks
+        tag(BlockTags.MINEABLE_WITH_PICKAXE) //TODO check for more missing blocks
                 .add(ModBlocks.AMALGAMITE)
                 .add(ModBlocks.POLISHED_AMALGAMITE)
                 .add(ModBlocks.POLISHED_AMALGAMITE_STAIRS)
@@ -165,7 +165,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.LARGUTH);
 
 
-        getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE)
+        tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(ModBlocks.CRUMBLING_DIRT)
                 .add(ModBlocks.KRYSLUM_ENRICHED_SOIL)
                 .add(ModBlocks.AURIC_SPORE_BLOCK)
@@ -178,12 +178,12 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
          */
 
-        getOrCreateTagBuilder(TagKey.of(RegistryKeys.BLOCK, Identifier.of("fabric", "needs_tool_level_4")))
+        tag(TagKey.of(Registries.SIDE, ResourceLocation.fromNamespaceAndPath("fabric", "needs_tool_level_4")))
                 .add(ModBlocks.QUAZARITH_BLOCK)
                 .add(ModBlocks.QUAZARITH_ORE);
 
 
-        getOrCreateTagBuilder(BlockTags.STANDING_SIGNS)
+        tag(BlockTags.STANDING_SIGNS)
                 .add(ModBlocks.VALTROX_SIGN)
                 .add(ModBlocks.COATED_VALTROX_SIGN)
 
@@ -191,7 +191,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
                 .add(ModBlocks.PETRIFIED_VALTROX_SIGN);
 
-        getOrCreateTagBuilder(BlockTags.WALL_SIGNS)
+        tag(BlockTags.WALL_SIGNS)
                 .add(ModBlocks.VALTROX_WALL_SIGN)
                 .add(ModBlocks.COATED_VALTROX_WALL_SIGN)
 
@@ -199,7 +199,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
                 .add(ModBlocks.PETRIFIED_VALTROX_WALL_SIGN);
 
-        getOrCreateTagBuilder(BlockTags.CEILING_HANGING_SIGNS)
+        tag(BlockTags.CEILING_HANGING_SIGNS)
                 .add(ModBlocks.VALTROX_HANGING_SIGN)
                 .add(ModBlocks.COATED_VALTROX_HANGING_SIGN)
 
@@ -208,7 +208,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN);
 
 
-        getOrCreateTagBuilder(BlockTags.WALL_HANGING_SIGNS)
+        tag(BlockTags.WALL_HANGING_SIGNS)
                 .add(ModBlocks.VALTROX_WALL_HANGING_SIGN)
                 .add(ModBlocks.COATED_VALTROX_WALL_HANGING_SIGN)
 
@@ -216,7 +216,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
                 .add(ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN);
 
-        getOrCreateTagBuilder(BlockTags.WALLS)
+        tag(BlockTags.WALLS)
                 .add(ModBlocks.UMBRUSK_BRICK_WALL)
                 .add(ModBlocks.UMBRUSK_WALL)
                 .add(ModBlocks.ZYGRIN_WALL)

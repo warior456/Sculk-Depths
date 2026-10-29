@@ -2,10 +2,10 @@ package net.ugi.sculk_depths.particle;
 
 
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
-import net.minecraft.particle.ParticleType;
-import net.minecraft.particle.SimpleParticleType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.ugi.sculk_depths.SculkDepths;
 
 public class ModParticleTypes {
@@ -21,12 +21,12 @@ public class ModParticleTypes {
     public static final ParticleType<SimpleParticleType> ENERGY_PARTICLE = FabricParticleTypes.simple();
 
     public static void registerModParticles() {
-        Registry.register(Registries.PARTICLE_TYPE, SculkDepths.identifier( "penebrium_spores"), PENEBRIUM_SPORES);
-        Registry.register(Registries.PARTICLE_TYPE, SculkDepths.identifier( "sculk_depths_portal_particle"), SCULK_DEPTHS_PORTAL_PARTICLE);
-        Registry.register(Registries.PARTICLE_TYPE, SculkDepths.identifier( "sculk_depths_portal_animation_particle"), SCULK_DEPTHS_PORTAL_ANIMATION_PARTICLE);
-        Registry.register(Registries.PARTICLE_TYPE, SculkDepths.identifier( "auric_spores"), AURIC_SPORES);
-        Registry.register(Registries.PARTICLE_TYPE, SculkDepths.identifier( "surface_wind"), SURFACE_WIND);
-        Registry.register(Registries.PARTICLE_TYPE, SculkDepths.identifier( "cave_falling_particle"), CAVE_FALLING_PARTICLE);
-        Registry.register(Registries.PARTICLE_TYPE, SculkDepths.identifier( "energy_particle"), ENERGY_PARTICLE);
+        Registry.register(BuiltInRegistries.PARTICLE_TYPE, SculkDepths.id( "penebrium_spores"), PENEBRIUM_SPORES);
+        Registry.register(BuiltInRegistries.PARTICLE_TYPE, SculkDepths.id( "sculk_depths_portal_particle"), SCULK_DEPTHS_PORTAL_PARTICLE);
+        Registry.register(BuiltInRegistries.PARTICLE_TYPE, SculkDepths.id( "sculk_depths_portal_animation_particle"), SCULK_DEPTHS_PORTAL_ANIMATION_PARTICLE);
+        Registry.register(BuiltInRegistries.PARTICLE_TYPE, SculkDepths.id( "auric_spores"), AURIC_SPORES);
+        Registry.register(BuiltInRegistries.PARTICLE_TYPE, SculkDepths.id( "surface_wind"), SURFACE_WIND);
+        Registry.register(BuiltInRegistries.PARTICLE_TYPE, SculkDepths.id( "cave_falling_particle"), CAVE_FALLING_PARTICLE);
+        Registry.register(BuiltInRegistries.PARTICLE_TYPE, SculkDepths.id( "energy_particle"), ENERGY_PARTICLE);
     }
 }

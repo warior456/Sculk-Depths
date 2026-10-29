@@ -2,10 +2,10 @@
 package net.ugi.sculk_depths.world.gen;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.world.gen.placementmodifier.PlacementModifier;
-import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 import net.ugi.sculk_depths.SculkDepths;
 
 public interface ModPlacementModifierType<P extends PlacementModifier> {
@@ -14,7 +14,7 @@ public interface ModPlacementModifierType<P extends PlacementModifier> {
 
 
     private static <P extends PlacementModifier> PlacementModifierType<P> register(String id, MapCodec<P> codec) {
-        return Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, SculkDepths.identifier( id), () -> {
+        return Registry.register(BuiltInRegistries.PLACEMENT_MODIFIER_TYPE, SculkDepths.id( id), () -> {
             return codec;
         });
     }

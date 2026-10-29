@@ -208,16 +208,13 @@ def build() -> dict:
     print(f"  yarn classes={len(yarn_class)} members={len(yarn_member)}")
     print(f"  intermediary classes={len(interm_class)} members={len(interm_member)}")
 
-    # class map: yarn(named) -> official
+    # class map: yarn(named) -> official (dotted, matching source imports)
     named_to_official_class: dict[str, str] = {}
-    inter_to_official: dict[str, str] = {}
     for obf, inter in interm_class.items():
         named = yarn_class.get(inter)
         official = moj_class.get(obf)
         if named and official:
-            named_to_official_class[named] = official
-        if official:
-            inter_to_official[inter] = official
+            named_to_official_class[named.replace("/", ".")] = official.replace("/", ".")
 
     method_votes = collections.defaultdict(collections.Counter)
     field_votes = collections.defaultdict(collections.Counter)
@@ -238,10 +235,11 @@ def build() -> dict:
             target = method_votes if kind == "m" else field_votes
             target[named_name][official_name] += 1
 
-    # keep only names where every observation agreed on the official name; for the
-    # rest take the majority and let the compiler flag the (few) wrong call sites.
-    method_map = {k: c.most_common(1)[0][0] for k, c in method_votes.items()}
-    field_map = {k: c.most_common(1)[0][0] for k, c in field_votes.items()}
+    # Only rewrite names that map to exactly one official name. Ambiguous yarn names
+    # (e.g. getWorld -> level()/getLevel()/getServer()) are left alone: a wrong guess
+    # would still compile in some cases, which is far worse than a compile error.
+    method_map = {k: c.most_common(1)[0][0] for k, c in method_votes.items() if len(c) == 1}
+    field_map = {k: c.most_common(1)[0][0] for k, c in field_votes.items() if len(c) == 1}
     ambiguous = {
         "methods": sorted(k for k, c in method_votes.items() if len(c) > 1),
         "fields": sorted(k for k, c in field_votes.items() if len(c) > 1),
@@ -346,7 +344,7 @@ def remap_file(path: str, tables: dict) -> tuple[str, list[str]]:
 
     for yarn_simple, off_simple in imported.items():
         for fqn, off_fqn in classes.items():
-            if "$" in fqn and fqn.split("$")[0] == yarn_simple:
+            if "$" in fqn and fqn.split("$")[0].rpartition(".")[2] == yarn_simple:
                 yarn_inner = fqn.split("$", 1)[1].replace("$", ".")
                 off_inner = off_fqn.split("$", 1)[1].replace("$", ".")
                 rules[f"{yarn_simple}.{yarn_inner}"] = f"{off_simple}.{off_inner}"

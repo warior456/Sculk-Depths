@@ -2,36 +2,36 @@ package net.ugi.sculk_depths.block.custom;
 
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.block.AbstractPlantStemBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.VineLogic;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.level.block.GrowingPlantHeadBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.NetherVines;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.ugi.sculk_depths.block.ModBlocks;
 
-public class AuricVinesEndBlock extends AbstractPlantStemBlock {
+public class AuricVinesEndBlock extends GrowingPlantHeadBlock {
     @Override
-    protected MapCodec<? extends AbstractPlantStemBlock> getCodec() {
+    protected MapCodec<? extends GrowingPlantHeadBlock> getCodec() {
         return null;
     }
 
-    protected static final VoxelShape SHAPE = Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
+    protected static final VoxelShape SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
 
     public AuricVinesEndBlock(Settings settings) {
-        super(settings, Direction.DOWN, SHAPE, false, 0.1);
+        super(settings, Direction.MIN_Y, SHAPE, false, 0.1);
     }
 
-    protected int getGrowthLength(Random random) {
-        return VineLogic.getGrowthLength(random);
+    protected int getBlocksToGrowWhenBonemealed(RandomSource random) {
+        return NetherVines.getBlocksToGrowWhenBonemealed(random);
     }
 
-    protected Block getPlant() {
+    protected Block getBodyBlock() {
         return ModBlocks.AURIC_VINES;
     }
 
-    protected boolean chooseStemState(BlockState state) {
-        return VineLogic.isValidForWeepingStem(state);
+    protected boolean canGrowInto(BlockState state) {
+        return NetherVines.isValidGrowthState(state);
     }
 }

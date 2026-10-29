@@ -1,10 +1,10 @@
 package net.ugi.sculk_depths.tags;
 
-import net.minecraft.block.Block;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.item.Item;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
 import net.ugi.sculk_depths.SculkDepths;
 
 
@@ -14,52 +14,52 @@ public class ModTags {
 /*                public static final TagKey<Block> METAL_DETECTOR_DETECTABLE_BLOCKS =
                         createTag("metal_detector_detectable_blocks");*/
         public static final TagKey<Block> COATABLE_BLOCKS =
-            createTag("coatable_blocks");
+            tag("coatable_blocks");
 
         public static final TagKey<Block> LESTER_SPAWN_BLOCKS =
-                createTag("lester_spawn_blocks");
+                tag("lester_spawn_blocks");
 
         public static final TagKey<Block> INCORRECT_FOR_QUAZARITH_TOOL =
-                createTag("incorrect_for_quazarith_tool");
+                tag("incorrect_for_quazarith_tool");
                 
         public static final TagKey<Block> KRYSLUM_FLOWABLE_BLOCKS =
-                createTag("kryslum_flowable_blocks");
+                tag("kryslum_flowable_blocks");
 
         public static final TagKey<Block> PORTAL_AIR =
-                createTag("portal_air");
+                tag("portal_air");
 
         public static final TagKey<Block> SCULK_VEINS_REPLACABLE =
-                createTag("sculk_veins_replaceable");
+                tag("sculk_veins_replaceable");
 
 
-        private static TagKey<Block> createTag(String name) {
-            return TagKey.of(RegistryKeys.BLOCK, SculkDepths.identifier( name));
+        private static TagKey<Block> tag(String name) {
+            return TagKey.of(Registries.SIDE, SculkDepths.id( name));
         }
     }
 
     public static class Items {
 
         public static final TagKey<Item> CRYSTALS =
-                createTag("crystals");
+                tag("crystals");
 
         public static final TagKey<Item> CRYSTAL_UPGRADE_ITEMS =
-                createTag("crystal_upgrade_items");
+                tag("crystal_upgrade_items");
 
 
         public static final TagKey<Item> VALTROX_LOGS =
-                createTag("valtrox_logs");
+                tag("valtrox_logs");
 
         public static final TagKey<Item> COATED_VALTROX_LOGS =
-                createTag("coated_valtrox_logs");
+                tag("coated_valtrox_logs");
 
         public static final TagKey<Item> DRIED_VALTROX_LOGS =
-                createTag("dried_valtrox_logs");
+                tag("dried_valtrox_logs");
 
         public static final TagKey<Item> PETRIFIED_VALTROX_LOGS =
-                createTag("petrified_valtrox_logs");
+                tag("petrified_valtrox_logs");
 
-        private static TagKey<Item> createTag(String name) {
-            return TagKey.of(RegistryKeys.ITEM, SculkDepths.identifier( name));
+        private static TagKey<Item> tag(String name) {
+            return TagKey.of(Registries.ITEM, SculkDepths.id( name));
         }
     }
 
@@ -67,7 +67,7 @@ public class ModTags {
         public static final TagKey<Fluid> KRYSLUM = of("kryslum");
 
         private static TagKey<Fluid> of(String name) {
-            return TagKey.of(RegistryKeys.FLUID, SculkDepths.identifier( name));
+            return TagKey.of(Registries.FLUID, SculkDepths.id( name));
         }
     }
 

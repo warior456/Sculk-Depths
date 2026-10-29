@@ -1,16 +1,16 @@
 package net.ugi.sculk_depths.screen;
 
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.resource.featuretoggle.FeatureFlags;
-import net.minecraft.screen.ScreenHandlerType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
+import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.inventory.MenuType;
 import net.ugi.sculk_depths.SculkDepths;
 
 public class ModScreenHandlers {
-    public static ScreenHandlerType<ZygrinFurnaceScreenHandler> ZYGRIN_FURNACE_SCREEN_HANDLER = Registry.register(
-            Registries.SCREEN_HANDLER,
-            SculkDepths.identifier( "zygrin_furnace"),
-            new ScreenHandlerType<>(ZygrinFurnaceScreenHandler::new, FeatureFlags.VANILLA_FEATURES));
+    public static MenuType<ZygrinFurnaceScreenHandler> ZYGRIN_FURNACE_SCREEN_HANDLER = Registry.register(
+            BuiltInRegistries.MENU,
+            SculkDepths.id( "zygrin_furnace"),
+            new MenuType<>(ZygrinFurnaceScreenHandler::new, FeatureFlags.VANILLA_SET));
     //public static final ScreenHandlerType<ZygrinFurnaceScreenHandler> ZYGRIN_FURNACE_SCREEN_HANDLER = new ExtendedScreenHandlerType<>(ZygrinFurnaceScreenHandler::new);
     //public static final ScreenHandlerType<ZygrinFurnaceScreenHandler> ZYGRIN_FURNACE = ScreenHandlerType.register("blast_furnace", ZygrinFurnaceScreenHandler::new);
     public static void registerModScreenHandlers() {

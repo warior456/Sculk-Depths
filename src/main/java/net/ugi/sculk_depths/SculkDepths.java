@@ -6,10 +6,10 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.CauldronFluidContent;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
-import net.minecraft.entity.SpawnLocationTypes;
-import net.minecraft.entity.SpawnRestriction;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.Heightmap;
+import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.ugi.sculk_depths.block.ModBlockEntities;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
@@ -44,71 +44,71 @@ public class SculkDepths implements ModInitializer {
 	public static ConfigHandler CONFIG;
 	public static final Logger LOGGER = LoggerFactory.getLogger("sculk_depths");
 
-	public static Identifier identifier(String path) {
-		return Identifier.of(SculkDepths.MOD_ID, path);
+	public static ResourceLocation id(String path) {
+		return ResourceLocation.fromNamespaceAndPath(SculkDepths.MOD_ID, path);
 	}
 	@Override
 	public void onInitialize() {
 
-        SculkDepths.LOGGER.info("Loading Config for " + SculkDepths.MOD_ID);
+        SculkDepths.LOGGER.printDebugLog("Loading Config for " + SculkDepths.MOD_ID);
         Config.loadConfig();
 
-        SculkDepths.LOGGER.info("Registering ItemGroups for " + SculkDepths.MOD_ID);
+        SculkDepths.LOGGER.printDebugLog("Registering ItemGroups for " + SculkDepths.MOD_ID);
         ModItemGroup.registerItemgroups();
 
-        SculkDepths.LOGGER.info("Registering items for " + SculkDepths.MOD_ID);
+        SculkDepths.LOGGER.printDebugLog("Registering items for " + SculkDepths.MOD_ID);
         ModItems.registerModItems();
 
-        SculkDepths.LOGGER.info("Registering Blocks for " + SculkDepths.MOD_ID);
+        SculkDepths.LOGGER.printDebugLog("Registering Blocks for " + SculkDepths.MOD_ID);
         ModBlocks.registerModBlocks();
 
-        SculkDepths.LOGGER.info("Registering Sounds for " + SculkDepths.MOD_ID);
+        SculkDepths.LOGGER.printDebugLog("Registering Sounds for " + SculkDepths.MOD_ID);
         ModSounds.registerModSounds();
 
-        SculkDepths.LOGGER.info("Registering Effects for " + SculkDepths.MOD_ID);
+        SculkDepths.LOGGER.printDebugLog("Registering Effects for " + SculkDepths.MOD_ID);
         ModStatusEffects.init();
 
-        SculkDepths.LOGGER.info("Registering ServerTickEvents for " + SculkDepths.MOD_ID);
+        SculkDepths.LOGGER.printDebugLog("Registering ServerTickEvents for " + SculkDepths.MOD_ID);
         ServerTickEvents.START_WORLD_TICK.register(new ConditionalSoundPlayer());
         ServerTickEvents.START_WORLD_TICK.register(new ModBiomeEffects());
 
         //SculkDepths.LOGGER.info("Registering LootTables for " + SculkDepths.MOD_ID);
         //ModLootTableModifiers.modifyLootTables();
 
-        SculkDepths.LOGGER.info("Registering ModCauldronBehavior for " + SculkDepths.MOD_ID);
-        ModCauldronBehavior.registerBehavior();
+        SculkDepths.LOGGER.printDebugLog("Registering ModCauldronBehavior for " + SculkDepths.MOD_ID);
+        ModCauldronBehavior.bootStrap();
 
-        SculkDepths.LOGGER.info("Registering BlockEntities for " + SculkDepths.MOD_ID);
+        SculkDepths.LOGGER.printDebugLog("Registering BlockEntities for " + SculkDepths.MOD_ID);
         ModBlockEntities.registerBlockEntities();
 
-        SculkDepths.LOGGER.info("Registering Entities for " + SculkDepths.MOD_ID);
-        SpawnRestriction.register(ModEntities.LESTER, SpawnLocationTypes.ON_GROUND, null, (type, world, reason, pos, random) -> true);
-        SpawnRestriction.register(ModEntities.CHOMPER_COLOSSUS, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (type, world, reason, pos, random) -> true);
+        SculkDepths.LOGGER.printDebugLog("Registering Entities for " + SculkDepths.MOD_ID);
+        SpawnPlacements.register(ModEntities.LESTER, SpawnPlacementTypes.ON_GROUND, null, (type, world, reason, pos, random) -> true);
+        SpawnPlacements.register(ModEntities.CHOMPER_COLOSSUS, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (type, world, reason, pos, random) -> true);
         FabricDefaultAttributeRegistry.register(ModEntities.GLOMPER, GlomperEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.LESTER, LesterEntity.createLesterAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.CHOMPER_COLOSSUS, ChomperColossusEntity.createChomperColossusAttributes());
 
-        SculkDepths.LOGGER.info("Registering Particles for " + SculkDepths.MOD_ID);
+        SculkDepths.LOGGER.printDebugLog("Registering Particles for " + SculkDepths.MOD_ID);
         ModParticleTypes.registerModParticles();
 
-        SculkDepths.LOGGER.info("Registering ScreenHandlers for " + SculkDepths.MOD_ID);
+        SculkDepths.LOGGER.printDebugLog("Registering ScreenHandlers for " + SculkDepths.MOD_ID);
         ModScreenHandlers.registerModScreenHandlers();
 
-        SculkDepths.LOGGER.info("Registering WorldGen for " + SculkDepths.MOD_ID);
+        SculkDepths.LOGGER.printDebugLog("Registering WorldGen for " + SculkDepths.MOD_ID);
         ModPlacementModifierType.init();
         ModFeatures.init();
         WorldGenerator.initWorldGen();
 
-        SculkDepths.LOGGER.info("Registering Components for " + SculkDepths.MOD_ID);
+        SculkDepths.LOGGER.printDebugLog("Registering Components for " + SculkDepths.MOD_ID);
         ModComponentTypes.register();
 
-        SculkDepths.LOGGER.info("Registering POI's for " + SculkDepths.MOD_ID);
+        SculkDepths.LOGGER.printDebugLog("Registering POI's for " + SculkDepths.MOD_ID);
         POIs.register();
 
 
         CauldronFluidContent.registerCauldron(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON, ModFluids.KRYSLUM_STILL, FluidConstants.BUCKET, ModProperties.KRYSLUM_LEVEL); //support for mods to see how much fluid is in it (doesn't work for create pipes)
 
-        LOGGER.info(SculkDepths.MOD_ID + " has loaded");
+        LOGGER.printDebugLog(SculkDepths.MOD_ID + " has loaded");
     }
 
 

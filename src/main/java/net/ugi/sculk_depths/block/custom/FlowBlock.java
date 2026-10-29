@@ -2,17 +2,17 @@ package net.ugi.sculk_depths.block.custom;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.BlockGetter;
 import net.ugi.sculk_depths.state.property.ModProperties;
 import net.ugi.sculk_depths.tags.ModTags;
 
@@ -27,39 +27,39 @@ public class FlowBlock extends FacingBlock {
 
     protected static final float field_31233 = 6.0f;
     protected static final float field_31234 = 10.0f;
-    protected static final VoxelShape Y_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-    protected static final VoxelShape Z_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-    protected static final VoxelShape X_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
+    protected static final VoxelShape Y_AXIS_AABB = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
+    protected static final VoxelShape Z_AXIS_AABB = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
+    protected static final VoxelShape X_AXIS_AABB = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
 
     public FlowBlock(AbstractBlock.Settings settings) {
         super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.UP));
+        this.registerDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.MAX_Y));
     }
 
     @Override
-    public BlockState rotate(BlockState blockState, BlockRotation rotation) {
-        return blockState.with(FACING, rotation.rotate(blockState.get(FACING)));
+    public BlockState hasRot(BlockState block, Rotation rotation) {
+        return block.with(FACING, rotation.hasRot(block.get(FACING)));
 
     }
 
     @Override
-    public BlockState mirror(BlockState blockState, BlockMirror mirror) {
-        return blockState.rotate(mirror.getRotation(blockState.get(FACING)));
+    public BlockState initialMirror(BlockState block, Mirror initialMirror) {
+        return block.hasRot(initialMirror.getRotation(block.get(FACING)));
     }
 
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, ShapeContext context) {
         switch (state.get(FACING).getAxis()) {
             default: {
-                return X_SHAPE;
+                return X_AXIS_AABB;
             }
             case Z: {
-                return Z_SHAPE;
+                return Z_AXIS_AABB;
             }
-            case Y:
+            case Y_ROT:
         }
-        return Y_SHAPE;
+        return Y_AXIS_AABB;
     }
 
 /*    @Override
@@ -236,12 +236,12 @@ public class FlowBlock extends FacingBlock {
     
 
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getSide().getOpposite());
+    public BlockState getPlacementState(BlockPlaceContext ctx) {
+        return this.getDefaultState().with(FACING, ctx.getSide().opposite());
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    protected void appendProperties(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }
 }

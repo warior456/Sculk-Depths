@@ -1,15 +1,15 @@
 package net.ugi.sculk_depths.item.custom;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.tags.ModTags;
 
@@ -22,29 +22,29 @@ public class GlomperGlux extends Item implements Coatable{
     }
 
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) { //originally copied from mc
+    public InteractionResult useOn(UseOnContext context) { //originally copied from mc
         BlockPos blockPos = context.getBlockPos();
-        PlayerEntity playerEntity = context.getPlayer();
-        World world = context.getWorld();
-        BlockState blockState = world.getBlockState(blockPos);
-        Block block = blockState.getBlock();
+        Player playerEntity = context.getPlayer();
+        Level world = context.getWorld();
+        BlockState block = world.getBlockState(blockPos);
+        Block block = block.getBlock();
 
-        if (blockState.isIn(ModTags.Blocks.COATABLE_BLOCKS)) {
+        if (block.is(ModTags.Blocks.COATABLE_BLOCKS)) {
             if (block == ModBlocks.VALTROX_DOOR){
-                BlockPos blockPos1 = blockState.get(HALF).equals(DoubleBlockHalf.UPPER) ? blockPos.down() : blockPos;
-                Coatable.CoatBlock(blockState, world, blockPos1);
+                BlockPos blockPos1 = block.get(HALF).equals(DoubleBlockHalf.UPPER) ? blockPos.below() : blockPos;
+                Coatable.CoatBlock(block, world, blockPos1);
             }
             else {
-                Coatable.CoatBlock(blockState, world, blockPos);
+                Coatable.CoatBlock(block, world, blockPos);
             }
-            context.getStack().decrement(1);
+            context.getStack().shrink(1);
             if(playerEntity != null){
-                playerEntity.playSound(SoundEvents.ITEM_HONEYCOMB_WAX_ON, 1.0F, 2.0F);
+                playerEntity.playSound(SoundEvents.HONEYCOMB_WAX_ON, 1.0F, 2.0F);
             }
-            return ActionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
 
         }
-        return ActionResult.FAIL;
+        return InteractionResult.FAIL;
     }
 
 }

@@ -1,12 +1,12 @@
 package net.ugi.sculk_depths.worldgen;
 
-import net.minecraft.Bootstrap;
+import net.minecraft.server.Bootstrap;
 import net.minecraft.SharedConstants;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.world.gen.chunk.AquiferSampler;
-import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
-import net.minecraft.world.gen.chunk.NoiseChunkGenerator;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.Aquifer;
+import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
+import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -50,12 +50,12 @@ class FluidLevelSamplerEquivalenceTest {
 
     @BeforeAll
     static void bootstrapMinecraft() throws Exception {
-        SharedConstants.createGameVersion();
+        SharedConstants.tryDetectVersion();
         Bootstrap.initialize();
         // FluidLevel's y/state are package-private; read them reflectively.
-        fluidLevelY = AquiferSampler.FluidLevel.class.getDeclaredField("y");
+        fluidLevelY = Aquifer.FluidStatus.class.getDeclaredField("y");
         fluidLevelY.setAccessible(true);
-        fluidLevelState = AquiferSampler.FluidLevel.class.getDeclaredField("state");
+        fluidLevelState = Aquifer.FluidStatus.class.getDeclaredField("state");
         fluidLevelState.setAccessible(true);
     }
 
@@ -63,18 +63,18 @@ class FluidLevelSamplerEquivalenceTest {
      * Invokes the private static {@code NoiseChunkGenerator.createFluidLevelSampler} on
      * the actual (mixin-transformed) class.
      */
-    private static AquiferSampler.FluidLevelSampler createSampler(ChunkGeneratorSettings settings) throws Exception {
-        Method m = NoiseChunkGenerator.class.getDeclaredMethod("createFluidLevelSampler", ChunkGeneratorSettings.class);
-        m.setAccessible(true);
-        return (AquiferSampler.FluidLevelSampler) m.invoke(null, settings);
+    private static Aquifer.FluidPicker samplerForProfilingPath(NoiseGeneratorSettings settings) throws Exception {
+        Method height = NoiseBasedChunkGenerator.class.getDeclaredMethod("createFluidLevelSampler", NoiseGeneratorSettings.class);
+        height.setAccessible(true);
+        return (Aquifer.FluidPicker) height.invoke(null, settings);
     }
 
     /**
      * Minimal generator settings: createFluidLevelSampler only reads seaLevel() and
      * defaultFluid(), so the noise-related components are left null.
      */
-    private static ChunkGeneratorSettings fixtureSettings() {
-        return new ChunkGeneratorSettings(
+    private static NoiseGeneratorSettings fixtureSettings() {
+        return new NoiseGeneratorSettings(
                 null,                                   // generationShapeConfig (unused)
                 Blocks.STONE.getDefaultState(),         // defaultBlock (unused)
                 Blocks.WATER.getDefaultState(),         // defaultFluid
@@ -91,29 +91,29 @@ class FluidLevelSamplerEquivalenceTest {
      * DimensionType.MIN_HEIGHT * 2 from the old code is omitted here: it was never
      * referenced by the returned lambda.
      */
-    private static AquiferSampler.FluidLevelSampler preMixinOracle(ChunkGeneratorSettings settings) {
-        AquiferSampler.FluidLevel fluidLevel = new AquiferSampler.FluidLevel(settings.seaLevel() - LAVA_SEA_OFFSET, Blocks.LAVA.getDefaultState());
-        int i = settings.seaLevel();
-        AquiferSampler.FluidLevel fluidLevel2 = new AquiferSampler.FluidLevel(i, settings.defaultFluid());
+    private static Aquifer.FluidPicker preMixinOracle(NoiseGeneratorSettings settings) {
+        Aquifer.FluidStatus fluidLevel = new Aquifer.FluidStatus(settings.createDisabled() - LAVA_SEA_OFFSET, Blocks.LAVA.getDefaultState());
+        int i = settings.createDisabled();
+        Aquifer.FluidStatus fluidLevel2 = new Aquifer.FluidStatus(i, settings.defaultFluid());
         return (x, y, z) -> {
-            if (y < Math.min(settings.seaLevel() - LAVA_SEA_OFFSET, i)) {
+            if (y < Math.minValue(settings.createDisabled() - LAVA_SEA_OFFSET, i)) {
                 return fluidLevel;
             }
             return fluidLevel2;
         };
     }
 
-    private static int fluidY(AquiferSampler.FluidLevel level) {
+    private static int fluidY(Aquifer.FluidStatus constructedBeacon) {
         try {
-            return fluidLevelY.getInt(level);
+            return fluidLevelY.getInt(constructedBeacon);
         } catch (IllegalAccessException e) {
             throw new AssertionError(e);
         }
     }
 
-    private static BlockState fluidState(AquiferSampler.FluidLevel level) {
+    private static BlockState fluidState(Aquifer.FluidStatus constructedBeacon) {
         try {
-            return (BlockState) fluidLevelState.get(level);
+            return (BlockState) fluidLevelState.get(constructedBeacon);
         } catch (IllegalAccessException e) {
             throw new AssertionError(e);
         }
@@ -121,29 +121,29 @@ class FluidLevelSamplerEquivalenceTest {
 
     @Test
     void lavaBelowThresholdAndDefaultFluidAtAndAbove() throws Exception {
-        AquiferSampler.FluidLevelSampler sampler = createSampler(fixtureSettings());
+        Aquifer.FluidPicker islandNoise = samplerForProfilingPath(fixtureSettings());
 
         // Strictly below the lava threshold: lava at seaLevel - LAVA_SEA_OFFSET.
         for (int y : new int[]{LAVA_LEVEL_Y - 2, LAVA_LEVEL_Y - 1}) {
-            AquiferSampler.FluidLevel level = sampler.getFluidLevel(0, y, 0);
-            assertEquals(LAVA_LEVEL_Y, fluidY(level), "lava level y at y=" + y);
-            assertEquals(Blocks.LAVA.getDefaultState(), fluidState(level), "expected lava at y=" + y);
+            Aquifer.FluidStatus constructedBeacon = islandNoise.computeFluid(0, y, 0);
+            assertValueEqual(LAVA_LEVEL_Y, fluidY(constructedBeacon), "lava level y at y=" + y);
+            assertValueEqual(Blocks.LAVA.getDefaultState(), fluidState(constructedBeacon), "expected lava at y=" + y);
         }
 
         // At the threshold itself and above: the default fluid at seaLevel.
         // (The boundary condition is strict: y < min(seaLevel - offset, seaLevel).)
         for (int y : new int[]{LAVA_LEVEL_Y, LAVA_LEVEL_Y + 1, SEA_LEVEL - 1, SEA_LEVEL, SEA_LEVEL + 1}) {
-            AquiferSampler.FluidLevel level = sampler.getFluidLevel(0, y, 0);
-            assertEquals(SEA_LEVEL, fluidY(level), "default fluid level y at y=" + y);
-            assertEquals(Blocks.WATER.getDefaultState(), fluidState(level), "expected default fluid at y=" + y);
+            Aquifer.FluidStatus constructedBeacon = islandNoise.computeFluid(0, y, 0);
+            assertValueEqual(SEA_LEVEL, fluidY(constructedBeacon), "default fluid level y at y=" + y);
+            assertValueEqual(Blocks.WATER.getDefaultState(), fluidState(constructedBeacon), "expected default fluid at y=" + y);
         }
     }
 
     @Test
     void matchesPreMixinOracleAcrossBoundarySweep() throws Exception {
-        ChunkGeneratorSettings settings = fixtureSettings();
-        AquiferSampler.FluidLevelSampler sampler = createSampler(settings);
-        AquiferSampler.FluidLevelSampler oracle = preMixinOracle(settings);
+        NoiseGeneratorSettings settings = fixtureSettings();
+        Aquifer.FluidPicker islandNoise = samplerForProfilingPath(settings);
+        Aquifer.FluidPicker oracle = preMixinOracle(settings);
 
         // Sweep well across both boundaries (lava threshold and seaLevel), at several
         // x/z positions: the sampler must be position-independent and equal to the
@@ -151,11 +151,11 @@ class FluidLevelSamplerEquivalenceTest {
         for (int x : new int[]{-9999, 0, 12345}) {
             for (int z : new int[]{-7777, 0, 54321}) {
                 for (int y = LAVA_LEVEL_Y - 32; y <= SEA_LEVEL + 32; y++) {
-                    AquiferSampler.FluidLevel actual = sampler.getFluidLevel(x, y, z);
-                    AquiferSampler.FluidLevel expected = oracle.getFluidLevel(x, y, z);
-                    assertEquals(fluidY(expected), fluidY(actual),
+                    Aquifer.FluidStatus actual = islandNoise.computeFluid(x, y, z);
+                    Aquifer.FluidStatus is = oracle.computeFluid(x, y, z);
+                    assertValueEqual(fluidY(is), fluidY(actual),
                             "fluid level y differs at (" + x + ", " + y + ", " + z + ")");
-                    assertEquals(fluidState(expected), fluidState(actual),
+                    assertValueEqual(fluidState(is), fluidState(actual),
                             "fluid state differs at (" + x + ", " + y + ", " + z + ")");
                 }
             }

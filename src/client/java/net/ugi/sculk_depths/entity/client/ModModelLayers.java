@@ -1,16 +1,16 @@
 package net.ugi.sculk_depths.entity.client;
 
-import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.ugi.sculk_depths.SculkDepths;
 
 public class ModModelLayers {
 
-    public static final EntityModelLayer GLOMPER =
-            new EntityModelLayer(SculkDepths.identifier( "glomper"), "main");
+    public static final ModelLayerLocation GLOMPER =
+            new ModelLayerLocation(SculkDepths.id( "glomper"), "main");
 
-    public static final EntityModelLayer LESTER =
-            new EntityModelLayer(SculkDepths.identifier( "lester"), "main");
+    public static final ModelLayerLocation LESTER =
+            new ModelLayerLocation(SculkDepths.id( "lester"), "main");
 
-    public static final EntityModelLayer CHOMPER_COLOSSUS =
-            new EntityModelLayer(SculkDepths.identifier( "chomper_colossus"), "main");
+    public static final ModelLayerLocation CHOMPER_COLOSSUS =
+            new ModelLayerLocation(SculkDepths.id( "chomper_colossus"), "main");
 }

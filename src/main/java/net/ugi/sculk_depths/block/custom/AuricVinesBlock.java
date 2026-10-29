@@ -2,8 +2,8 @@ package net.ugi.sculk_depths.block.custom;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.ugi.sculk_depths.block.ModBlocks;
 
 public class AuricVinesBlock extends AbstractPlantBlock {
@@ -11,13 +11,13 @@ public class AuricVinesBlock extends AbstractPlantBlock {
     protected MapCodec<? extends AbstractPlantBlock> getCodec() {
         return null;
     }
-    public static final VoxelShape SHAPE = Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
+    public static final VoxelShape SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
 
     public AuricVinesBlock(AbstractBlock.Settings settings) {
-        super(settings, Direction.DOWN, SHAPE, false);
+        super(settings, Direction.MIN_Y, SHAPE, false);
     }
 
-    protected AbstractPlantStemBlock getStem() {
+    protected AbstractPlantStemBlock getHeadBlock() {
         return (AbstractPlantStemBlock) ModBlocks.AURIC_VINES_END;
     }
 }

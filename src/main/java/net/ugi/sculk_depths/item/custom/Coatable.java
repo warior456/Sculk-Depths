@@ -3,11 +3,11 @@ package net.ugi.sculk_depths.item.custom;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.ugi.sculk_depths.block.ModBlocks;
 
 import java.util.function.Supplier;
@@ -52,7 +52,7 @@ public interface Coatable {
                             .put(ModBlocks.VALTROX_HANGING_SIGN, ModBlocks.COATED_VALTROX_HANGING_SIGN))
                     .put(ModBlocks.VALTROX_WALL_HANGING_SIGN, ModBlocks.COATED_VALTROX_WALL_HANGING_SIGN))
             .build());
-    Supplier<BiMap<Block, Block>> COAT_LEVEL_DECREASES = Suppliers.memoize(() -> COAT_LEVEL_INCREASES.get().inverse());
+    Supplier<BiMap<Block, Block>> COAT_LEVEL_DECREASES = Suppliers.memoize(() -> COAT_LEVEL_INCREASES.get().opposite());
 
 
     static Block getCoatedBlock(Block block) {
@@ -63,22 +63,22 @@ public interface Coatable {
         return COAT_LEVEL_DECREASES.get().get(block);
     }
 
-    static void CoatBlock(BlockState state, World world, BlockPos pos) {
+    static void CoatBlock(BlockState state, Level world, BlockPos pos) {
         Block block = state.getBlock();
 
         Block coatedblock = getCoatedBlock(block);
 
         if (block == ModBlocks.VALTROX_DOOR){
-            world.setBlockState(pos, coatedblock.getStateWithProperties(state.with(HALF, DoubleBlockHalf.LOWER)));
-            world.setBlockState(pos.up(), coatedblock.getStateWithProperties(state.with(HALF, DoubleBlockHalf.UPPER)));
+            world.setBlockState(pos, coatedblock.withPropertiesOf(state.with(HALF, DoubleBlockHalf.LOWER)));
+            world.setBlockState(pos.above(), coatedblock.withPropertiesOf(state.with(HALF, DoubleBlockHalf.UPPER)));
         }
-        else world.setBlockState(pos, coatedblock.getStateWithProperties(state));
+        else world.setBlockState(pos, coatedblock.withPropertiesOf(state));
     }
 
-    static void unCoatBlock(BlockState state, World world, BlockPos pos) {
+    static void unCoatBlock(BlockState state, Level world, BlockPos pos) {
         Block block = state.getBlock();
 
         Block nonCoatedblock = getNonCoatedBlock(block);
-        world.setBlockState(pos, nonCoatedblock.getStateWithProperties(state));
+        world.setBlockState(pos, nonCoatedblock.withPropertiesOf(state));
     }
 }

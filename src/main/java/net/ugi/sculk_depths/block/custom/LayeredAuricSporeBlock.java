@@ -1,34 +1,34 @@
 package net.ugi.sculk_depths.block.custom;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SnowBlock;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.WorldView;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.SnowLayerBlock;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelReader;
 import org.jetbrains.annotations.Nullable;
 
-public class LayeredAuricSporeBlock extends SnowBlock {
+public class LayeredAuricSporeBlock extends SnowLayerBlock {
     public LayeredAuricSporeBlock(Settings settings) {
         super(settings);
-        this.setDefaultState((this.stateManager.getDefaultState()).with(LAYERS, 1));
+        this.registerDefaultState((this.stateManager.getDefaultState()).with(ALL_MODELS, 1));
     }
 
     @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        BlockState blockState = world.getBlockState(pos.down());
-        return Block.isFaceFullSquare(blockState.getCollisionShape(world, pos.down()), Direction.UP) || blockState.isOf(this) && blockState.get(LAYERS) == 8;
+    public boolean canPlaceAt(BlockState state, LevelReader world, BlockPos pos) {
+        BlockState block = world.getBlockState(pos.below());
+        return Block.isFaceFull(block.nonClimbableShape(world, pos.below()), Direction.MAX_Y) || block.isOf(this) && block.get(ALL_MODELS) == 8;
     }
 
     @Override
-    public boolean canReplace(BlockState state, ItemPlacementContext context) {
-        int i = state.get(LAYERS);
+    public boolean canReplace(BlockState state, BlockPlaceContext context) {
+        int i = state.get(ALL_MODELS);
         if (context.getStack().isOf(this.asItem()) && i < 8) {
-            if (context.canReplaceExisting()) {
-                return context.getSide() == Direction.UP;
+            if (context.replacingClickedOnBlock()) {
+                return context.getSide() == Direction.MAX_Y;
             } else {
                 return true;
             }
@@ -39,18 +39,18 @@ public class LayeredAuricSporeBlock extends SnowBlock {
 
     @Override
     @Nullable
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        BlockState blockState = ctx.getWorld().getBlockState(ctx.getBlockPos());
-        if (blockState.isOf(this)) {
-            int i = blockState.get(LAYERS);
-            return blockState.with(LAYERS, Math.min(8, i + 1));
+    public BlockState getPlacementState(BlockPlaceContext ctx) {
+        BlockState block = ctx.getWorld().getBlockState(ctx.getBlockPos());
+        if (block.isOf(this)) {
+            int i = block.get(ALL_MODELS);
+            return block.with(ALL_MODELS, Math.minValue(8, i + 1));
         } else {
             return super.getPlacementState(ctx);
         }
     }
 
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 
     }
 

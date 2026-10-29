@@ -1,19 +1,19 @@
 package net.ugi.sculk_depths.block.custom;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.function.BooleanBiFunction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.custom.ModCauldron.FlumrockCauldronBlock;
 import net.ugi.sculk_depths.block.custom.ModCauldron.SporeFlumrockCauldronBlock;
@@ -29,7 +29,7 @@ import java.util.function.BiPredicate;
 
 public class SporeBlock extends ShroomBlock {
 
-    private static final VoxelShape DRIP_COLLISION_SHAPE = Block.createCuboidShape(6.0, 0.0, 6.0, 10.0, 16.0, 10.0);
+    private static final VoxelShape REQUIRED_SPACE_TO_DRIP_THROUGH_NON_SOLID_BLOCK = Block.box(6.0, 0.0, 6.0, 10.0, 16.0, 10.0);
 
 
     public SporeBlock(Settings settings) {
@@ -38,29 +38,29 @@ public class SporeBlock extends ShroomBlock {
 
 
     @Override
-    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         int i = pos.getX();
         int j = pos.getY();
         int k = pos.getZ();
 
-        BlockPos.Mutable mutable = new BlockPos.Mutable();
+        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
         for (int l = 0; l < 14; ++l) {
-            mutable.set(i + MathHelper.nextInt(random, -10, 10), j - random.nextInt(10), k + MathHelper.nextInt(random, -10, 10));
-            BlockState blockState = world.getBlockState(mutable);
-            if (blockState.isFullCube(world, mutable)) continue;
+            mutable.set(i + Mth.getInt(random, -10, 10), j - random.getInt(10), k + Mth.getInt(random, -10, 10));
+            BlockState block = world.getBlockState(mutable);
+            if (block.isCollisionShapeFullBlock(world, mutable)) continue;
             //ParticleTypes.ASH
-            world.addParticle((ParticleEffect) ModParticleTypes.PENEBRIUM_SPORES, (double) mutable.getX() + random.nextDouble(), (double) mutable.getY() + random.nextDouble(), (double) mutable.getZ() + random.nextDouble(), 0.0, 0.0, 0.0);
+            world.addParticle((ParticleOptions) ModParticleTypes.PENEBRIUM_SPORES, (double) mutable.getX() + random.nextDouble(), (double) mutable.getY() + random.nextDouble(), (double) mutable.getZ() + random.nextDouble(), 0.0, 0.0, 0.0);
         }
     }
 
     @Override
-    public boolean hasRandomTicks(BlockState state) {
+    public boolean isRandomlyTicking(BlockState state) {
         return true;
     }
 
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        BlockPos pos2 = getCauldronPos(world, pos);
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+        BlockPos pos2 = findFillableCauldronBelowStalactiteTip(world, pos);
         if (pos2 == null) {
             return;
         }
@@ -68,7 +68,7 @@ public class SporeBlock extends ShroomBlock {
         if (CauldronBlockstate == null) {
             return;
         }
-        if (MathHelper.nextInt(random, 0, Math.abs(pos.getY() - pos2.getY()) + 1) >= 2) {
+        if (Mth.getInt(random, 0, Math.abs(pos.getY() - pos2.getY()) + 1) >= 2) {
             return;
         }
         if (CauldronBlockstate.getBlock() instanceof FlumrockCauldronBlock) {
@@ -86,38 +86,38 @@ public class SporeBlock extends ShroomBlock {
     }
 
     @Nullable
-    private static BlockPos getCauldronPos(World world, BlockPos pos2) {
+    private static BlockPos findFillableCauldronBelowStalactiteTip(Level world, BlockPos pos2) {
         BiPredicate<BlockPos, BlockState> biPredicate = (pos, state) -> SporeBlock.canDripThrough(world, pos, state);
-        return SporeBlock.searchInDirection(world, pos2, Direction.DOWN.getDirection(), biPredicate, 11).orElse(null);
+        return SporeBlock.findBlockVertical(world, pos2, Direction.MIN_Y.getDirection(), biPredicate, 11).orElse(null);
     }
 
-    private static boolean canDripThrough(BlockView world, BlockPos pos, BlockState state) {
+    private static boolean canDripThrough(BlockGetter world, BlockPos pos, BlockState state) {
         if (state.isAir()) {
             return true;
         }
-        if (state.isOpaqueFullCube(world, pos)) {
+        if (state.isSolidRender(world, pos)) {
             return false;
         }
         if (!state.getFluidState().isEmpty()) {
             return false;
         }
-        VoxelShape voxelShape = state.getCollisionShape(world, pos);
-        return !VoxelShapes.matchesAnywhere(DRIP_COLLISION_SHAPE, voxelShape, BooleanBiFunction.AND);
+        VoxelShape voxelShape = state.nonClimbableShape(world, pos);
+        return !Shapes.joinIsNotEmpty(REQUIRED_SPACE_TO_DRIP_THROUGH_NON_SOLID_BLOCK, voxelShape, BooleanOp.AND);
     }
 
-    private static Optional<BlockPos> searchInDirection(WorldAccess world, BlockPos pos, Direction.AxisDirection direction, BiPredicate<BlockPos, BlockState> continuePredicate, int range) {
-        Direction direction2 = Direction.get(direction, Direction.Axis.Y);
-        BlockPos.Mutable mutable = pos.mutableCopy();
-        for (int i = 1; i < range; ++i) {
+    private static Optional<BlockPos> findBlockVertical(LevelAccessor world, BlockPos pos, Direction.AxisDirection direction, BiPredicate<BlockPos, BlockState> continuePredicate, int composite) {
+        Direction direction2 = Direction.get(direction, Direction.Axis.Y_ROT);
+        BlockPos.MutableBlockPos mutable = pos.mutable();
+        for (int i = 1; i < composite; ++i) {
             mutable.move(direction2);
-            BlockState blockState = world.getBlockState(mutable);
-            if (blockState.getBlock() instanceof FlumrockCauldronBlock || blockState.getBlock() instanceof SporeFlumrockCauldronBlock) {
+            BlockState block = world.getBlockState(mutable);
+            if (block.getBlock() instanceof FlumrockCauldronBlock || block.getBlock() instanceof SporeFlumrockCauldronBlock) {
                 return Optional.of(mutable.toImmutable());
             }
-            if (!world.isOutOfHeightLimit(mutable.getY()) && continuePredicate.test(mutable, blockState)) continue;
-            return Optional.empty();
+            if (!world.isOutsideBuildHeight(mutable.getY()) && continuePredicate.test(mutable, block)) continue;
+            return Optional.allEmpty();
         }
-        return Optional.empty();
+        return Optional.allEmpty();
 
 
     }

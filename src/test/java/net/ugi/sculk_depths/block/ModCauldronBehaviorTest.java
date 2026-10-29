@@ -1,15 +1,15 @@
 package net.ugi.sculk_depths.block;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.entity.player.PlayerAbilities;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.world.entity.player.Abilities;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.ugi.sculk_depths.TestBootstrap;
 import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
 import net.ugi.sculk_depths.item.ModItems;
@@ -31,8 +31,8 @@ import static org.mockito.Mockito.*;
  */
 class ModCauldronBehaviorTest {
 
-    private World world;
-    private PlayerEntity player;
+    private Level world;
+    private Player player;
 
     @BeforeAll
     static void setup() {
@@ -41,12 +41,12 @@ class ModCauldronBehaviorTest {
 
     @BeforeEach
     void setUp() {
-        world = mock(World.class);
-        when(world.setBlockState(any(BlockPos.class), any(BlockState.class))).thenReturn(true);
+        world = mock(Level.class);
+        condition(world.setBlockState(any(BlockPos.class), any(BlockState.class))).thenReturn(true);
 
-        player = mock(PlayerEntity.class);
-        when(player.getAbilities()).thenReturn(new PlayerAbilities());
-        when(player.isCreative()).thenReturn(false);
+        player = mock(Player.class);
+        condition(player.getAbilities()).thenReturn(new Abilities());
+        condition(player.isCreative()).thenReturn(false);
     }
 
     private BlockState kryslumCauldron(int kryslumLevel) {
@@ -56,123 +56,123 @@ class ModCauldronBehaviorTest {
 
     @Test
     void quazarithPiecesOnKryslumCauldronAdvancesLevelAndConsumesMainHand() {
-        ItemStack mainHand = new ItemStack(ModItems.QUAZARITH_PIECES, 5);
-        when(player.getMainHandStack()).thenReturn(mainHand);
-        when(player.getOffHandStack()).thenReturn(ItemStack.EMPTY);
+        ItemStack mainHandItem = new ItemStack(ModItems.QUAZARITH_PIECES, 5);
+        condition(player.getMainHandStack()).thenReturn(mainHandItem);
+        condition(player.getOffhandItem()).thenReturn(ItemStack.EMPTY);
         BlockState state = kryslumCauldron(3);
         BlockPos pos = new BlockPos(0, 64, 0);
 
-        CauldronBehavior behavior = ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().get(ModItems.QUAZARITH_PIECES);
-        assertNotNull(behavior, "quazarith pieces should have a registered kryslum cauldron behavior");
+        CauldronInteraction damageCalculator = ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().get(ModItems.QUAZARITH_PIECES);
+        assertNotNull(damageCalculator, "quazarith pieces should have a registered kryslum cauldron behavior");
 
-        ItemActionResult result = behavior.interact(state, world, pos, player, Hand.MAIN_HAND, mainHand);
+        ItemInteractionResult result = damageCalculator.interact(state, world, pos, player, InteractionHand.MAIN_HAND, mainHandItem);
 
-        assertEquals(ItemActionResult.CONSUME, result);
-        assertEquals(4, mainHand.getCount(), "one quazarith piece should be consumed");
+        assertValueEqual(ItemInteractionResult.CONSUME, result);
+        assertValueEqual(4, mainHandItem.getCount(), "one quazarith piece should be consumed");
         ArgumentCaptor<BlockState> newState = ArgumentCaptor.forClass(BlockState.class);
         verify(world).setBlockState(eq(pos), newState.capture());
-        assertEquals(1, newState.getValue().get(ModProperties.QUAZARITH_LEVEL).intValue());
+        assertValueEqual(1, newState.getValue().get(ModProperties.QUAZARITH_LEVEL).getAsInt());
     }
 
     @Test
     void cruxOnKryslumCauldronAdvancesCruxLevelAndConsumesMainHand() {
-        ItemStack mainHand = new ItemStack(ModItems.CRUX, 2);
-        when(player.getMainHandStack()).thenReturn(mainHand);
-        when(player.getOffHandStack()).thenReturn(ItemStack.EMPTY);
+        ItemStack mainHandItem = new ItemStack(ModItems.CRUX, 2);
+        condition(player.getMainHandStack()).thenReturn(mainHandItem);
+        condition(player.getOffhandItem()).thenReturn(ItemStack.EMPTY);
         BlockState state = kryslumCauldron(3);
         BlockPos pos = new BlockPos(0, 64, 0);
 
-        CauldronBehavior behavior = ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().get(ModItems.CRUX);
-        assertNotNull(behavior);
+        CauldronInteraction damageCalculator = ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().get(ModItems.CRUX);
+        assertNotNull(damageCalculator);
 
-        ItemActionResult result = behavior.interact(state, world, pos, player, Hand.MAIN_HAND, mainHand);
+        ItemInteractionResult result = damageCalculator.interact(state, world, pos, player, InteractionHand.MAIN_HAND, mainHandItem);
 
-        assertEquals(ItemActionResult.CONSUME, result);
-        assertEquals(1, mainHand.getCount(), "one crux should be consumed");
+        assertValueEqual(ItemInteractionResult.CONSUME, result);
+        assertValueEqual(1, mainHandItem.getCount(), "one crux should be consumed");
         ArgumentCaptor<BlockState> newState = ArgumentCaptor.forClass(BlockState.class);
         verify(world).setBlockState(eq(pos), newState.capture());
-        assertEquals(1, newState.getValue().get(ModProperties.CRUX_LEVEL).intValue());
+        assertValueEqual(1, newState.getValue().get(ModProperties.CRUX_LEVEL).getAsInt());
     }
 
     @Test
     void fullCauldronRejectsFurtherMaterial() {
-        ItemStack mainHand = new ItemStack(ModItems.QUAZARITH_PIECES, 5);
+        ItemStack mainHandItem = new ItemStack(ModItems.QUAZARITH_PIECES, 5);
         BlockState state = kryslumCauldron(3).with(ModProperties.QUAZARITH_LEVEL, 12);
 
-        CauldronBehavior behavior = ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().get(ModItems.QUAZARITH_PIECES);
+        CauldronInteraction damageCalculator = ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().get(ModItems.QUAZARITH_PIECES);
 
-        ItemActionResult result = behavior.interact(state, world, new BlockPos(0, 64, 0), player, Hand.MAIN_HAND, mainHand);
+        ItemInteractionResult result = damageCalculator.interact(state, world, new BlockPos(0, 64, 0), player, InteractionHand.MAIN_HAND, mainHandItem);
 
-        assertEquals(ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION, result);
-        assertEquals(5, mainHand.getCount(), "nothing should be consumed when the cauldron is full");
+        assertValueEqual(ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION, result);
+        assertValueEqual(5, mainHandItem.getCount(), "nothing should be consumed when the cauldron is full");
         verify(world, never()).setBlockState(any(BlockPos.class), any(BlockState.class));
     }
 
     @Test
     void bucketScoopLowersKryslumLevel() {
-        ItemStack mainHand = new ItemStack(Items.BUCKET, 1);
+        ItemStack mainHandItem = new ItemStack(Items.BUCKET, 1);
         BlockState state = kryslumCauldron(3);
         BlockPos pos = new BlockPos(0, 64, 0);
 
-        CauldronBehavior behavior = ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().get(Items.BUCKET);
-        assertNotNull(behavior);
+        CauldronInteraction damageCalculator = ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().get(Items.BUCKET);
+        assertNotNull(damageCalculator);
 
-        ItemActionResult result = behavior.interact(state, world, pos, player, Hand.MAIN_HAND, mainHand);
+        ItemInteractionResult result = damageCalculator.interact(state, world, pos, player, InteractionHand.MAIN_HAND, mainHandItem);
 
-        assertEquals(ItemActionResult.CONSUME, result);
+        assertValueEqual(ItemInteractionResult.CONSUME, result);
         ArgumentCaptor<BlockState> newState = ArgumentCaptor.forClass(BlockState.class);
         verify(world, atLeastOnce()).setBlockState(eq(pos), newState.capture());
         BlockState captured = newState.getValue();
-        assertEquals(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON, captured.getBlock());
-        assertEquals(2, captured.get(ModProperties.KRYSLUM_LEVEL).intValue());
+        assertValueEqual(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON, captured.getBlock());
+        assertValueEqual(2, captured.get(ModProperties.KRYSLUM_LEVEL).getAsInt());
     }
 
     @Test
     void bucketScoopAtLevelOneEmptiesCauldron() {
-        ItemStack mainHand = new ItemStack(Items.BUCKET, 1);
+        ItemStack mainHandItem = new ItemStack(Items.BUCKET, 1);
         BlockState state = kryslumCauldron(1);
         BlockPos pos = new BlockPos(0, 64, 0);
 
-        CauldronBehavior behavior = ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().get(Items.BUCKET);
+        CauldronInteraction damageCalculator = ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().get(Items.BUCKET);
 
-        behavior.interact(state, world, pos, player, Hand.MAIN_HAND, mainHand);
+        damageCalculator.interact(state, world, pos, player, InteractionHand.MAIN_HAND, mainHandItem);
 
         ArgumentCaptor<BlockState> newState = ArgumentCaptor.forClass(BlockState.class);
         verify(world, atLeastOnce()).setBlockState(eq(pos), newState.capture());
-        assertEquals(ModBlocks.FLUMROCK_CAULDRON, newState.getValue().getBlock(),
+        assertValueEqual(ModBlocks.FLUMROCK_CAULDRON, newState.getValue().getBlock(),
                 "scooping the last level should return the empty flumrock cauldron");
     }
 
     @Test
     void kryslumBucketFillsEmptyCauldron() {
-        ItemStack mainHand = new ItemStack(ModItems.KRYSLUM_BUCKET, 1);
+        ItemStack mainHandItem = new ItemStack(ModItems.KRYSLUM_BUCKET, 1);
         BlockState state = ModBlocks.FLUMROCK_CAULDRON.getDefaultState();
         BlockPos pos = new BlockPos(0, 64, 0);
 
-        CauldronBehavior behavior = ModCauldronBehavior.EMPTY_FLUMROCK_CAULDRON_BEHAVIOR.map().get(ModItems.KRYSLUM_BUCKET);
-        assertNotNull(behavior);
+        CauldronInteraction damageCalculator = ModCauldronBehavior.EMPTY_FLUMROCK_CAULDRON_BEHAVIOR.map().get(ModItems.KRYSLUM_BUCKET);
+        assertNotNull(damageCalculator);
 
-        ItemActionResult result = behavior.interact(state, world, pos, player, Hand.MAIN_HAND, mainHand);
+        ItemInteractionResult result = damageCalculator.interact(state, world, pos, player, InteractionHand.MAIN_HAND, mainHandItem);
 
-        assertEquals(ItemActionResult.CONSUME, result);
+        assertValueEqual(ItemInteractionResult.CONSUME, result);
         ArgumentCaptor<BlockState> newState = ArgumentCaptor.forClass(BlockState.class);
         verify(world, atLeastOnce()).setBlockState(eq(pos), newState.capture());
-        assertEquals(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON, newState.getValue().getBlock());
+        assertValueEqual(ModBlocks.KRYSLUM_FLUMROCK_CAULDRON, newState.getValue().getBlock());
     }
 
     @Test
     void sporeBucketFillsEmptyCauldronWithSporeCauldron() {
-        ItemStack mainHand = new ItemStack(ModItems.PENEBRIUM_SPORE_BUCKET, 1);
+        ItemStack mainHandItem = new ItemStack(ModItems.PENEBRIUM_SPORE_BUCKET, 1);
         BlockState state = ModBlocks.FLUMROCK_CAULDRON.getDefaultState();
         BlockPos pos = new BlockPos(0, 64, 0);
 
-        CauldronBehavior behavior = ModCauldronBehavior.EMPTY_FLUMROCK_CAULDRON_BEHAVIOR.map().get(ModItems.PENEBRIUM_SPORE_BUCKET);
-        assertNotNull(behavior);
+        CauldronInteraction damageCalculator = ModCauldronBehavior.EMPTY_FLUMROCK_CAULDRON_BEHAVIOR.map().get(ModItems.PENEBRIUM_SPORE_BUCKET);
+        assertNotNull(damageCalculator);
 
-        behavior.interact(state, world, pos, player, Hand.MAIN_HAND, mainHand);
+        damageCalculator.interact(state, world, pos, player, InteractionHand.MAIN_HAND, mainHandItem);
 
         ArgumentCaptor<BlockState> newState = ArgumentCaptor.forClass(BlockState.class);
         verify(world, atLeastOnce()).setBlockState(eq(pos), newState.capture());
-        assertEquals(ModBlocks.SPORE_FLUMROCK_CAULDRON, newState.getValue().getBlock());
+        assertValueEqual(ModBlocks.SPORE_FLUMROCK_CAULDRON, newState.getValue().getBlock());
     }
 }

@@ -2,107 +2,107 @@ package net.ugi.sculk_depths.screen;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.ingame.HandledScreen;
-import net.minecraft.client.gui.screen.recipebook.AbstractFurnaceRecipeBookScreen;
-import net.minecraft.client.gui.screen.recipebook.RecipeBookProvider;
-import net.minecraft.client.gui.screen.recipebook.RecipeBookWidget;
-import net.minecraft.client.gui.widget.TexturedButtonWidget;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.screen.AbstractRecipeScreenHandler;
-import net.minecraft.screen.slot.Slot;
-import net.minecraft.screen.slot.SlotActionType;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.recipebook.AbstractFurnaceRecipeBookComponent;
+import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
+import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.RecipeBookMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.ClickType;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 @Environment(value= EnvType.CLIENT)
-public class AbstractZygrinFurnaceScreen<T extends AbstractZygrinFurnaceScreenHandler> extends HandledScreen<T> implements RecipeBookProvider {
-    public final AbstractFurnaceRecipeBookScreen recipeBook;
-    private boolean narrow;
-    private final Identifier background;
-    private final Identifier litProgressTexture;
-    private final Identifier burnProgressTexture;
+public class AbstractZygrinFurnaceScreen<T extends AbstractZygrinFurnaceScreenHandler> extends AbstractContainerScreen<T> implements RecipeUpdateListener {
+    public final AbstractFurnaceRecipeBookComponent recipeBook;
+    private boolean widthTooNarrow;
+    private final ResourceLocation texture;
+    private final ResourceLocation litProgressSprite;
+    private final ResourceLocation burnProgressSprite;
 
     public AbstractZygrinFurnaceScreen(
             T handler,
-            AbstractFurnaceRecipeBookScreen recipeBook,
-            PlayerInventory inventory,
-            Text title,
-            Identifier background,
-            Identifier litProgressTexture,
-            Identifier burnProgressTexture
+            AbstractFurnaceRecipeBookComponent recipeBook,
+            Inventory inventory,
+            Component header,
+            ResourceLocation texture,
+            ResourceLocation litProgressSprite,
+            ResourceLocation burnProgressSprite
     ) {
-        super(handler, inventory, title);
+        super(handler, inventory, header);
         this.recipeBook = recipeBook;
-        this.background = background;
-        this.litProgressTexture = litProgressTexture;
-        this.burnProgressTexture = burnProgressTexture;
+        this.texture = texture;
+        this.litProgressSprite = litProgressSprite;
+        this.burnProgressSprite = burnProgressSprite;
     }
 
     @Override
     public void init() {
         super.init();
-        this.narrow = this.width < 379;
-        this.recipeBook.initialize(this.width, this.height, this.client, this.narrow, (AbstractRecipeScreenHandler<?, ?>)this.handler);
-        this.x = this.recipeBook.findLeftEdge(this.width, this.backgroundWidth);
-        this.addDrawableChild(new TexturedButtonWidget(this.x + 20, this.height / 2 - 49, 20, 18, RecipeBookWidget.BUTTON_TEXTURES, button -> {
-            this.recipeBook.toggleOpen();
-            this.x = this.recipeBook.findLeftEdge(this.width, this.backgroundWidth);
-            button.setPosition(this.x + 20, this.height / 2 - 49);
+        this.widthTooNarrow = this.setWidth < 379;
+        this.recipeBook.initialize(this.setWidth, this.height, this.client, this.widthTooNarrow, (RecipeBookMenu<?, ?>)this.handler);
+        this.x = this.recipeBook.updateScreenPosition(this.setWidth, this.imageWidth);
+        this.addRenderableWidget(new ImageButton(this.x + 20, this.height / 2 - 49, 20, 18, RecipeBookComponent.RECIPE_BUTTON_SPRITES, addButton -> {
+            this.recipeBook.toggleVisibility();
+            this.x = this.recipeBook.updateScreenPosition(this.setWidth, this.imageWidth);
+            addButton.setPosition(this.x + 20, this.height / 2 - 49);
         }));
-        this.titleX = (this.backgroundWidth - this.textRenderer.getWidth(this.title)) / 2;
+        this.titleLabelX = (this.imageWidth - this.font.getWidth(this.header)) / 2;
     }
 
     @Override
-    public void handledScreenTick() {
-        super.handledScreenTick();
-        this.recipeBook.update();
+    public void containerTick() {
+        super.containerTick();
+        this.recipeBook.updateDelay();
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        if (this.recipeBook.isOpen() && this.narrow) {
-            this.renderBackground(context, mouseX, mouseY, delta);
-            this.recipeBook.render(context, mouseX, mouseY, delta);
+    public void render(GuiGraphics context, int xMouse, int yMouse, float fadeDirection) {
+        if (this.recipeBook.isOpen() && this.widthTooNarrow) {
+            this.renderBackground(context, xMouse, yMouse, fadeDirection);
+            this.recipeBook.render(context, xMouse, yMouse, fadeDirection);
         } else {
-            super.render(context, mouseX, mouseY, delta);
-            this.recipeBook.render(context, mouseX, mouseY, delta);
-            this.recipeBook.drawGhostSlots(context, this.x, this.y, true, delta);
+            super.render(context, xMouse, yMouse, fadeDirection);
+            this.recipeBook.render(context, xMouse, yMouse, fadeDirection);
+            this.recipeBook.renderGhostRecipe(context, this.x, this.y, true, fadeDirection);
         }
 
-        this.drawMouseoverTooltip(context, mouseX, mouseY);
-        this.recipeBook.drawTooltip(context, this.x, this.y, mouseX, mouseY);
+        this.renderTooltip(context, xMouse, yMouse);
+        this.recipeBook.drawTooltip(context, this.x, this.y, xMouse, yMouse);
     }
 
     @Override
-    protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
+    protected void drawBackground(GuiGraphics context, float fadeDirection, int xMouse, int yMouse) {
         int i = this.x;
         int j = this.y;
-        context.drawTexture(this.background, i, j, 0, 0, this.backgroundWidth, this.backgroundHeight);
+        context.blit(this.texture, i, j, 0, 0, this.imageWidth, this.imageHeight);
         if (this.handler.isBurning()) {
             int k = 14;
-            int l = MathHelper.ceil(this.handler.getFuelProgress() * 13.0F) + 1;
-            context.drawGuiTexture(this.litProgressTexture, 14, 14, 0, 14 - l, i + 56, j + 36 + 14 - l, 14, l);
+            int l = Mth.ceil(this.handler.getLitProgress() * 13.0F) + 1;
+            context.blitSprite(this.litProgressSprite, 14, 14, 0, 14 - l, i + 56, j + 36 + 14 - l, 14, l);
         }
 
         int k = 24;
-        int l = MathHelper.ceil(this.handler.getCookProgress() * 24.0F);
-        context.drawGuiTexture(this.burnProgressTexture, 24, 16, 0, 0, i + 79, j + 34, l, 16);
+        int l = Mth.ceil(this.handler.getBurnProgress() * 24.0F);
+        context.blitSprite(this.burnProgressSprite, 24, 16, 0, 0, i + 79, j + 34, l, 16);
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (this.recipeBook.mouseClicked(mouseX, mouseY, button)) {
+    public boolean handleChatQueueClicked(double xMouse, double yMouse, int addButton) {
+        if (this.recipeBook.handleChatQueueClicked(xMouse, yMouse, addButton)) {
             return true;
         } else {
-            return this.narrow && this.recipeBook.isOpen() ? true : super.mouseClicked(mouseX, mouseY, button);
+            return this.widthTooNarrow && this.recipeBook.isOpen() ? true : super.handleChatQueueClicked(xMouse, yMouse, addButton);
         }
     }
 
     @Override
-    protected void onMouseClick(Slot slot, int slotId, int button, SlotActionType actionType) {
-        super.onMouseClick(slot, slotId, button, actionType);
+    protected void onMouseClick(Slot slot, int slotIndex, int addButton, ClickType clickType) {
+        super.onMouseClick(slot, slotIndex, addButton, clickType);
         this.recipeBook.slotClicked(slot);
     }
 
@@ -112,12 +112,12 @@ public class AbstractZygrinFurnaceScreen<T extends AbstractZygrinFurnaceScreenHa
     }
 
     @Override
-    protected boolean isClickOutsideBounds(double mouseX, double mouseY, int left, int top, int button) {
-        boolean bl = mouseX < (double)left
-                || mouseY < (double)top
-                || mouseX >= (double)(left + this.backgroundWidth)
-                || mouseY >= (double)(top + this.backgroundHeight);
-        return this.recipeBook.isClickOutsideBounds(mouseX, mouseY, this.x, this.y, this.backgroundWidth, this.backgroundHeight, button) && bl;
+    protected boolean hasClickedOutside(double xMouse, double yMouse, int left, int top, int addButton) {
+        boolean bl = xMouse < (double)left
+                || yMouse < (double)top
+                || xMouse >= (double)(left + this.imageWidth)
+                || yMouse >= (double)(top + this.imageHeight);
+        return this.recipeBook.hasClickedOutside(xMouse, yMouse, this.x, this.y, this.imageWidth, this.imageHeight, addButton) && bl;
     }
 
     @Override
@@ -126,12 +126,12 @@ public class AbstractZygrinFurnaceScreen<T extends AbstractZygrinFurnaceScreenHa
     }
 
     @Override
-    public void refreshRecipeBook() {
+    public void recipesUpdated() {
         this.recipeBook.refresh();
     }
 
     @Override
-    public RecipeBookWidget getRecipeBookWidget() {
+    public RecipeBookComponent getRecipeBookComponent() {
         return this.recipeBook;
     }
 }

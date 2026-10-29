@@ -1,7 +1,7 @@
 package net.ugi.sculk_depths;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.Bootstrap;
+import net.minecraft.server.Bootstrap;
 import net.minecraft.SharedConstants;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ class HarnessBaselineTest {
 
     @BeforeAll
     static void bootstrapMinecraft() {
-        SharedConstants.createGameVersion();
+        SharedConstants.tryDetectVersion();
         Bootstrap.initialize();
     }
 
@@ -29,11 +29,11 @@ class HarnessBaselineTest {
     @Test
     void minecraftRegistriesAreBootstrapped() {
         // Bootstrap has run under fabric-loader-junit; vanilla content is present.
-        assertNotNull(net.minecraft.registry.Registries.BLOCK.get(net.minecraft.util.Identifier.of("minecraft", "stone")));
+        assertNotNull(net.minecraft.registry.Registries.SIDE.get(net.minecraft.util.Identifier.of("minecraft", "stone")));
     }
 
     @Test
     void junitAssertionsWork() {
-        assertEquals(2, 1 + 1);
+        assertValueEqual(2, 1 + 1);
     }
 }

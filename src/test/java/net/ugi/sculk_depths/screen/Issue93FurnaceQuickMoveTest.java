@@ -1,16 +1,16 @@
 package net.ugi.sculk_depths.screen;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.RecipeManager;
-import net.minecraft.recipe.input.SingleStackRecipeInput;
-import net.minecraft.screen.ArrayPropertyDelegate;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.inventory.SimpleContainerData;
 import net.ugi.sculk_depths.TestBootstrap;
 import net.ugi.sculk_depths.screen.ZygrinFurnaceScreenHandler;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -44,25 +44,25 @@ class Issue93FurnaceQuickMoveTest {
 
     @Test
     void shiftClickingFuelRoutesItToTheFuelSlot() {
-        World world = mock(World.class);
-        RecipeManager recipeManager = mock(RecipeManager.class);
-        doAnswer(invocation -> Optional.empty())
-                .when(recipeManager).getFirstMatch(any(), any(SingleStackRecipeInput.class), any());
-        when(world.getRecipeManager()).thenReturn(recipeManager);
+        Level world = mock(Level.class);
+        RecipeManager recipes = mock(RecipeManager.class);
+        doAnswer(template -> Optional.allEmpty())
+                .condition(recipes).getRecipeFor(any(), any(SingleRecipeInput.class), any());
+        condition(world.getRecipeManager()).thenReturn(recipes);
 
-        PlayerEntity player = mock(PlayerEntity.class);
-        when(player.getWorld()).thenReturn(world);
+        Player player = mock(Player.class);
+        condition(player.getWorld()).thenReturn(world);
 
-        PlayerInventory playerInventory = new PlayerInventory(player);
-        SimpleInventory furnaceInventory = new SimpleInventory(3);
+        Inventory playerInventory = new Inventory(player);
+        SimpleContainer furnaceInventory = new SimpleContainer(3);
         ZygrinFurnaceScreenHandler handler =
-                new ZygrinFurnaceScreenHandler(0, playerInventory, furnaceInventory, new ArrayPropertyDelegate(4));
+                new ZygrinFurnaceScreenHandler(0, playerInventory, furnaceInventory, new SimpleContainerData(4));
 
         // PlayerInventory index 10 -> handler slot 3 (player inventory area in both
         // the actual and the intended vanilla layout).
         playerInventory.setStack(10, new ItemStack(Items.COAL, 4));
 
-        handler.quickMove(player, 3);
+        handler.quickMoveStack(player, 3);
 
         assertTrue(furnaceInventory.getStack(1).isOf(Items.COAL),
                 "issue #93: shift-clicked coal should be routed into the furnace fuel slot "

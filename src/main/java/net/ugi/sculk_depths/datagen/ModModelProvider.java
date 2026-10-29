@@ -2,10 +2,10 @@ package net.ugi.sculk_depths.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.data.client.*;
-import net.minecraft.data.family.BlockFamilies;
-import net.minecraft.util.Identifier;
+import net.minecraft.data.BlockFamilies;
+import net.minecraft.resources.ResourceLocation;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
 
@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ModModelProvider extends FabricModelProvider {
-    public ModModelProvider(FabricDataOutput output) {
-        super(output);
+    public ModModelProvider(FabricDataOutput withResultSlot) {
+        super(withResultSlot);
     }
 
     @Override
@@ -22,94 +22,94 @@ public class ModModelProvider extends FabricModelProvider {
         /*
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.RUBY_BLOCK);
          */
-        BlockStateModelGenerator.BlockTexturePool valtroxPlankPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.VALTROX_PLANKS);
-        BlockStateModelGenerator.BlockTexturePool coatedValtroxPlankPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.COATED_VALTROX_PLANKS);
-        BlockStateModelGenerator.BlockTexturePool driedValtroxPlankPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.DRIED_VALTROX_PLANKS);
-        BlockStateModelGenerator.BlockTexturePool petrifiedValtroxPlankPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.PETRIFIED_VALTROX_SLATES);
-        BlockStateModelGenerator.BlockTexturePool polishedAmalgamitekPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.POLISHED_AMALGAMITE);
-        BlockStateModelGenerator.BlockTexturePool amalgamiteBrickPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.AMALGAMITE_BRICKS);
-        BlockStateModelGenerator.BlockTexturePool flumrockTilesPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.FLUMROCK_TILES);
+        BlockStateModelGenerator.BlockTexturePool valtroxPlankPool = blockStateModelGenerator.family(ModBlocks.VALTROX_PLANKS);
+        BlockStateModelGenerator.BlockTexturePool coatedValtroxPlankPool = blockStateModelGenerator.family(ModBlocks.COATED_VALTROX_PLANKS);
+        BlockStateModelGenerator.BlockTexturePool driedValtroxPlankPool = blockStateModelGenerator.family(ModBlocks.DRIED_VALTROX_PLANKS);
+        BlockStateModelGenerator.BlockTexturePool petrifiedValtroxPlankPool = blockStateModelGenerator.family(ModBlocks.PETRIFIED_VALTROX_SLATES);
+        BlockStateModelGenerator.BlockTexturePool polishedAmalgamitekPool = blockStateModelGenerator.family(ModBlocks.POLISHED_AMALGAMITE);
+        BlockStateModelGenerator.BlockTexturePool amalgamiteBrickPool = blockStateModelGenerator.family(ModBlocks.AMALGAMITE_BRICKS);
+        BlockStateModelGenerator.BlockTexturePool flumrockTilesPool = blockStateModelGenerator.family(ModBlocks.FLUMROCK_TILES);
 
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.QUAZARITH_BLOCK);
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUX_BLOCK);
+        blockStateModelGenerator.createTrivialCube(ModBlocks.QUAZARITH_BLOCK);
+        blockStateModelGenerator.createTrivialCube(ModBlocks.CRUX_BLOCK);
         //blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.AURIC_SPORE_BLOCK);
 
         polishedAmalgamitekPool.stairs(ModBlocks.POLISHED_AMALGAMITE_STAIRS);
-        polishedAmalgamitekPool.slab(ModBlocks.POLISHED_AMALGAMITE_SLAB);
-        polishedAmalgamitekPool.wall(ModBlocks.POLISHED_AMALGAMITE_WALL);
+        polishedAmalgamitekPool.sandSlab(ModBlocks.POLISHED_AMALGAMITE_SLAB);
+        polishedAmalgamitekPool.sandstone(ModBlocks.POLISHED_AMALGAMITE_WALL);
 
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRACKED_AMALGAMITE_BRICKS);
+        blockStateModelGenerator.createTrivialCube(ModBlocks.CRACKED_AMALGAMITE_BRICKS);
         amalgamiteBrickPool.stairs(ModBlocks.AMALGAMITE_BRICK_STAIRS);
-        amalgamiteBrickPool.slab(ModBlocks.AMALGAMITE_BRICK_SLAB);
-        amalgamiteBrickPool.wall(ModBlocks.AMALGAMITE_BRICK_WALL);
+        amalgamiteBrickPool.sandSlab(ModBlocks.AMALGAMITE_BRICK_SLAB);
+        amalgamiteBrickPool.sandstone(ModBlocks.AMALGAMITE_BRICK_WALL);
 
-        blockStateModelGenerator.registerSingleton(ModBlocks.ACTIVATED_AMALGAMITE, TexturedModel.CUBE_COLUMN);
+        blockStateModelGenerator.createTrivialBlock(ModBlocks.ACTIVATED_AMALGAMITE, TexturedModel.COLUMN);
 
 
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUMBLING_FLUMROCK_TILES);
+        blockStateModelGenerator.createTrivialCube(ModBlocks.CRUMBLING_FLUMROCK_TILES);
         flumrockTilesPool.stairs(ModBlocks.FLUMROCK_TILE_STAIRS);
-        flumrockTilesPool.slab(ModBlocks.FLUMROCK_TILE_SLAB);
-        flumrockTilesPool.wall(ModBlocks.FLUMROCK_TILE_WALL);
+        flumrockTilesPool.sandSlab(ModBlocks.FLUMROCK_TILE_SLAB);
+        flumrockTilesPool.sandstone(ModBlocks.FLUMROCK_TILE_WALL);
 
-        blockStateModelGenerator.registerTintableCross(ModBlocks.DEAD_GRASS, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.DEAD_GRASS, BlockStateModelGenerator.TintType.NOT_TINTED);
 
 
-        blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.VALTROX_SAPLING, ModBlocks.POTTED_VALTROX_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
-        blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.PENEBRIUM_SHROOM, ModBlocks.POTTED_PENEBRIUM_SHROOM, BlockStateModelGenerator.TintType.NOT_TINTED);
-        blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.AURIC_SPORE_SPROUTS, ModBlocks.POTTED_AURIC_SPORE_SPROUTS, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.createPlant(ModBlocks.VALTROX_SAPLING, ModBlocks.POTTED_VALTROX_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.createPlant(ModBlocks.PENEBRIUM_SHROOM, ModBlocks.POTTED_PENEBRIUM_SHROOM, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.createPlant(ModBlocks.AURIC_SPORE_SPROUTS, ModBlocks.POTTED_AURIC_SPORE_SPROUTS, BlockStateModelGenerator.TintType.NOT_TINTED);
 
         valtroxPlankPool.fenceGate(ModBlocks.VALTROX_FENCE_GATE);
-        valtroxPlankPool.fence(ModBlocks.VALTROX_FENCE);
-        valtroxPlankPool.button(ModBlocks.VALTROX_BUTTON);
-        valtroxPlankPool.slab(ModBlocks.VALTROX_SLAB);
+        valtroxPlankPool.fenceState(ModBlocks.VALTROX_FENCE);
+        valtroxPlankPool.addButton(ModBlocks.VALTROX_BUTTON);
+        valtroxPlankPool.sandSlab(ModBlocks.VALTROX_SLAB);
         valtroxPlankPool.stairs(ModBlocks.VALTROX_STAIRS);
-        blockStateModelGenerator.registerLog(ModBlocks.VALTROX_LOG).log(ModBlocks.VALTROX_LOG).wood(ModBlocks.VALTROX_WOOD);
-        blockStateModelGenerator.registerLog(ModBlocks.STRIPPED_VALTROX_LOG).log(ModBlocks.STRIPPED_VALTROX_LOG).wood(ModBlocks.STRIPPED_VALTROX_WOOD);
+        blockStateModelGenerator.woodProvider(ModBlocks.VALTROX_LOG).log(ModBlocks.VALTROX_LOG).wood(ModBlocks.VALTROX_WOOD);
+        blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_VALTROX_LOG).log(ModBlocks.STRIPPED_VALTROX_LOG).wood(ModBlocks.STRIPPED_VALTROX_WOOD);
         valtroxPlankPool.pressurePlate(ModBlocks.VALTROX_PRESSURE_PLATE);
-        valtroxPlankPool.family(BlockFamilies.register(ModBlocks.VALTROX_PLANKS).sign(ModBlocks.VALTROX_SIGN, ModBlocks.VALTROX_WALL_SIGN).build());
-        blockStateModelGenerator.registerHangingSign(ModBlocks.STRIPPED_VALTROX_LOG, ModBlocks.VALTROX_HANGING_SIGN, ModBlocks.VALTROX_WALL_HANGING_SIGN);
-        blockStateModelGenerator.registerDoor(ModBlocks.VALTROX_DOOR);
-        blockStateModelGenerator.registerOrientableTrapdoor(ModBlocks.VALTROX_TRAPDOOR);
+        valtroxPlankPool.generateFor(BlockFamilies.register(ModBlocks.VALTROX_PLANKS).signCommand(ModBlocks.VALTROX_SIGN, ModBlocks.VALTROX_WALL_SIGN).build());
+        blockStateModelGenerator.createHangingSign(ModBlocks.STRIPPED_VALTROX_LOG, ModBlocks.VALTROX_HANGING_SIGN, ModBlocks.VALTROX_WALL_HANGING_SIGN);
+        blockStateModelGenerator.createDoor(ModBlocks.VALTROX_DOOR);
+        blockStateModelGenerator.createOrientableTrapdoor(ModBlocks.VALTROX_TRAPDOOR);
 
         coatedValtroxPlankPool.fenceGate(ModBlocks.COATED_VALTROX_FENCE_GATE);
-        coatedValtroxPlankPool.fence(ModBlocks.COATED_VALTROX_FENCE);
-        coatedValtroxPlankPool.button(ModBlocks.COATED_VALTROX_BUTTON);
-        coatedValtroxPlankPool.slab(ModBlocks.COATED_VALTROX_SLAB);
+        coatedValtroxPlankPool.fenceState(ModBlocks.COATED_VALTROX_FENCE);
+        coatedValtroxPlankPool.addButton(ModBlocks.COATED_VALTROX_BUTTON);
+        coatedValtroxPlankPool.sandSlab(ModBlocks.COATED_VALTROX_SLAB);
         coatedValtroxPlankPool.stairs(ModBlocks.COATED_VALTROX_STAIRS);
-        blockStateModelGenerator.registerLog(ModBlocks.COATED_VALTROX_LOG).log(ModBlocks.COATED_VALTROX_LOG).wood(ModBlocks.COATED_VALTROX_WOOD);
-        blockStateModelGenerator.registerLog(ModBlocks.COATED_STRIPPED_VALTROX_LOG).log(ModBlocks.COATED_STRIPPED_VALTROX_LOG).wood(ModBlocks.COATED_STRIPPED_VALTROX_WOOD);
+        blockStateModelGenerator.woodProvider(ModBlocks.COATED_VALTROX_LOG).log(ModBlocks.COATED_VALTROX_LOG).wood(ModBlocks.COATED_VALTROX_WOOD);
+        blockStateModelGenerator.woodProvider(ModBlocks.COATED_STRIPPED_VALTROX_LOG).log(ModBlocks.COATED_STRIPPED_VALTROX_LOG).wood(ModBlocks.COATED_STRIPPED_VALTROX_WOOD);
         coatedValtroxPlankPool.pressurePlate(ModBlocks.COATED_VALTROX_PRESSURE_PLATE);
-        coatedValtroxPlankPool.family(BlockFamilies.register(ModBlocks.COATED_VALTROX_PLANKS).sign(ModBlocks.COATED_VALTROX_SIGN, ModBlocks.COATED_VALTROX_WALL_SIGN).build());
-        blockStateModelGenerator.registerHangingSign(ModBlocks.COATED_STRIPPED_VALTROX_LOG, ModBlocks.COATED_VALTROX_HANGING_SIGN, ModBlocks.COATED_VALTROX_WALL_HANGING_SIGN);
-        blockStateModelGenerator.registerDoor(ModBlocks.COATED_VALTROX_DOOR);
-        blockStateModelGenerator.registerOrientableTrapdoor(ModBlocks.COATED_VALTROX_TRAPDOOR);
+        coatedValtroxPlankPool.generateFor(BlockFamilies.register(ModBlocks.COATED_VALTROX_PLANKS).signCommand(ModBlocks.COATED_VALTROX_SIGN, ModBlocks.COATED_VALTROX_WALL_SIGN).build());
+        blockStateModelGenerator.createHangingSign(ModBlocks.COATED_STRIPPED_VALTROX_LOG, ModBlocks.COATED_VALTROX_HANGING_SIGN, ModBlocks.COATED_VALTROX_WALL_HANGING_SIGN);
+        blockStateModelGenerator.createDoor(ModBlocks.COATED_VALTROX_DOOR);
+        blockStateModelGenerator.createOrientableTrapdoor(ModBlocks.COATED_VALTROX_TRAPDOOR);
 
 
         driedValtroxPlankPool.fenceGate(ModBlocks.DRIED_VALTROX_FENCE_GATE);
-        driedValtroxPlankPool.fence(ModBlocks.DRIED_VALTROX_FENCE);
-        driedValtroxPlankPool.button(ModBlocks.DRIED_VALTROX_BUTTON);
-        driedValtroxPlankPool.slab(ModBlocks.DRIED_VALTROX_SLAB);
+        driedValtroxPlankPool.fenceState(ModBlocks.DRIED_VALTROX_FENCE);
+        driedValtroxPlankPool.addButton(ModBlocks.DRIED_VALTROX_BUTTON);
+        driedValtroxPlankPool.sandSlab(ModBlocks.DRIED_VALTROX_SLAB);
         driedValtroxPlankPool.stairs(ModBlocks.DRIED_VALTROX_STAIRS);
-        blockStateModelGenerator.registerLog(ModBlocks.DRIED_VALTROX_LOG).log(ModBlocks.DRIED_VALTROX_LOG).wood(ModBlocks.DRIED_VALTROX_WOOD);
-        blockStateModelGenerator.registerLog(ModBlocks.STRIPPED_DRIED_VALTROX_LOG).log(ModBlocks.STRIPPED_DRIED_VALTROX_LOG).wood(ModBlocks.STRIPPED_DRIED_VALTROX_WOOD);
+        blockStateModelGenerator.woodProvider(ModBlocks.DRIED_VALTROX_LOG).log(ModBlocks.DRIED_VALTROX_LOG).wood(ModBlocks.DRIED_VALTROX_WOOD);
+        blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_DRIED_VALTROX_LOG).log(ModBlocks.STRIPPED_DRIED_VALTROX_LOG).wood(ModBlocks.STRIPPED_DRIED_VALTROX_WOOD);
         driedValtroxPlankPool.pressurePlate(ModBlocks.DRIED_VALTROX_PRESSURE_PLATE);
-        driedValtroxPlankPool.family(BlockFamilies.register(ModBlocks.DRIED_VALTROX_PLANKS).sign(ModBlocks.DRIED_VALTROX_SIGN, ModBlocks.DRIED_VALTROX_WALL_SIGN).build());
-        blockStateModelGenerator.registerHangingSign(ModBlocks.STRIPPED_DRIED_VALTROX_LOG, ModBlocks.DRIED_VALTROX_HANGING_SIGN, ModBlocks.DRIED_VALTROX_WALL_HANGING_SIGN);
-        blockStateModelGenerator.registerDoor(ModBlocks.DRIED_VALTROX_DOOR);
-        blockStateModelGenerator.registerOrientableTrapdoor(ModBlocks.DRIED_VALTROX_TRAPDOOR);
+        driedValtroxPlankPool.generateFor(BlockFamilies.register(ModBlocks.DRIED_VALTROX_PLANKS).signCommand(ModBlocks.DRIED_VALTROX_SIGN, ModBlocks.DRIED_VALTROX_WALL_SIGN).build());
+        blockStateModelGenerator.createHangingSign(ModBlocks.STRIPPED_DRIED_VALTROX_LOG, ModBlocks.DRIED_VALTROX_HANGING_SIGN, ModBlocks.DRIED_VALTROX_WALL_HANGING_SIGN);
+        blockStateModelGenerator.createDoor(ModBlocks.DRIED_VALTROX_DOOR);
+        blockStateModelGenerator.createOrientableTrapdoor(ModBlocks.DRIED_VALTROX_TRAPDOOR);
 
         petrifiedValtroxPlankPool.fenceGate(ModBlocks.PETRIFIED_VALTROX_WALL_GATE);
-        petrifiedValtroxPlankPool.wall(ModBlocks.PETRIFIED_VALTROX_WALL);
-        petrifiedValtroxPlankPool.button(ModBlocks.PETRIFIED_VALTROX_BUTTON);
-        petrifiedValtroxPlankPool.slab(ModBlocks.PETRIFIED_VALTROX_SLAB);
+        petrifiedValtroxPlankPool.sandstone(ModBlocks.PETRIFIED_VALTROX_WALL);
+        petrifiedValtroxPlankPool.addButton(ModBlocks.PETRIFIED_VALTROX_BUTTON);
+        petrifiedValtroxPlankPool.sandSlab(ModBlocks.PETRIFIED_VALTROX_SLAB);
         petrifiedValtroxPlankPool.stairs(ModBlocks.PETRIFIED_VALTROX_STAIRS);
-        blockStateModelGenerator.registerLog(ModBlocks.PETRIFIED_VALTROX_LOG).log(ModBlocks.PETRIFIED_VALTROX_LOG).wood(ModBlocks.PETRIFIED_VALTROX_WOOD);
-        blockStateModelGenerator.registerLog(ModBlocks.STRIPPED_PETRIFIED_VALTROX_LOG).log(ModBlocks.STRIPPED_PETRIFIED_VALTROX_LOG).wood(ModBlocks.STRIPPED_PETRIFIED_VALTROX_WOOD);
+        blockStateModelGenerator.woodProvider(ModBlocks.PETRIFIED_VALTROX_LOG).log(ModBlocks.PETRIFIED_VALTROX_LOG).wood(ModBlocks.PETRIFIED_VALTROX_WOOD);
+        blockStateModelGenerator.woodProvider(ModBlocks.STRIPPED_PETRIFIED_VALTROX_LOG).log(ModBlocks.STRIPPED_PETRIFIED_VALTROX_LOG).wood(ModBlocks.STRIPPED_PETRIFIED_VALTROX_WOOD);
         petrifiedValtroxPlankPool.pressurePlate(ModBlocks.PETRIFIED_VALTROX_PRESSURE_PLATE);
-        petrifiedValtroxPlankPool.family(BlockFamilies.register(ModBlocks.PETRIFIED_VALTROX_SLATES).sign(ModBlocks.PETRIFIED_VALTROX_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_SIGN).build());
-        blockStateModelGenerator.registerHangingSign(ModBlocks.STRIPPED_PETRIFIED_VALTROX_LOG, ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN);
-        blockStateModelGenerator.registerDoor(ModBlocks.PETRIFIED_VALTROX_DOOR);
-        blockStateModelGenerator.registerOrientableTrapdoor(ModBlocks.PETRIFIED_VALTROX_TRAPDOOR);
+        petrifiedValtroxPlankPool.generateFor(BlockFamilies.register(ModBlocks.PETRIFIED_VALTROX_SLATES).signCommand(ModBlocks.PETRIFIED_VALTROX_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_SIGN).build());
+        blockStateModelGenerator.createHangingSign(ModBlocks.STRIPPED_PETRIFIED_VALTROX_LOG, ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN);
+        blockStateModelGenerator.createDoor(ModBlocks.PETRIFIED_VALTROX_DOOR);
+        blockStateModelGenerator.createOrientableTrapdoor(ModBlocks.PETRIFIED_VALTROX_TRAPDOOR);
 
         List<String> suffixList = new ArrayList<>();
         suffixList.add("");
@@ -117,29 +117,29 @@ public class ModModelProvider extends FabricModelProvider {
         suffixList.add("3");
         suffixList.add("4");
 
-        registerBlockWithVariants(blockStateModelGenerator,ModBlocks.AMALGAMITE,suffixList, Models.CUBE_COLUMN);
+        registerBlockWithVariants(blockStateModelGenerator,ModBlocks.AMALGAMITE,suffixList, Models.COLUMN);
 
     }
 
     private void registerBlockWithVariants(BlockStateModelGenerator blockStateModelGenerator, Block block, List<String> suffixList, Model model) {
 
-        List<Identifier> identifierList = new ArrayList<>();
-        suffixList.forEach(suffix -> {
+        List<ResourceLocation> identifierList = new ArrayList<>();
+        suffixList.forEach(playerSuffix -> {
 
            //VariantsBlockStateSupplier.create(block, BlockStateVariant.create().put(VariantSettings.MODEL, TexturedModel.CUBE_COLUMN.upload(block, suffix, blockStateModelGenerator.modelCollector)));
 
-            identifierList.add(ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, suffix));
-            TextureMap textureMap = (new TextureMap()).put(TextureKey.END,ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, "_end" + suffix)).put(TextureKey.SIDE,ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, "_side" + suffix));
-            model.upload(ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, suffix), textureMap, blockStateModelGenerator.modelCollector);
+            identifierList.add(ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, playerSuffix));
+            TextureMap textureMap = (new TextureMap()).put(TextureKey.END_NOISE_SETTINGS,ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, "_end" + playerSuffix)).put(TextureKey.SIDE,ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, "_side" + playerSuffix));
+            model.upload(ModelIds.getBlockSubModelId(ModBlocks.AMALGAMITE, playerSuffix), textureMap, blockStateModelGenerator.modelOutput);
         });
 
-        blockStateModelGenerator.blockStateCollector.accept(createBlockStateWithVariants(block,identifierList));
+        blockStateModelGenerator.blockStateOutput.accept(createBlockStateWithVariants(block,identifierList));
 
     }
 
 
 
-    public static VariantsBlockStateSupplier createBlockStateWithVariants(Block block, List<Identifier> modelIdList) {
+    public static VariantsBlockStateSupplier createBlockStateWithVariants(Block block, List<ResourceLocation> modelIdList) {
 
 
         BlockStateVariant[] blockStateVariants = new BlockStateVariant[modelIdList.size()];

@@ -1,24 +1,24 @@
 package net.ugi.sculk_depths.sound;
 
-import net.minecraft.block.jukebox.JukeboxSong;
+import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.registry.*;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.resources.ResourceLocation;
 import net.ugi.sculk_depths.SculkDepths;
 
 public class ModSounds {
 
-    public static final Identifier SCULK_DEPTHS_MAIN_SOUNDTRACK = SculkDepths.identifier( "music.sculk_depths.main_soundtrack");
-    public static final Identifier SCULK_DEPTHS_CEPHLERA_SOUNDTRACK = SculkDepths.identifier( "music.sculk_depths.cephlera_soundtrack");
-    public static final Identifier SCULK_DEPTHS_MAIN_THEME = SculkDepths.identifier("music.sculk_depths.main_theme");
-    public static final Identifier SCULK_DEPTHS_ZINNIA = SculkDepths.identifier("music.sculk_depths.zinnia");
-    public static final Identifier SCULK_DEPTHS_OST_1 = SculkDepths.identifier("music.sculk_depths.ost-1");
-    public static final Identifier AMBIENT_WIND_ADDITIONS = SculkDepths.identifier("ambient.wind.additions");
-    public static final Identifier AMBIENT_CAVE_ADDITIONS = SculkDepths.identifier("ambient.cave.additions");
-    public static final Identifier BLOCK_AMALGAMITE_BREAK = SculkDepths.identifier("block.amalgamite.break");
-    public static final Identifier BLOCK_AMALGAMITE_STEP = SculkDepths.identifier("block.amalgamite.step");
-    public static final Identifier BLOCK_AMALGAMITE_PLACE = SculkDepths.identifier("block.amalgamite.place");
-    public static final Identifier ZINNIA_MUSIC_DISC = SculkDepths.identifier("disc.zinnia");
+    public static final ResourceLocation SCULK_DEPTHS_MAIN_SOUNDTRACK = SculkDepths.id( "music.sculk_depths.main_soundtrack");
+    public static final ResourceLocation SCULK_DEPTHS_CEPHLERA_SOUNDTRACK = SculkDepths.id( "music.sculk_depths.cephlera_soundtrack");
+    public static final ResourceLocation SCULK_DEPTHS_MAIN_THEME = SculkDepths.id("music.sculk_depths.main_theme");
+    public static final ResourceLocation SCULK_DEPTHS_ZINNIA = SculkDepths.id("music.sculk_depths.zinnia");
+    public static final ResourceLocation SCULK_DEPTHS_OST_1 = SculkDepths.id("music.sculk_depths.ost-1");
+    public static final ResourceLocation AMBIENT_WIND_ADDITIONS = SculkDepths.id("ambient.wind.additions");
+    public static final ResourceLocation AMBIENT_CAVE_ADDITIONS = SculkDepths.id("ambient.cave.additions");
+    public static final ResourceLocation BLOCK_AMALGAMITE_BREAK = SculkDepths.id("block.amalgamite.break");
+    public static final ResourceLocation BLOCK_AMALGAMITE_STEP = SculkDepths.id("block.amalgamite.step");
+    public static final ResourceLocation BLOCK_AMALGAMITE_PLACE = SculkDepths.id("block.amalgamite.place");
+    public static final ResourceLocation ZINNIA_MUSIC_DISC = SculkDepths.id("disc.zinnia");
     public static SoundEvent SCULK_DEPTHS_MAIN_SOUNDTRACK_EVENT = SoundEvent.of(SCULK_DEPTHS_MAIN_SOUNDTRACK);
     public static SoundEvent SCULK_DEPTHS_CEPHLERA_SOUNDTRACK_EVENT = SoundEvent.of(SCULK_DEPTHS_CEPHLERA_SOUNDTRACK);
     public static SoundEvent SCULK_DEPTHS_MAIN_THEME_EVENT = SoundEvent.of(SCULK_DEPTHS_MAIN_THEME);
@@ -32,7 +32,7 @@ public class ModSounds {
     public static SoundEvent ZINNIA_MUSIC_DISC_EVENT = SoundEvent.of(ZINNIA_MUSIC_DISC);
 
 
-    public static final RegistryKey<JukeboxSong> ZINNIA_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, SculkDepths.identifier( "zinnia"));
+    public static final RegistryKey<JukeboxSong> ZINNIA_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, SculkDepths.id( "zinnia"));
 
 
     public static void registerModSounds() {

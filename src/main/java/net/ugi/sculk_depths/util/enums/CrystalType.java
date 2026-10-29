@@ -1,13 +1,13 @@
 package net.ugi.sculk_depths.util.enums;
 
-import net.minecraft.util.StringIdentifiable;
+import net.minecraft.util.StringRepresentable;
 
-public enum CrystalType implements StringIdentifiable {
+public enum CrystalType implements StringRepresentable {
     NONE("none"),
     WHITE("white"),
-    BLUE("blue"),
+    COLOR_BLUE("blue"),
     ORANGE("orange"),
-    LIME("lime");
+    COLOR_LIGHT_GREEN("lime");
 
 
     private final String name;

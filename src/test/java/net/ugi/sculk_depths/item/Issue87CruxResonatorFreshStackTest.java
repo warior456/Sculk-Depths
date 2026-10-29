@@ -1,10 +1,10 @@
 package net.ugi.sculk_depths.item;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.level.Level;
 import net.ugi.sculk_depths.TestBootstrap;
 import net.ugi.sculk_depths.item.ModComponentTypes;
 import net.ugi.sculk_depths.item.ModItems;
@@ -38,15 +38,15 @@ class Issue87CruxResonatorFreshStackTest {
     void usingFreshCruxResonatorDoesNotThrow() {
         // Mocked World leaves the public final isClient field false -> server path,
         // which is where the NPE lives.
-        World world = mock(World.class);
-        PlayerEntity player = mock(PlayerEntity.class);
+        Level world = mock(Level.class);
+        Player player = mock(Player.class);
         ItemStack freshResonator = new ItemStack(ModItems.CRUX_RESONATOR);
         assertNull(freshResonator.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST),
                 "a fresh resonator has no tracker list component (precondition of the bug)");
-        when(player.getStackInHand(Hand.MAIN_HAND)).thenReturn(freshResonator);
+        condition(player.getItemInHand(InteractionHand.MAIN_HAND)).thenReturn(freshResonator);
 
-        TypedActionResult<ItemStack> result = assertDoesNotThrow(
-                () -> ModItems.CRUX_RESONATOR.use(world, player, Hand.MAIN_HAND),
+        InteractionResultHolder<ItemStack> result = assertDoesNotThrow(
+                () -> ModItems.CRUX_RESONATOR.use(world, player, InteractionHand.MAIN_HAND),
                 "issue #87: using a fresh Crux Resonator must not throw");
 
         assertTrue(result.getResult().isAccepted());

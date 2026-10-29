@@ -1,12 +1,12 @@
 package net.ugi.sculk_depths.item.crystal;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
 import net.ugi.sculk_depths.item.ModItems;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 public class CheckInvForCrystalItems implements ServerTickEvents.StartWorldTick{
 
     @Override
-    public void onStartTick(ServerWorld world) {
+    public void onStartTick(ServerLevel world) {
         /*List<ServerPlayerEntity> serverPlayers = world.getPlayers(); //Todo: reenable if game loads
         for (ServerPlayerEntity serverPlayer : serverPlayers) {
             PlayerEntity player = world.getClosestPlayer(serverPlayer.getX(),serverPlayer.getY(),serverPlayer.getZ(),0.1,false);

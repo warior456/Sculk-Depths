@@ -1,7 +1,7 @@
 package net.ugi.sculk_depths.item;
 
-import net.minecraft.registry.Registries;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.ugi.sculk_depths.TestBootstrap;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -21,15 +21,15 @@ class Issue99ComponentNamespaceTest {
 
     @Test
     void oscillatorTrackerComponentUsesModNamespace() {
-        Identifier id = Registries.DATA_COMPONENT_TYPE.getId(ModComponentTypes.OSCILLATOR_TRACKER);
-        assertEquals("sculk_depths", id.getNamespace(),
+        ResourceLocation id = BuiltInRegistries.DATA_COMPONENT_TYPE.getId(ModComponentTypes.OSCILLATOR_TRACKER);
+        assertValueEqual("sculk_depths", id.extractNamespace(),
                 "quazarith_oscillator_tracker must be registered under the sculk_depths namespace");
     }
 
     @Test
     void oscillatorTrackerListComponentUsesModNamespace() {
-        Identifier id = Registries.DATA_COMPONENT_TYPE.getId(ModComponentTypes.OSCILLATOR_TRACKER_LIST);
-        assertEquals("sculk_depths", id.getNamespace(),
+        ResourceLocation id = BuiltInRegistries.DATA_COMPONENT_TYPE.getId(ModComponentTypes.OSCILLATOR_TRACKER_LIST);
+        assertValueEqual("sculk_depths", id.extractNamespace(),
                 "oscillator_tracker_list must be registered under the sculk_depths namespace");
     }
 }

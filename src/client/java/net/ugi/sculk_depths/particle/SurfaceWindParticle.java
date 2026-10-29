@@ -2,45 +2,45 @@ package net.ugi.sculk_depths.particle;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.particle.AscendingParticle;
+import net.minecraft.client.particle.BaseAshSmokeParticle;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleFactory;
-import net.minecraft.client.particle.SpriteProvider;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.SimpleParticleType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Heightmap;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.ugi.sculk_depths.sound.ConditionalSoundPlayerClient;
 import org.jetbrains.annotations.Nullable;
 
-public class SurfaceWindParticle extends AscendingParticle {
+public class SurfaceWindParticle extends BaseAshSmokeParticle {
 
 
-    protected SurfaceWindParticle(ClientWorld world, double x, double y, double z, float randomVelocityXMultiplier, float randomVelocityYMultiplier, float randomVelocityZMultiplier, double velocityX, double velocityY, double velocityZ, float scaleMultiplier, SpriteProvider spriteProvider, float colorMultiplier, int baseMaxAge, float gravityStrength, boolean collidesWithWorld) {
-        super(world, x, y, z, randomVelocityXMultiplier, randomVelocityYMultiplier, randomVelocityZMultiplier, velocityX, velocityY, velocityZ, scaleMultiplier, spriteProvider, colorMultiplier, baseMaxAge, gravityStrength, collidesWithWorld);
+    protected SurfaceWindParticle(ClientLevel world, double x, double y, double z, float randomVelocityXMultiplier, float randomVelocityYMultiplier, float randomVelocityZMultiplier, double velocityX, double velocityY, double velocityZ, float scaleMultiplier, SpriteSet sprite, float colorMultiplier, int baseMaxAge, float gravity, boolean hasPhysics) {
+        super(world, x, y, z, randomVelocityXMultiplier, randomVelocityYMultiplier, randomVelocityZMultiplier, velocityX, velocityY, velocityZ, scaleMultiplier, sprite, colorMultiplier, baseMaxAge, gravity, hasPhysics);
     }
 
 
     @Environment(value = EnvType.CLIENT)
     public static class Factory
-            implements ParticleFactory<SimpleParticleType> {
-        private final SpriteProvider spriteProvider;
+            implements ParticleProvider<SimpleParticleType> {
+        private final SpriteSet sprite;
 
-        public Factory(SpriteProvider spriteProvider) {
-            this.spriteProvider = spriteProvider;
+        public Factory(SpriteSet sprite) {
+            this.sprite = sprite;
         }
 
         @Nullable
         @Override
-        public Particle createParticle(SimpleParticleType parameters, ClientWorld clientWorld, double x, double y, double z, double vel_x, double h, double vel_z) {
+        public Particle createParticle(SimpleParticleType dispatchOptionalValue, ClientLevel clientLevel, double x, double y, double z, double vel_x, double h, double vel_z) {
             BlockPos pos = new BlockPos((int) x, (int) y, (int) z);
             // Check if the top Y position is greater than y, if so return null to spawn no particle
-            if (clientWorld.getTopPosition(Heightmap.Type.MOTION_BLOCKING, pos).getY() > y) {
+            if (clientLevel.getTopPosition(Heightmap.Types.MOTION_BLOCKING, pos).getY() > y) {
                 return null;
             }
 
-            SurfaceWindParticle particle = new SurfaceWindParticle(clientWorld, x, y, z, 0.5f, 0.05f, 0.5f, ConditionalSoundPlayerClient.getWindX(), -0.05f, ConditionalSoundPlayerClient.getWindZ(), 1.0f, this.spriteProvider, 0.9f, 20, 0.002f, true);
-            return particle;
+            SurfaceWindParticle particleFromItem = new SurfaceWindParticle(clientLevel, x, y, z, 0.5f, 0.05f, 0.5f, ConditionalSoundPlayerClient.getWindX(), -0.05f, ConditionalSoundPlayerClient.getWindZ(), 1.0f, this.sprite, 0.9f, 20, 0.002f, true);
+            return particleFromItem;
         }
 
 

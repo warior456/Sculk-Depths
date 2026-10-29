@@ -1,6 +1,6 @@
 package net.ugi.sculk_depths;
 
-import net.minecraft.Bootstrap;
+import net.minecraft.server.Bootstrap;
 import net.minecraft.SharedConstants;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.custom.ModCauldron.ModCauldronBehavior;
@@ -27,7 +27,7 @@ public final class TestBootstrap {
             return;
         }
         // fabric-loader-junit boots the loader but not the game bootstrap.
-        SharedConstants.createGameVersion();
+        SharedConstants.tryDetectVersion();
         Bootstrap.initialize();
 
         // Config is normally read from disk in onInitialize; give tests sane defaults.
@@ -40,7 +40,7 @@ public final class TestBootstrap {
         ModScreenHandlers.registerModScreenHandlers();
         ModComponentTypes.register();
         // Populates the cauldron behavior maps (normally done in onInitialize).
-        ModCauldronBehavior.registerBehavior();
+        ModCauldronBehavior.bootStrap();
 
         initialized = true;
     }

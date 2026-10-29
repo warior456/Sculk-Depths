@@ -2,14 +2,14 @@ package net.ugi.sculk_depths.world.gen;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.intprovider.IntProvider;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.gen.feature.FeaturePlacementContext;
-import net.minecraft.world.gen.placementmodifier.PlacementModifier;
-import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.levelgen.placement.PlacementContext;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 
 import java.util.stream.Stream;
 
@@ -21,11 +21,11 @@ public class CountOnEveryLayerConstant
     private final IntProvider startY;
     private final IntProvider separation;
 
-    public static final MapCodec<CountOnEveryLayerConstant> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            IntProvider.VALUE_CODEC.fieldOf("count").forGetter(c ->  c.count),
+    public static final MapCodec<CountOnEveryLayerConstant> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.recipeGroupPrefix(
+            IntProvider.CODEC.fieldOf("count").forGetter(c ->  c.count),
             IntProvider.POSITIVE_CODEC.fieldOf("layers").forGetter(c -> c.layers),
-            IntProvider.VALUE_CODEC.fieldOf("start_y").forGetter(c -> c.startY),
-            IntProvider.VALUE_CODEC.fieldOf("separation").forGetter(c -> c.separation)
+            IntProvider.CODEC.fieldOf("start_y").forGetter(c -> c.startY),
+            IntProvider.CODEC.fieldOf("separation").forGetter(c -> c.separation)
     ).apply(instance, CountOnEveryLayerConstant::new));
 
 
@@ -39,7 +39,7 @@ public class CountOnEveryLayerConstant
 
 
     @Override
-    public Stream<BlockPos> getPositions(FeaturePlacementContext context, Random random, BlockPos pos) {
+    public Stream<BlockPos> findAll(PlacementContext context, RandomSource random, BlockPos pos) {
 
         int startY = this.startY.get(random);
 
@@ -63,25 +63,25 @@ public class CountOnEveryLayerConstant
         return ModPlacementModifierType.COUNT_ON_EVERY_LAYER_CONSTANT;
     }
 
-    private static int findPos(FeaturePlacementContext context, int x, int y, int z, int targetY) {
-        BlockPos.Mutable mutable = new BlockPos.Mutable(x, y, z);
+    private static int findOnGroundYPosition(PlacementContext context, int x, int y, int z, int targetY) {
+        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos(x, y, z);
         int i = 0;
-        BlockState blockState = context.getBlockState(mutable);
+        BlockState block = context.getBlockState(mutable);
         for (int j = y; j >= context.getBottomY() + 1; --j) {
-            mutable.setY(j - 1);
+            mutable.adjustPositionHeight(j - 1);
             BlockState blockState2 = context.getBlockState(mutable);
-            if (!blocksSpawn(blockState2) && blocksSpawn(blockState) && !blockState2.isOf(Blocks.BEDROCK)) {
+            if (!isEmpty(blockState2) && isEmpty(block) && !blockState2.isOf(Blocks.BEDROCK)) {
                 if (i == targetY) {
                     return mutable.getY() + 1;
                 }
                 ++i;
             }
-            blockState = blockState2;
+            block = blockState2;
         }
-        return Integer.MAX_VALUE;
+        return Integer.INFINITE;
     }
 
-    private static boolean blocksSpawn(BlockState state) {
+    private static boolean isEmpty(BlockState state) {
         return state.isAir() || state.isOf(Blocks.WATER) || state.isOf(Blocks.LAVA);
     }
 }
