@@ -1,9 +1,10 @@
 plugins {
-	id 'fabric-loom' version '1.7-SNAPSHOT'
+	id 'java'
+	id 'net.neoforged.moddev' version '2.0.148'
 	id 'maven-publish'
 }
 
-version = version = project.minecraft_version + "-" + project.mod_version
+version = project.minecraft_version + "-" + project.mod_version
 group = project.maven_group
 
 base {
@@ -11,143 +12,80 @@ base {
 }
 
 repositories {
-	// Add repositories to retrieve artifacts from in here.
-	// You should only use this when depending on other mods because
-	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
-	// for more information about repositories.
-	maven { url 'https://maven.kyrptonaught.dev/' }
-	maven { url "https://api.modrinth.com/maven" }
-	maven { url = "https://jitpack.io" }
-	maven { url "https://api.modrinth.com/maven"}
+	mavenCentral()
+	maven { url = 'https://api.modrinth.com/maven' }
 }
 
+// The original project used Loom's splitEnvironmentSourceSets(): common code lived in
+// src/main, client-only code in src/client. NeoForge has a single classpath, so both
+// directories are compiled into the same source set. The folder layout is unchanged.
 sourceSets {
-	gametest {
-		compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
-		runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+	main {
+		java.srcDirs += ['src/client/java']
+		resources.srcDirs += ['src/client/resources']
 	}
 }
 
-loom {
-	splitEnvironmentSourceSets()
-	accessWidenerPath = file("src/main/resources/sculk_depths.accesswidener")
-	mods {
-		"sculk_depths" {
-			sourceSet sourceSets.main
-			sourceSet sourceSets.client
-		}
-		"sculk_depths_gametest" {
-			sourceSet sourceSets.gametest
-		}
-	}
+neoForge {
+	version = project.neoforge_version
 
 	runs {
-		// Headless dedicated server that runs the Fabric GameTests and exits.
-		gameTestServer {
-			inherit server
-			name "Game Test Server"
-			vmArg "-Dfabric-api.gametest"
-			vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/reports/gametest/junit.xml"
+		client {
+			client()
+			gameDirectory = file('run')
+		}
+		server {
+			server()
+			gameDirectory = file('run')
+		}
+		data {
+			data()
+			gameDirectory = file('run')
+			// Generates assets/data from the code-based providers (see SculkDepthsDataGenerator).
+			programArguments.addAll '--mod', project.archives_base_name,
+					'--all',
+					'--output', file('src/generated/resources/').getAbsolutePath(),
+					'--existing', file('src/main/resources/').getAbsolutePath()
 		}
 	}
 
-}
-
-// Loom's split-env run classpath only picks up the main source set; make sure the
-// gametest mod (classes + its fabric.mod.json) is on the game test server classpath.
-tasks.named('runGameTestServer') {
-	dependsOn 'gametestClasses'
-	classpath += sourceSets.gametest.output
-}
-
-fabricApi {
-	configureDataGeneration()
+	mods {
+		sculk_depths {
+			sourceSet sourceSets.main
+		}
+	}
 }
 
 dependencies {
 	// To change the versions see the gradle.properties file
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
-/*	modImplementation include ("net.kyrptonaught:customportalapi:${project.customportalapi_version}"){
-		exclude group: "net.fabricmc.fabric-api", module: "fabric-gametest-api-v1"}*/
-
-	include(modImplementation("maven.modrinth:fstats:${project.fstats_version}"))
-
-	// Test harness: fabric-loader-junit bootstraps the loader + registries headlessly
-	testImplementation "net.fabricmc:fabric-loader-junit:${project.loader_version}"
-	testImplementation "org.mockito:mockito-core:5.14.2"
 }
 
-test {
-	useJUnitPlatform()
-	// Regression tests for confirmed bugs (assert CORRECT behavior, so they FAIL on
-	// the current buggy code by design) live in the regression package and run via
-	// the separate regressionTest task, keeping the main suite green.
-	exclude 'net/ugi/sculk_depths/regression/**'
-	testLogging {
-		events "PASSED", "FAILED", "SKIPPED"
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
 	}
+	withSourcesJar()
 }
 
-// Runs only the issue-mapped regression tests. Each failure is an expected proof
-// of a known bug (see comments in the test classes), so failures do not fail the build.
-tasks.register('regressionTest', Test) {
-	useJUnitPlatform()
-	include 'net/ugi/sculk_depths/regression/**'
-	testClassesDirs = sourceSets.test.output.classesDirs
-	classpath = sourceSets.test.runtimeClasspath
-	ignoreFailures = true
-	testLogging {
-		events "PASSED", "FAILED", "SKIPPED"
-	}
-}
-
-// With splitEnvironmentSourceSets() loom does not wire Minecraft into the test
-// source set automatically; inherit the main (common) classpath instead.
-// The client classpath is also needed: fabric-loader-junit's Knot game provider
-// locates the game via the client entrypoint, which lives in the client-only jar.
-sourceSets {
-	test {
-		compileClasspath += sourceSets.main.compileClasspath + sourceSets.client.compileClasspath
-		runtimeClasspath += sourceSets.main.runtimeClasspath + sourceSets.client.runtimeClasspath
-	}
+tasks.withType(JavaCompile).configureEach {
+	options.release = 21
+	options.encoding = 'UTF-8'
 }
 
 processResources {
 	inputs.property "version", project.version
 
-	filesMatching("fabric.mod.json") {
+	filesMatching("META-INF/neoforge.mods.toml") {
 		expand "version": project.version
 	}
 }
 
-tasks.withType(JavaCompile).configureEach {
-	it.options.release = 21
-}
-
-java {
-	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-	// if it is present.
-	// If you remove this line, sources will not be generated.
-	withSourcesJar()
-
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
-}
-
 jar {
 	from("LICENSE") {
-		rename { "${it}_${project.base.archivesName.get()}"}
+		rename { "${it}_${project.base.archivesName.get()}" }
 	}
 }
 
-// configure the maven publication
 publishing {
 	publications {
 		create("mavenJava", MavenPublication) {
@@ -156,12 +94,6 @@ publishing {
 		}
 	}
 
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
 	repositories {
-		// Add repositories to publish to here.
-		// Notice: This block does NOT have the same function as the block in the top level.
-		// The repositories here will be used for publishing your artifact, not for
-		// retrieving dependencies.
 	}
 }
-

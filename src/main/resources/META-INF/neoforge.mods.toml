@@ -1,0 +1,34 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "Custom License"
+issueTrackerURL = "https://github.com/warior456/Sculk-Depths/issues"
+
+[[mods]]
+modId = "sculk_depths"
+version = "${version}"
+displayName = "Sculk Depths"
+authors = "Matteo_fey, gems_bond"
+description = '''
+This mod adds a new dimension accessed from the ancient cities
+'''
+logoFile = "assets/sculk_depths/icon.png"
+
+[[mixins]]
+config = "sculk_depths.mixins.json"
+
+[[mixins]]
+config = "sculk_depths.client.mixins.json"
+
+[[dependencies.sculk_depths]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.sculk_depths]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,1.22)"
+ordering = "NONE"
+side = "BOTH"

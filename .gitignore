@@ -39,4 +39,4 @@ replay_*.log
 *.hprof
 *.jfr
 /src/main/generated/.cache/
-/remappedSrc/
+/remappedSrc/tools/__pycache__/
