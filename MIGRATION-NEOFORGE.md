@@ -118,6 +118,56 @@ PROBE: SUCCESS - creative tab contents built without crashing
 ```
 No `missing model for variant` warnings and no spawn-placement error remain in that log.
 
+## Phase G — dedicated-server smoke test & portal structure regression  [ ]
+
+### Dedicated server
+- [x] `gradlew runServer` starts cleanly with the mod (`Done (7.359s)!`), no mod errors, no
+      missing dimensions/biomes/recipes/tags, worldgen of `sculk_depths:sculk_depths` runs.
+      The disposable test world/config used for this (`run/eula.txt`, `run/server.properties`,
+      `run/neoforge-server-test`) was deleted again, so `run/` only holds the normal client data.
+- [x] Entity default attributes are registered (`SculkDepths#onEntityAttributes` →
+      `EntityAttributeCreationEvent` for glomper/lester/chomper_colossus), matching the old
+      `FabricDefaultAttributeRegistry` calls.
+
+### Portal structure only generates partially (open, maintainer decides the fix)
+Observed in the maintainer's test world: after using the portal, the destination
+`sculk_depths:portal_structure` is placed with whole chunk slices missing
+("part of the portal structure didn't generate (chunks were skipped)"), plus
+`BlockAttachedEntity at invalid position` errors for the hanging signs in the missing chunks.
+
+Root cause (analysis only, not changed): `PedestalBlock` `GEN_STRUCTURE` first calls
+`GenerateStructureAPI.registerStructureStartStub(...)`. That helper uses reflection against
+`StructureManager#setStartForStructure(...)`; the Fabric-era attempt could not access the
+implementation class and therefore returned `false`, so the normal path (load all chunks,
+`StructureStart#placeInChunk` for every chunk of the bounding box) ran. On NeoForge the
+reflection succeeds, so the stub returns `true` even though it only places the anchor chunk
+when it happens to be loaded — the rest of the structure is never placed into already
+generated chunks.
+
+Decision: **do not redesign portal generation unprompted.** The maintainer wants to switch
+portal generation to "just set a structure start" because a companion mod interacts with it,
+and asked to be consulted once the rest of the port was done.
+
+## Maintainer messages captured during the session (for context after compaction)
+> "i just opened the game and my inventory again and it crashed again"
+
+→ fixed in Phase F (duplicate tab entries + null `EntityType` in spawn eggs).
+
+> "you might be working on this but part of the portal structure didn't generate (chunks were skipped)"
+
+→ see the portal structure section above (partial `portal_structure`, missing chunk slices).
+
+> "though i do want to switch the portal generation to just set a structure start (i have a mod
+> that plays with this so ask me once you've done the rest)"
+
+→ open item: replace the reflection/stub placement with a proper `StructureStart` registration
+so the structure generates through normal chunk generation; ask the maintainer how the companion
+mod expects it to be registered before changing `PedestalBlock`/`GenerateStructureAPI`.
+
+> "make sure to note my messages in the migration checklist in case compaction happens"
+
+→ this section.
+
 ## Known deliberate behaviour changes
 - `fstats` (Fabric Stats API) removed — no NeoForge counterpart bundled; no gameplay logic used it.
 - Fabric Transfer API cauldron interop removed (pipes/mods integration only).
