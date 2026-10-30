@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Minecraft.class)
 public class ExampleClientMixin {
-	@Inject(forIndex = @At("HEAD"), method = "run")
+	@Inject(at = @At("HEAD"), method = "run")
 	private void init(CallbackInfo printDebugLog) {
 		// This code is injected into the start of MinecraftClient.run()V
 	}

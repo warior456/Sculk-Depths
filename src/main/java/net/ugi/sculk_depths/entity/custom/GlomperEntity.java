@@ -1,9 +1,15 @@
 package net.ugi.sculk_depths.entity.custom;
 
 
-import net.minecraft.entity.*;
+import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -28,21 +34,22 @@ import java.util.function.Predicate;
 public class GlomperEntity extends PathfinderMob {
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
-    private static final Predicate<LivingEntity> LIVING_ENTITY_SELECTOR = entity -> entity.isAlwaysTicking() && entity.isFallFlying();
+    private static final Predicate<LivingEntity> CAN_ATTACK_PREDICATE = entity -> (entity instanceof Player) && entity.isFallFlying();
+    @Override
     protected float getFlyingSpeed() {
-        return this.getMovementSpeed() * 0.1f;//fix movement speed
+        return this.getSpeed() * 0.1f;//fix movement speed
     }
 
 
-    public GlomperEntity(EntityType<? extends PathfinderMob> entityType, Level world) {
-        super(entityType, world);
+    public GlomperEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
+        super(entityType, level);
         this.moveControl = new FlyingMoveControl(this, 0, true);
         this.setNoGravity(true);
     }
 
     @Override
-    protected int getXpToDrop() {
-        return 1 + this.getWorld().random.getInt(3);
+    protected int getBaseExperienceReward() {
+        return 1 + this.random.nextInt(3);
     }
 
 /*    @Override
@@ -70,55 +77,58 @@ public class GlomperEntity extends PathfinderMob {
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = this.random.getInt(40) + 80;
-            this.idleAnimationState.start(this.age);
+            this.idleAnimationTimeout = this.random.nextInt(40) + 80;
+            this.idleAnimationState.start(this.tickCount);
         } else {
             --this.idleAnimationTimeout;
         }
     }
 
     @Override
-    protected void updateLimbs(float posDelta) {
-        float f = this.getState() == EntityPose.STANDING ? Math.minValue(posDelta * 6.0f, 1.0f) : 0.0f;
-        this.walkAnimation.updateLimbs(f, 0.2f);
+    protected void updateWalkAnimation(float posDelta) {
+        float f = this.getPose() == Pose.STANDING ? Math.min(posDelta * 6.0f, 1.0f) : 0.0f;
+        this.walkAnimation.update(f, 0.2f);
     }
 
     @Override
     public void tick() {
         super.tick();
-        if(this.getWorld().isClientSide()) {
+        if(this.level().isClientSide()) {
             setupAnimationStates();
         }
     }
 
-    protected PathNavigation createNavigation(Level world) {
-        FlyingPathNavigation birdNavigation = new FlyingPathNavigation(this, world);
-        birdNavigation.setCanPathThroughDoors(false);
+    @Override
+    protected PathNavigation createNavigation(Level level) {
+        FlyingPathNavigation birdNavigation = new FlyingPathNavigation(this, level);
+        birdNavigation.setCanOpenDoors(false);
         birdNavigation.setCanFloat(true);
         birdNavigation.setCanPassDoors(true);
         return birdNavigation;
     }
 
+    @Override
     public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource source) {
         return false;
     }
 
+    @Override
     protected void registerGoals() {
-        this.goalSelector.add(4, new FlyGoal(this, 1.0));
-        //this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.add(5, new LookAroundGoal(this));
-        //this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
-        this.targetSelector.add(1, new GlomperEntity.GlomperTargetGoal(this, LivingEntity.class, 0, false, false, LIVING_ENTITY_SELECTOR));
-        this.goalSelector.add(2, new MeleeAttackGoal(this, 9.0D, false));
+        this.goalSelector.addGoal(4, new WaterAvoidingRandomFlyingGoal(this, 1.0));
+        //this.goalSelector.addGoal(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
+        //this.targetSelector.addGoal(1, new RevengeGoal(this, new Class[0]));
+        this.targetSelector.addGoal(1, new GlomperEntity.GlomperTargetGoal(this, LivingEntity.class, 0, false, false, CAN_ATTACK_PREDICATE));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 9.0D, false));
 
     }
 
     public static class GlomperTargetGoal
-            extends ActiveTargetGoal {
+            extends NearestAttackableTargetGoal<LivingEntity> {
 
         private boolean followingTargetEvenIfNotSeen;
 
-        public GlomperTargetGoal(Mob mob, Class targetType, int randomInterval, boolean mustSee, boolean mustReach, @Nullable Predicate targetPredicate) {
+        public GlomperTargetGoal(Mob mob, Class<LivingEntity> targetType, int randomInterval, boolean mustSee, boolean mustReach, @Nullable Predicate<LivingEntity> targetPredicate) {
             super(mob, targetType, randomInterval, mustSee, mustReach, targetPredicate);
         }
 
@@ -132,7 +142,7 @@ public class GlomperEntity extends PathfinderMob {
                 return false;
             }
             if (!this.followingTargetEvenIfNotSeen) {
-                return !this.mob.getNavigation().isIdle();
+                return !this.mob.getNavigation().isDone();
             }
             assert this.target != null;
             if (!this.target.isFallFlying()) {

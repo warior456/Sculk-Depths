@@ -3,11 +3,14 @@ package net.ugi.sculk_depths.portal;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.tags.TagKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.math.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.ugi.sculk_depths.block.ModBlocks;
@@ -27,41 +30,41 @@ public class Portal {
     public static BlockPos[] addElement(BlockPos[] arr, BlockPos e) {
         List<BlockPos> list = new ArrayList<>(Arrays.asList(arr));
         list.add(e);
-        return list.adjustArgs(new BlockPos[0]);
+        return list.toArray(new BlockPos[0]);
     }
 
     public static BlockPos[] addElement(BlockPos[] arr1, BlockPos[] arr2) {
         List<BlockPos> list = new ArrayList<>(arr1.length + arr2.length);
         list.addAll(Arrays.asList(arr1));
         list.addAll(Arrays.asList(arr2));
-        return list.adjustArgs(new BlockPos[0]);
+        return list.toArray(new BlockPos[0]);
     }
 
     public static ChunkPos[] addElement(ChunkPos[] arr, ChunkPos e) {
         List<ChunkPos> list = new ArrayList<>(Arrays.asList(arr));
         list.add(e);
-        return list.adjustArgs(new ChunkPos[0]);
+        return list.toArray(new ChunkPos[0]);
     }
 
-    private static boolean hasPoweredPedestal(Level world, BlockPos pos, Direction direction) {
-        BlockState state = world.getBlockState(pos.offset(direction, 10));
-        return state.getBlock() == ModBlocks.SCULK_PEDESTAL && state.get(ModProperties.HAS_ENERGY_ESSENCE);
+    private static boolean hasPoweredPedestal(Level level, BlockPos pos, Direction direction) {
+        BlockState state = level.getBlockState(pos.relative(direction, 10));
+        return state.is(ModBlocks.SCULK_PEDESTAL) && state.getValue(ModProperties.HAS_ENERGY_ESSENCE);
     }
 
-    public static List<BlockPos> getFramePos(Direction pedestalFacing, BlockPos pos, Level world ) {
+    public static List<BlockPos> getFramePos(Direction pedestalFacing, BlockPos pos, Level level ) {
         Direction right = pedestalFacing.getClockWise();
         Direction left = pedestalFacing.getCounterClockWise();
-        if (hasPoweredPedestal(world, pos, right)) {
+        if (hasPoweredPedestal(level, pos, right)) {
             return getFramePositionsForSide(pos, pedestalFacing, right);
         }
-        if (hasPoweredPedestal(world, pos, left)) {
+        if (hasPoweredPedestal(level, pos, left)) {
             return getFramePositionsForSide(pos, pedestalFacing, left);
         }
         return null;
     }
 
     private static List<BlockPos> getFramePositionsForSide(BlockPos pos, Direction facing, Direction side) {
-        Direction depth = facing.opposite();
+        Direction depth = facing.getOpposite();
         boolean isClockwise = side == facing.getClockWise();
         boolean facingPositiveAxis = facing == Direction.EAST || facing == Direction.SOUTH;
         int a;
@@ -74,98 +77,98 @@ public class Portal {
             b = facingPositiveAxis ? 5 : 6;
         }
         return List.of(
-                pos.offset(depth, 5).above(6).offset(side, a),
-                pos.offset(depth, 5).above(6).offset(side, b)
+                pos.relative(depth, 5).above(6).relative(side, a),
+                pos.relative(depth, 5).above(6).relative(side, b)
         );
     }
 
-    public static BlockPos getFrameAnchorPos(Direction pedestalFacing, BlockPos pos, Level world ) {
+    public static BlockPos getFrameAnchorPos(Direction pedestalFacing, BlockPos pos, Level level ) {
         Direction right = pedestalFacing.getClockWise();
         Direction left = pedestalFacing.getCounterClockWise();
-        if (hasPoweredPedestal(world, pos, right)) {
+        if (hasPoweredPedestal(level, pos, right)) {
             return getAnchorPosForSide(pos, pedestalFacing, right);
         }
-        if (hasPoweredPedestal(world, pos, left)) {
+        if (hasPoweredPedestal(level, pos, left)) {
             return getAnchorPosForSide(pos, pedestalFacing, left);
         }
         return null;
     }
 
     private static BlockPos getAnchorPosForSide(BlockPos pos, Direction facing, Direction side) {
-        return pos.offset(side, 5).above(13).offset(facing.opposite(), 5);
+        return pos.relative(side, 5).above(13).relative(facing.getOpposite(), 5);
     }
 
-    public static List<BlockPos> getNextpos(BlockPos pos, Level world, Block block){
+    public static List<BlockPos> getNextpos(BlockPos pos, Level level, Block block){
         List<BlockPos> list = new ArrayList<>();
-        if (world.getBlockState(pos.north()).getBlock() == block){
+        if (level.getBlockState(pos.north()).is(block)){
             list.add(pos.north());
         }
-        if (world.getBlockState(pos.south()).getBlock() == block){
+        if (level.getBlockState(pos.south()).is(block)){
             list.add(pos.south());
         }
-        if (world.getBlockState(pos.east()).getBlock() == block){
+        if (level.getBlockState(pos.east()).is(block)){
             list.add(pos.east());
         }
-        if (world.getBlockState(pos.west()).getBlock() == block){
+        if (level.getBlockState(pos.west()).is(block)){
             list.add(pos.west());
         }
-        if (world.getBlockState(pos.above()).getBlock() == block){
+        if (level.getBlockState(pos.above()).is(block)){
             list.add(pos.above());
         }
-        if (world.getBlockState(pos.below()).getBlock() == block){
+        if (level.getBlockState(pos.below()).is(block)){
             list.add(pos.below());
         }
         return list;
     }
 
-    public static List<BlockPos> getNextpos(BlockPos pos, Level world, TagKey<Block> of, Direction facing){
+    public static List<BlockPos> getNextpos(BlockPos pos, Level level, TagKey<Block> of, Direction facing){
         List<BlockPos> list = new ArrayList<>();
         if (facing == Direction.EAST || facing == Direction.WEST){
-            if (world.getBlockState(pos.north()).is(of)){
+            if (level.getBlockState(pos.north()).is(of)){
                 list.add(pos.north());
             }
-            if (world.getBlockState(pos.south()).is(of)){
+            if (level.getBlockState(pos.south()).is(of)){
                 list.add(pos.south());
             }
         }
         if (facing == Direction.NORTH || facing == Direction.SOUTH){
-            if (world.getBlockState(pos.east()).is(of)){
+            if (level.getBlockState(pos.east()).is(of)){
                 list.add(pos.east());
             }
-            if (world.getBlockState(pos.west()).is(of)){
+            if (level.getBlockState(pos.west()).is(of)){
                 list.add(pos.west());
             }
         }
-        if (world.getBlockState(pos.above()).is(of)){
+        if (level.getBlockState(pos.above()).is(of)){
             list.add(pos.above());
         }
-        if (world.getBlockState(pos.below()).is(of)){
+        if (level.getBlockState(pos.below()).is(of)){
             list.add(pos.below());
         }
         return list;
     }
 
-    private static Boolean checkFullFrame(BlockPos pos, Level world){
+    private static Boolean checkFullFrame(BlockPos pos, Level level){
         int countActivatedAmalgamite = 0;
 
         if (pos != null) {
 
-            if (world.getBlockState(pos.north()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+            if (level.getBlockState(pos.north()).is(ModBlocks.ACTIVATED_AMALGAMITE)) {
                 countActivatedAmalgamite++;
             }
-            if (world.getBlockState(pos.south()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+            if (level.getBlockState(pos.south()).is(ModBlocks.ACTIVATED_AMALGAMITE)) {
                 countActivatedAmalgamite++;
             }
-            if (world.getBlockState(pos.east()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+            if (level.getBlockState(pos.east()).is(ModBlocks.ACTIVATED_AMALGAMITE)) {
                 countActivatedAmalgamite++;
             }
-            if (world.getBlockState(pos.west()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+            if (level.getBlockState(pos.west()).is(ModBlocks.ACTIVATED_AMALGAMITE)) {
                 countActivatedAmalgamite++;
             }
-            if (world.getBlockState(pos.above()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+            if (level.getBlockState(pos.above()).is(ModBlocks.ACTIVATED_AMALGAMITE)) {
                 countActivatedAmalgamite++;
             }
-            if (world.getBlockState(pos.below()).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
+            if (level.getBlockState(pos.below()).is(ModBlocks.ACTIVATED_AMALGAMITE)) {
                 countActivatedAmalgamite++;
             }
 
@@ -176,17 +179,17 @@ public class Portal {
         return false;
     }
 
-    public static List<BlockPos> genFrameStep(Level world, List<BlockPos> blockposses, RandomSource random){
+    public static List<BlockPos> genFrameStep(Level level, List<BlockPos> blockposses, RandomSource random){
         List<BlockPos> newPosArr = new ArrayList<>();
         newPosArr.add(new BlockPos(0,-4096,0));
         for (BlockPos pos: blockposses) {
             List<BlockPos> newPos = new ArrayList<>();
-            if (world.getBlockState(pos).getBlock() != ModBlocks.ACTIVATED_AMALGAMITE) {
-                world.setBlockState(pos,ModBlocks.ACTIVATED_AMALGAMITE.getDefaultState());
-                Portal.addBlockPowerUpParticle((ServerLevel) world, pos, random, 10);
-                    newPos = getNextpos(pos, world, Blocks.REINFORCED_DEEPSLATE);
+            if (!level.getBlockState(pos).is(ModBlocks.ACTIVATED_AMALGAMITE)) {
+                level.setBlockAndUpdate(pos,ModBlocks.ACTIVATED_AMALGAMITE.defaultBlockState());
+                Portal.addBlockPowerUpParticle((ServerLevel) level, pos, random, 10);
+                    newPos = getNextpos(pos, level, Blocks.REINFORCED_DEEPSLATE);
                 if (newPos.isEmpty()){
-                    if (checkFullFrame(pos,world))
+                    if (checkFullFrame(pos,level))
                         newPos.add(new BlockPos(0,-4096,1));
                     else
                         newPos.add(new BlockPos(0,-4096,0));
@@ -197,14 +200,14 @@ public class Portal {
         return newPosArr;
     }
 
-    public static List<BlockPos> cancelFrameStep(Level world, List<BlockPos> blockposses){
+    public static List<BlockPos> cancelFrameStep(Level level, List<BlockPos> blockposses){
         List<BlockPos> newPosArr = new ArrayList<>();
         newPosArr.add(new BlockPos(0,-4096,0));
         for (BlockPos pos: blockposses) {
             List<BlockPos> newPos = new ArrayList<>();
-            if (world.getBlockState(pos).getBlock() == ModBlocks.ACTIVATED_AMALGAMITE) {
-                world.setBlockState(pos,Blocks.REINFORCED_DEEPSLATE.getDefaultState());
-                newPos = getNextpos(pos, world, ModBlocks.ACTIVATED_AMALGAMITE);
+            if (level.getBlockState(pos).is(ModBlocks.ACTIVATED_AMALGAMITE)) {
+                level.setBlockAndUpdate(pos,Blocks.REINFORCED_DEEPSLATE.defaultBlockState());
+                newPos = getNextpos(pos, level, ModBlocks.ACTIVATED_AMALGAMITE);
                 if (newPos.isEmpty()){
                     newPos.add(new BlockPos(0,-4096,0));
                 }
@@ -214,20 +217,20 @@ public class Portal {
         return newPosArr;
     }
 
-    public static List<BlockPos> genPortalStep(Level world, List<BlockPos> blockposses, Direction facing, RandomSource random){
-        BlockState state = ModBlocks.SCULK_DEPTHS_PORTAL.getDefaultState();
+    public static List<BlockPos> genPortalStep(Level level, List<BlockPos> blockposses, Direction facing, RandomSource random){
+        BlockState state = ModBlocks.SCULK_DEPTHS_PORTAL.defaultBlockState();
         List<BlockPos> newPosArr = new ArrayList<>();
         newPosArr.add(new BlockPos(0,-4096,0));
         for (BlockPos pos: blockposses) {
             List<BlockPos> newPos = new ArrayList<>();
-            if (world.getBlockState(pos).getBlock() != ModBlocks.SCULK_DEPTHS_PORTAL) {
+            if (!level.getBlockState(pos).is(ModBlocks.SCULK_DEPTHS_PORTAL)) {
                 if (facing == Direction.NORTH || facing == Direction.SOUTH){
-                    world.setBlockState(pos,ModBlocks.SCULK_DEPTHS_PORTAL.withPropertiesOf(state.with(AXIS, Direction.Axis.X_ROT)));
-                    newPos = getNextpos(pos, world, ModTags.Blocks.PORTAL_AIR,facing);
+                    level.setBlockAndUpdate(pos,ModBlocks.SCULK_DEPTHS_PORTAL.withPropertiesOf(state.setValue(AXIS, Direction.Axis.X)));
+                    newPos = getNextpos(pos, level, ModTags.Blocks.PORTAL_AIR,facing);
                 }
                 if (facing == Direction.EAST || facing == Direction.WEST){
-                    world.setBlockState(pos,ModBlocks.SCULK_DEPTHS_PORTAL.withPropertiesOf(state.with(AXIS, Direction.Axis.Z)));
-                    newPos = getNextpos(pos, world, ModTags.Blocks.PORTAL_AIR, facing);
+                    level.setBlockAndUpdate(pos,ModBlocks.SCULK_DEPTHS_PORTAL.withPropertiesOf(state.setValue(AXIS, Direction.Axis.Z)));
+                    newPos = getNextpos(pos, level, ModTags.Blocks.PORTAL_AIR, facing);
                 }
                 if (newPos.isEmpty()){
                     newPos.add(new BlockPos(0,-4096,0));
@@ -238,7 +241,7 @@ public class Portal {
         return newPosArr;
     }
 
-    public static void addBlockPowerUpParticle(ServerLevel world, BlockPos pos, RandomSource random, int amount){
+    public static void addBlockPowerUpParticle(ServerLevel level, BlockPos pos, RandomSource random, int amount){
         //System.out.println("particle");
         for (int i = 0; i < amount; i++) {
             for (int j = 0; j < 6; j++) {
@@ -247,41 +250,41 @@ public class Portal {
                 float z = pos.getZ() + 0.5f;
                 switch (j){
                     case 0://positivex
-                        x = x + 0.6f + MathHelper.getFloat(random, 0f, 0.2f);
-                        y = y + MathHelper.getFloat(random, -0.6f, 0.6f);
-                        z = z + MathHelper.getFloat(random, -0.6f, 0.6f);
+                        x = x + 0.6f + Mth.nextFloat(random, 0f, 0.2f);
+                        y = y + Mth.nextFloat(random, -0.6f, 0.6f);
+                        z = z + Mth.nextFloat(random, -0.6f, 0.6f);
                         break;
                     case 1://negativex
-                        x = x - 0.6f - MathHelper.getFloat(random, 0f, 0.2f);
-                        y = y + MathHelper.getFloat(random, -0.6f, 0.6f);
-                        z = z + MathHelper.getFloat(random, -0.6f, 0.6f);
+                        x = x - 0.6f - Mth.nextFloat(random, 0f, 0.2f);
+                        y = y + Mth.nextFloat(random, -0.6f, 0.6f);
+                        z = z + Mth.nextFloat(random, -0.6f, 0.6f);
                         break;
                     case 2://positivivez
-                        x = x + MathHelper.getFloat(random, -0.6f, 0.6f);
-                        y = y + MathHelper.getFloat(random, -0.6f, 0.6f);
-                        z = z + 0.6f + MathHelper.getFloat(random, 0f, 0.2f);
+                        x = x + Mth.nextFloat(random, -0.6f, 0.6f);
+                        y = y + Mth.nextFloat(random, -0.6f, 0.6f);
+                        z = z + 0.6f + Mth.nextFloat(random, 0f, 0.2f);
                         break;
                     case 3://negativez
-                        x = x + MathHelper.getFloat(random, -0.6f, 0.6f);
-                        y = y + MathHelper.getFloat(random, -0.6f, 0.6f);
-                        z = z - 0.6f - MathHelper.getFloat(random, 0f, 0.2f);
+                        x = x + Mth.nextFloat(random, -0.6f, 0.6f);
+                        y = y + Mth.nextFloat(random, -0.6f, 0.6f);
+                        z = z - 0.6f - Mth.nextFloat(random, 0f, 0.2f);
                         break;
                     case 4://positivey
-                        x = x + MathHelper.getFloat(random, -0.6f, 0.6f);
-                        y = y + 0.6f + MathHelper.getFloat(random, 0f, 0.2f);
-                        z = z + MathHelper.getFloat(random, -0.6f, 0.6f);
+                        x = x + Mth.nextFloat(random, -0.6f, 0.6f);
+                        y = y + 0.6f + Mth.nextFloat(random, 0f, 0.2f);
+                        z = z + Mth.nextFloat(random, -0.6f, 0.6f);
                         break;
                     case 5://negativey
-                        x = x + MathHelper.getFloat(random, -0.6f, 0.6f);
-                        y = y - 0.6f - MathHelper.getFloat(random, 0f, 0.2f);
-                        z = z + MathHelper.getFloat(random, -0.6f, 0.6f);
+                        x = x + Mth.nextFloat(random, -0.6f, 0.6f);
+                        y = y - 0.6f - Mth.nextFloat(random, 0f, 0.2f);
+                        z = z + Mth.nextFloat(random, -0.6f, 0.6f);
                         break;
                 }
                 //System.out.println(" " + x + " " + y + " "+z);
-                List<ServerPlayer> playerEntityList = world.getPlayers(serverPlayerEntity ->
-                        Vec3d.ofCenter(pos).isInRange(serverPlayerEntity.getPos(), 128.0));
+                List<ServerPlayer> playerEntityList = level.players().stream().filter(serverPlayerEntity ->
+                        Vec3.atCenterOf(pos).closerThan(serverPlayerEntity.position(), 128.0)).toList();
                 for (ServerPlayer serverPlayerEntity : playerEntityList) {
-                    world.spawnParticles(serverPlayerEntity, (ParticleOptions) ModParticleTypes.ENERGY_PARTICLE, true, x, y, z, 4, 0.1, 0, 0.1, 0);
+                    level.sendParticles(serverPlayerEntity, ModParticleTypes.ENERGY_PARTICLE, true, x, y, z, 4, 0.1, 0, 0.1, 0);
                 }
 
                 //world.addImportantParticle((ParticleEffect) ModParticleTypes.ENERGY_PARTICLE, false, x, y, z, 0, 0, 0);
@@ -291,67 +294,67 @@ public class Portal {
 
     }
 
-    public static BlockPos getFrameMinPos(Direction pedestalFacing, BlockPos pos, Level world ) {
+    public static BlockPos getFrameMinPos(Direction pedestalFacing, BlockPos pos, Level level ) {
         switch (pedestalFacing) {
             case EAST -> {
-                if (world.getBlockState(pos.north(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.north(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
+                if (level.getBlockState(pos.north(10)).is(ModBlocks.SCULK_PEDESTAL))
+                    if (level.getBlockState(pos.north(10)).getValue(ModProperties.HAS_ENERGY_ESSENCE))
                         return pos.north(15).above(7).west(5);
-                if (world.getBlockState(pos.south(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.south(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
+                if (level.getBlockState(pos.south(10)).is(ModBlocks.SCULK_PEDESTAL))
+                    if (level.getBlockState(pos.south(10)).getValue(ModProperties.HAS_ENERGY_ESSENCE))
                         return pos.north(5).above(7).west(5);
             }
             case NORTH -> {
-                if (world.getBlockState(pos.east(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.east(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
+                if (level.getBlockState(pos.east(10)).is(ModBlocks.SCULK_PEDESTAL))
+                    if (level.getBlockState(pos.east(10)).getValue(ModProperties.HAS_ENERGY_ESSENCE))
                         return pos.west(5).above(7).south(5);
-                if (world.getBlockState(pos.west(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.west(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
+                if (level.getBlockState(pos.west(10)).is(ModBlocks.SCULK_PEDESTAL))
+                    if (level.getBlockState(pos.west(10)).getValue(ModProperties.HAS_ENERGY_ESSENCE))
                         return pos.west(15).above(7).south(5);
             }
             case WEST -> {
-                if (world.getBlockState(pos.north(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.north(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
+                if (level.getBlockState(pos.north(10)).is(ModBlocks.SCULK_PEDESTAL))
+                    if (level.getBlockState(pos.north(10)).getValue(ModProperties.HAS_ENERGY_ESSENCE))
                         return pos.north(14).above(7).east(5);
-                if (world.getBlockState(pos.south(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.south(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
+                if (level.getBlockState(pos.south(10)).is(ModBlocks.SCULK_PEDESTAL))
+                    if (level.getBlockState(pos.south(10)).getValue(ModProperties.HAS_ENERGY_ESSENCE))
                         return pos.north(4).above(7).east(5);
             }
             case SOUTH -> {
-                if (world.getBlockState(pos.east(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.east(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
+                if (level.getBlockState(pos.east(10)).is(ModBlocks.SCULK_PEDESTAL))
+                    if (level.getBlockState(pos.east(10)).getValue(ModProperties.HAS_ENERGY_ESSENCE))
                         return pos.west(4).above(7).north(5);
-                if (world.getBlockState(pos.west(10)).getBlock() == ModBlocks.SCULK_PEDESTAL)
-                    if (world.getBlockState(pos.west(10)).get(ModProperties.HAS_ENERGY_ESSENCE))
+                if (level.getBlockState(pos.west(10)).is(ModBlocks.SCULK_PEDESTAL))
+                    if (level.getBlockState(pos.west(10)).getValue(ModProperties.HAS_ENERGY_ESSENCE))
                         return pos.west(14).above(7).north(5);
             }
         }
         return null;
     }
 
-    public static void addPortalStartAttemptParticle(ServerLevel world, BlockPos pos, RandomSource random, int amount){
+    public static void addPortalStartAttemptParticle(ServerLevel level, BlockPos pos, RandomSource random, int amount){
         //System.out.println("particle");
-        int dx = random.getInt(10)-5;
-        int dy = random.getInt(10)-5;
-        int deltaZ = random.getInt(10)-5;
+        int dx = random.nextInt(10)-5;
+        int dy = random.nextInt(10)-5;
+        int deltaZ = random.nextInt(10)-5;
 
         double x = pos.getX() + 0.5f;
         double y = pos.getY() + 0.5f;
         double z = pos.getZ() + 0.5f;
 
-        Vec3d relativeVector = new Vec3d(dx, dy, deltaZ);
-        Vec3d normalized3dVector = relativeVector.normalize();
+        Vec3 relativeVector = new Vec3(dx, dy, deltaZ);
+        Vec3 normalized3dVector = relativeVector.normalize();
 
         for (int i = 0; i < amount; i++) {
-            x = x + normalized3dVector.getX()/10 + random.getFloat()/10;
-            y = y + normalized3dVector.getY()/10 + random.getFloat()/10;
-            z = z + normalized3dVector.getZ()/10 + random.getFloat()/10;
+            x = x + normalized3dVector.x/10 + (double) random.nextFloat()/10;
+            y = y + normalized3dVector.y/10 + (double) random.nextFloat()/10;
+            z = z + normalized3dVector.z/10 + (double) random.nextFloat()/10;
 
             //System.out.println(" " + x + " " + y + " "+z);
-            List<ServerPlayer> playerEntityList = world.getPlayers(serverPlayerEntity ->
-                    Vec3d.ofCenter(pos).isInRange(serverPlayerEntity.getPos(), 128.0));
+            List<ServerPlayer> playerEntityList = level.players().stream().filter(serverPlayerEntity ->
+                    Vec3.atCenterOf(pos).closerThan(serverPlayerEntity.position(), 128.0)).toList();
             for (ServerPlayer serverPlayerEntity : playerEntityList) {
-                world.spawnParticles(serverPlayerEntity, (ParticleOptions) ModParticleTypes.SCULK_DEPTHS_PORTAL_ANIMATION_PARTICLE, true, x, y, z, 4, 0.0, 0.0, 0.0, 0);
+                level.sendParticles(serverPlayerEntity, ModParticleTypes.SCULK_DEPTHS_PORTAL_ANIMATION_PARTICLE, true, x, y, z, 4, 0.0, 0.0, 0.0, 0);
 
 
             }

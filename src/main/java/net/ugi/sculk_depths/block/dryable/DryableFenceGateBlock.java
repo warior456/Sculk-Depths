@@ -1,4 +1,5 @@
 package net.ugi.sculk_depths.block.dryable;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.FenceGateBlock;
@@ -10,8 +11,8 @@ import net.minecraft.util.RandomSource;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class DryableFenceGateBlock extends FenceGateBlock implements Dryable {
-    public DryableFenceGateBlock(WoodType type, Settings settings) {
-        super(type, settings);
+    public DryableFenceGateBlock(WoodType type, BlockBehaviour.Properties properties) {
+        super(type, properties);
     }
 
     @Override
@@ -19,11 +20,11 @@ public class DryableFenceGateBlock extends FenceGateBlock implements Dryable {
         return true;
     }
     @Override
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        if (Mth.getInt(random, 0, 100) == 0) {
-            if(world.dimensionTypeRegistration().getKey().get() == ModDimensions.SCULK_DEPTHS_TYPE) {
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (Mth.nextInt(random, 0, 100) == 0) {
+            if(level.dimensionTypeRegistration().is(ModDimensions.SCULK_DEPTHS_TYPE)) {
 
-                Dryable.DryBlock(state, world, pos);
+                Dryable.DryBlock(state, level, pos);
             }
         }
     }

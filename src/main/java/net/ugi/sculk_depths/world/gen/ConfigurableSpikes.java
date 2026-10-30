@@ -21,13 +21,13 @@ public class ConfigurableSpikes
     }
 
     @Override
-    public boolean generate(FeaturePlaceContext<NoneFeatureConfiguration> context) {
+    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         BlockPos blockPos = context.origin();
 
-        RandomSource random = context.getRandom();
+        RandomSource random = context.random();
         int topOffsetRangeMax = 16; //xz coordinaterange
         int topOffsetRangeMin = 0;
-        int maxHeight = random.getInt(20) + 27; //height of spike
+        int maxHeight = random.nextInt(20) + 27; //height of spike
         int cruxChance = 5; //percentage
         this.canSpawnOn = new Block[] {ModBlocks.AURIC_SPORE_BLOCK};
 
@@ -41,27 +41,27 @@ public class ConfigurableSpikes
     }
     public boolean makeSpike(FeaturePlaceContext<NoneFeatureConfiguration> context, BlockPos blockPos, int topOffsetRangeMax,int topOffsetRangeMin, int maxHeight, int cruxChance) {
 
-        RandomSource random = context.getRandom();
-        WorldGenLevel structureWorldAccess = context.getWorld();
+        RandomSource random = context.random();
+        WorldGenLevel structureWorldAccess = context.level();
         /*while (structureWorldAccess.isAir(blockPos) && blockPos.getY() > structureWorldAccess.getBottomY() + 2) {//downwards raycast
             blockPos = blockPos.down();
         }*/
         //raycast down 20 blocks
         int i = 0;
-        while(i < 20 && context.getWorld().getBlockState(blockPos).isOf(Blocks.AIR)){
+        while(i < 20 && context.level().getBlockState(blockPos).is(Blocks.AIR)){
             blockPos = blockPos.below();
             i++;
         }
 
         for (Block block : this.canSpawnOn) {
-            if(!context.getWorld().getBlockState(blockPos.below()).isOf(block)){
+            if(!context.level().getBlockState(blockPos.below()).is(block)){
                 return false;
             }
             
         }
 
-        int radiusTopOffset = (int)Math.ceil(Math.sqrt(random.nextBetween(2, (topOffsetRangeMax - topOffsetRangeMin) * 16) + topOffsetRangeMin * 16));
-        int angleTopOffset =  random.nextBetween(0, 360);
+        int radiusTopOffset = (int)Math.ceil(Math.sqrt(random.nextIntBetweenInclusive(2, (topOffsetRangeMax - topOffsetRangeMin) * 16) + topOffsetRangeMin * 16));
+        int angleTopOffset =  random.nextIntBetweenInclusive(0, 360);
         int xTopOffset = (int)Math.round(Math.cos(Math.toRadians(angleTopOffset))*radiusTopOffset);
         int zTopOffset = (int)Math.round(Math.sin(Math.toRadians(angleTopOffset))*radiusTopOffset);
 
@@ -70,24 +70,24 @@ public class ConfigurableSpikes
         final int totalLength = (int) relativeVector.length();
 
         int length = totalLength;
-        int radiusSetting = totalLength / 10 + random.getInt(2); //radius first step of calculation, random for variation in same length spikes
+        int radiusSetting = totalLength / 10 + random.nextInt(2); //radius first step of calculation, random for variation in same length spikes
 
         double x = blockPos.getX();
         double y = blockPos.getY()-radiusSetting;
         double z = blockPos.getZ();
         //if top in stone => not generate
-        if (!context.getWorld().getBlockState(new BlockPos((int)Math.round(x + relativeVector.x) ,(int)Math.round(y + relativeVector.y), (int)Math.round(z + relativeVector.z))).isOf(Blocks.AIR)) return false;
+        if (!context.level().getBlockState(new BlockPos((int)Math.round(x + relativeVector.x) ,(int)Math.round(y + relativeVector.y), (int)Math.round(z + relativeVector.z))).is(Blocks.AIR)) return false;
 
-        int spawnCrux = random.getInt(100);
+        int spawnCrux = random.nextInt(100);
 
         while (length>0){
             int radius = Math.round(radiusSetting * (length+3)/totalLength);
             
             //non rounded tracking of coordinates
             //nextstep
-            x = x + normalized3dVector.getX();
-            y = y + normalized3dVector.getY();
-            z = z + normalized3dVector.getZ();
+            x = x + normalized3dVector.x;
+            y = y + normalized3dVector.y;
+            z = z + normalized3dVector.z;
 
             int radiusSquared = radius * radius;
             Iterable<BlockPos> blockPosIterable = BlockPos.withinManhattan(new BlockPos( (int)Math.round(x), (int)Math.round(y), (int)Math.round(z)), radius, (int) (radius*1.5) + 2, radius);
@@ -97,21 +97,21 @@ public class ConfigurableSpikes
             blockPosIterable.forEach(blockPos1 -> {
                 int distanceToPlayer = (int) ((blockPos1.getX() - finalX)*(blockPos1.getX() - finalX) + ((blockPos1.getY() - finalY)/1.5)*((blockPos1.getY() - finalY)/1.5) + (blockPos1.getZ() - finalZ)*(blockPos1.getZ() - finalZ));
                 if (distanceToPlayer <= radiusSquared) {//ball instead of rectangle
-                    if(context.getWorld().getBlockState(blockPos1).isOf(ModBlocks.LARGUTH)){}
+                    if(context.level().getBlockState(blockPos1).is(ModBlocks.LARGUTH)){}
                     else if (spawnCrux < cruxChance) {
-                        if(!context.getWorld().getBlockState(blockPos1.above()).isOf(Blocks.AIR) &&
-                                !context.getWorld().getBlockState(blockPos1.below()).isOf(Blocks.AIR) &&
-                                !context.getWorld().getBlockState(blockPos1.north()).isOf(Blocks.AIR) &&
-                                !context.getWorld().getBlockState(blockPos1.east()).isOf(Blocks.AIR) &&
-                                !context.getWorld().getBlockState(blockPos1.south()).isOf(Blocks.AIR) &&
-                                !context.getWorld().getBlockState(blockPos1.west()).isOf(Blocks.AIR) &&
-                                random.getInt(10) < 5 ||
-                                random.getInt(70) == 0)
-                            this.setBlockState(structureWorldAccess, blockPos1, ModBlocks.CRUX_ORE.getDefaultState());
-                        else this.setBlockState(structureWorldAccess, blockPos1, ModBlocks.ZYGRIN.getDefaultState());
+                        if(!context.level().getBlockState(blockPos1.above()).is(Blocks.AIR) &&
+                                !context.level().getBlockState(blockPos1.below()).is(Blocks.AIR) &&
+                                !context.level().getBlockState(blockPos1.north()).is(Blocks.AIR) &&
+                                !context.level().getBlockState(blockPos1.east()).is(Blocks.AIR) &&
+                                !context.level().getBlockState(blockPos1.south()).is(Blocks.AIR) &&
+                                !context.level().getBlockState(blockPos1.west()).is(Blocks.AIR) &&
+                                random.nextInt(10) < 5 ||
+                                random.nextInt(70) == 0)
+                            this.setBlock(structureWorldAccess, blockPos1, ModBlocks.CRUX_ORE.defaultBlockState());
+                        else this.setBlock(structureWorldAccess, blockPos1, ModBlocks.ZYGRIN.defaultBlockState());
 
                     }
-                    else this.setBlockState(structureWorldAccess, blockPos1, ModBlocks.ZYGRIN.getDefaultState());
+                    else this.setBlock(structureWorldAccess, blockPos1, ModBlocks.ZYGRIN.defaultBlockState());
                 }
             });
             length--;

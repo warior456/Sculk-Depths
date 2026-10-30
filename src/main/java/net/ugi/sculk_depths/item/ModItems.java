@@ -1,8 +1,20 @@
 package net.ugi.sculk_depths.item;
 
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.world.food.Foods;
-import net.minecraft.item.*;
+import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.HangingSignItem;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.SignItem;
+import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.SwordItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -18,16 +30,18 @@ import net.ugi.sculk_depths.sound.ModSounds;
 
 public class ModItems {
 
+    public static final java.util.Map<ResourceKey<CreativeModeTab>, java.util.List<Item>> TAB_ITEMS = new java.util.LinkedHashMap<>();
+
     // ------------------- resources -------------------
 
     public static final Item CRUX = registerItem("crux",
-            new Item(new Item.Settings()));
+            new Item(new Item.Properties()));
 
     public static final Item QUAZARITH_PIECES = registerItem("quazarith_pieces",
-            new Item(new Item.Settings()));
+            new Item(new Item.Properties()));
 
     public static final Item QUAZARITH_INGOT = registerItem("quazarith_ingot",
-            new Item(new Item.Settings().fireResistant()));
+            new Item(new Item.Properties().fireResistant()));
 
 
     // ------------------- quazarith -------------------
@@ -35,88 +49,88 @@ public class ModItems {
     //quazarith tools
     public static final Item QUAZARITH_SHOVEL = registerItem("quazarith_shovel",
             new ShovelItem(ModToolMaterials.QUAZARITH, //2.5F, -3.0F,
-                    new Item.Settings().attributes(ShovelItem.createAttributes(ModToolMaterials.QUAZARITH, 2.5f, -3f)).fireResistant()));
+                    new Item.Properties().attributes(ShovelItem.createAttributes(ModToolMaterials.QUAZARITH, 2.5f, -3f)).fireResistant()));
     public static final Item QUAZARITH_PICKAXE = registerItem("quazarith_pickaxe",
             new PickaxeItem(ModToolMaterials.QUAZARITH, //2, -2.0F,
-                    new Item.Settings().attributes(PickaxeItem.createAttributes(ModToolMaterials.QUAZARITH, 2f,-2f)).fireResistant()));
+                    new Item.Properties().attributes(PickaxeItem.createAttributes(ModToolMaterials.QUAZARITH, 2f,-2f)).fireResistant()));
 
     public static final Item QUAZARITH_AXE = registerItem("quazarith_axe",
             new AxeItem(ModToolMaterials.QUAZARITH, //7, -3.0F,
-                    new Item.Settings().attributes(AxeItem.createAttributes(ModToolMaterials.QUAZARITH, 9f,-3f)).fireResistant()));
+                    new Item.Properties().attributes(AxeItem.createAttributes(ModToolMaterials.QUAZARITH, 9f,-3f)).fireResistant()));
 
     public static final Item QUAZARITH_HOE = registerItem("quazarith_hoe",
             new HoeItem(ModToolMaterials.QUAZARITH, //-4, 1.0F,
-                    new Item.Settings().attributes(HoeItem.createAttributes(ModToolMaterials.QUAZARITH, -4f,1f)).fireResistant()));
+                    new Item.Properties().attributes(HoeItem.createAttributes(ModToolMaterials.QUAZARITH, -4f,1f)).fireResistant()));
 
     public static final Item QUAZARITH_SWORD = registerItem("quazarith_sword",
             new SwordItem(ModToolMaterials.QUAZARITH, //6, -2.0F,
-                    new Item.Settings().attributes(SwordItem.createAttributes(ModToolMaterials.QUAZARITH, 6, -2f)).fireResistant()));
+                    new Item.Properties().attributes(SwordItem.createAttributes(ModToolMaterials.QUAZARITH, 6, -2f)).fireResistant()));
 
     //quazarith armor
     public static final Item QUAZARITH_HELMET = registerItem("quazarith_helmet",
             new ArmorItem(ModArmorMaterials.QUAZARITH_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
-                    new Item.Settings().fireResistant().durability(ArmorItem.Type.HELMET.getDurability(200))));
+                    new Item.Properties().fireResistant().durability(ArmorItem.Type.HELMET.getDurability(200))));
 
     public static final Item QUAZARITH_CHESTPLATE = registerItem("quazarith_chestplate",
             new ArmorItem(ModArmorMaterials.QUAZARITH_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,
-                    new Item.Settings().fireResistant().durability(ArmorItem.Type.CHESTPLATE.getDurability(200))));
+                    new Item.Properties().fireResistant().durability(ArmorItem.Type.CHESTPLATE.getDurability(200))));
 
     public static final Item QUAZARITH_LEGGINGS = registerItem("quazarith_leggings",
             new ArmorItem(ModArmorMaterials.QUAZARITH_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,
-                    new Item.Settings().fireResistant().durability(ArmorItem.Type.LEGGINGS.getDurability(200))));
+                    new Item.Properties().fireResistant().durability(ArmorItem.Type.LEGGINGS.getDurability(200))));
 
     public static final Item QUAZARITH_BOOTS = registerItem("quazarith_boots",
             new ArmorItem(ModArmorMaterials.QUAZARITH_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
-                    new Item.Settings().fireResistant().durability(ArmorItem.Type.BOOTS.getDurability(200))));
+                    new Item.Properties().fireResistant().durability(ArmorItem.Type.BOOTS.getDurability(200))));
 
 
     // ------------------- spawn eggs -------------------
 
     public static final Item GLOMPER_SPAWN_EGG = registerItem("glomper_spawn_egg",
-            new SpawnEggItem(ModEntities.GLOMPER, 1769607, 42751, new Item.Settings()));
+            new SpawnEggItem(ModEntities.GLOMPER, 1769607, 42751, new Item.Properties()));
 
     public static final Item LESTER_SPAWN_EGG = registerItem("lester_spawn_egg",
-            new SpawnEggItem(ModEntities.LESTER, 856599, 12305307, new Item.Settings()));
+            new SpawnEggItem(ModEntities.LESTER, 856599, 12305307, new Item.Properties()));
 
     public static final Item CHOMPER_COLOSSUS_SPAWN_EGG = registerItem("chomper_colossus_spawn_egg",
-            new SpawnEggItem(ModEntities.CHOMPER_COLOSSUS, 5860206, 9800821, new Item.Settings()));
+            new SpawnEggItem(ModEntities.CHOMPER_COLOSSUS, 5860206, 9800821, new Item.Properties()));
 
 
     // ------------------- crystals -------------------
     public static final Item WHITE_CRYSTAL = registerItem("white_crystal",
-            new Item(new Item.Settings()));
+            new Item(new Item.Properties()));
 
     public static final Item BLUE_CRYSTAL = registerItem("blue_crystal",
-            new Item(new Item.Settings()));
+            new Item(new Item.Properties()));
 
     public static final Item ORANGE_CRYSTAL = registerItem("orange_crystal",
-            new Item(new Item.Settings()));
+            new Item(new Item.Properties()));
 
     public static final Item LIME_CRYSTAL = registerItem("lime_crystal",
-            new Item(new Item.Settings()));
+            new Item(new Item.Properties()));
 
 
     // ------------------- misc -------------------
     public static final Item KRYSLUM_BUCKET = registerItem("kryslum_bucket", new BucketItem(ModFluids.KRYSLUM_STILL,
-            new Item.Settings().craftRemainder(Items.BUCKET).stacksTo(1)));
+            new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
     public static final Item PENEBRIUM_SPORE_BUCKET = registerItem("penebrium_spore_bucket",
-            new Item(new Item.Settings().craftRemainder(Items.BUCKET).stacksTo(1)));
+            new Item(new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
     public static final Item CRUX_RESONATOR = registerItem("crux_resonator",
-            (new CruxResonator(new Item.Settings())));
+            (new CruxResonator(new Item.Properties())));
 
     public static final Item QELBERRIES = registerItem("qelberries",
-            (new AliasedBlockItem(ModBlocks.QELBERRY_BUSH, (new Item.Settings()).food(Foods.SWEET_BERRIES))));
+            (new ItemNameBlockItem(ModBlocks.QELBERRY_BUSH, (new Item.Properties()).food(Foods.SWEET_BERRIES))));
 
     public static final Item ENERGY_ESSENCE = registerItem("energy_essence",
-            new Item(new Item.Settings()));
+            new Item(new Item.Properties()));
 
     public static final Item GLOMPER_GLUX = registerItem("glomper_glux",
-            new GlomperGlux(new Item.Settings()));
+            new GlomperGlux(new Item.Properties()));
 
     public static final Item MUSIC_DISC_ZINNIA = registerItem("music_disc_zinnia",
-            new Item((new Item.Settings()).stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(ModSounds.ZINNIA_KEY)));
+            new Item((new Item.Properties()).stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(ModSounds.ZINNIA_KEY)));
 
 
 
@@ -124,28 +138,28 @@ public class ModItems {
 
     // ------------------- signs -------------------
     public static final Item VALTROX_SIGN = registerItem("valtrox_sign",
-            new SignItem(new Item.Settings().stacksTo(16), ModBlocks.VALTROX_SIGN, ModBlocks.VALTROX_WALL_SIGN));
+            new SignItem(new Item.Properties().stacksTo(16), ModBlocks.VALTROX_SIGN, ModBlocks.VALTROX_WALL_SIGN));
 
     public static final Item VALTROX_HANGING_SIGN = registerItem("valtrox_hanging_sign",
-            new HangingSignItem(ModBlocks.VALTROX_HANGING_SIGN, ModBlocks.VALTROX_WALL_HANGING_SIGN, new Item.Settings().stacksTo(16)));
+            new HangingSignItem(ModBlocks.VALTROX_HANGING_SIGN, ModBlocks.VALTROX_WALL_HANGING_SIGN, new Item.Properties().stacksTo(16)));
 
     public static final Item COATED_VALTROX_SIGN = registerItem("coated_valtrox_sign",
-            new SignItem(new Item.Settings().stacksTo(16), ModBlocks.COATED_VALTROX_SIGN, ModBlocks.COATED_VALTROX_WALL_SIGN));
+            new SignItem(new Item.Properties().stacksTo(16), ModBlocks.COATED_VALTROX_SIGN, ModBlocks.COATED_VALTROX_WALL_SIGN));
 
     public static final Item COATED_VALTROX_HANGING_SIGN = registerItem("coated_valtrox_hanging_sign",
-            new HangingSignItem(ModBlocks.COATED_VALTROX_HANGING_SIGN, ModBlocks.COATED_VALTROX_WALL_HANGING_SIGN, new Item.Settings().stacksTo(16)));
+            new HangingSignItem(ModBlocks.COATED_VALTROX_HANGING_SIGN, ModBlocks.COATED_VALTROX_WALL_HANGING_SIGN, new Item.Properties().stacksTo(16)));
 
     public static final Item DRIED_VALTROX_SIGN = registerItem("dried_valtrox_sign",
-            new SignItem(new Item.Settings().stacksTo(16), ModBlocks.DRIED_VALTROX_SIGN, ModBlocks.DRIED_VALTROX_WALL_SIGN));
+            new SignItem(new Item.Properties().stacksTo(16), ModBlocks.DRIED_VALTROX_SIGN, ModBlocks.DRIED_VALTROX_WALL_SIGN));
 
     public static final Item DRIED_VALTROX_HANGING_SIGN = registerItem("dried_valtrox_hanging_sign",
-            new HangingSignItem(ModBlocks.DRIED_VALTROX_HANGING_SIGN, ModBlocks.DRIED_VALTROX_WALL_HANGING_SIGN, new Item.Settings().stacksTo(16)));
+            new HangingSignItem(ModBlocks.DRIED_VALTROX_HANGING_SIGN, ModBlocks.DRIED_VALTROX_WALL_HANGING_SIGN, new Item.Properties().stacksTo(16)));
 
     public static final Item PETRIFIED_VALTROX_SIGN = registerItem("petrified_valtrox_sign",
-            new SignItem(new Item.Settings().stacksTo(16), ModBlocks.PETRIFIED_VALTROX_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_SIGN));
+            new SignItem(new Item.Properties().stacksTo(16), ModBlocks.PETRIFIED_VALTROX_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_SIGN));
 
     public static final Item PETRIFIED_VALTROX_HANGING_SIGN = registerItem("petrified_valtrox_hanging_sign",
-            new HangingSignItem(ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN, new Item.Settings().stacksTo(16)));
+            new HangingSignItem(ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN, ModBlocks.PETRIFIED_VALTROX_WALL_HANGING_SIGN, new Item.Properties().stacksTo(16)));
 
 
 
@@ -193,7 +207,6 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, ENERGY_ESSENCE);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, GLOMPER_GLUX);
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, MUSIC_DISC_ZINNIA);
-        addToItemGroup(ModItemGroup.SCULK_DEPTHS_ITEMS, CHOMPER_COLOSSUS_SPAWN_EGG);
 
 
 
@@ -209,8 +222,8 @@ public class ModItems {
         addToItemGroup(ModItemGroup.SCULK_DEPTHS_BLOCKS, PETRIFIED_VALTROX_HANGING_SIGN);
     }
 
-    private static void addToItemGroup(ResourceKey<ItemGroup> recipeGroupPrefix, Item items) {
-        ItemGroupEvents.modifyEntriesEvent(recipeGroupPrefix).register(entries -> entries.add((items)));
+    public static void addToItemGroup(ResourceKey<CreativeModeTab> recipeGroupPrefix, Item items) {
+        TAB_ITEMS.computeIfAbsent(recipeGroupPrefix, k -> new java.util.ArrayList<>()).add(items);
     }
 
     public static void registerModItems() {

@@ -20,54 +20,54 @@ public class ConfigurablePillars
     }
 
     @Override
-    public boolean generate(FeaturePlaceContext<NoneFeatureConfiguration> context) {
+    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
 
         BlockPos blockPos = context.origin();
 
-        RandomSource random = context.getRandom();
-        WorldGenLevel structureWorldAccess = context.getWorld();
+        RandomSource random = context.random();
+        WorldGenLevel structureWorldAccess = context.level();
         /*while (structureWorldAccess.isAir(blockPos) && blockPos.getY() > structureWorldAccess.getBottomY() + 2) {//downwards raycast
             blockPos = blockPos.down();
         }*/
         //raycast down 20 blocks
         int i = 0;
-        while(i < 10 && !context.getWorld().getBlockState(blockPos).isOf(ModBlocks.AURIC_SPORE_BLOCK)){
+        while(i < 10 && !context.level().getBlockState(blockPos).is(ModBlocks.AURIC_SPORE_BLOCK)){
             blockPos = blockPos.below();
             i++;
         }
 
-        if (!context.getWorld().getBlockState(blockPos.below()).isOf(ModBlocks.AURIC_SPORE_BLOCK)) return false;
+        if (!context.level().getBlockState(blockPos.below()).is(ModBlocks.AURIC_SPORE_BLOCK)) return false;
 
         //config
-        int topOffsetRange = random.getInt(10); //xz coordinaterange
-        int maxHeight = random.getInt(50) + 70; //height of spike
+        int topOffsetRange = random.nextInt(10); //xz coordinaterange
+        int maxHeight = random.nextInt(50) + 70; //height of spike
 
-        int xTopOffset = random.nextBetween(-topOffsetRange, topOffsetRange);//x pos of top
-        int zTopOffset = random.nextBetween(-topOffsetRange, topOffsetRange);//z pos of top
+        int xTopOffset = random.nextIntBetweenInclusive(-topOffsetRange, topOffsetRange);//x pos of top
+        int zTopOffset = random.nextIntBetweenInclusive(-topOffsetRange, topOffsetRange);//z pos of top
 
         Vec3 relativeVector = new Vec3(xTopOffset, maxHeight, zTopOffset);//vector in the direction of the center line of blocks (base to top)
         Vec3 normalized3dVector = relativeVector.normalize(); //used for moving setblock one step at a time
         final int totalLength = (int) relativeVector.length();
 
         int length = totalLength;
-        int radiusSetting = random.getInt(5)+4; //radius first step of calculation, random for variation in same length spikes
+        int radiusSetting = random.nextInt(5)+4; //radius first step of calculation, random for variation in same length spikes
 
         double x = blockPos.getX();
         double y = blockPos.getY()-30;
         double z = blockPos.getZ();
         //if top in stone => not generate
-        if (!context.getWorld().getBlockState(new BlockPos((int)Math.round(x + relativeVector.x) ,(int)Math.round(y + relativeVector.y), (int)Math.round(z + relativeVector.z))).isOf(Blocks.AIR)) return false;
+        if (!context.level().getBlockState(new BlockPos((int)Math.round(x + relativeVector.x) ,(int)Math.round(y + relativeVector.y), (int)Math.round(z + relativeVector.z))).is(Blocks.AIR)) return false;
 
-        int spawnCrux = random.getInt(100);
+        int spawnCrux = random.nextInt(100);
         int j = 0;
         while (length - j>0){
             int radius = radiusSetting;
             
             //non rounded tracking of coordinates
             //nextstep
-            x = x + normalized3dVector.getX();
-            y = y + normalized3dVector.getY();
-            z = z + normalized3dVector.getZ();
+            x = x + normalized3dVector.x;
+            y = y + normalized3dVector.y;
+            z = z + normalized3dVector.z;
 
             int radiusSquared = radius * radius;
             Iterable<BlockPos> blockPosIterable = BlockPos.withinManhattan(new BlockPos( (int)Math.round(x), (int)Math.round(y), (int)Math.round(z)), radius, 1, radius);
@@ -77,16 +77,16 @@ public class ConfigurablePillars
             blockPosIterable.forEach(blockPos1 -> {
                 int distanceToPlayer = (int) ((blockPos1.getX() - finalX)*(blockPos1.getX() - finalX) + ((blockPos1.getY() - finalY)/1)*((blockPos1.getY() - finalY)/1) + (blockPos1.getZ() - finalZ)*(blockPos1.getZ() - finalZ));
                 if (distanceToPlayer <= radiusSquared) {//ball instead of rectangle
-                    this.setBlockState(structureWorldAccess, blockPos1, ModBlocks.CRUMBLING_FLUMROCK_TILES.getDefaultState());
+                    this.setBlock(structureWorldAccess, blockPos1, ModBlocks.CRUMBLING_FLUMROCK_TILES.defaultBlockState());
                 }
             });
             if (j > 40){
-                if (random.getInt(10) == 0){
-                    int angleTopOffset =  random.nextBetween(0, 360);
+                if (random.nextInt(10) == 0){
+                    int angleTopOffset =  random.nextIntBetweenInclusive(0, 360);
                     int holeX = (int)Math.round(Math.cos(Math.toRadians(angleTopOffset))*radius);
                     int holeZ = (int)Math.round(Math.sin(Math.toRadians(angleTopOffset))*radius);
 
-                    int holeRadius = random.getInt((int)(radius/4))+2;
+                    int holeRadius = random.nextInt((int)(radius/4))+2;
 
                     int finalX2 = (int)Math.round(x+holeX);
                     int finalY2 = (int)Math.round(y-5);
@@ -96,11 +96,11 @@ public class ConfigurablePillars
 
                     blockPosIterable2.forEach(blockPos2 -> {
                         int distanceToPlayer = (int) (((blockPos2.getX() - finalX2)/2)*((blockPos2.getX() - finalX2)/2) + ((blockPos2.getY() - finalY2)/1)*((blockPos2.getY() - finalY2)/1) + ((blockPos2.getZ() - finalZ2)/2)*((blockPos2.getZ() - finalZ2)/2));
-                        if (Math.round(distanceToPlayer) <= (holeRadius-1)*(holeRadius-1) && context.getWorld().getBlockState(blockPos2).isOf(ModBlocks.CRUMBLING_FLUMROCK_TILES)) {//ball instead of rectangle
-                            this.setBlockState(structureWorldAccess, blockPos2, Blocks.AIR.getDefaultState());
+                        if (Math.round(distanceToPlayer) <= (holeRadius-1)*(holeRadius-1) && context.level().getBlockState(blockPos2).is(ModBlocks.CRUMBLING_FLUMROCK_TILES)) {//ball instead of rectangle
+                            this.setBlock(structureWorldAccess, blockPos2, Blocks.AIR.defaultBlockState());
                         }
-                        else if (Math.round(distanceToPlayer) <= holeRadius*holeRadius && context.getWorld().getBlockState(blockPos2).isOf(ModBlocks.CRUMBLING_FLUMROCK_TILES) && random.getInt(5) != 0) {//ball instead of rectangle
-                            this.setBlockState(structureWorldAccess, blockPos2, ModBlocks.LARGUTH.getDefaultState());
+                        else if (Math.round(distanceToPlayer) <= holeRadius*holeRadius && context.level().getBlockState(blockPos2).is(ModBlocks.CRUMBLING_FLUMROCK_TILES) && random.nextInt(5) != 0) {//ball instead of rectangle
+                            this.setBlock(structureWorldAccess, blockPos2, ModBlocks.LARGUTH.defaultBlockState());
                         }
                     });
                 }
@@ -109,10 +109,10 @@ public class ConfigurablePillars
 
         }
         for(x = 0; x < totalLength/20; x++){
-            int randomY = random.getInt(maxHeight-40);
+            int randomY = random.nextInt(maxHeight-40);
             BlockPos blockPos2 = blockPos.above(randomY);
             Block[] canSpawnOn = {ModBlocks.CRUMBLING_FLUMROCK_TILES};
-            ConfigurableSpikes.genSpike(context,blockPos2,16, radiusSetting+2,random.getInt(20) + 15,5,canSpawnOn);
+            ConfigurableSpikes.genSpike(context,blockPos2,16, radiusSetting+2,random.nextInt(20) + 15,5,canSpawnOn);
         }
         return true;
     }

@@ -16,7 +16,6 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Supplier;
 
-import static net.minecraft.item.ArmorMaterials.LEATHER;
 
 /*public class ModArmorMaterials {
 

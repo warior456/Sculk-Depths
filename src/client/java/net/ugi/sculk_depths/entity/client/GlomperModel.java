@@ -1,6 +1,12 @@
 package net.ugi.sculk_depths.entity.client;
 
-import net.minecraft.client.model.*;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HierarchicalModel;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -17,44 +23,44 @@ public class GlomperModel<T extends GlomperEntity> extends HierarchicalModel<T> 
 	private final ModelPart glomper;
 
 	public GlomperModel(ModelPart root) {
-		this.glomper = root.getAnyDescendantWithName("glomper");
+		this.glomper = root.getChild("glomper");
 	}
 
-	public static TexturedModelData getTexturedModelData() {
-		ModelData modelData = new ModelData();
-		ModelPartData modelPartData = modelData.getRoot();
-		ModelPartData glomper = modelPartData.addOrReplaceChild("glomper", ModelPartBuilder.create(), ModelTransform.offset(0.0F, 16.0F, 0.0F));
+	public static LayerDefinition getTexturedModelData() {
+		MeshDefinition modelData = new MeshDefinition();
+		PartDefinition modelPartData = modelData.getRoot();
+		PartDefinition glomper = modelPartData.addOrReplaceChild("glomper", CubeListBuilder.create(), PartPose.offset(0.0F, 16.0F, 0.0F));
 
-		ModelPartData legs = glomper.addOrReplaceChild("legs", ModelPartBuilder.create(), ModelTransform.offset(0.0F, 8.0F, 0.0F));
+		PartDefinition legs = glomper.addOrReplaceChild("legs", CubeListBuilder.create(), PartPose.offset(0.0F, 8.0F, 0.0F));
 
-		ModelPartData leg1 = legs.addOrReplaceChild("leg1", ModelPartBuilder.create().texOffs(4, 36).cuboid(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new Dilation(0.0F)), ModelTransform.offset(-4.5F, -7.0F, 2.5F));
+		PartDefinition leg1 = legs.addOrReplaceChild("leg1", CubeListBuilder.create().texOffs(4, 36).addBox(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-4.5F, -7.0F, 2.5F));
 
-		ModelPartData leg2 = legs.addOrReplaceChild("leg2", ModelPartBuilder.create().texOffs(36, 0).cuboid(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new Dilation(0.0F)), ModelTransform.offset(0.5F, -7.0F, -4.5F));
+		PartDefinition leg2 = legs.addOrReplaceChild("leg2", CubeListBuilder.create().texOffs(36, 0).addBox(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, -7.0F, -4.5F));
 
-		ModelPartData leg3 = legs.addOrReplaceChild("leg3", ModelPartBuilder.create().texOffs(0, 36).cuboid(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new Dilation(0.0F)), ModelTransform.offset(1.5F, -7.0F, -1.5F));
+		PartDefinition leg3 = legs.addOrReplaceChild("leg3", CubeListBuilder.create().texOffs(0, 36).addBox(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(1.5F, -7.0F, -1.5F));
 
-		ModelPartData leg4 = legs.addOrReplaceChild("leg4", ModelPartBuilder.create().texOffs(0, 0).cuboid(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new Dilation(0.0F)), ModelTransform.offset(-0.5F, -7.0F, 1.5F));
+		PartDefinition leg4 = legs.addOrReplaceChild("leg4", CubeListBuilder.create().texOffs(0, 0).addBox(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.5F, -7.0F, 1.5F));
 
-		ModelPartData leg5 = legs.addOrReplaceChild("leg5", ModelPartBuilder.create().texOffs(34, 20).cuboid(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new Dilation(0.0F)), ModelTransform.offset(-3.5F, -7.0F, -3.5F));
+		PartDefinition leg5 = legs.addOrReplaceChild("leg5", CubeListBuilder.create().texOffs(34, 20).addBox(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.5F, -7.0F, -3.5F));
 
-		ModelPartData leg6 = legs.addOrReplaceChild("leg6", ModelPartBuilder.create().texOffs(30, 20).cuboid(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new Dilation(0.0F)), ModelTransform.offset(-2.5F, -7.0F, -0.5F));
+		PartDefinition leg6 = legs.addOrReplaceChild("leg6", CubeListBuilder.create().texOffs(30, 20).addBox(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.5F, -7.0F, -0.5F));
 
-		ModelPartData leg7 = legs.addOrReplaceChild("leg7", ModelPartBuilder.create().texOffs(4, 20).cuboid(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new Dilation(0.0F)), ModelTransform.offset(4.5F, -7.0F, -0.5F));
+		PartDefinition leg7 = legs.addOrReplaceChild("leg7", CubeListBuilder.create().texOffs(4, 20).addBox(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(4.5F, -7.0F, -0.5F));
 
-		ModelPartData leg8 = legs.addOrReplaceChild("leg8", ModelPartBuilder.create().texOffs(0, 20).cuboid(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new Dilation(0.0F)), ModelTransform.offset(3.5F, -7.0F, -3.5F));
+		PartDefinition leg8 = legs.addOrReplaceChild("leg8", CubeListBuilder.create().texOffs(0, 20).addBox(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(3.5F, -7.0F, -3.5F));
 
-		ModelPartData leg9 = legs.addOrReplaceChild("leg9", ModelPartBuilder.create().texOffs(8, 0).cuboid(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new Dilation(0.0F)), ModelTransform.offset(3.5F, -7.0F, 3.5F));
+		PartDefinition leg9 = legs.addOrReplaceChild("leg9", CubeListBuilder.create().texOffs(8, 0).addBox(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(3.5F, -7.0F, 3.5F));
 
-		ModelPartData leg10 = legs.addOrReplaceChild("leg10", ModelPartBuilder.create().texOffs(4, 0).cuboid(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new Dilation(0.0F)), ModelTransform.offset(0.5F, -7.0F, 4.5F));
+		PartDefinition leg10 = legs.addOrReplaceChild("leg10", CubeListBuilder.create().texOffs(4, 0).addBox(-0.5F, 0.0F, -0.5F, 1.0F, 7.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, -7.0F, 4.5F));
 
-		ModelPartData headParts = glomper.addOrReplaceChild("head", ModelPartBuilder.create().texOffs(0, 0).cuboid(-6.0F, -14.99F, -6.0F, 12.0F, 8.0F, 12.0F, new Dilation(0.0F))
-				.texOffs(0, 20).cuboid(-5.0F, -13.99F, -5.0F, 10.0F, 6.0F, 10.0F, new Dilation(0.0F)), ModelTransform.offset(0.0F, 8.0F, 0.0F));
-		return TexturedModelData.of(modelData, 64, 64);
+		PartDefinition headParts = glomper.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-6.0F, -14.99F, -6.0F, 12.0F, 8.0F, 12.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 20).addBox(-5.0F, -13.99F, -5.0F, 10.0F, 6.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 8.0F, 0.0F));
+		return LayerDefinition.create(modelData, 64, 64);
 	}
 	@Override
-	public void setAngles(GlomperEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float lowerHeadTick) {
-		this.getPart().traverse().forEach(ModelPart::resetPose);
-		this.applyHeadRotation(netHeadYaw, lowerHeadTick);
+	public void setupAnim(GlomperEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		this.root().getAllParts().forEach(ModelPart::resetPose);
+		this.applyHeadRotation(netHeadYaw, headPitch);
 
 		//this.animateMovement(ModAnimations.LESTER_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
 		this.animate(entity.idleAnimationState, ModAnimations.GLOMPER_IDLE, ageInTicks, 1f);
@@ -70,12 +76,16 @@ public class GlomperModel<T extends GlomperEntity> extends HierarchicalModel<T> 
 
 
 	@Override
-	public void render(PoseStack pose, VertexConsumer vertexConsumer, int light, int overlay, int setColor) {
+	public void renderToBuffer(PoseStack pose, VertexConsumer vertexConsumer, int light, int overlay, int setColor) {
 		glomper.render(pose, vertexConsumer, light, overlay, setColor);
 	}
 
 	@Override
-	public ModelPart getPart() {
+	public ModelPart root() {
 		return glomper;
+	}
+
+	public ModelPart getPart() {
+		return root();
 	}
 }

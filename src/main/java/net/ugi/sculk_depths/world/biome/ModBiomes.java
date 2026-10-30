@@ -15,6 +15,6 @@ public class ModBiomes {
     public static final ResourceKey<Biome> SCULK_CAVES = register("sculk_caves");
 
     private static ResourceKey<Biome> register(String name) {
-        return ResourceKey.of(Registries.BIOME, SculkDepths.id( name));
+        return ResourceKey.create(Registries.BIOME, SculkDepths.id( name));
     }
 }

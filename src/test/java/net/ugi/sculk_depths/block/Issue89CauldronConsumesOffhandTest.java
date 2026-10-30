@@ -37,7 +37,7 @@ import static org.mockito.Mockito.when;
  */
 class Issue89CauldronConsumesOffhandTest {
 
-    private Level world;
+    private Level level;
     private Player player;
 
     @BeforeAll
@@ -47,8 +47,8 @@ class Issue89CauldronConsumesOffhandTest {
 
     @BeforeEach
     void setUp() {
-        world = mock(Level.class);
-        condition(world.setBlockState(any(BlockPos.class), any(BlockState.class))).thenReturn(true);
+        level = mock(Level.class);
+        condition(level.setBlockState(any(BlockPos.class), any(BlockState.class))).thenReturn(true);
 
         player = mock(Player.class);
         condition(player.getAbilities()).thenReturn(new Abilities());
@@ -69,7 +69,7 @@ class Issue89CauldronConsumesOffhandTest {
         CauldronInteraction damageCalculator = ModCauldronBehavior.KRYSLUM_FLUMROCK_CAULDRON_BEHAVIOR.map().get(ModItems.QUAZARITH_INGOT);
         assertNotNull(damageCalculator);
 
-        damageCalculator.interact(state, world, pos, player, InteractionHand.MAIN_HAND, ingotStack);
+        damageCalculator.interact(state, level, pos, player, InteractionHand.MAIN_HAND, ingotStack);
 
         assertValueEqual(3, ingotStack.getCount(),
                 "issue #89: the quazarith ingot being used should be the stack that is consumed");

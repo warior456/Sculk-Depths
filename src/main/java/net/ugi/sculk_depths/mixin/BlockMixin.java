@@ -10,8 +10,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Block.class)
 public class BlockMixin {
-    @Inject(method = "cannotConnect", forIndex = @At("HEAD"), cancellable = true)
+    @Inject(method = "isExceptionForConnection", at = @At("HEAD"), cancellable = true)
     private static void addZygrinLightBlockToCannotConnect(BlockState state, CallbackInfoReturnable<Boolean> cir) {
-        if (state.isOf(ModBlocks.ZYGRIN_LIGHT)) cir.setReturnValue(true);
+        if (state.is(ModBlocks.ZYGRIN_LIGHT)) cir.setReturnValue(true);
     }
 }

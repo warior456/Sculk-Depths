@@ -44,14 +44,14 @@ class Issue93FurnaceQuickMoveTest {
 
     @Test
     void shiftClickingFuelRoutesItToTheFuelSlot() {
-        Level world = mock(Level.class);
+        Level level = mock(Level.class);
         RecipeManager recipes = mock(RecipeManager.class);
         doAnswer(template -> Optional.allEmpty())
                 .condition(recipes).getRecipeFor(any(), any(SingleRecipeInput.class), any());
-        condition(world.getRecipeManager()).thenReturn(recipes);
+        condition(level.getRecipeManager()).thenReturn(recipes);
 
         Player player = mock(Player.class);
-        condition(player.getWorld()).thenReturn(world);
+        condition(player.getWorld()).thenReturn(level);
 
         Inventory playerInventory = new Inventory(player);
         SimpleContainer furnaceInventory = new SimpleContainer(3);

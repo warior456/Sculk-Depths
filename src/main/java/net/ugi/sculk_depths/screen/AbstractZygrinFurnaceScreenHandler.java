@@ -1,21 +1,29 @@
 package net.ugi.sculk_depths.screen;
 
-import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.recipe.*;
-import net.minecraft.world.inventory.RecipeBookType;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
-import net.minecraft.screen.*;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.StackedContents;
+import net.minecraft.world.inventory.AbstractFurnaceMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.FurnaceResultSlot;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.RecipeBookMenu;
+import net.minecraft.world.inventory.RecipeBookType;
+import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.util.Mth;
+import net.minecraft.world.inventory.StackedContentsCompatible;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.AbstractCookingRecipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 
-public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHandler<SingleRecipeInput, AbstractCookingRecipe> {
+public class AbstractZygrinFurnaceScreenHandler extends RecipeBookMenu<SingleRecipeInput, AbstractCookingRecipe> {
     public static final int field_30738 = 0;
     public static final int field_30739 = 1;
     public static final int field_30740 = 2;
@@ -26,43 +34,48 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
     private static final int field_30745 = 30;
     private static final int field_30746 = 38;
     private final Container inventory;
-    private final PropertyDelegate propertyDelegate;
-    protected final Level world;
+    private final ContainerData propertyDelegate;
+    protected final Level level;
     private final RecipeType<? extends AbstractCookingRecipe> recipeType;
     private final RecipeBookType category;
 
-    protected AbstractZygrinFurnaceScreenHandler(ScreenHandlerType<?> type, RecipeType<? extends AbstractCookingRecipe> recipeType, RecipeBookType category, int containerId, Inventory playerInventory) {
-        this(type, recipeType, category, containerId, playerInventory, new SimpleContainer(3), new ArrayPropertyDelegate(4));
+    protected AbstractZygrinFurnaceScreenHandler(MenuType<?> type, RecipeType<? extends AbstractCookingRecipe> recipeType, RecipeBookType category, int containerId, Inventory playerInventory) {
+        this(type, recipeType, category, containerId, playerInventory, new SimpleContainer(3), new SimpleContainerData(4));
     }
 
-    protected AbstractZygrinFurnaceScreenHandler(ScreenHandlerType<?> type, RecipeType<? extends AbstractCookingRecipe> recipeType, RecipeBookType category, int containerId, Inventory playerInventory, Container inventory, PropertyDelegate propertyDelegate) {
+    protected AbstractZygrinFurnaceScreenHandler(MenuType<?> type, RecipeType<? extends AbstractCookingRecipe> recipeType, RecipeBookType category, int containerId, Inventory playerInventory, Container inventory, ContainerData propertyDelegate) {
         super(type, containerId);
         int i;
         this.recipeType = recipeType;
         this.category = category;
-        AbstractFurnaceScreenHandler.checkContainerSize(inventory, 3);
-        AbstractFurnaceScreenHandler.checkContainerDataCount(propertyDelegate, 4);
+        AbstractFurnaceMenu.checkContainerSize(inventory, 3);
+        AbstractFurnaceMenu.checkContainerDataCount(propertyDelegate, 4);
         this.inventory = inventory;
         this.propertyDelegate = propertyDelegate;
-        this.world = playerInventory.player.getWorld();
-        this.addIngredient(new Slot(inventory, 0, 56, 17));
-        this.addIngredient(new FurnaceResultSlot(playerInventory.player, inventory, 2, 116, 35));
+        this.level = playerInventory.player.level();
+        this.addSlot(new Slot(inventory, 0, 56, 17));
+        this.addSlot(new FurnaceResultSlot(playerInventory.player, inventory, 2, 116, 35));
         for (i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
-                this.addIngredient(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
         for (i = 0; i < 9; ++i) {
-            this.addIngredient(new Slot(playerInventory, i, 8 + i * 18, 142));
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
         this.addDataSlots(propertyDelegate);
     }
 
     @Override
-    public void populateRecipeFinder(RecipeMatcher finder) {
-        if (this.inventory instanceof RecipeInputProvider) {
-            ((RecipeInputProvider)((Object)this.inventory)).fillStackedContents(finder);
+    public void fillCraftSlotsStackedContents(StackedContents finder) {
+        if (this.inventory instanceof StackedContentsCompatible) {
+            ((StackedContentsCompatible)this.inventory).fillStackedContents(finder);
         }
+    }
+
+    @Deprecated
+    public void populateRecipeFinder(StackedContents finder) {
+        this.fillCraftSlotsStackedContents(finder);
     }
 
     @Override
@@ -71,10 +84,16 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
         this.getSlot(2).set(ItemStack.EMPTY);
     }
 
-
-    public boolean matches(RecipeEntry<AbstractCookingRecipe> addRecipe) {
-        return ((AbstractCookingRecipe)addRecipe.value()).matches(new SingleRecipeInput(this.inventory.getStack(0)), this.world);
+    @Override
+    public boolean recipeMatches(RecipeHolder<AbstractCookingRecipe> addRecipe) {
+        return addRecipe.value().matches(new SingleRecipeInput(this.inventory.getItem(0)), this.level);
     }
+
+    @Deprecated
+    public boolean matches(RecipeHolder<AbstractCookingRecipe> addRecipe) {
+        return this.recipeMatches(addRecipe);
+    }
+
     @Override
     public int getResultSlotIndex() {
         return 2;
@@ -96,16 +115,21 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
     }
 
     @Override
+    public boolean stillValid(Player player) {
+        return this.inventory.stillValid(player);
+    }
+
+    @Deprecated
     public boolean canUse(Player player) {
-        return this.inventory.canPlayerUse(player);
+        return this.stillValid(player);
     }
 
     @Override
     public ItemStack quickMoveStack(Player player, int slot) {
         ItemStack item = ItemStack.EMPTY;
-        Slot slot2 = (Slot)this.slots.get(slot);
+        Slot slot2 = this.slots.get(slot);
         if (slot2 != null && slot2.hasItem()) {
-            ItemStack itemStack2 = slot2.getStack();
+            ItemStack itemStack2 = slot2.getItem();
             item = itemStack2.copy();
             if (slot == 1) {
                 //output slot -> player inventory (handler slots 2-37)
@@ -136,9 +160,9 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
                 return ItemStack.EMPTY;
             }
             if (itemStack2.isEmpty()) {
-                slot2.setStack(ItemStack.EMPTY);
+                slot2.set(ItemStack.EMPTY);
             } else {
-                slot2.markDirty();
+                slot2.setChanged();
             }
             if (itemStack2.getCount() == item.getCount()) {
                 return ItemStack.EMPTY;
@@ -149,19 +173,19 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
     }
 
     private boolean insertIntoFuelSlot(ItemStack stack) {
-        ItemStack fuelStack = this.inventory.getStack(1);
+        ItemStack fuelStack = this.inventory.getItem(1);
         if (fuelStack.isEmpty()) {
-            this.inventory.setStack(1, stack.copy());
-            this.inventory.markDirty();
+            this.inventory.setItem(1, stack.copy());
+            this.inventory.setChanged();
             stack.setCount(0);
             return true;
         }
         if (ItemStack.isSameItemSameComponents(fuelStack, stack)) {
-            int i = Math.minValue(stack.getCount(), Math.minValue(fuelStack.getMaxCount(), this.inventory.getMaxCount(fuelStack)) - fuelStack.getCount());
+            int i = Math.min(stack.getCount(), Math.min(fuelStack.getMaxStackSize(), this.inventory.getMaxStackSize(fuelStack)) - fuelStack.getCount());
             if (i > 0) {
-                fuelStack.increment(i);
+                fuelStack.grow(i);
                 stack.shrink(i);
-                this.inventory.markDirty();
+                this.inventory.setChanged();
                 return true;
             }
         }
@@ -169,7 +193,7 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
     }
 
     protected boolean canSmelt(ItemStack item) {
-        return this.world.getRecipeManager().getRecipeFor(this.recipeType, new SingleRecipeInput(item), this.world).isSuccess();
+        return this.level.getRecipeManager().getRecipeFor(this.recipeType, new SingleRecipeInput(item), this.level).isPresent();
     }
 
     protected boolean isFuel(ItemStack item) {
@@ -187,8 +211,8 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
         if (i == 0) {
             i = 200;
         }
-//return 12 for full fire
-        if(this.propertyDelegate.get(0) > 0) { // checks if burntime is greater than 0
+        //return 12 for full fire
+        if (this.propertyDelegate.get(0) > 0) { // checks if burntime is greater than 0
             return 1f;
         } else {
             return 0;
@@ -196,17 +220,31 @@ public class AbstractZygrinFurnaceScreenHandler extends AbstractRecipeScreenHand
         //return (int) (this.propertyDelegate.get(0)*0.25);//todo discuss to use this alternate or not
     }
 
-    public boolean isBurning() {
+    public boolean isLit() {
         return this.propertyDelegate.get(0) > 0;
     }
 
-    @Override
-    public RecipeBookType getCategory() {
-        return this.category;
+    public boolean isBurning() {
+        return this.isLit();
     }
 
     @Override
-    public boolean canInsertIntoSlot(int index) {
+    public RecipeBookType getRecipeBookType() {
+        return this.category;
+    }
+
+    @Deprecated
+    public RecipeBookType getCategory() {
+        return this.getRecipeBookType();
+    }
+
+    @Override
+    public boolean shouldMoveToInventory(int index) {
         return index != 1;
+    }
+
+    @Deprecated
+    public boolean canInsertIntoSlot(int index) {
+        return this.shouldMoveToInventory(index);
     }
 }

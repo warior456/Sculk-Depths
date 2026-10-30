@@ -43,7 +43,7 @@ public enum ModToolMaterials implements Tier {
     }
 
     @Override
-    public float getMiningSpeedMultiplier() {
+    public float getSpeed() {
         return this.miningspeedMultiplier;
     }
 

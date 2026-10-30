@@ -13,9 +13,9 @@ public class ModDamageTypes {
      * Store the RegistryKey of our DamageType into a new constant called CUSTOM_DAMAGE_TYPE
      * The Identifier in use here points to our JSON file we created earlier.
      */
-    public static final ResourceKey<DamageType> INFECTED_DAMAGE_TYPE = ResourceKey.of(Registries.DAMAGE_TYPE, SculkDepths.id( "infected_damage_type"));
+    public static final ResourceKey<DamageType> INFECTED_DAMAGE_TYPE = ResourceKey.create(Registries.DAMAGE_TYPE, SculkDepths.id( "infected_damage_type"));
 
-    public static DamageSource of(Level world, ResourceKey<DamageType> name) {
-        return new DamageSource(world.getRegistryManager().get(Registries.DAMAGE_TYPE).entryOf(name));
+    public static DamageSource of(Level level, ResourceKey<DamageType> name) {
+        return level.damageSources().source(name);
     }
 }

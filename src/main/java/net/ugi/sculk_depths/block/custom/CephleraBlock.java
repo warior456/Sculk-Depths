@@ -1,23 +1,27 @@
 package net.ugi.sculk_depths.block.custom;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.GrowingPlantBodyBlock;
+import net.minecraft.world.level.block.GrowingPlantHeadBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.core.Direction;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.ugi.sculk_depths.block.ModBlocks;
 
-public class CephleraBlock extends AbstractPlantBlock {
+public class CephleraBlock extends GrowingPlantBodyBlock {
+    public static final MapCodec<CephleraBlock> CODEC = simpleCodec(CephleraBlock::new);
     @Override
-    protected MapCodec<? extends AbstractPlantBlock> getCodec() {
-        return null;
+    protected MapCodec<? extends GrowingPlantBodyBlock> codec() {
+        return CODEC;
     }
     public static final VoxelShape SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
 
-    public CephleraBlock(AbstractBlock.Settings settings) {
-        super(settings, Direction.MIN_Y, SHAPE, false);
+    public CephleraBlock(BlockBehaviour.Properties properties) {
+        super(properties, Direction.DOWN, SHAPE, false);
     }
 
-    protected AbstractPlantStemBlock getHeadBlock() {
-        return (AbstractPlantStemBlock) ModBlocks.CEPHLERA_LIGHT;
+    protected GrowingPlantHeadBlock getHeadBlock() {
+        return (GrowingPlantHeadBlock) ModBlocks.CEPHLERA_LIGHT;
     }
 }

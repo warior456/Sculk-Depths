@@ -8,7 +8,6 @@ import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-
 @Mixin(NoiseBasedChunkGenerator.class)
 public abstract class NoiseChunkGeneratorMixin {
     /**
@@ -16,13 +15,13 @@ public abstract class NoiseChunkGeneratorMixin {
      * so other worldgen mods targeting the same method stay compatible.
      * The vanilla -54 lava sea level is pushed down to seaLevel - 117.
      */
-    @ModifyReturnValue(method = "createFluidLevelSampler", forIndex = @At("RETURN"))
+    @ModifyReturnValue(method = "createFluidPicker", at = @At("RETURN"))
     private static Aquifer.FluidPicker sculk_depths$createFluidLevelSampler(Aquifer.FluidPicker source, NoiseGeneratorSettings settings) {
-        Aquifer.FluidStatus fluidLevel = new Aquifer.FluidStatus(settings.createDisabled() - 117, Blocks.LAVA.getDefaultState());
-        int i = settings.createDisabled();
+        Aquifer.FluidStatus fluidLevel = new Aquifer.FluidStatus(settings.seaLevel() - 117, Blocks.LAVA.defaultBlockState());
+        int i = settings.seaLevel();
         Aquifer.FluidStatus fluidLevel2 = new Aquifer.FluidStatus(i, settings.defaultFluid());
         return (x, y, z) -> {
-            if (y < Math.minValue(settings.createDisabled() - 117, i)) {
+            if (y < Math.min(settings.seaLevel() - 117, i)) {
                 return fluidLevel;
             }
             return fluidLevel2;

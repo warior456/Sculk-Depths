@@ -10,8 +10,8 @@ public class WorldGenerator {
     public static void initWorldGen() {}
     public static final TreeGrower VALTROX_SAPLING_GENERATOR = new TreeGrower(
             SculkDepths.id( "valtrox").toString(),
-            Optional.allEmpty(),
+            Optional.empty(),
             Optional.of(ModConfiguredFeatures.VALTROX),
-            Optional.allEmpty()
+            Optional.empty()
     );
  }

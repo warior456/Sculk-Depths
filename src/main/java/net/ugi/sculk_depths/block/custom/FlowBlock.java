@@ -1,28 +1,26 @@
 package net.ugi.sculk_depths.block.custom;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.block.*;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.ugi.sculk_depths.state.property.ModProperties;
-import net.ugi.sculk_depths.tags.ModTags;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DirectionalBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-import java.util.ArrayList;
+public class FlowBlock extends DirectionalBlock {
+    public static final MapCodec<FlowBlock> CODEC = simpleCodec(FlowBlock::new);
 
-
-public class FlowBlock extends FacingBlock {
     @Override
-    protected MapCodec<? extends FacingBlock> getCodec() {
-        return null;
+    public MapCodec<FlowBlock> codec() {
+        return CODEC;
     }
 
     protected static final float field_31233 = 6.0f;
@@ -31,35 +29,34 @@ public class FlowBlock extends FacingBlock {
     protected static final VoxelShape Z_AXIS_AABB = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
     protected static final VoxelShape X_AXIS_AABB = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
 
-    public FlowBlock(AbstractBlock.Settings settings) {
-        super(settings);
-        this.registerDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.MAX_Y));
+    public FlowBlock(BlockBehaviour.Properties properties) {
+        super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.UP));
     }
 
     @Override
-    public BlockState hasRot(BlockState block, Rotation rotation) {
-        return block.with(FACING, rotation.hasRot(block.get(FACING)));
-
+    public BlockState rotate(BlockState block, Rotation rotation) {
+        return block.setValue(FACING, rotation.rotate(block.getValue(FACING)));
     }
 
     @Override
-    public BlockState initialMirror(BlockState block, Mirror initialMirror) {
-        return block.hasRot(initialMirror.getRotation(block.get(FACING)));
+    public BlockState mirror(BlockState block, Mirror mirror) {
+        return block.rotate(mirror.getRotation(block.getValue(FACING)));
     }
 
-
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, ShapeContext context) {
-        switch (state.get(FACING).getAxis()) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        switch (state.getValue(FACING).getAxis()) {
             default: {
                 return X_AXIS_AABB;
             }
             case Z: {
                 return Z_AXIS_AABB;
             }
-            case Y_ROT:
+            case Y: {
+                return Y_AXIS_AABB;
+            }
         }
-        return Y_AXIS_AABB;
     }
 
 /*    @Override
@@ -68,87 +65,87 @@ public class FlowBlock extends FacingBlock {
         ArrayList<BlockPos> blockPosArrayList = new ArrayList<BlockPos>();
         switch (state.get(Properties.FACING)) {
             case NORTH:
-                blockPosArrayList.add(pos.offset(Direction.EAST));
-                blockPosArrayList.add(pos.offset(Direction.SOUTH));
-                blockPosArrayList.add(pos.offset(Direction.WEST));
-                blockPosArrayList.add(pos.offset(Direction.UP));
-                blockPosArrayList.add(pos.offset(Direction.DOWN));
+                blockPosArrayList.add(pos.relative(Direction.EAST));
+                blockPosArrayList.add(pos.relative(Direction.SOUTH));
+                blockPosArrayList.add(pos.relative(Direction.WEST));
+                blockPosArrayList.add(pos.relative(Direction.UP));
+                blockPosArrayList.add(pos.relative(Direction.DOWN));
                 if(kryslumPoweredOrNeighbourPowered(world, blockPosArrayList, pos)){
                     state = state.with(ModProperties.KRYSLUM_POWERED, true);
-                    world.setBlockState(pos, state);
+                    level.setBlock(pos, state);
                 } else {
                     state = state.with(ModProperties.KRYSLUM_POWERED, false);
-                    world.setBlockState(pos, state);
+                    level.setBlock(pos, state);
                 }
                 break;
             case EAST:
-                blockPosArrayList.add(pos.offset(Direction.NORTH));
-                blockPosArrayList.add(pos.offset(Direction.SOUTH));
-                blockPosArrayList.add(pos.offset(Direction.WEST));
-                blockPosArrayList.add(pos.offset(Direction.UP));
-                blockPosArrayList.add(pos.offset(Direction.DOWN));
+                blockPosArrayList.add(pos.relative(Direction.NORTH));
+                blockPosArrayList.add(pos.relative(Direction.SOUTH));
+                blockPosArrayList.add(pos.relative(Direction.WEST));
+                blockPosArrayList.add(pos.relative(Direction.UP));
+                blockPosArrayList.add(pos.relative(Direction.DOWN));
                 if(kryslumPoweredOrNeighbourPowered(world, blockPosArrayList, pos)){
                     state = state.with(ModProperties.KRYSLUM_POWERED, true);
-                    world.setBlockState(pos, state);
+                    level.setBlock(pos, state);
                 } else {
                     state = state.with(ModProperties.KRYSLUM_POWERED, false);
-                    world.setBlockState(pos, state);
+                    level.setBlock(pos, state);
                 }
                 break;
             case SOUTH:
-                blockPosArrayList.add(pos.offset(Direction.NORTH));
-                blockPosArrayList.add(pos.offset(Direction.EAST));
-                blockPosArrayList.add(pos.offset(Direction.WEST));
-                blockPosArrayList.add(pos.offset(Direction.UP));
-                blockPosArrayList.add(pos.offset(Direction.DOWN));
+                blockPosArrayList.add(pos.relative(Direction.NORTH));
+                blockPosArrayList.add(pos.relative(Direction.EAST));
+                blockPosArrayList.add(pos.relative(Direction.WEST));
+                blockPosArrayList.add(pos.relative(Direction.UP));
+                blockPosArrayList.add(pos.relative(Direction.DOWN));
                 if(kryslumPoweredOrNeighbourPowered(world, blockPosArrayList, pos)){
                     state = state.with(ModProperties.KRYSLUM_POWERED, true);
-                    world.setBlockState(pos, state);
+                    level.setBlock(pos, state);
                 } else {
                     state = state.with(ModProperties.KRYSLUM_POWERED, false);
-                    world.setBlockState(pos, state);
+                    level.setBlock(pos, state);
                 }
                 break;
             case WEST:
-                blockPosArrayList.add(pos.offset(Direction.NORTH));
-                blockPosArrayList.add(pos.offset(Direction.EAST));
-                blockPosArrayList.add(pos.offset(Direction.SOUTH));
-                blockPosArrayList.add(pos.offset(Direction.UP));
-                blockPosArrayList.add(pos.offset(Direction.DOWN));
+                blockPosArrayList.add(pos.relative(Direction.NORTH));
+                blockPosArrayList.add(pos.relative(Direction.EAST));
+                blockPosArrayList.add(pos.relative(Direction.SOUTH));
+                blockPosArrayList.add(pos.relative(Direction.UP));
+                blockPosArrayList.add(pos.relative(Direction.DOWN));
                 if(kryslumPoweredOrNeighbourPowered(world, blockPosArrayList, pos)){
                     state = state.with(ModProperties.KRYSLUM_POWERED, true);
-                    world.setBlockState(pos, state);
+                    level.setBlock(pos, state);
                 } else {
                     state = state.with(ModProperties.KRYSLUM_POWERED, false);
-                    world.setBlockState(pos, state);
+                    level.setBlock(pos, state);
                 }
                 break;
             case UP:
-                blockPosArrayList.add(pos.offset(Direction.NORTH));
-                blockPosArrayList.add(pos.offset(Direction.EAST));
-                blockPosArrayList.add(pos.offset(Direction.SOUTH));
-                blockPosArrayList.add(pos.offset(Direction.WEST));
-                blockPosArrayList.add(pos.offset(Direction.DOWN));
+                blockPosArrayList.add(pos.relative(Direction.NORTH));
+                blockPosArrayList.add(pos.relative(Direction.EAST));
+                blockPosArrayList.add(pos.relative(Direction.SOUTH));
+                blockPosArrayList.add(pos.relative(Direction.WEST));
+                blockPosArrayList.add(pos.relative(Direction.DOWN));
                 if(kryslumPoweredOrNeighbourPowered(world, blockPosArrayList, pos)){
                     state = state.with(ModProperties.KRYSLUM_POWERED, true);
-                    world.setBlockState(pos, state);
+                    level.setBlock(pos, state);
                 } else {
                     state = state.with(ModProperties.KRYSLUM_POWERED, false);
-                    world.setBlockState(pos, state);
+                    level.setBlock(pos, state);
                 }
                 break;
             case DOWN:
-                blockPosArrayList.add(pos.offset(Direction.NORTH));
-                blockPosArrayList.add(pos.offset(Direction.EAST));
-                blockPosArrayList.add(pos.offset(Direction.SOUTH));
-                blockPosArrayList.add(pos.offset(Direction.WEST));
-                blockPosArrayList.add(pos.offset(Direction.UP));
+                blockPosArrayList.add(pos.relative(Direction.NORTH));
+                blockPosArrayList.add(pos.relative(Direction.EAST));
+                blockPosArrayList.add(pos.relative(Direction.SOUTH));
+                blockPosArrayList.add(pos.relative(Direction.WEST));
+                blockPosArrayList.add(pos.relative(Direction.UP));
                 if(kryslumPoweredOrNeighbourPowered(world, blockPosArrayList, pos)){
                     state = state.with(ModProperties.KRYSLUM_POWERED, true);
-                    world.setBlockState(pos, state);
+                    level.setBlock(pos, state);
                 } else {
                     state = state.with(ModProperties.KRYSLUM_POWERED, false);
-                    world.setBlockState(pos, state);
+                    level.setBlock(pos, state);
                 }
                 break;
         }
@@ -232,16 +229,13 @@ public class FlowBlock extends FacingBlock {
         return false;
     }*/
 
-
-    
-
     @Override
-    public BlockState getPlacementState(BlockPlaceContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getSide().opposite());
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        return this.defaultBlockState().setValue(FACING, ctx.getClickedFace().getOpposite());
     }
 
     @Override
-    protected void appendProperties(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }
 }

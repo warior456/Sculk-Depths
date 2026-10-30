@@ -1,6 +1,5 @@
 package net.ugi.sculk_depths.mixin;
 
-
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.world.level.block.state.BlockState;
@@ -13,11 +12,11 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class FlowableFluidMixin {
 
     @ModifyReturnValue(
-            method = "canFill",
-            forIndex = @At("RETURN")
+            method = "canHoldFluid",
+            at = @At("RETURN")
     )
     private boolean allowOnTopOfKryslumEnrichedSoil(boolean source, @Local(ordinal = 0) BlockState state) {
-        if (state.isOf(ModBlocks.SCULK_DEPTHS_PORTAL)) return false;
+        if (state.is(ModBlocks.SCULK_DEPTHS_PORTAL)) return false;
         else return source;
     }
 }

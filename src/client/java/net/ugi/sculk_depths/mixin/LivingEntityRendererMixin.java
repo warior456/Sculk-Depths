@@ -14,11 +14,11 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(LivingEntityRenderer.class)
 public class LivingEntityRendererMixin {
     @ModifyReturnValue(
-            method = "getRenderLayer",
-            forIndex = @At("RETURN")
+            method = "getRenderType",
+            at = @At("RETURN")
     )
     private RenderType AllowGlomperTranslucency(@Nullable RenderType source, @Local(ordinal = 0) LivingEntity livingEntity) {
-        if(livingEntity.getClass() == GlomperEntity.class){
+        if (livingEntity.getClass() == GlomperEntity.class) {
             return RenderType.entityTranslucent(GlomperRenderer.GLOMPER_TEXTURE); //TODO unhardcode this
         }
         return source;

@@ -1,22 +1,26 @@
 package net.ugi.sculk_depths.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.tags.ModTags;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
-    public ModItemTagProvider(FabricDataOutput withResultSlot, CompletableFuture<HolderLookup.Provider> completableFuture) {
-        super(withResultSlot, completableFuture);
+public class ModItemTagProvider extends ItemTagsProvider {
+    public ModItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags, @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, blockTags, SculkDepths.MOD_ID, existingFileHelper);
     }
 
     @Override
-    protected void configure(HolderLookup.Provider arg) {
+    protected void addTags(HolderLookup.Provider provider) {
 
         tag(ModTags.Items.VALTROX_LOGS)
                 .add(ModBlocks.VALTROX_LOG.asItem())
@@ -48,7 +52,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         tag(ItemTags.PICKAXES)
                 .add(ModItems.QUAZARITH_PICKAXE);
 
-        tag(ItemTags.AXIS_VALUES)
+        tag(ItemTags.AXES)
                 .add(ModItems.QUAZARITH_AXE);
 
         tag(ItemTags.HOES)
@@ -131,7 +135,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModBlocks.DRIED_VALTROX_PLANKS.asItem());
 
         // ------------------- stairs (any) ------------------- //todo the rest
-        tag(ItemTags.STAIRS_STRAIGHT)
+        tag(ItemTags.STAIRS)
                 .add(ModBlocks.VALTROX_STAIRS.asItem())
                 .add(ModBlocks.COATED_VALTROX_STAIRS.asItem())
                 .add(ModBlocks.DRIED_VALTROX_STAIRS.asItem())

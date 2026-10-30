@@ -13,7 +13,7 @@ public class ModComponentTypes {
         Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, SculkDepths.id("oscillator_tracker_list"), OSCILLATOR_TRACKER_LIST);
     }
 
-    public static final DataComponentType<OscillatorTrackerComponent> OSCILLATOR_TRACKER = DataComponentType.<OscillatorTrackerComponent>builder().codec(OscillatorTrackerComponent.CODEC).streamCodec(OscillatorTrackerComponent.PACKET_CODEC).build();
-    public static final DataComponentType<OscillatorTrackerComponentList> OSCILLATOR_TRACKER_LIST = DataComponentType.<OscillatorTrackerComponentList>builder().codec(OscillatorTrackerComponentList.CODEC).streamCodec(OscillatorTrackerComponentList.PACKET_CODEC).build();
+    public static final DataComponentType<OscillatorTrackerComponent> OSCILLATOR_TRACKER = DataComponentType.<OscillatorTrackerComponent>builder().persistent(OscillatorTrackerComponent.CODEC).networkSynchronized(OscillatorTrackerComponent.PACKET_CODEC).build();
+    public static final DataComponentType<OscillatorTrackerComponentList> OSCILLATOR_TRACKER_LIST = DataComponentType.<OscillatorTrackerComponentList>builder().persistent(OscillatorTrackerComponentList.CODEC).networkSynchronized(OscillatorTrackerComponentList.PACKET_CODEC).build();
 
 }

@@ -33,7 +33,7 @@ public class ModTags {
 
 
         private static TagKey<Block> tag(String name) {
-            return TagKey.of(Registries.SIDE, SculkDepths.id( name));
+            return TagKey.create(Registries.BLOCK, SculkDepths.id( name));
         }
     }
 
@@ -59,7 +59,7 @@ public class ModTags {
                 tag("petrified_valtrox_logs");
 
         private static TagKey<Item> tag(String name) {
-            return TagKey.of(Registries.ITEM, SculkDepths.id( name));
+            return TagKey.create(Registries.ITEM, SculkDepths.id( name));
         }
     }
 
@@ -67,7 +67,7 @@ public class ModTags {
         public static final TagKey<Fluid> KRYSLUM = of("kryslum");
 
         private static TagKey<Fluid> of(String name) {
-            return TagKey.of(Registries.FLUID, SculkDepths.id( name));
+            return TagKey.create(Registries.FLUID, SculkDepths.id( name));
         }
     }
 

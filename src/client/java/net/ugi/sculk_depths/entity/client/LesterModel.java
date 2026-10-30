@@ -1,6 +1,12 @@
 package net.ugi.sculk_depths.entity.client;
 
-import net.minecraft.client.model.*;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HierarchicalModel;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -14,43 +20,43 @@ public class LesterModel <T extends LesterEntity> extends HierarchicalModel<T> {
 	private final ModelPart lester;
 
 	public LesterModel(ModelPart root) {
-		this.lester = root.getAnyDescendantWithName("lester");
+		this.lester = root.getChild("lester");
 	}
 
-	public static TexturedModelData getTexturedModelData() {
-		ModelData modelData = new ModelData();
-		ModelPartData modelPartData = modelData.getRoot();
-		ModelPartData lester = modelPartData.addOrReplaceChild("lester", ModelPartBuilder.create(), ModelTransform.offset(0.0F, 24.0F, 0.0F));
+	public static LayerDefinition getTexturedModelData() {
+		MeshDefinition modelData = new MeshDefinition();
+		PartDefinition modelPartData = modelData.getRoot();
+		PartDefinition lester = modelPartData.addOrReplaceChild("lester", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-		ModelPartData body = lester.addOrReplaceChild("body", ModelPartBuilder.create(), ModelTransform.offset(0.0F, -11.0F, 0.0F));
+		PartDefinition body = lester.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.offset(0.0F, -11.0F, 0.0F));
 
-		ModelPartData R_leg = body.addOrReplaceChild("R_leg", ModelPartBuilder.create().texOffs(22, 33).cuboid(-2.5F, 0.0F, -3.0F, 5.0F, 6.0F, 6.0F, new Dilation(0.0F)), ModelTransform.offset(2.5F, 5.0F, 0.0F));
+		PartDefinition R_leg = body.addOrReplaceChild("R_leg", CubeListBuilder.create().texOffs(22, 33).addBox(-2.5F, 0.0F, -3.0F, 5.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(2.5F, 5.0F, 0.0F));
 
-		ModelPartData headParts = body.addOrReplaceChild("head", ModelPartBuilder.create(), ModelTransform.offset(0.0F, -6.1F, 4.0F));
+		PartDefinition headParts = body.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.offset(0.0F, -6.1F, 4.0F));
 
-		ModelPartData cube_r1 = headParts.addOrReplaceChild("cube_r1", ModelPartBuilder.create().texOffs(0, 20).cuboid(-6.0F, -4.125F, -9.5F, 12.0F, 3.0F, 10.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.875F, -0.5F, -0.7418F, 0.0F, 0.0F));
+		PartDefinition cube_r1 = headParts.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 20).addBox(-6.0F, -4.125F, -9.5F, 12.0F, 3.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.875F, -0.5F, -0.7418F, 0.0F, 0.0F));
 
-		ModelPartData cube_r2 = headParts.addOrReplaceChild("cube_r2", ModelPartBuilder.create().texOffs(4, 5).cuboid(-5.0F, -1.7F, 0.0F, 1.0F, 1.0F, 0.0F, new Dilation(0.0F))
-				.texOffs(2, 5).cuboid(-1.0F, -1.7F, 0.0F, 1.0F, 1.0F, 0.0F, new Dilation(0.0F))
-				.texOffs(0, 1).cuboid(2.0F, -0.7F, 0.0F, 3.0F, 1.0F, 0.0F, new Dilation(0.0F))
-				.texOffs(0, 5).cuboid(3.0F, -1.7F, 0.0F, 1.0F, 1.0F, 0.0F, new Dilation(0.0F))
-				.texOffs(0, 0).cuboid(-2.0F, -0.7F, 0.0F, 3.0F, 1.0F, 0.0F, new Dilation(0.0F))
-				.texOffs(0, 4).cuboid(-5.0F, -0.7F, 0.0F, 2.0F, 1.0F, 0.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -5.25F, -6.0F, 0.3491F, 0.0F, -3.1416F));
+		PartDefinition cube_r2 = headParts.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(4, 5).addBox(-5.0F, -1.7F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
+				.texOffs(2, 5).addBox(-1.0F, -1.7F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 1).addBox(2.0F, -0.7F, 0.0F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 5).addBox(3.0F, -1.7F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 0).addBox(-2.0F, -0.7F, 0.0F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 4).addBox(-5.0F, -0.7F, 0.0F, 2.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -5.25F, -6.0F, 0.3491F, 0.0F, -3.1416F));
 
-		ModelPartData chest = body.addOrReplaceChild("chest", ModelPartBuilder.create().texOffs(0, 6).cuboid(3.0F, -8.25F, -3.0F, 1.0F, 1.0F, 0.0F, new Dilation(0.0F))
-				.texOffs(0, 2).cuboid(2.0F, -7.25F, -3.0F, 3.0F, 1.0F, 0.0F, new Dilation(0.0F))
-				.texOffs(6, 0).cuboid(-1.0F, -8.25F, -3.0F, 1.0F, 1.0F, 0.0F, new Dilation(0.0F))
-				.texOffs(0, 3).cuboid(-2.0F, -7.25F, -3.0F, 3.0F, 1.0F, 0.0F, new Dilation(0.0F))
-				.texOffs(4, 4).cuboid(-5.0F, -7.25F, -3.0F, 2.0F, 1.0F, 0.0F, new Dilation(0.0F))
-				.texOffs(6, 1).cuboid(-5.0F, -8.25F, -3.0F, 1.0F, 1.0F, 0.0F, new Dilation(0.0F))
-				.texOffs(0, 0).cuboid(-6.0F, -6.25F, -4.0F, 12.0F, 12.0F, 8.0F, new Dilation(0.0F)), ModelTransform.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition chest = body.addOrReplaceChild("chest", CubeListBuilder.create().texOffs(0, 6).addBox(3.0F, -8.25F, -3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 2).addBox(2.0F, -7.25F, -3.0F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
+				.texOffs(6, 0).addBox(-1.0F, -8.25F, -3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 3).addBox(-2.0F, -7.25F, -3.0F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
+				.texOffs(4, 4).addBox(-5.0F, -7.25F, -3.0F, 2.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
+				.texOffs(6, 1).addBox(-5.0F, -8.25F, -3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 0).addBox(-6.0F, -6.25F, -4.0F, 12.0F, 12.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		ModelPartData L_leg = body.addOrReplaceChild("L_leg", ModelPartBuilder.create().texOffs(0, 33).cuboid(-2.5F, 0.0F, -3.0F, 5.0F, 6.0F, 6.0F, new Dilation(0.0F)), ModelTransform.offset(-2.5F, 5.0F, 0.0F));
-		return TexturedModelData.of(modelData, 64, 64);
+		PartDefinition L_leg = body.addOrReplaceChild("L_leg", CubeListBuilder.create().texOffs(0, 33).addBox(-2.5F, 0.0F, -3.0F, 5.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.5F, 5.0F, 0.0F));
+		return LayerDefinition.create(modelData, 64, 64);
 	}
 	@Override
-	public void setAngles(LesterEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float lowerHeadTick) {
-		this.getPart().traverse().forEach(ModelPart::resetPose);
+	public void setupAnim(LesterEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		this.root().getAllParts().forEach(ModelPart::resetPose);
 		//this.setHeadAngles(netHeadYaw, headPitch);
 
 		this.animateWalk(ModAnimations.LESTER_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
@@ -67,14 +73,16 @@ public class LesterModel <T extends LesterEntity> extends HierarchicalModel<T> {
 
 
 	@Override
-	public void render(PoseStack pose, VertexConsumer vertexConsumer, int light, int overlay, int setColor) {
+	public void renderToBuffer(PoseStack pose, VertexConsumer vertexConsumer, int light, int overlay, int setColor) {
 		lester.render(pose, vertexConsumer, light, overlay, setColor);
 	}
 
 	@Override
-	public ModelPart getPart() {
+	public ModelPart root() {
 		return lester;
 	}
 
-
+	public ModelPart getPart() {
+		return root();
+	}
 }

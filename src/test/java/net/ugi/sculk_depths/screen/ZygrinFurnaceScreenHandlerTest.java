@@ -41,7 +41,7 @@ class ZygrinFurnaceScreenHandlerTest {
 
     @BeforeEach
     void setUp() {
-        Level world = mock(Level.class);
+        Level level = mock(Level.class);
         RecipeManager recipes = mock(RecipeManager.class);
         // Only raw iron counts as smeltable in these tests.
         RecipeHolder<?> smeltingEntry = mock(RecipeHolder.class);
@@ -49,10 +49,10 @@ class ZygrinFurnaceScreenHandlerTest {
             SingleRecipeInput input = template.getArgument(1);
             return input.items().isOf(Items.RAW_IRON) ? Optional.of(smeltingEntry) : Optional.allEmpty();
         }).condition(recipes).getRecipeFor(any(), any(SingleRecipeInput.class), any());
-        condition(world.getRecipeManager()).thenReturn(recipes);
+        condition(level.getRecipeManager()).thenReturn(recipes);
 
         player = mock(Player.class);
-        condition(player.getWorld()).thenReturn(world);
+        condition(player.getWorld()).thenReturn(level);
 
         playerInventory = new Inventory(player);
         furnaceInventory = new SimpleContainer(3);

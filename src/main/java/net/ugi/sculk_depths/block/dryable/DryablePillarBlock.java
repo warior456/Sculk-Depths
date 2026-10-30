@@ -1,4 +1,5 @@
 package net.ugi.sculk_depths.block.dryable;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -10,8 +11,8 @@ import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 public class DryablePillarBlock extends RotatedPillarBlock implements Dryable {
-    public DryablePillarBlock(Settings settings) {
-        super(settings);
+    public DryablePillarBlock(BlockBehaviour.Properties properties) {
+        super(properties);
     }
 
     @Override
@@ -19,36 +20,36 @@ public class DryablePillarBlock extends RotatedPillarBlock implements Dryable {
         return true;
     }
     @Override
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 
-        if (Mth.getInt(random, 0, 100) == 0) {
-            if(world.dimensionTypeRegistration().getKey().get() == ModDimensions.SCULK_DEPTHS_TYPE) {
+        if (Mth.nextInt(random, 0, 100) == 0) {
+            if(level.dimensionTypeRegistration().is(ModDimensions.SCULK_DEPTHS_TYPE)) {
 
                 if (state.getBlock() == ModBlocks.VALTROX_LOG || state.getBlock() == ModBlocks.VALTROX_WOOD) {
                     int livingBlocks = -1;
                     int driedBlocks = 0;
-                    for (BlockPos blockPos : BlockPos.iterate(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
-                        if (world.getBlockState(blockPos).getBlock() == ModBlocks.VALTROX_LOG || world.getBlockState(blockPos).getBlock() == ModBlocks.VALTROX_WOOD ||world.getBlockState(blockPos).getBlock() == ModBlocks.VALTROX_LEAVES) {
+                    for (BlockPos blockPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
+                        if (level.getBlockState(blockPos).getBlock() == ModBlocks.VALTROX_LOG || level.getBlockState(blockPos).getBlock() == ModBlocks.VALTROX_WOOD ||level.getBlockState(blockPos).getBlock() == ModBlocks.VALTROX_LEAVES) {
                             livingBlocks += 1;
                         }
-                        if (world.getBlockState(blockPos).getBlock() == ModBlocks.DRIED_VALTROX_LOG || world.getBlockState(blockPos).getBlock() == ModBlocks.DRIED_VALTROX_WOOD) {
+                        if (level.getBlockState(blockPos).getBlock() == ModBlocks.DRIED_VALTROX_LOG || level.getBlockState(blockPos).getBlock() == ModBlocks.DRIED_VALTROX_WOOD) {
                             driedBlocks += 1;
                         }
 
                     }
                     if (livingBlocks <= 1 ) {
-                        Dryable.DryBlock(state, world, pos);
+                        Dryable.DryBlock(state, level, pos);
                     }
                     if(driedBlocks >= 1 && livingBlocks > 1) {
                         for (int l = driedBlocks; l >= 0; --l) {
-                            if (Mth.getInt(random, 0, 10) == 0) {
-                                Dryable.DryBlock(state, world, pos);
+                            if (Mth.nextInt(random, 0, 10) == 0) {
+                                Dryable.DryBlock(state, level, pos);
                                 return;
                             }
                         }
                     }
                 }
-                else Dryable.DryBlock(state, world, pos);
+                else Dryable.DryBlock(state, level, pos);
             }
         }
     }

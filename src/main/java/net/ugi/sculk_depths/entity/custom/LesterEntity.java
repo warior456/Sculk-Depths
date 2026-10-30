@@ -1,8 +1,13 @@
 package net.ugi.sculk_depths.entity.custom;
 
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.damagesource.DamageSource;
@@ -28,8 +33,8 @@ public class LesterEntity extends PathfinderMob {
 
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
-    public LesterEntity(EntityType<? extends PathfinderMob> entityType, Level world) {
-        super(entityType, world);
+    public LesterEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
+        super(entityType, level);
         this.xpReward = 5;
     }
 
@@ -55,10 +60,10 @@ public class LesterEntity extends PathfinderMob {
             return false;
         } else {
             float f = 0.8F * 0.8F;
-            AABB box = AABB.of(this.getEyePosition(), (double)f, 1.0E-6, (double)f);
-            return BlockPos.stream(box).contains((pos) -> {
-                BlockState block = this.getWorld().getBlockState(pos);
-                return !(block.isAir() || block.is(ModTags.Blocks.LESTER_SPAWN_BLOCKS)) && block.isSuffocating(this.getWorld(), pos) && Shapes.joinIsNotEmpty(block.nonClimbableShape(this.getWorld(), pos).offset((double)pos.getX(), (double)pos.getY(), (double)pos.getZ()), Shapes.cuboid(box), BooleanOp.AND);
+            AABB box = AABB.ofSize(this.getEyePosition(), (double)f, 1.0E-6, (double)f);
+            return BlockPos.betweenClosedStream(box).anyMatch((pos) -> {
+                BlockState block = this.level().getBlockState(pos);
+                return !(block.isAir() || block.is(ModTags.Blocks.LESTER_SPAWN_BLOCKS)) && block.isSuffocating(this.level(), pos) && Shapes.joinIsNotEmpty(block.getCollisionShape(this.level(), pos).move((double)pos.getX(), (double)pos.getY(), (double)pos.getZ()), Shapes.create(box), BooleanOp.AND);
             });
         }
     }
@@ -66,42 +71,42 @@ public class LesterEntity extends PathfinderMob {
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = this.random.getInt(40) + 80;
-            this.idleAnimationState.start(this.age);
+            this.idleAnimationTimeout = this.random.nextInt(40) + 80;
+            this.idleAnimationState.start(this.tickCount);
         } else {
             --this.idleAnimationTimeout;
         }
     }
 
     @Override
-    protected void updateLimbs(float posDelta) {
-        float f = this.getState() == EntityPose.STANDING ? Math.minValue(posDelta * 6.0f, 1.0f) : 0.0f;
-        this.walkAnimation.updateLimbs(f, 0.2f);
+    protected void updateWalkAnimation(float posDelta) {
+        float f = this.getPose() == Pose.STANDING ? Math.min(posDelta * 6.0f, 1.0f) : 0.0f;
+        this.walkAnimation.update(f, 0.2f);
     }
 
     @Override
     public void tick() {
         super.tick();
-        if(this.getWorld().isClientSide()) {
+        if(this.level().isClientSide()) {
             setupAnimationStates();
         }
     }
 
     @Override
     protected void registerGoals() {
-        //this.goalSelector.add(2, new TemptGoal(this, 1.25D, Ingredient.ofItems(ModItems.QUAZARITH_PIECES), false));
-        this.goalSelector.add(5, new WanderAroundFarGoal(this, 1D));
-        this.goalSelector.add(4, new LookAroundGoal(this));
-        this.goalSelector.add(1, new ActiveTargetGoal<>(this, Player.class, true));
-        this.goalSelector.add(2, new MeleeAttackGoal(this, 1.2f, false));
-/*        this.goalSelector.add(0, new SwimGoal(this));
+        //this.goalSelector.addGoal(2, new TemptGoal(this, 1.25D, Ingredient.ofItems(ModItems.QUAZARITH_PIECES), false));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1D));
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2f, false));
+/*        this.goalSelector.addGoal(0, new SwimGoal(this));
 
 
 
 
-        this.goalSelector.add(4, new WanderAroundFarGoal(this, 1D));
-        this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 4f));
-        this.goalSelector.add(6, new LookAroundGoal(this));*/
+        this.goalSelector.addGoal(4, new WanderAroundFarGoal(this, 1D));
+        this.goalSelector.addGoal(5, new LookAtEntityGoal(this, PlayerEntity.class, 4f));
+        this.goalSelector.addGoal(6, new LookAroundGoal(this));*/
     }
 
     public static AttributeSupplier.Builder createLesterAttributes() {

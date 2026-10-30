@@ -1,14 +1,11 @@
 package net.ugi.sculk_depths.screen;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screens.recipebook.SmeltingRecipeBookComponent;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.ugi.sculk_depths.SculkDepths;
 
-@Environment(EnvType.CLIENT)
 public class ZygrinFurnaceScreen extends AbstractZygrinFurnaceScreen<ZygrinFurnaceScreenHandler> {
     //private static final Identifier TEXTURE = SculkDepths.identifier("textures/gui/container/zygrin_furnace.png");
 

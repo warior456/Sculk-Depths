@@ -7,13 +7,13 @@ import net.ugi.sculk_depths.entity.effect.ModStatusEffects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(targets= "net.minecraft.client.gui.hud.InGameHud$HeartType")
+@Mixin(targets = "net.minecraft.client.gui.Gui$HeartType")
 public class InGameHudMixin {
     @ModifyExpressionValue(
-            method = "fromPlayerState",
-            forIndex = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;hasStatusEffect(Lnet/minecraft/registry/entry/RegistryEntry;)Z")
+            method = "forPlayer",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;hasEffect(Lnet/minecraft/core/Holder;)Z")
     )
-    private static boolean HasInfectedStatusEffect(boolean source,@Local(ordinal = 0) Player player){
+    private static boolean HasInfectedStatusEffect(boolean source, @Local(ordinal = 0) Player player) {
         return player.hasEffect(ModStatusEffects.INFECTED) || source;
     }
 }

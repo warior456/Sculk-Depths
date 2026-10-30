@@ -20,36 +20,38 @@ public class GenerateStructureAPI {
 
     public static boolean generateStructure(Level  originalWorld, ResourceKey<Level> targetWorldKey, ResourceLocation setStructures, BlockPos pos){
         if(originalWorld.isClientSide)return false;
-        Optional<Holder.Reference<Structure>> structureReference = originalWorld.getRegistryManager().get(Registries.STRUCTURE).getEntry(setStructures);
+        Optional<Holder.Reference<Structure>> structureReference = originalWorld.registryAccess().registry(Registries.STRUCTURE).flatMap(r -> r.getHolder(setStructures));
         if(structureReference.isEmpty()) return false;
-        ServerLevel serverWorld = originalWorld.getServer().getWorld(targetWorldKey);
+        ServerLevel serverWorld = originalWorld.getServer().getLevel(targetWorldKey);
+        if (serverWorld == null) return false;
         StructureStart structureStart = structureStart(originalWorld,  targetWorldKey, setStructures, pos);
         if(structureStart == null)return false;
         BoundingBox blockBox = structureStart.getBoundingBox();
-        ChunkPos chunkPos = new ChunkPos(SectionPos.getSectionCoord(blockBox.getMinX()), SectionPos.getSectionCoord(blockBox.getMinZ()));
-        ChunkPos chunkPos2 = new ChunkPos(SectionPos.getSectionCoord(blockBox.getMaxX()), SectionPos.getSectionCoord(blockBox.getMaxZ()));
-        ChunkPos[] chunkPosArray =  ChunkPos.stream(chunkPos, chunkPos2).adjustArgs(ChunkPos[]::new);
+        ChunkPos chunkPos = new ChunkPos(SectionPos.blockToSectionCoord(blockBox.minX()), SectionPos.blockToSectionCoord(blockBox.minZ()));
+        ChunkPos chunkPos2 = new ChunkPos(SectionPos.blockToSectionCoord(blockBox.maxX()), SectionPos.blockToSectionCoord(blockBox.maxZ()));
+        ChunkPos[] chunkPosArray =  ChunkPos.rangeClosed(chunkPos, chunkPos2).toArray(ChunkPos[]::new);
         return  generate(serverWorld, structureStart, chunkPosArray);
     }
     public static boolean generateStructure(Level  originalWorld, ResourceKey<Level> targetWorldKey, ResourceKey<Structure> setStructures, BlockPos pos){
-        return generateStructure(originalWorld, targetWorldKey, setStructures.getValue(), pos);
+        return generateStructure(originalWorld, targetWorldKey, setStructures.location(), pos);
     }
 
 
     public static boolean generateStructure(Level  originalWorld, ResourceKey<Level> targetWorldKey, ResourceLocation setStructures, StructureStart structureStart){
         if(originalWorld.isClientSide)return false;
         if(structureStart == null)return false;
-        Optional<Holder.Reference<Structure>> structureReference = originalWorld.getRegistryManager().get(Registries.STRUCTURE).getEntry(setStructures);
+        Optional<Holder.Reference<Structure>> structureReference = originalWorld.registryAccess().registry(Registries.STRUCTURE).flatMap(r -> r.getHolder(setStructures));
         if(structureReference.isEmpty()) return false;
-        ServerLevel serverWorld = originalWorld.getServer().getWorld(targetWorldKey);
+        ServerLevel serverWorld = originalWorld.getServer().getLevel(targetWorldKey);
+        if (serverWorld == null) return false;
         BoundingBox blockBox = structureStart.getBoundingBox();
-        ChunkPos chunkPos = new ChunkPos(SectionPos.getSectionCoord(blockBox.getMinX()), SectionPos.getSectionCoord(blockBox.getMinZ()));
-        ChunkPos chunkPos2 = new ChunkPos(SectionPos.getSectionCoord(blockBox.getMaxX()), SectionPos.getSectionCoord(blockBox.getMaxZ()));
-        ChunkPos[] chunkPosArray =  ChunkPos.stream(chunkPos, chunkPos2).adjustArgs(ChunkPos[]::new);
+        ChunkPos chunkPos = new ChunkPos(SectionPos.blockToSectionCoord(blockBox.minX()), SectionPos.blockToSectionCoord(blockBox.minZ()));
+        ChunkPos chunkPos2 = new ChunkPos(SectionPos.blockToSectionCoord(blockBox.maxX()), SectionPos.blockToSectionCoord(blockBox.maxZ()));
+        ChunkPos[] chunkPosArray =  ChunkPos.rangeClosed(chunkPos, chunkPos2).toArray(ChunkPos[]::new);
         return  generate(serverWorld, structureStart, chunkPosArray);
     }
     public static boolean generateStructure(Level  originalWorld, ResourceKey<Level> targetWorldKey, ResourceKey<Structure> setStructures, StructureStart structureStart){
-        return generateStructure(originalWorld, targetWorldKey, setStructures.getValue(), structureStart);
+        return generateStructure(originalWorld, targetWorldKey, setStructures.location(), structureStart);
     }
 
 
@@ -58,31 +60,35 @@ public class GenerateStructureAPI {
 
         if(originalWorld.isClientSide)return false;
         if(structureStart == null)return false;
-        Optional<Holder.Reference<Structure>> structureReference = originalWorld.getRegistryManager().get(Registries.STRUCTURE).getEntry(setStructures);
+        Optional<Holder.Reference<Structure>> structureReference = originalWorld.registryAccess().registry(Registries.STRUCTURE).flatMap(r -> r.getHolder(setStructures));
         if(structureReference.isEmpty()) return false;
-        ServerLevel serverWorld = originalWorld.getServer().getWorld(targetWorldKey);
+        ServerLevel serverWorld = originalWorld.getServer().getLevel(targetWorldKey);
+        if (serverWorld == null) return false;
         return  generate( serverWorld, structureStart, chunkPosArray);
     }
 
     public static boolean generateStructurePartial(Level  originalWorld, ResourceKey<Level> targetWorldKey, ResourceKey<Structure> setStructures, StructureStart structureStart, ChunkPos[] chunkPosArray){
-        return generateStructurePartial(originalWorld, targetWorldKey, setStructures.getValue(), structureStart, chunkPosArray);
+        return generateStructurePartial(originalWorld, targetWorldKey, setStructures.location(), structureStart, chunkPosArray);
     }
 
     public static StructureStart structureStart (Level  originalWorld, ResourceKey<Level> targetWorldKey, ResourceLocation structureKey, BlockPos pos){
         if(originalWorld.isClientSide)return null;
-        Optional<Holder.Reference<Structure>> structureReference = originalWorld.getRegistryManager().get(Registries.STRUCTURE).getEntry(structureKey);
+        Optional<Holder.Reference<Structure>> structureReference = originalWorld.registryAccess().registry(Registries.STRUCTURE).flatMap(r -> r.getHolder(structureKey));
         if(structureReference.isEmpty())return null;
         Holder.Reference<Structure> setStructures = structureReference.get();
-        ServerLevel serverWorld = originalWorld.getServer().getWorld(targetWorldKey);
-        ChunkGenerator generator = serverWorld.getChunkSource().getChunkGenerator();
+        ServerLevel serverWorld = originalWorld.getServer().getLevel(targetWorldKey);
+        if (serverWorld == null) return null;
+        ChunkGenerator generator = serverWorld.getChunkSource().getGenerator();
         Structure structure2 = setStructures.value();
+        ServerLevel overworld = originalWorld.getServer().getLevel(Level.OVERWORLD);
+        long seed = overworld != null ? overworld.getSeed() : serverWorld.getSeed();
         StructureStart structureStart = structure2.generate(
-                originalWorld.getRegistryManager(),
+                originalWorld.registryAccess(),
                 generator,
                 generator.getBiomeSource(),
                 serverWorld.getChunkSource().randomState(),
                 serverWorld.getStructureManager(),
-                originalWorld.getServer().getWorld(Level.OVERWORLD).getSeed(),
+                seed,
                 new ChunkPos(pos),
                 0,
                 serverWorld,
@@ -91,7 +97,7 @@ public class GenerateStructureAPI {
         return structureStart;
     }
     public static StructureStart structureStart (Level  originalWorld, ResourceKey<Level> targetWorldKey, ResourceKey<Structure> structureKey, BlockPos pos){
-        return structureStart (originalWorld,targetWorldKey,structureKey.getValue(),pos);
+        return structureStart (originalWorld,targetWorldKey,structureKey.location(),pos);
     }
 
     /**
@@ -102,18 +108,18 @@ public class GenerateStructureAPI {
     public static boolean registerStructureStartStub(Level originalWorld, ResourceKey<Level> targetWorldKey, ResourceLocation structureKey, BlockPos anchor){
         if (originalWorld.isClientSide) return false;
         try{
-            java.util.Optional<Holder.Reference<Structure>> opt = originalWorld.getRegistryManager().get(Registries.STRUCTURE).getEntry(structureKey);
+            Optional<Holder.Reference<Structure>> opt = originalWorld.registryAccess().registry(Registries.STRUCTURE).flatMap(r -> r.getHolder(structureKey));
             if (opt.isEmpty()) return false;
             Holder.Reference<Structure> structureRef = opt.get();
             Structure setStructures = structureRef.value();
 
-            ServerLevel serverWorld = originalWorld.getServer().getWorld(targetWorldKey);
+            ServerLevel serverWorld = originalWorld.getServer().getLevel(targetWorldKey);
             if (serverWorld == null) return false;
 
-            ChunkGenerator generator = serverWorld.getChunkSource().getChunkGenerator();
+            ChunkGenerator generator = serverWorld.getChunkSource().getGenerator();
 
             StructureStart start = setStructures.generate(
-                    originalWorld.getRegistryManager(),
+                    originalWorld.registryAccess(),
                     generator,
                     generator.getBiomeSource(),
                     serverWorld.getChunkSource().randomState(),
@@ -127,19 +133,24 @@ public class GenerateStructureAPI {
 
             ChunkPos startChunk = new ChunkPos(anchor);
 
-            // Try to register via StructureAccessor.setStartForStructure(ChunkPos, RegistryKey<Structure>, StructureStart)
+            // Try to register via StructureManager.setStartForStructure
             Object getMutable = serverWorld.structureManager();
             boolean registered = false;
             try{
-                java.lang.reflect.Method height = getMutable.getClass().getMethod("setStartForStructure", ChunkPos.class, ResourceKey.class, StructureStart.class);
-                // build RegistryKey<Structure>
-                ResourceKey<Structure> structKey = ResourceKey.of(Registries.STRUCTURE, structureKey);
-                height.invoke(getMutable, startChunk, structKey, start);
+                java.lang.reflect.Method height = getMutable.getClass().getMethod("setStartForStructure", SectionPos.class, Structure.class, StructureStart.class, net.minecraft.world.level.chunk.StructureAccess.class);
+                SectionPos sectionPos = SectionPos.of(anchor);
+                height.invoke(getMutable, sectionPos, setStructures, start, serverWorld.getChunk(startChunk.x, startChunk.z));
                 registered = true;
-            }catch(NoSuchMethodException e){
-                // attempt alternative method name: setStart
+            }catch(Exception e){
+                // attempt alternative reflection fallback from upstream
                 for (java.lang.reflect.Method m2 : getMutable.getClass().getMethods()){
                     Class<?>[] pts = m2.getParameterTypes();
+                    if (pts.length == 4 && pts[0] == SectionPos.class && pts[1] == Structure.class && pts[2] == StructureStart.class){
+                        SectionPos sectionPos = SectionPos.of(anchor);
+                        m2.invoke(getMutable, sectionPos, setStructures, start, serverWorld.getChunk(startChunk.x, startChunk.z));
+                        registered = true;
+                        break;
+                    }
                     if (pts.length == 2 && pts[0] == ChunkPos.class && pts[1] == StructureStart.class){
                         m2.invoke(getMutable, startChunk, start);
                         registered = true;
@@ -150,23 +161,7 @@ public class GenerateStructureAPI {
 
             // If registered, try to persist/mark dirty only if the chunk is loaded already.
             if (registered){
-                Object chunkSource = serverWorld.getChunkSource();
-                boolean chunkLoaded = false;
-                // try common method signatures to check whether chunk is loaded without forcing generation
-                try{
-                    java.lang.reflect.Method isLoadedMethod = chunkSource.getClass().getMethod("isChunkLoaded", int.class, int.class);
-                    Object res = isLoadedMethod.invoke(chunkSource, startChunk.x, startChunk.z);
-                    if (res instanceof Boolean) chunkLoaded = (Boolean) res;
-                }catch(Exception ignored){
-                    try{
-                        java.lang.reflect.Method isLoadedMethod2 = chunkSource.getClass().getMethod("isLoaded", ChunkPos.class);
-                        Object res = isLoadedMethod2.invoke(chunkSource, startChunk);
-                        if (res instanceof Boolean) chunkLoaded = (Boolean) res;
-                    }catch(Exception ignored2){
-                        // could not determine; assume not loaded to avoid forcing chunk generation
-                        chunkLoaded = false;
-                    }
-                }
+                boolean chunkLoaded = serverWorld.getChunkSource().hasChunk(startChunk.x, startChunk.z);
 
                 if (chunkLoaded){
                     // chunk is present: place center piece only by generating for the single chunk
@@ -175,16 +170,7 @@ public class GenerateStructureAPI {
                     // mark the chunk dirty so it will be saved
                     try{
                         var chunk = serverWorld.getChunk(startChunk.x, startChunk.z);
-                        // prefer markDirty if available
-                        try{
-                            java.lang.reflect.Method md = chunk.getClass().getMethod("markDirty");
-                            md.invoke(chunk);
-                        }catch(NoSuchMethodException ex){
-                            try{
-                                java.lang.reflect.Method md2 = chunk.getClass().getMethod("setNeedsSaving", boolean.class);
-                                md2.invoke(chunk, true);
-                            }catch(Exception ignored3){}
-                        }
+                        chunk.setUnsaved(true);
                     }catch(Exception ignored){}
                 }
 
@@ -194,12 +180,16 @@ public class GenerateStructureAPI {
             // fallback: if unable to register via accessor, load the chunk and set on chunk instance
             try{
                 var chunk = serverWorld.getChunk(startChunk.x, startChunk.z); // this may load/generate - fallback
-                // try to find chunk.setStructureStart(RegistryKey, StructureStart) or similar
                 boolean setOnChunk = false;
                 for (java.lang.reflect.Method m3 : chunk.getClass().getMethods()){
                     Class<?>[] pts = m3.getParameterTypes();
+                    if (pts.length == 2 && Structure.class.isAssignableFrom(pts[0]) && StructureStart.class.isAssignableFrom(pts[1])){
+                        m3.invoke(chunk, setStructures, start);
+                        setOnChunk = true;
+                        break;
+                    }
                     if (pts.length == 2 && ResourceKey.class.isAssignableFrom(pts[0]) && StructureStart.class.isAssignableFrom(pts[1])){
-                        ResourceKey<Structure> structKey = ResourceKey.of(Registries.STRUCTURE, structureKey);
+                        ResourceKey<Structure> structKey = ResourceKey.create(Registries.STRUCTURE, structureKey);
                         m3.invoke(chunk, structKey, start);
                         setOnChunk = true;
                         break;
@@ -207,8 +197,7 @@ public class GenerateStructureAPI {
                 }
                 // mark chunk dirty
                 try{
-                    java.lang.reflect.Method md = chunk.getClass().getMethod("markDirty");
-                    md.invoke(chunk);
+                    chunk.setUnsaved(true);
                 }catch(Exception ignored){}
 
                 if (setOnChunk){
@@ -226,17 +215,17 @@ public class GenerateStructureAPI {
     }
 
     private static boolean generate(ServerLevel serverWorld, StructureStart structureStart, ChunkPos[] chunkPosArray){
-        ChunkGenerator generator = serverWorld.getChunkSource().getChunkGenerator();
+        ChunkGenerator generator = serverWorld.getChunkSource().getGenerator();
         if(!structureStart.isValid()){
             return false;
         }else {
             for (ChunkPos chunkPosx : chunkPosArray) {
-                structureStart.place(
+                structureStart.placeInChunk(
                         serverWorld,
                         serverWorld.structureManager(),
                         generator,
                         serverWorld.getRandom(),
-                        new BoundingBox(chunkPosx.getMinBlockX(), serverWorld.getBottomY(), chunkPosx.getMinBlockZ(), chunkPosx.getMaxBlockX(), serverWorld.getTopY(), chunkPosx.getMaxBlockZ()),
+                        new BoundingBox(chunkPosx.getMinBlockX(), serverWorld.getMinBuildHeight(), chunkPosx.getMinBlockZ(), chunkPosx.getMaxBlockX(), serverWorld.getMaxBuildHeight(), chunkPosx.getMaxBlockZ()),
                         chunkPosx
                 );
             }
@@ -245,14 +234,14 @@ public class GenerateStructureAPI {
         }
     }
 
-    public static void forceLoadChunks(ChunkPos[] chunkPosArray, ServerLevel world) {
+    public static void forceLoadChunks(ChunkPos[] chunkPosArray, ServerLevel level) {
         for (ChunkPos chunkPos : chunkPosArray) {
-            world.updateChunkForced(chunkPos.x, chunkPos.z, true);
+            level.setChunkForced(chunkPos.x, chunkPos.z, true);
         }
     }
-    public static void unloadNearbyChunks(ChunkPos[] chunkPosArray, ServerLevel world) {
+    public static void unloadNearbyChunks(ChunkPos[] chunkPosArray, ServerLevel level) {
         for (ChunkPos chunkPos : chunkPosArray) {
-            world.updateChunkForced(chunkPos.x, chunkPos.z, false);
+            level.setChunkForced(chunkPos.x, chunkPos.z, false);
         }
     }
 

@@ -1,255 +1,227 @@
 package net.ugi.sculk_depths.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SnowLayerBlock;
-import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
-import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
-import net.minecraft.world.level.storage.loot.functions.CopyNameFunction;
-import net.minecraft.world.level.storage.loot.functions.LimitCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.IntRange;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.core.HolderLookup;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.block.custom.LayeredAuricSporeBlock;
 import net.ugi.sculk_depths.item.ModItems;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-public class ModLootTableProvider extends FabricBlockLootTableProvider {
+public class ModLootTableProvider extends LootTableProvider {
 
-
-    public ModLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registries) {
-        super(dataOutput, registries);
+    public ModLootTableProvider(PackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registries) {
+        super(dataOutput, Collections.emptySet(), List.of(
+                new SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK)
+        ), registries);
     }
 
-    @Override
-    public void generate() {
-        addDrop(ModBlocks.QUAZARITH_BLOCK, drops(ModBlocks.QUAZARITH_BLOCK.asItem()));
-        addDrop(ModBlocks.CRUX_BLOCK, drops(ModBlocks.CRUX_BLOCK.asItem()));
+    public static class ModBlockLootTableProvider extends BlockLootSubProvider {
 
-        addDrop(ModBlocks.QUAZARITH_ORE, oreDrops(ModBlocks.QUAZARITH_ORE,ModItems.QUAZARITH_PIECES));
-        addDrop(ModBlocks.CRUX_ORE, oreDrops(ModBlocks.CRUX_ORE,ModItems.CRUX));
+        public ModBlockLootTableProvider(HolderLookup.Provider registries) {
+            super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
+        }
 
+        @Override
+        public void generate() {
+            dropSelf(ModBlocks.QUAZARITH_BLOCK);
+            dropSelf(ModBlocks.CRUX_BLOCK);
 
-        addDrop(ModBlocks.LARGUTH);
-        addDrop(ModBlocks.ZYGRIN_FURNACE, this::createNameableBlockEntityTable);
-        addDrop(ModBlocks.CEPHLERA,ModBlocks.CEPHLERA_LIGHT.asItem());
-        addDrop(ModBlocks.CRUMBLING_DIRT);
-        addDrop(ModBlocks.KRYSLUM_ENRICHED_SOIL);
-        addDrop(ModBlocks.VALTROX_SAPLING);
-        addDrop(ModBlocks.AURIC_VINES,ModBlocks.AURIC_VINES_END.asItem());
-        addDrop(ModBlocks.VALTROX_LEAVES, createLeavesDrops(ModBlocks.VALTROX_LEAVES,ModBlocks.VALTROX_SAPLING, 0.1F));
-        addDrop(ModBlocks.DEAD_GRASS, // drops with silktouch or shears ( and no loottable if not)
-                LootTable.builder().withPool(LootPool.builder().setRolls(ConstantValue.create(1.0F)).with(((LootPoolSingletonContainer.Builder)LootItem.builder(ModBlocks.DEAD_GRASS).when(this.hasShearsOrSilkTouch())))));
+            add(ModBlocks.QUAZARITH_ORE, block -> createOreDrop(block, ModItems.QUAZARITH_PIECES));
+            add(ModBlocks.CRUX_ORE, block -> createOreDrop(block, ModItems.CRUX));
 
+            dropSelf(ModBlocks.LARGUTH);
+            add(ModBlocks.ZYGRIN_FURNACE, this::createNameableBlockEntityTable);
+            dropOther(ModBlocks.CEPHLERA, ModBlocks.CEPHLERA_LIGHT.asItem());
+            dropSelf(ModBlocks.CRUMBLING_DIRT);
+            dropSelf(ModBlocks.KRYSLUM_ENRICHED_SOIL);
+            dropSelf(ModBlocks.VALTROX_SAPLING);
+            dropOther(ModBlocks.AURIC_VINES, ModBlocks.AURIC_VINES_END.asItem());
+            add(ModBlocks.VALTROX_LEAVES, block -> createLeavesDrops(block, ModBlocks.VALTROX_SAPLING, 0.1F));
+            add(ModBlocks.DEAD_GRASS, // drops with silktouch or shears ( and no loottable if not)
+                    LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(ModBlocks.DEAD_GRASS).when(HAS_SHEARS.or(this.hasSilkTouch())))));
 
-        addDrop(ModBlocks.QUAZARITH_OSCILLATOR);
+            dropSelf(ModBlocks.QUAZARITH_OSCILLATOR);
 
-        dropPottedContents(ModBlocks.POTTED_AURIC_SPORE_SPROUTS);
-        dropPottedContents(ModBlocks.POTTED_PENEBRIUM_SHROOM);
-        dropPottedContents(ModBlocks.POTTED_VALTROX_SAPLING);
+            dropPottedContents(ModBlocks.POTTED_AURIC_SPORE_SPROUTS);
+            dropPottedContents(ModBlocks.POTTED_PENEBRIUM_SHROOM);
+            dropPottedContents(ModBlocks.POTTED_VALTROX_SAPLING);
 
+            dropSelf(ModBlocks.VALTROX_LOG);
+            dropSelf(ModBlocks.VALTROX_WOOD);
+            dropSelf(ModBlocks.STRIPPED_VALTROX_LOG);
+            dropSelf(ModBlocks.STRIPPED_VALTROX_WOOD);
+            dropSelf(ModBlocks.VALTROX_PLANKS);
+            dropSelf(ModBlocks.VALTROX_STAIRS);
+            add(ModBlocks.VALTROX_SLAB, this::createSlabItemTable);
+            dropSelf(ModBlocks.VALTROX_FENCE);
+            dropSelf(ModBlocks.VALTROX_FENCE_GATE);
+            add(ModBlocks.VALTROX_DOOR, this::createDoorTable);
+            dropSelf(ModBlocks.VALTROX_TRAPDOOR);
+            dropSelf(ModBlocks.VALTROX_PRESSURE_PLATE);
+            dropSelf(ModBlocks.VALTROX_BUTTON);
+            dropSelf(ModBlocks.VALTROX_SIGN);
+            dropSelf(ModBlocks.VALTROX_HANGING_SIGN);
 
-        addDrop(ModBlocks.VALTROX_LOG);
-        addDrop(ModBlocks.VALTROX_WOOD);
-        addDrop(ModBlocks.STRIPPED_VALTROX_LOG);
-        addDrop(ModBlocks.STRIPPED_VALTROX_WOOD);
-        addDrop(ModBlocks.VALTROX_PLANKS);
-        addDrop(ModBlocks.VALTROX_STAIRS);
-        addDrop(ModBlocks.VALTROX_SLAB, createSlabItemTable(ModBlocks.VALTROX_SLAB));
-        addDrop(ModBlocks.VALTROX_FENCE);
-        addDrop(ModBlocks.VALTROX_FENCE_GATE);
-        addDrop(ModBlocks.VALTROX_DOOR, createDoorTable(ModBlocks.VALTROX_DOOR));
-        addDrop(ModBlocks.VALTROX_TRAPDOOR);
-        addDrop(ModBlocks.VALTROX_PRESSURE_PLATE);
-        addDrop(ModBlocks.VALTROX_BUTTON);
-        addDrop(ModBlocks.VALTROX_SIGN);
-        addDrop(ModBlocks.VALTROX_HANGING_SIGN);
+            dropSelf(ModBlocks.COATED_VALTROX_LOG);
+            dropSelf(ModBlocks.COATED_VALTROX_WOOD);
+            dropSelf(ModBlocks.COATED_STRIPPED_VALTROX_LOG);
+            dropSelf(ModBlocks.COATED_STRIPPED_VALTROX_WOOD);
+            dropSelf(ModBlocks.COATED_VALTROX_PLANKS);
+            dropSelf(ModBlocks.COATED_VALTROX_STAIRS);
+            add(ModBlocks.COATED_VALTROX_SLAB, this::createSlabItemTable);
+            dropSelf(ModBlocks.COATED_VALTROX_FENCE);
+            dropSelf(ModBlocks.COATED_VALTROX_FENCE_GATE);
+            add(ModBlocks.COATED_VALTROX_DOOR, this::createDoorTable);
+            dropSelf(ModBlocks.COATED_VALTROX_TRAPDOOR);
+            dropSelf(ModBlocks.COATED_VALTROX_PRESSURE_PLATE);
+            dropSelf(ModBlocks.COATED_VALTROX_BUTTON);
+            dropSelf(ModBlocks.COATED_VALTROX_SIGN);
+            dropSelf(ModBlocks.COATED_VALTROX_HANGING_SIGN);
 
-        addDrop(ModBlocks.COATED_VALTROX_LOG);
-        addDrop(ModBlocks.COATED_VALTROX_WOOD);
-        addDrop(ModBlocks.COATED_STRIPPED_VALTROX_LOG);
-        addDrop(ModBlocks.COATED_STRIPPED_VALTROX_WOOD);
-        addDrop(ModBlocks.COATED_VALTROX_PLANKS);
-        addDrop(ModBlocks.COATED_VALTROX_STAIRS);
-        addDrop(ModBlocks.COATED_VALTROX_SLAB, createSlabItemTable(ModBlocks.COATED_VALTROX_SLAB));
-        addDrop(ModBlocks.COATED_VALTROX_FENCE);
-        addDrop(ModBlocks.COATED_VALTROX_FENCE_GATE);
-        addDrop(ModBlocks.COATED_VALTROX_DOOR, createDoorTable(ModBlocks.COATED_VALTROX_DOOR));
-        addDrop(ModBlocks.COATED_VALTROX_TRAPDOOR);
-        addDrop(ModBlocks.COATED_VALTROX_PRESSURE_PLATE);
-        addDrop(ModBlocks.COATED_VALTROX_BUTTON);
-        addDrop(ModBlocks.COATED_VALTROX_SIGN);
-        addDrop(ModBlocks.COATED_VALTROX_HANGING_SIGN);
+            dropSelf(ModBlocks.DRIED_VALTROX_LOG);
+            dropSelf(ModBlocks.DRIED_VALTROX_WOOD);
+            dropSelf(ModBlocks.STRIPPED_DRIED_VALTROX_LOG);
+            dropSelf(ModBlocks.STRIPPED_DRIED_VALTROX_WOOD);
+            dropSelf(ModBlocks.DRIED_VALTROX_PLANKS);
+            dropSelf(ModBlocks.DRIED_VALTROX_STAIRS);
+            add(ModBlocks.DRIED_VALTROX_SLAB, this::createSlabItemTable);
+            dropSelf(ModBlocks.DRIED_VALTROX_FENCE);
+            dropSelf(ModBlocks.DRIED_VALTROX_FENCE_GATE);
+            add(ModBlocks.DRIED_VALTROX_DOOR, this::createDoorTable);
+            dropSelf(ModBlocks.DRIED_VALTROX_TRAPDOOR);
+            dropSelf(ModBlocks.DRIED_VALTROX_PRESSURE_PLATE);
+            dropSelf(ModBlocks.DRIED_VALTROX_BUTTON);
+            dropSelf(ModBlocks.DRIED_VALTROX_SIGN);
+            dropSelf(ModBlocks.DRIED_VALTROX_HANGING_SIGN);
 
-        addDrop(ModBlocks.DRIED_VALTROX_LOG);
-        addDrop(ModBlocks.DRIED_VALTROX_WOOD);
-        addDrop(ModBlocks.STRIPPED_DRIED_VALTROX_LOG);
-        addDrop(ModBlocks.STRIPPED_DRIED_VALTROX_WOOD);
-        addDrop(ModBlocks.DRIED_VALTROX_PLANKS);
-        addDrop(ModBlocks.DRIED_VALTROX_STAIRS);
-        addDrop(ModBlocks.DRIED_VALTROX_SLAB, createSlabItemTable(ModBlocks.DRIED_VALTROX_SLAB));
-        addDrop(ModBlocks.DRIED_VALTROX_FENCE);
-        addDrop(ModBlocks.DRIED_VALTROX_FENCE_GATE);
-        addDrop(ModBlocks.DRIED_VALTROX_DOOR, createDoorTable(ModBlocks.DRIED_VALTROX_DOOR));
-        addDrop(ModBlocks.DRIED_VALTROX_TRAPDOOR);
-        addDrop(ModBlocks.DRIED_VALTROX_PRESSURE_PLATE);
-        addDrop(ModBlocks.DRIED_VALTROX_BUTTON);
-        addDrop(ModBlocks.DRIED_VALTROX_SIGN);
-        addDrop(ModBlocks.DRIED_VALTROX_HANGING_SIGN);
+            dropSelf(ModBlocks.PETRIFIED_VALTROX_LOG);
+            dropSelf(ModBlocks.PETRIFIED_VALTROX_WOOD);
+            dropSelf(ModBlocks.STRIPPED_PETRIFIED_VALTROX_LOG);
+            dropSelf(ModBlocks.STRIPPED_PETRIFIED_VALTROX_WOOD);
+            dropSelf(ModBlocks.PETRIFIED_VALTROX_SLATES);
+            dropSelf(ModBlocks.PETRIFIED_VALTROX_STAIRS);
+            add(ModBlocks.PETRIFIED_VALTROX_SLAB, this::createSlabItemTable);
+            dropSelf(ModBlocks.PETRIFIED_VALTROX_WALL);
+            dropSelf(ModBlocks.PETRIFIED_VALTROX_WALL_GATE);
+            add(ModBlocks.PETRIFIED_VALTROX_DOOR, this::createDoorTable);
+            dropSelf(ModBlocks.PETRIFIED_VALTROX_TRAPDOOR);
+            dropSelf(ModBlocks.PETRIFIED_VALTROX_PRESSURE_PLATE);
+            dropSelf(ModBlocks.PETRIFIED_VALTROX_BUTTON);
+            dropSelf(ModBlocks.PETRIFIED_VALTROX_SIGN);
+            dropSelf(ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN);
 
+            dropSelf(ModBlocks.AMALGAMITE);
+            dropSelf(ModBlocks.POLISHED_AMALGAMITE);
+            dropSelf(ModBlocks.POLISHED_AMALGAMITE_STAIRS);
+            add(ModBlocks.POLISHED_AMALGAMITE_SLAB, this::createSlabItemTable);
+            dropSelf(ModBlocks.POLISHED_AMALGAMITE_WALL);
+            dropSelf(ModBlocks.AMALGAMITE_BRICKS);
+            dropSelf(ModBlocks.CRACKED_AMALGAMITE_BRICKS);
+            dropSelf(ModBlocks.AMALGAMITE_BRICK_STAIRS);
+            add(ModBlocks.AMALGAMITE_BRICK_SLAB, this::createSlabItemTable);
+            dropSelf(ModBlocks.AMALGAMITE_BRICK_WALL);
+            dropSelf(ModBlocks.CHISELED_AMALGAMITE);
 
-        addDrop(ModBlocks.PETRIFIED_VALTROX_LOG);
-        addDrop(ModBlocks.PETRIFIED_VALTROX_WOOD);
-        addDrop(ModBlocks.STRIPPED_PETRIFIED_VALTROX_LOG);
-        addDrop(ModBlocks.STRIPPED_PETRIFIED_VALTROX_WOOD);
-        addDrop(ModBlocks.PETRIFIED_VALTROX_SLATES);
-        addDrop(ModBlocks.PETRIFIED_VALTROX_STAIRS);
-        addDrop(ModBlocks.PETRIFIED_VALTROX_SLAB, createSlabItemTable(ModBlocks.PETRIFIED_VALTROX_SLAB));
-        addDrop(ModBlocks.PETRIFIED_VALTROX_WALL);
-        addDrop(ModBlocks.PETRIFIED_VALTROX_WALL_GATE);
-        addDrop(ModBlocks.PETRIFIED_VALTROX_DOOR, createDoorTable(ModBlocks.PETRIFIED_VALTROX_DOOR));
-        addDrop(ModBlocks.PETRIFIED_VALTROX_TRAPDOOR);
-        addDrop(ModBlocks.PETRIFIED_VALTROX_PRESSURE_PLATE);
-        addDrop(ModBlocks.PETRIFIED_VALTROX_BUTTON);
-        addDrop(ModBlocks.PETRIFIED_VALTROX_SIGN);
-        addDrop(ModBlocks.PETRIFIED_VALTROX_HANGING_SIGN);
+            dropSelf(ModBlocks.ZYGRIN);
+            dropSelf(ModBlocks.ZYGRIN_STAIRS);
+            add(ModBlocks.ZYGRIN_SLAB, this::createSlabItemTable);
+            dropSelf(ModBlocks.ZYGRIN_WALL);
+            dropSelf(ModBlocks.POLISHED_ZYGRIN);
+            dropSelf(ModBlocks.POLISHED_ZYGRIN_STAIRS);
+            add(ModBlocks.POLISHED_ZYGRIN_SLAB, this::createSlabItemTable);
+            dropSelf(ModBlocks.POLISHED_ZYGRIN_WALL);
+            dropSelf(ModBlocks.ZYGRIN_BRICKS);
+            dropSelf(ModBlocks.ZYGRIN_BRICK_STAIRS);
+            add(ModBlocks.ZYGRIN_BRICK_SLAB, this::createSlabItemTable);
+            dropSelf(ModBlocks.ZYGRIN_BRICK_WALL);
+            dropSelf(ModBlocks.ZYGRIN_PILLAR);
+            dropSelf(ModBlocks.CHISELED_ZYGRIN);
+            dropSelf(ModBlocks.ZYGRIN_LIGHT);
+            dropSelf(ModBlocks.ZYGRIN_FLOWBLOCK);
 
-        addDrop(ModBlocks.AMALGAMITE);
-        addDrop(ModBlocks.POLISHED_AMALGAMITE);
-        addDrop(ModBlocks.POLISHED_AMALGAMITE_STAIRS);
-        addDrop(ModBlocks.POLISHED_AMALGAMITE_SLAB, createSlabItemTable(ModBlocks.POLISHED_AMALGAMITE_SLAB));
-        addDrop(ModBlocks.POLISHED_AMALGAMITE_WALL);
-        addDrop(ModBlocks.AMALGAMITE_BRICKS);
-        addDrop(ModBlocks.CRACKED_AMALGAMITE_BRICKS);
-        addDrop(ModBlocks.AMALGAMITE_BRICK_STAIRS);
-        addDrop(ModBlocks.AMALGAMITE_BRICK_SLAB, createSlabItemTable(ModBlocks.AMALGAMITE_BRICK_SLAB));
-        addDrop(ModBlocks.AMALGAMITE_BRICK_WALL);
-        addDrop(ModBlocks.CHISELED_AMALGAMITE);
+            dropSelf(ModBlocks.UMBRUSK);
+            dropSelf(ModBlocks.UMBRUSK_STAIRS);
+            add(ModBlocks.UMBRUSK_SLAB, this::createSlabItemTable);
+            dropSelf(ModBlocks.UMBRUSK_WALL);
+            dropSelf(ModBlocks.UMBRUSK_BRICKS);
+            dropSelf(ModBlocks.UMBRUSK_BRICK_STAIRS);
+            add(ModBlocks.UMBRUSK_BRICK_SLAB, this::createSlabItemTable);
+            dropSelf(ModBlocks.UMBRUSK_BRICK_WALL);
 
-        addDrop(ModBlocks.ZYGRIN);
-        addDrop(ModBlocks.ZYGRIN_STAIRS);
-        addDrop(ModBlocks.ZYGRIN_SLAB, createSlabItemTable(ModBlocks.ZYGRIN_SLAB));
-        addDrop(ModBlocks.ZYGRIN_WALL);
-        addDrop(ModBlocks.POLISHED_ZYGRIN);
-        addDrop(ModBlocks.POLISHED_ZYGRIN_STAIRS);
-        addDrop(ModBlocks.POLISHED_ZYGRIN_SLAB, createSlabItemTable(ModBlocks.POLISHED_ZYGRIN_SLAB));
-        addDrop(ModBlocks.POLISHED_ZYGRIN_WALL);
-        addDrop(ModBlocks.ZYGRIN_BRICKS);
-        addDrop(ModBlocks.ZYGRIN_BRICK_STAIRS);
-        addDrop(ModBlocks.ZYGRIN_BRICK_SLAB, createSlabItemTable(ModBlocks.ZYGRIN_BRICK_SLAB));
-        addDrop(ModBlocks.ZYGRIN_BRICK_WALL);
-        addDrop(ModBlocks.ZYGRIN_PILLAR);
-        addDrop(ModBlocks.CHISELED_ZYGRIN);
-        addDrop(ModBlocks.ZYGRIN_BRICKS);
-        addDrop(ModBlocks.ZYGRIN_LIGHT);
-        addDrop(ModBlocks.ZYGRIN_FLOWBLOCK);
-        addDrop(ModBlocks.ZYGRIN_FURNACE);
+            dropSelf(ModBlocks.FLUMROCK);
+            dropSelf(ModBlocks.FLUMROCK_TILES);
+            dropSelf(ModBlocks.CRUMBLING_FLUMROCK_TILES);
+            dropSelf(ModBlocks.FLUMROCK_TILE_STAIRS);
+            add(ModBlocks.FLUMROCK_TILE_SLAB, this::createSlabItemTable);
+            dropSelf(ModBlocks.FLUMROCK_TILE_WALL);
+            dropSelf(ModBlocks.FLUMROCK_CAULDRON);
 
-        addDrop(ModBlocks.UMBRUSK);
-        addDrop(ModBlocks.UMBRUSK_STAIRS);
-        addDrop(ModBlocks.UMBRUSK_SLAB, createSlabItemTable(ModBlocks.UMBRUSK_SLAB));
-        addDrop(ModBlocks.UMBRUSK_WALL);
-        addDrop(ModBlocks.UMBRUSK_BRICKS);
-        addDrop(ModBlocks.UMBRUSK_BRICK_STAIRS);
-        addDrop(ModBlocks.UMBRUSK_BRICK_SLAB, createSlabItemTable(ModBlocks.UMBRUSK_BRICK_SLAB));
-        addDrop(ModBlocks.UMBRUSK_BRICK_WALL);
+            dropSelf(ModBlocks.PENEBRIUM_SHROOM);
+            dropWhenSilkTouch(ModBlocks.PENEBRIUM_SHROOM_STEM);
+            dropWhenSilkTouch(ModBlocks.PENEBRIUM_SHROOM_BLOCK);
+            add(ModBlocks.PENEBRIUM_SPORE_BLOCK, block -> createMushroomBlockDrop(block, ModBlocks.PENEBRIUM_SHROOM));
 
-        addDrop(ModBlocks.FLUMROCK);
-        addDrop(ModBlocks.FLUMROCK_TILES);
-        addDrop(ModBlocks.CRUMBLING_FLUMROCK_TILES);
-        addDrop(ModBlocks.FLUMROCK_TILE_STAIRS);
-        addDrop(ModBlocks.FLUMROCK_TILE_SLAB, createSlabItemTable(ModBlocks.FLUMROCK_TILE_SLAB));
-        addDrop(ModBlocks.FLUMROCK_TILE_WALL);
-        addDrop(ModBlocks.FLUMROCK_CAULDRON);
+            dropSelf(ModBlocks.AURIC_SPORE_SPROUTS);
+            dropWhenSilkTouch(ModBlocks.AURIC_SHROOM_STEM);
+            add(ModBlocks.AURIC_SPORE_BLOCK, block -> createSingleItemTableWithSilkTouch(block, ModBlocks.AURIC_SPORE_SPROUTS));
+            add(ModBlocks.AURIC_SHROOM_BLOCK, block -> createMushroomBlockDrop(block, ModBlocks.AURIC_SPORE_SPROUTS));
 
+            this.add(
+                    ModBlocks.AURIC_SPORE_LAYER,
+                    block -> LootTable.lootTable()
+                            .withPool(
+                                    LootPool.lootPool()
+                                            .when(LootItemEntityPropertyCondition.entityPresent(LootContext.EntityTarget.THIS))
+                                            .add(
+                                                    AlternativesEntry.alternatives(
+                                                            AlternativesEntry.alternatives(
+                                                                            LayeredAuricSporeBlock.ALL_MODELS.getPossibleValues(),
+                                                                            integer -> LootItem.lootTableItem(ModBlocks.AURIC_SPORE_SPROUTS)
+                                                                                    .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(LayeredAuricSporeBlock.ALL_MODELS, integer)))
+                                                                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, (float) integer.intValue())))
+                                                                    )
+                                                                    .when(this.doesNotHaveSilkTouch()),
+                                                            AlternativesEntry.alternatives(
+                                                                    SnowLayerBlock.LAYERS.getPossibleValues(),
+                                                                    integer -> LootItem.lootTableItem(ModBlocks.AURIC_SPORE_LAYER)
+                                                                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly((float) integer.intValue())))
+                                                                            .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(LayeredAuricSporeBlock.ALL_MODELS, integer)))
+                                                            )
+                                                    )
+                                            )
+                            )
+            );
+        }
 
-        addDrop(ModBlocks.PENEBRIUM_SHROOM);
-        addDropWithSilkTouch(ModBlocks.PENEBRIUM_SHROOM_STEM);
-        addDropWithSilkTouch(ModBlocks.PENEBRIUM_SHROOM_BLOCK);
-        addDrop(ModBlocks.PENEBRIUM_SPORE_BLOCK, createMushroomBlockDrop(ModBlocks.PENEBRIUM_SPORE_BLOCK, ModBlocks.PENEBRIUM_SHROOM));
-
-        addDrop(ModBlocks.AURIC_SPORE_SPROUTS);
-        addDropWithSilkTouch(ModBlocks.AURIC_SHROOM_STEM);
-        addDrop(ModBlocks.AURIC_SPORE_BLOCK, silkTouchOrItemDrops(ModBlocks.AURIC_SPORE_BLOCK,ModBlocks.AURIC_SPORE_SPROUTS.asItem()));
-        addDrop(ModBlocks.AURIC_SHROOM_BLOCK, createMushroomBlockDrop(ModBlocks.AURIC_SHROOM_BLOCK, ModBlocks.AURIC_SPORE_SPROUTS));
-
-/*        addDrop(ModBlocks.AURIC_SPORE_LAYER, (block) -> {//TODO
-            return LootTable.builder().pool(LootPool.builder().conditionally(EntityPropertiesLootCondition.create(LootContext.EntityTarget.THIS)).with(AlternativeEntry.builder(LayeredAuricSporeBlock.LAYERS.getValues() , (integer) -> {
-                return ItemEntry.builder(ModBlocks.AURIC_SPORE_LAYER).apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create((float) integer ))).conditionally(BlockStatePropertyLootCondition.builder(block).properties(StatePredicate.Builder.create().exactMatch(LayeredAuricSporeBlock.LAYERS, integer )));
-            }).conditionally(WITH_SILK_TOUCH)));
-        });*/
-        this.addDrop(
-                ModBlocks.AURIC_SPORE_LAYER,
-                block -> LootTable.builder()
-                        .withPool(
-                                LootPool.builder()
-                                        .when(LootItemEntityPropertyCondition.create(LootContext.EntityTarget.THIS))
-                                        .with(
-                                                AlternativesEntry.builder(
-                                                        AlternativesEntry.builder(
-                                                                        LayeredAuricSporeBlock.ALL_MODELS.getValues(),
-                                                                        integer -> LootItem.builder(ModBlocks.AURIC_SPORE_SPROUTS)
-                                                                                .when(LootItemBlockStatePropertyCondition.builder(block).properties(StatePropertiesPredicate.Builder.create().hasProperty(LayeredAuricSporeBlock.ALL_MODELS, integer)))
-                                                                                .apply(SetItemCountFunction.builder(UniformGenerator.create(0, (float)integer.getAsInt())))
-                                                                )
-                                                                .when(this.doesNotHaveSilkTouch()),
-                                                        AlternativesEntry.builder(
-                                                                SnowLayerBlock.ALL_MODELS.getValues(),
-                                                                integer -> LootItem.builder(ModBlocks.AURIC_SPORE_LAYER)
-                                                                        .apply(SetItemCountFunction.builder(ConstantValue.create((float)integer.getAsInt())))
-                                                                        .when(LootItemBlockStatePropertyCondition.builder(block).properties(StatePropertiesPredicate.Builder.create().hasProperty(LayeredAuricSporeBlock.ALL_MODELS, integer)))
-                                                        )
-                                                )
-                                        )
-                        )
-        );
+        @Override
+        protected Iterable<Block> getKnownBlocks() {
+            return BuiltInRegistries.BLOCK.stream()
+                    .filter(b -> BuiltInRegistries.BLOCK.getKey(b).getNamespace().equals(SculkDepths.MOD_ID))
+                    .filter(b -> this.map.containsKey(b.getLootTable()))
+                    .toList();
+        }
     }
-
-    public LootTable.Builder createMushroomBlockDrop(Block withSilkTouch, ItemLike withoutSilkTouch) {
-        return this.dropsWithSilkTouch(withSilkTouch, this.applyExplosionDecay(withSilkTouch,
-                LootItem.builder(withoutSilkTouch)
-                        .apply(SetItemCountFunction.builder(UniformGenerator.create(-6.0F, 2.0F)))//TODO the chance?
-                        .apply(LimitCount.builder(IntRange.lowerBound(0)))));
-    }
-
-
-    public LootTable.Builder createNameableBlockEntityTable(Block drop) {
-        return LootTable.builder().withPool(this.applyExplosionCondition(drop, LootPool.builder().setRolls(ConstantValue.create(1.0f)).with(LootItem.builder(drop).apply(CopyNameFunction.builder(CopyNameFunction.NameSource.BLOCK_ENTITY)))));
-    }
-
-/*    public LootTable.Builder copperLikeOreDrops(Block drop, Item item) {
-        return BlockLootTableGenerator.dropsWithSilkTouch(drop, (LootPoolEntry.Builder) this.applyExplosionDecay(drop,
-                ((LeafEntry.Builder)
-                        ItemEntry.builder(item)
-                                .apply(SetCountLootFunction
-                                        .builder(UniformLootNumberProvider
-                                                .create(2.0f, 5.0f))))
-                        .apply(ApplyBonusLootFunction.oreDrops(Enchantments.FORTUNE))));
-    }*/
-
-    public LootTable.Builder silkTouchOrItemDrops(Block withSilkTouch, Item withoutSilkTouch) {
-        HolderLookup.RegistryLookup<Enchantment> impl = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
-        return this.dropsWithSilkTouch(withSilkTouch, (LootPoolEntryContainer.Builder)this.applyExplosionDecay(withSilkTouch, LootItem.builder(withoutSilkTouch)));
-    }
-
 }

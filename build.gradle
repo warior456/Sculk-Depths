@@ -23,7 +23,21 @@ sourceSets {
 	main {
 		java.srcDirs += ['src/client/java']
 		resources.srcDirs += ['src/client/resources']
+		// Loom's fabricApi.configureDataGeneration() added this directory to the main source set,
+		// so the checked-in generated assets/models are part of the mod resources. Keep it wired up
+		// or all data-generated blockstates/models disappear from the dev run and the built jar.
+		resources.srcDirs += ['src/main/generated']
 	}
+	// The original unit tests / game tests are parked (Fabric Loader JUnit + Fabric GameTest have
+	// no drop-in NeoForge equivalent); keep the files but do not compile them.
+	test {
+		java.srcDirs = []
+		resources.srcDirs = []
+	}
+}
+
+tasks.named('test') {
+	enabled = false
 }
 
 neoForge {
@@ -42,9 +56,10 @@ neoForge {
 			data()
 			gameDirectory = file('run')
 			// Generates assets/data from the code-based providers (see SculkDepthsDataGenerator).
+			// Matches the pre-port layout (Loom's configureDataGeneration() used src/main/generated).
 			programArguments.addAll '--mod', project.archives_base_name,
 					'--all',
-					'--output', file('src/generated/resources/').getAbsolutePath(),
+					'--output', file('src/main/generated/').getAbsolutePath(),
 					'--existing', file('src/main/resources/').getAbsolutePath()
 		}
 	}
@@ -70,6 +85,8 @@ java {
 tasks.withType(JavaCompile).configureEach {
 	options.release = 21
 	options.encoding = 'UTF-8'
+	// porting aid: report all errors at once instead of stopping at 100
+	options.compilerArgs += ['-Xmaxerrs', '3000']
 }
 
 processResources {

@@ -1,8 +1,9 @@
 package net.ugi.sculk_depths.particle;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.BaseAshSmokeParticle;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
@@ -10,21 +11,20 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class PenebriumSporeParticle
-        extends AscendingParticle {
+        extends BaseAshSmokeParticle {
 
 
 
-    protected PenebriumSporeParticle(ClientLevel world, double x, double y, double z, float randomVelocityXMultiplier, float randomVelocityYMultiplier, float randomVelocityZMultiplier, double velocityX, double velocityY, double velocityZ, float scaleMultiplier, SpriteProvider sprite, float colorMultiplier, int baseMaxAge, float gravity, boolean hasPhysics) {
-        super(world, x, y, z, randomVelocityXMultiplier, randomVelocityYMultiplier, randomVelocityZMultiplier, velocityX, velocityY, velocityZ, scaleMultiplier, sprite, colorMultiplier, baseMaxAge, gravity, hasPhysics);
+    protected PenebriumSporeParticle(ClientLevel level, double x, double y, double z, float randomVelocityXMultiplier, float randomVelocityYMultiplier, float randomVelocityZMultiplier, double velocityX, double velocityY, double velocityZ, float scaleMultiplier, SpriteSet sprite, float colorMultiplier, int baseMaxAge, float gravity, boolean hasPhysics) {
+        super(level, x, y, z, randomVelocityXMultiplier, randomVelocityYMultiplier, randomVelocityZMultiplier, velocityX, velocityY, velocityZ, scaleMultiplier, sprite, colorMultiplier, baseMaxAge, gravity, hasPhysics);
     }
 
 
-    @Environment(value = EnvType.CLIENT)
-    public static class Factory
-            implements ParticleFactory<SimpleParticleType> {
-        private final SpriteProvider sprite;
+        public static class Factory
+            implements ParticleProvider<SimpleParticleType> {
+        private final SpriteSet sprite;
 
-        public Factory(SpriteProvider sprite) {
+        public Factory(SpriteSet sprite) {
             this.sprite = sprite;
         }
 
@@ -34,7 +34,7 @@ public class PenebriumSporeParticle
 
             PenebriumSporeParticle particleFromItem = new PenebriumSporeParticle(clientLevel, x, y, z, 0.3f, 0.1f, 0.3f, 0f, -0.01f, 0f, 0.18f, this.sprite, 1f, 500, 0.01f, true);
             particleFromItem.setColor(1,1,1);
-            particleFromItem.lifetime = Mth.nextBetween(clientLevel.random, 500, 1000);
+            particleFromItem.lifetime = Mth.randomBetweenInclusive(clientLevel.random, 500, 1000);
             //particle.gravityStrength = 0.01f;
             return particleFromItem;
         }

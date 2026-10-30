@@ -1,5 +1,6 @@
 /*
 package net.ugi.sculk_depths.item.crystal;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -60,7 +61,7 @@ public class CrystalUpgrade extends Item {
     static List<String> crystalItemNbtList = Arrays.asList("\"white\"", "\"blue\"", "\"orange\"", "\"lime\"");
 
 
-    public CrystalUpgrade(Settings settings) {
+    public CrystalUpgrade(BlockBehaviour.Properties properties) {
         super(settings);
     }
 

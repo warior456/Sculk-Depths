@@ -17,19 +17,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
-    protected LivingEntityMixin(EntityType<?> type, Level world) {
-        super(type, world);
+    protected LivingEntityMixin(EntityType<?> type, Level level) {
+        super(type, level);
     }
 
-    @Inject(method = "onKilledBy", forIndex = @At("RETURN"))
+    @Inject(method = "createWitherRose", at = @At("RETURN"))
     public void sculkDepths$onKilledBy(@Nullable LivingEntity adversary, CallbackInfo ci) {
-        if (this.getWorld().isClientSide) {
+        if (this.level().isClientSide) {
             return;
         }
         if (adversary instanceof Warden && this.getType().is(ModEntityTags.DROPS_ENERGY_ESSENCE)) {
-            ItemEntity itemEntity = new ItemEntity(this.getWorld(), this.getX(), this.getY(), this.getZ(), new ItemStack(ModItems.ENERGY_ESSENCE));
-            this.getWorld().spawnEntity(itemEntity);
-            this.getWorld().spawnEntity(itemEntity);
+            ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), new ItemStack(ModItems.ENERGY_ESSENCE));
+            this.level().addFreshEntity(itemEntity);
         }
     }
 }

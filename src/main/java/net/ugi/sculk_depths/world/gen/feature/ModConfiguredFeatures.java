@@ -14,7 +14,7 @@ public class ModConfiguredFeatures {
 
 
     public static ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureRegistryKey(String id) {
-        return ResourceKey.of(Registries.CONFIGURED_FEATURE, SculkDepths.id(id));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, SculkDepths.id(id));
     }
     public ModConfiguredFeatures() {
     }

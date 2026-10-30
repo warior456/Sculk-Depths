@@ -41,121 +41,121 @@ class PortalFrameGeometryEquivalenceTest {
     }
 
     private static Level worldWithPoweredPedestalAt(BlockPos pedestalPos) {
-        Level world = mock(Level.class);
-        condition(world.getBlockState(any(BlockPos.class))).thenReturn(Blocks.AIR.getDefaultState());
-        condition(world.getBlockState(pedestalPos)).thenReturn(POWERED_PEDESTAL);
-        return world;
+        Level level = mock(Level.class);
+        condition(level.getBlockState(any(BlockPos.class))).thenReturn(Blocks.AIR.getDefaultState());
+        condition(level.getBlockState(pedestalPos)).thenReturn(POWERED_PEDESTAL);
+        return level;
     }
 
     @Test
     void eastNorthFrameMatchesOriginalOffsets() {
-        Level world = worldWithPoweredPedestalAt(ORIGIN.north(10));
+        Level level = worldWithPoweredPedestalAt(ORIGIN.north(10));
 
-        List<BlockPos> createTopFrame = Portal.getFramePos(Direction.EAST, ORIGIN, world);
+        List<BlockPos> createTopFrame = Portal.getFramePos(Direction.EAST, ORIGIN, level);
         assertNotNull(createTopFrame);
         assertValueEqual(2, createTopFrame.size());
         assertValueEqual(new BlockPos(5, 70, -13), createTopFrame.get(0), "east/north frame first corner");
         assertValueEqual(new BlockPos(5, 70, -12), createTopFrame.get(1), "east/north frame second corner");
 
-        BlockPos anchor = Portal.getFrameAnchorPos(Direction.EAST, ORIGIN, world);
+        BlockPos anchor = Portal.getFrameAnchorPos(Direction.EAST, ORIGIN, level);
         assertValueEqual(new BlockPos(5, 77, -12), anchor, "east/north anchor");
     }
 
     @Test
     void eastSouthFrameMatchesOriginalOffsets() {
-        Level world = worldWithPoweredPedestalAt(ORIGIN.south(10));
+        Level level = worldWithPoweredPedestalAt(ORIGIN.south(10));
 
-        List<BlockPos> createTopFrame = Portal.getFramePos(Direction.EAST, ORIGIN, world);
+        List<BlockPos> createTopFrame = Portal.getFramePos(Direction.EAST, ORIGIN, level);
         assertNotNull(createTopFrame);
         assertValueEqual(2, createTopFrame.size());
         assertValueEqual(new BlockPos(5, 70, -3), createTopFrame.get(0), "east/south frame first corner");
         assertValueEqual(new BlockPos(5, 70, -2), createTopFrame.get(1), "east/south frame second corner");
 
-        BlockPos anchor = Portal.getFrameAnchorPos(Direction.EAST, ORIGIN, world);
+        BlockPos anchor = Portal.getFrameAnchorPos(Direction.EAST, ORIGIN, level);
         assertValueEqual(new BlockPos(5, 77, -2), anchor, "east/south anchor");
     }
 
     @Test
     void northEastFrameMatchesOriginalOffsets() {
-        Level world = worldWithPoweredPedestalAt(ORIGIN.east(10));
+        Level level = worldWithPoweredPedestalAt(ORIGIN.east(10));
 
-        List<BlockPos> createTopFrame = Portal.getFramePos(Direction.NORTH, ORIGIN, world);
+        List<BlockPos> createTopFrame = Portal.getFramePos(Direction.NORTH, ORIGIN, level);
         assertNotNull(createTopFrame);
         assertValueEqual(2, createTopFrame.size());
         assertValueEqual(new BlockPos(15, 70, -2), createTopFrame.get(0), "north/east frame first corner");
         assertValueEqual(new BlockPos(14, 70, -2), createTopFrame.get(1), "north/east frame second corner");
 
-        BlockPos anchor = Portal.getFrameAnchorPos(Direction.NORTH, ORIGIN, world);
+        BlockPos anchor = Portal.getFrameAnchorPos(Direction.NORTH, ORIGIN, level);
         assertValueEqual(new BlockPos(15, 77, -2), anchor, "north/east anchor");
     }
 
     @Test
     void northWestFrameMatchesOriginalOffsets() {
-        Level world = worldWithPoweredPedestalAt(ORIGIN.west(10));
+        Level level = worldWithPoweredPedestalAt(ORIGIN.west(10));
 
-        List<BlockPos> createTopFrame = Portal.getFramePos(Direction.NORTH, ORIGIN, world);
+        List<BlockPos> createTopFrame = Portal.getFramePos(Direction.NORTH, ORIGIN, level);
         assertNotNull(createTopFrame);
         assertValueEqual(2, createTopFrame.size());
         assertValueEqual(new BlockPos(5, 70, -2), createTopFrame.get(0), "north/west frame first corner");
         assertValueEqual(new BlockPos(4, 70, -2), createTopFrame.get(1), "north/west frame second corner");
 
-        BlockPos anchor = Portal.getFrameAnchorPos(Direction.NORTH, ORIGIN, world);
+        BlockPos anchor = Portal.getFrameAnchorPos(Direction.NORTH, ORIGIN, level);
         assertValueEqual(new BlockPos(5, 77, -2), anchor, "north/west anchor");
     }
 
     @Test
     void westNorthFrameMatchesOriginalOffsets() {
-        Level world = worldWithPoweredPedestalAt(ORIGIN.north(10));
+        Level level = worldWithPoweredPedestalAt(ORIGIN.north(10));
 
-        List<BlockPos> createTopFrame = Portal.getFramePos(Direction.WEST, ORIGIN, world);
+        List<BlockPos> createTopFrame = Portal.getFramePos(Direction.WEST, ORIGIN, level);
         assertNotNull(createTopFrame);
         assertValueEqual(2, createTopFrame.size());
         assertValueEqual(new BlockPos(15, 70, -12), createTopFrame.get(0), "west/north frame first corner");
         assertValueEqual(new BlockPos(15, 70, -11), createTopFrame.get(1), "west/north frame second corner");
 
-        BlockPos anchor = Portal.getFrameAnchorPos(Direction.WEST, ORIGIN, world);
+        BlockPos anchor = Portal.getFrameAnchorPos(Direction.WEST, ORIGIN, level);
         assertValueEqual(new BlockPos(15, 77, -12), anchor, "west/north anchor");
     }
 
     @Test
     void westSouthFrameMatchesOriginalOffsets() {
-        Level world = worldWithPoweredPedestalAt(ORIGIN.south(10));
+        Level level = worldWithPoweredPedestalAt(ORIGIN.south(10));
 
-        List<BlockPos> createTopFrame = Portal.getFramePos(Direction.WEST, ORIGIN, world);
+        List<BlockPos> createTopFrame = Portal.getFramePos(Direction.WEST, ORIGIN, level);
         assertNotNull(createTopFrame);
         assertValueEqual(2, createTopFrame.size());
         assertValueEqual(new BlockPos(15, 70, -2), createTopFrame.get(0), "west/south frame first corner");
         assertValueEqual(new BlockPos(15, 70, -1), createTopFrame.get(1), "west/south frame second corner");
 
-        BlockPos anchor = Portal.getFrameAnchorPos(Direction.WEST, ORIGIN, world);
+        BlockPos anchor = Portal.getFrameAnchorPos(Direction.WEST, ORIGIN, level);
         assertValueEqual(new BlockPos(15, 77, -2), anchor, "west/south anchor");
     }
 
     @Test
     void southEastFrameMatchesOriginalOffsets() {
-        Level world = worldWithPoweredPedestalAt(ORIGIN.east(10));
+        Level level = worldWithPoweredPedestalAt(ORIGIN.east(10));
 
-        List<BlockPos> createTopFrame = Portal.getFramePos(Direction.SOUTH, ORIGIN, world);
+        List<BlockPos> createTopFrame = Portal.getFramePos(Direction.SOUTH, ORIGIN, level);
         assertNotNull(createTopFrame);
         assertValueEqual(2, createTopFrame.size());
         assertValueEqual(new BlockPos(16, 70, -12), createTopFrame.get(0), "south/east frame first corner");
         assertValueEqual(new BlockPos(15, 70, -12), createTopFrame.get(1), "south/east frame second corner");
 
-        BlockPos anchor = Portal.getFrameAnchorPos(Direction.SOUTH, ORIGIN, world);
+        BlockPos anchor = Portal.getFrameAnchorPos(Direction.SOUTH, ORIGIN, level);
         assertValueEqual(new BlockPos(15, 77, -12), anchor, "south/east anchor");
     }
 
     @Test
     void southWestFrameMatchesOriginalOffsets() {
-        Level world = worldWithPoweredPedestalAt(ORIGIN.west(10));
+        Level level = worldWithPoweredPedestalAt(ORIGIN.west(10));
 
-        List<BlockPos> createTopFrame = Portal.getFramePos(Direction.SOUTH, ORIGIN, world);
+        List<BlockPos> createTopFrame = Portal.getFramePos(Direction.SOUTH, ORIGIN, level);
         assertNotNull(createTopFrame);
         assertValueEqual(2, createTopFrame.size());
         assertValueEqual(new BlockPos(6, 70, -12), createTopFrame.get(0), "south/west frame first corner");
         assertValueEqual(new BlockPos(5, 70, -12), createTopFrame.get(1), "south/west frame second corner");
 
-        BlockPos anchor = Portal.getFrameAnchorPos(Direction.SOUTH, ORIGIN, world);
+        BlockPos anchor = Portal.getFrameAnchorPos(Direction.SOUTH, ORIGIN, level);
         assertValueEqual(new BlockPos(5, 77, -12), anchor, "south/west anchor");
     }
 }

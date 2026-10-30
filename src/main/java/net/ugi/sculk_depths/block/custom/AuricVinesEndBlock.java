@@ -1,4 +1,5 @@
 package net.ugi.sculk_depths.block.custom;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 
 import com.mojang.serialization.MapCodec;
@@ -12,15 +13,16 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.ugi.sculk_depths.block.ModBlocks;
 
 public class AuricVinesEndBlock extends GrowingPlantHeadBlock {
+    public static final MapCodec<AuricVinesEndBlock> CODEC = simpleCodec(AuricVinesEndBlock::new);
     @Override
-    protected MapCodec<? extends GrowingPlantHeadBlock> getCodec() {
-        return null;
+    protected MapCodec<? extends GrowingPlantHeadBlock> codec() {
+        return CODEC;
     }
 
     protected static final VoxelShape SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
 
-    public AuricVinesEndBlock(Settings settings) {
-        super(settings, Direction.MIN_Y, SHAPE, false, 0.1);
+    public AuricVinesEndBlock(BlockBehaviour.Properties properties) {
+        super(properties, Direction.DOWN, SHAPE, false, 0.1);
     }
 
     protected int getBlocksToGrowWhenBonemealed(RandomSource random) {

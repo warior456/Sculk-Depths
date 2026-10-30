@@ -1,6 +1,8 @@
 package net.ugi.sculk_depths.entity.custom;
 
-import net.minecraft.entity.*;
+import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -21,8 +23,8 @@ public class ChomperColossusEntity extends PathfinderMob {
     private static double viewScale = 1.0;
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
-    public ChomperColossusEntity(EntityType<? extends PathfinderMob> entityType, Level world) {
-        super(entityType, world);
+    public ChomperColossusEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
+        super(entityType, level);
         this.xpReward = 50;
     }
 
@@ -34,46 +36,46 @@ public class ChomperColossusEntity extends PathfinderMob {
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = this.random.getInt(40) + 80;
-            this.idleAnimationState.start(this.age);
+            this.idleAnimationTimeout = this.random.nextInt(40) + 80;
+            this.idleAnimationState.start(this.tickCount);
         } else {
             --this.idleAnimationTimeout;
         }
     }
 
     @Override
-    public boolean shouldRender(double distanceToPlayer) {
+    public boolean shouldRenderAtSqrDistance(double distance) {
         double d = 30;
-        return distanceToPlayer < (d *= 64.0 * viewScale) * d;
+        return distance < (d *= 64.0 * viewScale) * d;
     }
 
 
     @Override
-    protected void updateLimbs(float posDelta) {
-        float f = this.getState() == EntityPose.STANDING ? Math.minValue(posDelta * 6.0f, 1.0f) : 0.0f;
-        this.walkAnimation.updateLimbs(f, 0.2f);
+    protected void updateWalkAnimation(float posDelta) {
+        float f = this.getPose() == Pose.STANDING ? Math.min(posDelta * 6.0f, 1.0f) : 0.0f;
+        this.walkAnimation.update(f, 0.2f);
     }
 
     @Override
     public void tick() {
         super.tick();
-        if(this.getWorld().isClientSide()) {
+        if(this.level().isClientSide()) {
             setupAnimationStates();
         }
     }
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.add(1, new WaterAvoidingRandomStrollGoal(this, 1D));
-        this.goalSelector.add(2, new RandomLookAroundGoal(this));
-/*        this.goalSelector.add(0, new SwimGoal(this));
+        this.goalSelector.addGoal(1, new WaterAvoidingRandomStrollGoal(this, 1D));
+        this.goalSelector.addGoal(2, new RandomLookAroundGoal(this));
+/*        this.goalSelector.addGoal(0, new SwimGoal(this));
 
 
 
 
-        this.goalSelector.add(4, new WanderAroundFarGoal(this, 1D));
-        this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 4f));
-        this.goalSelector.add(6, new LookAroundGoal(this));*/
+        this.goalSelector.addGoal(4, new WanderAroundFarGoal(this, 1D));
+        this.goalSelector.addGoal(5, new LookAtEntityGoal(this, PlayerEntity.class, 4f));
+        this.goalSelector.addGoal(6, new LookAroundGoal(this));*/
     }
 
     public static AttributeSupplier.Builder createChomperColossusAttributes() {

@@ -1,24 +1,28 @@
 package net.ugi.sculk_depths.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.tags.ModTags;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
-    public ModBlockTagProvider(FabricDataOutput withResultSlot, CompletableFuture<HolderLookup.Provider> registriesFuture) {
-        super(withResultSlot, registriesFuture);
+public class ModBlockTagProvider extends BlockTagsProvider {
+    public ModBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, SculkDepths.MOD_ID, existingFileHelper);
     }
 
     @Override
-    protected void configure(HolderLookup.Provider arg) {
+    protected void addTags(HolderLookup.Provider provider) {
         tag(ModTags.Blocks.KRYSLUM_FLOWABLE_BLOCKS)
                 .add(ModBlocks.ZYGRIN_FLOWBLOCK);
 
@@ -178,7 +182,11 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
          */
 
-        tag(TagKey.of(Registries.SIDE, ResourceLocation.fromNamespaceAndPath("fabric", "needs_tool_level_4")))
+        tag(Tags.Blocks.NEEDS_NETHERITE_TOOL)
+                .add(ModBlocks.QUAZARITH_BLOCK)
+                .add(ModBlocks.QUAZARITH_ORE);
+
+        tag(TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("fabric", "needs_tool_level_4")))
                 .add(ModBlocks.QUAZARITH_BLOCK)
                 .add(ModBlocks.QUAZARITH_ORE);
 

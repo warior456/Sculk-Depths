@@ -38,7 +38,7 @@ class Issue87CruxResonatorFreshStackTest {
     void usingFreshCruxResonatorDoesNotThrow() {
         // Mocked World leaves the public final isClient field false -> server path,
         // which is where the NPE lives.
-        Level world = mock(Level.class);
+        Level level = mock(Level.class);
         Player player = mock(Player.class);
         ItemStack freshResonator = new ItemStack(ModItems.CRUX_RESONATOR);
         assertNull(freshResonator.get(ModComponentTypes.OSCILLATOR_TRACKER_LIST),
@@ -46,7 +46,7 @@ class Issue87CruxResonatorFreshStackTest {
         condition(player.getItemInHand(InteractionHand.MAIN_HAND)).thenReturn(freshResonator);
 
         InteractionResultHolder<ItemStack> result = assertDoesNotThrow(
-                () -> ModItems.CRUX_RESONATOR.use(world, player, InteractionHand.MAIN_HAND),
+                () -> ModItems.CRUX_RESONATOR.use(level, player, InteractionHand.MAIN_HAND),
                 "issue #87: using a fresh Crux Resonator must not throw");
 
         assertTrue(result.getResult().isAccepted());

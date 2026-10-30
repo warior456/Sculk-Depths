@@ -9,12 +9,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Warden.class)
-
 public class WardenEntityMixin {
 
-    @Inject(method="isValidTarget", forIndex=@At("RETURN"), cancellable=true)
-    public void doNotAttack(Entity entity, CallbackInfoReturnable<Boolean> cir){
+    @Inject(method = "canTargetEntity", at = @At("RETURN"), cancellable = true)
+    public void doNotAttack(Entity entity, CallbackInfoReturnable<Boolean> cir) {
         if (entity != null && entity.getType().is(ModEntityTags.NO_WARDEN_ANGER)) cir.setReturnValue(false);
     }
-    //Lnet/minecraft/entity/mob/WardenEntity;isValidTarget(Lnet/minecraft/entity/Entity;)Z
 }

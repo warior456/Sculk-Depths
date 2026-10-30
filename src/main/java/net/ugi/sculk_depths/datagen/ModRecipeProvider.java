@@ -1,27 +1,25 @@
 package net.ugi.sculk_depths.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.resources.ResourceLocation;
+import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.block.ModBlocks;
 import net.ugi.sculk_depths.item.ModItems;
 import net.ugi.sculk_depths.tags.ModTags;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ModRecipeProvider extends FabricRecipeProvider {
-    public ModRecipeProvider(FabricDataOutput withResultSlot, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+public class ModRecipeProvider extends RecipeProvider {
+    public ModRecipeProvider(PackOutput withResultSlot, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(withResultSlot, registriesFuture);
     }
     //examples:
@@ -30,7 +28,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
 
     @Override
-    public void generate(RecipeOutput exporter) {
+    protected void buildRecipes(RecipeOutput exporter) {
         stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_ZYGRIN, ModBlocks.ZYGRIN);
         stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_ZYGRIN, ModBlocks.ZYGRIN);
         stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ZYGRIN_PILLAR, ModBlocks.ZYGRIN);
@@ -57,7 +55,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         WoodRecipe(exporter, ModBlocks.STRIPPED_VALTROX_LOG, ModBlocks.STRIPPED_VALTROX_WOOD, RecipeCategory.BUILDING_BLOCKS);
         oneToOneConversionRecipe(exporter,ModBlocks.VALTROX_BUTTON, ModBlocks.VALTROX_PLANKS, "wooden_button",1);
-        DoorRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModBlocks.VALTROX_DOOR, RecipeCategory.REDSTONE_BLOCKS, "wooden_door");
+        DoorRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModBlocks.VALTROX_DOOR, RecipeCategory.REDSTONE, "wooden_door");
         FenceRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModBlocks.VALTROX_FENCE, RecipeCategory.MISC,"wooden_fence");
         FenceGateRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModBlocks.VALTROX_FENCE_GATE, RecipeCategory.MISC, "wooden_fence_gate");
         HanginSignRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModItems.VALTROX_HANGING_SIGN, RecipeCategory.MISC, "hanging_sign");
@@ -65,9 +63,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         SignRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModItems.VALTROX_SIGN, RecipeCategory.MISC, "wooden_sign");
         SlabRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModBlocks.VALTROX_SLAB);
         StairsRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModBlocks.VALTROX_STAIRS);
-        TrapDoorRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModBlocks.VALTROX_TRAPDOOR, RecipeCategory.REDSTONE_BLOCKS, "wooden_trapdoor");
+        TrapDoorRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModBlocks.VALTROX_TRAPDOOR, RecipeCategory.REDSTONE, "wooden_trapdoor");
         WoodRecipe(exporter, ModBlocks.VALTROX_LOG, ModBlocks.VALTROX_WOOD, RecipeCategory.BUILDING_BLOCKS);
-        PressurePlateRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModBlocks.VALTROX_PRESSURE_PLATE, RecipeCategory.REDSTONE_BLOCKS, "wooden_pressure_plate");
+        PressurePlateRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModBlocks.VALTROX_PRESSURE_PLATE, RecipeCategory.REDSTONE, "wooden_pressure_plate");
 
 
         //coated valtrox //TODO recipecategory
@@ -79,7 +77,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         oneToOneConversionRecipe(exporter,ModBlocks.COATED_VALTROX_BUTTON, ModBlocks.COATED_VALTROX_PLANKS, "wooden_button",1);
         CraftingTableCoatingRecipe(exporter, ModBlocks.VALTROX_BUTTON.asItem(), ModBlocks.COATED_VALTROX_BUTTON.asItem(), RecipeCategory.MISC, "glux_coating");
 
-        DoorRecipe(exporter, ModBlocks.COATED_VALTROX_PLANKS, ModBlocks.COATED_VALTROX_DOOR, RecipeCategory.REDSTONE_BLOCKS, "wooden_door");
+        DoorRecipe(exporter, ModBlocks.COATED_VALTROX_PLANKS, ModBlocks.COATED_VALTROX_DOOR, RecipeCategory.REDSTONE, "wooden_door");
         CraftingTableCoatingRecipe(exporter, ModBlocks.VALTROX_DOOR.asItem(), ModBlocks.COATED_VALTROX_DOOR.asItem(), RecipeCategory.MISC, "glux_coating");
 
         FenceRecipe(exporter, ModBlocks.COATED_VALTROX_PLANKS, ModBlocks.COATED_VALTROX_FENCE, RecipeCategory.MISC,"wooden_fence");
@@ -100,8 +98,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         StairsRecipe(exporter, ModBlocks.COATED_VALTROX_PLANKS, ModBlocks.COATED_VALTROX_STAIRS);
         CraftingTableCoatingRecipe(exporter, ModBlocks.VALTROX_STAIRS.asItem(), ModBlocks.COATED_VALTROX_STAIRS.asItem(), RecipeCategory.BUILDING_BLOCKS, "glux_coating");
 
-        TrapDoorRecipe(exporter, ModBlocks.COATED_VALTROX_PLANKS, ModBlocks.COATED_VALTROX_TRAPDOOR, RecipeCategory.REDSTONE_BLOCKS, "wooden_trapdoor");
-        CraftingTableCoatingRecipe(exporter, ModBlocks.VALTROX_TRAPDOOR.asItem(), ModBlocks.COATED_VALTROX_TRAPDOOR.asItem(), RecipeCategory.REDSTONE_BLOCKS, "glux_coating");
+        TrapDoorRecipe(exporter, ModBlocks.COATED_VALTROX_PLANKS, ModBlocks.COATED_VALTROX_TRAPDOOR, RecipeCategory.REDSTONE, "wooden_trapdoor");
+        CraftingTableCoatingRecipe(exporter, ModBlocks.VALTROX_TRAPDOOR.asItem(), ModBlocks.COATED_VALTROX_TRAPDOOR.asItem(), RecipeCategory.REDSTONE, "glux_coating");
 
         WoodRecipe(exporter, ModBlocks.COATED_VALTROX_LOG, ModBlocks.COATED_VALTROX_WOOD, RecipeCategory.BUILDING_BLOCKS);
         CraftingTableCoatingRecipe(exporter, ModBlocks.VALTROX_WOOD.asItem(), ModBlocks.COATED_VALTROX_WOOD.asItem(), RecipeCategory.BUILDING_BLOCKS, "glux_coating");
@@ -111,13 +109,13 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         planksFromLogs(exporter, ModBlocks.COATED_VALTROX_PLANKS, ModTags.Items.COATED_VALTROX_LOGS, 4);
         CraftingTableCoatingRecipe(exporter, ModBlocks.VALTROX_PLANKS.asItem(), ModBlocks.COATED_VALTROX_PLANKS.asItem(), RecipeCategory.MISC, "glux_coating");
 
-        PressurePlateRecipe(exporter, ModBlocks.COATED_VALTROX_PLANKS, ModBlocks.COATED_VALTROX_PRESSURE_PLATE, RecipeCategory.REDSTONE_BLOCKS, "wooden_pressure_plate");
-        CraftingTableCoatingRecipe(exporter, ModBlocks.VALTROX_PRESSURE_PLATE.asItem(), ModBlocks.COATED_VALTROX_PRESSURE_PLATE.asItem(), RecipeCategory.REDSTONE_BLOCKS, "glux_coating");
+        PressurePlateRecipe(exporter, ModBlocks.COATED_VALTROX_PLANKS, ModBlocks.COATED_VALTROX_PRESSURE_PLATE, RecipeCategory.REDSTONE, "wooden_pressure_plate");
+        CraftingTableCoatingRecipe(exporter, ModBlocks.VALTROX_PRESSURE_PLATE.asItem(), ModBlocks.COATED_VALTROX_PRESSURE_PLATE.asItem(), RecipeCategory.REDSTONE, "glux_coating");
 
         //Dried valtrox
         WoodRecipe(exporter, ModBlocks.STRIPPED_DRIED_VALTROX_LOG, ModBlocks.STRIPPED_DRIED_VALTROX_WOOD, RecipeCategory.BUILDING_BLOCKS);
         oneToOneConversionRecipe(exporter,ModBlocks.DRIED_VALTROX_BUTTON, ModBlocks.DRIED_VALTROX_PLANKS, "wooden_button",1);
-        DoorRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModBlocks.DRIED_VALTROX_DOOR, RecipeCategory.REDSTONE_BLOCKS, "wooden_door");
+        DoorRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModBlocks.DRIED_VALTROX_DOOR, RecipeCategory.REDSTONE, "wooden_door");
         FenceRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModBlocks.DRIED_VALTROX_FENCE, RecipeCategory.MISC,"wooden_fence");
         FenceGateRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModBlocks.DRIED_VALTROX_FENCE_GATE, RecipeCategory.MISC, "wooden_fence_gate");
         HanginSignRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModItems.DRIED_VALTROX_HANGING_SIGN, RecipeCategory.MISC, "hanging_sign");
@@ -125,41 +123,41 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         SignRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModItems.DRIED_VALTROX_SIGN, RecipeCategory.MISC, "wooden_sign");
         SlabRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModBlocks.DRIED_VALTROX_SLAB);
         StairsRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModBlocks.DRIED_VALTROX_STAIRS);
-        TrapDoorRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModBlocks.DRIED_VALTROX_TRAPDOOR, RecipeCategory.REDSTONE_BLOCKS, "wooden_trapdoor");
+        TrapDoorRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModBlocks.DRIED_VALTROX_TRAPDOOR, RecipeCategory.REDSTONE, "wooden_trapdoor");
         WoodRecipe(exporter, ModBlocks.DRIED_VALTROX_LOG, ModBlocks.DRIED_VALTROX_WOOD, RecipeCategory.BUILDING_BLOCKS);
-        PressurePlateRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModBlocks.DRIED_VALTROX_PRESSURE_PLATE, RecipeCategory.REDSTONE_BLOCKS, "wooden_pressure_plate");
+        PressurePlateRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModBlocks.DRIED_VALTROX_PRESSURE_PLATE, RecipeCategory.REDSTONE, "wooden_pressure_plate");
 
         //petrified valtrox
         WoodRecipe(exporter, ModBlocks.STRIPPED_PETRIFIED_VALTROX_LOG, ModBlocks.STRIPPED_PETRIFIED_VALTROX_WOOD, RecipeCategory.BUILDING_BLOCKS);
         oneToOneConversionRecipe(exporter,ModBlocks.PETRIFIED_VALTROX_BUTTON, ModBlocks.PETRIFIED_VALTROX_SLATES, "wooden_button",1);
-        DoorRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModBlocks.PETRIFIED_VALTROX_DOOR, RecipeCategory.REDSTONE_BLOCKS, "wooden_door");
+        DoorRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModBlocks.PETRIFIED_VALTROX_DOOR, RecipeCategory.REDSTONE, "wooden_door");
         HanginSignRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModItems.PETRIFIED_VALTROX_HANGING_SIGN, RecipeCategory.MISC, "hanging_sign");
         SignRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModItems.PETRIFIED_VALTROX_SIGN, RecipeCategory.MISC, "wooden_sign");
         SlabRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModBlocks.PETRIFIED_VALTROX_SLAB);
         planksFromLogs(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModTags.Items.PETRIFIED_VALTROX_LOGS, 4);
         StairsRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModBlocks.PETRIFIED_VALTROX_STAIRS);
-        TrapDoorRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModBlocks.PETRIFIED_VALTROX_TRAPDOOR, RecipeCategory.REDSTONE_BLOCKS, "wooden_trapdoor");
+        TrapDoorRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModBlocks.PETRIFIED_VALTROX_TRAPDOOR, RecipeCategory.REDSTONE, "wooden_trapdoor");
         FenceRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModBlocks.PETRIFIED_VALTROX_WALL, RecipeCategory.MISC,"wooden_fence");
         FenceGateRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModBlocks.PETRIFIED_VALTROX_WALL_GATE, RecipeCategory.MISC, "wooden_fence_gate");
         WoodRecipe(exporter, ModBlocks.VALTROX_LOG, ModBlocks.PETRIFIED_VALTROX_WOOD, RecipeCategory.BUILDING_BLOCKS);
-        PressurePlateRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModBlocks.PETRIFIED_VALTROX_PRESSURE_PLATE, RecipeCategory.REDSTONE_BLOCKS, "wooden_pressure_plate");
+        PressurePlateRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModBlocks.PETRIFIED_VALTROX_PRESSURE_PLATE, RecipeCategory.REDSTONE, "wooden_pressure_plate");
 
 
 
-        ShapedRecipeBuilder.create(RecipeCategory.DECORATIONS, Items.CANDLE)
-                .input('S', Items.STRING_UTF8)
-                .input('H', ModItems.GLOMPER_GLUX)
-                .addPattern("S")
-                .addPattern("H")
-                .criteria("has_string", has(Items.STRING_UTF8))
-                .criteria("has_glomper_glux", has(ModItems.GLOMPER_GLUX))
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, Items.CANDLE)
+                .define('S', Items.STRING)
+                .define('H', ModItems.GLOMPER_GLUX)
+                .pattern("S")
+                .pattern("H")
+                .unlockedBy("has_string", has(Items.STRING))
+                .unlockedBy("has_glomper_glux", has(ModItems.GLOMPER_GLUX))
                 .save(exporter);
 
-        ShapedRecipeBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.AURIC_SPORE_LAYER.asItem(), 6)
-            .addPattern("###")
-            .input('#', ModBlocks.AURIC_SPORE_BLOCK)
-            .criteria(hasItem(ModBlocks.AURIC_SPORE_BLOCK), has(ModBlocks.AURIC_SPORE_BLOCK))
-            .save(exporter, ResourceLocation.fromNamespaceAndPath(getSimpleRecipeName(ModBlocks.AURIC_SPORE_LAYER)));
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.AURIC_SPORE_LAYER.asItem(), 6)
+            .pattern("###")
+            .define('#', ModBlocks.AURIC_SPORE_BLOCK)
+            .unlockedBy(getHasName(ModBlocks.AURIC_SPORE_BLOCK), has(ModBlocks.AURIC_SPORE_BLOCK))
+            .save(exporter, SculkDepths.id(getSimpleRecipeName(ModBlocks.AURIC_SPORE_LAYER)));
 
 //todo recipecategory check
 //todo recipegroups
@@ -169,130 +167,130 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     }
 
     void SlabRecipe(RecipeOutput exporter, Block input, Block withResultSlot){
-        ShapedRecipeBuilder.create(RecipeCategory.BUILDING_BLOCKS, withResultSlot, 6)
-                .addPattern("XXX")
-                .input('X', input.asItem())
-                .criteria(hasItem(input.asItem()), has(input.asItem()))
-                .save(exporter, ResourceLocation.fromNamespaceAndPath(getSimpleRecipeName(withResultSlot.asItem())));
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, withResultSlot, 6)
+                .pattern("XXX")
+                .define('X', input.asItem())
+                .unlockedBy(getHasName(input.asItem()), has(input.asItem()))
+                .save(exporter, SculkDepths.id(getSimpleRecipeName(withResultSlot.asItem())));
 
     }
 
 
     void StairsRecipe(RecipeOutput exporter, Block input, Block withResultSlot){
-        ShapedRecipeBuilder.create(RecipeCategory.BUILDING_BLOCKS, withResultSlot, 4)
-                .addPattern("X  ")
-                .addPattern("XX ")
-                .addPattern("XXX")
-                .input('X', input.asItem())
-                .criteria(hasItem(input.asItem()), has(input.asItem()))
-                .save(exporter, ResourceLocation.fromNamespaceAndPath(getSimpleRecipeName(withResultSlot.asItem())));
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, withResultSlot, 4)
+                .pattern("X  ")
+                .pattern("XX ")
+                .pattern("XXX")
+                .define('X', input.asItem())
+                .unlockedBy(getHasName(input.asItem()), has(input.asItem()))
+                .save(exporter, SculkDepths.id(getSimpleRecipeName(withResultSlot.asItem())));
     }
 
     void CraftingTableCoatingRecipe(RecipeOutput exporter, Item uncoated, Item coated, RecipeCategory recipeCategory, String recipeGroupPrefix){
-        ShapelessRecipeBuilder.create(recipeCategory, coated)
-                .input(ModItems.GLOMPER_GLUX)
-                .input(uncoated)
-                .criteria(hasItem(uncoated.asItem()), has(uncoated.asItem()))
-                .recipeGroupPrefix(recipeGroupPrefix)
-                .save(exporter, ResourceLocation.fromNamespaceAndPath(getSimpleRecipeName(coated.asItem()) + "_from_glux"));
+        ShapelessRecipeBuilder.shapeless(recipeCategory, coated)
+                .requires(ModItems.GLOMPER_GLUX)
+                .requires(uncoated)
+                .unlockedBy(getHasName(uncoated.asItem()), has(uncoated.asItem()))
+                .group(recipeGroupPrefix)
+                .save(exporter, SculkDepths.id(getSimpleRecipeName(coated.asItem()) + "_from_glux"));
     }
 
     void PressurePlateRecipe(RecipeOutput exporter, Block input, Block withResultSlot, RecipeCategory recipeCategory, String recipeGroupPrefix){
-        ShapedRecipeBuilder.create(recipeCategory, withResultSlot, 1)
-                .addPattern("XX")
-                .input('X', input.asItem())
-                .criteria(hasItem(input.asItem()), has(input.asItem()))
-                .recipeGroupPrefix(recipeGroupPrefix)
-                .save(exporter, ResourceLocation.fromNamespaceAndPath(getSimpleRecipeName(withResultSlot.asItem())));
+        ShapedRecipeBuilder.shaped(recipeCategory, withResultSlot, 1)
+                .pattern("XX")
+                .define('X', input.asItem())
+                .unlockedBy(getHasName(input.asItem()), has(input.asItem()))
+                .group(recipeGroupPrefix)
+                .save(exporter, SculkDepths.id(getSimpleRecipeName(withResultSlot.asItem())));
     }
 
     void ChiseledRecipe(RecipeOutput exporter, Block input, Block withResultSlot, RecipeCategory recipeCategory){
-        ShapedRecipeBuilder.create(recipeCategory, withResultSlot, 1)
-                .addPattern("X")
-                .addPattern("X")
-                .input('X', input.asItem())
-                .criteria(hasItem(input.asItem()), has(input.asItem()))
-                .save(exporter, ResourceLocation.fromNamespaceAndPath(getSimpleRecipeName(withResultSlot.asItem())));
+        ShapedRecipeBuilder.shaped(recipeCategory, withResultSlot, 1)
+                .pattern("X")
+                .pattern("X")
+                .define('X', input.asItem())
+                .unlockedBy(getHasName(input.asItem()), has(input.asItem()))
+                .save(exporter, SculkDepths.id(getSimpleRecipeName(withResultSlot.asItem())));
     }
 
     void WoodRecipe(RecipeOutput exporter, Block input, Block withResultSlot, RecipeCategory recipeCategory){
-        ShapedRecipeBuilder.create(recipeCategory, withResultSlot, 3)
-                .addPattern("XX")
-                .addPattern("XX")
-                .input('X', input.asItem())
-                .criteria(hasItem(input.asItem()), has(input.asItem()))
-                .recipeGroupPrefix("bark")
-                .save(exporter, ResourceLocation.fromNamespaceAndPath(getSimpleRecipeName(withResultSlot.asItem())));
+        ShapedRecipeBuilder.shaped(recipeCategory, withResultSlot, 3)
+                .pattern("XX")
+                .pattern("XX")
+                .define('X', input.asItem())
+                .unlockedBy(getHasName(input.asItem()), has(input.asItem()))
+                .group("bark")
+                .save(exporter, SculkDepths.id(getSimpleRecipeName(withResultSlot.asItem())));
     }
 
     void DoorRecipe(RecipeOutput exporter, Block input, Block withResultSlot, RecipeCategory recipeCategory, String recipeGroupPrefix){
-        ShapedRecipeBuilder.create(recipeCategory, withResultSlot, 3)
-                .addPattern("XX")
-                .addPattern("XX")
-                .addPattern("XX")
-                .input('X', input.asItem())
-                .criteria(hasItem(input.asItem()), has(input.asItem()))
-                .recipeGroupPrefix(recipeGroupPrefix)
+        ShapedRecipeBuilder.shaped(recipeCategory, withResultSlot, 3)
+                .pattern("XX")
+                .pattern("XX")
+                .pattern("XX")
+                .define('X', input.asItem())
+                .unlockedBy(getHasName(input.asItem()), has(input.asItem()))
+                .group(recipeGroupPrefix)
                 .showNotification(true)
-                .save(exporter, ResourceLocation.fromNamespaceAndPath(getSimpleRecipeName(withResultSlot.asItem())));
+                .save(exporter, SculkDepths.id(getSimpleRecipeName(withResultSlot.asItem())));
     }
 
     void FenceRecipe(RecipeOutput exporter, Block input, Block withResultSlot, RecipeCategory recipeCategory, String recipeGroupPrefix){
-        ShapedRecipeBuilder.create(recipeCategory, withResultSlot, 3)
-                .addPattern("WXW")
-                .addPattern("WXW")
-                .input('X', Items.STICK)
-                .input('W', input.asItem())
-                .criteria(hasItem(input.asItem()), has(input.asItem()))
-                .recipeGroupPrefix(recipeGroupPrefix)
-                .save(exporter, ResourceLocation.fromNamespaceAndPath(getSimpleRecipeName(withResultSlot.asItem())));
+        ShapedRecipeBuilder.shaped(recipeCategory, withResultSlot, 3)
+                .pattern("WXW")
+                .pattern("WXW")
+                .define('X', Items.STICK)
+                .define('W', input.asItem())
+                .unlockedBy(getHasName(input.asItem()), has(input.asItem()))
+                .group(recipeGroupPrefix)
+                .save(exporter, SculkDepths.id(getSimpleRecipeName(withResultSlot.asItem())));
     }
 
     void FenceGateRecipe(RecipeOutput exporter, Block input, Block withResultSlot, RecipeCategory recipeCategory, String recipeGroupPrefix){
-        ShapedRecipeBuilder.create(recipeCategory, withResultSlot, 1)
-                .addPattern("XWX")
-                .addPattern("XWX")
-                .input('X', Items.STICK)
-                .input('W', input.asItem())
-                .criteria(hasItem(input.asItem()), has(input.asItem()))
-                .recipeGroupPrefix(recipeGroupPrefix)
-                .save(exporter, ResourceLocation.fromNamespaceAndPath(getSimpleRecipeName(withResultSlot.asItem())));
+        ShapedRecipeBuilder.shaped(recipeCategory, withResultSlot, 1)
+                .pattern("XWX")
+                .pattern("XWX")
+                .define('X', Items.STICK)
+                .define('W', input.asItem())
+                .unlockedBy(getHasName(input.asItem()), has(input.asItem()))
+                .group(recipeGroupPrefix)
+                .save(exporter, SculkDepths.id(getSimpleRecipeName(withResultSlot.asItem())));
     }
 
     void HanginSignRecipe(RecipeOutput exporter, Block input, Item withResultSlot, RecipeCategory recipeCategory, String recipeGroupPrefix){
-        ShapedRecipeBuilder.create(recipeCategory, withResultSlot, 1)
-                .addPattern("X X")
-                .addPattern("WWW")
-                .addPattern("WWW")
-                .input('X', Blocks.CHAIN)
-                .input('W', input.asItem())
-                .criteria(hasItem(input), has(input))
-                .recipeGroupPrefix(recipeGroupPrefix)
-                .save(exporter, ResourceLocation.fromNamespaceAndPath(getSimpleRecipeName(withResultSlot.asItem())));
+        ShapedRecipeBuilder.shaped(recipeCategory, withResultSlot, 1)
+                .pattern("X X")
+                .pattern("WWW")
+                .pattern("WWW")
+                .define('X', Blocks.CHAIN)
+                .define('W', input.asItem())
+                .unlockedBy(getHasName(input), has(input))
+                .group(recipeGroupPrefix)
+                .save(exporter, SculkDepths.id(getSimpleRecipeName(withResultSlot.asItem())));
     }
 
     void SignRecipe(RecipeOutput exporter, Block input, Item withResultSlot, RecipeCategory recipeCategory, String recipeGroupPrefix){
-        ShapedRecipeBuilder.create(recipeCategory, withResultSlot, 3)
-                .addPattern("WWW")
-                .addPattern("WWW")
-                .addPattern(" X ")
-                .input('X', Items.STICK)
-                .input('W', input.asItem())
-                .criteria(hasItem(input), has(input))
-                .recipeGroupPrefix(recipeGroupPrefix)
+        ShapedRecipeBuilder.shaped(recipeCategory, withResultSlot, 3)
+                .pattern("WWW")
+                .pattern("WWW")
+                .pattern(" X ")
+                .define('X', Items.STICK)
+                .define('W', input.asItem())
+                .unlockedBy(getHasName(input), has(input))
+                .group(recipeGroupPrefix)
                 .showNotification(true)
-                .save(exporter, ResourceLocation.fromNamespaceAndPath(getSimpleRecipeName(withResultSlot.asItem())));
+                .save(exporter, SculkDepths.id(getSimpleRecipeName(withResultSlot.asItem())));
     }
 
     void TrapDoorRecipe(RecipeOutput exporter, Block input, Block withResultSlot, RecipeCategory recipeCategory, String recipeGroupPrefix){
-        ShapedRecipeBuilder.create(recipeCategory, withResultSlot, 2)
-                .addPattern("XXX")
-                .addPattern("XXX")
-                .input('X', input.asItem())
-                .criteria(hasItem(input.asItem()), has(input.asItem()))
-                .recipeGroupPrefix(recipeGroupPrefix)
+        ShapedRecipeBuilder.shaped(recipeCategory, withResultSlot, 2)
+                .pattern("XXX")
+                .pattern("XXX")
+                .define('X', input.asItem())
+                .unlockedBy(getHasName(input.asItem()), has(input.asItem()))
+                .group(recipeGroupPrefix)
                 .showNotification(true)
-                .save(exporter, ResourceLocation.fromNamespaceAndPath(getSimpleRecipeName(withResultSlot.asItem())));
+                .save(exporter, SculkDepths.id(getSimpleRecipeName(withResultSlot.asItem())));
     }
 
 }

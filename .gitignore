@@ -40,3 +40,9 @@ replay_*.log
 *.jfr
 /src/main/generated/.cache/
 /remappedSrc/tools/__pycache__/
+
+# neoforge migration artifacts
+.agents/
+.migration_artifacts/
+tools/
+mappings/

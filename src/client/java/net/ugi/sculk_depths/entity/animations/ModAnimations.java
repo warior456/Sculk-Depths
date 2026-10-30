@@ -7,7 +7,7 @@ import net.minecraft.client.animation.AnimationChannel;
 
 public class ModAnimations {
 
-    public static final AnimationDefinition GLOMPER_IDLE = AnimationDefinition.Builder.create(3f).looping()
+    public static final AnimationDefinition GLOMPER_IDLE = AnimationDefinition.Builder.withLength(3f).looping()
             .addAnimation("head",
                     new AnimationChannel(AnimationChannel.Targets.SCALE,
                             new Keyframe(0f, KeyframeAnimations.scaleVec(1f, 1f, 1f),
@@ -118,7 +118,7 @@ public class ModAnimations {
                                     AnimationChannel.Interpolations.CATMULLROM),
                             new Keyframe(3f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM))).build();
-    public static final AnimationDefinition LESTER_IDLE = AnimationDefinition.Builder.create(2f).looping()
+    public static final AnimationDefinition LESTER_IDLE = AnimationDefinition.Builder.withLength(2f).looping()
             .addAnimation("head",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
                             new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
@@ -129,7 +129,7 @@ public class ModAnimations {
                                     AnimationChannel.Interpolations.LINEAR),
                             new Keyframe(2f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR))).build();
-    public static final AnimationDefinition LESTER_WALK = AnimationDefinition.Builder.create(1.2083433f).looping()
+    public static final AnimationDefinition LESTER_WALK = AnimationDefinition.Builder.withLength(1.2083433f).looping()
             .addAnimation("head",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
                             new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),

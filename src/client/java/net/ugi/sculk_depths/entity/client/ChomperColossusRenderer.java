@@ -9,21 +9,21 @@ import net.ugi.sculk_depths.SculkDepths;
 import net.ugi.sculk_depths.entity.custom.ChomperColossusEntity;
 
 public class ChomperColossusRenderer extends MobRenderer<ChomperColossusEntity, ChomperColossusModel<ChomperColossusEntity>> {
-    private static final ResourceLocation TEXTURE = SculkDepths.id( "textures/entity/chomper_colossus.png");
+    private static final ResourceLocation TEXTURE = SculkDepths.id("textures/entity/chomper_colossus.png");
 
     public ChomperColossusRenderer(EntityRendererProvider.Context context) {
-        super(context, new ChomperColossusModel<>(context.getPart(ModModelLayers.CHOMPER_COLOSSUS)), 0.6f);
+        super(context, new ChomperColossusModel<>(context.bakeLayer(ModModelLayers.CHOMPER_COLOSSUS)), 0.6f);
     }
 
     @Override
-    public ResourceLocation getTexture(ChomperColossusEntity entity) {
+    public ResourceLocation getTextureLocation(ChomperColossusEntity entity) {
         return TEXTURE;
     }
 
     @Override
     public void render(ChomperColossusEntity mobEntity, float f, float g, PoseStack matrixStack,
                        MultiBufferSource vertexConsumerProvider, int i) {
-        if(mobEntity.setIsBaby()) {
+        if(mobEntity.isBaby()) {
             matrixStack.scale(0.5f, 0.5f, 0.5f);
         } else {
             matrixStack.scale(1f, 1f, 1f);
