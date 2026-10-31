@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:dried_valtrox_button_from_dried_valtrox_planks"
+        "recipe": "sculk_depths:dried_valtrox_button_from_dried_valtrox_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:dried_valtrox_button_from_dried_valtrox_planks"
+      "sculk_depths:dried_valtrox_button_from_dried_valtrox_planks"
     ]
   }
 }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:coated_valtrox_wood"
+        "recipe": "sculk_depths:coated_valtrox_wood"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:coated_valtrox_wood"
+      "sculk_depths:coated_valtrox_wood"
     ]
   }
 }

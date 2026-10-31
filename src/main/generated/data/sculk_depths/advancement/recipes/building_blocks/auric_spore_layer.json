@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:auric_spore_layer"
+        "recipe": "sculk_depths:auric_spore_layer"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:auric_spore_layer"
+      "sculk_depths:auric_spore_layer"
     ]
   }
 }

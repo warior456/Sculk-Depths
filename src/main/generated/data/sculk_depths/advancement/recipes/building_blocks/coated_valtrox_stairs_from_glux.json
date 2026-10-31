@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:coated_valtrox_stairs_from_glux"
+        "recipe": "sculk_depths:coated_valtrox_stairs_from_glux"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:coated_valtrox_stairs_from_glux"
+      "sculk_depths:coated_valtrox_stairs_from_glux"
     ]
   }
 }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:petrified_valtrox_button_from_petrified_valtrox_slates"
+        "recipe": "sculk_depths:petrified_valtrox_button_from_petrified_valtrox_slates"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:petrified_valtrox_button_from_petrified_valtrox_slates"
+      "sculk_depths:petrified_valtrox_button_from_petrified_valtrox_slates"
     ]
   }
 }

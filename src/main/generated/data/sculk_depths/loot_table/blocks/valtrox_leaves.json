@@ -128,5 +128,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "sculk_depths:blocks/valtrox_leaves"
 }

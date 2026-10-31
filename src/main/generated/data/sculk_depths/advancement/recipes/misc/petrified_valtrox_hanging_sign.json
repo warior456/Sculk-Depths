@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:petrified_valtrox_hanging_sign"
+        "recipe": "sculk_depths:petrified_valtrox_hanging_sign"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:petrified_valtrox_hanging_sign"
+      "sculk_depths:petrified_valtrox_hanging_sign"
     ]
   }
 }

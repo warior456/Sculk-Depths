@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:quazarith_ingot"
+        "recipe": "sculk_depths:quazarith_ingot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:quazarith_ingot"
+      "sculk_depths:quazarith_ingot"
     ]
   }
 }

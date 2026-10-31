@@ -11,10 +11,20 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_components",
+              "include": [
+                "minecraft:custom_name"
+              ],
+              "source": "block_entity"
+            }
+          ],
           "name": "sculk_depths:zygrin_furnace"
         }
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "sculk_depths:blocks/zygrin_furnace"
 }

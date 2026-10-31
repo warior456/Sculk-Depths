@@ -57,5 +57,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "sculk_depths:blocks/auric_shroom_block"
 }

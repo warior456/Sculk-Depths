@@ -28,5 +28,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "sculk_depths:blocks/penebrium_shroom_block"
 }

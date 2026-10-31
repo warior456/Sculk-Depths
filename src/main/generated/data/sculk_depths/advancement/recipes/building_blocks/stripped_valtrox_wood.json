@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:stripped_valtrox_wood"
+        "recipe": "sculk_depths:stripped_valtrox_wood"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:stripped_valtrox_wood"
+      "sculk_depths:stripped_valtrox_wood"
     ]
   }
 }

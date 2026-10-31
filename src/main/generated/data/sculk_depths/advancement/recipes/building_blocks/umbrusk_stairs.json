@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:umbrusk_stairs"
+        "recipe": "sculk_depths:umbrusk_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:umbrusk_stairs"
+      "sculk_depths:umbrusk_stairs"
     ]
   }
 }

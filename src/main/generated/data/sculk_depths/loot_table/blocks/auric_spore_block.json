@@ -30,9 +30,9 @@
             },
             {
               "type": "minecraft:item",
-              "functions": [
+              "conditions": [
                 {
-                  "function": "minecraft:explosion_decay"
+                  "condition": "minecraft:survives_explosion"
                 }
               ],
               "name": "sculk_depths:auric_spore_sprouts"
@@ -42,5 +42,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "sculk_depths:blocks/auric_spore_block"
 }

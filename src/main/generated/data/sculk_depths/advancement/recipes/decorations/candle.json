@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_glomper_glux": {
+      "conditions": {
+        "items": [
+          {
+            "items": "sculk_depths:glomper_glux"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_string": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:string"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "sculk_depths:candle"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_string",
+      "has_glomper_glux"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "sculk_depths:candle"
+    ]
+  }
+}

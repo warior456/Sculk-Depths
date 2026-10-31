@@ -31,5 +31,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "sculk_depths:blocks/potted_auric_spore_sprouts"
 }
