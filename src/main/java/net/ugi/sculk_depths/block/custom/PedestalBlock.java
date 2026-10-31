@@ -14,7 +14,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.structure.StructureStart;
 import net.minecraft.util.*;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
@@ -37,7 +36,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.*;
 
 public class PedestalBlock extends FacingBlock {
     public static final BooleanProperty HAS_ENERGY_ESSENCE = ModProperties.HAS_ENERGY_ESSENCE;
@@ -47,8 +45,6 @@ public class PedestalBlock extends FacingBlock {
     private List<BlockPos> portalFramePos = new ArrayList<>();
     private PortalPhase portalPhase = PortalPhase.NONE;
     private List<BlockPos> posArray = new ArrayList<>();
-    private ChunkPos[] chunkArray = new ChunkPos[0];
-    private StructureStart structureStart;
 
     public enum PortalPhase {
         NONE,
@@ -76,10 +72,6 @@ public class PedestalBlock extends FacingBlock {
     public PedestalBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(HAS_ENERGY_ESSENCE, false));
-    }
-
-    private Executor getAsyncExecutor() {
-        return CompletableFuture.delayedExecutor(0, TimeUnit.MILLISECONDS);
     }
 
     @Override
@@ -153,36 +145,11 @@ public class PedestalBlock extends FacingBlock {
 
                 BlockPos anchor = Portal.getFrameAnchorPos(state.get(FACING),pos, world);
 
-                // Register a stub start so the structure will generate when chunks are actually generated/loaded.
-                // If the target chunk is already loaded, the method will place the center piece only.
-                if (!GenerateStructureAPI.registerStructureStartStub(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor)) {
-                    structureStart = GenerateStructureAPI.structureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor); //50ms (matteo)
-
-                    if (structureStart == null || !structureStart.hasChildren()) {portalPhase = PortalPhase.NONE;return;}
-
-                    BlockBox boundingBox = structureStart.getBoundingBox();
-                    chunkArray = GenerateStructureAPI.generateChunkArray(//not laggy
-                            new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMinX()),ChunkSectionPos.getSectionCoord(boundingBox.getMinZ())),
-                            new ChunkPos(ChunkSectionPos.getSectionCoord(boundingBox.getMaxX()),ChunkSectionPos.getSectionCoord(boundingBox.getMaxZ())),
-                            0,1);
-
-                    ServerWorld serverWorld = world.getServer().getWorld(ModDimensions.SCULK_DEPTHS_LEVEL_KEY);
-
-                    CompletableFuture.runAsync(() -> {
-                        for (ChunkPos chunkPos : chunkArray) {//load chunks
-                            assert serverWorld != null;
-                            serverWorld.getChunk(chunkPos.x, chunkPos.z);
-                        }
-                        GenerateStructureAPI.forceLoadNearbyChunks(chunkArray, serverWorld);
-
-                    }, getAsyncExecutor()).thenRunAsync(() -> {
-                        // This code runs back on the main server thread after the chunks are loaded
-                        GenerateStructureAPI.generateStructurePartial(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), structureStart, boundingBox.streamChunkPos().toArray(ChunkPos[]::new));
-                        portalPhase = PortalPhase.GEN_PORTAL;
-                    }, world.getServer());
-                    portalPhase = PortalPhase.WAITING_PARTICLES;
-                    world.scheduleBlockTick(pos,state.getBlock(),1);
-                    break;
+                // Attach the structure start to the target level and let worldgen place the pieces while
+                // the chunks generate. Already generated chunks are written immediately inside the helper.
+                if (!GenerateStructureAPI.placeStructureStart(world, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.identifier("portal_structure"), anchor)) {
+                    portalPhase = PortalPhase.NONE;
+                    return;
                 }
 
                 portalPhase = PortalPhase.GEN_PORTAL;
