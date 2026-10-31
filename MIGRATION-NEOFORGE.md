@@ -102,10 +102,45 @@ tab contents (`BuildCreativeModeTabContentsEvent`).
 - [x] **`gradlew build`**: the parked Fabric unit tests (`src/test/java`) broke the `test` task
       (missing JUnit + `net.fabricmc.loader`); the test source set is now excluded and `test`
       disabled. `build` is green and the jar contains the generated assets.
-- [x] **Datagen smoke test**: `gradlew runData` completes (block/item tags, recipes, loot tables;
-      model definitions are a no-op, see known gaps). Regenerated data is semantically identical to
-      the checked-in files except JSON formatting and the stale pre-1.21.1 recipe-advancement
-      namespace leftovers.
+- [x] **Datagen smoke test**: `gradlew runData` completes (block/item tags, recipes, loot tables,
+      blockstates/models). The model provider was ported, so model definitions are generated again
+      (see "Model datagen" below). Regenerated data is semantically identical to the checked-in
+      files except the intentional 1.21.1 refresh (`random_sequence` on loot tables, recipe ids in
+      advancements) described below.
+
+### Model datagen
+- [x] `ModModelProvider` is a real `DataProvider` again (was a no-op stub). It runs
+      `SculkDepthsBlockModelGenerators` (extends vanilla `BlockModelGenerators`) and saves
+      blockstates/models through `PackOutput` providers, plus flat item models for `CRUX` and
+      `MUSIC_DISC_ZINNIA`.
+- [x] Item-model delegation (vanilla `ModelProvider` behaviour) is restricted to the blocks the
+      provider generated a blockstate for. All other mod blocks (`zygrin`, `umbrusk`,
+      `crystal_block`, ...) keep their handwritten assets and do not get duplicate generated item
+      models.
+- [x] Logs use `logWithHorizontal(...)`, so the checked-in `*_log_horizontal` models/blockstates
+      are reproduced (the plain `log(...)` call emits only the vertical model).
+- [x] Several vanilla generator helpers (`family`, `woodProvider`, `createDoor`,
+      `createOrientableTrapdoor`, `createCrossBlockWithDefaultItem`, `createPlant`) are
+      package-private. They are widened for datagen through
+      `src/main/resources/META-INF/accesstransformer.cfg`, registered with
+      `neoForge.accessTransformers`. AT entries need full JVM descriptors, e.g.
+      `public net.minecraft.data.models.BlockModelGenerators family(Lnet/minecraft/world/level/block/Block;)Lnet/minecraft/data/models/BlockModelGenerators$BlockFamilyProvider;`.
+- [x] A helper placed in `net.minecraft.data.models` was rejected by the module layer
+      (`Module minecraft contains package ...`); the helper lives in
+      `net.ugi.sculk_depths.datagen` instead.
+- [x] Verification: regenerating into a temp directory produced exactly the checked-in set
+      (93 blockstates, 279 models, 84 item models) with zero semantic JSON differences. The two
+      remaining byte-level differences were only LF/CRLF; git stores LF (`core.autocrlf=true`), so
+      regenerating in `src/main/generated` is not a content change. `runData` now writes there again.
+- [x] Recipe datagen namespace fix: vanilla helpers (`stonecutterResultFromBase`,
+      `nineBlockStorageRecipes`, `oneToOneConversionRecipe`, `planksFromLogs`) derive bare item
+      paths and would save into `data/minecraft`. Local `stonecutterRecipe` / `ButtonRecipe` /
+      `planksRecipe` helpers (and explicit ids for storage blocks/candle) keep every recipe and its
+      advancement under `sculk_depths:`.
+- [x] First full regeneration refreshed the legacy Fabric-era data: 128 loot tables gained the
+      1.21 `random_sequence` field, 75 recipe advancements now point at `sculk_depths:` ids instead
+      of `minecraft:`, and `sculk_depths:candle` plus
+      `neoforge:needs_netherite_tool` were added. No recipe/tag files were removed.
 
 Verification (automated `runClient --quickPlaySingleplayer neoforge` with a temporary probe that
 opens `InventoryScreen` and quits; probe removed afterwards, log from `run/logs/latest.log`):
@@ -168,10 +203,16 @@ mod expects it to be registered before changing `PedestalBlock`/`GenerateStructu
 
 → this section.
 
+> "okay just continue"
+
+→ continued the model datagen port/verification (see "Model datagen" in Phase F).
+
 ## Known deliberate behaviour changes
 - `fstats` (Fabric Stats API) removed — no NeoForge counterpart bundled; no gameplay logic used it.
 - Fabric Transfer API cauldron interop removed (pipes/mods integration only).
-- `ModModelProvider` is currently a **stub** (`run()` returns nothing): the model datagen body
-  was not ported and vanilla 1.21.1 `ModelProvider` has no per-mod registration hook. The
-  generated blockstates/models are checked into `src/main/generated` and are shipped, so the mod
-  renders correctly; `runData` simply will not regenerate models until the provider is rewritten.
+- `ModModelProvider` is ported (no longer a stub) and reproduces the checked-in assets.
+- `META-INF/accesstransformer.cfg` is shipped solely to widen vanilla `BlockModelGenerators`
+  helpers used at datagen time; it does not change gameplay.
+- `ModRecipeProvider` uses local helper methods for stonecutting/buttons/planks and explicit ids
+  for storage blocks and the candle recipe so datagen does not write into the `minecraft`
+  namespace.

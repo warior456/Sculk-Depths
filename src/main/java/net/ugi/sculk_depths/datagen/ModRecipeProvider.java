@@ -7,8 +7,11 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.ugi.sculk_depths.SculkDepths;
@@ -29,13 +32,17 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput exporter) {
-        stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_ZYGRIN, ModBlocks.ZYGRIN);
-        stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_ZYGRIN, ModBlocks.ZYGRIN);
-        stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ZYGRIN_PILLAR, ModBlocks.ZYGRIN);
-        stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ZYGRIN_BRICKS, ModBlocks.ZYGRIN);
+        stonecutterRecipe(exporter, ModBlocks.CHISELED_ZYGRIN, ModBlocks.ZYGRIN);
+        stonecutterRecipe(exporter, ModBlocks.POLISHED_ZYGRIN, ModBlocks.ZYGRIN);
+        stonecutterRecipe(exporter, ModBlocks.ZYGRIN_PILLAR, ModBlocks.ZYGRIN);
+        stonecutterRecipe(exporter, ModBlocks.ZYGRIN_BRICKS, ModBlocks.ZYGRIN);
 
-        nineBlockStorageRecipes(exporter, RecipeCategory.MISC, ModItems.CRUX, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CRUX_BLOCK);
-        nineBlockStorageRecipes(exporter, RecipeCategory.MISC, ModItems.QUAZARITH_INGOT, RecipeCategory.BUILDING_BLOCKS, ModBlocks.QUAZARITH_BLOCK);
+        // Vanilla nineBlockStorageRecipes derives bare item paths as ids; pass explicit mod ids so the
+        // recipes and their advancements stay in data/sculk_depths instead of shadowing vanilla recipes.
+        nineBlockStorageRecipes(exporter, RecipeCategory.MISC, ModItems.CRUX, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CRUX_BLOCK,
+                "sculk_depths:crux_block", null, "sculk_depths:crux", null);
+        nineBlockStorageRecipes(exporter, RecipeCategory.MISC, ModItems.QUAZARITH_INGOT, RecipeCategory.BUILDING_BLOCKS, ModBlocks.QUAZARITH_BLOCK,
+                "sculk_depths:quazarith_block", null, "sculk_depths:quazarith_ingot", null);
 
         //tools
 
@@ -54,12 +61,12 @@ public class ModRecipeProvider extends RecipeProvider {
         //valtrox
 
         WoodRecipe(exporter, ModBlocks.STRIPPED_VALTROX_LOG, ModBlocks.STRIPPED_VALTROX_WOOD, RecipeCategory.BUILDING_BLOCKS);
-        oneToOneConversionRecipe(exporter,ModBlocks.VALTROX_BUTTON, ModBlocks.VALTROX_PLANKS, "wooden_button",1);
+        ButtonRecipe(exporter, ModBlocks.VALTROX_BUTTON, ModBlocks.VALTROX_PLANKS, "wooden_button");
         DoorRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModBlocks.VALTROX_DOOR, RecipeCategory.REDSTONE, "wooden_door");
         FenceRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModBlocks.VALTROX_FENCE, RecipeCategory.MISC,"wooden_fence");
         FenceGateRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModBlocks.VALTROX_FENCE_GATE, RecipeCategory.MISC, "wooden_fence_gate");
         HanginSignRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModItems.VALTROX_HANGING_SIGN, RecipeCategory.MISC, "hanging_sign");
-        planksFromLogs(exporter, ModBlocks.VALTROX_PLANKS, ModTags.Items.VALTROX_LOGS, 4);
+        planksRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModTags.Items.VALTROX_LOGS, 4);
         SignRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModItems.VALTROX_SIGN, RecipeCategory.MISC, "wooden_sign");
         SlabRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModBlocks.VALTROX_SLAB);
         StairsRecipe(exporter, ModBlocks.VALTROX_PLANKS, ModBlocks.VALTROX_STAIRS);
@@ -74,7 +81,7 @@ public class ModRecipeProvider extends RecipeProvider {
         WoodRecipe(exporter, ModBlocks.COATED_STRIPPED_VALTROX_LOG, ModBlocks.COATED_STRIPPED_VALTROX_WOOD, RecipeCategory.BUILDING_BLOCKS);
         CraftingTableCoatingRecipe(exporter, ModBlocks.STRIPPED_VALTROX_WOOD.asItem(), ModBlocks.COATED_STRIPPED_VALTROX_WOOD.asItem(), RecipeCategory.BUILDING_BLOCKS, "glux_coating");
 
-        oneToOneConversionRecipe(exporter,ModBlocks.COATED_VALTROX_BUTTON, ModBlocks.COATED_VALTROX_PLANKS, "wooden_button",1);
+        ButtonRecipe(exporter, ModBlocks.COATED_VALTROX_BUTTON, ModBlocks.COATED_VALTROX_PLANKS, "wooden_button");
         CraftingTableCoatingRecipe(exporter, ModBlocks.VALTROX_BUTTON.asItem(), ModBlocks.COATED_VALTROX_BUTTON.asItem(), RecipeCategory.MISC, "glux_coating");
 
         DoorRecipe(exporter, ModBlocks.COATED_VALTROX_PLANKS, ModBlocks.COATED_VALTROX_DOOR, RecipeCategory.REDSTONE, "wooden_door");
@@ -106,7 +113,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
         CraftingTableCoatingRecipe(exporter, ModBlocks.VALTROX_LOG.asItem(), ModBlocks.COATED_VALTROX_LOG.asItem(), RecipeCategory.BUILDING_BLOCKS, "glux_coating");
 
-        planksFromLogs(exporter, ModBlocks.COATED_VALTROX_PLANKS, ModTags.Items.COATED_VALTROX_LOGS, 4);
+        planksRecipe(exporter, ModBlocks.COATED_VALTROX_PLANKS, ModTags.Items.COATED_VALTROX_LOGS, 4);
         CraftingTableCoatingRecipe(exporter, ModBlocks.VALTROX_PLANKS.asItem(), ModBlocks.COATED_VALTROX_PLANKS.asItem(), RecipeCategory.MISC, "glux_coating");
 
         PressurePlateRecipe(exporter, ModBlocks.COATED_VALTROX_PLANKS, ModBlocks.COATED_VALTROX_PRESSURE_PLATE, RecipeCategory.REDSTONE, "wooden_pressure_plate");
@@ -114,12 +121,12 @@ public class ModRecipeProvider extends RecipeProvider {
 
         //Dried valtrox
         WoodRecipe(exporter, ModBlocks.STRIPPED_DRIED_VALTROX_LOG, ModBlocks.STRIPPED_DRIED_VALTROX_WOOD, RecipeCategory.BUILDING_BLOCKS);
-        oneToOneConversionRecipe(exporter,ModBlocks.DRIED_VALTROX_BUTTON, ModBlocks.DRIED_VALTROX_PLANKS, "wooden_button",1);
+        ButtonRecipe(exporter, ModBlocks.DRIED_VALTROX_BUTTON, ModBlocks.DRIED_VALTROX_PLANKS, "wooden_button");
         DoorRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModBlocks.DRIED_VALTROX_DOOR, RecipeCategory.REDSTONE, "wooden_door");
         FenceRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModBlocks.DRIED_VALTROX_FENCE, RecipeCategory.MISC,"wooden_fence");
         FenceGateRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModBlocks.DRIED_VALTROX_FENCE_GATE, RecipeCategory.MISC, "wooden_fence_gate");
         HanginSignRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModItems.DRIED_VALTROX_HANGING_SIGN, RecipeCategory.MISC, "hanging_sign");
-        planksFromLogs(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModTags.Items.DRIED_VALTROX_LOGS, 4);
+        planksRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModTags.Items.DRIED_VALTROX_LOGS, 4);
         SignRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModItems.DRIED_VALTROX_SIGN, RecipeCategory.MISC, "wooden_sign");
         SlabRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModBlocks.DRIED_VALTROX_SLAB);
         StairsRecipe(exporter, ModBlocks.DRIED_VALTROX_PLANKS, ModBlocks.DRIED_VALTROX_STAIRS);
@@ -129,12 +136,12 @@ public class ModRecipeProvider extends RecipeProvider {
 
         //petrified valtrox
         WoodRecipe(exporter, ModBlocks.STRIPPED_PETRIFIED_VALTROX_LOG, ModBlocks.STRIPPED_PETRIFIED_VALTROX_WOOD, RecipeCategory.BUILDING_BLOCKS);
-        oneToOneConversionRecipe(exporter,ModBlocks.PETRIFIED_VALTROX_BUTTON, ModBlocks.PETRIFIED_VALTROX_SLATES, "wooden_button",1);
+        ButtonRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_BUTTON, ModBlocks.PETRIFIED_VALTROX_SLATES, "wooden_button");
         DoorRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModBlocks.PETRIFIED_VALTROX_DOOR, RecipeCategory.REDSTONE, "wooden_door");
         HanginSignRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModItems.PETRIFIED_VALTROX_HANGING_SIGN, RecipeCategory.MISC, "hanging_sign");
         SignRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModItems.PETRIFIED_VALTROX_SIGN, RecipeCategory.MISC, "wooden_sign");
         SlabRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModBlocks.PETRIFIED_VALTROX_SLAB);
-        planksFromLogs(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModTags.Items.PETRIFIED_VALTROX_LOGS, 4);
+        planksRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModTags.Items.PETRIFIED_VALTROX_LOGS, 4);
         StairsRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModBlocks.PETRIFIED_VALTROX_STAIRS);
         TrapDoorRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModBlocks.PETRIFIED_VALTROX_TRAPDOOR, RecipeCategory.REDSTONE, "wooden_trapdoor");
         FenceRecipe(exporter, ModBlocks.PETRIFIED_VALTROX_SLATES, ModBlocks.PETRIFIED_VALTROX_WALL, RecipeCategory.MISC,"wooden_fence");
@@ -151,7 +158,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("H")
                 .unlockedBy("has_string", has(Items.STRING))
                 .unlockedBy("has_glomper_glux", has(ModItems.GLOMPER_GLUX))
-                .save(exporter);
+                .save(exporter, SculkDepths.id("candle"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.AURIC_SPORE_LAYER.asItem(), 6)
             .pattern("###")
@@ -291,6 +298,28 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group(recipeGroupPrefix)
                 .showNotification(true)
                 .save(exporter, SculkDepths.id(getSimpleRecipeName(withResultSlot.asItem())));
+    }
+
+    void stonecutterRecipe(RecipeOutput exporter, Block result, Block base){
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(base), RecipeCategory.BUILDING_BLOCKS, result)
+                .unlockedBy(getHasName(base), has(base))
+                .save(exporter, SculkDepths.id(getConversionRecipeName(result, base) + "_stonecutting"));
+    }
+
+    void ButtonRecipe(RecipeOutput exporter, Block button, Block planks, String recipeGroupPrefix){
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, button)
+                .requires(planks)
+                .group(recipeGroupPrefix)
+                .unlockedBy(getHasName(planks), has(planks))
+                .save(exporter, SculkDepths.id(getConversionRecipeName(button, planks)));
+    }
+
+    void planksRecipe(RecipeOutput exporter, Block planks, TagKey<Item> logs, int count){
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, planks, count)
+                .requires(logs)
+                .group("planks")
+                .unlockedBy("has_logs", has(logs))
+                .save(exporter, SculkDepths.id(getSimpleRecipeName(planks)));
     }
 
 }

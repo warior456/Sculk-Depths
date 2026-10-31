@@ -43,6 +43,10 @@ tasks.named('test') {
 neoForge {
 	version = project.neoforge_version
 
+	accessTransformers {
+		from 'src/main/resources/META-INF/accesstransformer.cfg'
+	}
+
 	runs {
 		client {
 			client()
