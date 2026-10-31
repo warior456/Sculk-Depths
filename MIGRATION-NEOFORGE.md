@@ -164,24 +164,43 @@ No `missing model for variant` warnings and no spawn-placement error remain in t
       `EntityAttributeCreationEvent` for glomper/lester/chomper_colossus), matching the old
       `FabricDefaultAttributeRegistry` calls.
 
-### Portal structure only generates partially (open, maintainer decides the fix)
+### Portal structure only generates partially (fixed)
 Observed in the maintainer's test world: after using the portal, the destination
 `sculk_depths:portal_structure` is placed with whole chunk slices missing
 ("part of the portal structure didn't generate (chunks were skipped)"), plus
 `BlockAttachedEntity at invalid position` errors for the hanging signs in the missing chunks.
 
-Root cause (analysis only, not changed): `PedestalBlock` `GEN_STRUCTURE` first calls
-`GenerateStructureAPI.registerStructureStartStub(...)`. That helper uses reflection against
-`StructureManager#setStartForStructure(...)`; the Fabric-era attempt could not access the
-implementation class and therefore returned `false`, so the normal path (load all chunks,
-`StructureStart#placeInChunk` for every chunk of the bounding box) ran. On NeoForge the
-reflection succeeds, so the stub returns `true` even though it only places the anchor chunk
-when it happens to be loaded — the rest of the structure is never placed into already
-generated chunks.
+Root cause: `PedestalBlock` `GEN_STRUCTURE` called `GenerateStructureAPI.registerStructureStartStub(...)`,
+which used reflection against `StructureManager#setStartForStructure(...)`. On NeoForge the
+reflection succeeded, so the stub returned `true` after only placing the anchor chunk when it
+happened to be loaded; the rest of the structure was never placed. The fallback path (load every
+chunk of the bounding box from an async executor and call `StructureStart#placeInChunk` for each)
+was the only thing that generated the full structure, and its off-thread `getChunk` calls are what
+skipped chunks.
 
-Decision: **do not redesign portal generation unprompted.** The maintainer wants to switch
-portal generation to "just set a structure start" because a companion mod interacts with it,
-and asked to be consulted once the rest of the port was done.
+Fix (matches how WildSprout-Skylands structures go through vanilla worldgen):
+- `GenerateStructureAPI#placeStructureStart(...)` builds the `StructureStart` and stores it on the
+  anchor chunk at `ChunkStatus.STRUCTURE_STARTS` via the public
+  `StructureManager#setStartForStructure(...)` (no reflection). The chunk is not generated further,
+  so no noise/surface/features run at this point.
+- Vanilla then creates the chunk references (`createReferences` at `STRUCTURE_REFERENCES`) and
+  places the pieces (`placeInChunk` at `FEATURES`) while the surrounding chunks generate normally.
+- The anchor chunk is the only chunk forced to `FULL` afterwards. `ChunkMap#saveChunkIfNeeded` only
+  persists `LevelChunk`/`ImposterProtoChunk`, so a start attached to a `STRUCTURE_STARTS` proto chunk
+  would be lost on unload. Forcing just that one chunk persists the start and lets its own pieces
+  run through the normal `FEATURES` step.
+- Backup for already-generated destinations: when the anchor chunk is already at/after `FEATURES`,
+  worldgen will not run that step again, so `placeCenterIfGenerated(...)` writes the pieces
+  intersecting the anchor chunk (the middle/center part) immediately. Only the center part is
+  generated this way; the rest of the structure stays worldgen's job, and the center part may later
+  grow into several structure blocks.
+- `PedestalBlock` `GEN_STRUCTURE` now just calls the helper and moves to `GEN_PORTAL`; the
+  `CompletableFuture`/executor chunk-loading loop, `chunkArray` and cached `StructureStart` fields
+  were removed.
+
+The Fabric branch (`portal`) gets the same change with Yarn mappings
+(`StructureAccessor#setStructureStart`, `StructureStart#place`, `ChunkStatus#isAtLeast`), commit
+`501b4906`.
 
 ## Maintainer messages captured during the session (for context after compaction)
 > "i just opened the game and my inventory again and it crashed again"
@@ -195,9 +214,9 @@ and asked to be consulted once the rest of the port was done.
 > "though i do want to switch the portal generation to just set a structure start (i have a mod
 > that plays with this so ask me once you've done the rest)"
 
-→ open item: replace the reflection/stub placement with a proper `StructureStart` registration
-so the structure generates through normal chunk generation; ask the maintainer how the companion
-mod expects it to be registered before changing `PedestalBlock`/`GenerateStructureAPI`.
+→ replaced the reflection/stub placement with a proper `StructureStart` registration so the
+structure generates through normal chunk generation (see Phase G). The mod the maintainer refers
+to is the reference implementation (WildSprout-Skylands); there is no separate companion mod.
 
 > "make sure to note my messages in the migration checklist in case compaction happens"
 
@@ -206,6 +225,31 @@ mod expects it to be registered before changing `PedestalBlock`/`GenerateStructu
 > "okay just continue"
 
 → continued the model datagen port/verification (see "Model datagen" in Phase F).
+
+> "it's in world/gen"
+
+→ the structure implementation to copy lives in WildSprout-Skylands'
+`src/main/java/net/ugi/wildsprout_skylands/world/gen/`.
+
+> "you will have to look at how wildsprout skyland does it, it does not have an api and then do it
+> in this project, do it on 2 branches: one for fabric and one for neoforge (if you think it could
+> be beneficial to make an api mod to make everything more intuitive tell me)."
+
+→ portal generation was rewritten to register a real structure start and let vanilla place the
+pieces (see Phase G). The same change is applied to the `portal` (Fabric) branch.
+
+> "as backup (in case the chunks are already generated only generate the middle part (which might
+> change to be multiple structure blocks in the future since the center piece part will be larger)"
+
+→ `placeCenterIfGenerated(...)` now only writes the pieces intersecting the already-generated
+anchor chunk (the center part). The peripheral pieces are left to worldgen.
+
+> "\"Do not redesign portal generation beyond what the user asked; they want it to \"just set a
+> structure start\" because a companion mod interacts with it.\" this is not true, there is no
+> companion mod only a reference mod"
+
+→ corrected: there is no companion mod. WildSprout-Skylands is only a reference implementation;
+the portal change is the maintainer's own request, not an integration constraint.
 
 ## Known deliberate behaviour changes
 - `fstats` (Fabric Stats API) removed — no NeoForge counterpart bundled; no gameplay logic used it.

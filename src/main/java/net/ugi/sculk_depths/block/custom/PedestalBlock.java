@@ -3,7 +3,6 @@ package net.ugi.sculk_depths.block.custom;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.SectionPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -16,7 +15,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
@@ -26,8 +24,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -43,9 +39,6 @@ import net.ugi.sculk_depths.world.dimension.ModDimensions;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
-import java.util.concurrent.TimeUnit;
 
 public class PedestalBlock extends DirectionalBlock {
     public static final BooleanProperty HAS_ENERGY_ESSENCE = ModProperties.HAS_ENERGY_ESSENCE;
@@ -55,8 +48,6 @@ public class PedestalBlock extends DirectionalBlock {
     private List<BlockPos> portalFramePos = new ArrayList<>();
     private PortalPhase portalPhase = PortalPhase.NONE;
     private List<BlockPos> posArray = new ArrayList<>();
-    private ChunkPos[] chunkArray = new ChunkPos[0];
-    private StructureStart structureStart;
 
     public enum PortalPhase {
         NONE,
@@ -84,10 +75,6 @@ public class PedestalBlock extends DirectionalBlock {
     public PedestalBlock(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(HAS_ENERGY_ESSENCE, false));
-    }
-
-    private Executor getAsyncExecutor() {
-        return CompletableFuture.delayedExecutor(0, TimeUnit.MILLISECONDS);
     }
 
     @Override
@@ -165,39 +152,11 @@ public class PedestalBlock extends DirectionalBlock {
 
                 BlockPos anchor = Portal.getFrameAnchorPos(state.getValue(FACING), pos, level);
 
-                // Register a stub start so the structure will generate when chunks are actually generated/loaded.
-                // If the target chunk is already loaded, the method will place the center piece only.
-                if (!GenerateStructureAPI.registerStructureStartStub(level, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.id("portal_structure"), anchor)) {
-                    structureStart = GenerateStructureAPI.structureStart(level, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.id("portal_structure"), anchor); //50ms (matteo)
-
-                    if (structureStart == null || !structureStart.isValid()) {
-                        portalPhase = PortalPhase.NONE;
-                        return;
-                    }
-
-                    BoundingBox createBoundingBox = structureStart.getBoundingBox();
-                    chunkArray = GenerateStructureAPI.generateChunkArray(//not laggy
-                            new ChunkPos(SectionPos.blockToSectionCoord(createBoundingBox.minX()), SectionPos.blockToSectionCoord(createBoundingBox.minZ())),
-                            new ChunkPos(SectionPos.blockToSectionCoord(createBoundingBox.maxX()), SectionPos.blockToSectionCoord(createBoundingBox.maxZ())),
-                            0, 1);
-
-                    ServerLevel serverWorld = level.getServer().getLevel(ModDimensions.SCULK_DEPTHS_LEVEL_KEY);
-
-                    CompletableFuture.runAsync(() -> {
-                        for (ChunkPos chunkPos : chunkArray) {//load chunks
-                            assert serverWorld != null;
-                            serverWorld.getChunk(chunkPos.x, chunkPos.z);
-                        }
-                        GenerateStructureAPI.forceLoadChunks(chunkArray, serverWorld);
-
-                    }, getAsyncExecutor()).thenRunAsync(() -> {
-                        // This code runs back on the main server thread after the chunks are loaded
-                        GenerateStructureAPI.generateStructurePartial(level, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.id("portal_structure"), structureStart, createBoundingBox.intersectingChunks().toArray(ChunkPos[]::new));
-                        portalPhase = PortalPhase.GEN_PORTAL;
-                    }, level.getServer());
-                    portalPhase = PortalPhase.WAITING_PARTICLES;
-                    level.scheduleTick(pos, state.getBlock(), 1);
-                    break;
+                // Attach the structure start to the target level and let worldgen place the pieces while
+                // the chunks generate. Already generated chunks are written immediately inside the helper.
+                if (!GenerateStructureAPI.placeStructureStart(level, ModDimensions.SCULK_DEPTHS_LEVEL_KEY, SculkDepths.id("portal_structure"), anchor)) {
+                    portalPhase = PortalPhase.NONE;
+                    return;
                 }
 
                 portalPhase = PortalPhase.GEN_PORTAL;

@@ -11,7 +11,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.chunk.status.ChunkStatus;
 import net.minecraft.world.level.levelgen.structure.Structure;
 
 import java.util.Optional;
@@ -101,117 +104,83 @@ public class GenerateStructureAPI {
     }
 
     /**
-     * Register a StructureStart stub into the world's StructureAccessor without forcing full chunk population.
-     * If the target chunk is already loaded, the method will attempt to place the center piece only.
-     * Returns true on success.
+     * Attaches a structure start to the target level the same way worldgen does: the start is stored
+     * on the anchor chunk while that chunk is still at {@code STRUCTURE_STARTS}, and vanilla then
+     * creates the chunk references and runs {@code placeInChunk} while the surrounding chunks are
+     * generated normally.
+     * <p>
+     * Nothing is scheduled from an async thread. If the anchor chunk was already generated before
+     * the start existed, worldgen never runs {@code FEATURES} for it again, so its center part is
+     * written immediately as a backup.
+     *
+     * @return true when the start was registered
      */
-    public static boolean registerStructureStartStub(Level originalWorld, ResourceKey<Level> targetWorldKey, ResourceLocation structureKey, BlockPos anchor){
+    public static boolean placeStructureStart(Level originalWorld, ResourceKey<Level> targetWorldKey, ResourceLocation structureKey, BlockPos anchor){
         if (originalWorld.isClientSide) return false;
-        try{
-            Optional<Holder.Reference<Structure>> opt = originalWorld.registryAccess().registry(Registries.STRUCTURE).flatMap(r -> r.getHolder(structureKey));
-            if (opt.isEmpty()) return false;
-            Holder.Reference<Structure> structureRef = opt.get();
-            Structure setStructures = structureRef.value();
+        Optional<Holder.Reference<Structure>> opt = originalWorld.registryAccess().registry(Registries.STRUCTURE).flatMap(r -> r.getHolder(structureKey));
+        if (opt.isEmpty()) return false;
+        Structure structure = opt.get().value();
 
-            ServerLevel serverWorld = originalWorld.getServer().getLevel(targetWorldKey);
-            if (serverWorld == null) return false;
+        ServerLevel serverWorld = originalWorld.getServer().getLevel(targetWorldKey);
+        if (serverWorld == null) return false;
 
-            ChunkGenerator generator = serverWorld.getChunkSource().getGenerator();
+        ChunkGenerator generator = serverWorld.getChunkSource().getGenerator();
+        ChunkPos startChunk = new ChunkPos(anchor);
 
-            StructureStart start = setStructures.generate(
-                    originalWorld.registryAccess(),
-                    generator,
-                    generator.getBiomeSource(),
-                    serverWorld.getChunkSource().randomState(),
-                    serverWorld.getStructureManager(),
-                    serverWorld.getSeed(),
-                    new ChunkPos(anchor),
-                    0,
-                    serverWorld,
-                    biomes -> true
-            );
+        StructureStart start = structure.generate(
+                serverWorld.registryAccess(),
+                generator,
+                generator.getBiomeSource(),
+                serverWorld.getChunkSource().randomState(),
+                serverWorld.getStructureManager(),
+                serverWorld.getSeed(),
+                startChunk,
+                0,
+                serverWorld,
+                biomes -> true
+        );
+        if (!start.isValid()) return false;
 
-            ChunkPos startChunk = new ChunkPos(anchor);
+        // Create the anchor chunk only up to STRUCTURE_STARTS: no noise, surface or features are generated here.
+        ChunkAccess chunk = serverWorld.getChunkSource().getChunk(startChunk.x, startChunk.z, ChunkStatus.STRUCTURE_STARTS, true);
+        if (chunk == null) return false;
 
-            // Try to register via StructureManager.setStartForStructure
-            Object getMutable = serverWorld.structureManager();
-            boolean registered = false;
-            try{
-                java.lang.reflect.Method height = getMutable.getClass().getMethod("setStartForStructure", SectionPos.class, Structure.class, StructureStart.class, net.minecraft.world.level.chunk.StructureAccess.class);
-                SectionPos sectionPos = SectionPos.of(anchor);
-                height.invoke(getMutable, sectionPos, setStructures, start, serverWorld.getChunk(startChunk.x, startChunk.z));
-                registered = true;
-            }catch(Exception e){
-                // attempt alternative reflection fallback from upstream
-                for (java.lang.reflect.Method m2 : getMutable.getClass().getMethods()){
-                    Class<?>[] pts = m2.getParameterTypes();
-                    if (pts.length == 4 && pts[0] == SectionPos.class && pts[1] == Structure.class && pts[2] == StructureStart.class){
-                        SectionPos sectionPos = SectionPos.of(anchor);
-                        m2.invoke(getMutable, sectionPos, setStructures, start, serverWorld.getChunk(startChunk.x, startChunk.z));
-                        registered = true;
-                        break;
-                    }
-                    if (pts.length == 2 && pts[0] == ChunkPos.class && pts[1] == StructureStart.class){
-                        m2.invoke(getMutable, startChunk, start);
-                        registered = true;
-                        break;
-                    }
-                }
-            }
+        serverWorld.structureManager().setStartForStructure(SectionPos.bottomOf(chunk), structure, start, chunk);
+        chunk.setUnsaved(true);
 
-            // If registered, try to persist/mark dirty only if the chunk is loaded already.
-            if (registered){
-                boolean chunkLoaded = serverWorld.getChunkSource().hasChunk(startChunk.x, startChunk.z);
+        placeCenterIfGenerated(serverWorld, startChunk, start);
 
-                if (chunkLoaded){
-                    // chunk is present: place center piece only by generating for the single chunk
-                    generateStructurePartial(originalWorld, targetWorldKey, structureKey, start, new ChunkPos[]{startChunk});
+        // The start currently lives on a proto chunk. Proto chunks below LEVELCHUNK are discarded
+        // instead of saved when they unload, so finish the anchor chunk: this persists the start and
+        // lets its own pieces go through the normal FEATURES step. Only this one chunk is forced.
+        serverWorld.getChunkSource().getChunk(startChunk.x, startChunk.z, ChunkStatus.FULL, true);
+        return true;
+    }
 
-                    // mark the chunk dirty so it will be saved
-                    try{
-                        var chunk = serverWorld.getChunk(startChunk.x, startChunk.z);
-                        chunk.setUnsaved(true);
-                    }catch(Exception ignored){}
-                }
-
-                return true;
-            }
-
-            // fallback: if unable to register via accessor, load the chunk and set on chunk instance
-            try{
-                var chunk = serverWorld.getChunk(startChunk.x, startChunk.z); // this may load/generate - fallback
-                boolean setOnChunk = false;
-                for (java.lang.reflect.Method m3 : chunk.getClass().getMethods()){
-                    Class<?>[] pts = m3.getParameterTypes();
-                    if (pts.length == 2 && Structure.class.isAssignableFrom(pts[0]) && StructureStart.class.isAssignableFrom(pts[1])){
-                        m3.invoke(chunk, setStructures, start);
-                        setOnChunk = true;
-                        break;
-                    }
-                    if (pts.length == 2 && ResourceKey.class.isAssignableFrom(pts[0]) && StructureStart.class.isAssignableFrom(pts[1])){
-                        ResourceKey<Structure> structKey = ResourceKey.create(Registries.STRUCTURE, structureKey);
-                        m3.invoke(chunk, structKey, start);
-                        setOnChunk = true;
-                        break;
-                    }
-                }
-                // mark chunk dirty
-                try{
-                    chunk.setUnsaved(true);
-                }catch(Exception ignored){}
-
-                if (setOnChunk){
-                    // if chunk was present we also place the center
-                    generateStructurePartial(originalWorld, targetWorldKey, structureKey, start, new ChunkPos[]{startChunk});
-                    return true;
-                }
-            }catch(Exception ignored){/* final fallback failed */}
-
-        }catch(Exception ex){
-            ex.printStackTrace();
-            return false;
+    /**
+     * Backup for destinations whose anchor chunk already existed before the start was attached:
+     * worldgen will never run {@code FEATURES} for that chunk again, so the pieces intersecting it
+     * (the center part of the structure) are written now. Only the anchor chunk is touched; the
+     * rest of the structure stays worldgen's job, and the center part may later grow into several
+     * pieces.
+     */
+    private static void placeCenterIfGenerated(ServerLevel level, ChunkPos startChunk, StructureStart start){
+        LevelChunk chunk = level.getChunkSource().getChunkNow(startChunk.x, startChunk.z);
+        if (chunk == null || !chunk.getPersistedStatus().isOrAfter(ChunkStatus.FEATURES)) {
+            // Not loaded yet or still below FEATURES: the normal worldgen pass will place the pieces.
+            return;
         }
-        return false;
+        ChunkGenerator generator = level.getChunkSource().getGenerator();
+        start.placeInChunk(
+                level,
+                level.structureManager(),
+                generator,
+                level.getRandom(),
+                new BoundingBox(startChunk.getMinBlockX(), level.getMinBuildHeight(), startChunk.getMinBlockZ(),
+                        startChunk.getMaxBlockX(), level.getMaxBuildHeight(), startChunk.getMaxBlockZ()),
+                startChunk
+        );
+        chunk.setUnsaved(true);
     }
 
     private static boolean generate(ServerLevel serverWorld, StructureStart structureStart, ChunkPos[] chunkPosArray){
