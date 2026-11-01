@@ -298,6 +298,10 @@ the portal change is the maintainer's own request, not an integration constraint
 → fixed in `ShroomBlock`: default faces are now exposed (vanilla `HugeMushroomBlock` behaviour) and
 the ported neighbour check uses `neighborState` again. Applied to both branches.
 
+> "add ./agents and ./migration to fabric .gitignore"
+
+→ `portal` `.gitignore` now ignores `.agents/` and `.migration_artifacts/` (commit `0a06150f`).
+
 ## Known deliberate behaviour changes
 - `fstats` (Fabric Stats API) removed — no NeoForge counterpart bundled; no gameplay logic used it.
 - Fabric Transfer API cauldron interop removed (pipes/mods integration only).
