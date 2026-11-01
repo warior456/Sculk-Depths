@@ -218,6 +218,24 @@ The files are kept for reference only; nothing is compiled or run.
 both `neoforge-oc` and `portal`, so the structure no longer carves a boxed shell through the
 surrounding terrain.
 
+### World-generated penebrium blocks show inner faces (fixed)
+Reported by the maintainer on NeoForge: world-generated `penebrium_shroom_stem` and
+`penebrium_spore_block` looked as if they were still surrounded by blocks (inner texture on all
+sides).
+
+Two causes in `ShroomBlock`:
+- The class never registered a default state, so every face property defaulted to `false`.
+  Worldgen only supplies the block id (the `penebrium_shroom` tree feature and structure palettes),
+  which resolves to `defaultBlockState()`; all-false selects the `*_inside` models on all six sides.
+  Vanilla `HugeMushroomBlock` defaults all six faces to `true`; `ShroomBlock` now does the same.
+- The NeoForge port turned Fabric's `neighborState.isOf(this)` into `state.is(this)`, so every
+  neighbour update forced the touched face to `false` (inside), even when the neighbour had just
+  been removed. Restored to `neighborState.is(this)`.
+
+Applied to `neoforge-oc` (both fixes) and `portal` (default state only; its neighbour check was
+already correct). Existing chunks keep the old states until they are regenerated or receive a block
+update.
+
 ## Maintainer messages captured during the session (for context after compaction)
 > "i just opened the game and my inventory again and it crashed again"
 
@@ -272,6 +290,13 @@ the portal change is the maintainer's own request, not an integration constraint
 
 → tests moved to `unused/tests` and `unused/gametests`, build wiring removed on both branches;
 `portal_structure.json` now uses `beard_thin` on `neoforge-oc` and `portal`.
+
+> "there seems to be an issue with the texture of world generated penebrium stems and spore blocks
+> (the ones that emit spores), they have the block/model state as if blocks were all around it and
+> then removed (neoforge, idk if it's also on fabric)"
+
+→ fixed in `ShroomBlock`: default faces are now exposed (vanilla `HugeMushroomBlock` behaviour) and
+the ported neighbour check uses `neighborState` again. Applied to both branches.
 
 ## Known deliberate behaviour changes
 - `fstats` (Fabric Stats API) removed — no NeoForge counterpart bundled; no gameplay logic used it.
