@@ -19,6 +19,16 @@ public class ShroomBlock
 
     public ShroomBlock(Settings settings) {
         super(settings);
+        // Worldgen (tree features, structure palettes) only supplies the block id, so the placed
+        // state comes from getDefaultState(). Default every face to "exposed" like vanilla
+        // HugeMushroomBlock; getStateForNeighborUpdate then hides faces shared with other shroom blocks.
+        this.setDefaultState(this.getDefaultState()
+                .with(DOWN, true)
+                .with(UP, true)
+                .with(NORTH, true)
+                .with(EAST, true)
+                .with(SOUTH, true)
+                .with(WEST, true));
     }
 
     public static final BooleanProperty NORTH;
