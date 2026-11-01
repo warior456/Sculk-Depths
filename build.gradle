@@ -32,6 +32,22 @@ loom {
 		}
 	}
 
+	runs {
+		client {
+			client()
+			setConfigName("Minecraft Client")
+			ideConfigGenerated(true)
+			runDir("run")
+			source(sourceSets.client)
+		}
+		server {
+			server()
+			setConfigName("Minecraft Server")
+			ideConfigGenerated(true)
+			runDir("run")
+			source(sourceSets.main)
+		}
+	}
 }
 
 fabricApi {
