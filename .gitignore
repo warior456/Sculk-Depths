@@ -40,3 +40,8 @@ replay_*.log
 *.jfr
 /src/main/generated/.cache/
 /remappedSrc/
+
+# local agent / migration scratch
+
+.agents/
+.migration_artifacts/
