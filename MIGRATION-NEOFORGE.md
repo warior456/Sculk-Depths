@@ -202,6 +202,22 @@ The Fabric branch (`portal`) gets the same change with Yarn mappings
 (`StructureAccessor#setStructureStart`, `StructureStart#place`, `ChunkStatus#isAtLeast`), commit
 `501b4906`.
 
+### Tests and game tests parked in `unused/`
+The port added a Fabric GameTest harness (`src/gametest`) and a Fabric Loader JUnit suite
+(`src/test`, regression tests for issues 87–99). Neither existed before the port and neither has a
+drop-in NeoForge equivalent, so both were moved out of the build:
+- `src/gametest` → `unused/gametests`
+- `src/test` → `unused/tests`
+- `build.gradle` wiring removed on both branches: the `gametest` source set, the
+  `sculk_depths_gametest` mod entry, `runGameTestServer`, the `fabric-loader-junit`/`mockito`
+  test dependencies, and the `test`/`regressionTest` tasks.
+The files are kept for reference only; nothing is compiled or run.
+
+### Portal structure terrain adaptation
+`portal_structure.json` now uses `"terrain_adaptation": "beard_thin"` instead of `beard_box` on
+both `neoforge-oc` and `portal`, so the structure no longer carves a boxed shell through the
+surrounding terrain.
+
 ## Maintainer messages captured during the session (for context after compaction)
 > "i just opened the game and my inventory again and it crashed again"
 
@@ -250,6 +266,12 @@ anchor chunk (the center part). The peripheral pieces are left to worldgen.
 
 → corrected: there is no companion mod. WildSprout-Skylands is only a reference implementation;
 the portal change is the maintainer's own request, not an integration constraint.
+
+> "move all the gametests and tests (they didn't exist before this port) to ./unused and change the
+> fabric version to also use beard thin terrain adaptation instead of beard box"
+
+→ tests moved to `unused/tests` and `unused/gametests`, build wiring removed on both branches;
+`portal_structure.json` now uses `beard_thin` on `neoforge-oc` and `portal`.
 
 ## Known deliberate behaviour changes
 - `fstats` (Fabric Stats API) removed — no NeoForge counterpart bundled; no gameplay logic used it.
