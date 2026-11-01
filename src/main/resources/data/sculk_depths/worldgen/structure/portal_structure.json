@@ -16,6 +16,6 @@
   "start_jigsaw_name": "sculk_depths:portal_structure_anchor",
   "start_pool": "sculk_depths:portal_structure/portal",
   "step": "underground_structures",
-  "terrain_adaptation": "beard_box",
+  "terrain_adaptation": "beard_thin",
   "use_expansion_hack": true
 }
