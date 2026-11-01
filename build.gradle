@@ -28,16 +28,6 @@ sourceSets {
 		// or all data-generated blockstates/models disappear from the dev run and the built jar.
 		resources.srcDirs += ['src/main/generated']
 	}
-	// The original unit tests / game tests are parked (Fabric Loader JUnit + Fabric GameTest have
-	// no drop-in NeoForge equivalent); keep the files but do not compile them.
-	test {
-		java.srcDirs = []
-		resources.srcDirs = []
-	}
-}
-
-tasks.named('test') {
-	enabled = false
 }
 
 neoForge {
