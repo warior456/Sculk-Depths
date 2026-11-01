@@ -34,6 +34,16 @@ public class ShroomBlock extends TransparentBlock {
 
     public ShroomBlock(BlockBehaviour.Properties properties) {
         super(properties);
+        // Worldgen (tree features, structure palettes) only supplies the block id, so the placed
+        // state comes from defaultBlockState(). Default every face to "exposed" like vanilla
+        // HugeMushroomBlock; updateShape then hides the faces shared with other shroom blocks.
+        this.registerDefaultState(this.defaultBlockState()
+                .setValue(DOWN, true)
+                .setValue(UP, true)
+                .setValue(NORTH, true)
+                .setValue(EAST, true)
+                .setValue(SOUTH, true)
+                .setValue(WEST, true));
     }
 
     @Override
@@ -56,7 +66,7 @@ public class ShroomBlock extends TransparentBlock {
 
     @Override
     protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-        return state.is(this) ? state.setValue(PROPERTY_BY_DIRECTION.get(direction), false) : super.updateShape(state, direction, neighborState, level, pos, neighborPos);
+        return neighborState.is(this) ? state.setValue(PROPERTY_BY_DIRECTION.get(direction), false) : super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 
     @Override
